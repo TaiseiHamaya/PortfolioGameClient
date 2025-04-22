@@ -7,9 +7,11 @@
     <ClCompile Include="Portfolio\Scene\FactoryPortfolio.cpp" />
     <ClCompile Include="Portfolio\main.cpp" />
     <ClCompile Include="Portfolio\Portfolio.cpp" />
+    <ClCompile Include="Portfolio\Scene\SceneGame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Portfolio\Scene\FactoryPortfolio.h" />
     <ClInclude Include="Portfolio\Portfolio.h" />
+    <ClInclude Include="Portfolio\Scene\SceneGame.h" />
   </ItemGroup>
 </Project>
