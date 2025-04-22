@@ -1,0 +1,3 @@
+[submodule "DirectXGame"]
+	path = DirectXGame
+	url = https://github.com/TaiseiHamaya/DirectXGame.git
