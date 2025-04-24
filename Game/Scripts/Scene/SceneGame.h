@@ -52,6 +52,7 @@ private:
 
 	std::unique_ptr<FollowCamera> camera3D;
 	std::unique_ptr<StaticMeshInstance> skydome;
+	std::unique_ptr<EnemyManager> enemyManager;
 	Reference<Player> player;
 
 	std::unique_ptr<LocalPlayerCommandHandler> localPlayerCommandHandler;

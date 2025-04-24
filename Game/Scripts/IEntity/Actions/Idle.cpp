@@ -1,9 +1,13 @@
 #include "Idle.h"
 
+#include "../BaseEntity.h"
+
 void Idle::update() {
 }
 
 void Idle::reset() {
+	timer.set(0);
+	loopAnimation = true;
 }
 
 r32 Idle::progress() const {

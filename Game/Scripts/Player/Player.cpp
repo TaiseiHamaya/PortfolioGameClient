@@ -1,10 +1,5 @@
 #include "Player.h"
 
-Player::Player() :
-	BaseEntity() {
-	reset_animated_mesh("Player.gltf");
-}
-
 #ifdef _DEBUG
 #include <imgui.h>
 void Player::debug_gui() {

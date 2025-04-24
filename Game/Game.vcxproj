@@ -15,6 +15,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Scripts\CombatTower\CombatTower.cpp" />
+    <ClCompile Include="Scripts\MiscInstance\Enemy\EnemyRemoteHandler.cpp" />
     <ClCompile Include="Scripts\RemoteEntity\RemoteEnemyCommandHandler.cpp" />
     <ClCompile Include="Scripts\EntityCommand\Hander\IEntityCommandHandler.cpp" />
     <ClCompile Include="Scripts\IEntity\Actions\Idle.cpp" />
@@ -23,7 +25,6 @@
     <ClCompile Include="Scripts\EntityCommand\Command\DamagedCommand.cpp" />
     <ClCompile Include="Scripts\EntityCommand\Command\JumpCommand.cpp" />
     <ClCompile Include="Scripts\EntityCommand\Command\MoveCommand.cpp" />
-    <ClCompile Include="Scripts\EntityCommand\ActionHandler.cpp" />
     <ClCompile Include="Scripts\Util\LookAtRect.cpp" />
     <ClCompile Include="Scripts\Manager\EntityManager.cpp" />
     <ClCompile Include="Scripts\IEntity\EntityUi.cpp" />
@@ -34,7 +35,6 @@
     <ClCompile Include="Scripts\Scene\SceneGame.cpp" />
     <ClCompile Include="Scripts\MiscInstance\Camera\FollowCamera.cpp" />
     <ClCompile Include="Scripts\MiscInstance\Effects\HitAnimation.cpp" />
-    <ClCompile Include="Scripts\MiscInstance\Enemy\DeadEnemy.cpp" />
     <ClCompile Include="Scripts\MiscInstance\Enemy\Enemy.cpp" />
     <ClCompile Include="Scripts\MiscInstance\Enemy\EnemyManager.cpp" />
     <ClCompile Include="Scripts\IEntity\BaseAction.cpp" />
@@ -44,6 +44,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BuiltinTypes.h" />
+    <ClInclude Include="Scripts\CombatTower\CombatTower.h" />
+    <ClInclude Include="Scripts\MiscInstance\Enemy\EnemyRemoteHandler.h" />
     <ClInclude Include="Scripts\RemoteEntity\RemoteEnemyCommandHandler.h" />
     <ClInclude Include="Scripts\EntityCommand\Hander\IEntityCommandHandler.h" />
     <ClInclude Include="Scripts\IEntity\Actions\Idle.h" />
@@ -52,7 +54,6 @@
     <ClInclude Include="Scripts\EntityCommand\Command\DamagedCommand.h" />
     <ClInclude Include="Scripts\EntityCommand\Command\JumpCommand.h" />
     <ClInclude Include="Scripts\EntityCommand\Command\MoveCommand.h" />
-    <ClInclude Include="Scripts\EntityCommand\ActionHandler.h" />
     <ClInclude Include="Scripts\EntityCommand\ICommand.h" />
     <ClInclude Include="Scripts\Util\LookAtRect.h" />
     <ClInclude Include="Scripts\Manager\EntityManager.h" />
@@ -63,7 +64,6 @@
     <ClInclude Include="Scripts\Scene\SceneGame.h" />
     <ClInclude Include="Scripts\MiscInstance\Camera\FollowCamera.h" />
     <ClInclude Include="Scripts\MiscInstance\Effects\HitAnimation.h" />
-    <ClInclude Include="Scripts\MiscInstance\Enemy\DeadEnemy.h" />
     <ClInclude Include="Scripts\MiscInstance\Enemy\Enemy.h" />
     <ClInclude Include="Scripts\MiscInstance\Enemy\EnemyManager.h" />
     <ClInclude Include="Scripts\IEntity\BaseAction.h" />

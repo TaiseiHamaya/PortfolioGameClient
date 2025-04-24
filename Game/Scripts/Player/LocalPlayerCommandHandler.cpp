@@ -42,7 +42,7 @@ void LocalPlayerCommandHandler::update() {
 
 	if (receiver->now_action()->progress() >= 0.8f && !actionBuffer.has_value()) {
 		for (u32 i = NumPreAction; ActionKeys& trigger : actionTriggers) {
-			if (actionHandlerK.press(trigger.key) || actionHandlerP.press(trigger.pad)) {
+			if (actionHandlerK.trigger(trigger.key) || actionHandlerP.trigger(trigger.pad)) {
 				actionBuffer = i;
 				break;
 			}

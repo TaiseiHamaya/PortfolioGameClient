@@ -10,6 +10,9 @@
 
 #include "Scripts/IEntity/BaseEntity.h"
 
+class SkinningMeshDrawManager;
+class Rect3dDrawManager;
+
 class EntityManager final {
 public:
 	EntityManager() = default;
@@ -18,7 +21,7 @@ public:
 	__CLASS_NON_COPYABLE(EntityManager)
 
 public:
-	void start(Reference<WorldManager> worldManager_);
+	void start(Reference<WorldManager> worldManager_, Reference<SkinningMeshDrawManager> skinDraw_, Reference<Rect3dDrawManager> rectDraw_);
 
 	void begin();
 	void update();
@@ -26,25 +29,26 @@ public:
 
 public:
 	template<typename T>
-	Reference<T> generate(u64 id);
+		requires std::derived_from<T, BaseEntity>
+	Reference<T> generate(u64 id, const std::filesystem::path& initjson);
 	void destroy(u64 id);
 
-	Reference<BaseEntity> get_entity(u64 id);
+	Reference<BaseEntity> inquire(u64 id) const;
 
 private:
 	Reference<WorldManager> worldManager;
+	Reference<SkinningMeshDrawManager> skinDraw;
+	Reference<Rect3dDrawManager> rectDraw;
+
 	std::unordered_map<u64, std::unique_ptr<BaseEntity>> entities;
 };
 
 template<typename T>
-inline Reference<T> EntityManager::generate(u64 id) {
+	requires std::derived_from<T, BaseEntity>
+inline Reference<T> EntityManager::generate(u64 id, const std::filesystem::path& initjson) {
 	std::unique_ptr<T> temp = worldManager->create<T>(nullptr);
-
-	std::string typeName = typeid(T).name();
-	if constexpr (std::is_class_v<T> || std::is_enum_v<T>) {
-		typeName = (std::find(typeName.begin(), typeName.end(), ' ') + 1)._Ptr;
-	}
-	temp->initialize(typeName.c_str());
+	temp->initialize(initjson);
+	temp->start(skinDraw, rectDraw);
 	Reference<T> result = temp;
 	entities.emplace(id, std::move(temp));
 

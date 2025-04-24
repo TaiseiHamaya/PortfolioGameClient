@@ -1,7 +1,9 @@
 #include "EntityManager.h"
 
-void EntityManager::start(Reference<WorldManager> worldManager_) {
+void EntityManager::start(Reference<WorldManager> worldManager_, Reference<SkinningMeshDrawManager> skinDraw_, Reference<Rect3dDrawManager> rectDraw_) {
 	worldManager = worldManager_;
+	skinDraw = skinDraw_;
+	rectDraw = rectDraw_;
 }
 
 void EntityManager::begin() {
@@ -28,7 +30,7 @@ void EntityManager::destroy(u64 id) {
 	}
 }
 
-Reference<BaseEntity> EntityManager::get_entity(u64 id) {
+Reference<BaseEntity> EntityManager::inquire(u64 id)  const {
 	if (entities.contains(id)) {
 		return entities.at(id);
 	}

@@ -1,8 +1,8 @@
 #include "BaseEntity.h"
 
 #include <Engine/Assets/Json/JsonAsset.h>
-#include <Engine/Runtime/Clock/WorldClock.h>
 #include <Engine/Module/World/WorldManager.h>
+#include <Engine/Runtime/Clock/WorldClock.h>
 #define COLOR4_SERIALIZER
 #include <Engine/Assets/Json/JsonSerializer.h>
 
@@ -10,14 +10,14 @@
 
 using namespace std::literals::string_literals;
 
-void BaseEntity::initialize([[maybe_unused]] const char* name) {
-	JsonAsset json{ std::format(".\\Game\\Resources\\Json\\Entity\\{}.json", name)};
+void BaseEntity::initialize(const std::filesystem::path& file) {
+	JsonAsset json{ std::format(L".\\Game\\Resources\\Json\\Entity\\{}", file.native()) };
 	shadow = world_manager()->create<Shadow>();
 	ui = world_manager()->create<EntityUi>(this);
 	ui->initialize(2.5f, json.try_emplace<Color4>("HPColor"));
 
 	idleAction = std::make_unique<Idle>();
-	idleAction->start(this, std::format("{}.gltf-{}", name, "Idle"));
+	idleAction->start(this, std::format("{}.gltf-{}", file.stem().string(), "Idle"));
 
 	reset_animated_mesh(json.try_emplace<std::string>("Model"));
 	set_action(idleAction);
@@ -37,45 +37,45 @@ void BaseEntity::begin() {
 	}
 
 	nowAction->begin();
+	SkinningMeshInstance::begin();
 }
 
 void BaseEntity::update() {
-	if (!nowAction) {
-		return;
-	}
-	// 移動が停止するようなアクションでは実行しない
-	if (nowAction->action_effect() != ActionEffect::Stack) {
-		// 重力処理
-		velocity.y += -20.0f * WorldClock::DeltaSeconds();
-		// 地面の上では摩擦減衰
-		if (transform.get_translate().y == 0 && velocity.length() != 0) {
-			velocity *= 0.75f;
+	if (nowAction) {
+
+		// 移動が停止するようなアクションでは実行しない
+		if (nowAction->action_effect() != ActionEffect::Stack) {
+			// 重力処理
+			velocity.y += -20.0f * WorldClock::DeltaSeconds();
+			// 地面の上では摩擦減衰
+			if (transform.get_translate().y == 0 && velocity.length() != 0) {
+				velocity *= 0.75f;
+			}
+			// 移動
+			transform.plus_translate(velocity * WorldClock::DeltaSeconds());
+
+			// 地面に埋まらないようにする
+			if (transform.get_translate().y <= 0.0f) {
+				transform.set_translate_y(0.0f);
+			}
 		}
-		// 移動
-		transform.plus_translate(velocity* WorldClock::DeltaSeconds());
 
-		// 地面に埋まらないようにする
-		if (transform.get_translate().y <= 0.0f) {
-			transform.set_translate_y(0.0f);
+		nowAction->update();
+
+		if (nowAction->end_action() && nowAction.ptr() != idleAction.get()) {
+			set_action(idleAction);
 		}
 	}
 
-	nowAction->update();
-
-	Vector3 xzDirection = Vector3{ velocity.x, 0.0f,velocity.z }.normalize_safe();
+	Vector3 xzVelocity = Vector3{ velocity.x, 0.0f,velocity.z };
 	// ---------- 移動方向を向く ----------
-	// 向く方向
-	Quaternion forwardTo{ transform.get_quaternion() };
-	if (xzDirection.length() != 0) {
-		forwardTo = Quaternion::LookForward(xzDirection.normalize());
-	}
-	// Slerp補完
-	transform.set_quaternion(
-		Quaternion::Slerp(transform.get_quaternion(), forwardTo, 0.1f)
-	);
-
-	if (nowAction->end_action()) {
-		set_action(idleAction);
+	if (xzVelocity.length() != 0) {
+		// 向く方向
+		Quaternion forwardTo{ Quaternion::LookForward(xzVelocity.normalize()) };
+		// Slerp補完
+		transform.set_quaternion(
+			Quaternion::Slerp(transform.get_quaternion(), forwardTo, 0.1f)
+		);
 	}
 
 	update_animation();

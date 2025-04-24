@@ -30,7 +30,9 @@ void SceneGame::load() {
 	PolygonMeshLibrary::RegisterLoadQue("./Game/Resources/Game/Models/Player.gltf");
 	NodeAnimationLibrary::RegisterLoadQue("./Game/Resources/Game/Models/Player.gltf");
 	SkeletonLibrary::RegisterLoadQue("./Game/Resources/Game/Models/Player.gltf");
-	PolygonMeshLibrary::RegisterLoadQue("./Game/Resources/Game/Models/Enemy.gltf");
+	PolygonMeshLibrary::RegisterLoadQue("./Game/Resources/Game/Models/RedComet.gltf");
+	NodeAnimationLibrary::RegisterLoadQue("./Game/Resources/Game/Models/RedComet.gltf");
+	SkeletonLibrary::RegisterLoadQue("./Game/Resources/Game/Models/RedComet.gltf");
 	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/Circle.png");
 	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/white.png");
 	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/shadow.png");
@@ -40,7 +42,7 @@ void SceneGame::initialize() {
 	// WorldManager
 	worldManager = eps::CreateUnique<WorldManager>();
 	entityManager = eps::CreateUnique<EntityManager>();
-	entityManager->start(worldManager);
+	enemyManager = eps::CreateUnique<EnemyManager>();
 
 	// DrawManager
 	skinningMeshDrawManager = eps::CreateUnique<SkinningMeshDrawManager>();
@@ -55,28 +57,24 @@ void SceneGame::initialize() {
 
 	directionalLightingExecutor = eps::CreateUnique<DirectionalLightingExecutor>(1);
 
+	entityManager->start(worldManager, skinningMeshDrawManager, rect3dDrawManager);
+	enemyManager->start(entityManager);
+
 	// WorldInstances
 	// Allocation
 	directionalLight = worldManager->create<DirectionalLightInstance>();
-	player = entityManager->generate<Player>(0);
+	player = entityManager->generate<Player>(0, "Player.json");
 	skydome = worldManager->create<StaticMeshInstance>(nullptr, "skydome.gltf");
 	camera3D = worldManager->create<FollowCamera>();
 
-	EnemyManager::staticMeshDrawManager = staticMeshDrawManager;
-	EnemyManager::skinningMeshDrawManager = skinningMeshDrawManager;
-	//Particle::lookAtDefault = camera3D.get();
 	LookAtRect::camera = camera3D;
 
-	player->start(skinningMeshDrawManager, rect3dDrawManager);
 	skydome->get_transform().set_scale(CVector3::BASIS * 100);
 	skydome->get_materials()[0].lightingType = LighingType::None;
 	camera3D->initialize();
-	camera3D->set_transform({
-		CVector3::BASIS,
-		Quaternion::EulerDegree(45,0,0),
-		{0,10,-10}
-		});
+	camera3D->set_offset({ 0,1,-40 });
 	camera3D->set_target(player);
+	enemyManager->generate(1, "RedComet.json", Vector3{ 0,0,8 });
 
 	localPlayerCommandHandler = std::make_unique<LocalPlayerCommandHandler>();
 	localPlayerCommandHandler->initialize(player);
@@ -133,9 +131,10 @@ void SceneGame::initialize() {
 	// CreateInstancing
 	skinningMeshDrawManager->make_instancing(0, "Player.gltf", 1);
 	skinningMeshDrawManager->make_instancing(0, "Enemy.gltf", 100);
+	skinningMeshDrawManager->make_instancing(0, "RedComet.gltf", 1);
 	staticMeshDrawManager->make_instancing(0, "skydome.gltf", 1);
 	//staticMeshDrawManager->make_instancing(0, "Sphere.obj", 1);
-	
+
 	// RegisterDraw
 	staticMeshDrawManager->register_debug_instance(0, camera3D, true);
 	staticMeshDrawManager->register_instance(skydome);
@@ -196,7 +195,7 @@ void SceneGame::draw() const {
 	// ParticleBillboard
 	renderPath->next();
 	camera3D->register_world_projection(1);
-	
+
 	// Rect3D
 	renderPath->next();
 	camera3D->register_world_projection(3);
@@ -215,6 +214,7 @@ void SceneGame::draw() const {
 #endif // DEFERRED_RENDERING
 }
 
+#ifdef DEBUG_FEATURES_ENABLE
 void SceneGame::debug_update() {
 	ImGui::Begin("Camera3D");
 	camera3D->debug_gui();
@@ -232,4 +232,7 @@ void SceneGame::debug_update() {
 	player->debug_gui();
 	ImGui::End();
 
+	enemyManager->debug_gui();
 }
+
+#endif // DEFERRED_RENDERING

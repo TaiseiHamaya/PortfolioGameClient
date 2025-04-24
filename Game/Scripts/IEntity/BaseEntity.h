@@ -21,6 +21,7 @@ enum class EntityFlag {
 	Invisible = 0b01000, // 不可視
 	Invincible = 0b10000, // 無敵
 
+	Default = Idle,
 	Targetable = Idle | Battle,
 	ShowEnmityList = Battle | Invincible,
 };
@@ -29,7 +30,7 @@ __USE_BITFLAG(EntityFlag)
 
 class BaseEntity : public SkinningMeshInstance {
 public:
-	void initialize(const char* name);
+	void initialize(const std::filesystem::path& file);
 	void start(
 		Reference<SkinningMeshDrawManager> skinDraw,
 		Reference<Rect3dDrawManager> rectDraw);
@@ -46,6 +47,8 @@ public:
 
 protected:
 	void set_action(Reference<BaseAction> action);
+	u64 get_target_id() const { return targetId; };
+	const std::vector<u64>& get_enmity_ids() const { return enmityIds; };
 
 protected:
 	u64 id;
@@ -59,7 +62,8 @@ protected:
 	std::unique_ptr<EntityUi> ui;
 	std::unique_ptr<Shadow> shadow;
 
-	Reference<BaseEntity> target{ nullptr }; // 対象
+	u64 targetId; // 対象
+	std::vector<u64> enmityIds; // 敵対一覧
 
 	Reference<BaseAction> nowAction{ nullptr }; // 今のアクション
 
