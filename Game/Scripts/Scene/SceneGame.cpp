@@ -15,10 +15,32 @@
 #include <Engine/Module/World/Mesh/StaticMeshInstance.h>
 #include <Engine/Module/World/Mesh/Primitive/Rect3d.h>
 
+#include <Engine/Assets/Animation/NodeAnimation/NodeAnimationLibrary.h>
+#include <Engine/Assets/Animation/Skeleton/SkeletonLibrary.h>
+#include <Engine/Assets/Audio/AudioLibrary.h>
+#include <Engine/Assets/PolygonMesh/PolygonMeshLibrary.h>
+#include <Engine/Assets/Texture/TextureLibrary.h>
+#include <Engine/Runtime/Scene/SceneManager.h>
+
+#include "Scripts/Util/LookAtRect.h"
+#include <Engine/Runtime/Clock/WorldClock.h>
+
+void SceneGame::load() {
+	PolygonMeshLibrary::RegisterLoadQue("./Game/Resources/Game/Models/skydome.gltf");
+	PolygonMeshLibrary::RegisterLoadQue("./Game/Resources/Game/Models/Player.gltf");
+	NodeAnimationLibrary::RegisterLoadQue("./Game/Resources/Game/Models/Player.gltf");
+	SkeletonLibrary::RegisterLoadQue("./Game/Resources/Game/Models/Player.gltf");
+	PolygonMeshLibrary::RegisterLoadQue("./Game/Resources/Game/Models/Enemy.gltf");
+	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/Circle.png");
+	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/white.png");
+	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/shadow.png");
+}
+
 void SceneGame::initialize() {
 	// WorldManager
 	worldManager = eps::CreateUnique<WorldManager>();
-	collisionManager = std::make_unique<CollisionManager>();
+	entityManager = eps::CreateUnique<EntityManager>();
+	entityManager->start(worldManager);
 
 	// DrawManager
 	skinningMeshDrawManager = eps::CreateUnique<SkinningMeshDrawManager>();
@@ -33,9 +55,32 @@ void SceneGame::initialize() {
 
 	directionalLightingExecutor = eps::CreateUnique<DirectionalLightingExecutor>(1);
 
-
 	// WorldInstances
+	// Allocation
 	directionalLight = worldManager->create<DirectionalLightInstance>();
+	player = entityManager->generate<Player>(0);
+	skydome = worldManager->create<StaticMeshInstance>(nullptr, "skydome.gltf");
+	camera3D = worldManager->create<FollowCamera>();
+
+	EnemyManager::staticMeshDrawManager = staticMeshDrawManager;
+	EnemyManager::skinningMeshDrawManager = skinningMeshDrawManager;
+	//Particle::lookAtDefault = camera3D.get();
+	LookAtRect::camera = camera3D;
+
+	player->start(skinningMeshDrawManager, rect3dDrawManager);
+	skydome->get_transform().set_scale(CVector3::BASIS * 100);
+	skydome->get_materials()[0].lightingType = LighingType::None;
+	camera3D->initialize();
+	camera3D->set_transform({
+		CVector3::BASIS,
+		Quaternion::EulerDegree(45,0,0),
+		{0,10,-10}
+		});
+	camera3D->set_target(player);
+
+	localPlayerCommandHandler = std::make_unique<LocalPlayerCommandHandler>();
+	localPlayerCommandHandler->initialize(player);
+	localPlayerCommandHandler->start(camera3D);
 
 	// RenderPath
 	auto deferredRenderTarget = DeferredAdaptor::CreateGBufferRenderTarget();
@@ -84,19 +129,43 @@ void SceneGame::initialize() {
 #else
 	renderPath->initialize({ deferredMeshNode,skinMeshNodeDeferred,nonLightingPixelNode,directionalLightingNode,particleBillboardNode,rect3dNode });
 #endif // DEFERRED_RENDERING
+
+	// CreateInstancing
+	skinningMeshDrawManager->make_instancing(0, "Player.gltf", 1);
+	skinningMeshDrawManager->make_instancing(0, "Enemy.gltf", 100);
+	staticMeshDrawManager->make_instancing(0, "skydome.gltf", 1);
+	//staticMeshDrawManager->make_instancing(0, "Sphere.obj", 1);
+	
+	// RegisterDraw
+	staticMeshDrawManager->register_debug_instance(0, camera3D, true);
+	staticMeshDrawManager->register_instance(skydome);
+}
+
+void SceneGame::begin() {
+	localPlayerCommandHandler->begin();
+	entityManager->begin();
+	camera3D->input();
 }
 
 void SceneGame::update() {
+	localPlayerCommandHandler->update();
+
+	localPlayerCommandHandler->run();
+
+	entityManager->update();
+	camera3D->update();
+}
+
+void SceneGame::late_update() {
+	entityManager->late_update();
 }
 
 void SceneGame::begin_rendering() {
 
 	worldManager->update_matrix();
 
-	//particleEmitter->transfer();
 	directionalLight->transfer();
-	//pointLight->transfer();
-	//camera3D->transfer();
+	camera3D->transfer();
 
 	directionalLightingExecutor->begin();
 	directionalLightingExecutor->write_to_buffer(directionalLight);
@@ -108,42 +177,59 @@ void SceneGame::begin_rendering() {
 void SceneGame::draw() const {
 	// 3DMesh
 	renderPath->begin();
-	//camera3D->register_world_projection(2);
-	//staticMeshDrawManager->draw_layer(0);
+	camera3D->register_world_projection(2);
+	staticMeshDrawManager->draw_layer(0);
 
 	// SkinMesh
 	renderPath->next();
-	//camera3D->register_world_projection(2);
-	//skinningMeshDrawManager->draw_layer(0);
+	camera3D->register_world_projection(2);
+	skinningMeshDrawManager->draw_layer(0);
 
 	// NonLightingPixel
 	renderPath->next();
 
 	// DirectionalLight
 	renderPath->next();
-	//camera3D->register_world_lighting(1);
-	//directionalLightingExecutor->draw_command();
+	camera3D->register_world_lighting(1);
+	directionalLightingExecutor->draw_command();
 
 	// ParticleBillboard
 	renderPath->next();
-	//camera3D->register_world_projection(1);
-	////particleEmitter->draw();
-
+	camera3D->register_world_projection(1);
+	
 	// Rect3D
 	renderPath->next();
-	//camera3D->register_world_projection(3);
-	//camera3D->register_world_lighting(4);
-	//directionalLightingExecutor->set_command(5);
-	//rect3dDrawManager->draw_layer(0);
+	camera3D->register_world_projection(3);
+	camera3D->register_world_lighting(4);
+	directionalLightingExecutor->set_command(5);
+	rect3dDrawManager->draw_layer(0);
 
 	renderPath->next();
 
 #ifdef DEBUG_FEATURES_ENABLE
 	// LineDraw
-	//camera3D->register_world_projection(1);
-	//collisionManager->debug_draw3d();
-	//camera3D->debug_draw_frustum();
+	camera3D->register_world_projection(1);
+	camera3D->debug_draw_frustum();
 
 	renderPath->next();
 #endif // DEFERRED_RENDERING
+}
+
+void SceneGame::debug_update() {
+	ImGui::Begin("Camera3D");
+	camera3D->debug_gui();
+	ImGui::End();
+
+	ImGui::Begin("WorldClock");
+	WorldClock::DebugGui();
+	ImGui::End();
+
+	ImGui::Begin("DirectionalLight");
+	directionalLight->debug_gui();
+	ImGui::End();
+
+	ImGui::Begin("Player");
+	player->debug_gui();
+	ImGui::End();
+
 }

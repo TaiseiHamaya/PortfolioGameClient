@@ -15,15 +15,61 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Portfolio\main.cpp" />
-    <ClCompile Include="Portfolio\Scene\FactoryPortfolio.cpp" />
-    <ClCompile Include="Portfolio\Portfolio.cpp" />
-    <ClCompile Include="Portfolio\Scene\SceneGame.cpp" />
+    <ClCompile Include="Scripts\RemoteEntity\RemoteEnemyCommandHandler.cpp" />
+    <ClCompile Include="Scripts\EntityCommand\Hander\IEntityCommandHandler.cpp" />
+    <ClCompile Include="Scripts\IEntity\Actions\Idle.cpp" />
+    <ClCompile Include="Scripts\Player\LocalPlayerCommandHandler.cpp" />
+    <ClCompile Include="Scripts\EntityCommand\Invoker.cpp" />
+    <ClCompile Include="Scripts\EntityCommand\Command\DamagedCommand.cpp" />
+    <ClCompile Include="Scripts\EntityCommand\Command\JumpCommand.cpp" />
+    <ClCompile Include="Scripts\EntityCommand\Command\MoveCommand.cpp" />
+    <ClCompile Include="Scripts\EntityCommand\ActionHandler.cpp" />
+    <ClCompile Include="Scripts\Util\LookAtRect.cpp" />
+    <ClCompile Include="Scripts\Manager\EntityManager.cpp" />
+    <ClCompile Include="Scripts\IEntity\EntityUi.cpp" />
+    <ClCompile Include="Scripts\IEntity\BaseEntity.cpp" />
+    <ClCompile Include="Scripts\main.cpp" />
+    <ClCompile Include="Scripts\Portfolio.cpp" />
+    <ClCompile Include="Scripts\Scene\FactoryPortfolio.cpp" />
+    <ClCompile Include="Scripts\Scene\SceneGame.cpp" />
+    <ClCompile Include="Scripts\MiscInstance\Camera\FollowCamera.cpp" />
+    <ClCompile Include="Scripts\MiscInstance\Effects\HitAnimation.cpp" />
+    <ClCompile Include="Scripts\MiscInstance\Enemy\DeadEnemy.cpp" />
+    <ClCompile Include="Scripts\MiscInstance\Enemy\Enemy.cpp" />
+    <ClCompile Include="Scripts\MiscInstance\Enemy\EnemyManager.cpp" />
+    <ClCompile Include="Scripts\IEntity\BaseAction.cpp" />
+    <ClCompile Include="Scripts\Player\Player.cpp" />
+    <ClCompile Include="Scripts\IEntity\Shadow.cpp" />
+    <ClCompile Include="Scripts\EntityCommand\Command\StartActionCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Portfolio\Scene\FactoryPortfolio.h" />
-    <ClInclude Include="Portfolio\Portfolio.h" />
-    <ClInclude Include="Portfolio\Scene\SceneGame.h" />
+    <ClInclude Include="BuiltinTypes.h" />
+    <ClInclude Include="Scripts\RemoteEntity\RemoteEnemyCommandHandler.h" />
+    <ClInclude Include="Scripts\EntityCommand\Hander\IEntityCommandHandler.h" />
+    <ClInclude Include="Scripts\IEntity\Actions\Idle.h" />
+    <ClInclude Include="Scripts\Player\LocalPlayerCommandHandler.h" />
+    <ClInclude Include="Scripts\EntityCommand\Invoker.h" />
+    <ClInclude Include="Scripts\EntityCommand\Command\DamagedCommand.h" />
+    <ClInclude Include="Scripts\EntityCommand\Command\JumpCommand.h" />
+    <ClInclude Include="Scripts\EntityCommand\Command\MoveCommand.h" />
+    <ClInclude Include="Scripts\EntityCommand\ActionHandler.h" />
+    <ClInclude Include="Scripts\EntityCommand\ICommand.h" />
+    <ClInclude Include="Scripts\Util\LookAtRect.h" />
+    <ClInclude Include="Scripts\Manager\EntityManager.h" />
+    <ClInclude Include="Scripts\IEntity\EntityUi.h" />
+    <ClInclude Include="Scripts\IEntity\BaseEntity.h" />
+    <ClInclude Include="Scripts\Portfolio.h" />
+    <ClInclude Include="Scripts\Scene\FactoryPortfolio.h" />
+    <ClInclude Include="Scripts\Scene\SceneGame.h" />
+    <ClInclude Include="Scripts\MiscInstance\Camera\FollowCamera.h" />
+    <ClInclude Include="Scripts\MiscInstance\Effects\HitAnimation.h" />
+    <ClInclude Include="Scripts\MiscInstance\Enemy\DeadEnemy.h" />
+    <ClInclude Include="Scripts\MiscInstance\Enemy\Enemy.h" />
+    <ClInclude Include="Scripts\MiscInstance\Enemy\EnemyManager.h" />
+    <ClInclude Include="Scripts\IEntity\BaseAction.h" />
+    <ClInclude Include="Scripts\Player\Player.h" />
+    <ClInclude Include="Scripts\IEntity\Shadow.h" />
+    <ClInclude Include="Scripts\EntityCommand\Command\StartActionCommand.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -95,6 +141,7 @@
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <ForcedIncludeFiles>BuiltinTypes.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
     </ClCompile>
     <FxCompile>
       <ShaderModel>6.6</ShaderModel>
@@ -119,6 +166,7 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <ForcedIncludeFiles>BuiltinTypes.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
     </ClCompile>
     <FxCompile>
       <ShaderModel>6.6</ShaderModel>
@@ -141,6 +189,7 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <ForcedIncludeFiles>BuiltinTypes.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
     </ClCompile>
     <FxCompile>
       <ShaderModel>6.6</ShaderModel>
