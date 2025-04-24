@@ -11,9 +11,9 @@
 #include <Engine/Module/Render/RenderNode/Forward/Particle/ParticleBillboardNode/ParticleBillboardNode.h>
 #include <Engine/Module/Render/RenderNode/Forward/Primitive/Rect3dNode .h>
 
+#include <Engine/Module/World/Mesh/Primitive/Rect3d.h>
 #include <Engine/Module/World/Mesh/SkinningMeshInstance.h>
 #include <Engine/Module/World/Mesh/StaticMeshInstance.h>
-#include <Engine/Module/World/Mesh/Primitive/Rect3d.h>
 
 #include <Engine/Assets/Animation/NodeAnimation/NodeAnimationLibrary.h>
 #include <Engine/Assets/Animation/Skeleton/SkeletonLibrary.h>
@@ -22,11 +22,15 @@
 #include <Engine/Assets/Texture/TextureLibrary.h>
 #include <Engine/Runtime/Scene/SceneManager.h>
 
-#include "Scripts/Util/LookAtRect.h"
 #include <Engine/Runtime/Clock/WorldClock.h>
+
+#include "Scripts/Util/LookAtRect.h"
+
+#include <Engine/Debug/DebugValues/DebugValues.h>
 
 void SceneGame::load() {
 	PolygonMeshLibrary::RegisterLoadQue("./Game/Resources/Game/Models/skydome.gltf");
+	PolygonMeshLibrary::RegisterLoadQue("./Game/Resources/Game/Models/Comet.obj");
 	PolygonMeshLibrary::RegisterLoadQue("./Game/Resources/Game/Models/Player.gltf");
 	NodeAnimationLibrary::RegisterLoadQue("./Game/Resources/Game/Models/Player.gltf");
 	SkeletonLibrary::RegisterLoadQue("./Game/Resources/Game/Models/Player.gltf");
@@ -36,6 +40,15 @@ void SceneGame::load() {
 	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/Circle.png");
 	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/white.png");
 	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/shadow.png");
+	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/AOEBase.png");
+	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/DustCloud1.png");
+	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/DustCloud2.png");
+	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/Fire.png");
+	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/CometGround1.png");
+	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/CometGround2.png");
+	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/CometGround3.png");
+
+	PolygonMeshLibrary::RegisterLoadQue(".\\DirectXGame\\EngineResources\\Models\\Grid\\Grid.obj");
 }
 
 void SceneGame::initialize() {
@@ -68,6 +81,8 @@ void SceneGame::initialize() {
 	camera3D = worldManager->create<FollowCamera>();
 
 	LookAtRect::camera = camera3D;
+	Particle::lookAtDefault = camera3D.get();
+	CometEffect::camera = camera3D;
 
 	skydome->get_transform().set_scale(CVector3::BASIS * 100);
 	skydome->get_materials()[0].lightingType = LighingType::None;
@@ -133,14 +148,21 @@ void SceneGame::initialize() {
 	skinningMeshDrawManager->make_instancing(0, "Enemy.gltf", 100);
 	skinningMeshDrawManager->make_instancing(0, "RedComet.gltf", 1);
 	staticMeshDrawManager->make_instancing(0, "skydome.gltf", 1);
-	//staticMeshDrawManager->make_instancing(0, "Sphere.obj", 1);
+	staticMeshDrawManager->make_instancing(0, "Comet.obj", 100);
+	staticMeshDrawManager->make_instancing(0, "Grid.obj", 1);
 
 	// RegisterDraw
+#ifdef DEBUG_FEATURES_ENABLE
 	staticMeshDrawManager->register_debug_instance(0, camera3D, true);
+#else
+	staticMeshDrawManager->register_instance(DebugValues::GetGridInstance());
+#endif // DEBUG_FEATURES_ENABLE
 	staticMeshDrawManager->register_instance(skydome);
 }
 
 void SceneGame::begin() {
+	timer.ahead();
+
 	localPlayerCommandHandler->begin();
 	entityManager->begin();
 	camera3D->input();
@@ -153,6 +175,24 @@ void SceneGame::update() {
 
 	entityManager->update();
 	camera3D->update();
+
+	if (std::fmodf(timer.time(), 2.0f) <= WorldClock::DeltaSeconds()) {
+		auto& temp = comets.emplace_back(
+			worldManager->create<CircleAoe>(),
+			worldManager->create<CometEffect>()
+		);
+		temp.circleAoE->initialize(player->world_position(), 7, 3);
+		temp.circleAoE->start(rect3dDrawManager);
+		temp.cometEffect->initialize(player->world_position());
+		temp.cometEffect->start(staticMeshDrawManager, rect3dDrawManager);
+	}
+
+	for (auto& comet : comets) {
+		comet.circleAoE->update();
+		if (comet.circleAoE->is_end()) {
+			comet.cometEffect->update();
+		}
+	}
 }
 
 void SceneGame::late_update() {
@@ -195,6 +235,9 @@ void SceneGame::draw() const {
 	// ParticleBillboard
 	renderPath->next();
 	camera3D->register_world_projection(1);
+	for (const auto& comet : comets) {
+		comet.cometEffect->draw_particle();
+	}
 
 	// Rect3D
 	renderPath->next();
@@ -233,6 +276,24 @@ void SceneGame::debug_update() {
 	ImGui::End();
 
 	enemyManager->debug_gui();
+
+	ImGui::Begin("Test");
+	if (ImGui::Button("Gen")) {
+		auto& temp = comets.emplace_back(
+			worldManager->create<CircleAoe>(),
+			worldManager->create<CometEffect>()
+		);
+		temp.circleAoE->initialize(player->world_position(), 7, 3);
+		temp.circleAoE->start(rect3dDrawManager);
+		temp.cometEffect->initialize(player->world_position());
+		temp.cometEffect->start(staticMeshDrawManager, rect3dDrawManager);
+	}
+
+	if (comets.size() >= 1) {
+		auto& comet = comets.front();
+		comet.cometEffect->debug_gui();
+	}
+	ImGui::End();
 }
 
 #endif // DEFERRED_RENDERING

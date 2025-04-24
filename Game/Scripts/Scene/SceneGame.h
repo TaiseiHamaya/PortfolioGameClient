@@ -15,20 +15,28 @@
 
 #include "Scripts/Manager/EntityManager.h"
 
+#include "Scripts/MiscInstance/AOE/CircleAoe.h"
 #include "Scripts/MiscInstance/Camera/FollowCamera.h"
+#include "Scripts/MiscInstance/Effects/CometEffect.h"
 #include "Scripts/MiscInstance/Enemy/EnemyManager.h"
-#include "Scripts/Player/Player.h"
 #include "Scripts/Player/LocalPlayerCommandHandler.h"
+#include "Scripts/Player/Player.h"
+
+struct CometAction {
+	std::unique_ptr<CircleAoe> circleAoE;
+	std::unique_ptr<CometEffect> cometEffect;
+};
 
 class SceneGame final : public BaseScene {
-public:	void load() override;
+public:
+	void load() override;
 	void initialize() override;
 
 	void begin() override;
 	void update() override;
 	void late_update() override;
 	void begin_rendering() override;
-	
+
 	void draw() const override;
 
 #ifdef DEBUG_FEATURES_ENABLE
@@ -38,6 +46,8 @@ public:
 
 
 private:
+	WorldTimer timer;
+
 	std::unique_ptr<RenderPath> renderPath;
 	std::unique_ptr<WorldManager> worldManager;
 
@@ -56,4 +66,6 @@ private:
 	Reference<Player> player;
 
 	std::unique_ptr<LocalPlayerCommandHandler> localPlayerCommandHandler;
+
+	std::vector<CometAction> comets;
 };

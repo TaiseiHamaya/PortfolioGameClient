@@ -15,6 +15,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Scripts\MiscInstance\Effects\CometEffect.cpp" />
+    <ClCompile Include="Scripts\MiscInstance\AOE\BaseAoe.cpp" />
+    <ClCompile Include="Scripts\MiscInstance\AOE\CircleAoe.cpp" />
     <ClCompile Include="Scripts\CombatTower\CombatTower.cpp" />
     <ClCompile Include="Scripts\MiscInstance\Enemy\EnemyRemoteHandler.cpp" />
     <ClCompile Include="Scripts\RemoteEntity\RemoteEnemyCommandHandler.cpp" />
@@ -43,7 +46,10 @@
     <ClCompile Include="Scripts\EntityCommand\Command\StartActionCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Scripts\MiscInstance\Effects\CometEffect.h" />
+    <ClInclude Include="Scripts\MiscInstance\AOE\BaseAoe.h" />
     <ClInclude Include="BuiltinTypes.h" />
+    <ClInclude Include="Scripts\MiscInstance\AOE\CircleAoe.h" />
     <ClInclude Include="Scripts\CombatTower\CombatTower.h" />
     <ClInclude Include="Scripts\MiscInstance\Enemy\EnemyRemoteHandler.h" />
     <ClInclude Include="Scripts\RemoteEntity\RemoteEnemyCommandHandler.h" />

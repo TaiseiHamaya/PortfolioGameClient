@@ -18,8 +18,10 @@ void EnemyManager::generate(u64 id, const std::filesystem::path& path, Vector3 p
 	);
 }
 
+#ifdef DEBUG_FEATURES_ENABLE
 void EnemyManager::debug_gui() {
 	ImGui::Begin("Enemy");
 	enemies.front()->debug_gui();
 	ImGui::End();
 }
+#endif // DEBUG_FEATURES_ENABLE

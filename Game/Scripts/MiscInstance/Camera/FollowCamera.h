@@ -2,6 +2,7 @@
 
 #include <Engine/Module/World/Camera/Camera3D.h>
 #include <Engine/Runtime/Clock/WorldTimer.h>
+#include <Engine/Runtime/Input/InputHandler.h>
 
 class FollowCamera final : public Camera3D {
 public:

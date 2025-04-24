@@ -1,0 +1,126 @@
+{
+	"DrawType": 1,
+	"Pivot": {
+		"X": 0.5,
+		"Y": 0.5
+	},
+	"Size": {
+		"X": 5.0,
+		"Y": 5.0
+	},
+	"duration": 1.0,
+	"emission": {
+		"Count": 20,
+		"Cycles": 1,
+		"Interval": 0.0,
+		"Shape": {
+			"Data": {
+				"Offset": {
+					"X": 0.5,
+					"Y": 0.0,
+					"Z": 0.5
+				},
+				"Size": {
+					"X": 6.0,
+					"Y": 1.0,
+					"Z": 6.0
+				}
+			},
+			"Type": 3
+		},
+		"Time": 0.0
+	},
+	"isLoop": false,
+	"isParentEmitter": false,
+	"particleFinal": {
+		"Color": {
+			"Max": {
+				"A": 0.0,
+				"B": 0.0,
+				"G": 0.0,
+				"R": 0.0
+			},
+			"Min": {
+				"A": 0.0,
+				"B": 0.0,
+				"G": 0.0,
+				"R": 0.0
+			}
+		},
+		"Size": {
+			"Max": {
+				"X": 1.5,
+				"Y": 1.5,
+				"Z": 1.5
+			},
+			"Min": {
+				"X": 1.5,
+				"Y": 1.5,
+				"Z": 1.5
+			}
+		}
+	},
+	"particleInit": {
+		"Acceleration": {
+			"Max": {
+				"X": 0.0,
+				"Y": 8.800000190734863,
+				"Z": 0.0
+			},
+			"Min": {
+				"X": 0.0,
+				"Y": 5.0,
+				"Z": 0.0
+			}
+		},
+		"Color": {
+			"Max": {
+				"A": 1.0,
+				"B": 0.10199999809265137,
+				"G": 0.0820000022649765,
+				"R": 0.3370000123977661
+			},
+			"Min": {
+				"A": 1.0,
+				"B": 0.0,
+				"G": 0.0,
+				"R": 0.20000000298023224
+			}
+		},
+		"Direction": {
+			"Data": {},
+			"Mode": 1
+		},
+		"Lifetime": {
+			"Max": 1.0,
+			"Min": 1.0
+		},
+		"Rotation": {
+			"Data": {
+				"AngleParSec": {
+					"Max": 3.0,
+					"Min": 1.0
+				},
+				"IsRandomDirection": true
+			},
+			"Mode": 3
+		},
+		"Size": {
+			"Max": {
+				"X": 1.0,
+				"Y": 1.0,
+				"Z": 1.0
+			},
+			"Min": {
+				"X": 1.0,
+				"Y": 1.0,
+				"Z": 1.0
+			}
+		},
+		"Speed": {
+			"Max": 5.0,
+			"Min": 2.0
+		}
+	},
+	"useResourceName": "DustCloud1.png"
+}
