@@ -18,11 +18,15 @@ public:
 public:
 	void initialize(const Vector3& position);
 	void start(Reference<StaticMeshDrawManager> meshDraw, Reference<Rect3dDrawManager> rectDraw);
+	void end(Reference<StaticMeshDrawManager> meshDraw, Reference<Rect3dDrawManager> rectDraw);
 
 public:
 	void update();
 
 	void draw_particle();
+
+public:
+	bool is_end() const;
 
 #ifdef DEBUG_FEATURES_ENABLE
 public:

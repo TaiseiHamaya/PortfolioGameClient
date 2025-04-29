@@ -37,6 +37,11 @@ void CircleAoe::start(Reference<Rect3dDrawManager> rectDraw) {
 	rectDraw->register_instance(effect);
 }
 
+void CircleAoe::end(Reference<Rect3dDrawManager> rectDraw) {
+	rectDraw->unregister_instance(base);
+	rectDraw->unregister_instance(effect);
+}
+
 void CircleAoe::update() {
 	timer.ahead();
 

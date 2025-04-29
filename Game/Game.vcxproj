@@ -48,7 +48,6 @@
   <ItemGroup>
     <ClInclude Include="Scripts\MiscInstance\Effects\CometEffect.h" />
     <ClInclude Include="Scripts\MiscInstance\AOE\BaseAoe.h" />
-    <ClInclude Include="BuiltinTypes.h" />
     <ClInclude Include="Scripts\MiscInstance\AOE\CircleAoe.h" />
     <ClInclude Include="Scripts\CombatTower\CombatTower.h" />
     <ClInclude Include="Scripts\MiscInstance\Enemy\EnemyRemoteHandler.h" />
@@ -147,7 +146,7 @@
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <ForcedIncludeFiles>BuiltinTypes.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles>$(SolutionDir)DirectXGame\Library\Utility\BuiltinTypes.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
     </ClCompile>
     <FxCompile>
       <ShaderModel>6.6</ShaderModel>
@@ -172,7 +171,7 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <ForcedIncludeFiles>BuiltinTypes.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles>$(SolutionDir)DirectXGame\Library\Utility\BuiltinTypes.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
     </ClCompile>
     <FxCompile>
       <ShaderModel>6.6</ShaderModel>
@@ -195,7 +194,7 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <ForcedIncludeFiles>BuiltinTypes.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles>$(SolutionDir)DirectXGame\Library\Utility\BuiltinTypes.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
     </ClCompile>
     <FxCompile>
       <ShaderModel>6.6</ShaderModel>

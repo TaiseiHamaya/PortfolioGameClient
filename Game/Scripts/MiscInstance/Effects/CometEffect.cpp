@@ -52,6 +52,12 @@ void CometEffect::start(Reference<StaticMeshDrawManager> meshDraw, Reference<Rec
 	rectDraw->register_instance(groundEffect);
 }
 
+void CometEffect::end(Reference<StaticMeshDrawManager> meshDraw, Reference<Rect3dDrawManager> rectDraw) {
+	meshDraw->unregister_instance(cometBody);
+	rectDraw->unregister_instance(cometFire);
+	rectDraw->unregister_instance(groundEffect);
+}
+
 void CometEffect::update() {
 	timer.ahead();
 
@@ -94,7 +100,11 @@ void CometEffect::draw_particle() {
 	dustCloudParticle1->draw();
 }
 
-#ifdef DEBUG_FUATURE_ENABLE
+bool CometEffect::is_end() const {
+	return dustCloudParticle0->is_end_all() && dustCloudParticle1->is_end_all();
+}
+
+#ifdef DEBUG_FEATURES_ENABLE
 void CometEffect::debug_gui() {
 	if (ImGui::TreeNode("0")) {
 		dustCloudParticle0->debug_gui();

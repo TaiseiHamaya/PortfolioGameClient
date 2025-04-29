@@ -2,9 +2,15 @@
 
 #include <Engine/Runtime/Scene/BaseScene.h>
 
+#include <list>
+#include <vector>
+
 #include <Engine/Module/Render/RenderPath/RenderPath.h>
 #include <Engine/Module/World/Collision/CollisionManager.h>
 #include <Engine/Module/World/WorldManager.h>
+
+#include <Engine/GraphicsAPI/DirectX/DxResource/TextureResource/RenderTexture.h>
+#include <Engine/Module/Render/RenderNode/Deferred/DeferredAdaptor.h>
 
 #include <Engine/Module/World/Light/DirectionalLight/DirectionalLightInstance.h>
 
@@ -49,6 +55,8 @@ private:
 	WorldTimer timer;
 
 	std::unique_ptr<RenderPath> renderPath;
+	std::vector<RenderTexture> renderTextures;
+	DeferredAdaptor::GBuffersType gBuffer;
 	std::unique_ptr<WorldManager> worldManager;
 
 	std::unique_ptr<StaticMeshDrawManager> staticMeshDrawManager;
@@ -67,5 +75,5 @@ private:
 
 	std::unique_ptr<LocalPlayerCommandHandler> localPlayerCommandHandler;
 
-	std::vector<CometAction> comets;
+	std::list<CometAction> comets;
 };

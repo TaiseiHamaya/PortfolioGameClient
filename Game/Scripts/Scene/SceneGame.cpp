@@ -96,39 +96,41 @@ void SceneGame::initialize() {
 	localPlayerCommandHandler->start(camera3D);
 
 	// RenderPath
-	auto deferredRenderTarget = DeferredAdaptor::CreateGBufferRenderTarget();
+	renderTextures.resize(2);
+	renderTextures[0].initialize(DeferredAdaptor::DXGI_FORMAT_LIST[0]);
+	renderTextures[1].initialize(DeferredAdaptor::DXGI_FORMAT_LIST[1]);
+	gBuffer.initialize({ renderTextures[0],renderTextures[1] });
 
 	auto deferredMeshNode = eps::CreateShared<StaticMeshNodeDeferred>();
 	deferredMeshNode->initialize();
-	deferredMeshNode->set_render_target(deferredRenderTarget);
-	deferredMeshNode->set_config(RenderNodeConfig::ContinueDrawBefore | RenderNodeConfig::ContinueUseDpehtBefore);
+	deferredMeshNode->set_render_target(gBuffer);
 
 	auto skinMeshNodeDeferred = eps::CreateShared<SkinningMeshNodeDeferred>();
 	skinMeshNodeDeferred->initialize();
-	skinMeshNodeDeferred->set_render_target(deferredRenderTarget);
-	skinMeshNodeDeferred->set_config(RenderNodeConfig::ContinueDrawAfter | RenderNodeConfig::ContinueUseDpehtAfter);
+	skinMeshNodeDeferred->set_render_target(gBuffer);
+	skinMeshNodeDeferred->set_config(RenderNodeConfig::NoClearRenderTarget | RenderNodeConfig::NoClearDepth);
 
 	auto nonLightingPixelNode = eps::CreateShared<NonLightingPixelNode>();
 	nonLightingPixelNode->initialize();
-	nonLightingPixelNode->set_render_target_SC(DxSwapChain::GetRenderTarget());
-	nonLightingPixelNode->set_gbuffers(deferredRenderTarget);
+	nonLightingPixelNode->set_render_target_SC();
+	nonLightingPixelNode->set_gbuffers(renderTextures[0]);
 
 	auto directionalLightingNode = eps::CreateShared<DirectionalLightingNode>();
 	directionalLightingNode->initialize();
-	directionalLightingNode->set_config(RenderNodeConfig::ContinueDrawAfter);
-	directionalLightingNode->set_render_target_SC(DxSwapChain::GetRenderTarget());
-	directionalLightingNode->set_gbuffers(deferredRenderTarget);
+	directionalLightingNode->set_config(RenderNodeConfig::NoClearRenderTarget | RenderNodeConfig::NoClearDepth);
+	directionalLightingNode->set_render_target_SC();
+	directionalLightingNode->set_gbuffers({ renderTextures[0], renderTextures[1] });
 
 	std::shared_ptr<ParticleBillboardNode> particleBillboardNode;
 	particleBillboardNode = std::make_unique<ParticleBillboardNode>();
 	particleBillboardNode->initialize();
-	particleBillboardNode->set_config(RenderNodeConfig::ContinueDrawBefore | RenderNodeConfig::ContinueDrawAfter | RenderNodeConfig::ContinueUseDpehtBefore | RenderNodeConfig::NoClearDepth);
-	particleBillboardNode->set_render_target_SC(DxSwapChain::GetRenderTarget());
+	particleBillboardNode->set_config(RenderNodeConfig::NoClearRenderTarget | RenderNodeConfig::NoClearDepth);
+	particleBillboardNode->set_render_target_SC();
 
 	auto rect3dNode = eps::CreateShared<Rect3dNode>();
 	rect3dNode->initialize();
-	rect3dNode->set_render_target_SC(DxSwapChain::GetRenderTarget());
-	rect3dNode->set_config(RenderNodeConfig::ContinueDrawBefore | RenderNodeConfig::ContinueDrawAfter | RenderNodeConfig::ContinueUseDpehtAfter | RenderNodeConfig::NoClearDepth);
+	rect3dNode->set_render_target_SC();
+	rect3dNode->set_config(RenderNodeConfig::NoClearRenderTarget | RenderNodeConfig::NoClearDepth);
 
 #ifdef DEBUG_FEATURES_ENABLE
 	std::shared_ptr<PrimitiveLineNode> primitiveLineNode;
@@ -186,6 +188,15 @@ void SceneGame::update() {
 		temp.cometEffect->initialize(player->world_position());
 		temp.cometEffect->start(staticMeshDrawManager, rect3dDrawManager);
 	}
+
+	std::erase_if(comets, [&](CometAction& elem) {
+		if (elem.cometEffect->is_end()) {
+			elem.circleAoE->end(rect3dDrawManager);
+			elem.cometEffect->end(staticMeshDrawManager, rect3dDrawManager);
+			return true;
+		}
+		return false;
+	});
 
 	for (auto& comet : comets) {
 		comet.circleAoE->update();

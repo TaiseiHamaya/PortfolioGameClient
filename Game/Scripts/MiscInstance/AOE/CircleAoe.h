@@ -13,6 +13,7 @@ public:
 public:
 	void initialize(const Vector3& position, float radius, float duration_);
 	void start(Reference<Rect3dDrawManager> rectDraw);
+	void end(Reference<Rect3dDrawManager> rectDraw);
 	void update();
 
 public:

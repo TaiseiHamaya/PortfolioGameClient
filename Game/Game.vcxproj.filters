@@ -54,7 +54,6 @@
     <ClInclude Include="Scripts\EntityCommand\Command\MoveCommand.h" />
     <ClInclude Include="Scripts\EntityCommand\Command\JumpCommand.h" />
     <ClInclude Include="Scripts\EntityCommand\Command\DamagedCommand.h" />
-    <ClInclude Include="BuiltinTypes.h" />
     <ClInclude Include="Scripts\EntityCommand\Invoker.h" />
     <ClInclude Include="Scripts\Player\LocalPlayerCommandHandler.h" />
     <ClInclude Include="Scripts\IEntity\Actions\Idle.h" />
