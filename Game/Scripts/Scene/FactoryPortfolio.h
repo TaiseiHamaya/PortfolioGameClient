@@ -1,8 +1,9 @@
-﻿#pragma once
+#pragma once
 
 #include "Engine/Runtime/Scene/BaseSceneFactory.h"
 
 enum SceneListPortfolio {
+	SCENE_GAME,
 };
 
 class FactoryPortfolio final : public BaseSceneFactory {

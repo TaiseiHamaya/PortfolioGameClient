@@ -2,7 +2,7 @@
 
 #include <Engine/Runtime/Scene/BaseScene.h>
 
-#include "Portfolio/Scene/SceneGame.h"
+#include "Scripts/Scene/SceneGame.h"
 
 std::unique_ptr<BaseScene> FactoryPortfolio::initialize_scene() {
 	return std::make_unique<SceneGame>();
