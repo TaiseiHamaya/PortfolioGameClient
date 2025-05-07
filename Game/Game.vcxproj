@@ -15,6 +15,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Scripts\RenderNode\PostEffect\GaussianBlurNode.cpp" />
+    <ClCompile Include="Scripts\RenderNode\PostEffect\MargeTextureNode.cpp" />
+    <ClCompile Include="Scripts\RenderNode\PostEffect\BloomNode.cpp" />
+    <ClCompile Include="Scripts\RenderNode\PostEffect\DownSamplingNode.cpp" />
     <ClCompile Include="Scripts\MiscInstance\Effects\CometEffect.cpp" />
     <ClCompile Include="Scripts\MiscInstance\AOE\BaseAoe.cpp" />
     <ClCompile Include="Scripts\MiscInstance\AOE\CircleAoe.cpp" />
@@ -28,6 +32,7 @@
     <ClCompile Include="Scripts\EntityCommand\Command\DamagedCommand.cpp" />
     <ClCompile Include="Scripts\EntityCommand\Command\JumpCommand.cpp" />
     <ClCompile Include="Scripts\EntityCommand\Command\MoveCommand.cpp" />
+    <ClCompile Include="Scripts\RenderNode\PostEffect\LuminanceExtractionNode.cpp" />
     <ClCompile Include="Scripts\Util\LookAtRect.cpp" />
     <ClCompile Include="Scripts\Manager\EntityManager.cpp" />
     <ClCompile Include="Scripts\IEntity\EntityUi.cpp" />
@@ -46,6 +51,10 @@
     <ClCompile Include="Scripts\EntityCommand\Command\StartActionCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Scripts\RenderNode\PostEffect\GaussianBlurNode.h" />
+    <ClInclude Include="Scripts\RenderNode\PostEffect\MargeTextureNode.h" />
+    <ClInclude Include="Scripts\RenderNode\PostEffect\BloomNode.h" />
+    <ClInclude Include="Scripts\RenderNode\PostEffect\DownSamplingNode.h" />
     <ClInclude Include="Scripts\MiscInstance\Effects\CometEffect.h" />
     <ClInclude Include="Scripts\MiscInstance\AOE\BaseAoe.h" />
     <ClInclude Include="Scripts\MiscInstance\AOE\CircleAoe.h" />
@@ -60,6 +69,7 @@
     <ClInclude Include="Scripts\EntityCommand\Command\JumpCommand.h" />
     <ClInclude Include="Scripts\EntityCommand\Command\MoveCommand.h" />
     <ClInclude Include="Scripts\EntityCommand\ICommand.h" />
+    <ClInclude Include="Scripts\RenderNode\PostEffect\LuminanceExtractionNode.h" />
     <ClInclude Include="Scripts\Util\LookAtRect.h" />
     <ClInclude Include="Scripts\Manager\EntityManager.h" />
     <ClInclude Include="Scripts\IEntity\EntityUi.h" />

@@ -28,6 +28,11 @@
 
 #include <Engine/Debug/DebugValues/DebugValues.h>
 
+#include <Scripts/RenderNode/PostEffect/LuminanceExtractionNode.h>
+#include <Scripts/RenderNode/PostEffect/BloomNode.h>
+#include <Scripts/RenderNode/PostEffect/MargeTextureNode.h>
+#include <Scripts/RenderNode/PostEffect/GaussianBlurNode.h>
+
 void SceneGame::load() {
 	PolygonMeshLibrary::RegisterLoadQue("./Game/Resources/Game/Models/skydome.gltf");
 	PolygonMeshLibrary::RegisterLoadQue("./Game/Resources/Game/Models/Comet.obj");
@@ -96,10 +101,26 @@ void SceneGame::initialize() {
 	localPlayerCommandHandler->start(camera3D);
 
 	// RenderPath
-	renderTextures.resize(2);
+	renderTextures.resize(10);
 	renderTextures[0].initialize(DeferredAdaptor::DXGI_FORMAT_LIST[0]);
 	renderTextures[1].initialize(DeferredAdaptor::DXGI_FORMAT_LIST[1]);
+	renderTextures[2].initialize(DXGI_FORMAT_R8G8B8A8_UNORM_SRGB); // シーン結果
+	renderTextures[3].initialize(DXGI_FORMAT_R8G8B8A8_UNORM_SRGB); // ラジアルブラー
+	renderTextures[4].initialize(DXGI_FORMAT_R8G8B8A8_UNORM_SRGB); // 輝度抽出
+	renderTextures[5].initialize(DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, EngineSettings::CLIENT_WIDTH / 2, EngineSettings::CLIENT_HEIGHT / 2); // ダウンサンプリング 1/2
+	renderTextures[6].initialize(DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, EngineSettings::CLIENT_WIDTH / 4, EngineSettings::CLIENT_HEIGHT / 4); // ダウンサンプリング 1/4
+	renderTextures[7].initialize(DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, EngineSettings::CLIENT_WIDTH / 8, EngineSettings::CLIENT_HEIGHT / 8); // ダウンサンプリング 1/8
+	renderTextures[8].initialize(DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, EngineSettings::CLIENT_WIDTH / 16, EngineSettings::CLIENT_HEIGHT / 16); // ダウンサンプリング 1/16
+	renderTextures[9].initialize(DXGI_FORMAT_R8G8B8A8_UNORM_SRGB); // ダウンサンプリングを合成
 	gBuffer.initialize({ renderTextures[0],renderTextures[1] });
+	baseRenderTexture.initialize(renderTextures[2]);
+	radialBlurRenderTexture.initialize(renderTextures[3]);
+	luminanceRenderTexture.initialize(renderTextures[4]);
+	downSampleRenderTexture2.initialize(renderTextures[5]);
+	downSampleRenderTexture4.initialize(renderTextures[6]);
+	downSampleRenderTexture8.initialize(renderTextures[7]);
+	downSampleRenderTexture16.initialize(renderTextures[8]);
+	bloomBaseRenderTexture.initialize(renderTextures[9]);
 
 	auto deferredMeshNode = eps::CreateShared<StaticMeshNodeDeferred>();
 	deferredMeshNode->initialize();
@@ -112,37 +133,80 @@ void SceneGame::initialize() {
 
 	auto nonLightingPixelNode = eps::CreateShared<NonLightingPixelNode>();
 	nonLightingPixelNode->initialize();
-	nonLightingPixelNode->set_render_target_SC();
+	nonLightingPixelNode->set_render_target(baseRenderTexture);
 	nonLightingPixelNode->set_gbuffers(renderTextures[0]);
 
 	auto directionalLightingNode = eps::CreateShared<DirectionalLightingNode>();
 	directionalLightingNode->initialize();
 	directionalLightingNode->set_config(RenderNodeConfig::NoClearRenderTarget | RenderNodeConfig::NoClearDepth);
-	directionalLightingNode->set_render_target_SC();
+	directionalLightingNode->set_render_target(baseRenderTexture);
 	directionalLightingNode->set_gbuffers({ renderTextures[0], renderTextures[1] });
 
 	std::shared_ptr<ParticleBillboardNode> particleBillboardNode;
 	particleBillboardNode = std::make_unique<ParticleBillboardNode>();
 	particleBillboardNode->initialize();
 	particleBillboardNode->set_config(RenderNodeConfig::NoClearRenderTarget | RenderNodeConfig::NoClearDepth);
-	particleBillboardNode->set_render_target_SC();
+	particleBillboardNode->set_render_target(baseRenderTexture);
 
 	auto rect3dNode = eps::CreateShared<Rect3dNode>();
 	rect3dNode->initialize();
-	rect3dNode->set_render_target_SC();
+	rect3dNode->set_render_target(baseRenderTexture);
 	rect3dNode->set_config(RenderNodeConfig::NoClearRenderTarget | RenderNodeConfig::NoClearDepth);
 
+	radialBlurNode = eps::CreateShared<RadialBlurNode>();
+	radialBlurNode->initialize();
+	radialBlurNode->set_render_target(radialBlurRenderTexture);
+	radialBlurNode->set_texture_resource(renderTextures[2]);
+
+	luminanceExtractionNode = eps::CreateShared<LuminanceExtractionNode>();
+	luminanceExtractionNode->initialize();
+	luminanceExtractionNode->set_render_target(luminanceRenderTexture);
+	luminanceExtractionNode->set_texture_resource(renderTextures[3]);
+
+	gaussianBlurNode2 = eps::CreateShared<GaussianBlurNode>();
+	gaussianBlurNode2->initialize();
+	gaussianBlurNode2->set_render_target(downSampleRenderTexture2);
+	gaussianBlurNode2->set_base_texture(renderTextures[4]);
+
+	gaussianBlurNode4 = eps::CreateShared<GaussianBlurNode>();
+	gaussianBlurNode4->initialize();
+	gaussianBlurNode4->set_render_target(downSampleRenderTexture4);
+	gaussianBlurNode4->set_base_texture(renderTextures[5]);
+
+	gaussianBlurNode8 = eps::CreateShared<GaussianBlurNode>();
+	gaussianBlurNode8->initialize();
+	gaussianBlurNode8->set_render_target(downSampleRenderTexture8);
+	gaussianBlurNode8->set_base_texture(renderTextures[6]);
+
+	gaussianBlurNode16 = eps::CreateShared<GaussianBlurNode>();
+	gaussianBlurNode16->initialize();
+	gaussianBlurNode16->set_render_target(downSampleRenderTexture16);
+	gaussianBlurNode16->set_base_texture(renderTextures[7]);
+
+	margeTextureNode = eps::CreateShared<MargeTextureNode>();
+	margeTextureNode->initialize();
+	margeTextureNode->set_render_target(bloomBaseRenderTexture);
+	margeTextureNode->set_texture_resources({ renderTextures[5] ,renderTextures[6] ,renderTextures[7], renderTextures[8] });
+
+	bloomNode = eps::CreateShared<BloomNode>();
+	bloomNode->initialize();
+	bloomNode->set_render_target_SC();
+	bloomNode->set_base_texture(renderTextures[3]);
+	bloomNode->set_blur_texture(renderTextures[9]);
+
 #ifdef DEBUG_FEATURES_ENABLE
-	std::shared_ptr<PrimitiveLineNode> primitiveLineNode;
+		std::shared_ptr<PrimitiveLineNode> primitiveLineNode;
 	primitiveLineNode = std::make_unique<PrimitiveLineNode>();
 	primitiveLineNode->initialize();
 #endif // _DEBUG
 
 	renderPath = eps::CreateUnique<RenderPath>();
 #ifdef DEBUG_FEATURES_ENABLE
-	renderPath->initialize({ deferredMeshNode,skinMeshNodeDeferred,nonLightingPixelNode,directionalLightingNode,particleBillboardNode,rect3dNode,primitiveLineNode });
+	renderPath->initialize({ deferredMeshNode,skinMeshNodeDeferred,nonLightingPixelNode,directionalLightingNode,particleBillboardNode,rect3dNode, 
+		radialBlurNode, luminanceExtractionNode, gaussianBlurNode2, gaussianBlurNode4, gaussianBlurNode8, gaussianBlurNode16 , margeTextureNode, bloomNode,primitiveLineNode });
 #else
-	renderPath->initialize({ deferredMeshNode,skinMeshNodeDeferred,nonLightingPixelNode,directionalLightingNode,particleBillboardNode,rect3dNode });
+	renderPath->initialize({ deferredMeshNode,skinMeshNodeDeferred,nonLightingPixelNode,directionalLightingNode,particleBillboardNode,rect3dNode,
+		radialBlurNode, luminanceExtractionNode, gaussianBlurNode2, gaussianBlurNode4, gaussianBlurNode8, gaussianBlurNode16 , margeTextureNode, bloomNode });
 #endif // DEFERRED_RENDERING
 
 	// CreateInstancing
@@ -185,7 +249,7 @@ void SceneGame::update() {
 		);
 		temp.circleAoE->initialize(player->world_position(), 7, 3);
 		temp.circleAoE->start(rect3dDrawManager);
-		temp.cometEffect->initialize(player->world_position());
+		temp.cometEffect->initialize(player->world_position(), radialBlurNode->data());
 		temp.cometEffect->start(staticMeshDrawManager, rect3dDrawManager);
 	}
 
@@ -257,6 +321,38 @@ void SceneGame::draw() const {
 	directionalLightingExecutor->set_command(5);
 	rect3dDrawManager->draw_layer(0);
 
+	// ラジアルブラー
+	renderPath->next();
+	radialBlurNode->draw();
+
+	// 輝度抽出
+	renderPath->next();
+	luminanceExtractionNode->draw();
+
+	// ダウンサンプリング2
+	renderPath->next();
+	gaussianBlurNode2->draw();
+
+	// ダウンサンプリング4
+	renderPath->next();
+	gaussianBlurNode4->draw();
+
+	// ダウンサンプリング8
+	renderPath->next();
+	gaussianBlurNode8->draw();
+
+	// ダウンサンプリング16
+	renderPath->next();
+	gaussianBlurNode16->draw();
+
+	// 統合
+	renderPath->next();
+	margeTextureNode->draw();
+
+	// ブルーム
+	renderPath->next();
+	bloomNode->draw();
+
 	renderPath->next();
 
 #ifdef DEBUG_FEATURES_ENABLE
@@ -288,23 +384,27 @@ void SceneGame::debug_update() {
 
 	enemyManager->debug_gui();
 
-	ImGui::Begin("Test");
-	if (ImGui::Button("Gen")) {
-		auto& temp = comets.emplace_back(
-			worldManager->create<CircleAoe>(),
-			worldManager->create<CometEffect>()
-		);
-		temp.circleAoE->initialize(player->world_position(), 7, 3);
-		temp.circleAoE->start(rect3dDrawManager);
-		temp.cometEffect->initialize(player->world_position());
-		temp.cometEffect->start(staticMeshDrawManager, rect3dDrawManager);
-	}
-
-	if (comets.size() >= 1) {
-		auto& comet = comets.front();
-		comet.cometEffect->debug_gui();
-	}
+	ImGui::Begin("Blur");
+	radialBlurNode->debug_gui();
 	ImGui::End();
+
+	//ImGui::Begin("Test");
+	//if (ImGui::Button("Gen")) {
+	//	auto& temp = comets.emplace_back(
+	//		worldManager->create<CircleAoe>(),
+	//		worldManager->create<CometEffect>()
+	//	);
+	//	temp.circleAoE->initialize(player->world_position(), 7, 3);
+	//	temp.circleAoE->start(rect3dDrawManager);
+	//	temp.cometEffect->initialize(player->world_position());
+	//	temp.cometEffect->start(staticMeshDrawManager, rect3dDrawManager);
+	//}
+
+	//if (comets.size() >= 1) {
+	//	auto& comet = comets.front();
+	//	comet.cometEffect->debug_gui();
+	//}
+	//ImGui::End();
 }
 
 #endif // DEFERRED_RENDERING

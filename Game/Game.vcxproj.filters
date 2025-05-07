@@ -33,6 +33,11 @@
     <ClCompile Include="Scripts\MiscInstance\AOE\BaseAoe.cpp" />
     <ClCompile Include="Scripts\MiscInstance\AOE\CircleAoe.cpp" />
     <ClCompile Include="Scripts\MiscInstance\Effects\CometEffect.cpp" />
+    <ClCompile Include="Scripts\RenderNode\PostEffect\DownSamplingNode.cpp" />
+    <ClCompile Include="Scripts\RenderNode\PostEffect\BloomNode.cpp" />
+    <ClCompile Include="Scripts\RenderNode\PostEffect\LuminanceExtractionNode.cpp" />
+    <ClCompile Include="Scripts\RenderNode\PostEffect\MargeTextureNode.cpp" />
+    <ClCompile Include="Scripts\RenderNode\PostEffect\GaussianBlurNode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scripts\Scene\FactoryPortfolio.h" />
@@ -64,5 +69,10 @@
     <ClInclude Include="Scripts\MiscInstance\AOE\BaseAoe.h" />
     <ClInclude Include="Scripts\MiscInstance\AOE\CircleAoe.h" />
     <ClInclude Include="Scripts\MiscInstance\Effects\CometEffect.h" />
+    <ClInclude Include="Scripts\RenderNode\PostEffect\DownSamplingNode.h" />
+    <ClInclude Include="Scripts\RenderNode\PostEffect\BloomNode.h" />
+    <ClInclude Include="Scripts\RenderNode\PostEffect\LuminanceExtractionNode.h" />
+    <ClInclude Include="Scripts\RenderNode\PostEffect\MargeTextureNode.h" />
+    <ClInclude Include="Scripts\RenderNode\PostEffect\GaussianBlurNode.h" />
   </ItemGroup>
 </Project>

@@ -4,11 +4,13 @@
 #include <Engine/Module/World/Mesh/StaticMeshInstance.h>
 #include <Engine/Module/World/Particle/ParticleEmitterInstance.h>
 #include <Engine/Runtime/Clock/WorldTimer.h>
+#include <Engine/Module/World/Camera/Camera3D.h>
 
 #include "Scripts/Util/LookAtRect.h"
 
 class StaticMeshDrawManager;
 class Rect3dDrawManager;
+struct BlurInfo;
 
 class CometEffect final : public WorldInstance {
 public:
@@ -16,7 +18,7 @@ public:
 	~CometEffect();
 
 public:
-	void initialize(const Vector3& position);
+	void initialize(const Vector3& position, Reference<BlurInfo> blur_);
 	void start(Reference<StaticMeshDrawManager> meshDraw, Reference<Rect3dDrawManager> rectDraw);
 	void end(Reference<StaticMeshDrawManager> meshDraw, Reference<Rect3dDrawManager> rectDraw);
 
@@ -43,6 +45,8 @@ private:
 	std::unique_ptr<Rect3d> cometFire;
 	std::unique_ptr<Rect3d> groundEffect;
 
+	Reference<BlurInfo> blurData;
+
 public:
-	inline static Reference<WorldInstance> camera{ nullptr };
+	inline static Reference<Camera3D> camera{ nullptr };
 };

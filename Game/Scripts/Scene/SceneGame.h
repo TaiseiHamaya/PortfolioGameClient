@@ -27,11 +27,17 @@
 #include "Scripts/MiscInstance/Enemy/EnemyManager.h"
 #include "Scripts/Player/LocalPlayerCommandHandler.h"
 #include "Scripts/Player/Player.h"
+#include <Engine/Module/Render/RenderNode/Posteffect/RadialBlur/RadialBlurNode.h>
 
 struct CometAction {
 	std::unique_ptr<CircleAoe> circleAoE;
 	std::unique_ptr<CometEffect> cometEffect;
 };
+
+class LuminanceExtractionNode;
+class GaussianBlurNode;
+class MargeTextureNode;
+class BloomNode;
 
 class SceneGame final : public BaseScene {
 public:
@@ -57,6 +63,24 @@ private:
 	std::unique_ptr<RenderPath> renderPath;
 	std::vector<RenderTexture> renderTextures;
 	DeferredAdaptor::GBuffersType gBuffer;
+	SingleRenderTarget baseRenderTexture;
+	SingleRenderTarget radialBlurRenderTexture;
+	SingleRenderTarget luminanceRenderTexture;
+	SingleRenderTarget downSampleRenderTexture2;
+	SingleRenderTarget downSampleRenderTexture4;
+	SingleRenderTarget downSampleRenderTexture8;
+	SingleRenderTarget downSampleRenderTexture16;
+	SingleRenderTarget bloomBaseRenderTexture;
+
+	std::shared_ptr<RadialBlurNode> radialBlurNode;
+	std::shared_ptr<LuminanceExtractionNode> luminanceExtractionNode;
+	std::shared_ptr<GaussianBlurNode> gaussianBlurNode2;
+	std::shared_ptr<GaussianBlurNode> gaussianBlurNode4;
+	std::shared_ptr<GaussianBlurNode> gaussianBlurNode8;
+	std::shared_ptr<GaussianBlurNode> gaussianBlurNode16;
+	std::shared_ptr<MargeTextureNode> margeTextureNode;
+	std::shared_ptr<BloomNode> bloomNode;
+
 	std::unique_ptr<WorldManager> worldManager;
 
 	std::unique_ptr<StaticMeshDrawManager> staticMeshDrawManager;

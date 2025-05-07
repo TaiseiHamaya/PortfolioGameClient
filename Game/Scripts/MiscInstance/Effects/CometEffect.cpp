@@ -5,12 +5,17 @@
 
 #include <Engine/Module/DrawExecutor/Mesh/Primitive/Rect3dDrawManager.h>
 #include <Engine/Module/DrawExecutor/Mesh/StaticMeshDrawManager.h>
+
+#include <Engine/Module/Render/RenderNode/Posteffect/RadialBlur/RadialBlurNode.h>
+
+#include <Library/Math/VectorConverter.h>
+#include <Library/Utility/Tools/MathEPS.h>
 #include <Library/Utility/Tools/RandomEngine.h>
 
 CometEffect::CometEffect() : WorldInstance() {}
 CometEffect::~CometEffect() = default;
 
-void CometEffect::initialize(const Vector3& position) {
+void CometEffect::initialize(const Vector3& position, Reference<BlurInfo> blur_) {
 	const auto& worldManager = world_manager();
 	transform.set_translate(position);
 	transform.set_translate_y(0.02f);
@@ -25,7 +30,7 @@ void CometEffect::initialize(const Vector3& position) {
 	cometBody->reset_mesh("Comet.obj");
 	cometBody->set_active(false);
 	cometBody->get_materials()[0].color = Color3{ 0.5f,0.01f,0.01f };
-	cometBody->get_materials()[0].lightingType= LighingType::None;
+	cometBody->get_materials()[0].lightingType = LighingType::None;
 
 	cometFire = worldManager->create<Rect3d>(this);
 	cometFire->set_active(false);
@@ -44,6 +49,8 @@ void CometEffect::initialize(const Vector3& position) {
 		Quaternion::AngleAxis(CVector3::BASIS_Y, RandomEngine::Random01MOD() * PI2)
 		* Quaternion::LookForward(CVector3::UP, CVector3::FORWARD)
 	);
+
+	blurData = blur_;
 }
 
 void CometEffect::start(Reference<StaticMeshDrawManager> meshDraw, Reference<Rect3dDrawManager> rectDraw) {
@@ -90,6 +97,18 @@ void CometEffect::update() {
 		dustCloudParticle1->update();
 		groundEffect->get_transform().set_scale(CVector3::BASIS * param);
 		groundEffect->get_material().color.alpha = 1 - param;
+		Vector2 blurPosition = Converter::ToVector2(
+				Transform3D::Homogeneous(
+					world_position() + CVector3::BASIS_Y,
+					camera->vp_matrix()
+				)
+		);
+		blurPosition += CVector2::BASIS;
+		blurPosition /= 2.0f;
+		blurData->center = blurPosition;
+		blurData->sampleCount = 8;
+		blurData->weight = 0.4f;
+		blurData->length = std::sin(param * PI) * 0.1f;
 	}
 }
 
