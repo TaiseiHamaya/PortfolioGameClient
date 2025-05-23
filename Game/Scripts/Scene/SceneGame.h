@@ -5,19 +5,19 @@
 #include <list>
 #include <vector>
 
-#include <Engine/Module/Render/RenderPath/RenderPath.h>
-#include <Engine/Module/World/Collision/CollisionManager.h>
-#include <Engine/Module/World/WorldManager.h>
+#include <Library/Math/Vector3.h>
 
 #include <Engine/GraphicsAPI/DirectX/DxResource/TextureResource/RenderTexture.h>
-#include <Engine/Module/Render/RenderNode/Deferred/DeferredAdaptor.h>
-
-#include <Engine/Module/World/Light/DirectionalLight/DirectionalLightInstance.h>
-
 #include <Engine/Module/DrawExecutor/LightingExecutor/DirectionalLightingExecutor.h>
 #include <Engine/Module/DrawExecutor/Mesh/Primitive/Rect3dDrawManager.h>
 #include <Engine/Module/DrawExecutor/Mesh/SkinningMeshDrawManager.h>
 #include <Engine/Module/DrawExecutor/Mesh/StaticMeshDrawManager.h>
+#include <Engine/Module/Render/RenderNode/Deferred/DeferredAdaptor.h>
+#include <Engine/Module/Render/RenderNode/Posteffect/RadialBlur/RadialBlurNode.h>
+#include <Engine/Module/Render/RenderPath/RenderPath.h>
+#include <Engine/Module/World/Collision/CollisionManager.h>
+#include <Engine/Module/World/Light/DirectionalLight/DirectionalLightInstance.h>
+#include <Engine/Module/World/WorldManager.h>
 
 #include "Scripts/Manager/EntityManager.h"
 
@@ -27,7 +27,6 @@
 #include "Scripts/MiscInstance/Enemy/EnemyManager.h"
 #include "Scripts/Player/LocalPlayerCommandHandler.h"
 #include "Scripts/Player/Player.h"
-#include <Engine/Module/Render/RenderNode/Posteffect/RadialBlur/RadialBlurNode.h>
 
 struct CometAction {
 	std::unique_ptr<CircleAoe> circleAoE;
@@ -100,4 +99,6 @@ private:
 	std::unique_ptr<LocalPlayerCommandHandler> localPlayerCommandHandler;
 
 	std::list<CometAction> comets;
+
+	Reference<Vector3> cubemapWorld;
 };

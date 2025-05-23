@@ -38,6 +38,7 @@
     <ClCompile Include="Scripts\RenderNode\PostEffect\LuminanceExtractionNode.cpp" />
     <ClCompile Include="Scripts\RenderNode\PostEffect\MargeTextureNode.cpp" />
     <ClCompile Include="Scripts\RenderNode\PostEffect\GaussianBlurNode.cpp" />
+    <ClCompile Include="Scripts\RenderNode\CubemapNode\CubemapNode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scripts\Scene\FactoryPortfolio.h" />
@@ -74,5 +75,6 @@
     <ClInclude Include="Scripts\RenderNode\PostEffect\LuminanceExtractionNode.h" />
     <ClInclude Include="Scripts\RenderNode\PostEffect\MargeTextureNode.h" />
     <ClInclude Include="Scripts\RenderNode\PostEffect\GaussianBlurNode.h" />
+    <ClInclude Include="Scripts\RenderNode\CubemapNode\CubemapNode.h" />
   </ItemGroup>
 </Project>

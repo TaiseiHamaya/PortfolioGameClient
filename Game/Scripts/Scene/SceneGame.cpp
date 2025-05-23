@@ -28,10 +28,11 @@
 
 #include <Engine/Debug/DebugValues/DebugValues.h>
 
-#include <Scripts/RenderNode/PostEffect/LuminanceExtractionNode.h>
+#include <Scripts/RenderNode/CubemapNode/CubemapNode.h>
 #include <Scripts/RenderNode/PostEffect/BloomNode.h>
-#include <Scripts/RenderNode/PostEffect/MargeTextureNode.h>
 #include <Scripts/RenderNode/PostEffect/GaussianBlurNode.h>
+#include <Scripts/RenderNode/PostEffect/LuminanceExtractionNode.h>
+#include <Scripts/RenderNode/PostEffect/MargeTextureNode.h>
 
 void SceneGame::load() {
 	PolygonMeshLibrary::RegisterLoadQue("./Game/Resources/Game/Models/skydome.gltf");
@@ -52,6 +53,7 @@ void SceneGame::load() {
 	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/CometGround1.png");
 	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/CometGround2.png");
 	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/CometGround3.png");
+	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/rogland_clear_night_2k.dds");
 
 	PolygonMeshLibrary::RegisterLoadQue(".\\DirectXGame\\EngineResources\\Models\\Grid\\Grid.obj");
 }
@@ -91,6 +93,7 @@ void SceneGame::initialize() {
 
 	skydome->get_transform().set_scale(CVector3::BASIS * 100);
 	skydome->get_materials()[0].lightingType = LighingType::None;
+	skydome->set_active(false);
 	camera3D->initialize();
 	camera3D->set_offset({ 0,1,-40 });
 	camera3D->set_target(player);
@@ -141,6 +144,14 @@ void SceneGame::initialize() {
 	directionalLightingNode->set_config(RenderNodeConfig::NoClearRenderTarget | RenderNodeConfig::NoClearDepth);
 	directionalLightingNode->set_render_target(baseRenderTexture);
 	directionalLightingNode->set_gbuffers({ renderTextures[0], renderTextures[1] });
+
+	auto cubemapNode = eps::CreateShared<CubemapNode>();
+	cubemapNode->initialize();
+	cubemapNode->set_cubemap_texture("rogland_clear_night_2k.dds");
+	cubemapNode->set_camera(camera3D);
+	cubemapNode->set_render_target(baseRenderTexture);
+	cubemapWorld = cubemapNode->get_world();
+	cubemapNode->set_config(RenderNodeConfig::NoClearRenderTarget | RenderNodeConfig::NoClearDepth);
 
 	std::shared_ptr<ParticleBillboardNode> particleBillboardNode;
 	particleBillboardNode = std::make_unique<ParticleBillboardNode>();
@@ -195,17 +206,17 @@ void SceneGame::initialize() {
 	bloomNode->set_blur_texture(renderTextures[9]);
 
 #ifdef DEBUG_FEATURES_ENABLE
-		std::shared_ptr<PrimitiveLineNode> primitiveLineNode;
+	std::shared_ptr<PrimitiveLineNode> primitiveLineNode;
 	primitiveLineNode = std::make_unique<PrimitiveLineNode>();
 	primitiveLineNode->initialize();
 #endif // _DEBUG
 
 	renderPath = eps::CreateUnique<RenderPath>();
 #ifdef DEBUG_FEATURES_ENABLE
-	renderPath->initialize({ deferredMeshNode,skinMeshNodeDeferred,nonLightingPixelNode,directionalLightingNode,particleBillboardNode,rect3dNode, 
+	renderPath->initialize({ deferredMeshNode,skinMeshNodeDeferred,nonLightingPixelNode,directionalLightingNode, cubemapNode,particleBillboardNode,rect3dNode,
 		radialBlurNode, luminanceExtractionNode, gaussianBlurNode2, gaussianBlurNode4, gaussianBlurNode8, gaussianBlurNode16 , margeTextureNode, bloomNode,primitiveLineNode });
 #else
-	renderPath->initialize({ deferredMeshNode,skinMeshNodeDeferred,nonLightingPixelNode,directionalLightingNode,particleBillboardNode,rect3dNode,
+	renderPath->initialize({ deferredMeshNode,skinMeshNodeDeferred,nonLightingPixelNode,directionalLightingNode, cubemapNode,particleBillboardNode,rect3dNode,
 		radialBlurNode, luminanceExtractionNode, gaussianBlurNode2, gaussianBlurNode4, gaussianBlurNode8, gaussianBlurNode16 , margeTextureNode, bloomNode });
 #endif // DEFERRED_RENDERING
 
@@ -272,6 +283,8 @@ void SceneGame::update() {
 
 void SceneGame::late_update() {
 	entityManager->late_update();
+
+	*cubemapWorld = camera3D->world_position();
 }
 
 void SceneGame::begin_rendering() {
@@ -306,6 +319,9 @@ void SceneGame::draw() const {
 	renderPath->next();
 	camera3D->register_world_lighting(1);
 	directionalLightingExecutor->draw_command();
+
+	// Skybox
+	renderPath->next();
 
 	// ParticleBillboard
 	renderPath->next();

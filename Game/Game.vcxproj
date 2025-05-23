@@ -15,6 +15,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Scripts\RenderNode\CubemapNode\CubemapNode.cpp" />
     <ClCompile Include="Scripts\RenderNode\PostEffect\GaussianBlurNode.cpp" />
     <ClCompile Include="Scripts\RenderNode\PostEffect\MargeTextureNode.cpp" />
     <ClCompile Include="Scripts\RenderNode\PostEffect\BloomNode.cpp" />
@@ -51,6 +52,7 @@
     <ClCompile Include="Scripts\EntityCommand\Command\StartActionCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Scripts\RenderNode\CubemapNode\CubemapNode.h" />
     <ClInclude Include="Scripts\RenderNode\PostEffect\GaussianBlurNode.h" />
     <ClInclude Include="Scripts\RenderNode\PostEffect\MargeTextureNode.h" />
     <ClInclude Include="Scripts\RenderNode\PostEffect\BloomNode.h" />
