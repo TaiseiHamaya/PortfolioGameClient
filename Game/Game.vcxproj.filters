@@ -12,9 +12,9 @@
     <ClCompile Include="Scripts\Portfolio.cpp" />
     <ClCompile Include="Scripts\main.cpp" />
     <ClCompile Include="Scripts\Player\Player.cpp" />
-    <ClCompile Include="Scripts\IEntity\BaseAction.cpp" />
+    <ClCompile Include="Scripts\IEntity\IActionBasic.cpp" />
     <ClCompile Include="Scripts\MiscInstance\Effects\HitAnimation.cpp" />
-    <ClCompile Include="Scripts\IEntity\BaseEntity.cpp" />
+    <ClCompile Include="Scripts\IEntity\IEntity.cpp" />
     <ClCompile Include="Scripts\IEntity\EntityUi.cpp" />
     <ClCompile Include="Scripts\Manager\EntityManager.cpp" />
     <ClCompile Include="Scripts\Util\LookAtRect.cpp" />
@@ -29,7 +29,6 @@
     <ClCompile Include="Scripts\EntityCommand\Hander\IEntityCommandHandler.cpp" />
     <ClCompile Include="Scripts\RemoteEntity\RemoteEnemyCommandHandler.cpp" />
     <ClCompile Include="Scripts\MiscInstance\Enemy\EnemyRemoteHandler.cpp" />
-    <ClCompile Include="Scripts\CombatTower\CombatTower.cpp" />
     <ClCompile Include="Scripts\MiscInstance\AOE\BaseAoe.cpp" />
     <ClCompile Include="Scripts\MiscInstance\AOE\CircleAoe.cpp" />
     <ClCompile Include="Scripts\MiscInstance\Effects\CometEffect.cpp" />
@@ -39,6 +38,8 @@
     <ClCompile Include="Scripts\RenderNode\PostEffect\MargeTextureNode.cpp" />
     <ClCompile Include="Scripts\RenderNode\PostEffect\GaussianBlurNode.cpp" />
     <ClCompile Include="Scripts\RenderNode\CubemapNode\CubemapNode.cpp" />
+    <ClCompile Include="Scripts\Player\Actions\PaladinHolySpirit.cpp" />
+    <ClCompile Include="Scripts\ContaintsDirector\ContaintsDirector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scripts\Scene\FactoryPortfolio.h" />
@@ -48,9 +49,9 @@
     <ClInclude Include="Scripts\Scene\SceneGame.h" />
     <ClInclude Include="Scripts\Portfolio.h" />
     <ClInclude Include="Scripts\Player\Player.h" />
-    <ClInclude Include="Scripts\IEntity\BaseAction.h" />
+    <ClInclude Include="Scripts\IEntity\IActionBasic.h" />
     <ClInclude Include="Scripts\MiscInstance\Effects\HitAnimation.h" />
-    <ClInclude Include="Scripts\IEntity\BaseEntity.h" />
+    <ClInclude Include="Scripts\IEntity\IEntity.h" />
     <ClInclude Include="Scripts\IEntity\EntityUi.h" />
     <ClInclude Include="Scripts\Manager\EntityManager.h" />
     <ClInclude Include="Scripts\Util\LookAtRect.h" />
@@ -66,7 +67,6 @@
     <ClInclude Include="Scripts\EntityCommand\Hander\IEntityCommandHandler.h" />
     <ClInclude Include="Scripts\RemoteEntity\RemoteEnemyCommandHandler.h" />
     <ClInclude Include="Scripts\MiscInstance\Enemy\EnemyRemoteHandler.h" />
-    <ClInclude Include="Scripts\CombatTower\CombatTower.h" />
     <ClInclude Include="Scripts\MiscInstance\AOE\BaseAoe.h" />
     <ClInclude Include="Scripts\MiscInstance\AOE\CircleAoe.h" />
     <ClInclude Include="Scripts\MiscInstance\Effects\CometEffect.h" />
@@ -76,5 +76,8 @@
     <ClInclude Include="Scripts\RenderNode\PostEffect\MargeTextureNode.h" />
     <ClInclude Include="Scripts\RenderNode\PostEffect\GaussianBlurNode.h" />
     <ClInclude Include="Scripts\RenderNode\CubemapNode\CubemapNode.h" />
+    <ClInclude Include="Scripts\IEntity\ISkillAction\ISkillAction.h" />
+    <ClInclude Include="Scripts\Player\Actions\PaladinHolySpirit.h" />
+    <ClInclude Include="Scripts\ContaintsDirector\ContaintsDirector.h" />
   </ItemGroup>
 </Project>

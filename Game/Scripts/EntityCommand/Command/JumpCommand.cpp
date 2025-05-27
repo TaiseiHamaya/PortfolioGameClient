@@ -1,6 +1,6 @@
 #include "JumpCommand.h"
 
-void JumpCommand::execute(Reference<BaseEntity> entity) {
+void JumpCommand::execute(Reference<IEntity> entity) {
 	if (entity) {
 		entity->jump();
 	}

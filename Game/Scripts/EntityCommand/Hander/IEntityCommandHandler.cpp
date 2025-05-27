@@ -1,6 +1,6 @@
 #include "IEntityCommandHandler.h"
 
-void IEntityCommandHandler::initialize(Reference<BaseEntity> receiver_) {
+void IEntityCommandHandler::initialize(Reference<IEntity> receiver_) {
 	receiver = receiver_;
 }
 

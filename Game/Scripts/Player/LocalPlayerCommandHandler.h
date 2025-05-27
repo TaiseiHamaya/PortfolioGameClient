@@ -3,7 +3,7 @@
 #include <Engine/Runtime/Input/InputHandler.h>
 #include <Library/Utility/Template/Reference.h>
 
-#include "Scripts/IEntity/BaseEntity.h"
+#include "Scripts/IEntity/IEntity.h"
 #include "Scripts/EntityCommand/Hander/IEntityCommandHandler.h"
 
 class LocalPlayerCommandHandler final : public IEntityCommandHandler {

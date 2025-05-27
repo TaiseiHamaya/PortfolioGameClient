@@ -7,5 +7,5 @@ public:
 	JumpCommand() = default;
 	~JumpCommand() = default;
 
-	void execute(Reference<BaseEntity> entity);
+	void execute(Reference<IEntity> entity);
 };

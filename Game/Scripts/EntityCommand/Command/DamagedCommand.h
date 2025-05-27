@@ -7,7 +7,7 @@ public:
 	DamagedCommand() = default;
 	~DamagedCommand() = default;
 
-	void execute(Reference<BaseEntity> entity);
+	void execute(Reference<IEntity> entity);
 	
 private:
 	i32 damage;

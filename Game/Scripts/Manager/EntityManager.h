@@ -8,7 +8,7 @@
 #include <Library/Utility/Template/Reference.h>
 #include <Library/Utility/Tools/ConstructorMacro.h>
 
-#include "Scripts/IEntity/BaseEntity.h"
+#include "Scripts/IEntity/IEntity.h"
 
 class SkinningMeshDrawManager;
 class Rect3dDrawManager;
@@ -29,22 +29,22 @@ public:
 
 public:
 	template<typename T>
-		requires std::derived_from<T, BaseEntity>
+		requires std::derived_from<T, IEntity>
 	Reference<T> generate(u64 id, const std::filesystem::path& initjson);
 	void destroy(u64 id);
 
-	Reference<BaseEntity> inquire(u64 id) const;
+	Reference<IEntity> inquire(u64 id) const;
 
 private:
 	Reference<WorldManager> worldManager;
 	Reference<SkinningMeshDrawManager> skinDraw;
 	Reference<Rect3dDrawManager> rectDraw;
 
-	std::unordered_map<u64, std::unique_ptr<BaseEntity>> entities;
+	std::unordered_map<u64, std::unique_ptr<IEntity>> entities;
 };
 
 template<typename T>
-	requires std::derived_from<T, BaseEntity>
+	requires std::derived_from<T, IEntity>
 inline Reference<T> EntityManager::generate(u64 id, const std::filesystem::path& initjson) {
 	std::unique_ptr<T> temp = worldManager->create<T>(nullptr);
 	temp->initialize(initjson);

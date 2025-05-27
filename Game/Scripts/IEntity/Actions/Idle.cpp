@@ -1,6 +1,6 @@
 #include "Idle.h"
 
-#include "../BaseEntity.h"
+#include "../IEntity.h"
 
 void Idle::update() {
 }

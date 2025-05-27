@@ -4,5 +4,5 @@
 
 class EnemyRemoteHandler final : public IEntityCommandHandler {
 public:
-	inline static Reference<BaseEntity> player{ nullptr };
+	inline static Reference<IEntity> player{ nullptr };
 };

@@ -7,19 +7,19 @@ void EntityManager::start(Reference<WorldManager> worldManager_, Reference<Skinn
 }
 
 void EntityManager::begin() {
-	for (std::unique_ptr<BaseEntity>& entity : entities | std::views::values) {
+	for (std::unique_ptr<IEntity>& entity : entities | std::views::values) {
 		entity->begin();
 	}
 }
 
 void EntityManager::update() {
-	for (std::unique_ptr<BaseEntity>& entity : entities | std::views::values) {
+	for (std::unique_ptr<IEntity>& entity : entities | std::views::values) {
 		entity->update();
 	}
 }
 
 void EntityManager::late_update() {
-	for (std::unique_ptr<BaseEntity>& entity : entities | std::views::values) {
+	for (std::unique_ptr<IEntity>& entity : entities | std::views::values) {
 		entity->late_update();
 	}
 }
@@ -30,7 +30,7 @@ void EntityManager::destroy(u64 id) {
 	}
 }
 
-Reference<BaseEntity> EntityManager::inquire(u64 id)  const {
+Reference<IEntity> EntityManager::inquire(u64 id)  const {
 	if (entities.contains(id)) {
 		return entities.at(id);
 	}

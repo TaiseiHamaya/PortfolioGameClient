@@ -4,14 +4,14 @@
 #include <vector>
 
 #include "Scripts/EntityCommand/ICommand.h"
-#include "Scripts/IEntity/BaseEntity.h"
+#include "Scripts/IEntity/IEntity.h"
 
 class IEntityCommandHandler {
 public:
 	virtual ~IEntityCommandHandler() = default;
 
 public:
-	virtual void initialize(Reference<BaseEntity> receiver_);
+	virtual void initialize(Reference<IEntity> receiver_);
 	virtual void begin() = 0;
 	virtual void update() = 0;
 
@@ -24,5 +24,5 @@ protected:
 protected:
 	std::vector<std::unique_ptr<ICommand>> commands;
 	std::list<std::function<void(void)>> commandEntries;
-	Reference<BaseEntity> receiver;
+	Reference<IEntity> receiver;
 };

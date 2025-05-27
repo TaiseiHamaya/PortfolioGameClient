@@ -10,7 +10,7 @@
 #include <memory>
 #include <vector>
 
-#include "BaseAction.h"
+#include "IActionBasic.h"
 #include "EntityUi.h"
 #include "Shadow.h"
 
@@ -28,7 +28,7 @@ enum class EntityFlag {
 
 __USE_BITFLAG(EntityFlag)
 
-class BaseEntity : public SkinningMeshInstance {
+class IEntity : public SkinningMeshInstance {
 public:
 	void initialize(const std::filesystem::path& file);
 	void start(
@@ -46,7 +46,7 @@ public:
 	void sync_position(Vector3 position, r32 yAngle);
 
 protected:
-	void set_action(Reference<BaseAction> action);
+	void set_action(Reference<IActionBasic> action);
 	u64 get_target_id() const { return targetId; };
 	const std::vector<u64>& get_enmity_ids() const { return enmityIds; };
 
@@ -65,13 +65,13 @@ protected:
 	u64 targetId; // 対象
 	std::vector<u64> enmityIds; // 敵対一覧
 
-	Reference<BaseAction> nowAction{ nullptr }; // 今のアクション
+	Reference<IActionBasic> nowAction{ nullptr }; // 今のアクション
 
-	std::unique_ptr<BaseAction> idleAction;
-	std::unique_ptr<BaseAction> fightAction;
-	std::unique_ptr<BaseAction> damagedAction;
-	std::vector<std::unique_ptr<BaseAction>> actionList;
+	std::unique_ptr<IActionBasic> idleAction;
+	std::unique_ptr<IActionBasic> fightAction;
+	std::unique_ptr<IActionBasic> damagedAction;
+	std::vector<std::unique_ptr<IActionBasic>> actionList;
 
 public:
-	Reference<BaseAction> now_action() const { return nowAction; }
+	Reference<IActionBasic> now_action() const { return nowAction; }
 };

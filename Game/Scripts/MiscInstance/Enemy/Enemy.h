@@ -3,9 +3,9 @@
 #include <memory>
 
 #include "./EnemyRemoteHandler.h"
-#include "Scripts/IEntity/BaseEntity.h"
+#include "Scripts/IEntity/IEntity.h"
 
 class SphereCollider;
 
-class Enemy : public BaseEntity {
+class Enemy : public IEntity {
 };

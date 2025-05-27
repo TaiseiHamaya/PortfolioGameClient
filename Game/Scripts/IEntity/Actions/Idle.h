@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../BaseAction.h"
+#include "../IActionBasic.h"
 
-class Idle final : public BaseAction {
+class Idle final : public IActionBasic {
 public:
 	void update();
 

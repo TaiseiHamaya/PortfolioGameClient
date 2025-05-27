@@ -4,7 +4,7 @@
 
 #include <Library/Utility/Template/Reference.h>
 
-class BaseEntity;
+class IEntity;
 
 #include <string>
 
@@ -19,13 +19,13 @@ enum class ActionEffect {
 	Stack
 };
 
-class BaseAction {
+class IActionBasic {
 public:
-	BaseAction() = default;
-	virtual ~BaseAction() = default;
+	IActionBasic() = default;
+	virtual ~IActionBasic() = default;
 
 public:
-	void start(Reference<BaseEntity> owner_, const std::string& animationName);
+	void start(Reference<IEntity> owner_, const std::string& animationName);
 	void begin();
 	virtual void update() = 0;
 
@@ -56,7 +56,7 @@ protected:
 
 	ActionType type;
 	ActionEffect effect;
-	Reference<BaseEntity> owner{ nullptr };
+	Reference<IEntity> owner{ nullptr };
 	std::string useAnimationName{ "Armatureアクション" };
 	bool loopAnimation{ false };
 };

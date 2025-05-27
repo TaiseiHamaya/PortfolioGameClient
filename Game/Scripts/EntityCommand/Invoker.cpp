@@ -6,7 +6,7 @@ void Invoker::run() {
 	}
 }
 
-void Invoker::register_entry(Reference<BaseEntity> receiver, u64 commandIndex) {
+void Invoker::register_entry(Reference<IEntity> receiver, u64 commandIndex) {
 	if (receiver && commandIndex < commands.size()) {
 		commandEntries.emplace_back(
 			[&command = commands[commandIndex], receiver]() { command->execute(receiver); }

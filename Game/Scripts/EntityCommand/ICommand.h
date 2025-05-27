@@ -1,11 +1,11 @@
 #pragma once
 
-#include "Scripts/IEntity/BaseEntity.h"
+#include "Scripts/IEntity/IEntity.h"
 
 class ICommand {
 public:
 	ICommand() = default;
 	virtual ~ICommand() = default;
 
-	virtual void execute(Reference<BaseEntity>) = 0;
+	virtual void execute(Reference<IEntity>) = 0;
 };

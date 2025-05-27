@@ -7,7 +7,7 @@ public:
 	StartActionCommand() = default;
 	~StartActionCommand() = default;
 
-	void execute(Reference<BaseEntity> entity);
+	void execute(Reference<IEntity> entity);
 
 private:
 	u32 actionIndex;
