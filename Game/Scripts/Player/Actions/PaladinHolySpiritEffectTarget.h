@@ -4,21 +4,28 @@
 #include <vector>
 
 #include <Engine/Module/World/Particle/ParticleEmitterInstance.h>
-#include <Engine/Module/World/WorldInstance/WorldInstance.h>
 #include <Engine/Runtime/Clock/WorldTimer.h>
 
+#include "Scripts/MiscInstance/Effects/IEffectInstance.h"
 #include "Scripts/IEntity/IEntity.h"
 #include "Scripts/Util/LookAtRect.h"
 
-class PaladinHolySpiritEffectTarget final : public WorldInstance {
+class PaladinHolySpiritEffectTarget final : public IEffectInstance {
 public:
-	PaladinHolySpiritEffectTarget() = default;
+	PaladinHolySpiritEffectTarget();
 	~PaladinHolySpiritEffectTarget() = default;
 
 public:
-	void initialize();
-	void setup(Reference<IEntity> self, Reference<IEntity> target);
+	void initialize(const Vector3& position);
+	void setup(Reference<StaticMeshDrawManager> meshDrawManager, Reference<Rect3dDrawManager> rectDrawManager) override;
+	void terminate(Reference<StaticMeshDrawManager> meshDrawManager, Reference<Rect3dDrawManager> rectDrawManager) override;
 	void update() override;
+	void draw_particle() const override;
+
+#ifdef DEBUG_FEATURES_ENABLE
+public:
+	void debug_gui() override;
+#endif //DEBUG_FEATURES_ENABLE
 
 private:
 	WorldTimer timer;

@@ -15,8 +15,8 @@ PaladinHolySpirit::PaladinHolySpirit() noexcept {
 	radius = 0.0f;
 }
 
-std::vector<std::unique_ptr<WorldInstance>> PaladinHolySpirit::on_impact(Reference<IEntity> entity, Reference<IEntity> target, Reference<WorldManager> world) {
-	std::vector<std::unique_ptr<WorldInstance>> result{};
+std::vector<std::unique_ptr<IEffectInstance>> PaladinHolySpirit::on_impact(Reference<IEntity> entity, Reference<IEntity> target, Reference<WorldManager> world) {
+	std::vector<std::unique_ptr<IEffectInstance>> result{};
 
 	// ホリスピ強化状態化のチェックと消費処理
 	//bool isEnchantedHolySpirit = entity;
@@ -28,8 +28,7 @@ std::vector<std::unique_ptr<WorldInstance>> PaladinHolySpirit::on_impact(Referen
 
 	// エフェクトの生成
 	auto temp = world->create<PaladinHolySpiritEffectTarget>();
-	temp->initialize();
-	temp->setup(entity, target);
+	temp->initialize(EffectTools::CalculateTargetPosition(entity, target));
 	result.emplace_back(std::move(temp));
 
 	return result;

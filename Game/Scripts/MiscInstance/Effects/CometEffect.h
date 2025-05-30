@@ -6,26 +6,26 @@
 #include <Engine/Runtime/Clock/WorldTimer.h>
 #include <Engine/Module/World/Camera/Camera3D.h>
 
-#include "Scripts/Util/LookAtRect.h"
+#include "Scripts/MiscInstance/Effects/IEffectInstance.h"
 
 class StaticMeshDrawManager;
 class Rect3dDrawManager;
 struct BlurInfo;
 
-class CometEffect final : public WorldInstance {
+class CometEffect final : public IEffectInstance {
 public:
 	CometEffect();
 	~CometEffect();
 
 public:
 	void initialize(const Vector3& position, Reference<BlurInfo> blur_);
-	void start(Reference<StaticMeshDrawManager> meshDraw, Reference<Rect3dDrawManager> rectDraw);
-	void end(Reference<StaticMeshDrawManager> meshDraw, Reference<Rect3dDrawManager> rectDraw);
+	void setup(Reference<StaticMeshDrawManager> meshDraw, Reference<Rect3dDrawManager> rectDraw) override;
+	void terminate(Reference<StaticMeshDrawManager> meshDraw, Reference<Rect3dDrawManager> rectDraw) override;
 
 public:
-	void update();
+	void update() override;
 
-	void draw_particle();
+	void draw_particle() const override;
 
 public:
 	bool is_end() const;

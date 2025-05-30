@@ -7,11 +7,19 @@
 #include <Library/Utility/Tools/Easing.h>
 #include <Library/Math/Definition.h>
 
-void PaladinHolySpiritEffectTarget::initialize() {
+PaladinHolySpiritEffectTarget::PaladinHolySpiritEffectTarget() : IEffectInstance() {}
+
+void PaladinHolySpiritEffectTarget::initialize(const Vector3& position) {
+	// 位置
+	transform.set_translate(position);
+	update_affine();
+
+	// 黒いやつ
 	absorption = world_manager()->create<LookAtRect>(this);
 	absorption->initialize(Vector2{ 1.0f,1.0f }, Vector2{ 0.5f,0.5f });
 	absorption->get_transform().set_scale(CVector3::ZERO);
 
+	// でかいやつ
 	centerConstraint = world_manager()->create<WorldInstance>(this);
 	centerBillboards.resize(6);
 	for (i32 i = 0; std::unique_ptr<LookAtRect>& centerBillboard : centerBillboards) {
@@ -21,40 +29,41 @@ void PaladinHolySpiritEffectTarget::initialize() {
 			Quaternion::AngleAxis(CVector3::FORWARD, PI2 * i / 6)
 		);
 		centerBillboard->get_transform().set_scale(CVector3::ZERO);
+		centerBillboard->get_material().texture = TextureLibrary::GetTexture("PaladinHolySpiritEffectTargetCenter6.png");
 
 		++i;
 	}
 
+	// 中心の丸いやつ
 	lightBillboard = world_manager()->create<LookAtRect>(this);
 	lightBillboard->initialize(Vector2{ 1.0f,1.0f }, Vector2{ 0.5f,0.5f });
 	lightBillboard->get_transform().set_scale(CVector3::ZERO);
 
-	etherDustEmitter = world_manager()->create<ParticleEmitterInstance>(this,
-		"", 128);
+	// エーテルエフェクト
+	etherDustEmitter = world_manager()->create<ParticleEmitterInstance>(this, "PaladinHolySpiritEffectTargetEther.json", 128);
+	etherDustEmitter->update_affine();
 	etherDustEmitter->set_active(false);
 
-	shiningEmitter = world_manager()->create<ParticleEmitterInstance>(this,
-		"", 8);
+	// キラキラしたやつ
+	shiningEmitter = world_manager()->create<ParticleEmitterInstance>(this, "PaladinHolySpiritEffectTargetShining.json", 8);
+	shiningEmitter->update_affine();
 	shiningEmitter->set_active(false);
 }
 
-void PaladinHolySpiritEffectTarget::setup(Reference<IEntity> self, Reference<IEntity> target) {
-	// エフェクトの位置を設定
-	Vector3 worldPosition{};
-	Vector3 offset = Vector3{ 0.0f, 0.5f, 0.1f };
-	if (target) {
-		worldPosition = target->world_position();
-		offset *= target->target_radius();
+void PaladinHolySpiritEffectTarget::setup([[maybe_unused]] Reference<StaticMeshDrawManager> meshDrawManager, Reference<Rect3dDrawManager> rectDrawManager) {
+	rectDrawManager->register_instance(absorption);
+	for (auto& centerBillboard : centerBillboards) {
+		rectDrawManager->register_instance(centerBillboard);
 	}
-	Vector3 translate{};
-	if (self) {
-		Vector3 selfBackward = CVector3::BACKWARD * self->world_affine();
-		selfBackward.y = 0.0f;
-		selfBackward = selfBackward.normalize_safe();
-		translate = worldPosition + offset * Quaternion::LookForward(selfBackward);
-	}
+	rectDrawManager->register_instance(lightBillboard);
+}
 
-	transform.set_translate(translate);
+void PaladinHolySpiritEffectTarget::terminate([[maybe_unused]] Reference<StaticMeshDrawManager> meshDrawManager, Reference<Rect3dDrawManager> rectDrawManager) {
+	rectDrawManager->unregister_instance(absorption);
+	for (auto& centerBillboard : centerBillboards) {
+		rectDrawManager->unregister_instance(centerBillboard);
+	}
+	rectDrawManager->unregister_instance(lightBillboard);
 }
 
 void PaladinHolySpiritEffectTarget::update() {
@@ -96,5 +105,31 @@ void PaladinHolySpiritEffectTarget::update() {
 	// 最後のキラキラしたやつ
 	if (timer.just_crossed(1.0f)) {
 		shiningEmitter->set_active(true);
+	}
+
+	etherDustEmitter->update();
+	shiningEmitter->update();
+
+	if (etherDustEmitter->is_end_all() && shiningEmitter->is_end_all()) {
+		isDestroy = true;
+	}
+}
+
+void PaladinHolySpiritEffectTarget::draw_particle() const {
+	etherDustEmitter->transfer();
+	shiningEmitter->transfer();
+	etherDustEmitter->draw();
+	shiningEmitter->draw();
+}
+
+void PaladinHolySpiritEffectTarget::debug_gui() {
+	if (ImGui::TreeNode("Ether")) {
+		etherDustEmitter->debug_gui();
+		ImGui::TreePop();
+	}
+	ImGui::Separator();
+	if (ImGui::TreeNode("Shining")) {
+		shiningEmitter->debug_gui();
+		ImGui::TreePop();
 	}
 }

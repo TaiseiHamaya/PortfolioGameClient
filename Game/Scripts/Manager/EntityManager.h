@@ -21,7 +21,7 @@ public:
 	__CLASS_NON_COPYABLE(EntityManager)
 
 public:
-	void start(Reference<WorldManager> worldManager_, Reference<SkinningMeshDrawManager> skinDraw_, Reference<Rect3dDrawManager> rectDraw_);
+	void setup(Reference<WorldManager> worldManager_, Reference<SkinningMeshDrawManager> skinDraw_, Reference<Rect3dDrawManager> rectDraw_);
 
 	void begin();
 	void update();

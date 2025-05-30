@@ -8,5 +8,5 @@ public:
 	~PaladinHolySpirit() = default;
 
 public:
-	std::vector<std::unique_ptr<WorldInstance>> on_impact(Reference<IEntity> entity, Reference<IEntity> target, Reference<WorldManager> world) override;
+	std::vector<std::unique_ptr<IEffectInstance>> on_impact(Reference<IEntity> entity, Reference<IEntity> target, Reference<WorldManager> world) override;
 };

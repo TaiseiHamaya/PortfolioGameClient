@@ -1,0 +1,117 @@
+{
+	"DrawType": 1,
+	"Pivot": {
+		"X": 0.5,
+		"Y": 0.5
+	},
+	"Size": {
+		"X": 2.0,
+		"Y": 2.0
+	},
+	"duration": 1.0,
+	"emission": {
+		"Count": 1,
+		"Cycles": 8,
+		"Interval": 0.05000000074505806,
+		"Shape": {
+			"Data": {
+				"Radius": 1.0
+			},
+			"Type": 1
+		},
+		"Time": 0.0
+	},
+	"isLoop": false,
+	"isParentEmitter": false,
+	"particleFinal": {
+		"Color": {
+			"Max": {
+				"A": 0.0,
+				"B": 1.0,
+				"G": 1.0,
+				"R": 1.0
+			},
+			"Min": {
+				"A": 0.0,
+				"B": 1.0,
+				"G": 1.0,
+				"R": 1.0
+			}
+		},
+		"Size": {
+			"Max": {
+				"X": 1.5,
+				"Y": 1.5,
+				"Z": 1.5
+			},
+			"Min": {
+				"X": 0.5,
+				"Y": 0.5,
+				"Z": 0.5
+			}
+		}
+	},
+	"particleInit": {
+		"Acceleration": {
+			"Max": {
+				"X": 0.0,
+				"Y": 0.0,
+				"Z": 0.0
+			},
+			"Min": {
+				"X": 0.0,
+				"Y": 0.0,
+				"Z": 0.0
+			}
+		},
+		"Color": {
+			"Max": {
+				"A": 1.0,
+				"B": 1.0,
+				"G": 1.0,
+				"R": 1.0
+			},
+			"Min": {
+				"A": 1.0,
+				"B": 1.0,
+				"G": 1.0,
+				"R": 1.0
+			}
+		},
+		"Direction": {
+			"Data": {},
+			"Mode": 1
+		},
+		"Lifetime": {
+			"Max": 1.149999976158142,
+			"Min": 0.8399999737739563
+		},
+		"Rotation": {
+			"Data": {
+				"AngleParSec": {
+					"Max": 0.0,
+					"Min": 0.0
+				},
+				"IsRandomDirection": false
+			},
+			"Mode": 3
+		},
+		"Size": {
+			"Max": {
+				"X": 0.0,
+				"Y": 0.0,
+				"Z": 0.0
+			},
+			"Min": {
+				"X": 0.0,
+				"Y": 0.0,
+				"Z": 0.0
+			}
+		},
+		"Speed": {
+			"Max": 0.0,
+			"Min": 0.0
+		}
+	},
+	"useResourceName": "PaladinHolySpiritEffectTargetShining.png"
+}

@@ -12,7 +12,7 @@
 #include <Library/Utility/Tools/MathEPS.h>
 #include <Library/Utility/Tools/RandomEngine.h>
 
-CometEffect::CometEffect() : WorldInstance() {}
+CometEffect::CometEffect() : IEffectInstance() {}
 CometEffect::~CometEffect() = default;
 
 void CometEffect::initialize(const Vector3& position, Reference<BlurInfo> blur_) {
@@ -53,13 +53,13 @@ void CometEffect::initialize(const Vector3& position, Reference<BlurInfo> blur_)
 	blurData = blur_;
 }
 
-void CometEffect::start(Reference<StaticMeshDrawManager> meshDraw, Reference<Rect3dDrawManager> rectDraw) {
+void CometEffect::setup(Reference<StaticMeshDrawManager> meshDraw, Reference<Rect3dDrawManager> rectDraw) {
 	meshDraw->register_instance(cometBody);
 	rectDraw->register_instance(cometFire);
 	rectDraw->register_instance(groundEffect);
 }
 
-void CometEffect::end(Reference<StaticMeshDrawManager> meshDraw, Reference<Rect3dDrawManager> rectDraw) {
+void CometEffect::terminate(Reference<StaticMeshDrawManager> meshDraw, Reference<Rect3dDrawManager> rectDraw) {
 	meshDraw->unregister_instance(cometBody);
 	rectDraw->unregister_instance(cometFire);
 	rectDraw->unregister_instance(groundEffect);
@@ -110,9 +110,13 @@ void CometEffect::update() {
 		blurData->weight = 0.4f;
 		blurData->length = std::sin(param * PI) * 0.1f;
 	}
+
+	if (dustCloudParticle0->is_end_all() && dustCloudParticle1->is_end_all()) {
+		isDestroy = true;
+	}
 }
 
-void CometEffect::draw_particle() {
+void CometEffect::draw_particle() const {
 	dustCloudParticle0->transfer();
 	dustCloudParticle1->transfer();
 	dustCloudParticle0->draw();
@@ -120,7 +124,7 @@ void CometEffect::draw_particle() {
 }
 
 bool CometEffect::is_end() const {
-	return dustCloudParticle0->is_end_all() && dustCloudParticle1->is_end_all();
+	return isDestroy;
 }
 
 #ifdef DEBUG_FEATURES_ENABLE

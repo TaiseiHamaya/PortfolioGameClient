@@ -33,6 +33,7 @@
 #include <Scripts/RenderNode/PostEffect/GaussianBlurNode.h>
 #include <Scripts/RenderNode/PostEffect/LuminanceExtractionNode.h>
 #include <Scripts/RenderNode/PostEffect/MargeTextureNode.h>
+#include "Scripts/MiscInstance/Enemy/Enemy.h"
 
 void SceneGame::load() {
 	PolygonMeshLibrary::RegisterLoadQue("./Game/Resources/Game/Models/skydome.gltf");
@@ -53,6 +54,8 @@ void SceneGame::load() {
 	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/CometGround1.png");
 	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/CometGround2.png");
 	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/CometGround3.png");
+	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/PlayerEffect/PaladinHolySpiritEffectTargetCenter6.png");
+	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/PlayerEffect/PaladinHolySpiritEffectTargetShining.png");
 	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/rogland_clear_night_2k.dds");
 
 	PolygonMeshLibrary::RegisterLoadQue(".\\DirectXGame\\EngineResources\\Models\\Grid\\Grid.obj");
@@ -63,6 +66,7 @@ void SceneGame::initialize() {
 	worldManager = eps::CreateUnique<WorldManager>();
 	entityManager = eps::CreateUnique<EntityManager>();
 	enemyManager = eps::CreateUnique<EnemyManager>();
+	effectManager = eps::CreateUnique<EffectManager>();
 
 	// DrawManager
 	skinningMeshDrawManager = eps::CreateUnique<SkinningMeshDrawManager>();
@@ -77,8 +81,9 @@ void SceneGame::initialize() {
 
 	directionalLightingExecutor = eps::CreateUnique<DirectionalLightingExecutor>(1);
 
-	entityManager->start(worldManager, skinningMeshDrawManager, rect3dDrawManager);
-	enemyManager->start(entityManager);
+	entityManager->setup(worldManager, skinningMeshDrawManager, rect3dDrawManager);
+	enemyManager->setup(entityManager);
+	effectManager->setup(staticMeshDrawManager, rect3dDrawManager);
 
 	// WorldInstances
 	// Allocation
@@ -235,6 +240,8 @@ void SceneGame::initialize() {
 	staticMeshDrawManager->register_instance(DebugValues::GetGridInstance());
 #endif // DEBUG_FEATURES_ENABLE
 	staticMeshDrawManager->register_instance(skydome);
+
+	inputHandler.initialize({ PadID::A });
 }
 
 void SceneGame::begin() {
@@ -253,6 +260,18 @@ void SceneGame::update() {
 	entityManager->update();
 	camera3D->update();
 
+	inputHandler.update();
+	actionTimer.back();
+	if (inputHandler.trigger(PadID::A) && actionTimer < 0) {
+		actionTimer.set(2.5f);
+		auto effect = paladinHolySpirit->on_impact(player, enemyManager->get_nearest(player->world_position()).ptr(), worldManager);
+		for (auto& elem : effect) {
+			effectManager->register_instance(std::move(elem));
+		}
+	}
+
+	effectManager->update();
+
 	if (std::fmodf(timer.time(), 2.0f) <= WorldClock::DeltaSeconds()) {
 		auto& temp = comets.emplace_back(
 			worldManager->create<CircleAoe>(),
@@ -261,13 +280,13 @@ void SceneGame::update() {
 		temp.circleAoE->initialize(player->world_position(), 7, 3);
 		temp.circleAoE->start(rect3dDrawManager);
 		temp.cometEffect->initialize(player->world_position(), radialBlurNode->data());
-		temp.cometEffect->start(staticMeshDrawManager, rect3dDrawManager);
+		temp.cometEffect->setup(staticMeshDrawManager, rect3dDrawManager);
 	}
 
 	std::erase_if(comets, [&](CometAction& elem) {
 		if (elem.cometEffect->is_end()) {
 			elem.circleAoE->end(rect3dDrawManager);
-			elem.cometEffect->end(staticMeshDrawManager, rect3dDrawManager);
+			elem.cometEffect->terminate(staticMeshDrawManager, rect3dDrawManager);
 			return true;
 		}
 		return false;
@@ -329,6 +348,7 @@ void SceneGame::draw() const {
 	for (const auto& comet : comets) {
 		comet.cometEffect->draw_particle();
 	}
+	effectManager->draw_particle();
 
 	// Rect3D
 	renderPath->next();
@@ -404,23 +424,9 @@ void SceneGame::debug_update() {
 	radialBlurNode->debug_gui();
 	ImGui::End();
 
-	//ImGui::Begin("Test");
-	//if (ImGui::Button("Gen")) {
-	//	auto& temp = comets.emplace_back(
-	//		worldManager->create<CircleAoe>(),
-	//		worldManager->create<CometEffect>()
-	//	);
-	//	temp.circleAoE->initialize(player->world_position(), 7, 3);
-	//	temp.circleAoE->start(rect3dDrawManager);
-	//	temp.cometEffect->initialize(player->world_position());
-	//	temp.cometEffect->start(staticMeshDrawManager, rect3dDrawManager);
-	//}
-
-	//if (comets.size() >= 1) {
-	//	auto& comet = comets.front();
-	//	comet.cometEffect->debug_gui();
-	//}
-	//ImGui::End();
+	ImGui::Begin("Test");
+	effectManager->debug_gui();
+	ImGui::End();
 }
 
 #endif // DEFERRED_RENDERING

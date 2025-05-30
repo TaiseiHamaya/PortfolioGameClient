@@ -18,13 +18,17 @@
 #include <Engine/Module/World/Collision/CollisionManager.h>
 #include <Engine/Module/World/Light/DirectionalLight/DirectionalLightInstance.h>
 #include <Engine/Module/World/WorldManager.h>
+#include <Engine/Runtime/Input/Input.h>
+#include <Engine/Runtime/Input/InputHandler.h>
 
+#include "Scripts/Manager/EffectManager.h"
 #include "Scripts/Manager/EntityManager.h"
 
 #include "Scripts/MiscInstance/AOE/CircleAoe.h"
 #include "Scripts/MiscInstance/Camera/FollowCamera.h"
 #include "Scripts/MiscInstance/Effects/CometEffect.h"
 #include "Scripts/MiscInstance/Enemy/EnemyManager.h"
+#include "Scripts/Player/Actions/PaladinHolySpirit.h"
 #include "Scripts/Player/LocalPlayerCommandHandler.h"
 #include "Scripts/Player/Player.h"
 
@@ -88,6 +92,7 @@ private:
 	std::unique_ptr<DirectionalLightingExecutor> directionalLightingExecutor;
 
 	std::unique_ptr<EntityManager> entityManager;
+	std::unique_ptr<EffectManager> effectManager;
 
 	std::unique_ptr<DirectionalLightInstance> directionalLight;
 
@@ -101,4 +106,8 @@ private:
 	std::list<CometAction> comets;
 
 	Reference<Vector3> cubemapWorld;
+
+	WorldTimer actionTimer;
+	InputHandler<PadID> inputHandler;
+	std::unique_ptr<PaladinHolySpirit> paladinHolySpirit;
 };

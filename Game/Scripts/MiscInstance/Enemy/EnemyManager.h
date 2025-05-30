@@ -15,12 +15,12 @@ public:
 	~EnemyManager() = default;
 
 public:
-	void start(Reference<EntityManager> entityManager_);
+	void setup(Reference<EntityManager> entityManager_);
 
 public:
 	void generate(u64 id, const std::filesystem::path& path, Vector3 position);
 
-	Reference<Enemy> get_nearest_enemy(const Vector3& position) const;
+	Reference<Enemy> get_nearest(const Vector3& position) const;
 
 #ifdef DEBUG_FEATURES_ENABLE
 public:

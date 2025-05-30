@@ -5,7 +5,7 @@
 #include "./Enemy.h"
 #include "Scripts/Manager/EntityManager.h"
 
-void EnemyManager::start(Reference<EntityManager> entityManager_) {
+void EnemyManager::setup(Reference<EntityManager> entityManager_) {
 	entityManager = entityManager_;
 }
 
@@ -19,7 +19,7 @@ void EnemyManager::generate(u64 id, const std::filesystem::path& path, Vector3 p
 	);
 }
 
-Reference<Enemy> EnemyManager::get_nearest_enemy(const Vector3& position) const {
+Reference<Enemy> EnemyManager::get_nearest(const Vector3& position) const {
 	Reference<Enemy> result{};
 	float currentsDistance = std::numeric_limits<float>::max();
 	for (Reference<Enemy> enemy : enemies) {

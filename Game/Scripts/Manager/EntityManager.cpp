@@ -1,6 +1,6 @@
 #include "EntityManager.h"
 
-void EntityManager::start(Reference<WorldManager> worldManager_, Reference<SkinningMeshDrawManager> skinDraw_, Reference<Rect3dDrawManager> rectDraw_) {
+void EntityManager::setup(Reference<WorldManager> worldManager_, Reference<SkinningMeshDrawManager> skinDraw_, Reference<Rect3dDrawManager> rectDraw_) {
 	worldManager = worldManager_;
 	skinDraw = skinDraw_;
 	rectDraw = rectDraw_;

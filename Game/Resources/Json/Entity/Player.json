@@ -1,9 +1,10 @@
 {
-	"HPColor": {
-		"R": 0.2000,
-		"G": 0.2000,
-		"B": 1.0000,
-		"A": 1.0000
-	},
-	"Model": "Player.gltf"
+  "HPColor": {
+    "R": 0.2000,
+    "G": 0.2000,
+    "B": 1.0000,
+    "A": 1.0000
+  },
+  "Model": "Player.gltf",
+  "TargetRadius": 0.5
 }

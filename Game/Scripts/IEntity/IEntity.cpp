@@ -21,6 +21,8 @@ void IEntity::initialize(const std::filesystem::path& file) {
 
 	reset_animated_mesh(json.try_emplace<std::string>("Model"));
 	set_action(idleAction);
+
+	targetRadius = json.try_emplace<float>("TargetRadius");
 }
 
 void IEntity::start(Reference<SkinningMeshDrawManager> skinDraw, Reference<Rect3dDrawManager> rectDraw) {
@@ -120,6 +122,9 @@ void IEntity::sync_position(Vector3 position, r32 yAngle) {
 }
 
 void IEntity::set_action(Reference<IActionBasic> action) {
+	if (!action) {
+		return;
+	}
 	nowAction = action;
 	nowAction->reset();
 	nowAction->reset_animation();

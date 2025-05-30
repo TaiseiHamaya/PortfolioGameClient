@@ -4,6 +4,8 @@
 
 #include "Scripts/IEntity/IEntity.h"
 
+#include "Scripts/MiscInstance/Effects/IEffectInstance.h"
+
 class ISkillAction {
 public:
 	enum class TargetType : i8 {
@@ -23,7 +25,7 @@ public:
 	virtual ~ISkillAction() = default;
 
 public:
-	virtual std::vector<std::unique_ptr<WorldInstance>> on_impact(Reference<IEntity> entity, Reference<IEntity> target, Reference<WorldManager> world) = 0;
+	virtual std::vector<std::unique_ptr<IEffectInstance>> on_impact(Reference<IEntity> entity, Reference<IEntity> target, Reference<WorldManager> world) = 0;
 
 protected:
 	TargetType targetType{};

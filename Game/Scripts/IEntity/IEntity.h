@@ -34,9 +34,9 @@ public:
 	void start(
 		Reference<SkinningMeshDrawManager> skinDraw,
 		Reference<Rect3dDrawManager> rectDraw);
-	virtual void begin();
+	virtual void begin() override;
 
-	virtual void update();
+	virtual void update() override;
 
 public:
 	void start_action(u32 index);
