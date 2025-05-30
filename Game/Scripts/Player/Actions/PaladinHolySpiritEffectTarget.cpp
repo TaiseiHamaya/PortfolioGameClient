@@ -2,10 +2,10 @@
 
 #include <Engine/Module/World/WorldManager.h>
 
-#include <Library/Utility/Tools/MathEPS.h>
-#include <Library/Utility/Tools/Functions.h>
-#include <Library/Utility/Tools/Easing.h>
 #include <Library/Math/Definition.h>
+#include <Library/Utility/Tools/Easing.h>
+#include <Library/Utility/Tools/Functions.h>
+#include <Library/Utility/Tools/MathEPS.h>
 
 PaladinHolySpiritEffectTarget::PaladinHolySpiritEffectTarget() : IEffectInstance() {}
 
@@ -16,28 +16,37 @@ void PaladinHolySpiritEffectTarget::initialize(const Vector3& position) {
 
 	// 黒いやつ
 	absorption = world_manager()->create<LookAtRect>(this);
-	absorption->initialize(Vector2{ 1.0f,1.0f }, Vector2{ 0.5f,0.5f });
+	absorption->get_material().texture = TextureLibrary::GetTexture("PaladinHolySpiritEffectTargetAbsorption.png");
+	absorption->initialize(Vector2{ 7.0f,7.0f }, Vector2{ 0.5f,0.5f });
 	absorption->get_transform().set_scale(CVector3::ZERO);
+	absorption->get_material().color = CColor4::BLACK;
+	absorption->get_material().lightingType = LighingType::None;
 
 	// でかいやつ
 	centerConstraint = world_manager()->create<WorldInstance>(this);
 	centerBillboards.resize(6);
-	for (i32 i = 0; std::unique_ptr<LookAtRect>& centerBillboard : centerBillboards) {
-		centerBillboard = world_manager()->create<LookAtRect>(centerConstraint);
-		centerBillboard->initialize(Vector2{ 1.0f,1.0f }, Vector2{ 0.5f,0.5f });
+	for (i32 i = 0; std::unique_ptr<Rect3d>& centerBillboard : centerBillboards) {
+		centerBillboard = world_manager()->create<Rect3d>(centerConstraint);
+		centerBillboard->initialize(Vector2{ 3.0f,5.0f }, Vector2{ 0.5f,0.0f });
 		centerBillboard->get_transform().set_quaternion(
 			Quaternion::AngleAxis(CVector3::FORWARD, PI2 * i / 6)
 		);
 		centerBillboard->get_transform().set_scale(CVector3::ZERO);
+		centerBillboard->get_transform().set_translate({ 0.0,0.0,0.01f });
 		centerBillboard->get_material().texture = TextureLibrary::GetTexture("PaladinHolySpiritEffectTargetCenter6.png");
+		centerBillboard->get_material().lightingType = LighingType::None;
 
 		++i;
 	}
 
 	// 中心の丸いやつ
 	lightBillboard = world_manager()->create<LookAtRect>(this);
-	lightBillboard->initialize(Vector2{ 1.0f,1.0f }, Vector2{ 0.5f,0.5f });
+	lightBillboard->initialize(Vector2{ 5.5f,5.5f }, Vector2{ 0.5f,0.5f });
 	lightBillboard->get_transform().set_scale(CVector3::ZERO);
+	lightBillboard->get_transform().set_translate({ 0.0,0.0,0.02f });
+	lightBillboard->get_material().color = { 0.334f,0.462f,0.853f,0.0f };
+	lightBillboard->get_material().texture = TextureLibrary::GetTexture("PaladinHolySpiritEffectTargetLight.png");
+	lightBillboard->get_material().lightingType = LighingType::None;
 
 	// エーテルエフェクト
 	etherDustEmitter = world_manager()->create<ParticleEmitterInstance>(this, "PaladinHolySpiritEffectTargetEther.json", 128);
@@ -70,32 +79,32 @@ void PaladinHolySpiritEffectTarget::update() {
 	timer.ahead();
 
 	// 中心の光ってるやつ
-	if (timer >= 0.15f && timer < 1.2f) {
-		r32 param = (timer - 0.15f) / (1.25f - 0.15f);
+	if (timer >= 0.15f) {
+		r32 param = eps::saturate((timer - 0.15f) / (1.25f - 0.15f));
 		r32 scaleBase = eps::lerp(0.0f, 1.0f, Easing::Out::Cubic(param));
 		lightBillboard->get_transform().set_scale(Vector3{ scaleBase, scaleBase, 1.0f });
 		lightBillboard->get_material().color.alpha = std::sin(param * PI);
 	}
 	// 周りの黒いやつ
-	if (timer >= 0.35f && timer < 1.0f) {
-		r32 param = (timer - 0.35f) / (1.0f - 0.35f);
+	if (timer >= 0.35f) {
+		r32 param = eps::saturate((timer - 0.35f) / (0.7f - 0.35f));
 		r32 scaleBase = eps::lerp(1.0f, 0.0f, param);
 		absorption->get_transform().set_scale(Vector3{ scaleBase, scaleBase, 1.0f });
-		absorption->get_material().color.alpha = eps::lerp(1.0f, 0.0f, param);
+		absorption->get_material().color.alpha = eps::lerp(0.0f, 1.0f, Easing::Out::Expo(param));
 	}
 	// 一番でかい派手なやつ
-	if (timer >= 0.25f && timer < 1.8f) {
+	if (timer >= 0.25f) {
 		centerConstraint->look_at(LookAtRect::camera);
-		centerConstraint->update_affine();
-		r32 param = (timer - 0.25f) / (1.8f - 0.25f);
-		for (std::unique_ptr<LookAtRect>& centerBillboard : centerBillboards) {
+		r32 param = eps::saturate((timer - 0.25f) / (1.8f - 0.25f));
+		for (std::unique_ptr<Rect3d>& centerBillboard : centerBillboards) {
 			centerBillboard->get_transform().set_scale({
 				param,
 				Easing::Out::Back(param),
 				1.0f
 			});
 			centerBillboard->get_material().color =
-				Color4::Lerp(CColor4::WHITE, CColor4::ZERO, param);
+				Color4::Lerp({ 0.334f,0.462f,0.853f,1.0f }, CColor4::ZERO, Easing::In::Cubic(param));
+			centerBillboard->get_material().color.alpha = eps::lerp(1.0f, 0.0f, Easing::In::Expo(param));
 		}
 	}
 	// 煙のパーティクル
@@ -122,6 +131,8 @@ void PaladinHolySpiritEffectTarget::draw_particle() const {
 	shiningEmitter->draw();
 }
 
+#ifdef DEBUG_FEATURES_ENABLE
+
 void PaladinHolySpiritEffectTarget::debug_gui() {
 	if (ImGui::TreeNode("Ether")) {
 		etherDustEmitter->debug_gui();
@@ -133,3 +144,5 @@ void PaladinHolySpiritEffectTarget::debug_gui() {
 		ImGui::TreePop();
 	}
 }
+
+#endif //DEBUG_FEATURES_ENABLE

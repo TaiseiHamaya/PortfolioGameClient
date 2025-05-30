@@ -56,6 +56,8 @@ void SceneGame::load() {
 	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/CometGround3.png");
 	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/PlayerEffect/PaladinHolySpiritEffectTargetCenter6.png");
 	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/PlayerEffect/PaladinHolySpiritEffectTargetShining.png");
+	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/PlayerEffect/PaladinHolySpiritEffectTargetAbsorption.png");
+	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/PlayerEffect/PaladinHolySpiritEffectTargetLight.png");
 	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/rogland_clear_night_2k.dds");
 
 	PolygonMeshLibrary::RegisterLoadQue(".\\DirectXGame\\EngineResources\\Models\\Grid\\Grid.obj");
@@ -158,16 +160,16 @@ void SceneGame::initialize() {
 	cubemapWorld = cubemapNode->get_world();
 	cubemapNode->set_config(RenderNodeConfig::NoClearRenderTarget | RenderNodeConfig::NoClearDepth);
 
+	auto rect3dNode = eps::CreateShared<Rect3dNode>();
+	rect3dNode->initialize();
+	rect3dNode->set_render_target(baseRenderTexture);
+	rect3dNode->set_config(RenderNodeConfig::NoClearRenderTarget | RenderNodeConfig::NoClearDepth);
+
 	std::shared_ptr<ParticleBillboardNode> particleBillboardNode;
 	particleBillboardNode = std::make_unique<ParticleBillboardNode>();
 	particleBillboardNode->initialize();
 	particleBillboardNode->set_config(RenderNodeConfig::NoClearRenderTarget | RenderNodeConfig::NoClearDepth);
 	particleBillboardNode->set_render_target(baseRenderTexture);
-
-	auto rect3dNode = eps::CreateShared<Rect3dNode>();
-	rect3dNode->initialize();
-	rect3dNode->set_render_target(baseRenderTexture);
-	rect3dNode->set_config(RenderNodeConfig::NoClearRenderTarget | RenderNodeConfig::NoClearDepth);
 
 	radialBlurNode = eps::CreateShared<RadialBlurNode>();
 	radialBlurNode->initialize();
@@ -218,10 +220,10 @@ void SceneGame::initialize() {
 
 	renderPath = eps::CreateUnique<RenderPath>();
 #ifdef DEBUG_FEATURES_ENABLE
-	renderPath->initialize({ deferredMeshNode,skinMeshNodeDeferred,nonLightingPixelNode,directionalLightingNode, cubemapNode,particleBillboardNode,rect3dNode,
+	renderPath->initialize({ deferredMeshNode,skinMeshNodeDeferred,nonLightingPixelNode,directionalLightingNode, cubemapNode,rect3dNode,particleBillboardNode,
 		radialBlurNode, luminanceExtractionNode, gaussianBlurNode2, gaussianBlurNode4, gaussianBlurNode8, gaussianBlurNode16 , margeTextureNode, bloomNode,primitiveLineNode });
 #else
-	renderPath->initialize({ deferredMeshNode,skinMeshNodeDeferred,nonLightingPixelNode,directionalLightingNode, cubemapNode,particleBillboardNode,rect3dNode,
+	renderPath->initialize({ deferredMeshNode,skinMeshNodeDeferred,nonLightingPixelNode,directionalLightingNode, cubemapNode,rect3dNode,particleBillboardNode,
 		radialBlurNode, luminanceExtractionNode, gaussianBlurNode2, gaussianBlurNode4, gaussianBlurNode8, gaussianBlurNode16 , margeTextureNode, bloomNode });
 #endif // DEFERRED_RENDERING
 
@@ -272,7 +274,7 @@ void SceneGame::update() {
 
 	effectManager->update();
 
-	if (std::fmodf(timer.time(), 2.0f) <= WorldClock::DeltaSeconds()) {
+	if (std::fmodf(timer.time(), 7.0f) <= WorldClock::DeltaSeconds()) {
 		auto& temp = comets.emplace_back(
 			worldManager->create<CircleAoe>(),
 			worldManager->create<CometEffect>()
@@ -342,6 +344,13 @@ void SceneGame::draw() const {
 	// Skybox
 	renderPath->next();
 
+	// Rect3D
+	renderPath->next();
+	camera3D->register_world_projection(3);
+	camera3D->register_world_lighting(4);
+	directionalLightingExecutor->set_command(5);
+	rect3dDrawManager->draw_layer(0);
+
 	// ParticleBillboard
 	renderPath->next();
 	camera3D->register_world_projection(1);
@@ -349,13 +358,6 @@ void SceneGame::draw() const {
 		comet.cometEffect->draw_particle();
 	}
 	effectManager->draw_particle();
-
-	// Rect3D
-	renderPath->next();
-	camera3D->register_world_projection(3);
-	camera3D->register_world_lighting(4);
-	directionalLightingExecutor->set_command(5);
-	rect3dDrawManager->draw_layer(0);
 
 	// ラジアルブラー
 	renderPath->next();

@@ -45,26 +45,26 @@ void CircleAoe::end(Reference<Rect3dDrawManager> rectDraw) {
 void CircleAoe::update() {
 	timer.ahead();
 
-	if (timer.time() * 3.0f < 1.0f) {
-		float param = std::clamp(timer.time() * 3.0f, 0.0f, 1.0f);
+	if (timer * 3.0f < 1.0f) {
+		float param = std::clamp(timer * 3.0f, 0.0f, 1.0f);
 		base->get_transform().set_scale(Vector3::Lerp(CVector3::ZERO, CVector3::BASIS, param));
 		base->get_material().color.alpha = param * 0.5f;
 	}
 	else {
-		float time = timer.time() - 0.33f;
+		float time = timer - 0.33f;
 		float param = time - std::trunc(time);
 		base->get_transform().set_scale(CVector3::BASIS);
 		effect->get_transform().set_scale(CVector3::BASIS * param);
 		effect->get_material().color.alpha = (1 - param) * 0.5f;
 	}
 
-	if (timer.time() >= duration) {
-		float param = std::lerp(1.0f, 0.0f, (timer.time() - duration) * 3.0f);
+	if (timer >= duration) {
+		float param = std::lerp(1.0f, 0.0f, (timer - duration) * 3.0f);
 		base->get_material().color.alpha = param * 0.5f;
 		effect->get_material().color.alpha = param * 0.5f;
 	}
 }
 
 bool CircleAoe::is_end() const {
-	return timer.time() >= duration;
+	return timer >= duration;
 }

@@ -35,10 +35,10 @@ public:
 public:
 	ActionEffect action_effect() const { return effect; }
 
-#ifdef _DEBUG
+#ifdef DEBUG_FEATURES_ENABLE
 public:
 	virtual void debug_gui();
-#endif // _DEBUG
+#endif // DEBUG_FEATURES_ENABLE
 
 protected:
 	WorldTimer timer;

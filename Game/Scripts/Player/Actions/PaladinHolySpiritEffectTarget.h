@@ -34,7 +34,7 @@ private:
 
 	std::unique_ptr<LookAtRect> absorption;
 	std::unique_ptr<WorldInstance> centerConstraint;
-	std::vector<std::unique_ptr<LookAtRect>> centerBillboards;
+	std::vector<std::unique_ptr<Rect3d>> centerBillboards;
 	std::unique_ptr<LookAtRect> lightBillboard;
 	std::unique_ptr<ParticleEmitterInstance> etherDustEmitter;
 	std::unique_ptr<ParticleEmitterInstance> shiningEmitter;
