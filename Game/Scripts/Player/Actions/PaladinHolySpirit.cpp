@@ -2,6 +2,9 @@
 
 #include <Engine/Module/World/WorldManager.h>
 
+#include "PaladinHolySpiritEffectSelf.h"
+#include "PaladinHolySpiritEffectTarget.h"
+
 PaladinHolySpirit::PaladinHolySpirit() noexcept {
 	targetType = TargetType::Target;
 	skillType = SkillType::Spell;
@@ -19,9 +22,15 @@ std::vector<std::unique_ptr<WorldInstance>> PaladinHolySpirit::on_impact(Referen
 	//bool isEnchantedHolySpirit = entity;
 
 	// 敵へのダメージ
-	target->on_damaged(100);
+	if (target) {
+		target->on_damaged(100);
+	}
 
-	result.push_back(std::move(world->create<WorldInstance>()));
+	// エフェクトの生成
+	auto temp = world->create<PaladinHolySpiritEffectTarget>();
+	temp->initialize();
+	temp->setup(entity, target);
+	result.emplace_back(std::move(temp));
 
 	return result;
 }

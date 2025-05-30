@@ -1,0 +1,12 @@
+{
+	"ProjectName": "Portfolio",
+	"WindowConfig": 13238272,
+	"GraphicsAPI": {
+		"NumBuffering": 2,
+		"ShaderVersion": "6.6",
+		"SrvHeapSize": 65536,
+		"RtvHeapSize": 30,
+		"DsvHeapSize": 1
+	},
+	"IsFixWorldClock": true
+}

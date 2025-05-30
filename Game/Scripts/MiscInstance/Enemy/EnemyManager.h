@@ -20,6 +20,8 @@ public:
 public:
 	void generate(u64 id, const std::filesystem::path& path, Vector3 position);
 
+	Reference<Enemy> get_nearest_enemy(const Vector3& position) const;
+
 #ifdef DEBUG_FEATURES_ENABLE
 public:
 	void debug_gui();

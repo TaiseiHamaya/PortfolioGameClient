@@ -45,14 +45,18 @@ public:
 	void on_damaged(i32 damage);
 	void sync_position(Vector3 position, r32 yAngle);
 
+public:
+	r32 target_radius() const;
+
 protected:
 	void set_action(Reference<IActionBasic> action);
-	u64 get_target_id() const { return targetId; };
 	const std::vector<u64>& get_enmity_ids() const { return enmityIds; };
 
 protected:
 	u64 id;
 	i32 hitpoint;
+
+	r32 targetRadius{};
 
 	Vector3 velocity;
 	r32 SPEED{ 5.0f };
@@ -61,8 +65,8 @@ protected:
 
 	std::unique_ptr<EntityUi> ui;
 	std::unique_ptr<Shadow> shadow;
-
-	u64 targetId; // 対象
+	
+	Reference<IEntity> selectionTarget; // 選択対象
 	std::vector<u64> enmityIds; // 敵対一覧
 
 	Reference<IActionBasic> nowAction{ nullptr }; // 今のアクション

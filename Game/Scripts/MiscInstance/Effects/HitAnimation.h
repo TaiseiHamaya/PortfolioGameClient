@@ -6,14 +6,6 @@
 
 #include "Scripts/Util/LookAtRect.h"
 
-//class LookAtRect final : public Rect3d {
-//public:
-//	void fixed_update() override;
-//
-//public:
-//	static inline Reference<WorldInstance> camera{};
-//};
-
 class HitAnimation final {
 public:
 	HitAnimation(Vector3&& position);

@@ -8,11 +8,6 @@ class IEntity;
 
 #include <string>
 
-enum class ActionType {
-	WeaponSkill,
-	Spell,
-	Ability
-};
 enum class ActionEffect {
 	Nane,
 	Spell,
@@ -38,7 +33,6 @@ public:
 	virtual bool end_action() const = 0;
 
 public:
-	ActionType action_type() const { return type; }
 	ActionEffect action_effect() const { return effect; }
 
 #ifdef _DEBUG
@@ -48,13 +42,6 @@ public:
 
 protected:
 	WorldTimer timer;
-
-	float CastTime{ 0 };
-	float RecastTime{ 2.5f };
-	float Range{ 0 };
-	float Radius{ 0 };
-
-	ActionType type;
 	ActionEffect effect;
 	Reference<IEntity> owner{ nullptr };
 	std::string useAnimationName{ "Armatureアクション" };

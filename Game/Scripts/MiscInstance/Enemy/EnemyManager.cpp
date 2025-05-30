@@ -1,7 +1,8 @@
 #include "EnemyManager.h"
 
-#include "Enemy.h"
+#include <limits>
 
+#include "./Enemy.h"
 #include "Scripts/Manager/EntityManager.h"
 
 void EnemyManager::start(Reference<EntityManager> entityManager_) {
@@ -16,6 +17,20 @@ void EnemyManager::generate(u64 id, const std::filesystem::path& path, Vector3 p
 	enemy->get_transform().set_quaternion(
 		Quaternion::LookForward(CVector3::BACKWARD)
 	);
+}
+
+Reference<Enemy> EnemyManager::get_nearest_enemy(const Vector3& position) const {
+	Reference<Enemy> result{};
+	float currentsDistance = std::numeric_limits<float>::max();
+	for (Reference<Enemy> enemy : enemies) {
+		float distance = (enemy->world_position() - position).length();
+		if (distance < currentsDistance) {
+			currentsDistance = distance;
+			result = enemy;
+		}
+	}
+
+	return result;
 }
 
 #ifdef DEBUG_FEATURES_ENABLE

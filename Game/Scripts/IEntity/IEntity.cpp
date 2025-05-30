@@ -124,3 +124,7 @@ void IEntity::set_action(Reference<IActionBasic> action) {
 	nowAction->reset();
 	nowAction->reset_animation();
 }
+
+r32 IEntity::target_radius() const {
+	return targetRadius;
+}

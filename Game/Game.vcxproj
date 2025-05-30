@@ -15,6 +15,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Scripts\Player\Actions\PaladinHolySpiritEffectSelf.cpp" />
+    <ClCompile Include="Scripts\Player\Actions\PaladinHolySpiritEffectTarget.cpp" />
     <ClCompile Include="Scripts\ContaintsDirector\ContaintsDirector.cpp" />
     <ClCompile Include="Scripts\Player\Actions\PaladinHolySpirit.cpp" />
     <ClCompile Include="Scripts\RenderNode\CubemapNode\CubemapNode.cpp" />
@@ -53,6 +55,8 @@
     <ClCompile Include="Scripts\EntityCommand\Command\StartActionCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Scripts\Player\Actions\PaladinHolySpiritEffectSelf.h" />
+    <ClInclude Include="Scripts\Player\Actions\PaladinHolySpiritEffectTarget.h" />
     <ClInclude Include="Scripts\ContaintsDirector\ContaintsDirector.h" />
     <ClInclude Include="Scripts\Player\Actions\PaladinHolySpirit.h" />
     <ClInclude Include="Scripts\IEntity\ISkillAction\ISkillAction.h" />
