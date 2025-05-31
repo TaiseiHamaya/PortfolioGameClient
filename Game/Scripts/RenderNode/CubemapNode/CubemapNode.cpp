@@ -46,12 +46,6 @@ void CubemapNode::create_pipeline_state() {
 	rootSignatureBuilder.add_cbv(D3D12_SHADER_VISIBILITY_VERTEX, 1); // 2 : camera
 	rootSignatureBuilder.sampler(D3D12_SHADER_VISIBILITY_PIXEL, 0, 0);
 
-	ShaderBuilder shaderBuilder;
-	shaderBuilder.initialize(
-		"Game/Resources/HLSL/Mesh/Skybox/Skybox.VS.hlsl",
-		"Game/Resources/HLSL/Mesh/Skybox/Skybox.PS.hlsl"
-	);
-
 	std::unique_ptr<PSOBuilder> psoBuilder = std::make_unique<PSOBuilder>();
 	psoBuilder->blendstate();
 	psoBuilder->depth_state(
@@ -61,7 +55,8 @@ void CubemapNode::create_pipeline_state() {
 	);
 	psoBuilder->rasterizerstate();
 	psoBuilder->rootsignature(rootSignatureBuilder.build());
-	psoBuilder->shaders(shaderBuilder);
+	psoBuilder->shaders(ShaderType::Vertex, "Skybox.VS.hlsl");
+	psoBuilder->shaders(ShaderType::Pixel, "Skybox.PS.hlsl");
 	psoBuilder->primitivetopologytype();
 	psoBuilder->rendertarget();
 

@@ -1,7 +1,6 @@
 #include "SceneGame.h"
 
-#include <Engine/GraphicsAPI/DirectX/DxSwapChain/DxSwapChain.h>
-#include <Engine/Module/Render/RenderNode/2D/Sprite/SpriteNode.h>
+#include <Engine/Assets/Shader/ShaderLibrary.h>
 #include <Engine/Module/Render/RenderNode/Debug/PrimitiveLine/PrimitiveLineNode.h>
 #include <Engine/Module/Render/RenderNode/Deferred/DeferredAdaptor.h>
 #include <Engine/Module/Render/RenderNode/Deferred/Lighting/DirectionalLighingNode.h>
@@ -9,9 +8,8 @@
 #include <Engine/Module/Render/RenderNode/Deferred/Mesh/SkinningMeshNodeDeferred.h>
 #include <Engine/Module/Render/RenderNode/Deferred/Mesh/StaticMeshNodeDeferred.h>
 #include <Engine/Module/Render/RenderNode/Forward/Particle/ParticleBillboardNode/ParticleBillboardNode.h>
-#include <Engine/Module/Render/RenderNode/Forward/Primitive/Rect3dNode .h>
+#include <Engine/Module/Render/RenderNode/Forward/Primitive/Rect3dNode.h>
 
-#include <Engine/Module/World/Mesh/Primitive/Rect3d.h>
 #include <Engine/Module/World/Mesh/SkinningMeshInstance.h>
 #include <Engine/Module/World/Mesh/StaticMeshInstance.h>
 
@@ -20,20 +18,17 @@
 #include <Engine/Assets/Audio/AudioLibrary.h>
 #include <Engine/Assets/PolygonMesh/PolygonMeshLibrary.h>
 #include <Engine/Assets/Texture/TextureLibrary.h>
-#include <Engine/Runtime/Scene/SceneManager.h>
 
 #include <Engine/Runtime/Clock/WorldClock.h>
 
 #include "Scripts/Util/LookAtRect.h"
 
-#include <Engine/Debug/DebugValues/DebugValues.h>
-
-#include <Scripts/RenderNode/CubemapNode/CubemapNode.h>
-#include <Scripts/RenderNode/PostEffect/BloomNode.h>
-#include <Scripts/RenderNode/PostEffect/GaussianBlurNode.h>
-#include <Scripts/RenderNode/PostEffect/LuminanceExtractionNode.h>
-#include <Scripts/RenderNode/PostEffect/MargeTextureNode.h>
 #include "Scripts/MiscInstance/Enemy/Enemy.h"
+#include "Scripts/RenderNode/CubemapNode/CubemapNode.h"
+#include "Scripts/RenderNode/PostEffect/BloomNode.h"
+#include "Scripts/RenderNode/PostEffect/GaussianBlurNode.h"
+#include "Scripts/RenderNode/PostEffect/LuminanceExtractionNode.h"
+#include "Scripts/RenderNode/PostEffect/MargeTextureNode.h"
 
 void SceneGame::load() {
 	PolygonMeshLibrary::RegisterLoadQue("./Game/Resources/Game/Models/skydome.gltf");
@@ -61,6 +56,28 @@ void SceneGame::load() {
 	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/rogland_clear_night_2k.dds");
 
 	PolygonMeshLibrary::RegisterLoadQue(".\\DirectXGame\\EngineResources\\Models\\Grid\\Grid.obj");
+
+	ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/FullscreenShader.VS.hlsl");
+	ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/Deferred/Mesh/StaticMesh.VS.hlsl");
+	ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/Deferred/Mesh/SkinningMesh.VS.hlsl");
+	ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/Deferred/Deferred.PS.hlsl");
+	ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/Deferred/Lighting/NonLighting.PS.hlsl");
+	ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/Deferred/Lighting/DirectionalLighting.PS.hlsl");
+	ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/Deferred/Lighting/PointLighting.PS.hlsl");
+	ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/Forward/Primitive/Rect3d.VS.hlsl");
+	ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/Forward/ForwardAlpha.PS.hlsl");
+	ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/Forward/Particle/ParticleBillboard/ParticleBillboard.VS.hlsl");
+	ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/Forward/Particle/ParticleBillboard/ParticleBillboard.PS.hlsl");
+
+	ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/Posteffect/RadialBlur/RadialBlur.PS.hlsl");
+
+	ShaderLibrary::RegisterLoadQue("./Game/Resources/HLSL/Mesh/Skybox/Skybox.VS.hlsl");
+	ShaderLibrary::RegisterLoadQue("./Game/Resources/HLSL/Mesh/Skybox/Skybox.PS.hlsl");
+	ShaderLibrary::RegisterLoadQue("./Game/Resources/HLSL/Bloom.PS.hlsl");
+	ShaderLibrary::RegisterLoadQue("./Game/Resources/HLSL/DownSampling.PS.hlsl");
+	ShaderLibrary::RegisterLoadQue("./Game/Resources/HLSL/GaussianBlur.PS.hlsl");
+	ShaderLibrary::RegisterLoadQue("./Game/Resources/HLSL/LuminanceExtraction.PS.hlsl");
+	ShaderLibrary::RegisterLoadQue("./Game/Resources/HLSL/MargeTexture4.PS.hlsl");
 }
 
 void SceneGame::initialize() {
@@ -79,7 +96,9 @@ void SceneGame::initialize() {
 
 	rect3dDrawManager = eps::CreateUnique<Rect3dDrawManager>();
 	rect3dDrawManager->initialize(1);
-	rect3dDrawManager->make_instancing(0, 100);
+	rect3dDrawManager->make_instancing(0, 1024);
+	//rect3dDrawManager->make_instancing(0, PrimitiveBlendMode::Add, 100);
+	//rect3dDrawManager->make_instancing(0, PrimitiveBlendMode::Alpha, 100);
 
 	directionalLightingExecutor = eps::CreateUnique<DirectionalLightingExecutor>(1);
 
