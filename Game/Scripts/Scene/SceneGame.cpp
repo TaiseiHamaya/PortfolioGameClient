@@ -21,6 +21,8 @@
 
 #include <Engine/Runtime/Clock/WorldClock.h>
 
+#include <Engine/Debug/DebugValues/DebugValues.h>
+
 #include "Scripts/Util/LookAtRect.h"
 
 #include "Scripts/MiscInstance/Enemy/Enemy.h"
