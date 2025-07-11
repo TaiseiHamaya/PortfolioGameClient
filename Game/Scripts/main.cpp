@@ -1,8 +1,8 @@
-#include "Scripts/Portfolio.h"
-
 #include <windows.h>
 
 #include <memory>
+
+#include "Scripts/Portfolio.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	std::unique_ptr<Framework> framework =
