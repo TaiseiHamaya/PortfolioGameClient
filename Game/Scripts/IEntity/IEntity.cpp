@@ -6,7 +6,7 @@
 #define COLOR4_SERIALIZER
 #include <Engine/Assets/Json/JsonSerializer.h>
 
-#include "Actions/Idle.h"
+#include "Actions/IdleAction.h"
 
 using namespace std::literals::string_literals;
 
@@ -16,11 +16,11 @@ void IEntity::initialize(const std::filesystem::path& file) {
 	ui = world_manager()->create<EntityUi>(this);
 	ui->initialize(2.5f, json.try_emplace<Color4>("HPColor"));
 
-	idleAction = std::make_unique<Idle>();
-	idleAction->start(this, std::format("{}.gltf-{}", file.stem().string(), "Idle"));
+	auto idleAction = std::make_unique<IdleAction>();
+	idleAction->setup(this, std::format("{}.gltf-{}", file.stem().string(), "Idle"));
+	actionList.emplace("Idle", std::move(idleAction));
 
 	reset_animated_mesh(json.try_emplace<std::string>("Model"));
-	set_action(idleAction);
 
 	targetRadius = json.try_emplace<float>("TargetRadius");
 }
@@ -34,19 +34,18 @@ void IEntity::start(Reference<SkinningMeshDrawManager> skinDraw, Reference<Rect3
 }
 
 void IEntity::begin() {
-	if (!nowAction) {
-		set_action(idleAction);
+	if (!currentAction) {
+		start_action("Idle");
 	}
 
-	nowAction->begin();
 	SkinningMeshInstance::begin();
 }
 
 void IEntity::update() {
-	if (nowAction) {
+	if (currentAction) {
 
 		// 移動が停止するようなアクションでは実行しない
-		if (nowAction->action_effect() != ActionEffect::Stack) {
+		if (currentAction->action_effect() != ActionEffect::Stack) {
 			// 重力処理
 			velocity.y += -20.0f * WorldClock::DeltaSeconds();
 			// 地面の上では摩擦減衰
@@ -62,10 +61,10 @@ void IEntity::update() {
 			}
 		}
 
-		nowAction->update();
+		currentAction->update();
 
-		if (nowAction->end_action() && nowAction.ptr() != idleAction.get()) {
-			set_action(idleAction);
+		if (currentAction->end_action()) {
+			start_action("Idle");
 		}
 	}
 
@@ -85,9 +84,12 @@ void IEntity::update() {
 	ui->update();
 }
 
-void IEntity::start_action(u32 index) {
-	if (nowAction && nowAction->progress()) {
-		set_action(actionList[index]);
+void IEntity::start_action(eps::string_hashed actionName) {
+	if (actionList.contains(actionName)) {
+		currentAction = actionList[actionName];
+		currentAction->reset();
+		currentAction->reset_animation();
+		currentAction->start();
 	}
 }
 
@@ -107,29 +109,18 @@ void IEntity::jump() {
 	if (transform.get_translate().y == 0) {
 		velocity.y = 8.0f;
 	}
+	start_action("Jump");
 }
 
 void IEntity::on_damaged(i32 damage) {
 	hitpoint -= damage;
-	set_action(damagedAction);
-}
-
-void IEntity::sync_position(Vector3 position, r32 yAngle) {
-	transform.set_translate(position);
-	transform.set_quaternion(
-		Quaternion::AngleAxis(CVector3::BASIS_Y, yAngle)
-	);
-}
-
-void IEntity::set_action(Reference<IActionBasic> action) {
-	if (!action) {
-		return;
-	}
-	nowAction = action;
-	nowAction->reset();
-	nowAction->reset_animation();
+	start_action("Damaged");
 }
 
 r32 IEntity::target_radius() const {
 	return targetRadius;
+}
+
+Reference<IEntity> IEntity::get_selection_target() const {
+	return selectionTarget;
 }

@@ -24,6 +24,7 @@
 #include "Scripts/Util/LookAtRect.h"
 
 #include "Scripts/MiscInstance/Enemy/Enemy.h"
+#include "Scripts/IEntity/ISkillAction/ISkillAction.h"
 #include "Scripts/RenderNode/CubemapNode/CubemapNode.h"
 #include "Scripts/RenderNode/PostEffect/BloomNode.h"
 #include "Scripts/RenderNode/PostEffect/GaussianBlurNode.h"
@@ -116,6 +117,7 @@ void SceneGame::initialize() {
 	LookAtRect::camera = camera3D;
 	Particle::lookAtDefault = camera3D.get();
 	CometEffect::camera = camera3D;
+	ISkillAction::SetEffectManager(effectManager);
 
 	skydome->get_transform().set_scale(CVector3::BASIS * 100);
 	skydome->get_materials()[0].lightingType = LighingType::None;
@@ -124,6 +126,7 @@ void SceneGame::initialize() {
 	camera3D->set_offset({ 0,1,-40 });
 	camera3D->set_target(player);
 	enemyManager->generate(1, "RedComet.json", Vector3{ 0,0,8 });
+	player->set_target(enemyManager->get_nearest(player->world_position()));
 
 	localPlayerCommandHandler = std::make_unique<LocalPlayerCommandHandler>();
 	localPlayerCommandHandler->initialize(player);
@@ -261,8 +264,6 @@ void SceneGame::initialize() {
 	staticMeshDrawManager->register_instance(DebugValues::GetGridInstance());
 #endif // DEBUG_FEATURES_ENABLE
 	staticMeshDrawManager->register_instance(skydome);
-
-	inputHandler.initialize({ PadID::A });
 }
 
 void SceneGame::begin() {
@@ -281,15 +282,15 @@ void SceneGame::update() {
 	entityManager->update();
 	camera3D->update();
 
-	inputHandler.update();
-	actionTimer.back();
-	if (inputHandler.trigger(PadID::A) && actionTimer < 0) {
-		actionTimer.set(2.5f);
-		auto effect = paladinHolySpirit->on_impact(player, enemyManager->get_nearest(player->world_position()).ptr(), worldManager);
-		for (auto& elem : effect) {
-			effectManager->register_instance(std::move(elem));
-		}
-	}
+	//inputHandler.update();
+	//actionTimer.back();
+	//if (inputHandler.trigger(PadID::A) && actionTimer < 0) {
+	//	actionTimer.set(2.5f);
+	//	auto effect = paladinHolySpirit->on_impact(player, enemyManager->get_nearest(player->world_position()).ptr(), worldManager);
+	//	for (auto& elem : effect) {
+	//		effectManager->register_instance(std::move(elem));
+	//	}
+	//}
 
 	effectManager->update();
 

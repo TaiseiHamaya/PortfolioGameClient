@@ -6,6 +6,7 @@
 
 #include <Library/Utility/Template/Reference.h>
 #include <Library/Utility/Template/bitflag.h>
+#include <Library/Utility/Template/string_hashed.h>
 
 #include <memory>
 #include <vector>
@@ -30,7 +31,7 @@ __USE_BITFLAG(EntityFlag)
 
 class IEntity : public SkinningMeshInstance {
 public:
-	void initialize(const std::filesystem::path& file);
+	virtual void initialize(const std::filesystem::path& file);
 	void start(
 		Reference<SkinningMeshDrawManager> skinDraw,
 		Reference<Rect3dDrawManager> rectDraw);
@@ -39,17 +40,16 @@ public:
 	virtual void update() override;
 
 public:
-	void start_action(u32 index);
+	void start_action(eps::string_hashed actionName);
 	void move(const Vector2& xzDirection);
 	void jump();
 	void on_damaged(i32 damage);
-	void sync_position(Vector3 position, r32 yAngle);
 
 public:
 	r32 target_radius() const;
+	Reference<IEntity> get_selection_target() const;
 
 protected:
-	void set_action(Reference<IActionBasic> action);
 	const std::vector<u64>& get_enmity_ids() const { return enmityIds; };
 
 protected:
@@ -69,13 +69,9 @@ protected:
 	Reference<IEntity> selectionTarget; // 選択対象
 	std::vector<u64> enmityIds; // 敵対一覧
 
-	Reference<IActionBasic> nowAction{ nullptr }; // 今のアクション
-
-	std::unique_ptr<IActionBasic> idleAction;
-	std::unique_ptr<IActionBasic> fightAction;
-	std::unique_ptr<IActionBasic> damagedAction;
-	std::vector<std::unique_ptr<IActionBasic>> actionList;
+	Reference<IActionBasic> currentAction{ nullptr }; // 今のアクション
+	std::unordered_map<eps::string_hashed, std::unique_ptr<IActionBasic>> actionList;
 
 public:
-	Reference<IActionBasic> now_action() const { return nowAction; }
+	Reference<IActionBasic> now_action() const { return currentAction; }
 };

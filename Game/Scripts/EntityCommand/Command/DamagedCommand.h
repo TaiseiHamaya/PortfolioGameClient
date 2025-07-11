@@ -4,7 +4,7 @@
 
 class DamagedCommand final : public ICommand {
 public:
-	DamagedCommand() = default;
+	DamagedCommand(i32 damage_);
 	~DamagedCommand() = default;
 
 	void execute(Reference<IEntity> entity);

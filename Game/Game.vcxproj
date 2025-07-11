@@ -15,7 +15,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Scripts\IEntity\Actions\JumpAction.cpp" />
     <ClCompile Include="Scripts\EntityCommand\Command\PlayerCommand\PlayerActionCommand .cpp" />
+    <ClCompile Include="Scripts\IEntity\ISkillAction\ISkillAction.cpp" />
     <ClCompile Include="Scripts\MiscInstance\Effects\IEffectInstance.cpp" />
     <ClCompile Include="Scripts\Manager\EffectManager.cpp" />
     <ClCompile Include="Scripts\Player\Actions\PaladinHolySpiritEffectSelf.cpp" />
@@ -33,7 +35,7 @@
     <ClCompile Include="Scripts\MiscInstance\Enemy\EnemyRemoteHandler.cpp" />
     <ClCompile Include="Scripts\RemoteEntity\RemoteEnemyCommandHandler.cpp" />
     <ClCompile Include="Scripts\EntityCommand\Hander\IEntityCommandHandler.cpp" />
-    <ClCompile Include="Scripts\IEntity\Actions\Idle.cpp" />
+    <ClCompile Include="Scripts\IEntity\Actions\IdleAction.cpp" />
     <ClCompile Include="Scripts\Player\LocalPlayerCommandHandler.cpp" />
     <ClCompile Include="Scripts\EntityCommand\Invoker.cpp" />
     <ClCompile Include="Scripts\EntityCommand\Command\DamagedCommand.cpp" />
@@ -58,6 +60,7 @@
     <ClCompile Include="Scripts\EntityCommand\Command\StartActionCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Scripts\IEntity\Actions\JumpAction.h" />
     <ClInclude Include="Scripts\EntityCommand\Command\PlayerCommand\PlayerActionCommand .h" />
     <ClInclude Include="Scripts\MiscInstance\Effects\IEffectInstance.h" />
     <ClInclude Include="Scripts\Manager\EffectManager.h" />
@@ -77,7 +80,7 @@
     <ClInclude Include="Scripts\MiscInstance\Enemy\EnemyRemoteHandler.h" />
     <ClInclude Include="Scripts\RemoteEntity\RemoteEnemyCommandHandler.h" />
     <ClInclude Include="Scripts\EntityCommand\Hander\IEntityCommandHandler.h" />
-    <ClInclude Include="Scripts\IEntity\Actions\Idle.h" />
+    <ClInclude Include="Scripts\IEntity\Actions\IdleAction.h" />
     <ClInclude Include="Scripts\Player\LocalPlayerCommandHandler.h" />
     <ClInclude Include="Scripts\EntityCommand\Invoker.h" />
     <ClInclude Include="Scripts\EntityCommand\Command\DamagedCommand.h" />
@@ -100,6 +103,9 @@
     <ClInclude Include="Scripts\Player\Player.h" />
     <ClInclude Include="Scripts\IEntity\Shadow.h" />
     <ClInclude Include="Scripts\EntityCommand\Command\StartActionCommand.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resources\Json\Action\Player\Paladin\HolySpirit.json" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

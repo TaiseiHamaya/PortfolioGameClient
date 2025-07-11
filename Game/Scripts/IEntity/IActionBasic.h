@@ -20,15 +20,14 @@ public:
 	virtual ~IActionBasic() = default;
 
 public:
-	void start(Reference<IEntity> owner_, const std::string& animationName);
-	void begin();
+	void setup(Reference<IEntity> owner_, const std::string& animationName);
+	virtual void start() = 0;
 	virtual void update() = 0;
 
 	virtual void reset() = 0;
 	void reset_animation();
 
 public:
-	virtual r32 progress() const = 0;
 	virtual bool can_transition() const = 0;
 	virtual bool end_action() const = 0;
 

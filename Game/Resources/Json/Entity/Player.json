@@ -6,5 +6,9 @@
     "A": 1.0000
   },
   "Model": "Player.gltf",
-  "TargetRadius": 0.5
+  "TargetRadius": 0.5,
+
+  "Actions": [
+    "PaladinHolySpirit"
+  ]
 }

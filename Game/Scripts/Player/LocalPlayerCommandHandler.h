@@ -1,10 +1,12 @@
 #pragma once
 
-#include <Engine/Runtime/Input/InputHandler.h>
 #include <Library/Utility/Template/Reference.h>
 
-#include "Scripts/IEntity/IEntity.h"
+#include <Engine/Runtime/Clock/WorldTimer.h>
+#include <Engine/Runtime/Input/InputHandler.h>
+
 #include "Scripts/EntityCommand/Hander/IEntityCommandHandler.h"
+#include "Scripts/IEntity/IEntity.h"
 
 class LocalPlayerCommandHandler final : public IEntityCommandHandler {
 public:
@@ -19,6 +21,8 @@ public:
 	void update() override;
 
 private:
+	WorldTimer actionTimer;
+
 	const u32 NumPreAction{ 1 };
 	std::optional<u32> actionBuffer; // 先行入力保存用
 

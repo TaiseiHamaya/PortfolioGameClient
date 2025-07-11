@@ -2,11 +2,12 @@
 
 #include <Engine/Runtime/Clock/WorldTimer.h>
 
+#include "../IActionBasic.h"
 #include "Scripts/IEntity/IEntity.h"
 
-#include "Scripts/MiscInstance/Effects/IEffectInstance.h"
+#include "Scripts/Manager/EffectManager.h"
 
-class ISkillAction {
+class ISkillAction : public IActionBasic {
 public:
 	enum class TargetType : i8 {
 		Target,
@@ -25,7 +26,7 @@ public:
 	virtual ~ISkillAction() = default;
 
 public:
-	virtual std::vector<std::unique_ptr<IEffectInstance>> on_impact(Reference<IEntity> entity, Reference<IEntity> target, Reference<WorldManager> world) = 0;
+
 
 protected:
 	TargetType targetType{};
@@ -35,4 +36,10 @@ protected:
 	i32 mpCost{};
 	float range{};
 	float radius{};
+
+public:
+	static void SetEffectManager(Reference<EffectManager> manager);
+
+protected:
+	static inline Reference<EffectManager> effectManager{ nullptr };
 };

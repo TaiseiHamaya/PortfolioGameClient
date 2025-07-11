@@ -1,5 +1,7 @@
 #include "IActionBasic.h"
 
+#include <format>
+
 #include "IEntity.h"
 
 #include <Engine/Assets/Animation/NodeAnimation/NodeAnimationPlayer.h>
@@ -11,13 +13,9 @@ void IActionBasic::reset_animation() {
 	animation->set_loop(loopAnimation);
 }
 
-void IActionBasic::start(Reference<IEntity> owner_, const std::string& animationName) {
+void IActionBasic::setup(Reference<IEntity> owner_, const std::string& animationName) {
 	owner = owner_;
 	useAnimationName = animationName;
-}
-
-void IActionBasic::begin() {
-	timer.ahead();
 }
 
 #ifdef DEBUG_FEATURES_ENABLE

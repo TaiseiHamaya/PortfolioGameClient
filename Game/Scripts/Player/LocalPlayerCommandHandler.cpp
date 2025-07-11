@@ -2,12 +2,15 @@
 
 #include "Scripts/EntityCommand/Command/MoveCommand.h"
 #include "Scripts/EntityCommand/Command/JumpCommand.h"
+#include "Scripts/EntityCommand/Command/StartActionCommand.h"
 
 void LocalPlayerCommandHandler::start(Reference<WorldInstance> camera_) {
 	commands.emplace_back(std::make_unique<MoveCommand>(xzDirection));
 	commands.emplace_back(std::make_unique<JumpCommand>());
+	commands.emplace_back(std::make_unique<StartActionCommand>("PaladinHolySpirit"));
 
 	actionTriggers.emplace_back(KeyID::Space, PadID::Y);
+	actionTriggers.emplace_back(KeyID::One, PadID::A);
 
 	std::vector<KeyID> keys;
 	std::vector<PadID> pads;
@@ -40,7 +43,7 @@ void LocalPlayerCommandHandler::update() {
 		entry_command(0);
 	}
 
-	if (receiver->now_action()->progress() >= 0.8f && !actionBuffer.has_value()) {
+	if (!actionBuffer.has_value()) {
 		for (u32 i = NumPreAction; ActionKeys& trigger : actionTriggers) {
 			if (actionHandlerK.trigger(trigger.key) || actionHandlerP.trigger(trigger.pad)) {
 				actionBuffer = i;

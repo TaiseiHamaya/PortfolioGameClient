@@ -106,8 +106,4 @@ private:
 	std::list<CometAction> comets;
 
 	Reference<Vector3> cubemapWorld;
-
-	WorldTimer actionTimer;
-	InputHandler<PadID> inputHandler;
-	std::unique_ptr<PaladinHolySpirit> paladinHolySpirit;
 };

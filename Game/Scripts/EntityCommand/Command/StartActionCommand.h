@@ -4,11 +4,11 @@
 
 class StartActionCommand final : public ICommand {
 public:
-	StartActionCommand() = default;
+	StartActionCommand(std::string_view name);
 	~StartActionCommand() = default;
 
 	void execute(Reference<IEntity> entity);
 
 private:
-	u32 actionIndex;
+	eps::string_hashed actionName;
 };
