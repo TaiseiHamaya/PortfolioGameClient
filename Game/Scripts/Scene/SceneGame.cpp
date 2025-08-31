@@ -27,9 +27,9 @@
 #include "Scripts/IEntity/ISkillAction/ISkillAction.h"
 #include "Scripts/RenderNode/CubemapNode/CubemapNode.h"
 #include "Scripts/RenderNode/PostEffect/BloomNode.h"
-#include "Scripts/RenderNode/PostEffect/GaussianBlurNode.h"
 #include "Scripts/RenderNode/PostEffect/LuminanceExtractionNode.h"
 #include "Scripts/RenderNode/PostEffect/MargeTextureNode.h"
+#include <Engine/Debug/DebugValues/DebugValues.h>
 
 void SceneGame::load() {
 	PolygonMeshLibrary::RegisterLoadQue("./Game/Resources/Game/Models/skydome.gltf");
@@ -97,7 +97,9 @@ void SceneGame::initialize() {
 
 	rect3dDrawManager = eps::CreateUnique<Rect3dDrawManager>();
 	rect3dDrawManager->initialize(1);
+	rect3dDrawManager->initialize(2);
 	rect3dDrawManager->make_instancing(0, 1024);
+	rect3dDrawManager->make_instancing(1, 32);
 	//rect3dDrawManager->make_instancing(0, PrimitiveBlendMode::Add, 100);
 	//rect3dDrawManager->make_instancing(0, PrimitiveBlendMode::Alpha, 100);
 
@@ -110,6 +112,7 @@ void SceneGame::initialize() {
 	// WorldInstances
 	// Allocation
 	directionalLight = worldManager->create<DirectionalLightInstance>();
+	directionalLight->light_data().intensity = 0.500f;
 	player = entityManager->generate<Player>(0, "Player.json");
 	skydome = worldManager->create<StaticMeshInstance>(nullptr, "skydome.gltf");
 	camera3D = worldManager->create<FollowCamera>();
@@ -234,6 +237,11 @@ void SceneGame::initialize() {
 	bloomNode->set_base_texture(renderTextures[3]);
 	bloomNode->set_blur_texture(renderTextures[9]);
 
+	auto rect3dNodeAOE = eps::CreateShared<Rect3dNode>();
+	rect3dNodeAOE->initialize();
+	rect3dNodeAOE->set_render_target_SC();
+	rect3dNodeAOE->set_config(RenderNodeConfig::NoClearRenderTarget | RenderNodeConfig::NoClearDepth);
+
 #ifdef DEBUG_FEATURES_ENABLE
 	std::shared_ptr<PrimitiveLineNode> primitiveLineNode;
 	primitiveLineNode = std::make_unique<PrimitiveLineNode>();
@@ -243,10 +251,10 @@ void SceneGame::initialize() {
 	renderPath = eps::CreateUnique<RenderPath>();
 #ifdef DEBUG_FEATURES_ENABLE
 	renderPath->initialize({ deferredMeshNode,skinMeshNodeDeferred,nonLightingPixelNode,directionalLightingNode, cubemapNode,rect3dNode,particleBillboardNode,
-		radialBlurNode, luminanceExtractionNode, gaussianBlurNode2, gaussianBlurNode4, gaussianBlurNode8, gaussianBlurNode16 , margeTextureNode, bloomNode,primitiveLineNode });
+		radialBlurNode, luminanceExtractionNode, gaussianBlurNode2, gaussianBlurNode4, gaussianBlurNode8, gaussianBlurNode16 , margeTextureNode, bloomNode, rect3dNodeAOE, primitiveLineNode });
 #else
 	renderPath->initialize({ deferredMeshNode,skinMeshNodeDeferred,nonLightingPixelNode,directionalLightingNode, cubemapNode,rect3dNode,particleBillboardNode,
-		radialBlurNode, luminanceExtractionNode, gaussianBlurNode2, gaussianBlurNode4, gaussianBlurNode8, gaussianBlurNode16 , margeTextureNode, bloomNode });
+		radialBlurNode, luminanceExtractionNode, gaussianBlurNode2, gaussianBlurNode4, gaussianBlurNode8, gaussianBlurNode16 , margeTextureNode, bloomNode, rect3dNodeAOE });
 #endif // DEFERRED_RENDERING
 
 	// CreateInstancing
@@ -411,6 +419,13 @@ void SceneGame::draw() const {
 	renderPath->next();
 	bloomNode->draw();
 
+	// AOE
+	renderPath->next();
+	camera3D->register_world_projection(3);
+	camera3D->register_world_lighting(4);
+	directionalLightingExecutor->set_command(5);
+	rect3dDrawManager->draw_layer(1);
+
 	renderPath->next();
 
 #ifdef DEBUG_FEATURES_ENABLE
@@ -448,6 +463,31 @@ void SceneGame::debug_update() {
 
 	ImGui::Begin("Test");
 	effectManager->debug_gui();
+	ImGui::End();
+
+	ImGui::Begin("PostEffect");
+	if(ImGui::TreeNode("LuminanceExtraction")) {
+		luminanceExtractionNode->debug_gui();
+		ImGui::TreePop();
+	}
+	if (ImGui::TreeNode("GaussianBlurNode16")) {
+		ImGui::DragFloat("Weight", &blurData.dispersion, 0.001f, 0.0f, 1.0f, "%.4f");
+		ImGui::DragFloat("Length", &blurData.length, 0.01f);
+		constexpr u32 min = 1;
+		constexpr u32 max = 16;
+		ImGui::DragScalar("SampleCount", ImGuiDataType_U32, reinterpret_cast<int*>(&blurData.sampleCount), 0.02f, &min, &max);
+
+		gaussianBlurNode2->set_parameters(blurData.dispersion, blurData.length, blurData.sampleCount);
+		gaussianBlurNode4->set_parameters(blurData.dispersion, blurData.length, blurData.sampleCount);
+		gaussianBlurNode8->set_parameters(blurData.dispersion, blurData.length, blurData.sampleCount);
+		gaussianBlurNode16->set_parameters(blurData.dispersion, blurData.length, blurData.sampleCount);
+	
+		ImGui::TreePop();
+	}
+	if (ImGui::TreeNode("BloomNode")) {
+		bloomNode->debug_gui();
+		ImGui::TreePop();
+	}
 	ImGui::End();
 }
 

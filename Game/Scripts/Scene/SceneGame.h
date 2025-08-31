@@ -31,6 +31,7 @@
 #include "Scripts/Player/Actions/PaladinHolySpirit.h"
 #include "Scripts/Player/LocalPlayerCommandHandler.h"
 #include "Scripts/Player/Player.h"
+#include "Scripts/RenderNode/PostEffect/GaussianBlurNode.h"
 
 struct CometAction {
 	std::unique_ptr<CircleAoe> circleAoE;
@@ -38,7 +39,6 @@ struct CometAction {
 };
 
 class LuminanceExtractionNode;
-class GaussianBlurNode;
 class MargeTextureNode;
 class BloomNode;
 
@@ -106,4 +106,12 @@ private:
 	std::list<CometAction> comets;
 
 	Reference<Vector3> cubemapWorld;
+
+#ifdef DEBUG_FEATURES_ENABLE
+	GaussianBlurNode::GaussianBlurInfo blurData{
+		.dispersion = 1.0f,
+		.length = 40.0f,
+		.sampleCount = 8
+	};
+#endif
 };

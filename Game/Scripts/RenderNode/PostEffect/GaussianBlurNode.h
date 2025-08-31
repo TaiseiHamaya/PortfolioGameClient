@@ -7,6 +7,13 @@
 
 class GaussianBlurNode : public SingleRenderTargetNode {
 public:
+	struct GaussianBlurInfo {
+		float dispersion;
+		float length;
+		uint32_t sampleCount;
+	};
+
+public:
 	GaussianBlurNode() = default;
 	~GaussianBlurNode() noexcept = default;
 
@@ -27,21 +34,19 @@ public:
 
 	void set_base_texture(Reference<RenderTexture> baseTexture_);
 
+public:
+	void set_parameters(r32 dispersion, r32 length, uint32_t sampleCount);
+
 private:
 	void create_pipeline_state();
 
-#ifdef _DEBUG
+#ifdef DEBUG_FEATURES_ENABLE
 public:
 	void debug_gui();
-#endif // _DEBUG
+#endif // DEBUG_FEATURES_ENABLE
 
 private:
 	Reference<RenderTexture> baseTexture;
 
-	struct GaussianBlurInfo {
-		float dispersion;
-		float length;
-		uint32_t sampleCount;
-	};
 	ConstantBuffer<GaussianBlurInfo> blurInfo;
 };

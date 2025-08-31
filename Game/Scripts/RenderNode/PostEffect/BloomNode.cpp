@@ -9,7 +9,7 @@ void BloomNode::initialize() {
 	create_pipeline_state();
 	pipelineState->set_name("BloomNode");
 	primitiveTopology = D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
-	bloomInfo.get_data()->weight = 0.3f;
+	bloomInfo.get_data()->weight = 1.0f;
 }
 
 void BloomNode::draw() const {
@@ -56,9 +56,9 @@ void BloomNode::create_pipeline_state() {
 	pipelineState->initialize(psoBuilder->get_rootsignature(), psoBuilder->build());
 }
 
-#ifdef _DEBUG
+#ifdef DEBUG_FEATURES_ENABLE
 #include <imgui.h>
 void BloomNode::debug_gui() {
 	ImGui::DragFloat("Weight", &bloomInfo.get_data()->weight, 0.001f, 0.0f, 1.0f, "%.4f");
 }
-#endif // _DEBUG
+#endif // DEBUG_FEATURES_ENABLE

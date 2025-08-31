@@ -25,6 +25,14 @@ void GaussianBlurNode::set_base_texture(Reference<RenderTexture> baseTexture_) {
 	baseTexture = baseTexture_;
 }
 
+void GaussianBlurNode::set_parameters(float dispersion, float length, uint32_t sampleCount) {
+	*blurInfo.get_data() = {
+		.dispersion = dispersion,
+		.length = length,
+		.sampleCount = sampleCount
+	};
+}
+
 void GaussianBlurNode::create_pipeline_state() {
 	RootSignatureBuilder rootSignatureBuilder;
 	rootSignatureBuilder.add_cbv(D3D12_SHADER_VISIBILITY_PIXEL, 0);
@@ -49,7 +57,7 @@ void GaussianBlurNode::create_pipeline_state() {
 	pipelineState->initialize(psoBuilder->get_rootsignature(), psoBuilder->build());
 }
 
-#ifdef _DEBUG
+#ifdef DEBUG_FEATURES_ENABLE
 #include <imgui.h>
 void GaussianBlurNode::debug_gui() {
 	ImGui::DragFloat("Weight", &blurInfo.get_data()->dispersion, 0.001f, 0.0f, 1.0f, "%.4f");
@@ -58,4 +66,4 @@ void GaussianBlurNode::debug_gui() {
 	static uint32_t max = 16;
 	ImGui::DragScalar("SampleCount", ImGuiDataType_U32, reinterpret_cast<int*>(&blurInfo.get_data()->sampleCount), 0.02f, &min, &max);
 }
-#endif // _DEBUG
+#endif // DEBUG_FEATURES_ENABLE

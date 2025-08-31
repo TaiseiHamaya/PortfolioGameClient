@@ -22,6 +22,7 @@ void CircleAoe::initialize(const Vector3& position, float radius, float duration
 	base->get_material().color.alpha = 0;
 	base->get_transform().set_scale(CVector3::ZERO);
 	base->get_transform().set_quaternion(rotate);
+	base->set_layer(1);
 	effect = world_manager()->create<Rect3d>(this);
 	effect->initialize(CVector3::BASIS * radius, CVector3::BASIS * 0.5f);
 	effect->get_material().texture = TextureLibrary::GetTexture("AOEBase.png");
@@ -29,7 +30,7 @@ void CircleAoe::initialize(const Vector3& position, float radius, float duration
 	effect->get_material().color.alpha = 0;
 	effect->get_transform().set_scale(CVector3::ZERO);
 	effect->get_transform().set_quaternion(rotate);
-
+	effect->set_layer(1);
 }
 
 void CircleAoe::start(Reference<Rect3dDrawManager> rectDraw) {
