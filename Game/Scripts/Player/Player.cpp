@@ -14,19 +14,16 @@ void Player::initialize(const std::filesystem::path& file) {
 	actionList.emplace("PaladinHolySpirit", std::move(paladinHolySpirit));
 }
 
-#ifdef _DEBUG
+#ifdef DEBUG_FEATURES_ENABLE
 #include <imgui.h>
 void Player::debug_gui() {
 	ImGui::Begin("Player");
-	SkinningMeshInstance::debug_gui();
-
 	for (auto& action : actionList | std::views::values) {
 		action->debug_gui();
 	}
-
 	ImGui::End();
 }
-#endif // _DEBUG
+#endif // DEBUG_FEATURES_ENABLE
 
 void Player::set_target(Reference<IEntity> entity) {
 	selectionTarget = entity;

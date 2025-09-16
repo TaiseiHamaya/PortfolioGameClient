@@ -1,6 +1,7 @@
 #pragma once
 
 #include <list>
+#include <functional>
 
 #include "Scripts/IEntity/IEntity.h"
 #include "Scripts/EntityCommand/ICommand.h"

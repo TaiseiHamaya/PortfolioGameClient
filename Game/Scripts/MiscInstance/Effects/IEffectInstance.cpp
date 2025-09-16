@@ -17,9 +17,6 @@ Vector3 EffectTools::CalculateTargetPosition(Reference<IEntity> self, Reference<
 	return result;
 }
 
-IEffectInstance::IEffectInstance() : WorldInstance() {
-}
-
 bool IEffectInstance::is_destroy() const {
 	return isDestroy;
 }
