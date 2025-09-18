@@ -314,21 +314,23 @@ void SceneGame::update() {
 		temp.cometEffect->setup(staticMeshDrawManager, rect3dDrawManager);
 	}
 
-	std::erase_if(comets, [&](CometAction& elem) {
-		if (elem.cometEffect->is_end()) {
-			elem.circleAoE->end(rect3dDrawManager);
-			elem.cometEffect->terminate(staticMeshDrawManager, rect3dDrawManager);
-			return true;
-		}
-		return false;
-	});
-
 	for (auto& comet : comets) {
 		comet.circleAoE->update();
 		if (comet.circleAoE->is_end()) {
 			comet.cometEffect->update();
 		}
 	}
+
+	std::erase_if(comets, [&](CometAction& elem) {
+		if (elem.cometEffect->is_end()) {
+			elem.circleAoE->end(rect3dDrawManager);
+			elem.cometEffect->terminate(staticMeshDrawManager, rect3dDrawManager);
+			worldManager->erase(elem.circleAoE);
+			worldManager->erase(elem.cometEffect);
+			return true;
+		}
+		return false;
+	});
 }
 
 void SceneGame::late_update() {

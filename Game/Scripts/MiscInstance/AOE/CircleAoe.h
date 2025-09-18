@@ -21,7 +21,7 @@ public:
 
 private:
 	WorldTimer timer;
-	float duration;
+	r32 duration{ 0.0f };
 
 	std::unique_ptr<Rect3d> base;
 	std::unique_ptr<Rect3d> effect;
