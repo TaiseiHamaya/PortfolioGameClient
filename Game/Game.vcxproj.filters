@@ -47,6 +47,8 @@
     <ClCompile Include="Scripts\EntityCommand\Command\PlayerCommand\PlayerActionCommand .cpp" />
     <ClCompile Include="Scripts\IEntity\Actions\JumpAction.cpp" />
     <ClCompile Include="Scripts\IEntity\ISkillAction\ISkillAction.cpp" />
+    <ClCompile Include="Scripts\Proto\types.pb.cc" />
+    <ClCompile Include="Scripts\Proto\math.pb.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scripts\Scene\FactoryPortfolio.h" />
@@ -92,6 +94,8 @@
     <ClInclude Include="Scripts\MiscInstance\Effects\IEffectInstance.h" />
     <ClInclude Include="Scripts\EntityCommand\Command\PlayerCommand\PlayerActionCommand .h" />
     <ClInclude Include="Scripts\IEntity\Actions\JumpAction.h" />
+    <ClInclude Include="Scripts\Proto\types.pb.h" />
+    <ClInclude Include="Scripts\Proto\math.pb.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resources\Json\Action\Player\Paladin\HolySpirit.json" />

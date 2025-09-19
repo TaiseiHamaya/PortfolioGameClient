@@ -24,6 +24,8 @@
     <ClCompile Include="Scripts\Player\Actions\PaladinHolySpiritEffectTarget.cpp" />
     <ClCompile Include="Scripts\ContaintsDirector\ContaintsDirector.cpp" />
     <ClCompile Include="Scripts\Player\Actions\PaladinHolySpirit.cpp" />
+    <ClCompile Include="Scripts\Proto\math.pb.cc" />
+    <ClCompile Include="Scripts\Proto\types.pb.cc" />
     <ClCompile Include="Scripts\RenderNode\CubemapNode\CubemapNode.cpp" />
     <ClCompile Include="Scripts\RenderNode\PostEffect\GaussianBlurNode.cpp" />
     <ClCompile Include="Scripts\RenderNode\PostEffect\MargeTextureNode.cpp" />
@@ -69,6 +71,8 @@
     <ClInclude Include="Scripts\ContaintsDirector\ContaintsDirector.h" />
     <ClInclude Include="Scripts\Player\Actions\PaladinHolySpirit.h" />
     <ClInclude Include="Scripts\IEntity\ISkillAction\ISkillAction.h" />
+    <ClInclude Include="Scripts\Proto\math.pb.h" />
+    <ClInclude Include="Scripts\Proto\types.pb.h" />
     <ClInclude Include="Scripts\RenderNode\CubemapNode\CubemapNode.h" />
     <ClInclude Include="Scripts\RenderNode\PostEffect\GaussianBlurNode.h" />
     <ClInclude Include="Scripts\RenderNode\PostEffect\MargeTextureNode.h" />
@@ -170,7 +174,7 @@
       <PreprocessorDefinitions>_WINDOWS;NOMINMAX;DEBUG_FEATURES_ENABLE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)DirectXGame;$(SolutionDir)DirectXGame\Library\Externals\nlohmann;$(SolutionDir)DirectXGame\Library\Externals\DirectXTex;$(SolutionDir)DirectXGame\Library\Externals\assimp\include;$(SolutionDir)DirectXGame\Library\Externals\imgui</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)DirectXGame;$(SolutionDir)DirectXGame\Library\Externals\nlohmann;$(SolutionDir)DirectXGame\Library\Externals\DirectXTex;$(SolutionDir)DirectXGame\Library\Externals\assimp\include;$(SolutionDir)Game\Scripts\Proto;$(SolutionDir)DirectXGame\Library\Externals\imgui</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
@@ -194,7 +198,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_WINDOWS;NOMINMAX;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)DirectXGame;$(SolutionDir)DirectXGame\Library\Externals\nlohmann;$(SolutionDir)DirectXGame\Library\Externals\DirectXTex;$(SolutionDir)DirectXGame\Library\Externals\assimp\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)DirectXGame;$(SolutionDir)DirectXGame\Library\Externals\nlohmann;$(SolutionDir)DirectXGame\Library\Externals\DirectXTex;$(SolutionDir)DirectXGame\Library\Externals\assimp\include;$(SolutionDir)Game\Scripts\Proto;</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -217,7 +221,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_WINDOWS;NOMINMAX;DEBUG_FEATURES_ENABLE;_DEVELOP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)DirectXGame;$(SolutionDir)DirectXGame\Library\Externals\nlohmann;$(SolutionDir)DirectXGame\Library\Externals\DirectXTex;$(SolutionDir)DirectXGame\Library\Externals\assimp\include;$(SolutionDir)DirectXGame\Library\Externals\imgui</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)DirectXGame;$(SolutionDir)DirectXGame\Library\Externals\nlohmann;$(SolutionDir)DirectXGame\Library\Externals\DirectXTex;$(SolutionDir)DirectXGame\Library\Externals\assimp\include;$(SolutionDir)Game\Scripts\Proto;$(SolutionDir)DirectXGame\Library\Externals\imgui</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
