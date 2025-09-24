@@ -19,6 +19,7 @@
 #include <Engine/Assets/PolygonMesh/PolygonMeshLibrary.h>
 #include <Engine/Assets/Texture/TextureLibrary.h>
 
+#include <Engine/Application/ProjectSettings/ProjectSettings.h>
 #include <Engine/Runtime/Clock/WorldClock.h>
 
 #include "Scripts/Util/LookAtRect.h"
@@ -142,10 +143,10 @@ void SceneGame::initialize() {
 	renderTextures[2].initialize(DXGI_FORMAT_R8G8B8A8_UNORM_SRGB); // シーン結果
 	renderTextures[3].initialize(DXGI_FORMAT_R8G8B8A8_UNORM_SRGB); // ラジアルブラー
 	renderTextures[4].initialize(DXGI_FORMAT_R8G8B8A8_UNORM_SRGB); // 輝度抽出
-	renderTextures[5].initialize(DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, EngineSettings::CLIENT_WIDTH / 2, EngineSettings::CLIENT_HEIGHT / 2); // ダウンサンプリング 1/2
-	renderTextures[6].initialize(DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, EngineSettings::CLIENT_WIDTH / 4, EngineSettings::CLIENT_HEIGHT / 4); // ダウンサンプリング 1/4
-	renderTextures[7].initialize(DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, EngineSettings::CLIENT_WIDTH / 8, EngineSettings::CLIENT_HEIGHT / 8); // ダウンサンプリング 1/8
-	renderTextures[8].initialize(DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, EngineSettings::CLIENT_WIDTH / 16, EngineSettings::CLIENT_HEIGHT / 16); // ダウンサンプリング 1/16
+	renderTextures[5].initialize(DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, ProjectSettings::ClientWidth() / 2, ProjectSettings::ClientHeight() / 2); // ダウンサンプリング 1/2
+	renderTextures[6].initialize(DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, ProjectSettings::ClientWidth() / 4, ProjectSettings::ClientHeight() / 4); // ダウンサンプリング 1/4
+	renderTextures[7].initialize(DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, ProjectSettings::ClientWidth() / 8, ProjectSettings::ClientHeight() / 8); // ダウンサンプリング 1/8
+	renderTextures[8].initialize(DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, ProjectSettings::ClientWidth() / 16, ProjectSettings::ClientHeight() / 16); // ダウンサンプリング 1/16
 	renderTextures[9].initialize(DXGI_FORMAT_R8G8B8A8_UNORM_SRGB); // ダウンサンプリングを合成
 	gBuffer.initialize({ renderTextures[0],renderTextures[1] });
 	baseRenderTexture.initialize(renderTextures[2]);
@@ -267,7 +268,7 @@ void SceneGame::initialize() {
 
 	// RegisterDraw
 #ifdef DEBUG_FEATURES_ENABLE
-	staticMeshDrawManager->register_debug_instance(0, camera3D, true);
+	//staticMeshDrawManager->register_debug_instance(0, camera3D, true);
 #else
 	staticMeshDrawManager->register_instance(DebugValues::GetGridInstance());
 #endif // DEBUG_FEATURES_ENABLE
@@ -313,21 +314,23 @@ void SceneGame::update() {
 		temp.cometEffect->setup(staticMeshDrawManager, rect3dDrawManager);
 	}
 
-	std::erase_if(comets, [&](CometAction& elem) {
-		if (elem.cometEffect->is_end()) {
-			elem.circleAoE->end(rect3dDrawManager);
-			elem.cometEffect->terminate(staticMeshDrawManager, rect3dDrawManager);
-			return true;
-		}
-		return false;
-	});
-
 	for (auto& comet : comets) {
 		comet.circleAoE->update();
 		if (comet.circleAoE->is_end()) {
 			comet.cometEffect->update();
 		}
 	}
+
+	std::erase_if(comets, [&](CometAction& elem) {
+		if (elem.cometEffect->is_end()) {
+			elem.circleAoE->end(rect3dDrawManager);
+			elem.cometEffect->terminate(staticMeshDrawManager, rect3dDrawManager);
+			worldManager->erase(elem.circleAoE);
+			worldManager->erase(elem.cometEffect);
+			return true;
+		}
+		return false;
+	});
 }
 
 void SceneGame::late_update() {
@@ -447,9 +450,9 @@ void SceneGame::debug_update() {
 	WorldClock::DebugGui();
 	ImGui::End();
 
-	ImGui::Begin("DirectionalLight");
+	/*ImGui::Begin("DirectionalLight");
 	directionalLight->debug_gui();
-	ImGui::End();
+	ImGui::End();*/
 
 	ImGui::Begin("Player");
 	player->debug_gui();

@@ -5,6 +5,8 @@
 #include "./Enemy.h"
 #include "Scripts/Manager/EntityManager.h"
 
+#include <imgui.h>
+
 void EnemyManager::setup(Reference<EntityManager> entityManager_) {
 	entityManager = entityManager_;
 }
@@ -35,8 +37,8 @@ Reference<Enemy> EnemyManager::get_nearest(const Vector3& position) const {
 
 #ifdef DEBUG_FEATURES_ENABLE
 void EnemyManager::debug_gui() {
-	ImGui::Begin("Enemy");
-	enemies.front()->debug_gui();
-	ImGui::End();
+	//ImGui::Begin("Enemy");
+	//enemies.front()->debug_gui();
+	//ImGui::End();
 }
 #endif // DEBUG_FEATURES_ENABLE

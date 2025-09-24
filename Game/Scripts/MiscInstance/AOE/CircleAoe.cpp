@@ -4,7 +4,7 @@
 #include <Engine/Module/World/WorldManager.h>
 #include <Library/Math/Definition.h>
 
-CircleAoe::CircleAoe() : WorldInstance() {}
+CircleAoe::CircleAoe() = default;
 CircleAoe::~CircleAoe() = default;
 
 void CircleAoe::initialize(const Vector3& position, float radius, float duration_) {
@@ -41,6 +41,10 @@ void CircleAoe::start(Reference<Rect3dDrawManager> rectDraw) {
 void CircleAoe::end(Reference<Rect3dDrawManager> rectDraw) {
 	rectDraw->unregister_instance(base);
 	rectDraw->unregister_instance(effect);
+
+	Reference<WorldManager> worldManager= world_manager();
+	worldManager->erase(base);
+	worldManager->erase(effect);
 }
 
 void CircleAoe::update() {

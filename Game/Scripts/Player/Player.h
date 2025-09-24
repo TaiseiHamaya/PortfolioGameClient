@@ -7,10 +7,10 @@ class Player final : public IEntity {
 public:
 	void initialize(const std::filesystem::path& file) override;
 
-#ifdef _DEBUG
+#ifdef DEBUG_FEATURES_ENABLE
 public:
-	void debug_gui() override;
-#endif // _DEBUG
+	void debug_gui();
+#endif // DEBUG_FEATURES_ENABLE
 
 
 public:

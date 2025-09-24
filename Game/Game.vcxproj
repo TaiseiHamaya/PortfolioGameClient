@@ -167,7 +167,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_WINDOWS;NOMINMAX;DEBUG_FEATURES_ENABLE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDOWS;NOMINMAX;ASIO_STANDALONE;_WIN32_WINNT=0x0A00;DEBUG_FEATURES_ENABLE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)DirectXGame;$(SolutionDir)DirectXGame\Library\Externals\nlohmann;$(SolutionDir)DirectXGame\Library\Externals\DirectXTex;$(SolutionDir)DirectXGame\Library\Externals\assimp\include;$(SolutionDir)DirectXGame\Library\Externals\imgui</AdditionalIncludeDirectories>
@@ -192,7 +192,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_WINDOWS;NOMINMAX;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDOWS;NOMINMAX;ASIO_STANDALONE;_WIN32_WINNT=0x0A00;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)DirectXGame;$(SolutionDir)DirectXGame\Library\Externals\nlohmann;$(SolutionDir)DirectXGame\Library\Externals\DirectXTex;$(SolutionDir)DirectXGame\Library\Externals\assimp\include;</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
@@ -215,7 +215,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_WINDOWS;NOMINMAX;DEBUG_FEATURES_ENABLE;_DEVELOP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDOWS;NOMINMAX;ASIO_STANDALONE;_WIN32_WINNT=0x0A00;DEBUG_FEATURES_ENABLE;_DEVELOP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)DirectXGame;$(SolutionDir)DirectXGame\Library\Externals\nlohmann;$(SolutionDir)DirectXGame\Library\Externals\DirectXTex;$(SolutionDir)DirectXGame\Library\Externals\assimp\include;$(SolutionDir)DirectXGame\Library\Externals\imgui</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>

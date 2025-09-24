@@ -12,7 +12,7 @@
 #include <Library/Utility/Tools/MathEPS.h>
 #include <Library/Utility/Tools/RandomEngine.h>
 
-CometEffect::CometEffect() : IEffectInstance() {}
+CometEffect::CometEffect() = default;
 CometEffect::~CometEffect() = default;
 
 void CometEffect::initialize(const Vector3& position, Reference<BlurInfo> blur_) {
@@ -63,6 +63,13 @@ void CometEffect::terminate(Reference<StaticMeshDrawManager> meshDraw, Reference
 	meshDraw->unregister_instance(cometBody);
 	rectDraw->unregister_instance(cometFire);
 	rectDraw->unregister_instance(groundEffect);
+
+	Reference<WorldManager> worldManager = world_manager();
+	worldManager->erase(dustCloudParticle0);
+	worldManager->erase(dustCloudParticle1);
+	worldManager->erase(cometBody);
+	worldManager->erase(cometFire);
+	worldManager->erase(groundEffect);
 }
 
 void CometEffect::update() {

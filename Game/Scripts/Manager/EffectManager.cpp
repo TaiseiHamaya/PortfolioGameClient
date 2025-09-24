@@ -1,5 +1,7 @@
 #include "EffectManager.h"
 
+#include <imgui.h>
+
 void EffectManager::setup(Reference<StaticMeshDrawManager> meshDrawManager_, Reference<Rect3dDrawManager> rectDrawManager_) {
 	meshDrawManager = meshDrawManager_;
 	rectDrawManager = rectDrawManager_;
