@@ -113,7 +113,7 @@ void SceneGame::initialize() {
 	// WorldInstances
 	// Allocation
 	directionalLight = worldManager->create<DirectionalLightInstance>();
-	directionalLight->light_data().intensity = 0.500f;
+	//directionalLight->light_data().intensity = 0.500f;
 	player = entityManager->generate<Player>(0, "Player.json");
 	skydome = worldManager->create<StaticMeshInstance>(nullptr, "skydome.gltf");
 	camera3D = worldManager->create<FollowCamera>();
@@ -270,7 +270,7 @@ void SceneGame::initialize() {
 #ifdef DEBUG_FEATURES_ENABLE
 	//staticMeshDrawManager->register_debug_instance(0, camera3D, true);
 #else
-	staticMeshDrawManager->register_instance(DebugValues::GetGridInstance());
+	//staticMeshDrawManager->register_instance(DebugValues::GetGridInstance());
 #endif // DEBUG_FEATURES_ENABLE
 	staticMeshDrawManager->register_instance(skydome);
 }
