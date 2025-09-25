@@ -174,7 +174,7 @@
       <PreprocessorDefinitions>_WINDOWS;NOMINMAX;DEBUG_FEATURES_ENABLE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)DirectXGame;$(SolutionDir)DirectXGame\Library\Externals\nlohmann;$(SolutionDir)DirectXGame\Library\Externals\DirectXTex;$(SolutionDir)DirectXGame\Library\Externals\assimp\include;$(SolutionDir)Game\Scripts\Proto;$(SolutionDir)DirectXGame\Library\Externals\imgui</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)DirectXGame;$(SolutionDir)DirectXGame\Library\Externals\nlohmann;$(SolutionDir)DirectXGame\Library\Externals\DirectXTex;$(SolutionDir)DirectXGame\Library\Externals\assimp\include;$(SolutionDir)Game\ThirdParty\protobuf;$(SolutionDir)DirectXGame\Library\Externals\imgui</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
@@ -198,7 +198,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_WINDOWS;NOMINMAX;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)DirectXGame;$(SolutionDir)DirectXGame\Library\Externals\nlohmann;$(SolutionDir)DirectXGame\Library\Externals\DirectXTex;$(SolutionDir)DirectXGame\Library\Externals\assimp\include;$(SolutionDir)Game\Scripts\Proto;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)DirectXGame;$(SolutionDir)DirectXGame\Library\Externals\nlohmann;$(SolutionDir)DirectXGame\Library\Externals\DirectXTex;$(SolutionDir)DirectXGame\Library\Externals\assimp\include;$(SolutionDir)Game\ThirdParty\protobuf;</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -221,7 +221,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_WINDOWS;NOMINMAX;DEBUG_FEATURES_ENABLE;_DEVELOP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)DirectXGame;$(SolutionDir)DirectXGame\Library\Externals\nlohmann;$(SolutionDir)DirectXGame\Library\Externals\DirectXTex;$(SolutionDir)DirectXGame\Library\Externals\assimp\include;$(SolutionDir)Game\Scripts\Proto;$(SolutionDir)DirectXGame\Library\Externals\imgui</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)DirectXGame;$(SolutionDir)DirectXGame\Library\Externals\nlohmann;$(SolutionDir)DirectXGame\Library\Externals\DirectXTex;$(SolutionDir)DirectXGame\Library\Externals\assimp\include;$(SolutionDir)Game\ThirdParty\protobuf;$(SolutionDir)DirectXGame\Library\Externals\imgui</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
