@@ -135,12 +135,12 @@ void PaladinHolySpiritEffectTarget::draw_particle() const {
 
 void PaladinHolySpiritEffectTarget::debug_gui() {
 	if (ImGui::TreeNode("Ether")) {
-		etherDustEmitter->debug_gui();
+		//etherDustEmitter->debug_gui();
 		ImGui::TreePop();
 	}
 	ImGui::Separator();
 	if (ImGui::TreeNode("Shining")) {
-		shiningEmitter->debug_gui();
+		//shiningEmitter->debug_gui();
 		ImGui::TreePop();
 	}
 }

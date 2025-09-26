@@ -273,6 +273,10 @@ void SceneGame::initialize() {
 	//staticMeshDrawManager->register_instance(DebugValues::GetGridInstance());
 #endif // DEBUG_FEATURES_ENABLE
 	staticMeshDrawManager->register_instance(skydome);
+
+	gameServerConnection.initialize();
+
+	gameServerConnection.connect();
 }
 
 void SceneGame::begin() {
@@ -492,6 +496,8 @@ void SceneGame::debug_update() {
 		ImGui::TreePop();
 	}
 	ImGui::End();
+
+	gameServerConnection.debug_gui();
 }
 
 #endif // DEFERRED_RENDERING

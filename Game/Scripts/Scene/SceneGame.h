@@ -1,5 +1,8 @@
 #pragma once
 
+#include <winsock2.h>
+#include <windows.h>
+
 #include <Engine/Runtime/Scene/BaseScene.h>
 
 #include <list>
@@ -32,6 +35,7 @@
 #include "Scripts/Player/LocalPlayerCommandHandler.h"
 #include "Scripts/Player/Player.h"
 #include "Scripts/RenderNode/PostEffect/GaussianBlurNode.h"
+#include "Scripts/Network/GameServer/GameServerConnectionManager.h"
 
 struct CometAction {
 	std::unique_ptr<CircleAoe> circleAoE;
@@ -106,6 +110,8 @@ private:
 	std::list<CometAction> comets;
 
 	Reference<Vector3> cubemapWorld;
+
+	GameServerConnectionManager gameServerConnection;
 
 #ifdef DEBUG_FEATURES_ENABLE
 	GaussianBlurNode::GaussianBlurInfo blurData{

@@ -49,6 +49,10 @@
     <ClCompile Include="Scripts\IEntity\ISkillAction\ISkillAction.cpp" />
     <ClCompile Include="Scripts\Proto\types.pb.cc" />
     <ClCompile Include="Scripts\Proto\math.pb.cc" />
+    <ClCompile Include="Scripts\Network\GameServer\GameServerPacketSender.cpp" />
+    <ClCompile Include="Scripts\Network\GameServer\GameServerPacketReceiver.cpp" />
+    <ClCompile Include="Scripts\Network\GameServer\GameServerConnectionManager.cpp" />
+    <ClCompile Include="Scripts\Network\ConnectionState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scripts\Scene\FactoryPortfolio.h" />
@@ -96,6 +100,10 @@
     <ClInclude Include="Scripts\IEntity\Actions\JumpAction.h" />
     <ClInclude Include="Scripts\Proto\types.pb.h" />
     <ClInclude Include="Scripts\Proto\math.pb.h" />
+    <ClInclude Include="Scripts\Network\GameServer\GameServerPacketSender.h" />
+    <ClInclude Include="Scripts\Network\GameServer\GameServerPacketReceiver.h" />
+    <ClInclude Include="Scripts\Network\GameServer\GameServerConnectionManager.h" />
+    <ClInclude Include="Scripts\Network\ConnectionState.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resources\Json\Action\Player\Paladin\HolySpirit.json" />
