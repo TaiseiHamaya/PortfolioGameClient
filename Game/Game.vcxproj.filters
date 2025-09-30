@@ -52,7 +52,9 @@
     <ClCompile Include="Scripts\Network\GameServer\GameServerPacketSender.cpp" />
     <ClCompile Include="Scripts\Network\GameServer\GameServerPacketReceiver.cpp" />
     <ClCompile Include="Scripts\Network\GameServer\GameServerConnectionManager.cpp" />
-    <ClCompile Include="Scripts\Network\ConnectionState.cpp" />
+    <ClCompile Include="Scripts\Network\GameServer\PacketBuffer.cpp" />
+    <ClCompile Include="Scripts\Network\NetworkCluster.cpp" />
+    <ClCompile Include="Scripts\Network\ZoneHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scripts\Scene\FactoryPortfolio.h" />
@@ -103,7 +105,9 @@
     <ClInclude Include="Scripts\Network\GameServer\GameServerPacketSender.h" />
     <ClInclude Include="Scripts\Network\GameServer\GameServerPacketReceiver.h" />
     <ClInclude Include="Scripts\Network\GameServer\GameServerConnectionManager.h" />
-    <ClInclude Include="Scripts\Network\ConnectionState.h" />
+    <ClInclude Include="Scripts\Network\GameServer\PacketBuffer.h" />
+    <ClInclude Include="Scripts\Network\NetworkCluster.h" />
+    <ClInclude Include="Scripts\Network\ZoneHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resources\Json\Action\Player\Paladin\HolySpirit.json" />

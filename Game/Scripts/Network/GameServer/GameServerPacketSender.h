@@ -1,14 +1,14 @@
 #pragma once
 
-#include <vector>
+#include <string>
 #include <vector>
 
 #include <Library/Utility/Template/Reference.h>
 #include <Library/Utility/Tools/ConstructorMacro.h>
 
-#include <asio/error_code.hpp>
-
 #include <Scripts/Proto/types.pb.h>
+
+#include <asio/error_code.hpp>
 
 class GameServerConnectionManager;
 
@@ -31,6 +31,6 @@ private:
 	void on_send_handler(const asio::error_code& errorCode, std::size_t bytesTransferred);
 
 private:
-	std::vector<std::string> packetStack;
+	std::vector<std::vector<u8>> packetStack;
 	Reference<GameServerConnectionManager> connectionManager;
 };

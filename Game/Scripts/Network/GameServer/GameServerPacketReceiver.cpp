@@ -2,8 +2,6 @@
 
 #include "GameServerConnectionManager.h"
 
-#include <Engine/Application/Output.h>
-
 void GameServerPacketReceiver::initialize() {
 }
 
@@ -15,18 +13,24 @@ void GameServerPacketReceiver::finalize() {
 	packetStack.clear();
 }
 
-const std::vector<Proto::Packet>& GameServerPacketReceiver::get_packet_stack() {
-	return packetStack;
+std::vector<Proto::Packet> GameServerPacketReceiver::take_packet_stack() {
+	return std::move(packetStack);
 }
 
-void GameServerPacketReceiver::poll_packets() {
-	if (!connectionManager || !connectionManager->is_connected()) {
+void GameServerPacketReceiver::read_packets() {
+	if (!connectionManager || !connectionManager->is_established()) {
 		return;
 	}
-	asio::ip::tcp::socket& socket = connectionManager->get_socket();
 
-	//socket.async_read_some()
-}
+	auto& socket = connectionManager->get_socket();
 
-void GameServerPacketReceiver::on_receive_handler() {
+	if (socket.available() == 0) {
+		return;
+	}
+
+	std::array<u8, BufferSize> buffer{};
+	size_t bytesRead = socket.read_some(asio::buffer(buffer));
+	std::span<u8> dataSpan{ buffer.data(), bytesRead };
+	auto packets = receiveBuffer.resolve_packets(dataSpan);
+	packetStack.insert(packetStack.end(), packets.begin(), packets.end());
 }

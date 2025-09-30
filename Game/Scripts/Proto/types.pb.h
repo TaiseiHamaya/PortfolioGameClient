@@ -71,14 +71,10 @@ class LoginNotificationBody;
 struct LoginNotificationBodyDefaultTypeInternal;
 extern LoginNotificationBodyDefaultTypeInternal _LoginNotificationBody_default_instance_;
 extern const ::google::protobuf::internal::ClassDataFull LoginNotificationBody_class_data_;
-class LoginRequestBody;
-struct LoginRequestBodyDefaultTypeInternal;
-extern LoginRequestBodyDefaultTypeInternal _LoginRequestBody_default_instance_;
-extern const ::google::protobuf::internal::ClassDataFull LoginRequestBody_class_data_;
-class LoginResponseBody;
-struct LoginResponseBodyDefaultTypeInternal;
-extern LoginResponseBodyDefaultTypeInternal _LoginResponseBody_default_instance_;
-extern const ::google::protobuf::internal::ClassDataFull LoginResponseBody_class_data_;
+class LoginResultBody;
+struct LoginResultBodyDefaultTypeInternal;
+extern LoginResultBodyDefaultTypeInternal _LoginResultBody_default_instance_;
+extern const ::google::protobuf::internal::ClassDataFull LoginResultBody_class_data_;
 class LogoutNotificationBody;
 struct LogoutNotificationBodyDefaultTypeInternal;
 extern LogoutNotificationBodyDefaultTypeInternal _LogoutNotificationBody_default_instance_;
@@ -160,9 +156,8 @@ inline bool TextMessageType_Parse(
                                            value);
 }
 enum LoginPacketType : int {
-  LoginRequest = 0,
-  LoginResponse = 1,
-  LoginNotification = 2,
+  LoginResult = 0,
+  LoginNotification = 1,
   LoginPacketType_INT_MIN_SENTINEL_DO_NOT_USE_ =
       ::std::numeric_limits<::int32_t>::min(),
   LoginPacketType_INT_MAX_SENTINEL_DO_NOT_USE_ =
@@ -173,11 +168,11 @@ extern const uint32_t LoginPacketType_internal_data_[];
 inline constexpr LoginPacketType LoginPacketType_MIN =
     static_cast<LoginPacketType>(0);
 inline constexpr LoginPacketType LoginPacketType_MAX =
-    static_cast<LoginPacketType>(2);
+    static_cast<LoginPacketType>(1);
 inline bool LoginPacketType_IsValid(int value) {
-  return 0 <= value && value <= 2;
+  return 0 <= value && value <= 1;
 }
-inline constexpr int LoginPacketType_ARRAYSIZE = 2 + 1;
+inline constexpr int LoginPacketType_ARRAYSIZE = 1 + 1;
 const ::google::protobuf::EnumDescriptor* PROTOBUF_NONNULL LoginPacketType_descriptor();
 template <typename T>
 const ::std::string& LoginPacketType_Name(T value) {
@@ -188,7 +183,7 @@ const ::std::string& LoginPacketType_Name(T value) {
 }
 template <>
 inline const ::std::string& LoginPacketType_Name(LoginPacketType value) {
-  return ::google::protobuf::internal::NameOfDenseEnum<LoginPacketType_descriptor, 0, 2>(
+  return ::google::protobuf::internal::NameOfDenseEnum<LoginPacketType_descriptor, 0, 1>(
       static_cast<int>(value));
 }
 inline bool LoginPacketType_Parse(
@@ -621,7 +616,6 @@ class Packet final : public ::google::protobuf::Message
   // accessors -------------------------------------------------------
   enum : int {
     kPayloadFieldNumber = 6,
-    kTimestampFieldNumber = 5,
     kTextMessageTypeFieldNumber = 1,
     kLoginPacketTypeFieldNumber = 2,
     kLogoutPacketTypeFieldNumber = 3,
@@ -640,16 +634,6 @@ class Packet final : public ::google::protobuf::Message
   const ::std::string& _internal_payload() const;
   PROTOBUF_ALWAYS_INLINE void _internal_set_payload(const ::std::string& value);
   ::std::string* PROTOBUF_NONNULL _internal_mutable_payload();
-
-  public:
-  // uint64 timestamp = 5;
-  void clear_timestamp() ;
-  ::uint64_t timestamp() const;
-  void set_timestamp(::uint64_t value);
-
-  private:
-  ::uint64_t _internal_timestamp() const;
-  void _internal_set_timestamp(::uint64_t value);
 
   public:
   // .Proto.TextMessageType textMessageType = 1;
@@ -708,7 +692,7 @@ class Packet final : public ::google::protobuf::Message
   inline bool has_category() const;
   inline void clear_has_category();
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<1, 6,
+  static const ::google::protobuf::internal::TcParseTable<0, 5,
                                    0, 0,
                                    2>
       _table_;
@@ -731,7 +715,6 @@ class Packet final : public ::google::protobuf::Message
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::google::protobuf::internal::ArenaStringPtr payload_;
-    ::uint64_t timestamp_;
     union CategoryUnion {
       constexpr CategoryUnion() : _constinit_{} {}
       ::google::protobuf::internal::ConstantInitialized _constinit_;
@@ -805,7 +788,7 @@ class LogoutResponseBody final : public ::google::protobuf::Message
     return *reinterpret_cast<const LogoutResponseBody*>(
         &_LogoutResponseBody_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 7;
+  static constexpr int kIndexInFileMessages = 6;
   friend void swap(LogoutResponseBody& a, LogoutResponseBody& b) { a.Swap(&b); }
   inline void Swap(LogoutResponseBody* PROTOBUF_NONNULL other) {
     if (other == this) return;
@@ -996,7 +979,7 @@ class LogoutRequestBody final : public ::google::protobuf::Message
     return *reinterpret_cast<const LogoutRequestBody*>(
         &_LogoutRequestBody_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 6;
+  static constexpr int kIndexInFileMessages = 5;
   friend void swap(LogoutRequestBody& a, LogoutRequestBody& b) { a.Swap(&b); }
   inline void Swap(LogoutRequestBody* PROTOBUF_NONNULL other) {
     if (other == this) return;
@@ -1187,7 +1170,7 @@ class LogoutNotificationBody final : public ::google::protobuf::Message
     return *reinterpret_cast<const LogoutNotificationBody*>(
         &_LogoutNotificationBody_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 8;
+  static constexpr int kIndexInFileMessages = 7;
   friend void swap(LogoutNotificationBody& a, LogoutNotificationBody& b) { a.Swap(&b); }
   inline void Swap(LogoutNotificationBody* PROTOBUF_NONNULL other) {
     if (other == this) return;
@@ -1275,24 +1258,8 @@ class LogoutNotificationBody final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
-    kUsernameFieldNumber = 2,
     kUserIdFieldNumber = 1,
   };
-  // string username = 2;
-  void clear_username() ;
-  const ::std::string& username() const;
-  template <typename Arg_ = const ::std::string&, typename... Args_>
-  void set_username(Arg_&& arg, Args_... args);
-  ::std::string* PROTOBUF_NONNULL mutable_username();
-  [[nodiscard]] ::std::string* PROTOBUF_NULLABLE release_username();
-  void set_allocated_username(::std::string* PROTOBUF_NULLABLE value);
-
-  private:
-  const ::std::string& _internal_username() const;
-  PROTOBUF_ALWAYS_INLINE void _internal_set_username(const ::std::string& value);
-  ::std::string* PROTOBUF_NONNULL _internal_mutable_username();
-
-  public:
   // uint64 userId = 1;
   void clear_userid() ;
   ::uint64_t userid() const;
@@ -1307,8 +1274,8 @@ class LogoutNotificationBody final : public ::google::protobuf::Message
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<1, 2,
-                                   0, 45,
+  static const ::google::protobuf::internal::TcParseTable<0, 1,
+                                   0, 0,
                                    2>
       _table_;
 
@@ -1329,7 +1296,6 @@ class LogoutNotificationBody final : public ::google::protobuf::Message
         const LogoutNotificationBody& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
-    ::google::protobuf::internal::ArenaStringPtr username_;
     ::uint64_t userid_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
@@ -1340,30 +1306,30 @@ class LogoutNotificationBody final : public ::google::protobuf::Message
 extern const ::google::protobuf::internal::ClassDataFull LogoutNotificationBody_class_data_;
 // -------------------------------------------------------------------
 
-class LoginResponseBody final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:Proto.LoginResponseBody) */ {
+class LoginResultBody final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:Proto.LoginResultBody) */ {
  public:
-  inline LoginResponseBody() : LoginResponseBody(nullptr) {}
-  ~LoginResponseBody() PROTOBUF_FINAL;
+  inline LoginResultBody() : LoginResultBody(nullptr) {}
+  ~LoginResultBody() PROTOBUF_FINAL;
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-  void operator delete(LoginResponseBody* PROTOBUF_NONNULL msg, ::std::destroying_delete_t) {
+  void operator delete(LoginResultBody* PROTOBUF_NONNULL msg, ::std::destroying_delete_t) {
     SharedDtor(*msg);
-    ::google::protobuf::internal::SizedDelete(msg, sizeof(LoginResponseBody));
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(LoginResultBody));
   }
 #endif
 
   template <typename = void>
-  explicit PROTOBUF_CONSTEXPR LoginResponseBody(::google::protobuf::internal::ConstantInitialized);
+  explicit PROTOBUF_CONSTEXPR LoginResultBody(::google::protobuf::internal::ConstantInitialized);
 
-  inline LoginResponseBody(const LoginResponseBody& from) : LoginResponseBody(nullptr, from) {}
-  inline LoginResponseBody(LoginResponseBody&& from) noexcept
-      : LoginResponseBody(nullptr, ::std::move(from)) {}
-  inline LoginResponseBody& operator=(const LoginResponseBody& from) {
+  inline LoginResultBody(const LoginResultBody& from) : LoginResultBody(nullptr, from) {}
+  inline LoginResultBody(LoginResultBody&& from) noexcept
+      : LoginResultBody(nullptr, ::std::move(from)) {}
+  inline LoginResultBody& operator=(const LoginResultBody& from) {
     CopyFrom(from);
     return *this;
   }
-  inline LoginResponseBody& operator=(LoginResponseBody&& from) noexcept {
+  inline LoginResultBody& operator=(LoginResultBody&& from) noexcept {
     if (this == &from) return *this;
     if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
       InternalSwap(&from);
@@ -1391,204 +1357,13 @@ class LoginResponseBody final : public ::google::protobuf::Message
   static const ::google::protobuf::Reflection* PROTOBUF_NONNULL GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const LoginResponseBody& default_instance() {
-    return *reinterpret_cast<const LoginResponseBody*>(
-        &_LoginResponseBody_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages = 4;
-  friend void swap(LoginResponseBody& a, LoginResponseBody& b) { a.Swap(&b); }
-  inline void Swap(LoginResponseBody* PROTOBUF_NONNULL other) {
-    if (other == this) return;
-    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
-      InternalSwap(other);
-    } else {
-      ::google::protobuf::internal::GenericSwap(this, other);
-    }
-  }
-  void UnsafeArenaSwap(LoginResponseBody* PROTOBUF_NONNULL other) {
-    if (other == this) return;
-    ABSL_DCHECK(GetArena() == other->GetArena());
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  LoginResponseBody* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
-    return ::google::protobuf::Message::DefaultConstruct<LoginResponseBody>(arena);
-  }
-  using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const LoginResponseBody& from);
-  using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const LoginResponseBody& from) { LoginResponseBody::MergeImpl(*this, from); }
-
-  private:
-  static void MergeImpl(::google::protobuf::MessageLite& to_msg,
-                        const ::google::protobuf::MessageLite& from_msg);
-
-  public:
-  bool IsInitialized() const {
-    return true;
-  }
-  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
-  #if defined(PROTOBUF_CUSTOM_VTABLE)
-  private:
-  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
-  static ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
-      const ::google::protobuf::MessageLite& msg, ::uint8_t* PROTOBUF_NONNULL target,
-      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream);
-
-  public:
-  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
-  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
-      ::uint8_t* PROTOBUF_NONNULL target,
-      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
-    return _InternalSerialize(*this, target, stream);
-  }
-  #else   // PROTOBUF_CUSTOM_VTABLE
-  ::size_t ByteSizeLong() const final;
-  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
-      ::uint8_t* PROTOBUF_NONNULL target,
-      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const final;
-  #endif  // PROTOBUF_CUSTOM_VTABLE
-  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
-
-  private:
-  void SharedCtor(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
-  static void SharedDtor(MessageLite& self);
-  void InternalSwap(LoginResponseBody* PROTOBUF_NONNULL other);
- private:
-  template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "Proto.LoginResponseBody"; }
-
- protected:
-  explicit LoginResponseBody(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
-  LoginResponseBody(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const LoginResponseBody& from);
-  LoginResponseBody(
-      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, LoginResponseBody&& from) noexcept
-      : LoginResponseBody(arena) {
-    *this = ::std::move(from);
-  }
-  const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL GetClassData() const PROTOBUF_FINAL;
-  static void* PROTOBUF_NONNULL PlacementNew_(
-      const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
-      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
-  static constexpr auto InternalNewImpl_();
-
- public:
-  static constexpr auto InternalGenerateClassData_();
-
-  ::google::protobuf::Metadata GetMetadata() const;
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-  enum : int {
-    kIsSuccessedFieldNumber = 1,
-  };
-  // bool isSuccessed = 1;
-  void clear_issuccessed() ;
-  bool issuccessed() const;
-  void set_issuccessed(bool value);
-
-  private:
-  bool _internal_issuccessed() const;
-  void _internal_set_issuccessed(bool value);
-
-  public:
-  // @@protoc_insertion_point(class_scope:Proto.LoginResponseBody)
- private:
-  class _Internal;
-  friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<0, 1,
-                                   0, 0,
-                                   2>
-      _table_;
-
-  friend class ::google::protobuf::MessageLite;
-  friend class ::google::protobuf::Arena;
-  template <typename T>
-  friend class ::google::protobuf::Arena::InternalHelper;
-  using InternalArenaConstructable_ = void;
-  using DestructorSkippable_ = void;
-  struct Impl_ {
-    inline explicit constexpr Impl_(::google::protobuf::internal::ConstantInitialized) noexcept;
-    inline explicit Impl_(
-        ::google::protobuf::internal::InternalVisibility visibility,
-        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
-    inline explicit Impl_(
-        ::google::protobuf::internal::InternalVisibility visibility,
-        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
-        const LoginResponseBody& from_msg);
-    ::google::protobuf::internal::HasBits<1> _has_bits_;
-    ::google::protobuf::internal::CachedSize _cached_size_;
-    bool issuccessed_;
-    PROTOBUF_TSAN_DECLARE_MEMBER
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_types_2eproto;
-};
-
-extern const ::google::protobuf::internal::ClassDataFull LoginResponseBody_class_data_;
-// -------------------------------------------------------------------
-
-class LoginRequestBody final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:Proto.LoginRequestBody) */ {
- public:
-  inline LoginRequestBody() : LoginRequestBody(nullptr) {}
-  ~LoginRequestBody() PROTOBUF_FINAL;
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-  void operator delete(LoginRequestBody* PROTOBUF_NONNULL msg, ::std::destroying_delete_t) {
-    SharedDtor(*msg);
-    ::google::protobuf::internal::SizedDelete(msg, sizeof(LoginRequestBody));
-  }
-#endif
-
-  template <typename = void>
-  explicit PROTOBUF_CONSTEXPR LoginRequestBody(::google::protobuf::internal::ConstantInitialized);
-
-  inline LoginRequestBody(const LoginRequestBody& from) : LoginRequestBody(nullptr, from) {}
-  inline LoginRequestBody(LoginRequestBody&& from) noexcept
-      : LoginRequestBody(nullptr, ::std::move(from)) {}
-  inline LoginRequestBody& operator=(const LoginRequestBody& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline LoginRequestBody& operator=(LoginRequestBody&& from) noexcept {
-    if (this == &from) return *this;
-    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
-      InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
-  }
-  inline ::google::protobuf::UnknownFieldSet* PROTOBUF_NONNULL mutable_unknown_fields()
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
-  }
-
-  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL descriptor() {
-    return GetDescriptor();
-  }
-  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::google::protobuf::Reflection* PROTOBUF_NONNULL GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const LoginRequestBody& default_instance() {
-    return *reinterpret_cast<const LoginRequestBody*>(
-        &_LoginRequestBody_default_instance_);
+  static const LoginResultBody& default_instance() {
+    return *reinterpret_cast<const LoginResultBody*>(
+        &_LoginResultBody_default_instance_);
   }
   static constexpr int kIndexInFileMessages = 3;
-  friend void swap(LoginRequestBody& a, LoginRequestBody& b) { a.Swap(&b); }
-  inline void Swap(LoginRequestBody* PROTOBUF_NONNULL other) {
+  friend void swap(LoginResultBody& a, LoginResultBody& b) { a.Swap(&b); }
+  inline void Swap(LoginResultBody* PROTOBUF_NONNULL other) {
     if (other == this) return;
     if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
       InternalSwap(other);
@@ -1596,7 +1371,7 @@ class LoginRequestBody final : public ::google::protobuf::Message
       ::google::protobuf::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(LoginRequestBody* PROTOBUF_NONNULL other) {
+  void UnsafeArenaSwap(LoginResultBody* PROTOBUF_NONNULL other) {
     if (other == this) return;
     ABSL_DCHECK(GetArena() == other->GetArena());
     InternalSwap(other);
@@ -1604,13 +1379,13 @@ class LoginRequestBody final : public ::google::protobuf::Message
 
   // implements Message ----------------------------------------------
 
-  LoginRequestBody* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
-    return ::google::protobuf::Message::DefaultConstruct<LoginRequestBody>(arena);
+  LoginResultBody* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<LoginResultBody>(arena);
   }
   using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const LoginRequestBody& from);
+  void CopyFrom(const LoginResultBody& from);
   using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const LoginRequestBody& from) { LoginRequestBody::MergeImpl(*this, from); }
+  void MergeFrom(const LoginResultBody& from) { LoginResultBody::MergeImpl(*this, from); }
 
   private:
   static void MergeImpl(::google::protobuf::MessageLite& to_msg,
@@ -1646,18 +1421,18 @@ class LoginRequestBody final : public ::google::protobuf::Message
   private:
   void SharedCtor(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
   static void SharedDtor(MessageLite& self);
-  void InternalSwap(LoginRequestBody* PROTOBUF_NONNULL other);
+  void InternalSwap(LoginResultBody* PROTOBUF_NONNULL other);
  private:
   template <typename T>
   friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "Proto.LoginRequestBody"; }
+  static ::absl::string_view FullMessageName() { return "Proto.LoginResultBody"; }
 
  protected:
-  explicit LoginRequestBody(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
-  LoginRequestBody(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const LoginRequestBody& from);
-  LoginRequestBody(
-      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, LoginRequestBody&& from) noexcept
-      : LoginRequestBody(arena) {
+  explicit LoginResultBody(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  LoginResultBody(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const LoginResultBody& from);
+  LoginResultBody(
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, LoginResultBody&& from) noexcept
+      : LoginResultBody(arena) {
     *this = ::std::move(from);
   }
   const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL GetClassData() const PROTOBUF_FINAL;
@@ -1675,6 +1450,7 @@ class LoginRequestBody final : public ::google::protobuf::Message
   // accessors -------------------------------------------------------
   enum : int {
     kUserIdFieldNumber = 1,
+    kIsSuccessedFieldNumber = 2,
   };
   // uint64 userId = 1;
   void clear_userid() ;
@@ -1686,11 +1462,21 @@ class LoginRequestBody final : public ::google::protobuf::Message
   void _internal_set_userid(::uint64_t value);
 
   public:
-  // @@protoc_insertion_point(class_scope:Proto.LoginRequestBody)
+  // bool isSuccessed = 2;
+  void clear_issuccessed() ;
+  bool issuccessed() const;
+  void set_issuccessed(bool value);
+
+  private:
+  bool _internal_issuccessed() const;
+  void _internal_set_issuccessed(bool value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:Proto.LoginResultBody)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<0, 1,
+  static const ::google::protobuf::internal::TcParseTable<1, 2,
                                    0, 0,
                                    2>
       _table_;
@@ -1709,17 +1495,18 @@ class LoginRequestBody final : public ::google::protobuf::Message
     inline explicit Impl_(
         ::google::protobuf::internal::InternalVisibility visibility,
         ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
-        const LoginRequestBody& from_msg);
+        const LoginResultBody& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::uint64_t userid_;
+    bool issuccessed_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_types_2eproto;
 };
 
-extern const ::google::protobuf::internal::ClassDataFull LoginRequestBody_class_data_;
+extern const ::google::protobuf::internal::ClassDataFull LoginResultBody_class_data_;
 // -------------------------------------------------------------------
 
 class LoginNotificationBody final : public ::google::protobuf::Message
@@ -1777,7 +1564,7 @@ class LoginNotificationBody final : public ::google::protobuf::Message
     return *reinterpret_cast<const LoginNotificationBody*>(
         &_LoginNotificationBody_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 5;
+  static constexpr int kIndexInFileMessages = 4;
   friend void swap(LoginNotificationBody& a, LoginNotificationBody& b) { a.Swap(&b); }
   inline void Swap(LoginNotificationBody* PROTOBUF_NONNULL other) {
     if (other == this) return;
@@ -2193,7 +1980,7 @@ class TransformSyncBody final : public ::google::protobuf::Message
     return *reinterpret_cast<const TransformSyncBody*>(
         &_TransformSyncBody_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 9;
+  static constexpr int kIndexInFileMessages = 8;
   friend void swap(TransformSyncBody& a, TransformSyncBody& b) { a.Swap(&b); }
   inline void Swap(TransformSyncBody* PROTOBUF_NONNULL other) {
     if (other == this) return;
@@ -2510,30 +2297,6 @@ inline ::Proto::SyncPacketType Packet::_internal_syncpackettype() const {
   return static_cast<::Proto::SyncPacketType>(0);
 }
 
-// uint64 timestamp = 5;
-inline void Packet::clear_timestamp() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.timestamp_ = ::uint64_t{0u};
-  _impl_._has_bits_[0] &= ~0x00000002U;
-}
-inline ::uint64_t Packet::timestamp() const {
-  // @@protoc_insertion_point(field_get:Proto.Packet.timestamp)
-  return _internal_timestamp();
-}
-inline void Packet::set_timestamp(::uint64_t value) {
-  _internal_set_timestamp(value);
-  _impl_._has_bits_[0] |= 0x00000002U;
-  // @@protoc_insertion_point(field_set:Proto.Packet.timestamp)
-}
-inline ::uint64_t Packet::_internal_timestamp() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.timestamp_;
-}
-inline void Packet::_internal_set_timestamp(::uint64_t value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.timestamp_ = value;
-}
-
 // bytes payload = 6;
 inline void Packet::clear_payload() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
@@ -2772,56 +2535,52 @@ inline void SystemMessageBody::set_allocated_message(::std::string* PROTOBUF_NUL
 
 // -------------------------------------------------------------------
 
-// LoginRequestBody
+// LoginResultBody
 
 // uint64 userId = 1;
-inline void LoginRequestBody::clear_userid() {
+inline void LoginResultBody::clear_userid() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.userid_ = ::uint64_t{0u};
   _impl_._has_bits_[0] &= ~0x00000001U;
 }
-inline ::uint64_t LoginRequestBody::userid() const {
-  // @@protoc_insertion_point(field_get:Proto.LoginRequestBody.userId)
+inline ::uint64_t LoginResultBody::userid() const {
+  // @@protoc_insertion_point(field_get:Proto.LoginResultBody.userId)
   return _internal_userid();
 }
-inline void LoginRequestBody::set_userid(::uint64_t value) {
+inline void LoginResultBody::set_userid(::uint64_t value) {
   _internal_set_userid(value);
   _impl_._has_bits_[0] |= 0x00000001U;
-  // @@protoc_insertion_point(field_set:Proto.LoginRequestBody.userId)
+  // @@protoc_insertion_point(field_set:Proto.LoginResultBody.userId)
 }
-inline ::uint64_t LoginRequestBody::_internal_userid() const {
+inline ::uint64_t LoginResultBody::_internal_userid() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.userid_;
 }
-inline void LoginRequestBody::_internal_set_userid(::uint64_t value) {
+inline void LoginResultBody::_internal_set_userid(::uint64_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.userid_ = value;
 }
 
-// -------------------------------------------------------------------
-
-// LoginResponseBody
-
-// bool isSuccessed = 1;
-inline void LoginResponseBody::clear_issuccessed() {
+// bool isSuccessed = 2;
+inline void LoginResultBody::clear_issuccessed() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.issuccessed_ = false;
-  _impl_._has_bits_[0] &= ~0x00000001U;
+  _impl_._has_bits_[0] &= ~0x00000002U;
 }
-inline bool LoginResponseBody::issuccessed() const {
-  // @@protoc_insertion_point(field_get:Proto.LoginResponseBody.isSuccessed)
+inline bool LoginResultBody::issuccessed() const {
+  // @@protoc_insertion_point(field_get:Proto.LoginResultBody.isSuccessed)
   return _internal_issuccessed();
 }
-inline void LoginResponseBody::set_issuccessed(bool value) {
+inline void LoginResultBody::set_issuccessed(bool value) {
   _internal_set_issuccessed(value);
-  _impl_._has_bits_[0] |= 0x00000001U;
-  // @@protoc_insertion_point(field_set:Proto.LoginResponseBody.isSuccessed)
+  _impl_._has_bits_[0] |= 0x00000002U;
+  // @@protoc_insertion_point(field_set:Proto.LoginResultBody.isSuccessed)
 }
-inline bool LoginResponseBody::_internal_issuccessed() const {
+inline bool LoginResultBody::_internal_issuccessed() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.issuccessed_;
 }
-inline void LoginResponseBody::_internal_set_issuccessed(bool value) {
+inline void LoginResultBody::_internal_set_issuccessed(bool value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.issuccessed_ = value;
 }
@@ -2983,7 +2742,7 @@ inline void LogoutResponseBody::_internal_set_issuccessed(bool value) {
 inline void LogoutNotificationBody::clear_userid() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.userid_ = ::uint64_t{0u};
-  _impl_._has_bits_[0] &= ~0x00000002U;
+  _impl_._has_bits_[0] &= ~0x00000001U;
 }
 inline ::uint64_t LogoutNotificationBody::userid() const {
   // @@protoc_insertion_point(field_get:Proto.LogoutNotificationBody.userId)
@@ -2991,7 +2750,7 @@ inline ::uint64_t LogoutNotificationBody::userid() const {
 }
 inline void LogoutNotificationBody::set_userid(::uint64_t value) {
   _internal_set_userid(value);
-  _impl_._has_bits_[0] |= 0x00000002U;
+  _impl_._has_bits_[0] |= 0x00000001U;
   // @@protoc_insertion_point(field_set:Proto.LogoutNotificationBody.userId)
 }
 inline ::uint64_t LogoutNotificationBody::_internal_userid() const {
@@ -3001,71 +2760,6 @@ inline ::uint64_t LogoutNotificationBody::_internal_userid() const {
 inline void LogoutNotificationBody::_internal_set_userid(::uint64_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.userid_ = value;
-}
-
-// string username = 2;
-inline void LogoutNotificationBody::clear_username() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.username_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000001U;
-}
-inline const ::std::string& LogoutNotificationBody::username() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:Proto.LogoutNotificationBody.username)
-  return _internal_username();
-}
-template <typename Arg_, typename... Args_>
-PROTOBUF_ALWAYS_INLINE void LogoutNotificationBody::set_username(Arg_&& arg, Args_... args) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_._has_bits_[0] |= 0x00000001U;
-  _impl_.username_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:Proto.LogoutNotificationBody.username)
-}
-inline ::std::string* PROTOBUF_NONNULL LogoutNotificationBody::mutable_username()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  ::std::string* _s = _internal_mutable_username();
-  // @@protoc_insertion_point(field_mutable:Proto.LogoutNotificationBody.username)
-  return _s;
-}
-inline const ::std::string& LogoutNotificationBody::_internal_username() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.username_.Get();
-}
-inline void LogoutNotificationBody::_internal_set_username(const ::std::string& value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_._has_bits_[0] |= 0x00000001U;
-  _impl_.username_.Set(value, GetArena());
-}
-inline ::std::string* PROTOBUF_NONNULL LogoutNotificationBody::_internal_mutable_username() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_._has_bits_[0] |= 0x00000001U;
-  return _impl_.username_.Mutable( GetArena());
-}
-inline ::std::string* PROTOBUF_NULLABLE LogoutNotificationBody::release_username() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:Proto.LogoutNotificationBody.username)
-  if ((_impl_._has_bits_[0] & 0x00000001U) == 0) {
-    return nullptr;
-  }
-  _impl_._has_bits_[0] &= ~0x00000001U;
-  auto* released = _impl_.username_.Release();
-  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString()) {
-    _impl_.username_.Set("", GetArena());
-  }
-  return released;
-}
-inline void LogoutNotificationBody::set_allocated_username(::std::string* PROTOBUF_NULLABLE value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (value != nullptr) {
-    _impl_._has_bits_[0] |= 0x00000001U;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000001U;
-  }
-  _impl_.username_.SetAllocated(value, GetArena());
-  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.username_.IsDefault()) {
-    _impl_.username_.Set("", GetArena());
-  }
-  // @@protoc_insertion_point(field_set_allocated:Proto.LogoutNotificationBody.username)
 }
 
 // -------------------------------------------------------------------

@@ -274,9 +274,11 @@ void SceneGame::initialize() {
 #endif // DEBUG_FEATURES_ENABLE
 	staticMeshDrawManager->register_instance(skydome);
 
-	gameServerConnection.initialize();
+	networkCluster.initialize();
 
-	gameServerConnection.connect();
+	zoneHandler.setup(networkCluster.get_receiver(), networkCluster.connection_manager());
+
+	networkCluster.setup();
 }
 
 void SceneGame::begin() {
@@ -285,9 +287,13 @@ void SceneGame::begin() {
 	localPlayerCommandHandler->begin();
 	entityManager->begin();
 	camera3D->input();
+
+	networkCluster.receive();
 }
 
 void SceneGame::update() {
+	zoneHandler.handle_zone();
+
 	localPlayerCommandHandler->update();
 
 	localPlayerCommandHandler->run();
@@ -341,6 +347,8 @@ void SceneGame::late_update() {
 	entityManager->late_update();
 
 	*cubemapWorld = camera3D->world_position();
+
+	networkCluster.send();
 }
 
 void SceneGame::begin_rendering() {
@@ -497,7 +505,7 @@ void SceneGame::debug_update() {
 	}
 	ImGui::End();
 
-	gameServerConnection.debug_gui();
+	networkCluster.debug_gui();
 }
 
 #endif // DEFERRED_RENDERING

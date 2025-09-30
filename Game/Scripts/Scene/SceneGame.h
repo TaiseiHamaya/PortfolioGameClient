@@ -10,6 +10,8 @@
 
 #include <Library/Math/Vector3.h>
 
+#include "Scripts/Proto/types.pb.h"
+
 #include <Engine/GraphicsAPI/DirectX/DxResource/TextureResource/RenderTexture.h>
 #include <Engine/Module/DrawExecutor/LightingExecutor/DirectionalLightingExecutor.h>
 #include <Engine/Module/DrawExecutor/Mesh/Primitive/Rect3dDrawManager.h>
@@ -35,7 +37,8 @@
 #include "Scripts/Player/LocalPlayerCommandHandler.h"
 #include "Scripts/Player/Player.h"
 #include "Scripts/RenderNode/PostEffect/GaussianBlurNode.h"
-#include "Scripts/Network/GameServer/GameServerConnectionManager.h"
+#include "Scripts/Network/NetworkCluster.h"
+#include "Scripts/Network/ZoneHandler.h"
 
 struct CometAction {
 	std::unique_ptr<CircleAoe> circleAoE;
@@ -111,7 +114,8 @@ private:
 
 	Reference<Vector3> cubemapWorld;
 
-	GameServerConnectionManager gameServerConnection;
+	NetworkCluster networkCluster;
+	ZoneHandler zoneHandler;
 
 #ifdef DEBUG_FEATURES_ENABLE
 	GaussianBlurNode::GaussianBlurInfo blurData{

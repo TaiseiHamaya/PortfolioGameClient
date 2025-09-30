@@ -1,14 +1,13 @@
 #pragma once
 
 #include <vector>
-#include <vector>
+
+#include <Scripts/Proto/types.pb.h>
 
 #include <Library/Utility/Template/Reference.h>
 #include <Library/Utility/Tools/ConstructorMacro.h>
 
-#include <asio/error_code.hpp>
-
-#include <Scripts/Proto/types.pb.h>
+#include "PacketBuffer.h"
 
 class GameServerConnectionManager;
 
@@ -25,13 +24,14 @@ public:
 	void finalize();
 
 public:
-	const std::vector<Proto::Packet>& get_packet_stack();
-	void poll_packets();
+	std::vector<Proto::Packet> take_packet_stack();
+	void read_packets();
 
 private:
-	void on_receive_handler();
+	static constexpr size_t BufferSize = 4096;
 
-private:
 	std::vector<Proto::Packet> packetStack;
 	Reference<GameServerConnectionManager> connectionManager;
+
+	ReceiveBuffer receiveBuffer;
 };
