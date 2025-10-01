@@ -1,11 +1,16 @@
 #pragma once
 
+#include <winsock2.h>
+#include <windows.h>
+
 #include <Engine/Runtime/Scene/BaseScene.h>
 
 #include <list>
 #include <vector>
 
 #include <Library/Math/Vector3.h>
+
+#include "Scripts/Proto/types.pb.h"
 
 #include <Engine/GraphicsAPI/DirectX/DxResource/TextureResource/RenderTexture.h>
 #include <Engine/Module/DrawExecutor/LightingExecutor/DirectionalLightingExecutor.h>
@@ -32,6 +37,8 @@
 #include "Scripts/Player/LocalPlayerCommandHandler.h"
 #include "Scripts/Player/Player.h"
 #include "Scripts/RenderNode/PostEffect/GaussianBlurNode.h"
+#include "Scripts/Network/NetworkCluster.h"
+#include "Scripts/Network/ZoneHandler.h"
 
 struct CometAction {
 	std::unique_ptr<CircleAoe> circleAoE;
@@ -106,6 +113,9 @@ private:
 	std::list<CometAction> comets;
 
 	Reference<Vector3> cubemapWorld;
+
+	NetworkCluster networkCluster;
+	ZoneHandler zoneHandler;
 
 #ifdef DEBUG_FEATURES_ENABLE
 	GaussianBlurNode::GaussianBlurInfo blurData{

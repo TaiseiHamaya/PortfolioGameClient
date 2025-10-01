@@ -136,13 +136,13 @@ bool CometEffect::is_end() const {
 
 #ifdef DEBUG_FEATURES_ENABLE
 void CometEffect::debug_gui() {
-	if (ImGui::TreeNode("0")) {
-		dustCloudParticle0->debug_gui();
-		ImGui::TreePop();
-	}
-	if (ImGui::TreeNode("1")) {
-		dustCloudParticle1->debug_gui();
-		ImGui::TreePop();
-	}
+	//if (ImGui::TreeNode("0")) {
+	//	dustCloudParticle0->debug_gui();
+	//	ImGui::TreePop();
+	//}
+	//if (ImGui::TreeNode("1")) {
+	//	dustCloudParticle1->debug_gui();
+	//	ImGui::TreePop();
+	//}
 }
 #endif // DEBUG_FUATURE_ENABLE
