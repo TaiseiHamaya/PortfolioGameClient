@@ -29,9 +29,11 @@ void ZoneHandler::handle_zone() {
 			break;
 		case Proto::Packet::kLogoutPacketType:
 			// LogoutPacketTypeの処理
+			process_logout_packet(packet.logoutpackettype(), packet.payload());
 			break;
 		case Proto::Packet::kSyncPacketType:
 			// SyncPacketTypeの処理
+			process_sync_packet(packet.syncpackettype(), packet.payload());
 			break;
 		default:
 			Warning("");
@@ -47,7 +49,7 @@ void ZoneHandler::process_text_message(Proto::TextMessageType type, const std::s
 	{
 		Proto::ChatMessageBody body;
 		body.ParseFromString(payload);
-		Information("[{}]: {}", body.userid(), body.message());
+		Information("[Player{}]: {}", body.userid(), body.message());
 	}
 	break;
 	case Proto::MessageSystemMessage:
@@ -66,7 +68,7 @@ void ZoneHandler::process_login_packet(Proto::LoginPacketType type, const std::s
 	{
 		Proto::LoginResultBody body;
 		body.ParseFromString(payload);
-		gameServerConnectionManager->on_connection_succussed();
+		gameServerConnectionManager->on_connection_succeeded();
 
 	}
 	break;
@@ -77,6 +79,39 @@ void ZoneHandler::process_login_packet(Proto::LoginPacketType type, const std::s
 		Information("[System]: Player added. Id-\'{}\' Name-\'{}\'", body.userid(), body.username());
 	}
 	break;
+	default:
+		break;
+	}
+}
+
+void ZoneHandler::process_logout_packet(Proto::LogoutPacketType type, const std::string& payload) {
+	switch (type) {
+	case Proto::LogoutResponse:
+	{
+		Proto::LogoutResponseBody body;
+		body.ParseFromString(payload);
+	}
+		break;
+	case Proto::LogoutNotification:
+	{
+		Proto::LogoutNotificationBody body;
+		body.ParseFromString(payload);
+		Information("[System]: Player removed. Id-\'{}\'", body.userid());
+	}
+		break;
+	default:
+		break;
+	}
+}
+
+void ZoneHandler::process_sync_packet(Proto::SyncPacketType type, const std::string& payload) {
+	switch (type) {
+	case Proto::SyncTransform:
+	{
+		Proto::TransformSyncBody body;
+		body.ParseFromString(payload);
+	}
+		break;
 	default:
 		break;
 	}

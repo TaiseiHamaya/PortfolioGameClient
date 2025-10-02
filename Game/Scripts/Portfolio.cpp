@@ -4,10 +4,19 @@
 
 #include "./Scene/FactoryPortfolio.h"
 
+#include <Engine/Application/WinApp.h>
 #include <Engine/Debug/Editor/EditorMain.h>
+
+#include <google/protobuf/message_lite.h>
 
 void Portfolio::initialize() {
 	EditorMain::SetActiveEditor(false);
 
 	SceneManager::Setup(std::make_unique<FactoryPortfolio>());
+}
+
+void Portfolio::finalize() {
+	google::protobuf::ShutdownProtobufLibrary();
+
+	WinApp::Finalize();
 }

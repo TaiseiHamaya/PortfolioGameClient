@@ -53,6 +53,7 @@ class SceneGame final : public BaseScene {
 public:
 	void load() override;
 	void initialize() override;
+	void finalize() override;
 
 	void begin() override;
 	void update() override;
