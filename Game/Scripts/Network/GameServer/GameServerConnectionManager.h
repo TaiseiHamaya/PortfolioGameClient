@@ -34,7 +34,7 @@ public:
 	void update();
 
 public:
-	void on_connection_succussed();
+	void on_connection_succeeded();
 
 public:
 	bool is_established() const;
@@ -59,8 +59,10 @@ private:
 	asio::io_context context;
 	asio::ip::tcp::socket socket{ context, asio::ip::tcp::v4() };
 	ConnectionState connectionState{ ConnectionState::Disconnected };
+	asio::steady_timer timer{ context };
+	asio::ip::tcp::endpoint endpoint{};
 
-	std::mutex mutex;
-	bool isThreadEnded = false;
+	mutable std::mutex mutex;
+	bool isThreadEnded = true;
 	std::thread contextThread;
 };

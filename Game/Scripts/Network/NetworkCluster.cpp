@@ -44,7 +44,10 @@ Reference<GameServerConnectionManager> NetworkCluster::connection_manager() {
 #include <imgui.h>
 #include <imgui_stdlib.h>
 void NetworkCluster::debug_gui() {
+	ImGui::Begin("NetworkCluster");
 	connectionManager.debug_gui();
+
+	ImGui::Separator();
 
 	bool send = false;
 	send |= ImGui::InputText("Chat", &msg, ImGuiInputTextFlags_EnterReturnsTrue);

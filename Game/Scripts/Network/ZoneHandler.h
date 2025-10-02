@@ -26,7 +26,8 @@ public:
 private:
 	void process_text_message(Proto::TextMessageType type, const std::string& payload);
 	void process_login_packet(Proto::LoginPacketType type, const std::string& payload);
-
+	void process_logout_packet(Proto::LogoutPacketType type, const std::string& payload);
+	void process_sync_packet(Proto::SyncPacketType type, const std::string& payload);
 
 private:
 	Reference<GameServerConnectionManager> gameServerConnectionManager;

@@ -281,6 +281,10 @@ void SceneGame::initialize() {
 	networkCluster.setup();
 }
 
+void SceneGame::finalize() {
+	networkCluster.finalize();
+}
+
 void SceneGame::begin() {
 	timer.ahead();
 
