@@ -5,7 +5,7 @@
 
 #include <Library/Utility/Tools/ConstructorMacro.h>
 
-#include "Scripts/MiscInstance/Effects/IEffectInstance.h"
+#include "Scripts/Instance/MiscInstance/Effects/IEffectInstance.h"
 
 class EffectManager {
 public:

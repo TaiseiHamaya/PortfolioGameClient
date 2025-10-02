@@ -1,8 +1,5 @@
 #pragma once
 
-#include <winsock2.h>
-#include <windows.h>
-
 #include <Engine/Runtime/Scene/BaseScene.h>
 
 #include <list>
@@ -29,14 +26,13 @@
 #include "Scripts/Manager/EffectManager.h"
 #include "Scripts/Manager/EntityManager.h"
 
-#include "Scripts/MiscInstance/AOE/CircleAoe.h"
-#include "Scripts/MiscInstance/Camera/FollowCamera.h"
-#include "Scripts/MiscInstance/Effects/CometEffect.h"
-#include "Scripts/MiscInstance/Enemy/EnemyManager.h"
-#include "Scripts/Player/Actions/PaladinHolySpirit.h"
-#include "Scripts/Player/LocalPlayerCommandHandler.h"
-#include "Scripts/Player/Player.h"
-#include "Scripts/RenderNode/PostEffect/GaussianBlurNode.h"
+#include "Scripts/Extension/RenderNode/PostEffect/GaussianBlurNode.h"
+#include "Scripts/Instance/MiscInstance/AOE/CircleAoe.h"
+#include "Scripts/Instance/MiscInstance/Camera/FollowCamera.h"
+#include "Scripts/Instance/MiscInstance/Effects/CometEffect.h"
+#include "Scripts/Instance/MiscInstance/Enemy/EnemyManager.h"
+#include "Scripts/Instance/Player/Actions/PaladinHolySpirit.h"
+#include "Scripts/Instance/Player/Player.h"
 #include "Scripts/Network/NetworkCluster.h"
 #include "Scripts/Network/ZoneHandler.h"
 
@@ -108,8 +104,6 @@ private:
 	std::unique_ptr<StaticMeshInstance> skydome;
 	std::unique_ptr<EnemyManager> enemyManager;
 	Reference<Player> player;
-
-	std::unique_ptr<LocalPlayerCommandHandler> localPlayerCommandHandler;
 
 	std::list<CometAction> comets;
 

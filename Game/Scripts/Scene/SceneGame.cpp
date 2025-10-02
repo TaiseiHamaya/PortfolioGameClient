@@ -22,14 +22,14 @@
 #include <Engine/Application/ProjectSettings/ProjectSettings.h>
 #include <Engine/Runtime/Clock/WorldClock.h>
 
-#include "Scripts/Util/LookAtRect.h"
+#include "Scripts/Extension/RenderNode/CubemapNode/CubemapNode.h"
+#include "Scripts/Extension/RenderNode/PostEffect/BloomNode.h"
+#include "Scripts/Extension/RenderNode/PostEffect/LuminanceExtractionNode.h"
+#include "Scripts/Extension/RenderNode/PostEffect/MargeTextureNode.h"
+#include "Scripts/Extension/Util/LookAtRect.h"
+#include "Scripts/Instance/IEntity/ISkillAction/ISkillAction.h"
+#include "Scripts/Instance/MiscInstance/Enemy/Enemy.h"
 
-#include "Scripts/MiscInstance/Enemy/Enemy.h"
-#include "Scripts/IEntity/ISkillAction/ISkillAction.h"
-#include "Scripts/RenderNode/CubemapNode/CubemapNode.h"
-#include "Scripts/RenderNode/PostEffect/BloomNode.h"
-#include "Scripts/RenderNode/PostEffect/LuminanceExtractionNode.h"
-#include "Scripts/RenderNode/PostEffect/MargeTextureNode.h"
 #include <Engine/Debug/DebugValues/DebugValues.h>
 
 void SceneGame::load() {
@@ -130,11 +130,7 @@ void SceneGame::initialize() {
 	camera3D->set_offset({ 0,1,-40 });
 	camera3D->set_target(player);
 	enemyManager->generate(1, "RedComet.json", Vector3{ 0,0,8 });
-	player->set_target(enemyManager->get_nearest(player->world_position()));
-
-	localPlayerCommandHandler = std::make_unique<LocalPlayerCommandHandler>();
-	localPlayerCommandHandler->initialize(player);
-	localPlayerCommandHandler->start(camera3D);
+	//player->set_target(enemyManager->get_nearest(player->world_position()));
 
 	// RenderPath
 	renderTextures.resize(10);
@@ -288,7 +284,6 @@ void SceneGame::finalize() {
 void SceneGame::begin() {
 	timer.ahead();
 
-	localPlayerCommandHandler->begin();
 	entityManager->begin();
 	camera3D->input();
 
@@ -297,10 +292,6 @@ void SceneGame::begin() {
 
 void SceneGame::update() {
 	zoneHandler.handle_zone();
-
-	localPlayerCommandHandler->update();
-
-	localPlayerCommandHandler->run();
 
 	entityManager->update();
 	camera3D->update();
@@ -485,7 +476,7 @@ void SceneGame::debug_update() {
 	ImGui::End();
 
 	ImGui::Begin("PostEffect");
-	if(ImGui::TreeNode("LuminanceExtraction")) {
+	if (ImGui::TreeNode("LuminanceExtraction")) {
 		luminanceExtractionNode->debug_gui();
 		ImGui::TreePop();
 	}
@@ -500,7 +491,7 @@ void SceneGame::debug_update() {
 		gaussianBlurNode4->set_parameters(blurData.dispersion, blurData.length, blurData.sampleCount);
 		gaussianBlurNode8->set_parameters(blurData.dispersion, blurData.length, blurData.sampleCount);
 		gaussianBlurNode16->set_parameters(blurData.dispersion, blurData.length, blurData.sampleCount);
-	
+
 		ImGui::TreePop();
 	}
 	if (ImGui::TreeNode("BloomNode")) {

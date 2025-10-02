@@ -8,7 +8,7 @@
 #include <Library/Utility/Template/Reference.h>
 #include <Library/Utility/Tools/ConstructorMacro.h>
 
-#include "Scripts/IEntity/IEntity.h"
+#include "Scripts/Instance/IEntity/IEntity.h"
 
 class SkinningMeshDrawManager;
 class Rect3dDrawManager;
