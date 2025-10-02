@@ -1,6 +1,6 @@
 #include "Shadow.h"
 
-void Shadow::start(Reference<WorldInstance> owner_, float scale_) {
+void Shadow::setup(Reference<WorldInstance> owner_, float scale_) {
 	owner = owner_;
 	scale = scale_;
 	transform.set_quaternion(

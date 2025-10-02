@@ -25,8 +25,8 @@ void IEntity::initialize(const std::filesystem::path& file) {
 	targetRadius = json.try_emplace<float>("TargetRadius");
 }
 
-void IEntity::start(Reference<SkinningMeshDrawManager> skinDraw, Reference<Rect3dDrawManager> rectDraw) {
-	shadow->start(this, 2.0f);
+void IEntity::setup(Reference<SkinningMeshDrawManager> skinDraw, Reference<Rect3dDrawManager> rectDraw) {
+	shadow->setup(this, 2.0f);
 	ui->start(rectDraw);
 	skinDraw->register_instance(this);
 	//staticDraw->register_instance()

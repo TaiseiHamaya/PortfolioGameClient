@@ -48,7 +48,7 @@ template<typename T>
 inline Reference<T> EntityManager::generate(u64 id, const std::filesystem::path& initjson) {
 	std::unique_ptr<T> temp = worldManager->create<T>(nullptr);
 	temp->initialize(initjson);
-	temp->start(skinDraw, rectDraw);
+	temp->setup(skinDraw, rectDraw);
 	Reference<T> result = temp;
 	entities.emplace(id, std::move(temp));
 

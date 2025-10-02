@@ -32,7 +32,7 @@ __USE_BITFLAG(EntityFlag)
 class IEntity : public SkinningMeshInstance {
 public:
 	virtual void initialize(const std::filesystem::path& file);
-	void start(
+	void setup(
 		Reference<SkinningMeshDrawManager> skinDraw,
 		Reference<Rect3dDrawManager> rectDraw);
 	virtual void begin() override;
