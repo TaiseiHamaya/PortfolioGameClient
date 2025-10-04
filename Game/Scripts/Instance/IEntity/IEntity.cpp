@@ -43,18 +43,10 @@ void IEntity::begin() {
 
 void IEntity::update() {
 	if (currentAction) {
-
 		// 移動が停止するようなアクションでは実行しない
 		if (currentAction->action_effect() != ActionEffect::Stack) {
 			// 重力処理
-			velocity.y += -20.0f * WorldClock::DeltaSeconds();
-			// 地面の上では摩擦減衰
-			if (transform.get_translate().y == 0 && velocity.length() != 0) {
-				velocity *= 0.75f;
-			}
-			// 移動
-			transform.plus_translate(velocity * WorldClock::DeltaSeconds());
-
+			velocityY += -20.0f * WorldClock::DeltaSeconds();
 			// 地面に埋まらないようにする
 			if (transform.get_translate().y <= 0.0f) {
 				transform.set_translate_y(0.0f);
@@ -66,17 +58,6 @@ void IEntity::update() {
 		if (currentAction->end_action()) {
 			start_action("Idle");
 		}
-	}
-
-	Vector3 xzVelocity = Vector3{ velocity.x, 0.0f,velocity.z };
-	// ---------- 移動方向を向く ----------
-	if (xzVelocity.length() != 0) {
-		// 向く方向
-		Quaternion forwardTo{ Quaternion::LookForward(xzVelocity.normalize()) };
-		// Slerp補完
-		transform.set_quaternion(
-			Quaternion::Slerp(transform.get_quaternion(), forwardTo, 0.1f)
-		);
 	}
 
 	update_animation();
@@ -93,21 +74,13 @@ void IEntity::start_action(eps::string_hashed actionName) {
 	}
 }
 
-void IEntity::move(const Vector2& xzDirection) {
-	if (!is_active()) {
-		return;
-	}
-	Vector2 xzVelocity = xzDirection * SPEED;
-	velocity = Vector3{ xzVelocity.x, velocity.y,xzVelocity.y };
-}
-
 void IEntity::jump() {
 	if (!is_active()) {
 		return;
 	}
 	// ---------- ジャンプ処理 ----------
 	if (transform.get_translate().y == 0) {
-		velocity.y = 8.0f;
+		velocityY = 8.0f;
 	}
 	start_action("Jump");
 }
@@ -117,10 +90,42 @@ void IEntity::on_damaged(i32 damage) {
 	start_action("Damaged");
 }
 
-r32 IEntity::target_radius() const {
+const std::vector<u64>& IEntity::get_enmity_ids() const noexcept {
+	return enmityIds;
+}
+
+u64 IEntity::local_id() const noexcept {
+	return localId;
+}
+
+const std::optional<u64>& IEntity::server_id() const noexcept {
+	return serverId;
+}
+
+std::optional<u64>& IEntity::server_id_mut() noexcept {
+	return serverId;
+}
+
+const std::string& IEntity::name_imu() const noexcept {
+	return name;
+}
+
+r32 IEntity::target_radius() const noexcept {
 	return targetRadius;
 }
 
-Reference<IEntity> IEntity::get_selection_target() const {
+Reference<IEntity> IEntity::get_selection_target() const noexcept {
 	return selectionTarget;
+}
+
+Reference<IActionBasic> IEntity::now_action() const noexcept {
+	return currentAction;
+}
+
+void IEntity::set_server_id(u64 id) {
+	serverId = id;
+}
+
+void IEntity::set_name(const std::string& name_) {
+	name = name_;
 }

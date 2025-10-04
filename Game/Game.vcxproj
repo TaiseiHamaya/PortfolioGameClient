@@ -15,6 +15,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Scripts\Instance\Player\RemotePlayer.cpp" />
+    <ClCompile Include="Scripts\Game\GameInputHandler.cpp" />
     <ClCompile Include="Scripts\Network\NetworkCluster.cpp" />
     <ClCompile Include="Scripts\Network\GameServer\PacketBuffer.cpp" />
     <ClCompile Include="Scripts\Network\GameServer\GameServerConnectionManager.cpp" />
@@ -26,7 +28,6 @@
     <ClCompile Include="Scripts\Manager\EffectManager.cpp" />
     <ClCompile Include="Scripts\Instance\Player\Actions\PaladinHolySpiritEffectSelf.cpp" />
     <ClCompile Include="Scripts\Instance\Player\Actions\PaladinHolySpiritEffectTarget.cpp" />
-    <ClCompile Include="Scripts\Game\Zone\ContaintsDirector\ContaintsDirector.cpp" />
     <ClCompile Include="Scripts\Instance\Player\Actions\PaladinHolySpirit.cpp" />
     <ClCompile Include="Scripts\Proto\math.pb.cc" />
     <ClCompile Include="Scripts\Proto\types.pb.cc" />
@@ -38,7 +39,6 @@
     <ClCompile Include="Scripts\Instance\MiscInstance\Effects\CometEffect.cpp" />
     <ClCompile Include="Scripts\Instance\MiscInstance\AOE\BaseAoe.cpp" />
     <ClCompile Include="Scripts\Instance\MiscInstance\AOE\CircleAoe.cpp" />
-    <ClCompile Include="Scripts\Instance\RemoteEntity\RemoteEnemyCommandHandler.cpp" />
     <ClCompile Include="Scripts\Instance\IEntity\Actions\IdleAction.cpp" />
     <ClCompile Include="Scripts\Extension\RenderNode\PostEffect\LuminanceExtractionNode.cpp" />
     <ClCompile Include="Scripts\Extension\Util\LookAtRect.cpp" />
@@ -56,9 +56,15 @@
     <ClCompile Include="Scripts\Instance\IEntity\IActionBasic.cpp" />
     <ClCompile Include="Scripts\Instance\Player\Player.cpp" />
     <ClCompile Include="Scripts\Instance\IEntity\Shadow.cpp" />
-    <ClCompile Include="Scripts\Network\ZoneHandler.cpp" />
+    <ClCompile Include="Scripts\Game\Zone\ZoneCommand\ZoneHandler.cpp" />
+    <ClCompile Include="Scripts\Game\Zone\ZoneCommand\Command\ZoneLoginPlayerCommand.cpp" />
+    <ClCompile Include="Scripts\Game\Zone\ZoneCommand\Command\ZoneSyncTransformCommand.cpp" />
+    <ClCompile Include="Scripts\Game\Zone\ZoneCommand\Command\ZoneLogoutPlayerCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Scripts\Instance\Player\RemotePlayer.h" />
+    <ClInclude Include="Scripts\Game\GameInputHandler.h" />
+    <ClInclude Include="Scripts\Game\Zone\ZoneCommand\Command\IZoneCommand.h" />
     <ClInclude Include="Scripts\Extension\Util\winsock_include.h" />
     <ClInclude Include="Scripts\Network\NetworkCluster.h" />
     <ClInclude Include="Scripts\Network\GameServer\PacketBuffer.h" />
@@ -70,7 +76,6 @@
     <ClInclude Include="Scripts\Manager\EffectManager.h" />
     <ClInclude Include="Scripts\Instance\Player\Actions\PaladinHolySpiritEffectSelf.h" />
     <ClInclude Include="Scripts\Instance\Player\Actions\PaladinHolySpiritEffectTarget.h" />
-    <ClInclude Include="Scripts\Game\Zone\ContaintsDirector\ContaintsDirector.h" />
     <ClInclude Include="Scripts\Instance\Player\Actions\PaladinHolySpirit.h" />
     <ClInclude Include="Scripts\Instance\IEntity\ISkillAction\ISkillAction.h" />
     <ClInclude Include="Scripts\Proto\math.pb.h" />
@@ -83,7 +88,6 @@
     <ClInclude Include="Scripts\Instance\MiscInstance\Effects\CometEffect.h" />
     <ClInclude Include="Scripts\Instance\MiscInstance\AOE\BaseAoe.h" />
     <ClInclude Include="Scripts\Instance\MiscInstance\AOE\CircleAoe.h" />
-    <ClInclude Include="Scripts\Instance\RemoteEntity\RemoteEnemyCommandHandler.h" />
     <ClInclude Include="Scripts\Instance\IEntity\Actions\IdleAction.h" />
     <ClInclude Include="Scripts\Extension\RenderNode\PostEffect\LuminanceExtractionNode.h" />
     <ClInclude Include="Scripts\Extension\Util\LookAtRect.h" />
@@ -100,7 +104,10 @@
     <ClInclude Include="Scripts\Instance\IEntity\IActionBasic.h" />
     <ClInclude Include="Scripts\Instance\Player\Player.h" />
     <ClInclude Include="Scripts\Instance\IEntity\Shadow.h" />
-    <ClInclude Include="Scripts\Network\ZoneHandler.h" />
+    <ClInclude Include="Scripts\Game\Zone\ZoneCommand\ZoneHandler.h" />
+    <ClInclude Include="Scripts\Game\Zone\ZoneCommand\Command\ZoneLoginPlayerCommand.h" />
+    <ClInclude Include="Scripts\Game\Zone\ZoneCommand\Command\ZoneSyncTransformCommand.h" />
+    <ClInclude Include="Scripts\Game\Zone\ZoneCommand\Command\ZoneLogoutPlayerCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resources\Json\Action\Player\Paladin\HolySpirit.json" />

@@ -7,4 +7,6 @@
 class SphereCollider;
 
 class Enemy : public IEntity {
+public:
+	void move_to(const std::chrono::steady_clock::time_point& time, const Vector3& position) override;
 };

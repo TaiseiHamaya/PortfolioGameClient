@@ -18,7 +18,7 @@ public:
 	void setup(Reference<EntityManager> entityManager_);
 
 public:
-	void generate(u64 id, const std::filesystem::path& path, Vector3 position);
+	void generate(const std::filesystem::path& path, Vector3 position);
 
 	Reference<Enemy> get_nearest(const Vector3& position) const;
 

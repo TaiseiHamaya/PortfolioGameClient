@@ -30,10 +30,13 @@ public:
 public:
 	template<typename T>
 		requires std::derived_from<T, IEntity>
-	Reference<T> generate(u64 id, const std::filesystem::path& initjson);
-	void destroy(u64 id);
+	Reference<T> generate(const std::filesystem::path& initjson);
+	void destroy(u64 serverId);
 
-	Reference<IEntity> inquire(u64 id) const;
+	Reference<IEntity> inquire_server_id(u64 id) const;
+	Reference<IEntity> inquire_local_id(u64 localId) const;
+
+	void register_server_id(u64 serverId, Reference<IEntity> entity);
 
 private:
 	Reference<WorldManager> worldManager;
@@ -41,16 +44,20 @@ private:
 	Reference<Rect3dDrawManager> rectDraw;
 
 	std::unordered_map<u64, std::unique_ptr<IEntity>> entities;
+	std::unordered_map<u64, Reference<IEntity>> entityRefByServerId;
+
+	u64 localIdCounter{ 0 };
 };
 
 template<typename T>
 	requires std::derived_from<T, IEntity>
-inline Reference<T> EntityManager::generate(u64 id, const std::filesystem::path& initjson) {
+inline Reference<T> EntityManager::generate(const std::filesystem::path& initJson) {
 	std::unique_ptr<T> temp = worldManager->create<T>(nullptr);
-	temp->initialize(initjson);
+	temp->initialize(initJson);
 	temp->setup(skinDraw, rectDraw);
 	Reference<T> result = temp;
-	entities.emplace(id, std::move(temp));
+	entities.emplace(localIdCounter, std::move(temp));
+	++localIdCounter;
 
 	return result;
 }

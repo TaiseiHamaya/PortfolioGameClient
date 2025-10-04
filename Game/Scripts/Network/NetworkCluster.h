@@ -6,12 +6,15 @@
 #include "GameServer/GameServerPacketReceiver.h"
 #include "GameServer/GameServerPacketSender.h"
 
+class IEntity;
+
 class NetworkCluster {
 public:
 	NetworkCluster() = default;
 	~NetworkCluster() = default;
 
-	__CLASS_NON_COPYABLE(NetworkCluster)
+	// ConnectionManagerがコピー/ムーブ禁止のため
+	__CLASS_NON_COPYMOVEABLE(NetworkCluster)
 
 public:
 	void initialize();
@@ -22,19 +25,23 @@ public:
 	void receive();
 	void send();
 
-public:
-	Reference<GameServerPacketReceiver> get_receiver();
-	Reference<GameServerConnectionManager> connection_manager();
-
-#ifdef DEBUG_FEATURES_ENABLE
-public:
-	void debug_gui();
-#endif // DEBUG_FEATURES_ENABLE
-
 private:
 	GameServerConnectionManager connectionManager;
 	GameServerPacketReceiver packetReceiver;
 	GameServerPacketSender packetSender;
 
+public:
+	Reference<GameServerPacketReceiver> get_receiver();
+	Reference<GameServerConnectionManager> connection_manager();
+	Reference<GameServerPacketSender> get_sender();
+
+#ifdef DEBUG_FEATURES_ENABLE
+public:
+	void debug_gui();
+	void set_player(Reference<IEntity> player_) { player = player_; }
+
+private:
 	std::string msg;
+	Reference<IEntity> player;
+#endif // DEBUG_FEATURES_ENABLE
 };

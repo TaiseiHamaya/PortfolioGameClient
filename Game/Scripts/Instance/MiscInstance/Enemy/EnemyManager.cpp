@@ -11,10 +11,9 @@ void EnemyManager::setup(Reference<EntityManager> entityManager_) {
 	entityManager = entityManager_;
 }
 
-void EnemyManager::generate(u64 id, const std::filesystem::path& path, Vector3 position) {
-	Reference<Enemy> enemy =
-		enemies.emplace_back(
-			entityManager->generate<Enemy>(id, path));
+void EnemyManager::generate(const std::filesystem::path& path, Vector3 position) {
+	Reference<Enemy> enemy = entityManager->generate<Enemy>(path);
+	enemies.emplace_back(enemy);
 	enemy->get_transform().set_translate(position);
 	enemy->get_transform().set_quaternion(
 		Quaternion::LookForward(CVector3::BACKWARD)

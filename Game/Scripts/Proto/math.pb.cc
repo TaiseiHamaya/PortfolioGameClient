@@ -52,34 +52,6 @@ struct Vector3DefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 Vector3DefaultTypeInternal _Vector3_default_instance_;
-
-inline constexpr Quaternion::Impl_::Impl_(
-    ::_pbi::ConstantInitialized) noexcept
-      : _cached_size_{0},
-        x_{0},
-        y_{0},
-        z_{0},
-        w_{0} {}
-
-template <typename>
-PROTOBUF_CONSTEXPR Quaternion::Quaternion(::_pbi::ConstantInitialized)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(Quaternion_class_data_.base()),
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(),
-#endif  // PROTOBUF_CUSTOM_VTABLE
-      _impl_(::_pbi::ConstantInitialized()) {
-}
-struct QuaternionDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR QuaternionDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~QuaternionDefaultTypeInternal() {}
-  union {
-    Quaternion _instance;
-  };
-};
-
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 QuaternionDefaultTypeInternal _Quaternion_default_instance_;
 }  // namespace Proto
 static constexpr const ::_pb::EnumDescriptor *PROTOBUF_NONNULL *PROTOBUF_NULLABLE
     file_level_enum_descriptors_math_2eproto = nullptr;
@@ -97,46 +69,31 @@ const ::uint32_t
         0,
         1,
         2,
-        0x081, // bitmap
-        PROTOBUF_FIELD_OFFSET(::Proto::Quaternion, _impl_._has_bits_),
-        7, // hasbit index offset
-        PROTOBUF_FIELD_OFFSET(::Proto::Quaternion, _impl_.x_),
-        PROTOBUF_FIELD_OFFSET(::Proto::Quaternion, _impl_.y_),
-        PROTOBUF_FIELD_OFFSET(::Proto::Quaternion, _impl_.z_),
-        PROTOBUF_FIELD_OFFSET(::Proto::Quaternion, _impl_.w_),
-        0,
-        1,
-        2,
-        3,
 };
 
 static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
         {0, sizeof(::Proto::Vector3)},
-        {9, sizeof(::Proto::Quaternion)},
 };
 static const ::_pb::Message* PROTOBUF_NONNULL const file_default_instances[] = {
     &::Proto::_Vector3_default_instance_._instance,
-    &::Proto::_Quaternion_default_instance_._instance,
 };
 const char descriptor_table_protodef_math_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
     "\n\nmath.proto\022\005Proto\"*\n\007Vector3\022\t\n\001x\030\001 \001("
-    "\002\022\t\n\001y\030\002 \001(\002\022\t\n\001z\030\003 \001(\002\"8\n\nQuaternion\022\t\n"
-    "\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002\022\t\n\001z\030\003 \001(\002\022\t\n\001w\030\004 \001("
-    "\002b\006proto3"
+    "\002\022\t\n\001y\030\002 \001(\002\022\t\n\001z\030\003 \001(\002b\006proto3"
 };
 static ::absl::once_flag descriptor_table_math_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_math_2eproto = {
     false,
     false,
-    129,
+    71,
     descriptor_table_protodef_math_2eproto,
     "math.proto",
     &descriptor_table_math_2eproto_once,
     nullptr,
     0,
-    2,
+    1,
     schemas,
     file_default_instances,
     TableStruct_math_2eproto::offsets,
@@ -453,341 +410,6 @@ void Vector3::InternalSwap(Vector3* PROTOBUF_RESTRICT PROTOBUF_NONNULL other) {
 }
 
 ::google::protobuf::Metadata Vector3::GetMetadata() const {
-  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
-}
-// ===================================================================
-
-class Quaternion::_Internal {
- public:
-  using HasBits =
-      decltype(::std::declval<Quaternion>()._impl_._has_bits_);
-  static constexpr ::int32_t kHasBitsOffset =
-      8 * PROTOBUF_FIELD_OFFSET(Quaternion, _impl_._has_bits_);
-};
-
-Quaternion::Quaternion(::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, Quaternion_class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:Proto.Quaternion)
-}
-Quaternion::Quaternion(
-    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Quaternion& from)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, Quaternion_class_data_.base()),
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(arena),
-#endif  // PROTOBUF_CUSTOM_VTABLE
-      _impl_(from._impl_) {
-  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
-      from._internal_metadata_);
-}
-PROTOBUF_NDEBUG_INLINE Quaternion::Impl_::Impl_(
-    [[maybe_unused]] ::google::protobuf::internal::InternalVisibility visibility,
-    [[maybe_unused]] ::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
-      : _cached_size_{0} {}
-
-inline void Quaternion::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
-  new (&_impl_) Impl_(internal_visibility(), arena);
-  ::memset(reinterpret_cast<char *>(&_impl_) +
-               offsetof(Impl_, x_),
-           0,
-           offsetof(Impl_, w_) -
-               offsetof(Impl_, x_) +
-               sizeof(Impl_::w_));
-}
-Quaternion::~Quaternion() {
-  // @@protoc_insertion_point(destructor:Proto.Quaternion)
-  SharedDtor(*this);
-}
-inline void Quaternion::SharedDtor(MessageLite& self) {
-  Quaternion& this_ = static_cast<Quaternion&>(self);
-  if constexpr (::_pbi::DebugHardenVerifyHasBitConsistency()) {
-    this_.VerifyHasBitConsistency();
-  }
-  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
-  ABSL_DCHECK(this_.GetArena() == nullptr);
-  this_._impl_.~Impl_();
-}
-
-inline void* PROTOBUF_NONNULL Quaternion::PlacementNew_(
-    const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
-    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena) {
-  return ::new (mem) Quaternion(arena);
-}
-constexpr auto Quaternion::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(Quaternion),
-                                            alignof(Quaternion));
-}
-constexpr auto Quaternion::InternalGenerateClassData_() {
-  return ::google::protobuf::internal::ClassDataFull{
-      ::google::protobuf::internal::ClassData{
-          &_Quaternion_default_instance_._instance,
-          &_table_.header,
-          nullptr,  // OnDemandRegisterArenaDtor
-          nullptr,  // IsInitialized
-          &Quaternion::MergeImpl,
-          ::google::protobuf::Message::GetNewImpl<Quaternion>(),
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-          &Quaternion::SharedDtor,
-          ::google::protobuf::Message::GetClearImpl<Quaternion>(), &Quaternion::ByteSizeLong,
-              &Quaternion::_InternalSerialize,
-#endif  // PROTOBUF_CUSTOM_VTABLE
-          PROTOBUF_FIELD_OFFSET(Quaternion, _impl_._cached_size_),
-          false,
-      },
-      &Quaternion::kDescriptorMethods,
-      &descriptor_table_math_2eproto,
-      nullptr,  // tracker
-  };
-}
-
-PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 const
-    ::google::protobuf::internal::ClassDataFull Quaternion_class_data_ =
-        Quaternion::InternalGenerateClassData_();
-
-PROTOBUF_ATTRIBUTE_WEAK const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL
-Quaternion::GetClassData() const {
-  ::google::protobuf::internal::PrefetchToLocalCache(&Quaternion_class_data_);
-  ::google::protobuf::internal::PrefetchToLocalCache(Quaternion_class_data_.tc_table);
-  return Quaternion_class_data_.base();
-}
-PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 4, 0, 0, 2>
-Quaternion::_table_ = {
-  {
-    PROTOBUF_FIELD_OFFSET(Quaternion, _impl_._has_bits_),
-    0, // no _extensions_
-    4, 24,  // max_field_number, fast_idx_mask
-    offsetof(decltype(_table_), field_lookup_table),
-    4294967280,  // skipmap
-    offsetof(decltype(_table_), field_entries),
-    4,  // num_field_entries
-    0,  // num_aux_entries
-    offsetof(decltype(_table_), field_names),  // no aux_entries
-    Quaternion_class_data_.base(),
-    nullptr,  // post_loop_handler
-    ::_pbi::TcParser::GenericFallback,  // fallback
-    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::Proto::Quaternion>(),  // to_prefetch
-    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
-  }, {{
-    // float w = 4;
-    {::_pbi::TcParser::FastF32S1,
-     {37, 3, 0, PROTOBUF_FIELD_OFFSET(Quaternion, _impl_.w_)}},
-    // float x = 1;
-    {::_pbi::TcParser::FastF32S1,
-     {13, 0, 0, PROTOBUF_FIELD_OFFSET(Quaternion, _impl_.x_)}},
-    // float y = 2;
-    {::_pbi::TcParser::FastF32S1,
-     {21, 1, 0, PROTOBUF_FIELD_OFFSET(Quaternion, _impl_.y_)}},
-    // float z = 3;
-    {::_pbi::TcParser::FastF32S1,
-     {29, 2, 0, PROTOBUF_FIELD_OFFSET(Quaternion, _impl_.z_)}},
-  }}, {{
-    65535, 65535
-  }}, {{
-    // float x = 1;
-    {PROTOBUF_FIELD_OFFSET(Quaternion, _impl_.x_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
-    // float y = 2;
-    {PROTOBUF_FIELD_OFFSET(Quaternion, _impl_.y_), _Internal::kHasBitsOffset + 1, 0, (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
-    // float z = 3;
-    {PROTOBUF_FIELD_OFFSET(Quaternion, _impl_.z_), _Internal::kHasBitsOffset + 2, 0, (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
-    // float w = 4;
-    {PROTOBUF_FIELD_OFFSET(Quaternion, _impl_.w_), _Internal::kHasBitsOffset + 3, 0, (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
-  }},
-  // no aux_entries
-  {{
-  }},
-};
-PROTOBUF_NOINLINE void Quaternion::Clear() {
-// @@protoc_insertion_point(message_clear_start:Proto.Quaternion)
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  ::uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  cached_has_bits = _impl_._has_bits_[0];
-  if ((cached_has_bits & 0x0000000fU) != 0) {
-    ::memset(&_impl_.x_, 0, static_cast<::size_t>(
-        reinterpret_cast<char*>(&_impl_.w_) -
-        reinterpret_cast<char*>(&_impl_.x_)) + sizeof(_impl_.w_));
-  }
-  _impl_._has_bits_.Clear();
-  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
-}
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-::uint8_t* PROTOBUF_NONNULL Quaternion::_InternalSerialize(
-    const ::google::protobuf::MessageLite& base, ::uint8_t* PROTOBUF_NONNULL target,
-    ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) {
-  const Quaternion& this_ = static_cast<const Quaternion&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
-::uint8_t* PROTOBUF_NONNULL Quaternion::_InternalSerialize(
-    ::uint8_t* PROTOBUF_NONNULL target,
-    ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
-  const Quaternion& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  if constexpr (::_pbi::DebugHardenVerifyHasBitConsistency()) {
-    this_.VerifyHasBitConsistency();
-  }
-  // @@protoc_insertion_point(serialize_to_array_start:Proto.Quaternion)
-  ::uint32_t cached_has_bits = 0;
-  (void)cached_has_bits;
-
-  // float x = 1;
-  if ((this_._impl_._has_bits_[0] & 0x00000001U) != 0) {
-    if (::absl::bit_cast<::uint32_t>(this_._internal_x()) != 0) {
-      target = stream->EnsureSpace(target);
-      target = ::_pbi::WireFormatLite::WriteFloatToArray(
-          1, this_._internal_x(), target);
-    }
-  }
-
-  // float y = 2;
-  if ((this_._impl_._has_bits_[0] & 0x00000002U) != 0) {
-    if (::absl::bit_cast<::uint32_t>(this_._internal_y()) != 0) {
-      target = stream->EnsureSpace(target);
-      target = ::_pbi::WireFormatLite::WriteFloatToArray(
-          2, this_._internal_y(), target);
-    }
-  }
-
-  // float z = 3;
-  if ((this_._impl_._has_bits_[0] & 0x00000004U) != 0) {
-    if (::absl::bit_cast<::uint32_t>(this_._internal_z()) != 0) {
-      target = stream->EnsureSpace(target);
-      target = ::_pbi::WireFormatLite::WriteFloatToArray(
-          3, this_._internal_z(), target);
-    }
-  }
-
-  // float w = 4;
-  if ((this_._impl_._has_bits_[0] & 0x00000008U) != 0) {
-    if (::absl::bit_cast<::uint32_t>(this_._internal_w()) != 0) {
-      target = stream->EnsureSpace(target);
-      target = ::_pbi::WireFormatLite::WriteFloatToArray(
-          4, this_._internal_w(), target);
-    }
-  }
-
-  if (ABSL_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
-    target =
-        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-            this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:Proto.Quaternion)
-  return target;
-}
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-::size_t Quaternion::ByteSizeLong(const MessageLite& base) {
-  const Quaternion& this_ = static_cast<const Quaternion&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
-::size_t Quaternion::ByteSizeLong() const {
-  const Quaternion& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  // @@protoc_insertion_point(message_byte_size_start:Proto.Quaternion)
-  ::size_t total_size = 0;
-
-  ::uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void)cached_has_bits;
-
-  ::_pbi::Prefetch5LinesFrom7Lines(&this_);
-  cached_has_bits = this_._impl_._has_bits_[0];
-  if ((cached_has_bits & 0x0000000fU) != 0) {
-    // float x = 1;
-    if ((cached_has_bits & 0x00000001U) != 0) {
-      if (::absl::bit_cast<::uint32_t>(this_._internal_x()) != 0) {
-        total_size += 5;
-      }
-    }
-    // float y = 2;
-    if ((cached_has_bits & 0x00000002U) != 0) {
-      if (::absl::bit_cast<::uint32_t>(this_._internal_y()) != 0) {
-        total_size += 5;
-      }
-    }
-    // float z = 3;
-    if ((cached_has_bits & 0x00000004U) != 0) {
-      if (::absl::bit_cast<::uint32_t>(this_._internal_z()) != 0) {
-        total_size += 5;
-      }
-    }
-    // float w = 4;
-    if ((cached_has_bits & 0x00000008U) != 0) {
-      if (::absl::bit_cast<::uint32_t>(this_._internal_w()) != 0) {
-        total_size += 5;
-      }
-    }
-  }
-  return this_.MaybeComputeUnknownFieldsSize(total_size,
-                                             &this_._impl_._cached_size_);
-}
-
-void Quaternion::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
-  auto* const _this = static_cast<Quaternion*>(&to_msg);
-  auto& from = static_cast<const Quaternion&>(from_msg);
-  if constexpr (::_pbi::DebugHardenVerifyHasBitConsistency()) {
-    from.VerifyHasBitConsistency();
-  }
-  // @@protoc_insertion_point(class_specific_merge_from_start:Proto.Quaternion)
-  ABSL_DCHECK_NE(&from, _this);
-  ::uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  cached_has_bits = from._impl_._has_bits_[0];
-  if ((cached_has_bits & 0x0000000fU) != 0) {
-    if ((cached_has_bits & 0x00000001U) != 0) {
-      if (::absl::bit_cast<::uint32_t>(from._internal_x()) != 0) {
-        _this->_impl_.x_ = from._impl_.x_;
-      }
-    }
-    if ((cached_has_bits & 0x00000002U) != 0) {
-      if (::absl::bit_cast<::uint32_t>(from._internal_y()) != 0) {
-        _this->_impl_.y_ = from._impl_.y_;
-      }
-    }
-    if ((cached_has_bits & 0x00000004U) != 0) {
-      if (::absl::bit_cast<::uint32_t>(from._internal_z()) != 0) {
-        _this->_impl_.z_ = from._impl_.z_;
-      }
-    }
-    if ((cached_has_bits & 0x00000008U) != 0) {
-      if (::absl::bit_cast<::uint32_t>(from._internal_w()) != 0) {
-        _this->_impl_.w_ = from._impl_.w_;
-      }
-    }
-  }
-  _this->_impl_._has_bits_[0] |= cached_has_bits;
-  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
-}
-
-void Quaternion::CopyFrom(const Quaternion& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:Proto.Quaternion)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-
-void Quaternion::InternalSwap(Quaternion* PROTOBUF_RESTRICT PROTOBUF_NONNULL other) {
-  using ::std::swap;
-  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
-  ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(Quaternion, _impl_.w_)
-      + sizeof(Quaternion::_impl_.w_)
-      - PROTOBUF_FIELD_OFFSET(Quaternion, _impl_.x_)>(
-          reinterpret_cast<char*>(&_impl_.x_),
-          reinterpret_cast<char*>(&other->_impl_.x_));
-}
-
-::google::protobuf::Metadata Quaternion::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // @@protoc_insertion_point(namespace_scope)
