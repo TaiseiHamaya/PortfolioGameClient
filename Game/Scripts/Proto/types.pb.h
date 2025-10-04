@@ -1067,16 +1067,16 @@ class LogoutRequestBody final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
-    kUserIdFieldNumber = 1,
+    kIdFieldNumber = 1,
   };
-  // uint64 userId = 1;
-  void clear_userid() ;
-  ::uint64_t userid() const;
-  void set_userid(::uint64_t value);
+  // uint64 id = 1;
+  void clear_id() ;
+  ::uint64_t id() const;
+  void set_id(::uint64_t value);
 
   private:
-  ::uint64_t _internal_userid() const;
-  void _internal_set_userid(::uint64_t value);
+  ::uint64_t _internal_id() const;
+  void _internal_set_id(::uint64_t value);
 
   public:
   // @@protoc_insertion_point(class_scope:Proto.LogoutRequestBody)
@@ -1105,7 +1105,7 @@ class LogoutRequestBody final : public ::google::protobuf::Message
         const LogoutRequestBody& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
-    ::uint64_t userid_;
+    ::uint64_t id_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -1258,16 +1258,16 @@ class LogoutNotificationBody final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
-    kUserIdFieldNumber = 1,
+    kIdFieldNumber = 1,
   };
-  // uint64 userId = 1;
-  void clear_userid() ;
-  ::uint64_t userid() const;
-  void set_userid(::uint64_t value);
+  // uint64 id = 1;
+  void clear_id() ;
+  ::uint64_t id() const;
+  void set_id(::uint64_t value);
 
   private:
-  ::uint64_t _internal_userid() const;
-  void _internal_set_userid(::uint64_t value);
+  ::uint64_t _internal_id() const;
+  void _internal_set_id(::uint64_t value);
 
   public:
   // @@protoc_insertion_point(class_scope:Proto.LogoutNotificationBody)
@@ -1296,7 +1296,7 @@ class LogoutNotificationBody final : public ::google::protobuf::Message
         const LogoutNotificationBody& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
-    ::uint64_t userid_;
+    ::uint64_t id_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -1449,17 +1449,33 @@ class LoginResultBody final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
-    kUserIdFieldNumber = 1,
+    kUsernameFieldNumber = 3,
+    kIdFieldNumber = 1,
     kIsSuccessedFieldNumber = 2,
   };
-  // uint64 userId = 1;
-  void clear_userid() ;
-  ::uint64_t userid() const;
-  void set_userid(::uint64_t value);
+  // string username = 3;
+  void clear_username() ;
+  const ::std::string& username() const;
+  template <typename Arg_ = const ::std::string&, typename... Args_>
+  void set_username(Arg_&& arg, Args_... args);
+  ::std::string* PROTOBUF_NONNULL mutable_username();
+  [[nodiscard]] ::std::string* PROTOBUF_NULLABLE release_username();
+  void set_allocated_username(::std::string* PROTOBUF_NULLABLE value);
 
   private:
-  ::uint64_t _internal_userid() const;
-  void _internal_set_userid(::uint64_t value);
+  const ::std::string& _internal_username() const;
+  PROTOBUF_ALWAYS_INLINE void _internal_set_username(const ::std::string& value);
+  ::std::string* PROTOBUF_NONNULL _internal_mutable_username();
+
+  public:
+  // uint64 id = 1;
+  void clear_id() ;
+  ::uint64_t id() const;
+  void set_id(::uint64_t value);
+
+  private:
+  ::uint64_t _internal_id() const;
+  void _internal_set_id(::uint64_t value);
 
   public:
   // bool isSuccessed = 2;
@@ -1476,8 +1492,8 @@ class LoginResultBody final : public ::google::protobuf::Message
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<1, 2,
-                                   0, 0,
+  static const ::google::protobuf::internal::TcParseTable<2, 3,
+                                   0, 38,
                                    2>
       _table_;
 
@@ -1498,7 +1514,8 @@ class LoginResultBody final : public ::google::protobuf::Message
         const LoginResultBody& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
-    ::uint64_t userid_;
+    ::google::protobuf::internal::ArenaStringPtr username_;
+    ::uint64_t id_;
     bool issuccessed_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
@@ -1653,7 +1670,7 @@ class LoginNotificationBody final : public ::google::protobuf::Message
   // accessors -------------------------------------------------------
   enum : int {
     kUsernameFieldNumber = 2,
-    kUserIdFieldNumber = 1,
+    kIdFieldNumber = 1,
   };
   // string username = 2;
   void clear_username() ;
@@ -1670,14 +1687,14 @@ class LoginNotificationBody final : public ::google::protobuf::Message
   ::std::string* PROTOBUF_NONNULL _internal_mutable_username();
 
   public:
-  // uint64 userId = 1;
-  void clear_userid() ;
-  ::uint64_t userid() const;
-  void set_userid(::uint64_t value);
+  // uint64 id = 1;
+  void clear_id() ;
+  ::uint64_t id() const;
+  void set_id(::uint64_t value);
 
   private:
-  ::uint64_t _internal_userid() const;
-  void _internal_set_userid(::uint64_t value);
+  ::uint64_t _internal_id() const;
+  void _internal_set_id(::uint64_t value);
 
   public:
   // @@protoc_insertion_point(class_scope:Proto.LoginNotificationBody)
@@ -1707,7 +1724,7 @@ class LoginNotificationBody final : public ::google::protobuf::Message
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::google::protobuf::internal::ArenaStringPtr username_;
-    ::uint64_t userid_;
+    ::uint64_t id_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -1861,7 +1878,7 @@ class ChatMessageBody final : public ::google::protobuf::Message
   // accessors -------------------------------------------------------
   enum : int {
     kMessageFieldNumber = 2,
-    kUserIdFieldNumber = 1,
+    kIdFieldNumber = 1,
   };
   // string message = 2;
   void clear_message() ;
@@ -1878,14 +1895,14 @@ class ChatMessageBody final : public ::google::protobuf::Message
   ::std::string* PROTOBUF_NONNULL _internal_mutable_message();
 
   public:
-  // uint64 userId = 1;
-  void clear_userid() ;
-  ::uint64_t userid() const;
-  void set_userid(::uint64_t value);
+  // uint64 id = 1;
+  void clear_id() ;
+  ::uint64_t id() const;
+  void set_id(::uint64_t value);
 
   private:
-  ::uint64_t _internal_userid() const;
-  void _internal_set_userid(::uint64_t value);
+  ::uint64_t _internal_id() const;
+  void _internal_set_id(::uint64_t value);
 
   public:
   // @@protoc_insertion_point(class_scope:Proto.ChatMessageBody)
@@ -1915,7 +1932,7 @@ class ChatMessageBody final : public ::google::protobuf::Message
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::google::protobuf::internal::ArenaStringPtr message_;
-    ::uint64_t userid_;
+    ::uint64_t id_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -2068,11 +2085,11 @@ class TransformSyncBody final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
-    kPositionFieldNumber = 2,
-    kRotationFieldNumber = 3,
-    kUserIdFieldNumber = 1,
+    kPositionFieldNumber = 3,
+    kIdFieldNumber = 1,
+    kTimestampFieldNumber = 2,
   };
-  // .Proto.Vector3 position = 2;
+  // .Proto.Vector3 position = 3;
   bool has_position() const;
   void clear_position() ;
   const ::Proto::Vector3& position() const;
@@ -2087,29 +2104,24 @@ class TransformSyncBody final : public ::google::protobuf::Message
   ::Proto::Vector3* PROTOBUF_NONNULL _internal_mutable_position();
 
   public:
-  // .Proto.Quaternion rotation = 3;
-  bool has_rotation() const;
-  void clear_rotation() ;
-  const ::Proto::Quaternion& rotation() const;
-  [[nodiscard]] ::Proto::Quaternion* PROTOBUF_NULLABLE release_rotation();
-  ::Proto::Quaternion* PROTOBUF_NONNULL mutable_rotation();
-  void set_allocated_rotation(::Proto::Quaternion* PROTOBUF_NULLABLE value);
-  void unsafe_arena_set_allocated_rotation(::Proto::Quaternion* PROTOBUF_NULLABLE value);
-  ::Proto::Quaternion* PROTOBUF_NULLABLE unsafe_arena_release_rotation();
+  // uint64 id = 1;
+  void clear_id() ;
+  ::uint64_t id() const;
+  void set_id(::uint64_t value);
 
   private:
-  const ::Proto::Quaternion& _internal_rotation() const;
-  ::Proto::Quaternion* PROTOBUF_NONNULL _internal_mutable_rotation();
+  ::uint64_t _internal_id() const;
+  void _internal_set_id(::uint64_t value);
 
   public:
-  // uint64 userId = 1;
-  void clear_userid() ;
-  ::uint64_t userid() const;
-  void set_userid(::uint64_t value);
+  // uint64 timestamp = 2;
+  void clear_timestamp() ;
+  ::uint64_t timestamp() const;
+  void set_timestamp(::uint64_t value);
 
   private:
-  ::uint64_t _internal_userid() const;
-  void _internal_set_userid(::uint64_t value);
+  ::uint64_t _internal_timestamp() const;
+  void _internal_set_timestamp(::uint64_t value);
 
   public:
   // @@protoc_insertion_point(class_scope:Proto.TransformSyncBody)
@@ -2117,7 +2129,7 @@ class TransformSyncBody final : public ::google::protobuf::Message
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<2, 3,
-                                   2, 0,
+                                   1, 0,
                                    2>
       _table_;
 
@@ -2139,8 +2151,8 @@ class TransformSyncBody final : public ::google::protobuf::Message
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::Proto::Vector3* PROTOBUF_NULLABLE position_;
-    ::Proto::Quaternion* PROTOBUF_NULLABLE rotation_;
-    ::uint64_t userid_;
+    ::uint64_t id_;
+    ::uint64_t timestamp_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -2375,28 +2387,28 @@ inline Packet::CategoryCase Packet::category_case() const {
 
 // ChatMessageBody
 
-// uint64 userId = 1;
-inline void ChatMessageBody::clear_userid() {
+// uint64 id = 1;
+inline void ChatMessageBody::clear_id() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.userid_ = ::uint64_t{0u};
+  _impl_.id_ = ::uint64_t{0u};
   _impl_._has_bits_[0] &= ~0x00000002U;
 }
-inline ::uint64_t ChatMessageBody::userid() const {
-  // @@protoc_insertion_point(field_get:Proto.ChatMessageBody.userId)
-  return _internal_userid();
+inline ::uint64_t ChatMessageBody::id() const {
+  // @@protoc_insertion_point(field_get:Proto.ChatMessageBody.id)
+  return _internal_id();
 }
-inline void ChatMessageBody::set_userid(::uint64_t value) {
-  _internal_set_userid(value);
+inline void ChatMessageBody::set_id(::uint64_t value) {
+  _internal_set_id(value);
   _impl_._has_bits_[0] |= 0x00000002U;
-  // @@protoc_insertion_point(field_set:Proto.ChatMessageBody.userId)
+  // @@protoc_insertion_point(field_set:Proto.ChatMessageBody.id)
 }
-inline ::uint64_t ChatMessageBody::_internal_userid() const {
+inline ::uint64_t ChatMessageBody::_internal_id() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.userid_;
+  return _impl_.id_;
 }
-inline void ChatMessageBody::_internal_set_userid(::uint64_t value) {
+inline void ChatMessageBody::_internal_set_id(::uint64_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.userid_ = value;
+  _impl_.id_ = value;
 }
 
 // string message = 2;
@@ -2537,35 +2549,35 @@ inline void SystemMessageBody::set_allocated_message(::std::string* PROTOBUF_NUL
 
 // LoginResultBody
 
-// uint64 userId = 1;
-inline void LoginResultBody::clear_userid() {
+// uint64 id = 1;
+inline void LoginResultBody::clear_id() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.userid_ = ::uint64_t{0u};
-  _impl_._has_bits_[0] &= ~0x00000001U;
+  _impl_.id_ = ::uint64_t{0u};
+  _impl_._has_bits_[0] &= ~0x00000002U;
 }
-inline ::uint64_t LoginResultBody::userid() const {
-  // @@protoc_insertion_point(field_get:Proto.LoginResultBody.userId)
-  return _internal_userid();
+inline ::uint64_t LoginResultBody::id() const {
+  // @@protoc_insertion_point(field_get:Proto.LoginResultBody.id)
+  return _internal_id();
 }
-inline void LoginResultBody::set_userid(::uint64_t value) {
-  _internal_set_userid(value);
-  _impl_._has_bits_[0] |= 0x00000001U;
-  // @@protoc_insertion_point(field_set:Proto.LoginResultBody.userId)
+inline void LoginResultBody::set_id(::uint64_t value) {
+  _internal_set_id(value);
+  _impl_._has_bits_[0] |= 0x00000002U;
+  // @@protoc_insertion_point(field_set:Proto.LoginResultBody.id)
 }
-inline ::uint64_t LoginResultBody::_internal_userid() const {
+inline ::uint64_t LoginResultBody::_internal_id() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.userid_;
+  return _impl_.id_;
 }
-inline void LoginResultBody::_internal_set_userid(::uint64_t value) {
+inline void LoginResultBody::_internal_set_id(::uint64_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.userid_ = value;
+  _impl_.id_ = value;
 }
 
 // bool isSuccessed = 2;
 inline void LoginResultBody::clear_issuccessed() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.issuccessed_ = false;
-  _impl_._has_bits_[0] &= ~0x00000002U;
+  _impl_._has_bits_[0] &= ~0x00000004U;
 }
 inline bool LoginResultBody::issuccessed() const {
   // @@protoc_insertion_point(field_get:Proto.LoginResultBody.isSuccessed)
@@ -2573,7 +2585,7 @@ inline bool LoginResultBody::issuccessed() const {
 }
 inline void LoginResultBody::set_issuccessed(bool value) {
   _internal_set_issuccessed(value);
-  _impl_._has_bits_[0] |= 0x00000002U;
+  _impl_._has_bits_[0] |= 0x00000004U;
   // @@protoc_insertion_point(field_set:Proto.LoginResultBody.isSuccessed)
 }
 inline bool LoginResultBody::_internal_issuccessed() const {
@@ -2585,32 +2597,97 @@ inline void LoginResultBody::_internal_set_issuccessed(bool value) {
   _impl_.issuccessed_ = value;
 }
 
+// string username = 3;
+inline void LoginResultBody::clear_username() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.username_.ClearToEmpty();
+  _impl_._has_bits_[0] &= ~0x00000001U;
+}
+inline const ::std::string& LoginResultBody::username() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:Proto.LoginResultBody.username)
+  return _internal_username();
+}
+template <typename Arg_, typename... Args_>
+PROTOBUF_ALWAYS_INLINE void LoginResultBody::set_username(Arg_&& arg, Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_._has_bits_[0] |= 0x00000001U;
+  _impl_.username_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:Proto.LoginResultBody.username)
+}
+inline ::std::string* PROTOBUF_NONNULL LoginResultBody::mutable_username()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::std::string* _s = _internal_mutable_username();
+  // @@protoc_insertion_point(field_mutable:Proto.LoginResultBody.username)
+  return _s;
+}
+inline const ::std::string& LoginResultBody::_internal_username() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.username_.Get();
+}
+inline void LoginResultBody::_internal_set_username(const ::std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_._has_bits_[0] |= 0x00000001U;
+  _impl_.username_.Set(value, GetArena());
+}
+inline ::std::string* PROTOBUF_NONNULL LoginResultBody::_internal_mutable_username() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_._has_bits_[0] |= 0x00000001U;
+  return _impl_.username_.Mutable( GetArena());
+}
+inline ::std::string* PROTOBUF_NULLABLE LoginResultBody::release_username() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:Proto.LoginResultBody.username)
+  if ((_impl_._has_bits_[0] & 0x00000001U) == 0) {
+    return nullptr;
+  }
+  _impl_._has_bits_[0] &= ~0x00000001U;
+  auto* released = _impl_.username_.Release();
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString()) {
+    _impl_.username_.Set("", GetArena());
+  }
+  return released;
+}
+inline void LoginResultBody::set_allocated_username(::std::string* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000001U;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001U;
+  }
+  _impl_.username_.SetAllocated(value, GetArena());
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.username_.IsDefault()) {
+    _impl_.username_.Set("", GetArena());
+  }
+  // @@protoc_insertion_point(field_set_allocated:Proto.LoginResultBody.username)
+}
+
 // -------------------------------------------------------------------
 
 // LoginNotificationBody
 
-// uint64 userId = 1;
-inline void LoginNotificationBody::clear_userid() {
+// uint64 id = 1;
+inline void LoginNotificationBody::clear_id() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.userid_ = ::uint64_t{0u};
+  _impl_.id_ = ::uint64_t{0u};
   _impl_._has_bits_[0] &= ~0x00000002U;
 }
-inline ::uint64_t LoginNotificationBody::userid() const {
-  // @@protoc_insertion_point(field_get:Proto.LoginNotificationBody.userId)
-  return _internal_userid();
+inline ::uint64_t LoginNotificationBody::id() const {
+  // @@protoc_insertion_point(field_get:Proto.LoginNotificationBody.id)
+  return _internal_id();
 }
-inline void LoginNotificationBody::set_userid(::uint64_t value) {
-  _internal_set_userid(value);
+inline void LoginNotificationBody::set_id(::uint64_t value) {
+  _internal_set_id(value);
   _impl_._has_bits_[0] |= 0x00000002U;
-  // @@protoc_insertion_point(field_set:Proto.LoginNotificationBody.userId)
+  // @@protoc_insertion_point(field_set:Proto.LoginNotificationBody.id)
 }
-inline ::uint64_t LoginNotificationBody::_internal_userid() const {
+inline ::uint64_t LoginNotificationBody::_internal_id() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.userid_;
+  return _impl_.id_;
 }
-inline void LoginNotificationBody::_internal_set_userid(::uint64_t value) {
+inline void LoginNotificationBody::_internal_set_id(::uint64_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.userid_ = value;
+  _impl_.id_ = value;
 }
 
 // string username = 2;
@@ -2682,28 +2759,28 @@ inline void LoginNotificationBody::set_allocated_username(::std::string* PROTOBU
 
 // LogoutRequestBody
 
-// uint64 userId = 1;
-inline void LogoutRequestBody::clear_userid() {
+// uint64 id = 1;
+inline void LogoutRequestBody::clear_id() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.userid_ = ::uint64_t{0u};
+  _impl_.id_ = ::uint64_t{0u};
   _impl_._has_bits_[0] &= ~0x00000001U;
 }
-inline ::uint64_t LogoutRequestBody::userid() const {
-  // @@protoc_insertion_point(field_get:Proto.LogoutRequestBody.userId)
-  return _internal_userid();
+inline ::uint64_t LogoutRequestBody::id() const {
+  // @@protoc_insertion_point(field_get:Proto.LogoutRequestBody.id)
+  return _internal_id();
 }
-inline void LogoutRequestBody::set_userid(::uint64_t value) {
-  _internal_set_userid(value);
+inline void LogoutRequestBody::set_id(::uint64_t value) {
+  _internal_set_id(value);
   _impl_._has_bits_[0] |= 0x00000001U;
-  // @@protoc_insertion_point(field_set:Proto.LogoutRequestBody.userId)
+  // @@protoc_insertion_point(field_set:Proto.LogoutRequestBody.id)
 }
-inline ::uint64_t LogoutRequestBody::_internal_userid() const {
+inline ::uint64_t LogoutRequestBody::_internal_id() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.userid_;
+  return _impl_.id_;
 }
-inline void LogoutRequestBody::_internal_set_userid(::uint64_t value) {
+inline void LogoutRequestBody::_internal_set_id(::uint64_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.userid_ = value;
+  _impl_.id_ = value;
 }
 
 // -------------------------------------------------------------------
@@ -2738,59 +2815,83 @@ inline void LogoutResponseBody::_internal_set_issuccessed(bool value) {
 
 // LogoutNotificationBody
 
-// uint64 userId = 1;
-inline void LogoutNotificationBody::clear_userid() {
+// uint64 id = 1;
+inline void LogoutNotificationBody::clear_id() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.userid_ = ::uint64_t{0u};
+  _impl_.id_ = ::uint64_t{0u};
   _impl_._has_bits_[0] &= ~0x00000001U;
 }
-inline ::uint64_t LogoutNotificationBody::userid() const {
-  // @@protoc_insertion_point(field_get:Proto.LogoutNotificationBody.userId)
-  return _internal_userid();
+inline ::uint64_t LogoutNotificationBody::id() const {
+  // @@protoc_insertion_point(field_get:Proto.LogoutNotificationBody.id)
+  return _internal_id();
 }
-inline void LogoutNotificationBody::set_userid(::uint64_t value) {
-  _internal_set_userid(value);
+inline void LogoutNotificationBody::set_id(::uint64_t value) {
+  _internal_set_id(value);
   _impl_._has_bits_[0] |= 0x00000001U;
-  // @@protoc_insertion_point(field_set:Proto.LogoutNotificationBody.userId)
+  // @@protoc_insertion_point(field_set:Proto.LogoutNotificationBody.id)
 }
-inline ::uint64_t LogoutNotificationBody::_internal_userid() const {
+inline ::uint64_t LogoutNotificationBody::_internal_id() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.userid_;
+  return _impl_.id_;
 }
-inline void LogoutNotificationBody::_internal_set_userid(::uint64_t value) {
+inline void LogoutNotificationBody::_internal_set_id(::uint64_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.userid_ = value;
+  _impl_.id_ = value;
 }
 
 // -------------------------------------------------------------------
 
 // TransformSyncBody
 
-// uint64 userId = 1;
-inline void TransformSyncBody::clear_userid() {
+// uint64 id = 1;
+inline void TransformSyncBody::clear_id() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.userid_ = ::uint64_t{0u};
-  _impl_._has_bits_[0] &= ~0x00000004U;
+  _impl_.id_ = ::uint64_t{0u};
+  _impl_._has_bits_[0] &= ~0x00000002U;
 }
-inline ::uint64_t TransformSyncBody::userid() const {
-  // @@protoc_insertion_point(field_get:Proto.TransformSyncBody.userId)
-  return _internal_userid();
+inline ::uint64_t TransformSyncBody::id() const {
+  // @@protoc_insertion_point(field_get:Proto.TransformSyncBody.id)
+  return _internal_id();
 }
-inline void TransformSyncBody::set_userid(::uint64_t value) {
-  _internal_set_userid(value);
-  _impl_._has_bits_[0] |= 0x00000004U;
-  // @@protoc_insertion_point(field_set:Proto.TransformSyncBody.userId)
+inline void TransformSyncBody::set_id(::uint64_t value) {
+  _internal_set_id(value);
+  _impl_._has_bits_[0] |= 0x00000002U;
+  // @@protoc_insertion_point(field_set:Proto.TransformSyncBody.id)
 }
-inline ::uint64_t TransformSyncBody::_internal_userid() const {
+inline ::uint64_t TransformSyncBody::_internal_id() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.userid_;
+  return _impl_.id_;
 }
-inline void TransformSyncBody::_internal_set_userid(::uint64_t value) {
+inline void TransformSyncBody::_internal_set_id(::uint64_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.userid_ = value;
+  _impl_.id_ = value;
 }
 
-// .Proto.Vector3 position = 2;
+// uint64 timestamp = 2;
+inline void TransformSyncBody::clear_timestamp() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.timestamp_ = ::uint64_t{0u};
+  _impl_._has_bits_[0] &= ~0x00000004U;
+}
+inline ::uint64_t TransformSyncBody::timestamp() const {
+  // @@protoc_insertion_point(field_get:Proto.TransformSyncBody.timestamp)
+  return _internal_timestamp();
+}
+inline void TransformSyncBody::set_timestamp(::uint64_t value) {
+  _internal_set_timestamp(value);
+  _impl_._has_bits_[0] |= 0x00000004U;
+  // @@protoc_insertion_point(field_set:Proto.TransformSyncBody.timestamp)
+}
+inline ::uint64_t TransformSyncBody::_internal_timestamp() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.timestamp_;
+}
+inline void TransformSyncBody::_internal_set_timestamp(::uint64_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.timestamp_ = value;
+}
+
+// .Proto.Vector3 position = 3;
 inline bool TransformSyncBody::has_position() const {
   bool value = (_impl_._has_bits_[0] & 0x00000001U) != 0;
   PROTOBUF_ASSUME(!value || _impl_.position_ != nullptr);
@@ -2881,99 +2982,6 @@ inline void TransformSyncBody::set_allocated_position(::Proto::Vector3* PROTOBUF
 
   _impl_.position_ = reinterpret_cast<::Proto::Vector3*>(value);
   // @@protoc_insertion_point(field_set_allocated:Proto.TransformSyncBody.position)
-}
-
-// .Proto.Quaternion rotation = 3;
-inline bool TransformSyncBody::has_rotation() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000002U) != 0;
-  PROTOBUF_ASSUME(!value || _impl_.rotation_ != nullptr);
-  return value;
-}
-inline const ::Proto::Quaternion& TransformSyncBody::_internal_rotation() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  const ::Proto::Quaternion* p = _impl_.rotation_;
-  return p != nullptr ? *p : reinterpret_cast<const ::Proto::Quaternion&>(::Proto::_Quaternion_default_instance_);
-}
-inline const ::Proto::Quaternion& TransformSyncBody::rotation() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:Proto.TransformSyncBody.rotation)
-  return _internal_rotation();
-}
-inline void TransformSyncBody::unsafe_arena_set_allocated_rotation(
-    ::Proto::Quaternion* PROTOBUF_NULLABLE value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (GetArena() == nullptr) {
-    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.rotation_);
-  }
-  _impl_.rotation_ = reinterpret_cast<::Proto::Quaternion*>(value);
-  if (value != nullptr) {
-    _impl_._has_bits_[0] |= 0x00000002U;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000002U;
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.TransformSyncBody.rotation)
-}
-inline ::Proto::Quaternion* PROTOBUF_NULLABLE TransformSyncBody::release_rotation() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-
-  _impl_._has_bits_[0] &= ~0x00000002U;
-  ::Proto::Quaternion* released = _impl_.rotation_;
-  _impl_.rotation_ = nullptr;
-  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
-    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
-    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
-    if (GetArena() == nullptr) {
-      delete old;
-    }
-  } else {
-    if (GetArena() != nullptr) {
-      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
-    }
-  }
-  return released;
-}
-inline ::Proto::Quaternion* PROTOBUF_NULLABLE TransformSyncBody::unsafe_arena_release_rotation() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:Proto.TransformSyncBody.rotation)
-
-  _impl_._has_bits_[0] &= ~0x00000002U;
-  ::Proto::Quaternion* temp = _impl_.rotation_;
-  _impl_.rotation_ = nullptr;
-  return temp;
-}
-inline ::Proto::Quaternion* PROTOBUF_NONNULL TransformSyncBody::_internal_mutable_rotation() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (_impl_.rotation_ == nullptr) {
-    auto* p = ::google::protobuf::Message::DefaultConstruct<::Proto::Quaternion>(GetArena());
-    _impl_.rotation_ = reinterpret_cast<::Proto::Quaternion*>(p);
-  }
-  return _impl_.rotation_;
-}
-inline ::Proto::Quaternion* PROTOBUF_NONNULL TransformSyncBody::mutable_rotation()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  _impl_._has_bits_[0] |= 0x00000002U;
-  ::Proto::Quaternion* _msg = _internal_mutable_rotation();
-  // @@protoc_insertion_point(field_mutable:Proto.TransformSyncBody.rotation)
-  return _msg;
-}
-inline void TransformSyncBody::set_allocated_rotation(::Proto::Quaternion* PROTOBUF_NULLABLE value) {
-  ::google::protobuf::Arena* message_arena = GetArena();
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (message_arena == nullptr) {
-    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.rotation_);
-  }
-
-  if (value != nullptr) {
-    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::Message*>(value)->GetArena();
-    if (message_arena != submessage_arena) {
-      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
-    }
-    _impl_._has_bits_[0] |= 0x00000002U;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000002U;
-  }
-
-  _impl_.rotation_ = reinterpret_cast<::Proto::Quaternion*>(value);
-  // @@protoc_insertion_point(field_set_allocated:Proto.TransformSyncBody.rotation)
 }
 
 #ifdef __GNUC__

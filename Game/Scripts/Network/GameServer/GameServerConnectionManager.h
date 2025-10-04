@@ -23,7 +23,8 @@ public:
 	GameServerConnectionManager() = default;
 	~GameServerConnectionManager() = default;
 
-	__CLASS_NON_COPYABLE(GameServerConnectionManager)
+	// mutexがあるため、コピー/ムーブ禁止
+	__CLASS_NON_COPYMOVEABLE(GameServerConnectionManager)
 
 public:
 	void initialize();

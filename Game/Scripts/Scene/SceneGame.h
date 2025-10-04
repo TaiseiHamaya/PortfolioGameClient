@@ -1,16 +1,11 @@
 #pragma once
 
-#include <winsock2.h>
-#include <windows.h>
-
 #include <Engine/Runtime/Scene/BaseScene.h>
 
 #include <list>
 #include <vector>
 
 #include <Library/Math/Vector3.h>
-
-#include "Scripts/Proto/types.pb.h"
 
 #include <Engine/GraphicsAPI/DirectX/DxResource/TextureResource/RenderTexture.h>
 #include <Engine/Module/DrawExecutor/LightingExecutor/DirectionalLightingExecutor.h>
@@ -29,16 +24,16 @@
 #include "Scripts/Manager/EffectManager.h"
 #include "Scripts/Manager/EntityManager.h"
 
-#include "Scripts/MiscInstance/AOE/CircleAoe.h"
-#include "Scripts/MiscInstance/Camera/FollowCamera.h"
-#include "Scripts/MiscInstance/Effects/CometEffect.h"
-#include "Scripts/MiscInstance/Enemy/EnemyManager.h"
-#include "Scripts/Player/Actions/PaladinHolySpirit.h"
-#include "Scripts/Player/LocalPlayerCommandHandler.h"
-#include "Scripts/Player/Player.h"
-#include "Scripts/RenderNode/PostEffect/GaussianBlurNode.h"
+#include "Scripts/Extension/RenderNode/PostEffect/GaussianBlurNode.h"
+#include "Scripts/Game/GameInputHandler.h"
+#include "Scripts/Game/Zone/ZoneCommand/ZoneHandler.h"
+#include "Scripts/Instance/MiscInstance/AOE/CircleAoe.h"
+#include "Scripts/Instance/MiscInstance/Camera/FollowCamera.h"
+#include "Scripts/Instance/MiscInstance/Effects/CometEffect.h"
+#include "Scripts/Instance/MiscInstance/Enemy/EnemyManager.h"
+#include "Scripts/Instance/Player/Actions/PaladinHolySpirit.h"
+#include "Scripts/Instance/Player/Player.h"
 #include "Scripts/Network/NetworkCluster.h"
-#include "Scripts/Network/ZoneHandler.h"
 
 struct CometAction {
 	std::unique_ptr<CircleAoe> circleAoE;
@@ -71,7 +66,9 @@ public:
 private:
 	WorldTimer timer;
 
+	// ---------- 描画パス関連 ----------
 	std::unique_ptr<RenderPath> renderPath;
+	// RenderTarget
 	std::vector<RenderTexture> renderTextures;
 	DeferredAdaptor::GBuffersType gBuffer;
 	SingleRenderTarget baseRenderTexture;
@@ -82,7 +79,7 @@ private:
 	SingleRenderTarget downSampleRenderTexture8;
 	SingleRenderTarget downSampleRenderTexture16;
 	SingleRenderTarget bloomBaseRenderTexture;
-
+	// RenderNode
 	std::shared_ptr<RadialBlurNode> radialBlurNode;
 	std::shared_ptr<LuminanceExtractionNode> luminanceExtractionNode;
 	std::shared_ptr<GaussianBlurNode> gaussianBlurNode2;
@@ -92,31 +89,31 @@ private:
 	std::shared_ptr<MargeTextureNode> margeTextureNode;
 	std::shared_ptr<BloomNode> bloomNode;
 
+	// ---------- マネージャー関連 ----------
 	std::unique_ptr<WorldManager> worldManager;
-
+	// 描画管理
 	std::unique_ptr<StaticMeshDrawManager> staticMeshDrawManager;
 	std::unique_ptr<SkinningMeshDrawManager> skinningMeshDrawManager;
 	std::unique_ptr<Rect3dDrawManager> rect3dDrawManager;
 	std::unique_ptr<DirectionalLightingExecutor> directionalLightingExecutor;
+	// その他
+	std::unique_ptr<EntityManager> entityManager; // 全てのエンティティ管理
+	std::unique_ptr<EffectManager> effectManager; // エフェクト管理
+	std::unique_ptr<EnemyManager> enemyManager; // 敵管理
 
-	std::unique_ptr<EntityManager> entityManager;
-	std::unique_ptr<EffectManager> effectManager;
+	std::unique_ptr<GameInputHandler> gameInputHandler; // プレイヤー入力
+	NetworkCluster networkCluster; // ネットワーク
+	ZoneHandler zoneHandler; // ゾーン処理
 
+	// WorldInstance
 	std::unique_ptr<DirectionalLightInstance> directionalLight;
 
 	std::unique_ptr<FollowCamera> camera3D;
 	std::unique_ptr<StaticMeshInstance> skydome;
-	std::unique_ptr<EnemyManager> enemyManager;
-	Reference<Player> player;
-
-	std::unique_ptr<LocalPlayerCommandHandler> localPlayerCommandHandler;
-
+	
 	std::list<CometAction> comets;
 
 	Reference<Vector3> cubemapWorld;
-
-	NetworkCluster networkCluster;
-	ZoneHandler zoneHandler;
 
 #ifdef DEBUG_FEATURES_ENABLE
 	GaussianBlurNode::GaussianBlurInfo blurData{

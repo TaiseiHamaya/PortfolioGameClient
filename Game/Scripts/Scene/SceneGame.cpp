@@ -22,14 +22,14 @@
 #include <Engine/Application/ProjectSettings/ProjectSettings.h>
 #include <Engine/Runtime/Clock/WorldClock.h>
 
-#include "Scripts/Util/LookAtRect.h"
+#include "Scripts/Extension/RenderNode/CubemapNode/CubemapNode.h"
+#include "Scripts/Extension/RenderNode/PostEffect/BloomNode.h"
+#include "Scripts/Extension/RenderNode/PostEffect/LuminanceExtractionNode.h"
+#include "Scripts/Extension/RenderNode/PostEffect/MargeTextureNode.h"
+#include "Scripts/Extension/Util/LookAtRect.h"
+#include "Scripts/Instance/IEntity/ISkillAction/ISkillAction.h"
+#include "Scripts/Instance/MiscInstance/Enemy/Enemy.h"
 
-#include "Scripts/MiscInstance/Enemy/Enemy.h"
-#include "Scripts/IEntity/ISkillAction/ISkillAction.h"
-#include "Scripts/RenderNode/CubemapNode/CubemapNode.h"
-#include "Scripts/RenderNode/PostEffect/BloomNode.h"
-#include "Scripts/RenderNode/PostEffect/LuminanceExtractionNode.h"
-#include "Scripts/RenderNode/PostEffect/MargeTextureNode.h"
 #include <Engine/Debug/DebugValues/DebugValues.h>
 
 void SceneGame::load() {
@@ -83,6 +83,7 @@ void SceneGame::load() {
 }
 
 void SceneGame::initialize() {
+	// ---------- Initialize ----------
 	// WorldManager
 	worldManager = eps::CreateUnique<WorldManager>();
 	entityManager = eps::CreateUnique<EntityManager>();
@@ -96,25 +97,42 @@ void SceneGame::initialize() {
 	staticMeshDrawManager = eps::CreateUnique<StaticMeshDrawManager>();
 	staticMeshDrawManager->initialize(1);
 
+	// Network
+	networkCluster.initialize();
+
+	gameInputHandler = eps::CreateUnique<GameInputHandler>();
+	gameInputHandler->initialize();
+
+	// ---------- CreateInstancing ----------
+	// Rect
 	rect3dDrawManager = eps::CreateUnique<Rect3dDrawManager>();
 	rect3dDrawManager->initialize(1);
 	rect3dDrawManager->initialize(2);
 	rect3dDrawManager->make_instancing(0, 1024);
 	rect3dDrawManager->make_instancing(1, 32);
-	//rect3dDrawManager->make_instancing(0, PrimitiveBlendMode::Add, 100);
-	//rect3dDrawManager->make_instancing(0, PrimitiveBlendMode::Alpha, 100);
-
+	// SkinMesh
+	skinningMeshDrawManager->make_instancing(0, "Player.gltf", 100);
+	skinningMeshDrawManager->make_instancing(0, "Enemy.gltf", 100);
+	skinningMeshDrawManager->make_instancing(0, "RedComet.gltf", 1);
+	// StaticMesh
+	staticMeshDrawManager->make_instancing(0, "skydome.gltf", 1);
+	staticMeshDrawManager->make_instancing(0, "Comet.obj", 100);
+	staticMeshDrawManager->make_instancing(0, "Grid.obj", 1);
+	// Light
 	directionalLightingExecutor = eps::CreateUnique<DirectionalLightingExecutor>(1);
 
+	// Setup
 	entityManager->setup(worldManager, skinningMeshDrawManager, rect3dDrawManager);
 	enemyManager->setup(entityManager);
 	effectManager->setup(staticMeshDrawManager, rect3dDrawManager);
+	zoneHandler.setup(entityManager, networkCluster.connection_manager(), networkCluster.get_receiver(), networkCluster.get_sender());
+	networkCluster.setup();
+	gameInputHandler->setup(zoneHandler);
 
 	// WorldInstances
 	// Allocation
 	directionalLight = worldManager->create<DirectionalLightInstance>();
-	//directionalLight->light_data().intensity = 0.500f;
-	player = entityManager->generate<Player>(0, "Player.json");
+	Reference<Player> player = entityManager->generate<Player>("Player.json");
 	skydome = worldManager->create<StaticMeshInstance>(nullptr, "skydome.gltf");
 	camera3D = worldManager->create<FollowCamera>();
 
@@ -122,6 +140,14 @@ void SceneGame::initialize() {
 	Particle::lookAtDefault = camera3D.get();
 	CometEffect::camera = camera3D;
 	ISkillAction::SetEffectManager(effectManager);
+	zoneHandler.set_player(player);
+	staticMeshDrawManager->register_instance(skydome);
+	gameInputHandler->set_instances(player, camera3D);
+
+#ifdef DEBUG_FEATURES_ENABLE
+	networkCluster.set_player(player);
+#endif // DEBUG_FEATURES_ENABLE
+
 
 	skydome->get_transform().set_scale(CVector3::BASIS * 100);
 	skydome->get_materials()[0].lightingType = LighingType::None;
@@ -129,13 +155,15 @@ void SceneGame::initialize() {
 	camera3D->initialize();
 	camera3D->set_offset({ 0,1,-40 });
 	camera3D->set_target(player);
-	enemyManager->generate(1, "RedComet.json", Vector3{ 0,0,8 });
-	player->set_target(enemyManager->get_nearest(player->world_position()));
+	enemyManager->generate("RedComet.json", Vector3{ 0,0,8 });
 
-	localPlayerCommandHandler = std::make_unique<LocalPlayerCommandHandler>();
-	localPlayerCommandHandler->initialize(player);
-	localPlayerCommandHandler->start(camera3D);
+#ifdef DEBUG_FEATURES_ENABLE
+	//staticMeshDrawManager->register_debug_instance(0, camera3D, true);
+#else
+	//staticMeshDrawManager->register_instance(DebugValues::GetGridInstance());
+#endif // DEBUG_FEATURES_ENABLE
 
+#pragma region RenderPath
 	// RenderPath
 	renderTextures.resize(10);
 	renderTextures[0].initialize(DeferredAdaptor::DXGI_FORMAT_LIST[0]);
@@ -257,28 +285,7 @@ void SceneGame::initialize() {
 	renderPath->initialize({ deferredMeshNode,skinMeshNodeDeferred,nonLightingPixelNode,directionalLightingNode, cubemapNode,rect3dNode,particleBillboardNode,
 		radialBlurNode, luminanceExtractionNode, gaussianBlurNode2, gaussianBlurNode4, gaussianBlurNode8, gaussianBlurNode16 , margeTextureNode, bloomNode, rect3dNodeAOE });
 #endif // DEFERRED_RENDERING
-
-	// CreateInstancing
-	skinningMeshDrawManager->make_instancing(0, "Player.gltf", 1);
-	skinningMeshDrawManager->make_instancing(0, "Enemy.gltf", 100);
-	skinningMeshDrawManager->make_instancing(0, "RedComet.gltf", 1);
-	staticMeshDrawManager->make_instancing(0, "skydome.gltf", 1);
-	staticMeshDrawManager->make_instancing(0, "Comet.obj", 100);
-	staticMeshDrawManager->make_instancing(0, "Grid.obj", 1);
-
-	// RegisterDraw
-#ifdef DEBUG_FEATURES_ENABLE
-	//staticMeshDrawManager->register_debug_instance(0, camera3D, true);
-#else
-	//staticMeshDrawManager->register_instance(DebugValues::GetGridInstance());
-#endif // DEBUG_FEATURES_ENABLE
-	staticMeshDrawManager->register_instance(skydome);
-
-	networkCluster.initialize();
-
-	zoneHandler.setup(networkCluster.get_receiver(), networkCluster.connection_manager());
-
-	networkCluster.setup();
+#pragma endregion RenderPath
 }
 
 void SceneGame::finalize() {
@@ -288,9 +295,10 @@ void SceneGame::finalize() {
 void SceneGame::begin() {
 	timer.ahead();
 
-	localPlayerCommandHandler->begin();
 	entityManager->begin();
+
 	camera3D->input();
+	gameInputHandler->input();
 
 	networkCluster.receive();
 }
@@ -298,35 +306,25 @@ void SceneGame::begin() {
 void SceneGame::update() {
 	zoneHandler.handle_zone();
 
-	localPlayerCommandHandler->update();
+	gameInputHandler->update();
 
-	localPlayerCommandHandler->run();
+	zoneHandler.execute_commands();
 
 	entityManager->update();
 	camera3D->update();
 
-	//inputHandler.update();
-	//actionTimer.back();
-	//if (inputHandler.trigger(PadID::A) && actionTimer < 0) {
-	//	actionTimer.set(2.5f);
-	//	auto effect = paladinHolySpirit->on_impact(player, enemyManager->get_nearest(player->world_position()).ptr(), worldManager);
-	//	for (auto& elem : effect) {
-	//		effectManager->register_instance(std::move(elem));
-	//	}
-	//}
-
 	effectManager->update();
 
-	if (std::fmodf(timer.time(), 7.0f) <= WorldClock::DeltaSeconds()) {
-		auto& temp = comets.emplace_back(
-			worldManager->create<CircleAoe>(),
-			worldManager->create<CometEffect>()
-		);
-		temp.circleAoE->initialize(player->world_position(), 7, 3);
-		temp.circleAoE->start(rect3dDrawManager);
-		temp.cometEffect->initialize(player->world_position(), radialBlurNode->data());
-		temp.cometEffect->setup(staticMeshDrawManager, rect3dDrawManager);
-	}
+	//if (std::fmodf(timer.time(), 7.0f) <= WorldClock::DeltaSeconds()) {
+	//	auto& temp = comets.emplace_back(
+	//		worldManager->create<CircleAoe>(),
+	//		worldManager->create<CometEffect>()
+	//	);
+	//	temp.circleAoE->initialize(player->world_position(), 7, 3);
+	//	temp.circleAoE->start(rect3dDrawManager);
+	//	temp.cometEffect->initialize(player->world_position(), radialBlurNode->data());
+	//	temp.cometEffect->setup(staticMeshDrawManager, rect3dDrawManager);
+	//}
 
 	for (auto& comet : comets) {
 		comet.circleAoE->update();
@@ -470,10 +468,6 @@ void SceneGame::debug_update() {
 	directionalLight->debug_gui();
 	ImGui::End();*/
 
-	ImGui::Begin("Player");
-	player->debug_gui();
-	ImGui::End();
-
 	enemyManager->debug_gui();
 
 	ImGui::Begin("Blur");
@@ -485,7 +479,7 @@ void SceneGame::debug_update() {
 	ImGui::End();
 
 	ImGui::Begin("PostEffect");
-	if(ImGui::TreeNode("LuminanceExtraction")) {
+	if (ImGui::TreeNode("LuminanceExtraction")) {
 		luminanceExtractionNode->debug_gui();
 		ImGui::TreePop();
 	}
@@ -500,7 +494,7 @@ void SceneGame::debug_update() {
 		gaussianBlurNode4->set_parameters(blurData.dispersion, blurData.length, blurData.sampleCount);
 		gaussianBlurNode8->set_parameters(blurData.dispersion, blurData.length, blurData.sampleCount);
 		gaussianBlurNode16->set_parameters(blurData.dispersion, blurData.length, blurData.sampleCount);
-	
+
 		ImGui::TreePop();
 	}
 	if (ImGui::TreeNode("BloomNode")) {
@@ -509,7 +503,9 @@ void SceneGame::debug_update() {
 	}
 	ImGui::End();
 
+	ImGui::Begin("NetworkCluster");
 	networkCluster.debug_gui();
+	ImGui::End();
 }
 
 #endif // DEFERRED_RENDERING
