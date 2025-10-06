@@ -30,7 +30,10 @@ private:
 	GameServerPacketReceiver packetReceiver;
 	GameServerPacketSender packetSender;
 
+	Reference<IEntity> player;
+
 public:
+	void set_player(Reference<IEntity> player_);
 	Reference<GameServerPacketReceiver> get_receiver();
 	Reference<GameServerConnectionManager> connection_manager();
 	Reference<GameServerPacketSender> get_sender();
@@ -38,10 +41,8 @@ public:
 #ifdef DEBUG_FEATURES_ENABLE
 public:
 	void debug_gui();
-	void set_player(Reference<IEntity> player_) { player = player_; }
 
 private:
 	std::string msg;
-	Reference<IEntity> player;
 #endif // DEBUG_FEATURES_ENABLE
 };

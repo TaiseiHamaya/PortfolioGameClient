@@ -10,7 +10,9 @@
 #include <google/protobuf/message_lite.h>
 
 void Portfolio::initialize() {
+#ifdef DEBUG_FEATURES_ENABLE
 	EditorMain::SetActiveEditor(false);
+#endif // DEBUG_FEATURES_ENABLE
 
 	SceneManager::Setup(std::make_unique<FactoryPortfolio>());
 }

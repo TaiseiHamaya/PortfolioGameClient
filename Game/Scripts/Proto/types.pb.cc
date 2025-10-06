@@ -157,63 +157,6 @@ struct LogoutNotificationBodyDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 LogoutNotificationBodyDefaultTypeInternal _LogoutNotificationBody_default_instance_;
 
-inline constexpr LoginResultBody::Impl_::Impl_(
-    ::_pbi::ConstantInitialized) noexcept
-      : _cached_size_{0},
-        username_(
-            &::google::protobuf::internal::fixed_address_empty_string,
-            ::_pbi::ConstantInitialized()),
-        id_{::uint64_t{0u}},
-        issuccessed_{false} {}
-
-template <typename>
-PROTOBUF_CONSTEXPR LoginResultBody::LoginResultBody(::_pbi::ConstantInitialized)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(LoginResultBody_class_data_.base()),
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(),
-#endif  // PROTOBUF_CUSTOM_VTABLE
-      _impl_(::_pbi::ConstantInitialized()) {
-}
-struct LoginResultBodyDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR LoginResultBodyDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~LoginResultBodyDefaultTypeInternal() {}
-  union {
-    LoginResultBody _instance;
-  };
-};
-
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 LoginResultBodyDefaultTypeInternal _LoginResultBody_default_instance_;
-
-inline constexpr LoginNotificationBody::Impl_::Impl_(
-    ::_pbi::ConstantInitialized) noexcept
-      : _cached_size_{0},
-        username_(
-            &::google::protobuf::internal::fixed_address_empty_string,
-            ::_pbi::ConstantInitialized()),
-        id_{::uint64_t{0u}} {}
-
-template <typename>
-PROTOBUF_CONSTEXPR LoginNotificationBody::LoginNotificationBody(::_pbi::ConstantInitialized)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(LoginNotificationBody_class_data_.base()),
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(),
-#endif  // PROTOBUF_CUSTOM_VTABLE
-      _impl_(::_pbi::ConstantInitialized()) {
-}
-struct LoginNotificationBodyDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR LoginNotificationBodyDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~LoginNotificationBodyDefaultTypeInternal() {}
-  union {
-    LoginNotificationBody _instance;
-  };
-};
-
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 LoginNotificationBodyDefaultTypeInternal _LoginNotificationBody_default_instance_;
-
 inline constexpr ChatMessageBody::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
@@ -268,6 +211,65 @@ struct TransformSyncBodyDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 TransformSyncBodyDefaultTypeInternal _TransformSyncBody_default_instance_;
+
+inline constexpr LoginResultBody::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        username_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        position_{nullptr},
+        id_{::uint64_t{0u}},
+        issuccessed_{false} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR LoginResultBody::LoginResultBody(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(LoginResultBody_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct LoginResultBodyDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR LoginResultBodyDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~LoginResultBodyDefaultTypeInternal() {}
+  union {
+    LoginResultBody _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 LoginResultBodyDefaultTypeInternal _LoginResultBody_default_instance_;
+
+inline constexpr LoginNotificationBody::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        username_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        position_{nullptr},
+        id_{::uint64_t{0u}} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR LoginNotificationBody::LoginNotificationBody(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(LoginNotificationBody_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct LoginNotificationBodyDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR LoginNotificationBodyDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~LoginNotificationBodyDefaultTypeInternal() {}
+  union {
+    LoginNotificationBody _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 LoginNotificationBodyDefaultTypeInternal _LoginNotificationBody_default_instance_;
 }  // namespace Proto
 static const ::_pb::EnumDescriptor* PROTOBUF_NONNULL
     file_level_enum_descriptors_types_2eproto[4];
@@ -305,20 +307,24 @@ const ::uint32_t
         0,
         0x081, // bitmap
         PROTOBUF_FIELD_OFFSET(::Proto::LoginResultBody, _impl_._has_bits_),
-        6, // hasbit index offset
+        7, // hasbit index offset
         PROTOBUF_FIELD_OFFSET(::Proto::LoginResultBody, _impl_.id_),
         PROTOBUF_FIELD_OFFSET(::Proto::LoginResultBody, _impl_.issuccessed_),
         PROTOBUF_FIELD_OFFSET(::Proto::LoginResultBody, _impl_.username_),
-        1,
+        PROTOBUF_FIELD_OFFSET(::Proto::LoginResultBody, _impl_.position_),
         2,
+        3,
         0,
+        1,
         0x081, // bitmap
         PROTOBUF_FIELD_OFFSET(::Proto::LoginNotificationBody, _impl_._has_bits_),
-        5, // hasbit index offset
+        6, // hasbit index offset
         PROTOBUF_FIELD_OFFSET(::Proto::LoginNotificationBody, _impl_.id_),
         PROTOBUF_FIELD_OFFSET(::Proto::LoginNotificationBody, _impl_.username_),
-        1,
+        PROTOBUF_FIELD_OFFSET(::Proto::LoginNotificationBody, _impl_.position_),
+        2,
         0,
+        1,
         0x081, // bitmap
         PROTOBUF_FIELD_OFFSET(::Proto::LogoutRequestBody, _impl_._has_bits_),
         4, // hasbit index offset
@@ -351,11 +357,11 @@ static const ::_pbi::MigrationSchema
         {15, sizeof(::Proto::ChatMessageBody)},
         {22, sizeof(::Proto::SystemMessageBody)},
         {27, sizeof(::Proto::LoginResultBody)},
-        {36, sizeof(::Proto::LoginNotificationBody)},
-        {43, sizeof(::Proto::LogoutRequestBody)},
-        {48, sizeof(::Proto::LogoutResponseBody)},
-        {53, sizeof(::Proto::LogoutNotificationBody)},
-        {58, sizeof(::Proto::TransformSyncBody)},
+        {38, sizeof(::Proto::LoginNotificationBody)},
+        {47, sizeof(::Proto::LogoutRequestBody)},
+        {52, sizeof(::Proto::LogoutResponseBody)},
+        {57, sizeof(::Proto::LogoutNotificationBody)},
+        {62, sizeof(::Proto::TransformSyncBody)},
 };
 static const ::_pb::Message* PROTOBUF_NONNULL const file_default_instances[] = {
     &::Proto::_Packet_default_instance_._instance,
@@ -379,22 +385,23 @@ const char descriptor_table_protodef_types_2eproto[] ABSL_ATTRIBUTE_SECTION_VARI
     "tTypeH\000\022\017\n\007payload\030\006 \001(\014B\n\n\010category\".\n\017"
     "ChatMessageBody\022\n\n\002id\030\001 \001(\004\022\017\n\007message\030\002"
     " \001(\t\"$\n\021SystemMessageBody\022\017\n\007message\030\001 \001"
-    "(\t\"D\n\017LoginResultBody\022\n\n\002id\030\001 \001(\004\022\023\n\013isS"
-    "uccessed\030\002 \001(\010\022\020\n\010username\030\003 \001(\t\"5\n\025Logi"
-    "nNotificationBody\022\n\n\002id\030\001 \001(\004\022\020\n\010usernam"
-    "e\030\002 \001(\t\"\037\n\021LogoutRequestBody\022\n\n\002id\030\001 \001(\004"
-    "\")\n\022LogoutResponseBody\022\023\n\013isSuccessed\030\001 "
-    "\001(\010\"$\n\026LogoutNotificationBody\022\n\n\002id\030\001 \001("
-    "\004\"T\n\021TransformSyncBody\022\n\n\002id\030\001 \001(\004\022\021\n\tti"
-    "mestamp\030\002 \001(\004\022 \n\010position\030\003 \001(\0132\016.Proto."
-    "Vector3*X\n\017TextMessageType\022\023\n\017MessageCha"
-    "tSend\020\000\022\026\n\022MessageChatReceive\020\001\022\030\n\024Messa"
-    "geSystemMessage\020\002*9\n\017LoginPacketType\022\017\n\013"
-    "LoginResult\020\000\022\025\n\021LoginNotification\020\001*Q\n\020"
-    "LogoutPacketType\022\021\n\rLogoutRequest\020\000\022\022\n\016L"
-    "ogoutResponse\020\001\022\026\n\022LogoutNotification\020\002*"
-    "#\n\016SyncPacketType\022\021\n\rSyncTransform\020\000b\006pr"
-    "oto3"
+    "(\t\"f\n\017LoginResultBody\022\n\n\002id\030\001 \001(\004\022\023\n\013isS"
+    "uccessed\030\002 \001(\010\022\020\n\010username\030\003 \001(\t\022 \n\010posi"
+    "tion\030\004 \001(\0132\016.Proto.Vector3\"W\n\025LoginNotif"
+    "icationBody\022\n\n\002id\030\001 \001(\004\022\020\n\010username\030\002 \001("
+    "\t\022 \n\010position\030\003 \001(\0132\016.Proto.Vector3\"\037\n\021L"
+    "ogoutRequestBody\022\n\n\002id\030\001 \001(\004\")\n\022LogoutRe"
+    "sponseBody\022\023\n\013isSuccessed\030\001 \001(\010\"$\n\026Logou"
+    "tNotificationBody\022\n\n\002id\030\001 \001(\004\"T\n\021Transfo"
+    "rmSyncBody\022\n\n\002id\030\001 \001(\004\022\021\n\ttimestamp\030\002 \001("
+    "\004\022 \n\010position\030\003 \001(\0132\016.Proto.Vector3*X\n\017T"
+    "extMessageType\022\023\n\017MessageChatSend\020\000\022\026\n\022M"
+    "essageChatReceive\020\001\022\030\n\024MessageSystemMess"
+    "age\020\002*9\n\017LoginPacketType\022\017\n\013LoginResult\020"
+    "\000\022\025\n\021LoginNotification\020\001*Q\n\020LogoutPacket"
+    "Type\022\021\n\rLogoutRequest\020\000\022\022\n\016LogoutRespons"
+    "e\020\001\022\026\n\022LogoutNotification\020\002*#\n\016SyncPacke"
+    "tType\022\021\n\rSyncTransform\020\000b\006proto3"
 };
 static const ::_pbi::DescriptorTable* PROTOBUF_NONNULL const
     descriptor_table_types_2eproto_deps[1] = {
@@ -404,7 +411,7 @@ static ::absl::once_flag descriptor_table_types_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_types_2eproto = {
     false,
     false,
-    964,
+    1032,
     descriptor_table_protodef_types_2eproto,
     "types.proto",
     &descriptor_table_types_2eproto_once,
@@ -1442,6 +1449,11 @@ class LoginResultBody::_Internal {
       8 * PROTOBUF_FIELD_OFFSET(LoginResultBody, _impl_._has_bits_);
 };
 
+void LoginResultBody::clear_position() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.position_ != nullptr) _impl_.position_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000002U;
+}
 LoginResultBody::LoginResultBody(::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, LoginResultBody_class_data_.base()) {
@@ -1472,6 +1484,10 @@ LoginResultBody::LoginResultBody(
   _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
   new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  ::uint32_t cached_has_bits = _impl_._has_bits_[0];
+  _impl_.position_ = ((cached_has_bits & 0x00000002U) != 0)
+                ? ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.position_)
+                : nullptr;
   ::memcpy(reinterpret_cast<char *>(&_impl_) +
                offsetof(Impl_, id_),
            reinterpret_cast<const char *>(&from._impl_) +
@@ -1491,10 +1507,10 @@ PROTOBUF_NDEBUG_INLINE LoginResultBody::Impl_::Impl_(
 inline void LoginResultBody::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
   ::memset(reinterpret_cast<char *>(&_impl_) +
-               offsetof(Impl_, id_),
+               offsetof(Impl_, position_),
            0,
            offsetof(Impl_, issuccessed_) -
-               offsetof(Impl_, id_) +
+               offsetof(Impl_, position_) +
                sizeof(Impl_::issuccessed_));
 }
 LoginResultBody::~LoginResultBody() {
@@ -1509,6 +1525,7 @@ inline void LoginResultBody::SharedDtor(MessageLite& self) {
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
   this_._impl_.username_.Destroy();
+  delete this_._impl_.position_;
   this_._impl_.~Impl_();
 }
 
@@ -1555,18 +1572,18 @@ LoginResultBody::GetClassData() const {
   return LoginResultBody_class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 3, 0, 38, 2>
+const ::_pbi::TcParseTable<2, 4, 1, 38, 2>
 LoginResultBody::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(LoginResultBody, _impl_._has_bits_),
     0, // no _extensions_
-    3, 24,  // max_field_number, fast_idx_mask
+    4, 24,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967288,  // skipmap
+    4294967280,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    3,  // num_field_entries
-    0,  // num_aux_entries
-    offsetof(decltype(_table_), field_names),  // no aux_entries
+    4,  // num_field_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
     LoginResultBody_class_data_.base(),
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
@@ -1574,13 +1591,15 @@ LoginResultBody::_table_ = {
     ::_pbi::TcParser::GetTable<::Proto::LoginResultBody>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    {::_pbi::TcParser::MiniParse, {}},
+    // .Proto.Vector3 position = 4;
+    {::_pbi::TcParser::FastMtS1,
+     {34, 1, 0, PROTOBUF_FIELD_OFFSET(LoginResultBody, _impl_.position_)}},
     // uint64 id = 1;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(LoginResultBody, _impl_.id_), 1>(),
-     {8, 1, 0, PROTOBUF_FIELD_OFFSET(LoginResultBody, _impl_.id_)}},
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(LoginResultBody, _impl_.id_), 2>(),
+     {8, 2, 0, PROTOBUF_FIELD_OFFSET(LoginResultBody, _impl_.id_)}},
     // bool isSuccessed = 2;
-    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(LoginResultBody, _impl_.issuccessed_), 2>(),
-     {16, 2, 0, PROTOBUF_FIELD_OFFSET(LoginResultBody, _impl_.issuccessed_)}},
+    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(LoginResultBody, _impl_.issuccessed_), 3>(),
+     {16, 3, 0, PROTOBUF_FIELD_OFFSET(LoginResultBody, _impl_.issuccessed_)}},
     // string username = 3;
     {::_pbi::TcParser::FastUS1,
      {26, 0, 0, PROTOBUF_FIELD_OFFSET(LoginResultBody, _impl_.username_)}},
@@ -1588,13 +1607,17 @@ LoginResultBody::_table_ = {
     65535, 65535
   }}, {{
     // uint64 id = 1;
-    {PROTOBUF_FIELD_OFFSET(LoginResultBody, _impl_.id_), _Internal::kHasBitsOffset + 1, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt64)},
+    {PROTOBUF_FIELD_OFFSET(LoginResultBody, _impl_.id_), _Internal::kHasBitsOffset + 2, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt64)},
     // bool isSuccessed = 2;
-    {PROTOBUF_FIELD_OFFSET(LoginResultBody, _impl_.issuccessed_), _Internal::kHasBitsOffset + 2, 0, (0 | ::_fl::kFcOptional | ::_fl::kBool)},
+    {PROTOBUF_FIELD_OFFSET(LoginResultBody, _impl_.issuccessed_), _Internal::kHasBitsOffset + 3, 0, (0 | ::_fl::kFcOptional | ::_fl::kBool)},
     // string username = 3;
     {PROTOBUF_FIELD_OFFSET(LoginResultBody, _impl_.username_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcOptional | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // .Proto.Vector3 position = 4;
+    {PROTOBUF_FIELD_OFFSET(LoginResultBody, _impl_.position_), _Internal::kHasBitsOffset + 1, 0, (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
   }},
-  // no aux_entries
+  {{
+      {::_pbi::TcParser::GetTable<::Proto::Vector3>()},
+  }},
   {{
     "\25\0\0\10\0\0\0\0"
     "Proto.LoginResultBody"
@@ -1609,10 +1632,16 @@ PROTOBUF_NOINLINE void LoginResultBody::Clear() {
   (void) cached_has_bits;
 
   cached_has_bits = _impl_._has_bits_[0];
-  if ((cached_has_bits & 0x00000001U) != 0) {
-    _impl_.username_.ClearNonDefaultToEmpty();
+  if ((cached_has_bits & 0x00000003U) != 0) {
+    if ((cached_has_bits & 0x00000001U) != 0) {
+      _impl_.username_.ClearNonDefaultToEmpty();
+    }
+    if ((cached_has_bits & 0x00000002U) != 0) {
+      ABSL_DCHECK(_impl_.position_ != nullptr);
+      _impl_.position_->Clear();
+    }
   }
-  if ((cached_has_bits & 0x00000006U) != 0) {
+  if ((cached_has_bits & 0x0000000cU) != 0) {
     ::memset(&_impl_.id_, 0, static_cast<::size_t>(
         reinterpret_cast<char*>(&_impl_.issuccessed_) -
         reinterpret_cast<char*>(&_impl_.id_)) + sizeof(_impl_.issuccessed_));
@@ -1640,7 +1669,7 @@ PROTOBUF_NOINLINE void LoginResultBody::Clear() {
   (void)cached_has_bits;
 
   // uint64 id = 1;
-  if ((this_._impl_._has_bits_[0] & 0x00000002U) != 0) {
+  if ((this_._impl_._has_bits_[0] & 0x00000004U) != 0) {
     if (this_._internal_id() != 0) {
       target = stream->EnsureSpace(target);
       target = ::_pbi::WireFormatLite::WriteUInt64ToArray(
@@ -1649,7 +1678,7 @@ PROTOBUF_NOINLINE void LoginResultBody::Clear() {
   }
 
   // bool isSuccessed = 2;
-  if ((this_._impl_._has_bits_[0] & 0x00000004U) != 0) {
+  if ((this_._impl_._has_bits_[0] & 0x00000008U) != 0) {
     if (this_._internal_issuccessed() != 0) {
       target = stream->EnsureSpace(target);
       target = ::_pbi::WireFormatLite::WriteBoolToArray(
@@ -1665,6 +1694,14 @@ PROTOBUF_NOINLINE void LoginResultBody::Clear() {
           _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "Proto.LoginResultBody.username");
       target = stream->WriteStringMaybeAliased(3, _s, target);
     }
+  }
+
+  cached_has_bits = this_._impl_._has_bits_[0];
+  // .Proto.Vector3 position = 4;
+  if ((cached_has_bits & 0x00000002U) != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+        4, *this_._impl_.position_, this_._impl_.position_->GetCachedSize(), target,
+        stream);
   }
 
   if (ABSL_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
@@ -1692,7 +1729,7 @@ PROTOBUF_NOINLINE void LoginResultBody::Clear() {
 
   ::_pbi::Prefetch5LinesFrom7Lines(&this_);
   cached_has_bits = this_._impl_._has_bits_[0];
-  if ((cached_has_bits & 0x00000007U) != 0) {
+  if ((cached_has_bits & 0x0000000fU) != 0) {
     // string username = 3;
     if ((cached_has_bits & 0x00000001U) != 0) {
       if (!this_._internal_username().empty()) {
@@ -1700,15 +1737,20 @@ PROTOBUF_NOINLINE void LoginResultBody::Clear() {
                                         this_._internal_username());
       }
     }
-    // uint64 id = 1;
+    // .Proto.Vector3 position = 4;
     if ((cached_has_bits & 0x00000002U) != 0) {
+      total_size += 1 +
+                    ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.position_);
+    }
+    // uint64 id = 1;
+    if ((cached_has_bits & 0x00000004U) != 0) {
       if (this_._internal_id() != 0) {
         total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(
             this_._internal_id());
       }
     }
     // bool isSuccessed = 2;
-    if ((cached_has_bits & 0x00000004U) != 0) {
+    if ((cached_has_bits & 0x00000008U) != 0) {
       if (this_._internal_issuccessed() != 0) {
         total_size += 2;
       }
@@ -1724,13 +1766,14 @@ void LoginResultBody::MergeImpl(::google::protobuf::MessageLite& to_msg, const :
   if constexpr (::_pbi::DebugHardenVerifyHasBitConsistency()) {
     from.VerifyHasBitConsistency();
   }
+  ::google::protobuf::Arena* arena = _this->GetArena();
   // @@protoc_insertion_point(class_specific_merge_from_start:Proto.LoginResultBody)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = from._impl_._has_bits_[0];
-  if ((cached_has_bits & 0x00000007U) != 0) {
+  if ((cached_has_bits & 0x0000000fU) != 0) {
     if ((cached_has_bits & 0x00000001U) != 0) {
       if (!from._internal_username().empty()) {
         _this->_internal_set_username(from._internal_username());
@@ -1741,11 +1784,19 @@ void LoginResultBody::MergeImpl(::google::protobuf::MessageLite& to_msg, const :
       }
     }
     if ((cached_has_bits & 0x00000002U) != 0) {
+      ABSL_DCHECK(from._impl_.position_ != nullptr);
+      if (_this->_impl_.position_ == nullptr) {
+        _this->_impl_.position_ = ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.position_);
+      } else {
+        _this->_impl_.position_->MergeFrom(*from._impl_.position_);
+      }
+    }
+    if ((cached_has_bits & 0x00000004U) != 0) {
       if (from._internal_id() != 0) {
         _this->_impl_.id_ = from._impl_.id_;
       }
     }
-    if ((cached_has_bits & 0x00000004U) != 0) {
+    if ((cached_has_bits & 0x00000008U) != 0) {
       if (from._internal_issuccessed() != 0) {
         _this->_impl_.issuccessed_ = from._impl_.issuccessed_;
       }
@@ -1773,9 +1824,9 @@ void LoginResultBody::InternalSwap(LoginResultBody* PROTOBUF_RESTRICT PROTOBUF_N
   ::google::protobuf::internal::memswap<
       PROTOBUF_FIELD_OFFSET(LoginResultBody, _impl_.issuccessed_)
       + sizeof(LoginResultBody::_impl_.issuccessed_)
-      - PROTOBUF_FIELD_OFFSET(LoginResultBody, _impl_.id_)>(
-          reinterpret_cast<char*>(&_impl_.id_),
-          reinterpret_cast<char*>(&other->_impl_.id_));
+      - PROTOBUF_FIELD_OFFSET(LoginResultBody, _impl_.position_)>(
+          reinterpret_cast<char*>(&_impl_.position_),
+          reinterpret_cast<char*>(&other->_impl_.position_));
 }
 
 ::google::protobuf::Metadata LoginResultBody::GetMetadata() const {
@@ -1791,6 +1842,11 @@ class LoginNotificationBody::_Internal {
       8 * PROTOBUF_FIELD_OFFSET(LoginNotificationBody, _impl_._has_bits_);
 };
 
+void LoginNotificationBody::clear_position() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.position_ != nullptr) _impl_.position_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000002U;
+}
 LoginNotificationBody::LoginNotificationBody(::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, LoginNotificationBody_class_data_.base()) {
@@ -1821,6 +1877,10 @@ LoginNotificationBody::LoginNotificationBody(
   _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
   new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  ::uint32_t cached_has_bits = _impl_._has_bits_[0];
+  _impl_.position_ = ((cached_has_bits & 0x00000002U) != 0)
+                ? ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.position_)
+                : nullptr;
   _impl_.id_ = from._impl_.id_;
 
   // @@protoc_insertion_point(copy_constructor:Proto.LoginNotificationBody)
@@ -1833,7 +1893,12 @@ PROTOBUF_NDEBUG_INLINE LoginNotificationBody::Impl_::Impl_(
 
 inline void LoginNotificationBody::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
-  _impl_.id_ = {};
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, position_),
+           0,
+           offsetof(Impl_, id_) -
+               offsetof(Impl_, position_) +
+               sizeof(Impl_::id_));
 }
 LoginNotificationBody::~LoginNotificationBody() {
   // @@protoc_insertion_point(destructor:Proto.LoginNotificationBody)
@@ -1847,6 +1912,7 @@ inline void LoginNotificationBody::SharedDtor(MessageLite& self) {
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
   this_._impl_.username_.Destroy();
+  delete this_._impl_.position_;
   this_._impl_.~Impl_();
 }
 
@@ -1893,18 +1959,18 @@ LoginNotificationBody::GetClassData() const {
   return LoginNotificationBody_class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<1, 2, 0, 44, 2>
+const ::_pbi::TcParseTable<2, 3, 1, 44, 2>
 LoginNotificationBody::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(LoginNotificationBody, _impl_._has_bits_),
     0, // no _extensions_
-    2, 8,  // max_field_number, fast_idx_mask
+    3, 24,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967292,  // skipmap
+    4294967288,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    2,  // num_field_entries
-    0,  // num_aux_entries
-    offsetof(decltype(_table_), field_names),  // no aux_entries
+    3,  // num_field_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
     LoginNotificationBody_class_data_.base(),
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
@@ -1912,21 +1978,29 @@ LoginNotificationBody::_table_ = {
     ::_pbi::TcParser::GetTable<::Proto::LoginNotificationBody>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
+    {::_pbi::TcParser::MiniParse, {}},
+    // uint64 id = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(LoginNotificationBody, _impl_.id_), 2>(),
+     {8, 2, 0, PROTOBUF_FIELD_OFFSET(LoginNotificationBody, _impl_.id_)}},
     // string username = 2;
     {::_pbi::TcParser::FastUS1,
      {18, 0, 0, PROTOBUF_FIELD_OFFSET(LoginNotificationBody, _impl_.username_)}},
-    // uint64 id = 1;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(LoginNotificationBody, _impl_.id_), 1>(),
-     {8, 1, 0, PROTOBUF_FIELD_OFFSET(LoginNotificationBody, _impl_.id_)}},
+    // .Proto.Vector3 position = 3;
+    {::_pbi::TcParser::FastMtS1,
+     {26, 1, 0, PROTOBUF_FIELD_OFFSET(LoginNotificationBody, _impl_.position_)}},
   }}, {{
     65535, 65535
   }}, {{
     // uint64 id = 1;
-    {PROTOBUF_FIELD_OFFSET(LoginNotificationBody, _impl_.id_), _Internal::kHasBitsOffset + 1, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt64)},
+    {PROTOBUF_FIELD_OFFSET(LoginNotificationBody, _impl_.id_), _Internal::kHasBitsOffset + 2, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt64)},
     // string username = 2;
     {PROTOBUF_FIELD_OFFSET(LoginNotificationBody, _impl_.username_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcOptional | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // .Proto.Vector3 position = 3;
+    {PROTOBUF_FIELD_OFFSET(LoginNotificationBody, _impl_.position_), _Internal::kHasBitsOffset + 1, 0, (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
   }},
-  // no aux_entries
+  {{
+      {::_pbi::TcParser::GetTable<::Proto::Vector3>()},
+  }},
   {{
     "\33\0\10\0\0\0\0\0"
     "Proto.LoginNotificationBody"
@@ -1941,8 +2015,14 @@ PROTOBUF_NOINLINE void LoginNotificationBody::Clear() {
   (void) cached_has_bits;
 
   cached_has_bits = _impl_._has_bits_[0];
-  if ((cached_has_bits & 0x00000001U) != 0) {
-    _impl_.username_.ClearNonDefaultToEmpty();
+  if ((cached_has_bits & 0x00000003U) != 0) {
+    if ((cached_has_bits & 0x00000001U) != 0) {
+      _impl_.username_.ClearNonDefaultToEmpty();
+    }
+    if ((cached_has_bits & 0x00000002U) != 0) {
+      ABSL_DCHECK(_impl_.position_ != nullptr);
+      _impl_.position_->Clear();
+    }
   }
   _impl_.id_ = ::uint64_t{0u};
   _impl_._has_bits_.Clear();
@@ -1968,7 +2048,7 @@ PROTOBUF_NOINLINE void LoginNotificationBody::Clear() {
   (void)cached_has_bits;
 
   // uint64 id = 1;
-  if ((this_._impl_._has_bits_[0] & 0x00000002U) != 0) {
+  if ((this_._impl_._has_bits_[0] & 0x00000004U) != 0) {
     if (this_._internal_id() != 0) {
       target = stream->EnsureSpace(target);
       target = ::_pbi::WireFormatLite::WriteUInt64ToArray(
@@ -1984,6 +2064,14 @@ PROTOBUF_NOINLINE void LoginNotificationBody::Clear() {
           _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "Proto.LoginNotificationBody.username");
       target = stream->WriteStringMaybeAliased(2, _s, target);
     }
+  }
+
+  cached_has_bits = this_._impl_._has_bits_[0];
+  // .Proto.Vector3 position = 3;
+  if ((cached_has_bits & 0x00000002U) != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+        3, *this_._impl_.position_, this_._impl_.position_->GetCachedSize(), target,
+        stream);
   }
 
   if (ABSL_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
@@ -2011,7 +2099,7 @@ PROTOBUF_NOINLINE void LoginNotificationBody::Clear() {
 
   ::_pbi::Prefetch5LinesFrom7Lines(&this_);
   cached_has_bits = this_._impl_._has_bits_[0];
-  if ((cached_has_bits & 0x00000003U) != 0) {
+  if ((cached_has_bits & 0x00000007U) != 0) {
     // string username = 2;
     if ((cached_has_bits & 0x00000001U) != 0) {
       if (!this_._internal_username().empty()) {
@@ -2019,8 +2107,13 @@ PROTOBUF_NOINLINE void LoginNotificationBody::Clear() {
                                         this_._internal_username());
       }
     }
-    // uint64 id = 1;
+    // .Proto.Vector3 position = 3;
     if ((cached_has_bits & 0x00000002U) != 0) {
+      total_size += 1 +
+                    ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.position_);
+    }
+    // uint64 id = 1;
+    if ((cached_has_bits & 0x00000004U) != 0) {
       if (this_._internal_id() != 0) {
         total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(
             this_._internal_id());
@@ -2037,13 +2130,14 @@ void LoginNotificationBody::MergeImpl(::google::protobuf::MessageLite& to_msg, c
   if constexpr (::_pbi::DebugHardenVerifyHasBitConsistency()) {
     from.VerifyHasBitConsistency();
   }
+  ::google::protobuf::Arena* arena = _this->GetArena();
   // @@protoc_insertion_point(class_specific_merge_from_start:Proto.LoginNotificationBody)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = from._impl_._has_bits_[0];
-  if ((cached_has_bits & 0x00000003U) != 0) {
+  if ((cached_has_bits & 0x00000007U) != 0) {
     if ((cached_has_bits & 0x00000001U) != 0) {
       if (!from._internal_username().empty()) {
         _this->_internal_set_username(from._internal_username());
@@ -2054,6 +2148,14 @@ void LoginNotificationBody::MergeImpl(::google::protobuf::MessageLite& to_msg, c
       }
     }
     if ((cached_has_bits & 0x00000002U) != 0) {
+      ABSL_DCHECK(from._impl_.position_ != nullptr);
+      if (_this->_impl_.position_ == nullptr) {
+        _this->_impl_.position_ = ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.position_);
+      } else {
+        _this->_impl_.position_->MergeFrom(*from._impl_.position_);
+      }
+    }
+    if ((cached_has_bits & 0x00000004U) != 0) {
       if (from._internal_id() != 0) {
         _this->_impl_.id_ = from._impl_.id_;
       }
@@ -2078,7 +2180,12 @@ void LoginNotificationBody::InternalSwap(LoginNotificationBody* PROTOBUF_RESTRIC
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.username_, &other->_impl_.username_, arena);
-  swap(_impl_.id_, other->_impl_.id_);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(LoginNotificationBody, _impl_.id_)
+      + sizeof(LoginNotificationBody::_impl_.id_)
+      - PROTOBUF_FIELD_OFFSET(LoginNotificationBody, _impl_.position_)>(
+          reinterpret_cast<char*>(&_impl_.position_),
+          reinterpret_cast<char*>(&other->_impl_.position_));
 }
 
 ::google::protobuf::Metadata LoginNotificationBody::GetMetadata() const {

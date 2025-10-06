@@ -1,7 +1,5 @@
 #include "EffectManager.h"
 
-#include <imgui.h>
-
 void EffectManager::setup(Reference<StaticMeshDrawManager> meshDrawManager_, Reference<Rect3dDrawManager> rectDrawManager_) {
 	meshDrawManager = meshDrawManager_;
 	rectDrawManager = rectDrawManager_;
@@ -38,6 +36,9 @@ void EffectManager::register_instance(std::unique_ptr<IEffectInstance> instance)
 }
 
 #ifdef DEBUG_FEATURES_ENABLE
+
+#include <imgui.h>
+
 void EffectManager::debug_gui() {
 	ImGui::Text("Count : %d", instances.size());
 	if (instances.empty()) {

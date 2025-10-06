@@ -6,7 +6,6 @@ void NetworkCluster::initialize() {
 	connectionManager.initialize();
 	packetReceiver.initialize();
 	packetSender.initialize();
-
 }
 
 void NetworkCluster::setup() {
@@ -43,6 +42,10 @@ void NetworkCluster::receive() {
 
 void NetworkCluster::send() {
 	packetSender.send_all_packets();
+}
+
+void NetworkCluster::set_player(Reference<IEntity> player_) {
+	player = player_;
 }
 
 Reference<GameServerPacketReceiver> NetworkCluster::get_receiver() {

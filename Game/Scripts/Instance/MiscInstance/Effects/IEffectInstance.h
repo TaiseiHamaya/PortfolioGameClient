@@ -28,10 +28,13 @@ public:
 	virtual void terminate(Reference<StaticMeshDrawManager>, Reference<Rect3dDrawManager>) = 0;
 	virtual void draw_particle() const = 0;
 
-	virtual void debug_gui() = 0;
-
 	bool is_destroy() const;
 
 protected:
 	bool isDestroy{ false };
+
+public:
+#ifdef DEBUG_FEATURES_ENABLE
+	virtual void debug_gui() = 0;
+#endif // DEBUG_FEATURES_ENABLE
 };

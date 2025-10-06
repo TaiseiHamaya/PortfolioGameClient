@@ -115,11 +115,9 @@ private:
 
 	Reference<Vector3> cubemapWorld;
 
-#ifdef DEBUG_FEATURES_ENABLE
 	GaussianBlurNode::GaussianBlurInfo blurData{
 		.dispersion = 1.0f,
 		.length = 40.0f,
 		.sampleCount = 8
 	};
-#endif
 };
