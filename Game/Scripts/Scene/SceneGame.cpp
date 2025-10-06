@@ -143,11 +143,7 @@ void SceneGame::initialize() {
 	zoneHandler.set_player(player);
 	staticMeshDrawManager->register_instance(skydome);
 	gameInputHandler->set_instances(player, camera3D);
-
-#ifdef DEBUG_FEATURES_ENABLE
 	networkCluster.set_player(player);
-#endif // DEBUG_FEATURES_ENABLE
-
 
 	skydome->get_transform().set_scale(CVector3::BASIS * 100);
 	skydome->get_materials()[0].lightingType = LighingType::None;
@@ -156,12 +152,8 @@ void SceneGame::initialize() {
 	camera3D->set_offset({ 0,1,-40 });
 	camera3D->set_target(player);
 	enemyManager->generate("RedComet.json", Vector3{ 0,0,8 });
-
-#ifdef DEBUG_FEATURES_ENABLE
-	//staticMeshDrawManager->register_debug_instance(0, camera3D, true);
-#else
-	//staticMeshDrawManager->register_instance(DebugValues::GetGridInstance());
-#endif // DEBUG_FEATURES_ENABLE
+	staticMeshDrawManager->register_instance(DebugValues::GetGridInstance());
+	directionalLight->light_data().intensity = 0.500f;
 
 #pragma region RenderPath
 	// RenderPath
@@ -286,6 +278,11 @@ void SceneGame::initialize() {
 		radialBlurNode, luminanceExtractionNode, gaussianBlurNode2, gaussianBlurNode4, gaussianBlurNode8, gaussianBlurNode16 , margeTextureNode, bloomNode, rect3dNodeAOE });
 #endif // DEFERRED_RENDERING
 #pragma endregion RenderPath
+
+	gaussianBlurNode2->set_parameters(blurData.dispersion, blurData.length, blurData.sampleCount);
+	gaussianBlurNode4->set_parameters(blurData.dispersion, blurData.length, blurData.sampleCount);
+	gaussianBlurNode8->set_parameters(blurData.dispersion, blurData.length, blurData.sampleCount);
+	gaussianBlurNode16->set_parameters(blurData.dispersion, blurData.length, blurData.sampleCount);
 }
 
 void SceneGame::finalize() {
@@ -464,9 +461,9 @@ void SceneGame::debug_update() {
 	WorldClock::DebugGui();
 	ImGui::End();
 
-	/*ImGui::Begin("DirectionalLight");
-	directionalLight->debug_gui();
-	ImGui::End();*/
+	//ImGui::Begin("DirectionalLight");
+	//directionalLight->debug_gui();
+	//ImGui::End();
 
 	enemyManager->debug_gui();
 

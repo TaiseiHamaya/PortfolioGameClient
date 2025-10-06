@@ -75,7 +75,7 @@ void ZoneHandler::move_client_player(const Vector3& position) {
 			position
 		)
 	);
-	if(!gameServerConnectionManager || !gameServerConnectionManager->is_connected()) {
+	if (!gameServerConnectionManager || !gameServerConnectionManager->is_connected()) {
 		return;
 	}
 	if (!gameServerPacketSender) {
@@ -133,6 +133,7 @@ void ZoneHandler::process_login_packet(Proto::LoginPacketType type, const std::s
 		gameServerConnectionManager->on_connection_succeeded();
 		player->set_server_id(body.id());
 		player->set_name(body.username());
+		player->get_transform().set_translate(Vector3{ body.position().x(), body.position().y(), body.position().z() });
 		entityManager->register_server_id(body.id(), player);
 	}
 	break;
@@ -141,8 +142,9 @@ void ZoneHandler::process_login_packet(Proto::LoginPacketType type, const std::s
 		Proto::LoginNotificationBody body;
 		body.ParseFromString(payload);
 		Information("[System]: Player added. Id-\'{}\' Name-\'{}\'", body.id(), body.username());
+		Vector3 position(body.position().x(), body.position().y(), body.position().z());
 		zoneCommands.emplace_back(
-			std::make_unique<ZoneLoginPlayerCommand>(entityManager, body.id(), body.username())
+			std::make_unique<ZoneLoginPlayerCommand>(entityManager, body.id(), body.username(), position)
 		);
 	}
 	break;
