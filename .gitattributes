@@ -57,4 +57,5 @@
 #*.PDF   diff=astextplain
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
-Game/ThirdParty/protobuf/lib/libprotobufd.lib filter=lfs diff=lfs merge=lfs -text
+Game/ThirdParty/protobuf/lib/debug/libprotobufd.lib filter=lfs diff=lfs merge=lfs -text
+Game/ThirdParty/protobuf/lib/release/libprotobuf.lib filter=lfs diff=lfs merge=lfs -text
