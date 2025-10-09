@@ -109,9 +109,6 @@
     <ClInclude Include="Scripts\Game\Zone\ZoneCommand\Command\ZoneSyncTransformCommand.h" />
     <ClInclude Include="Scripts\Game\Zone\ZoneCommand\Command\ZoneLogoutPlayerCommand.h" />
   </ItemGroup>
-  <ItemGroup>
-    <Text Include="Resources\Json\Action\Player\Paladin\HolySpirit.json" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -141,10 +138,8 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="ExtensionSettings">
-  </ImportGroup>
-  <ImportGroup Label="Shared">
-  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
@@ -186,8 +181,7 @@
     </ClCompile>
     <FxCompile>
       <ShaderModel>6.6</ShaderModel>
-      <ShaderType>
-      </ShaderType>
+      <ShaderType />
       <AdditionalIncludeDirectories>$(SolutionDir)DirectXGame\project\EngineResources\HLSL\</AdditionalIncludeDirectories>
     </FxCompile>
     <Lib>
@@ -256,6 +250,5 @@
     </Lib>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets" />
 </Project>

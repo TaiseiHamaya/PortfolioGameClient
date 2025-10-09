@@ -1,104 +1,358 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <ShowAllFiles>true</ShowAllFiles>
-  </PropertyGroup>
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Scripts\Scene\FactoryPortfolio.cpp" />
-    <ClCompile Include="Scripts\Scene\SceneGame.cpp" />
-    <ClCompile Include="Scripts\Instance\MiscInstance\Camera\FollowCamera.cpp" />
-    <ClCompile Include="Scripts\Instance\MiscInstance\Enemy\Enemy.cpp" />
-    <ClCompile Include="Scripts\Instance\MiscInstance\Enemy\EnemyManager.cpp" />
-    <ClCompile Include="Scripts\Portfolio.cpp" />
-    <ClCompile Include="Scripts\main.cpp" />
-    <ClCompile Include="Scripts\Instance\Player\Player.cpp" />
-    <ClCompile Include="Scripts\Instance\IEntity\IActionBasic.cpp" />
-    <ClCompile Include="Scripts\Instance\MiscInstance\Effects\HitAnimation.cpp" />
-    <ClCompile Include="Scripts\Instance\IEntity\IEntity.cpp" />
-    <ClCompile Include="Scripts\Instance\IEntity\EntityUi.cpp" />
-    <ClCompile Include="Scripts\Manager\EntityManager.cpp" />
-    <ClCompile Include="Scripts\Extension\Util\LookAtRect.cpp" />
-    <ClCompile Include="Scripts\Instance\IEntity\Shadow.cpp" />
-    <ClCompile Include="Scripts\Instance\IEntity\Actions\IdleAction.cpp" />
-    <ClCompile Include="Scripts\Instance\MiscInstance\AOE\BaseAoe.cpp" />
-    <ClCompile Include="Scripts\Instance\MiscInstance\AOE\CircleAoe.cpp" />
-    <ClCompile Include="Scripts\Instance\MiscInstance\Effects\CometEffect.cpp" />
-    <ClCompile Include="Scripts\Extension\RenderNode\PostEffect\DownSamplingNode.cpp" />
-    <ClCompile Include="Scripts\Extension\RenderNode\PostEffect\BloomNode.cpp" />
-    <ClCompile Include="Scripts\Extension\RenderNode\PostEffect\LuminanceExtractionNode.cpp" />
-    <ClCompile Include="Scripts\Extension\RenderNode\PostEffect\MargeTextureNode.cpp" />
-    <ClCompile Include="Scripts\Extension\RenderNode\PostEffect\GaussianBlurNode.cpp" />
-    <ClCompile Include="Scripts\Extension\RenderNode\CubemapNode\CubemapNode.cpp" />
-    <ClCompile Include="Scripts\Instance\Player\Actions\PaladinHolySpirit.cpp" />
-    <ClCompile Include="Scripts\Instance\Player\Actions\PaladinHolySpiritEffectSelf.cpp" />
-    <ClCompile Include="Scripts\Instance\Player\Actions\PaladinHolySpiritEffectTarget.cpp" />
-    <ClCompile Include="Scripts\Manager\EffectManager.cpp" />
-    <ClCompile Include="Scripts\Instance\MiscInstance\Effects\IEffectInstance.cpp" />
-    <ClCompile Include="Scripts\Instance\IEntity\Actions\JumpAction.cpp" />
-    <ClCompile Include="Scripts\Instance\IEntity\ISkillAction\ISkillAction.cpp" />
-    <ClCompile Include="Scripts\Proto\types.pb.cc" />
-    <ClCompile Include="Scripts\Proto\math.pb.cc" />
-    <ClCompile Include="Scripts\Network\GameServer\GameServerPacketSender.cpp" />
-    <ClCompile Include="Scripts\Network\GameServer\GameServerPacketReceiver.cpp" />
-    <ClCompile Include="Scripts\Network\GameServer\GameServerConnectionManager.cpp" />
-    <ClCompile Include="Scripts\Network\GameServer\PacketBuffer.cpp" />
-    <ClCompile Include="Scripts\Network\NetworkCluster.cpp" />
-    <ClCompile Include="Scripts\Game\Zone\ZoneCommand\ZoneHandler.cpp" />
-    <ClCompile Include="Scripts\Game\Zone\ZoneCommand\Command\ZoneLoginPlayerCommand.cpp" />
-    <ClCompile Include="Scripts\Game\Zone\ZoneCommand\Command\ZoneSyncTransformCommand.cpp" />
-    <ClCompile Include="Scripts\Game\Zone\ZoneCommand\Command\ZoneLogoutPlayerCommand.cpp" />
-    <ClCompile Include="Scripts\Game\GameInputHandler.cpp" />
-    <ClCompile Include="Scripts\Instance\Player\RemotePlayer.cpp" />
+    <Filter Include="Scripts">
+      <UniqueIdentifier>{04BDDCE0-9E8E-4F33-9BE2-5BBB92F2C580}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Extension">
+      <UniqueIdentifier>{131319EB-99E3-4D3C-A54F-AE53940F980A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Game">
+      <UniqueIdentifier>{94E0E859-440C-4513-BFCE-1D72FD74E283}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Instance">
+      <UniqueIdentifier>{EDB03785-A757-4236-A18C-F2269CAAB01F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Manager">
+      <UniqueIdentifier>{2D062505-FCA5-4A12-9C68-7F96BE2AEA50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Network">
+      <UniqueIdentifier>{1E7009F0-853B-429C-96F9-5D8FDA772C57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Proto">
+      <UniqueIdentifier>{0D32B880-60D6-4F88-95E8-0CB8202901D5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Scene">
+      <UniqueIdentifier>{580CA48C-0128-411E-A874-D0CA6A0CB72E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Extension\RenderNode">
+      <UniqueIdentifier>{12C239E0-1FDE-4109-BEE0-E90AA4C80C03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Extension\Util">
+      <UniqueIdentifier>{5A02411F-9BBF-42F6-9406-977C066904DE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Game\Zone">
+      <UniqueIdentifier>{9D288A9F-3CAB-43EA-8E54-196182712B20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Instance\IEntity">
+      <UniqueIdentifier>{66841376-7EB0-4FD9-89AE-06AB9C849E9F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Instance\MiscInstance">
+      <UniqueIdentifier>{972B411E-8D30-480B-BDBD-5EA3E85A6C7A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Instance\Player">
+      <UniqueIdentifier>{5BBBE7CD-4CFF-4888-B748-F2AAAE659C08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Network\GameServer">
+      <UniqueIdentifier>{4217503D-6A30-426F-BB7C-987543C10061}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Extension\RenderNode\CubemapNode">
+      <UniqueIdentifier>{36DB1298-283C-4349-86C6-C3A2A5C2A4B6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Extension\RenderNode\PostEffect">
+      <UniqueIdentifier>{24DFE036-9248-4791-B616-9132341263E0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Game\Zone\ZoneCommand">
+      <UniqueIdentifier>{46D2C2D0-ED00-4657-86A7-954E9B0D3B6E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Instance\IEntity\Actions">
+      <UniqueIdentifier>{007C2610-A78E-4F99-8731-5DA823E1C66D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Instance\IEntity\ISkillAction">
+      <UniqueIdentifier>{8D8A1977-6D02-43FA-877A-E01D48E21AE9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Instance\MiscInstance\AOE">
+      <UniqueIdentifier>{F732BAD8-09B1-4C6B-8380-B0DEAF8EE9C0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Instance\MiscInstance\Camera">
+      <UniqueIdentifier>{4AAC0144-885E-4B81-BD00-675D1FAFF9DA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Instance\MiscInstance\Effects">
+      <UniqueIdentifier>{ABD46D29-81CC-43C7-8212-ED2F6A1E778D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Instance\MiscInstance\Enemy">
+      <UniqueIdentifier>{8B127727-552C-45B6-B7DE-A56B5E7BBED2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Instance\Player\Actions">
+      <UniqueIdentifier>{716E1E5E-5EE7-430F-84B8-35A29398B93D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Game\Zone\ZoneCommand\Command">
+      <UniqueIdentifier>{21973094-92F0-4862-BCBF-A636E9403862}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Scripts\Scene\FactoryPortfolio.h" />
-    <ClInclude Include="Scripts\Instance\MiscInstance\Camera\FollowCamera.h" />
-    <ClInclude Include="Scripts\Instance\MiscInstance\Enemy\Enemy.h" />
-    <ClInclude Include="Scripts\Instance\MiscInstance\Enemy\EnemyManager.h" />
-    <ClInclude Include="Scripts\Scene\SceneGame.h" />
-    <ClInclude Include="Scripts\Portfolio.h" />
-    <ClInclude Include="Scripts\Instance\Player\Player.h" />
-    <ClInclude Include="Scripts\Instance\IEntity\IActionBasic.h" />
-    <ClInclude Include="Scripts\Instance\MiscInstance\Effects\HitAnimation.h" />
-    <ClInclude Include="Scripts\Instance\IEntity\IEntity.h" />
-    <ClInclude Include="Scripts\Instance\IEntity\EntityUi.h" />
-    <ClInclude Include="Scripts\Manager\EntityManager.h" />
-    <ClInclude Include="Scripts\Extension\Util\LookAtRect.h" />
-    <ClInclude Include="Scripts\Instance\IEntity\Shadow.h" />
-    <ClInclude Include="Scripts\Instance\IEntity\Actions\IdleAction.h" />
-    <ClInclude Include="Scripts\Instance\MiscInstance\AOE\BaseAoe.h" />
-    <ClInclude Include="Scripts\Instance\MiscInstance\AOE\CircleAoe.h" />
-    <ClInclude Include="Scripts\Instance\MiscInstance\Effects\CometEffect.h" />
-    <ClInclude Include="Scripts\Extension\RenderNode\PostEffect\DownSamplingNode.h" />
-    <ClInclude Include="Scripts\Extension\RenderNode\PostEffect\BloomNode.h" />
-    <ClInclude Include="Scripts\Extension\RenderNode\PostEffect\LuminanceExtractionNode.h" />
-    <ClInclude Include="Scripts\Extension\RenderNode\PostEffect\MargeTextureNode.h" />
-    <ClInclude Include="Scripts\Extension\RenderNode\PostEffect\GaussianBlurNode.h" />
-    <ClInclude Include="Scripts\Extension\RenderNode\CubemapNode\CubemapNode.h" />
-    <ClInclude Include="Scripts\Instance\IEntity\ISkillAction\ISkillAction.h" />
-    <ClInclude Include="Scripts\Instance\Player\Actions\PaladinHolySpirit.h" />
-    <ClInclude Include="Scripts\Instance\Player\Actions\PaladinHolySpiritEffectSelf.h" />
-    <ClInclude Include="Scripts\Instance\Player\Actions\PaladinHolySpiritEffectTarget.h" />
-    <ClInclude Include="Scripts\Manager\EffectManager.h" />
-    <ClInclude Include="Scripts\Instance\MiscInstance\Effects\IEffectInstance.h" />
-    <ClInclude Include="Scripts\Instance\IEntity\Actions\JumpAction.h" />
-    <ClInclude Include="Scripts\Proto\types.pb.h" />
-    <ClInclude Include="Scripts\Proto\math.pb.h" />
-    <ClInclude Include="Scripts\Network\GameServer\GameServerPacketSender.h" />
-    <ClInclude Include="Scripts\Network\GameServer\GameServerPacketReceiver.h" />
-    <ClInclude Include="Scripts\Network\GameServer\GameServerConnectionManager.h" />
-    <ClInclude Include="Scripts\Network\GameServer\PacketBuffer.h" />
-    <ClInclude Include="Scripts\Network\NetworkCluster.h" />
-    <ClInclude Include="Scripts\Game\Zone\ZoneCommand\ZoneHandler.h" />
-    <ClInclude Include="Scripts\Extension\Util\winsock_include.h" />
-    <ClInclude Include="Scripts\Game\Zone\ZoneCommand\Command\IZoneCommand.h" />
-    <ClInclude Include="Scripts\Game\Zone\ZoneCommand\Command\ZoneLoginPlayerCommand.h" />
-    <ClInclude Include="Scripts\Game\Zone\ZoneCommand\Command\ZoneSyncTransformCommand.h" />
-    <ClInclude Include="Scripts\Game\Zone\ZoneCommand\Command\ZoneLogoutPlayerCommand.h" />
-    <ClInclude Include="Scripts\Game\GameInputHandler.h" />
-    <ClInclude Include="Scripts\Instance\Player\RemotePlayer.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Resources\Json\Action\Player\Paladin\HolySpirit.json" />
+    <ClCompile Include="Scripts\Instance\Player\RemotePlayer.cpp">
+      <Filter>Scripts\Instance\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Game\GameInputHandler.cpp">
+      <Filter>Scripts\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Network\NetworkCluster.cpp">
+      <Filter>Scripts\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Network\GameServer\PacketBuffer.cpp">
+      <Filter>Scripts\Network\GameServer</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Network\GameServer\GameServerConnectionManager.cpp">
+      <Filter>Scripts\Network\GameServer</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Network\GameServer\GameServerPacketReceiver.cpp">
+      <Filter>Scripts\Network\GameServer</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Network\GameServer\GameServerPacketSender.cpp">
+      <Filter>Scripts\Network\GameServer</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Instance\IEntity\Actions\JumpAction.cpp">
+      <Filter>Scripts\Instance\IEntity\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Instance\IEntity\ISkillAction\ISkillAction.cpp">
+      <Filter>Scripts\Instance\IEntity\ISkillAction</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Instance\MiscInstance\Effects\IEffectInstance.cpp">
+      <Filter>Scripts\Instance\MiscInstance\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Manager\EffectManager.cpp">
+      <Filter>Scripts\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Instance\Player\Actions\PaladinHolySpiritEffectSelf.cpp">
+      <Filter>Scripts\Instance\Player\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Instance\Player\Actions\PaladinHolySpiritEffectTarget.cpp">
+      <Filter>Scripts\Instance\Player\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Instance\Player\Actions\PaladinHolySpirit.cpp">
+      <Filter>Scripts\Instance\Player\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Proto\math.pb.cc">
+      <Filter>Scripts\Proto</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Proto\types.pb.cc">
+      <Filter>Scripts\Proto</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Extension\RenderNode\CubemapNode\CubemapNode.cpp">
+      <Filter>Scripts\Extension\RenderNode\CubemapNode</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Extension\RenderNode\PostEffect\GaussianBlurNode.cpp">
+      <Filter>Scripts\Extension\RenderNode\PostEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Extension\RenderNode\PostEffect\MargeTextureNode.cpp">
+      <Filter>Scripts\Extension\RenderNode\PostEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Extension\RenderNode\PostEffect\BloomNode.cpp">
+      <Filter>Scripts\Extension\RenderNode\PostEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Extension\RenderNode\PostEffect\DownSamplingNode.cpp">
+      <Filter>Scripts\Extension\RenderNode\PostEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Instance\MiscInstance\Effects\CometEffect.cpp">
+      <Filter>Scripts\Instance\MiscInstance\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Instance\MiscInstance\AOE\BaseAoe.cpp">
+      <Filter>Scripts\Instance\MiscInstance\AOE</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Instance\MiscInstance\AOE\CircleAoe.cpp">
+      <Filter>Scripts\Instance\MiscInstance\AOE</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Instance\IEntity\Actions\IdleAction.cpp">
+      <Filter>Scripts\Instance\IEntity\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Extension\RenderNode\PostEffect\LuminanceExtractionNode.cpp">
+      <Filter>Scripts\Extension\RenderNode\PostEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Extension\Util\LookAtRect.cpp">
+      <Filter>Scripts\Extension\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Manager\EntityManager.cpp">
+      <Filter>Scripts\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Instance\IEntity\EntityUi.cpp">
+      <Filter>Scripts\Instance\IEntity</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Instance\IEntity\IEntity.cpp">
+      <Filter>Scripts\Instance\IEntity</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\main.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Portfolio.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Scene\FactoryPortfolio.cpp">
+      <Filter>Scripts\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Scene\SceneGame.cpp">
+      <Filter>Scripts\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Instance\MiscInstance\Camera\FollowCamera.cpp">
+      <Filter>Scripts\Instance\MiscInstance\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Instance\MiscInstance\Effects\HitAnimation.cpp">
+      <Filter>Scripts\Instance\MiscInstance\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Instance\MiscInstance\Enemy\Enemy.cpp">
+      <Filter>Scripts\Instance\MiscInstance\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Instance\MiscInstance\Enemy\EnemyManager.cpp">
+      <Filter>Scripts\Instance\MiscInstance\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Instance\IEntity\IActionBasic.cpp">
+      <Filter>Scripts\Instance\IEntity</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Instance\Player\Player.cpp">
+      <Filter>Scripts\Instance\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Instance\IEntity\Shadow.cpp">
+      <Filter>Scripts\Instance\IEntity</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Game\Zone\ZoneCommand\ZoneHandler.cpp">
+      <Filter>Scripts\Game\Zone\ZoneCommand</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Game\Zone\ZoneCommand\Command\ZoneLoginPlayerCommand.cpp">
+      <Filter>Scripts\Game\Zone\ZoneCommand\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Game\Zone\ZoneCommand\Command\ZoneSyncTransformCommand.cpp">
+      <Filter>Scripts\Game\Zone\ZoneCommand\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Game\Zone\ZoneCommand\Command\ZoneLogoutPlayerCommand.cpp">
+      <Filter>Scripts\Game\Zone\ZoneCommand\Command</Filter>
+    </ClCompile>
+    <ClInclude Include="Scripts\Instance\Player\RemotePlayer.h">
+      <Filter>Scripts\Instance\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Game\GameInputHandler.h">
+      <Filter>Scripts\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Game\Zone\ZoneCommand\Command\IZoneCommand.h">
+      <Filter>Scripts\Game\Zone\ZoneCommand\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Extension\Util\winsock_include.h">
+      <Filter>Scripts\Extension\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Network\NetworkCluster.h">
+      <Filter>Scripts\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Network\GameServer\PacketBuffer.h">
+      <Filter>Scripts\Network\GameServer</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Network\GameServer\GameServerConnectionManager.h">
+      <Filter>Scripts\Network\GameServer</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Network\GameServer\GameServerPacketReceiver.h">
+      <Filter>Scripts\Network\GameServer</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Network\GameServer\GameServerPacketSender.h">
+      <Filter>Scripts\Network\GameServer</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Instance\IEntity\Actions\JumpAction.h">
+      <Filter>Scripts\Instance\IEntity\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Instance\MiscInstance\Effects\IEffectInstance.h">
+      <Filter>Scripts\Instance\MiscInstance\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Manager\EffectManager.h">
+      <Filter>Scripts\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Instance\Player\Actions\PaladinHolySpiritEffectSelf.h">
+      <Filter>Scripts\Instance\Player\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Instance\Player\Actions\PaladinHolySpiritEffectTarget.h">
+      <Filter>Scripts\Instance\Player\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Instance\Player\Actions\PaladinHolySpirit.h">
+      <Filter>Scripts\Instance\Player\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Instance\IEntity\ISkillAction\ISkillAction.h">
+      <Filter>Scripts\Instance\IEntity\ISkillAction</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Proto\math.pb.h">
+      <Filter>Scripts\Proto</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Proto\types.pb.h">
+      <Filter>Scripts\Proto</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Extension\RenderNode\CubemapNode\CubemapNode.h">
+      <Filter>Scripts\Extension\RenderNode\CubemapNode</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Extension\RenderNode\PostEffect\GaussianBlurNode.h">
+      <Filter>Scripts\Extension\RenderNode\PostEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Extension\RenderNode\PostEffect\MargeTextureNode.h">
+      <Filter>Scripts\Extension\RenderNode\PostEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Extension\RenderNode\PostEffect\BloomNode.h">
+      <Filter>Scripts\Extension\RenderNode\PostEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Extension\RenderNode\PostEffect\DownSamplingNode.h">
+      <Filter>Scripts\Extension\RenderNode\PostEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Instance\MiscInstance\Effects\CometEffect.h">
+      <Filter>Scripts\Instance\MiscInstance\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Instance\MiscInstance\AOE\BaseAoe.h">
+      <Filter>Scripts\Instance\MiscInstance\AOE</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Instance\MiscInstance\AOE\CircleAoe.h">
+      <Filter>Scripts\Instance\MiscInstance\AOE</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Instance\IEntity\Actions\IdleAction.h">
+      <Filter>Scripts\Instance\IEntity\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Extension\RenderNode\PostEffect\LuminanceExtractionNode.h">
+      <Filter>Scripts\Extension\RenderNode\PostEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Extension\Util\LookAtRect.h">
+      <Filter>Scripts\Extension\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Manager\EntityManager.h">
+      <Filter>Scripts\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Instance\IEntity\EntityUi.h">
+      <Filter>Scripts\Instance\IEntity</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Instance\IEntity\IEntity.h">
+      <Filter>Scripts\Instance\IEntity</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Portfolio.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Scene\FactoryPortfolio.h">
+      <Filter>Scripts\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Scene\SceneGame.h">
+      <Filter>Scripts\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Instance\MiscInstance\Camera\FollowCamera.h">
+      <Filter>Scripts\Instance\MiscInstance\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Instance\MiscInstance\Effects\HitAnimation.h">
+      <Filter>Scripts\Instance\MiscInstance\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Instance\MiscInstance\Enemy\Enemy.h">
+      <Filter>Scripts\Instance\MiscInstance\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Instance\MiscInstance\Enemy\EnemyManager.h">
+      <Filter>Scripts\Instance\MiscInstance\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Instance\IEntity\IActionBasic.h">
+      <Filter>Scripts\Instance\IEntity</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Instance\Player\Player.h">
+      <Filter>Scripts\Instance\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Instance\IEntity\Shadow.h">
+      <Filter>Scripts\Instance\IEntity</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Game\Zone\ZoneCommand\ZoneHandler.h">
+      <Filter>Scripts\Game\Zone\ZoneCommand</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Game\Zone\ZoneCommand\Command\ZoneLoginPlayerCommand.h">
+      <Filter>Scripts\Game\Zone\ZoneCommand\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Game\Zone\ZoneCommand\Command\ZoneSyncTransformCommand.h">
+      <Filter>Scripts\Game\Zone\ZoneCommand\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Game\Zone\ZoneCommand\Command\ZoneLogoutPlayerCommand.h">
+      <Filter>Scripts\Game\Zone\ZoneCommand\Command</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
