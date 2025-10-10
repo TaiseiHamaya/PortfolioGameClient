@@ -355,4 +355,7 @@
       <Filter>Scripts\Game\Zone\ZoneCommand\Command</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="DevTool\launch-bot.ps1" />
+  </ItemGroup>
 </Project>
