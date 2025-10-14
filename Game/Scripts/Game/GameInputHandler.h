@@ -36,9 +36,9 @@ private:
 	
 	Reference<Player> player;
 
-#ifdef ENABLE_DEVELOP_BOT
+#ifdef DEBUG_FEATURES_ENABLE
 	WorldTimer timer;
-#endif // ENABLE_DEVELOP_BOT
+#endif // DEBUG_FEATURES_ENABLE
 
 public:
 	void set_instances(Reference<Player> player_, Reference<const WorldInstance> camera_);

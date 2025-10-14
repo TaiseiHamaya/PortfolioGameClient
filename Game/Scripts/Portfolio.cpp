@@ -9,10 +9,11 @@
 #include <Engine/Application/WinApp.h>
 #include <Engine/Debug/Editor/EditorMain.h>
 
-#ifdef ENABLE_DEVELOP_BOT
+#ifdef DEBUG_FEATURES_ENABLE
+#include <Engine/Application/ArgumentParser.h>
 #include <Engine/Application/ProjectSettings/ProjectSettings.h>
 #include <Engine/Application/Output.h>
-#endif // ENABLE_DEVELOP_BOT
+#endif // DEBUG_FEATURES_ENABLE
 
 void Portfolio::initialize() {
 #ifdef DEBUG_FEATURES_ENABLE
@@ -21,10 +22,13 @@ void Portfolio::initialize() {
 
 	SceneManager::Setup(std::make_unique<FactoryPortfolio>());
 
-#ifdef ENABLE_DEVELOP_BOT
-	ProjectSettings::SetMaxFrameRate(60);
-	Information(L"Botモードでビルドされています");
-#endif // ENABLE_DEVELOP_BOT
+#ifdef DEBUG_FEATURES_ENABLE
+	if (ArgumentParser::Contains("-ENABLE_DEVELOP_BOT")) {
+		ProjectSettings::SetMaxFrameRate(60);
+		ProjectSettings::GetApplicationSettingsImm().hideWindowForce = true;
+		Information(L"Botモードが有効化されました。");
+	}
+#endif // DEBUG_FEATURES_ENABLE
 }
 
 void Portfolio::finalize() {

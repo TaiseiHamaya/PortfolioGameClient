@@ -19,6 +19,7 @@
 #include <Engine/Assets/PolygonMesh/PolygonMeshLibrary.h>
 #include <Engine/Assets/Texture/TextureLibrary.h>
 
+#include <Engine/Application/ArgumentParser.h>
 #include <Engine/Application/ProjectSettings/ProjectSettings.h>
 #include <Engine/Runtime/Clock/WorldClock.h>
 
@@ -365,6 +366,11 @@ void SceneGame::begin_rendering() {
 }
 
 void SceneGame::draw() const {
+#ifdef DEBUG_FEATURES_ENABLE
+	if (ArgumentParser::Contains("-ENABLE_DEVELOP_BOT")) {
+		return;
+	}
+#endif // DEBUG_FEATURES_ENABLE
 	// 3DMesh
 	renderPath->begin();
 	camera3D->register_world_projection(2);
