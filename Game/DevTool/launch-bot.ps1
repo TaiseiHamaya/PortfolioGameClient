@@ -6,7 +6,7 @@
 	[switch]$ForceBuild,
 
 	[Parameter(Position = 1)]
-	[string]$BuildType = "Release"
+	[string]$BuildType = "Develop"
 )
 
 # 起動回数の取得
@@ -50,7 +50,6 @@ $solutionDir = Split-Path -Parent $gameDir
 $rootDir = Split-Path -Parent $solutionDir
 $Path = Join-Path $rootDir "generated\outputs\x64\$BuildType\DirectXGame.exe"
 
-# ビルド処理(-NoBuildが指定されていない限り、デフォルトで自動判定)
 if (-not $NoBuild) {
 	Write-Host "ソリューションをビルドしています..." -ForegroundColor Cyan
 	Write-Host "マクロ定義: ENABLE_DEVELOP_BOT" -ForegroundColor Cyan
@@ -77,8 +76,6 @@ if (-not $NoBuild) {
 		exit 1
 	}
 
-	$env:CL = "/D ENABLE_DEVELOP_BOT=1"
-
 	# ビルド引数の構築
 	$buildArgs = @(
 		$slnFile.FullName,
@@ -86,8 +83,6 @@ if (-not $NoBuild) {
 		"/p:Platform=x64",
 		"/m"
 	)
-
-	& $msbuild $buildArgs
 
 	# 環境変数をクリア
 	$env:CL = $null
@@ -175,7 +170,7 @@ $processes = @()
 # プログラムを指定回数起動
 for ($i = 0; $i -lt $Count; $i++) {
 	$pos = $positions[$i]
-	$runtimeArgs = "-x $($pos.X) -y $($pos.Y)"
+	$runtimeArgs = "-x $($pos.X) -y $($pos.Y) -ENABLE_DEVELOP_BOT"
 	
 	Write-Host "[$($i+1)/$Count] 起動中... (座標: $($pos.X), $($pos.Y))" -ForegroundColor Yellow
 	$process = Start-Process -FilePath $tempExePath -ArgumentList $runtimeArgs -WorkingDirectory $tempDir -PassThru
