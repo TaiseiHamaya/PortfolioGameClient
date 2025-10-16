@@ -52,7 +52,6 @@ $Path = Join-Path $rootDir "generated\outputs\x64\$BuildType\DirectXGame.exe"
 
 if (-not $NoBuild) {
 	Write-Host "ソリューションをビルドしています..." -ForegroundColor Cyan
-	Write-Host "マクロ定義: ENABLE_DEVELOP_BOT" -ForegroundColor Cyan
 
 	$slnFile = Get-ChildItem -Path $solutionDir -Filter "*.sln" | Select-Object -First 1
 	
@@ -84,8 +83,7 @@ if (-not $NoBuild) {
 		"/m"
 	)
 
-	# 環境変数をクリア
-	$env:CL = $null
+	& $msbuild $buildArgs
 
 	if ($LASTEXITCODE -ne 0) {
 		Write-Host "ビルドに失敗しました。" -ForegroundColor Red
