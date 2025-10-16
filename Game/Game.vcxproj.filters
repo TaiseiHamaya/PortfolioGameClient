@@ -354,8 +354,14 @@
     <ClInclude Include="Scripts\Game\Zone\ZoneCommand\Command\ZoneLogoutPlayerCommand.h">
       <Filter>Scripts\Game\Zone\ZoneCommand\Command</Filter>
     </ClInclude>
+    <ClCompile Include="Scripts\Extension\RenderNode\EnvironmentMeshNode\EnvironmentMeshNode.cpp" />
+    <ClCompile Include="Scripts\Extension\DrawExecutor\EnvironmentMeshExecutor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="DevTool\launch-bot.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Scripts\Extension\RenderNode\EnvironmentMeshNode\EnvironmentMeshNode.h" />
+    <ClInclude Include="Scripts\Extension\DrawExecutor\EnvironmentMeshExecutor.h" />
   </ItemGroup>
 </Project>

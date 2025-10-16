@@ -15,6 +15,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Scripts\Extension\DrawExecutor\EnvironmentMeshExecutor.cpp" />
+    <ClCompile Include="Scripts\Extension\RenderNode\EnvironmentMeshNode\EnvironmentMeshNode.cpp" />
     <ClCompile Include="Scripts\Instance\Player\RemotePlayer.cpp" />
     <ClCompile Include="Scripts\Game\GameInputHandler.cpp" />
     <ClCompile Include="Scripts\Network\NetworkCluster.cpp" />
@@ -62,6 +64,8 @@
     <ClCompile Include="Scripts\Game\Zone\ZoneCommand\Command\ZoneLogoutPlayerCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Scripts\Extension\DrawExecutor\EnvironmentMeshExecutor.h" />
+    <ClInclude Include="Scripts\Extension\RenderNode\EnvironmentMeshNode\EnvironmentMeshNode.h" />
     <ClInclude Include="Scripts\Instance\Player\RemotePlayer.h" />
     <ClInclude Include="Scripts\Game\GameInputHandler.h" />
     <ClInclude Include="Scripts\Game\Zone\ZoneCommand\Command\IZoneCommand.h" />
