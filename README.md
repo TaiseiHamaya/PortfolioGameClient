@@ -1,0 +1,3 @@
+[![ReleaseBuild](https://github.com/TaiseiHamaya/PortfolioGameClient/actions/workflows/ReleaseBuild.yml/badge.svg)](https://github.com/TaiseiHamaya/PortfolioGameClient/actions/workflows/ReleaseBuild.yml)
+[![DevelopBuild](https://github.com/TaiseiHamaya/PortfolioGameClient/actions/workflows/DevelopBuild.yml/badge.svg)](https://github.com/TaiseiHamaya/PortfolioGameClient/actions/workflows/DevelopBuild.yml)
+[![DebugBuild](https://github.com/TaiseiHamaya/PortfolioGameClient/actions/workflows/DebugBuild.yml/badge.svg)](https://github.com/TaiseiHamaya/PortfolioGameClient/actions/workflows/DebugBuild.yml)
