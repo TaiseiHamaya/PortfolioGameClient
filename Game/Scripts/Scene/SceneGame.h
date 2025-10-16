@@ -24,6 +24,7 @@
 #include "Scripts/Manager/EffectManager.h"
 #include "Scripts/Manager/EntityManager.h"
 
+#include "Scripts/Extension/DrawExecutor/EnvironmentMeshExecutor.h"
 #include "Scripts/Extension/RenderNode/PostEffect/GaussianBlurNode.h"
 #include "Scripts/Game/GameInputHandler.h"
 #include "Scripts/Game/Zone/ZoneCommand/ZoneHandler.h"
@@ -96,6 +97,8 @@ private:
 	std::unique_ptr<SkinningMeshDrawManager> skinningMeshDrawManager;
 	std::unique_ptr<Rect3dDrawManager> rect3dDrawManager;
 	std::unique_ptr<DirectionalLightingExecutor> directionalLightingExecutor;
+
+	std::unique_ptr<EnvironmentMeshExecutor> environmentMeshExecutor;
 	// その他
 	std::unique_ptr<EntityManager> entityManager; // 全てのエンティティ管理
 	std::unique_ptr<EffectManager> effectManager; // エフェクト管理
@@ -110,7 +113,7 @@ private:
 
 	std::unique_ptr<FollowCamera> camera3D;
 	std::unique_ptr<StaticMeshInstance> skydome;
-	
+
 	std::list<CometAction> comets;
 
 	Reference<Vector3> cubemapWorld;

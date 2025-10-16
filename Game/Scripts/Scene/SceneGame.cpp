@@ -24,6 +24,7 @@
 #include <Engine/Runtime/Clock/WorldClock.h>
 
 #include "Scripts/Extension/RenderNode/CubemapNode/CubemapNode.h"
+#include "Scripts/Extension/RenderNode/EnvironmentMeshNode/EnvironmentMeshNode.h"
 #include "Scripts/Extension/RenderNode/PostEffect/BloomNode.h"
 #include "Scripts/Extension/RenderNode/PostEffect/LuminanceExtractionNode.h"
 #include "Scripts/Extension/RenderNode/PostEffect/MargeTextureNode.h"
@@ -71,7 +72,6 @@ void SceneGame::load() {
 	ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/Forward/ForwardAlpha.PS.hlsl");
 	ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/Forward/Particle/ParticleBillboard/ParticleBillboard.VS.hlsl");
 	ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/Forward/Particle/ParticleBillboard/ParticleBillboard.PS.hlsl");
-
 	ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/Posteffect/RadialBlur/RadialBlur.PS.hlsl");
 
 	ShaderLibrary::RegisterLoadQue("./Game/Resources/HLSL/Mesh/Skybox/Skybox.VS.hlsl");
@@ -81,6 +81,8 @@ void SceneGame::load() {
 	ShaderLibrary::RegisterLoadQue("./Game/Resources/HLSL/GaussianBlur.PS.hlsl");
 	ShaderLibrary::RegisterLoadQue("./Game/Resources/HLSL/LuminanceExtraction.PS.hlsl");
 	ShaderLibrary::RegisterLoadQue("./Game/Resources/HLSL/MargeTexture4.PS.hlsl");
+
+	EnvironmentMeshNode::BeginLoadShader();
 }
 
 void SceneGame::initialize() {
@@ -122,6 +124,8 @@ void SceneGame::initialize() {
 	// Light
 	directionalLightingExecutor = eps::CreateUnique<DirectionalLightingExecutor>(1);
 
+	environmentMeshExecutor = eps::CreateUnique<EnvironmentMeshExecutor>("Grid.obj", 1, "rogland_clear_night_2k.dds");
+
 	// Setup
 	entityManager->setup(worldManager, skinningMeshDrawManager, rect3dDrawManager);
 	enemyManager->setup(entityManager);
@@ -145,6 +149,7 @@ void SceneGame::initialize() {
 	staticMeshDrawManager->register_instance(skydome);
 	gameInputHandler->set_instances(player, camera3D);
 	networkCluster.set_player(player);
+	environmentMeshExecutor->setup(directionalLightingExecutor, camera3D);
 
 	skydome->get_transform().set_scale(CVector3::BASIS * 100);
 	skydome->get_materials()[0].lightingType = LighingType::None;
@@ -153,7 +158,6 @@ void SceneGame::initialize() {
 	camera3D->set_offset({ 0,1,-40 });
 	camera3D->set_target(player);
 	enemyManager->generate("RedComet.json", Vector3{ 0,0,8 });
-	staticMeshDrawManager->register_instance(DebugValues::GetGridInstance());
 	directionalLight->light_data().intensity = 0.500f;
 
 #pragma region RenderPath
@@ -198,6 +202,11 @@ void SceneGame::initialize() {
 	directionalLightingNode->set_config(RenderNodeConfig::NoClearRenderTarget | RenderNodeConfig::NoClearDepth);
 	directionalLightingNode->set_render_target(baseRenderTexture);
 	directionalLightingNode->set_gbuffers({ renderTextures[0], renderTextures[1] });
+
+	auto environmentMeshNode = eps::CreateShared<EnvironmentMeshNode>();
+	environmentMeshNode->initialize();
+	environmentMeshNode->set_render_target(baseRenderTexture);
+	environmentMeshNode->set_config(RenderNodeConfig::NoClearRenderTarget | RenderNodeConfig::NoClearDepth);
 
 	auto cubemapNode = eps::CreateShared<CubemapNode>();
 	cubemapNode->initialize();
@@ -272,10 +281,10 @@ void SceneGame::initialize() {
 
 	renderPath = eps::CreateUnique<RenderPath>();
 #ifdef DEBUG_FEATURES_ENABLE
-	renderPath->initialize({ deferredMeshNode,skinMeshNodeDeferred,nonLightingPixelNode,directionalLightingNode, cubemapNode,rect3dNode,particleBillboardNode,
+	renderPath->initialize({ deferredMeshNode,skinMeshNodeDeferred,nonLightingPixelNode,directionalLightingNode, environmentMeshNode, cubemapNode,rect3dNode,particleBillboardNode,
 		radialBlurNode, luminanceExtractionNode, gaussianBlurNode2, gaussianBlurNode4, gaussianBlurNode8, gaussianBlurNode16 , margeTextureNode, bloomNode, rect3dNodeAOE, primitiveLineNode });
 #else
-	renderPath->initialize({ deferredMeshNode,skinMeshNodeDeferred,nonLightingPixelNode,directionalLightingNode, cubemapNode,rect3dNode,particleBillboardNode,
+	renderPath->initialize({ deferredMeshNode,skinMeshNodeDeferred,nonLightingPixelNode,directionalLightingNode, environmentMeshNode, cubemapNode,rect3dNode,particleBillboardNode,
 		radialBlurNode, luminanceExtractionNode, gaussianBlurNode2, gaussianBlurNode4, gaussianBlurNode8, gaussianBlurNode16 , margeTextureNode, bloomNode, rect3dNodeAOE });
 #endif // DEFERRED_RENDERING
 #pragma endregion RenderPath
@@ -360,6 +369,8 @@ void SceneGame::begin_rendering() {
 
 	directionalLightingExecutor->begin();
 	directionalLightingExecutor->write_to_buffer(directionalLight);
+	environmentMeshExecutor->begin();
+	environmentMeshExecutor->write_to_buffer(DebugValues::GetGridInstance());
 	rect3dDrawManager->transfer();
 	staticMeshDrawManager->transfer();
 	skinningMeshDrawManager->transfer();
@@ -388,6 +399,10 @@ void SceneGame::draw() const {
 	renderPath->next();
 	camera3D->register_world_lighting(1);
 	directionalLightingExecutor->draw_command();
+
+	// EnvironmentMesh(地面)
+	renderPath->next();
+	environmentMeshExecutor->draw_command();
 
 	// Skybox
 	renderPath->next();
