@@ -17,6 +17,7 @@
 #include <Engine/Assets/Animation/Skeleton/SkeletonLibrary.h>
 #include <Engine/Assets/Audio/AudioLibrary.h>
 #include <Engine/Assets/PolygonMesh/PolygonMeshLibrary.h>
+#include <Engine/Assets/PrimitiveGeometry/PrimitiveGeometryLibrary.h>
 #include <Engine/Assets/Texture/TextureLibrary.h>
 
 #include <Engine/Application/ArgumentParser.h>
@@ -60,6 +61,9 @@ void SceneGame::load() {
 	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/rogland_clear_night_2k.dds");
 
 	PolygonMeshLibrary::RegisterLoadQue(".\\DirectXGame\\EngineResources\\Models\\Grid\\Grid.obj");
+
+
+	PrimitiveGeometryLibrary::Transfer("Cubemap", std::make_shared<PrimitiveGeometryAsset>("Cubemap.json"));
 
 	ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/FullscreenShader.VS.hlsl");
 	ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/Deferred/Mesh/StaticMesh.VS.hlsl");
@@ -158,7 +162,7 @@ void SceneGame::initialize() {
 	camera3D->set_offset({ 0,1,-40 });
 	camera3D->set_target(player);
 	enemyManager->generate("RedComet.json", Vector3{ 0,0,8 });
-	directionalLight->light_data().intensity = 0.500f;
+	directionalLight->light_data_mut().intensity = 0.500f;
 
 #pragma region RenderPath
 	// RenderPath
