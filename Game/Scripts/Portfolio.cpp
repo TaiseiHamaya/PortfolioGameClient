@@ -12,7 +12,7 @@
 #ifdef DEBUG_FEATURES_ENABLE
 #include <Engine/Application/ArgumentParser.h>
 #include <Engine/Application/ProjectSettings/ProjectSettings.h>
-#include <Engine/Application/Output.h>
+#include <Engine/Application/Logger.h>
 #endif // DEBUG_FEATURES_ENABLE
 
 void Portfolio::initialize() {
@@ -26,7 +26,7 @@ void Portfolio::initialize() {
 	if (ArgumentParser::Contains("-ENABLE_DEVELOP_BOT")) {
 		ProjectSettings::SetMaxFrameRate(60);
 		ProjectSettings::GetApplicationSettingsImm().hideWindowForce = true;
-		Information(L"Botモードが有効化されました。");
+		szgInformation(L"Botモードが有効化されました。");
 	}
 #endif // DEBUG_FEATURES_ENABLE
 }

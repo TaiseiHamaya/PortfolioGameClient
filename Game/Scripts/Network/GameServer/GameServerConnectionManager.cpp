@@ -1,6 +1,6 @@
 #include "GameServerConnectionManager.h"
 
-#include <Engine/Application/Output.h>
+#include <Engine/Application/Logger.h>
 
 constexpr string_literal LOCAL_LOOPBACK_ADDRESS = "127.0.0.1";
 
@@ -85,7 +85,7 @@ const asio::ip::tcp::socket& GameServerConnectionManager::get_socket() const {
 void GameServerConnectionManager::on_connect_handler(const asio::error_code& errorCode) {
 	if (!errorCode) {
 		// Successfully connected to the server
-		Information("Connected to the server successfully.");
+		szgInformation("Connected to the server successfully.");
 		std::lock_guard lock{ mutex };
 		if (connectionState != ConnectionState::ConnectionComplete) {
 			connectionState = ConnectionState::ConnectionEstablished;
@@ -95,21 +95,21 @@ void GameServerConnectionManager::on_connect_handler(const asio::error_code& err
 		// Handle connection error
 		std::lock_guard lock{ mutex };
 		if (connectionState == ConnectionState::Disconnected) {
-			Error("サーバーとの接続はタイムアウトしました。");
+			szgError("サーバーとの接続はタイムアウトしました。");
 		}
 		else {
 			switch (errorCode.value()) {
 			case asio::error::connection_refused:
-				Error("サーバーと接続しましたが、拒否されました。");
+				szgError("サーバーと接続しましたが、拒否されました。");
 				break;
 			case asio::error::operation_aborted:
-				Error("サーバーとの接続は中止されました。");
+				szgError("サーバーとの接続は中止されました。");
 				break;
 			case asio::error::already_connected:
-				Error("サーバーとの既に接続されています。");
+				szgError("サーバーとの既に接続されています。");
 				break;
 			default:
-				Error("不明な理由でサーバーとの接続に失敗しました。: ErrorCode-\'{}\'", errorCode.message());
+				szgError("不明な理由でサーバーとの接続に失敗しました。: ErrorCode-\'{}\'", errorCode.message());
 				break;
 			}
 		}

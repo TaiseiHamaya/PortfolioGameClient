@@ -2,7 +2,7 @@
 
 #include "GameServerConnectionManager.h"
 
-#include <Engine/Application/Output.h>
+#include <Engine/Application/Logger.h>
 
 void GameServerPacketSender::initialize() {
 }
@@ -44,9 +44,9 @@ void GameServerPacketSender::send_all_packets() {
 
 void GameServerPacketSender::on_send_handler(const asio::error_code& errorCode, std::size_t bytesTransferred) {
 	if (errorCode) {
-		Warning("Failed to send packet to game server: {}\n", errorCode.message());
+		szgWarning("Failed to send packet to game server: {}\n", errorCode.message());
 	}
 	else {
-		Information("Sent {} bytes to game server", bytesTransferred);
+		szgInformation("Sent {} bytes to game server", bytesTransferred);
 	}
 }
