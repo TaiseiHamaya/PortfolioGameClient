@@ -1,6 +1,6 @@
 #include "PacketBuffer.h"
 
-#include <Engine/Application/Output.h>
+#include <Engine/Application/Logger.h>
 
 std::vector<Proto::Packet> ReceiveBuffer::resolve_packets(std::span<u8> data) {
 	std::vector<Proto::Packet> result;
@@ -29,7 +29,7 @@ std::vector<Proto::Packet> ReceiveBuffer::resolve_packets(std::span<u8> data) {
 				result.emplace_back(std::move(packet));
 			}
 			else {
-				Error("Failed to parse packet from buffer.");
+				szgError("Failed to parse packet from buffer.");
 			}
 			// 状態リセット
 			received_size = 0;

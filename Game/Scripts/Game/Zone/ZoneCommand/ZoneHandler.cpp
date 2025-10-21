@@ -1,6 +1,6 @@
 #include "ZoneHandler.h"
 
-#include <Engine/Application/Output.h>
+#include <Engine/Application/Logger.h>
 
 #include "./Command/ZoneLoginPlayerCommand.h"
 #include "./Command/ZoneLogoutPlayerCommand.h"
@@ -34,7 +34,7 @@ void ZoneHandler::handle_zone() {
 	auto packets = gameServerPacketReceiver->take_packet_stack();
 
 	for (auto& packet : packets) {
-		Information("Recv packet byte size long {}", packet.ByteSizeLong());
+		szgInformation("Recv packet byte size long {}", packet.ByteSizeLong());
 
 		switch (packet.category_case()) {
 		case Proto::Packet::kTextMessageType:
@@ -54,7 +54,7 @@ void ZoneHandler::handle_zone() {
 			process_sync_packet(packet.syncpackettype(), packet.payload());
 			break;
 		default:
-			Warning("");
+			szgWarning("");
 			// その他の処理
 			break;
 		}
@@ -107,10 +107,10 @@ void ZoneHandler::process_text_message(Proto::TextMessageType type, const std::s
 		body.ParseFromString(payload);
 		Reference<IEntity> entity = entityManager->inquire_server_id(body.id());
 		if (entity) {
-			Information("[{}]: {}", entity->name_imu(), body.message());
+			szgInformation("[{}]: {}", entity->name_imu(), body.message());
 		}
 		else {
-			Information("[Unknown]: {}", body.message());
+			szgInformation("[Unknown]: {}", body.message());
 		}
 	}
 	break;
@@ -118,7 +118,7 @@ void ZoneHandler::process_text_message(Proto::TextMessageType type, const std::s
 	{
 		Proto::SystemMessageBody body;
 		body.ParseFromString(payload);
-		Information("[System]: {}", body.message());
+		szgInformation("[System]: {}", body.message());
 	}
 	break;
 	}
@@ -141,7 +141,7 @@ void ZoneHandler::process_login_packet(Proto::LoginPacketType type, const std::s
 	{
 		Proto::LoginNotificationBody body;
 		body.ParseFromString(payload);
-		Information("[System]: Player added. Id-\'{}\' Name-\'{}\'", body.id(), body.username());
+		szgInformation("[System]: Player added. Id-\'{}\' Name-\'{}\'", body.id(), body.username());
 		Vector3 position(body.position().x(), body.position().y(), body.position().z());
 		zoneCommands.emplace_back(
 			std::make_unique<ZoneLoginPlayerCommand>(entityManager, body.id(), body.username(), position)
@@ -168,7 +168,7 @@ void ZoneHandler::process_logout_packet(Proto::LogoutPacketType type, const std:
 		zoneCommands.emplace_back(
 			std::make_unique<ZoneLogoutPlayerCommand>(entityManager, body.id())
 		);
-		Information("[System]: Player removed. Id-\'{}\'", body.id());
+		szgInformation("[System]: Player removed. Id-\'{}\'", body.id());
 	}
 	break;
 	default:
