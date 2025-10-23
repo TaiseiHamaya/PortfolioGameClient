@@ -44,7 +44,11 @@ struct CometAction {
 class LuminanceExtractionNode;
 class MargeTextureNode;
 class BloomNode;
+class CubemapNode;
 
+/// <summary>
+/// メインゲームシーン
+/// </summary>
 class SceneGame final : public BaseScene {
 public:
 	void load() override;
@@ -89,6 +93,7 @@ private:
 	std::shared_ptr<GaussianBlurNode> gaussianBlurNode16;
 	std::shared_ptr<MargeTextureNode> margeTextureNode;
 	std::shared_ptr<BloomNode> bloomNode;
+	std::shared_ptr<CubemapNode> cubemapNode;
 
 	// ---------- マネージャー関連 ----------
 	std::unique_ptr<WorldManager> worldManager;
@@ -115,8 +120,6 @@ private:
 	std::unique_ptr<StaticMeshInstance> skydome;
 
 	std::list<CometAction> comets;
-
-	Reference<Vector3> cubemapWorld;
 
 	GaussianBlurNode::GaussianBlurInfo blurData{
 		.dispersion = 1.0f,

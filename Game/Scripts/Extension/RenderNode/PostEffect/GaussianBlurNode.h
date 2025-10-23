@@ -5,11 +5,14 @@
 #include <Engine/GraphicsAPI/DirectX/DxResource/ConstantBuffer/ConstantBuffer.h>
 #include <Engine/GraphicsAPI/DirectX/DxResource/TextureResource/RenderTexture.h>
 
+/// <summary>
+/// GaussianBlur
+/// </summary>
 class GaussianBlurNode : public SingleRenderTargetNode {
 public:
 	struct GaussianBlurInfo {
-		float dispersion;
-		float length;
+		r32 dispersion;
+		r32 length;
 		uint32_t sampleCount;
 	};
 

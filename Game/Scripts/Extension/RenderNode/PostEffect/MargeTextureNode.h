@@ -6,6 +6,9 @@
 
 #include <Engine/GraphicsAPI/DirectX/DxResource/TextureResource/RenderTexture.h>
 
+/// <summary>
+/// 4枚のテクスチャを合成するノード
+/// </summary>
 class MargeTextureNode : public SingleRenderTargetNode {
 public:
 

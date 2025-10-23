@@ -9,6 +9,10 @@
 class Enemy;
 class EntityManager;
 
+/// <summary>
+/// 敵管理クラス
+/// 削除するかも
+/// </summary>
 class EnemyManager {
 public:
 	EnemyManager() = default;

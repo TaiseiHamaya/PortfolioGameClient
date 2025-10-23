@@ -106,7 +106,7 @@ std::optional<u64>& IEntity::server_id_mut() noexcept {
 	return serverId;
 }
 
-const std::string& IEntity::name_imu() const noexcept {
+const std::string& IEntity::name_imm() const noexcept {
 	return name;
 }
 

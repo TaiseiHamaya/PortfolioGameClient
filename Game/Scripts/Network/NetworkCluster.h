@@ -17,12 +17,29 @@ public:
 	__CLASS_NON_COPYMOVEABLE(NetworkCluster)
 
 public:
+	/// <summary>
+	/// 初期化
+	/// </summary>
 	void initialize();
+
+	/// <summary>
+	/// 遅延初期化
+	/// </summary>
 	void setup();
 
+	/// <summary>
+	/// 終了処理
+	/// </summary>
 	void finalize();
 
+	/// <summary>
+	/// メッセージ受け取り
+	/// </summary>
 	void receive();
+
+	/// <summary>
+	/// メッセージ送信
+	/// </summary>
 	void send();
 
 private:

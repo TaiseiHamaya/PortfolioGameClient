@@ -9,6 +9,9 @@
 
 class Camera3D;
 
+/// <summary>
+/// キューブマップ描画ノード
+/// </summary>
 class CubemapNode final : public SingleRenderTargetNode {
 public:
 	/// <summary>
@@ -21,7 +24,7 @@ public:
 	void set_cubemap_texture(const std::string& name);
 	void set_camera(Reference<const Camera3D> camera_);
 
-	Reference<Vector3> get_world();
+	void write_position(const Vector3& position);
 
 private:
 	void create_pipeline_state();
@@ -36,6 +39,6 @@ private:
 	std::shared_ptr<const PrimitiveGeometryAsset> indexBuffer;
 	Reference<const Camera3D> camera;
 	std::shared_ptr<const TextureAsset> cubemapTexture;
-	ConstantBuffer<Vector3> VsBuffer;
+	ConstantBuffer<Vector3> vsBuffer;
 	ConstantBuffer<Material> materialBuffer;
 };

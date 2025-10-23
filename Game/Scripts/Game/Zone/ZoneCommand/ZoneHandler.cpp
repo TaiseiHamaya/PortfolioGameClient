@@ -107,7 +107,7 @@ void ZoneHandler::process_text_message(Proto::TextMessageType type, const std::s
 		body.ParseFromString(payload);
 		Reference<IEntity> entity = entityManager->inquire_server_id(body.id());
 		if (entity) {
-			szgInformation("[{}]: {}", entity->name_imu(), body.message());
+			szgInformation("[{}]: {}", entity->name_imm(), body.message());
 		}
 		else {
 			szgInformation("[Unknown]: {}", body.message());

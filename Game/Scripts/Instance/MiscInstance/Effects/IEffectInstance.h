@@ -16,6 +16,9 @@ Vector3 CalculateTargetPosition(Reference<IEntity> self, Reference<IEntity> targ
 
 }
 
+/// <summary>
+/// エフェクトインターフェース
+/// </summary>
 class IEffectInstance : public WorldInstance {
 public:
 	IEffectInstance() = default;

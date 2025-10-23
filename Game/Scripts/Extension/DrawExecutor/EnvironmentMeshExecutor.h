@@ -10,6 +10,9 @@ class DirectionalLightingExecutor;
 class Camera3D;
 class TextureAsset;
 
+/// <summary>
+/// 環境マップ付きメッシュ描画実行クラス
+/// </summary>
 class EnvironmentMeshExecutor final : public BaseDrawExecutor<StaticMeshInstance> {
 public:
 	EnvironmentMeshExecutor() = default;
@@ -20,9 +23,30 @@ public:
 	__CLASS_NON_COPYABLE(EnvironmentMeshExecutor)
 
 public:
+	/// <summary>
+	/// 初期化
+	/// </summary>
+	/// <param name="mesh">メッシュ名</param>
+	/// <param name="maxInstance">最大インスタンス数</param>
+	/// <param name="environmentTexture_">環境マップテクスチャ</param>
 	void reinitialize(std::shared_ptr<const PolygonMesh> mesh, u32 maxInstance, std::shared_ptr<const TextureAsset> environmentTexture_);
+	
+	/// <summary>
+	/// ライトとカメラの設定
+	/// </summary>
+	/// <param name="directionalLightingExecutor_"></param>
+	/// <param name="camera_"></param>
 	void setup(Reference<const DirectionalLightingExecutor> directionalLightingExecutor_, Reference<const Camera3D> camera_);
+	
+	/// <summary>
+	/// コマンドを積む
+	/// </summary>
 	void draw_command() const override;
+	
+	/// <summary>
+	/// GPUバッファに書き込み
+	/// </summary>
+	/// <param name="instance"></param>
 	void write_to_buffer(Reference<const StaticMeshInstance> instance) override;
 
 private:

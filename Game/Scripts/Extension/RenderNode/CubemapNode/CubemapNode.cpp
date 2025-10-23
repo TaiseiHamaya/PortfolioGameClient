@@ -21,7 +21,7 @@ void CubemapNode::preprocess() {
 	materialBuffer.get_data()->texture = cubemapTexture->index();
 	auto& command = DxCommand::GetCommandList();
 	command->IASetIndexBuffer(indexBuffer->get_p_ibv());
-	command->SetGraphicsRootConstantBufferView(0, VsBuffer.get_resource()->GetGPUVirtualAddress());
+	command->SetGraphicsRootConstantBufferView(0, vsBuffer.get_resource()->GetGPUVirtualAddress());
 	command->SetGraphicsRootConstantBufferView(1, materialBuffer.get_resource()->GetGPUVirtualAddress());
 	camera->register_world_projection(2);
 	command->DrawIndexedInstanced(indexBuffer->index_size(), 1, 0, 0, 0);
@@ -35,8 +35,8 @@ void CubemapNode::set_camera(Reference<const Camera3D> camera_) {
 	camera = camera_;
 }
 
-Reference<Vector3> CubemapNode::get_world() {
-	return VsBuffer.get_data();
+void CubemapNode::write_position(const Vector3& position) {
+	*vsBuffer.get_data() = position;
 }
 
 void CubemapNode::create_pipeline_state() {

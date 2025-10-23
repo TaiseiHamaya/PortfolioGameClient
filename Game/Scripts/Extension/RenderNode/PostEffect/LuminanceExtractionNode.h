@@ -5,6 +5,9 @@
 #include <Engine/GraphicsAPI/DirectX/DxResource/ConstantBuffer/ConstantBuffer.h>
 #include <Engine/GraphicsAPI/DirectX/DxResource/TextureResource/RenderTexture.h>
 
+/// <summary>
+/// 色収差
+/// </summary>
 class LuminanceExtractionNode : public SingleRenderTargetNode {
 public:
 	LuminanceExtractionNode() = default;

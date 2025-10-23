@@ -25,7 +25,7 @@ void GaussianBlurNode::set_base_texture(Reference<RenderTexture> baseTexture_) {
 	baseTexture = baseTexture_;
 }
 
-void GaussianBlurNode::set_parameters(float dispersion, float length, uint32_t sampleCount) {
+void GaussianBlurNode::set_parameters(r32 dispersion, r32 length, uint32_t sampleCount) {
 	*blurInfo.get_data() = {
 		.dispersion = dispersion,
 		.length = length,

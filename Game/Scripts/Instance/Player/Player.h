@@ -4,6 +4,9 @@
 
 #include "Scripts/Instance/IEntity/IEntity.h"
 
+/// <summary>
+/// プレイヤー
+/// </summary>
 class Player final : public IEntity {
 public:
 	void initialize(const std::filesystem::path& file) override;

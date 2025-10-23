@@ -6,6 +6,9 @@
 
 #include "Scripts/Instance/IEntity/IEntity.h"
 
+/// <summary>
+/// 他プレイヤー
+/// </summary>
 class RemotePlayer final : public IEntity {
 public:
 	void initialize(const std::filesystem::path& file) override;
@@ -15,6 +18,9 @@ public:
 	void move_to(const std::chrono::steady_clock::time_point& time, const Vector3& position) override;
 
 private:
+	/// <summary>
+	/// 位置の補間計算
+	/// </summary>
 	void calculate_position();
 
 #ifdef DEBUG_FEATURES_ENABLE

@@ -32,6 +32,9 @@ enum class EntityFlag {
 
 __USE_BITFLAG(EntityFlag)
 
+/// <summary>
+/// エンティティのインターフェース
+/// </summary>
 class IEntity : public SkinningMeshInstance {
 public:
 	virtual void initialize(const std::filesystem::path& file);
@@ -44,9 +47,28 @@ public:
 	virtual void update() override;
 
 public:
+	/// <summary>
+	/// アクション実行
+	/// </summary>
+	/// <param name="actionName"></param>
 	void start_action(eps::string_hashed actionName);
+
+	/// <summary>
+	/// 移動処理
+	/// </summary>
+	/// <param name="time"></param>
+	/// <param name="position"></param>
 	virtual void move_to(const std::chrono::steady_clock::time_point& time, const Vector3& position) = 0;
+
+	/// <summary>
+	/// 削除予定
+	/// </summary>
 	void jump();
+
+	/// <summary>
+	/// 被ダメージ時処理
+	/// </summary>
+	/// <param name="damage"></param>
 	void on_damaged(i32 damage);
 
 protected:
@@ -79,7 +101,7 @@ public:
 	u64 local_id() const noexcept;
 	const std::optional<u64>& server_id() const noexcept;
 	std::optional<u64>& server_id_mut() noexcept;
-	const std::string& name_imu() const noexcept;
+	const std::string& name_imm() const noexcept;
 	r32 target_radius() const noexcept;
 	Reference<IEntity> get_selection_target() const noexcept;
 	Reference<IActionBasic> now_action() const noexcept;

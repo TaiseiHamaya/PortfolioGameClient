@@ -4,6 +4,9 @@
 
 #include <Engine/GraphicsAPI/DirectX/DxResource/TextureResource/RenderTexture.h>
 
+/// <summary>
+/// ダウンサンプリング
+/// </summary>
 class DownSamplingNode final : public SingleRenderTargetNode {
 public:
 	/// <summary>
