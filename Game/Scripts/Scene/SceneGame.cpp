@@ -212,12 +212,11 @@ void SceneGame::initialize() {
 	environmentMeshNode->set_render_target(baseRenderTexture);
 	environmentMeshNode->set_config(RenderNodeConfig::NoClearRenderTarget | RenderNodeConfig::NoClearDepth);
 
-	auto cubemapNode = eps::CreateShared<CubemapNode>();
+	cubemapNode = eps::CreateShared<CubemapNode>();
 	cubemapNode->initialize();
 	cubemapNode->set_cubemap_texture("rogland_clear_night_2k.dds");
 	cubemapNode->set_camera(camera3D);
 	cubemapNode->set_render_target(baseRenderTexture);
-	cubemapWorld = cubemapNode->get_world();
 	cubemapNode->set_config(RenderNodeConfig::NoClearRenderTarget | RenderNodeConfig::NoClearDepth);
 
 	auto rect3dNode = eps::CreateShared<Rect3dNode>();
@@ -359,7 +358,7 @@ void SceneGame::update() {
 void SceneGame::late_update() {
 	entityManager->late_update();
 
-	*cubemapWorld = camera3D->world_position();
+	cubemapNode->write_position(camera3D->world_position());
 
 	networkCluster.send();
 }

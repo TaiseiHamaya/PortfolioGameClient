@@ -12,6 +12,9 @@
 
 class GameServerConnectionManager;
 
+/// <summary>
+/// メッセージ送信用クラス
+/// </summary>
 class GameServerPacketSender final {
 public:
 	GameServerPacketSender() = default;
@@ -20,11 +23,31 @@ public:
 	__CLASS_NON_COPYABLE(GameServerPacketSender)
 
 public:
+	/// <summary>
+	/// 初期化
+	/// </summary>
 	void initialize();
+
+	/// <summary>
+	/// 遅延初期化
+	/// </summary>
+	/// <param name="connectionManager_"></param>
 	void setup(Reference<GameServerConnectionManager> connectionManager_);
+
+	/// <summary>
+	/// 終了処理
+	/// </summary>
 	void finalize();
 
+	/// <summary>
+	/// スタック
+	/// </summary>
+	/// <param name="packet"></param>
 	void stack_packet(const Proto::Packet& packet);
+	
+	/// <summary>
+	/// 送信
+	/// </summary>
 	void send_all_packets();
 
 private:

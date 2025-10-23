@@ -7,6 +7,9 @@
 
 #include "Scripts/Instance/MiscInstance/Effects/IEffectInstance.h"
 
+/// <summary>
+/// エフェクト管理クラス
+/// </summary>
 class EffectManager {
 public:
 	EffectManager() = default;

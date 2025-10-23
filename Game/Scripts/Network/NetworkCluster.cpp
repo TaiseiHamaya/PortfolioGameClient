@@ -77,7 +77,7 @@ void NetworkCluster::debug_gui() {
 	}
 	ImGui::Separator();
 
-	ImGui::Text(player->name_imu().c_str());
+	ImGui::Text(player->name_imm().c_str());
 
 	bool send = false;
 	send |= ImGui::InputText("Chat", &msg, ImGuiInputTextFlags_EnterReturnsTrue);

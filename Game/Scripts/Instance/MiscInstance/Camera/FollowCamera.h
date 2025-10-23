@@ -4,6 +4,9 @@
 #include <Engine/Runtime/Clock/WorldTimer.h>
 #include <Engine/Runtime/Input/InputHandler.h>
 
+/// <summary>
+/// 追跡カメラ
+/// </summary>
 class FollowCamera final : public Camera3D {
 public:
 	void initialize() override;
@@ -12,6 +15,9 @@ public:
 	void input();
 
 public:
+	/// <summary>
+	/// 画面揺れの実行
+	/// </summary>
 	void do_shake();
 
 public:

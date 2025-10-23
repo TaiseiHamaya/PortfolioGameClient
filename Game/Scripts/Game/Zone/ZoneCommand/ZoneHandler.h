@@ -14,6 +14,9 @@ class GameServerConnectionManager;
 class GameServerPacketReceiver;
 class GameServerPacketSender;
 
+/// <summary>
+/// ゾーン処理に関するハンドラ
+/// </summary>
 class ZoneHandler final {
 public:
 	ZoneHandler() = default;
@@ -29,12 +32,26 @@ public:
 		Reference<GameServerPacketSender> gameServerPacketSender_
 	);
 
+	/// <summary>
+	/// コマンドの実行
+	/// </summary>
 	void execute_commands();
 
+	/// <summary>
+	/// ハンドリング
+	/// </summary>
 	void handle_zone();
 
+	/// <summary>
+	/// コマンドのスタック
+	/// </summary>
+	/// <param name="command"></param>
 	void stack_command(std::unique_ptr<IZoneCommand> command);
 
+	/// <summary>
+	/// プレイヤーを移動させる
+	/// </summary>
+	/// <param name="position">位置</param>
 	void move_client_player(const Vector3& position);
 
 private:

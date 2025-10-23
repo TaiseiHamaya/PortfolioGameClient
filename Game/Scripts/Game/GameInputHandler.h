@@ -10,6 +10,9 @@ class Player;
 class WorldInstance;
 class ZoneHandler;
 
+/// <summary>
+/// インゲームの入力ハンドラ
+/// </summary>
 class GameInputHandler final {
 public:
 	GameInputHandler() = default;
@@ -19,8 +22,17 @@ public:
 
 public:
 	void initialize();
+
 	void setup(Reference<ZoneHandler> zoneHandler_);
+	
+	/// <summary>
+	/// 入力処理
+	/// </summary>
 	void input();
+
+	/// <summary>
+	/// 更新処理
+	/// </summary>
 	void update();
 
 private:

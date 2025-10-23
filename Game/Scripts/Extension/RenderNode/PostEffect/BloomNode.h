@@ -5,6 +5,9 @@
 #include <Engine/GraphicsAPI/DirectX/DxResource/ConstantBuffer/ConstantBuffer.h>
 #include <Engine/GraphicsAPI/DirectX/DxResource/TextureResource/RenderTexture.h>
 
+/// <summary>
+/// Bloom
+/// </summary>
 class BloomNode : public SingleRenderTargetNode {
 public:
 	BloomNode() = default;

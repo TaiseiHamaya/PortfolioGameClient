@@ -12,6 +12,9 @@ class StaticMeshDrawManager;
 class Rect3dDrawManager;
 struct BlurInfo;
 
+/// <summary>
+/// コメットのエフェクト
+/// </summary>
 class CometEffect final : public IEffectInstance {
 public:
 	CometEffect();

@@ -10,6 +10,9 @@
 
 class IEntity;
 
+/// <summary>
+/// 位置同期処理
+/// </summary>
 class ZoneSyncTransformCommand final : public IZoneCommand {
 public:
 	ZoneSyncTransformCommand(Reference<IEntity> entity, const std::chrono::steady_clock::time_point& time, const Vector3& position_);

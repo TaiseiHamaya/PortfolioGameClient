@@ -6,6 +6,9 @@
 
 class EntityManager;
 
+/// <summary>
+/// ログアウト処理
+/// </summary>
 class ZoneLogoutPlayerCommand final : public IZoneCommand {
 public:
 	ZoneLogoutPlayerCommand(Reference<EntityManager> entityManager_, u64 serverId_);

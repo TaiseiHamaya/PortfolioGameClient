@@ -4,6 +4,9 @@
 
 #include "Scripts/Extension/Util/LookAtRect.h"
 
+/// <summary>
+/// HPバーのWorldInstance
+/// </summary>
 class EntityUi final : public WorldInstance {
 public:
 	void initialize(float offsetY, Color4 color);

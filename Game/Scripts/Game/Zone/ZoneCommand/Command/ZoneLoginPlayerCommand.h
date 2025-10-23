@@ -9,6 +9,9 @@
 
 class EntityManager;
 
+/// <summary>
+/// ログイン処理
+/// </summary>
 class ZoneLoginPlayerCommand final : public IZoneCommand {
 public:
 	ZoneLoginPlayerCommand(Reference<EntityManager> entityManager_, u64 serverId, const std::string& name_, const Vector3& position_);
