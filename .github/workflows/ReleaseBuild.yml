@@ -17,6 +17,7 @@ jobs:
         uses: actions/checkout@v4
         with:
             submodules: recursive
+            lfs: true
         
       - name: Add MSBuild to PATH
         uses: microsoft/setup-msbuild@v2
@@ -28,6 +29,7 @@ jobs:
 
   notification:
     needs: build
+    if: ${{ always() }}
     runs-on: ubuntu-22.04
     steps:
       - name: Discord Notification
