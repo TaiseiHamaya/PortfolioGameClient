@@ -29,6 +29,7 @@ jobs:
 
   notification:
     needs: build
+    if: ${{ always() }}
     runs-on: ubuntu-22.04
     steps:
       - name: Discord Notification
