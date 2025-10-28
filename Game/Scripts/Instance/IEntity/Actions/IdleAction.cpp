@@ -2,6 +2,7 @@
 
 IdleAction::IdleAction() : IActionBasic() {
 	//useAnimationName = 
+	type = ActionType::Misc;
 }
 
 void IdleAction::start() {

@@ -2,7 +2,7 @@
 
 #include <Engine/Runtime/Clock/WorldClock.h>
 
-#include "Scripts/Game/Zone/ZoneCommand/ZoneHandler.h"
+#include "Scripts/Game/Zone/ZoneHandler.h"
 #include "Scripts/Instance/Player/Player.h"
 
 #include <Library/Utility/Tools/RandomEngine.h>
@@ -51,7 +51,7 @@ void GameInputHandler::update() {
 	}
 
 #ifdef DEBUG_FEATURES_ENABLE
-	if(ArgumentParser::Contains("-ENABLE_DEVELOP_BOT")) {
+	if (ArgumentParser::Contains("-ENABLE_DEVELOP_BOT")) {
 		timer.ahead();
 		Vector3 center;
 		std::optional<u64> xArgIndex = ArgumentParser::ArgIndexByValue("-x");
@@ -87,6 +87,10 @@ void GameInputHandler::update() {
 		Vector3 dest = position + velocity * WorldClock::DeltaSeconds();
 
 		zoneHandler->move_client_player(dest);
+	}
+
+	if (actionHandlerK.trigger(inputKey[1].first) || actionHandlerP.trigger(inputKey[1].second)) {
+		zoneHandler->request_play_action(0);
 	}
 }
 

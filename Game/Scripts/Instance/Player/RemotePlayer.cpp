@@ -5,7 +5,7 @@
 #include "../IEntity/Actions/JumpAction.h"
 #include "Actions/PaladinHolySpirit.h"
 
-using clock_type = std::chrono::steady_clock;
+using clock_type = std::chrono::system_clock;
 
 void RemotePlayer::initialize(const std::filesystem::path& file) {
 	IEntity::initialize(file);

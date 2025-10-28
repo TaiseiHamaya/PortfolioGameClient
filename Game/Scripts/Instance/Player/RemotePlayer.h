@@ -15,7 +15,7 @@ public:
 
 	void update() override;
 
-	void move_to(const std::chrono::steady_clock::time_point& time, const Vector3& position) override;
+	void move_to(const std::chrono::system_clock::time_point& time, const Vector3& position) override;
 
 private:
 	/// <summary>
@@ -33,7 +33,7 @@ public:
 
 private:
 	struct Waypoint {
-		std::chrono::steady_clock::time_point timestamp;
+		std::chrono::system_clock::time_point timestamp;
 		Vector3 position;
 	};
 

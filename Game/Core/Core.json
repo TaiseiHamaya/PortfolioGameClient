@@ -25,7 +25,7 @@
       "Width": 1280,
       "Height": 720
     },
-    "IsFixWorldClock": false,
+    "FixDeltaSeconds": 0.01666,
     "TargetFrameRate": null
   }
 }

@@ -18,6 +18,10 @@ void IActionBasic::setup(Reference<IEntity> owner_, const std::string& animation
 	useAnimationName = animationName;
 }
 
+ActionType IActionBasic::action_type() const noexcept {
+	return type;
+}
+
 #ifdef DEBUG_FEATURES_ENABLE
 
 void IActionBasic::debug_gui() {

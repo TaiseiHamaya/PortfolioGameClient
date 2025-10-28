@@ -19,8 +19,8 @@ void NetworkCluster::finalize() {
 	const auto& id = player->server_id();
 	if (id.has_value()) {
 		Proto::Packet packet;
-		packet.set_logoutpackettype(Proto::LogoutPacketType::LogoutRequest);
-		Proto::LogoutRequestBody body;
+		packet.set_category_logout_message(Proto::CategoryLogoutMessage::LOGOUT_REQUEST);
+		Proto::PayloadLogoutRequest body;
 		body.set_id(id.value());
 		packet.set_payload(body.SerializeAsString());
 		packetSender.stack_packet(packet);
@@ -84,8 +84,8 @@ void NetworkCluster::debug_gui() {
 	send |= ImGui::Button("SendMessage");
 	if (send) {
 		Proto::Packet packet;
-		packet.set_textmessagetype(Proto::TextMessageType::MessageChatSend);
-		Proto::ChatMessageBody body;
+		packet.set_category_text_message(Proto::CategoryTextMessage::CHAT_SEND);
+		Proto::PayloadTextMessage body;
 		body.set_message(msg);
 		body.set_id(id.value());
 		packet.set_payload(body.SerializeAsString());

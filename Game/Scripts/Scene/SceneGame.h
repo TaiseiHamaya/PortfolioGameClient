@@ -27,7 +27,7 @@
 #include "Scripts/Extension/DrawExecutor/EnvironmentMeshExecutor.h"
 #include "Scripts/Extension/RenderNode/PostEffect/GaussianBlurNode.h"
 #include "Scripts/Game/GameInputHandler.h"
-#include "Scripts/Game/Zone/ZoneCommand/ZoneHandler.h"
+#include "Scripts/Game/Zone/ZoneHandler.h"
 #include "Scripts/Instance/MiscInstance/AOE/CircleAoe.h"
 #include "Scripts/Instance/MiscInstance/Camera/FollowCamera.h"
 #include "Scripts/Instance/MiscInstance/Effects/CometEffect.h"
