@@ -2,7 +2,8 @@
 
 #include <Engine/Application/Logger.h>
 
-constexpr string_literal LOCAL_LOOPBACK_ADDRESS = "127.0.0.1";
+static constexpr string_literal LOCAL_LOOPBACK_ADDRESS = "127.0.0.1";
+static constexpr string_literal AWS_SERVER_ADDRESS = "18.180.254.93";
 
 void GameServerConnectionManager::initialize() {
 	attach_context_thread();
@@ -10,7 +11,7 @@ void GameServerConnectionManager::initialize() {
 
 void GameServerConnectionManager::connect() {
 	endpoint = {
-		asio::ip::make_address(LOCAL_LOOPBACK_ADDRESS),
+		asio::ip::make_address(AWS_SERVER_ADDRESS),
 		3215
 	};
 	// 非同期接続要求
