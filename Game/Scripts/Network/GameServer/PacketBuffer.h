@@ -34,7 +34,7 @@ private:
 	bool read_length_header(std::span<u8>& data);
 
 private:
-	u8 received_size{ 0 };
-	u8 size{ 0 };
+	u8 received_header_size{ 0 };
+	u32 size{ 0 };
 	std::vector<u8> buffer{};
 };

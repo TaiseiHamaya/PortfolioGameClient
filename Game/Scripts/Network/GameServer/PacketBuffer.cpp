@@ -32,7 +32,7 @@ std::vector<Proto::Packet> ReceiveBuffer::resolve_packets(std::span<u8> data) {
 				szgError("Failed to parse packet from buffer.");
 			}
 			// 状態リセット
-			received_size = 0;
+			received_header_size = 0;
 			size = 0;
 			buffer.clear();
 		}
@@ -46,19 +46,19 @@ bool ReceiveBuffer::read_length_header(std::span<u8>& data) {
 	constexpr u8 sizeof8 = sizeof(u8);
 
 	// ヘッダーが読み込まれている状態
-	if (received_size >= sizeof32) {
+	if (received_header_size >= sizeof32) {
 		return true;
 	}
 
-	u8 neededSize = sizeof32 - received_size;
+	u8 neededSize = sizeof32 - received_header_size;
 	u64 readSize = std::min<u64>(static_cast<u64>(neededSize), data.size());
 	for (u64 i = 0; i < readSize; ++i) {
-		size |= static_cast<u32>(data[i]) << (received_size * 8);
-		++received_size;
+		size |= static_cast<u32>(data[i]) << (received_header_size * 8);
+		++received_header_size;
 	}
 	data = data.subspan(readSize);
 
 	buffer.reserve(size);
 
-	return received_size >= sizeof32;
+	return received_header_size >= sizeof32;
 }
