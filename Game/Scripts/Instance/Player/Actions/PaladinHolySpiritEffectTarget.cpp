@@ -21,6 +21,7 @@ void PaladinHolySpiritEffectTarget::initialize(const Vector3& position) {
 	absorption->get_transform().set_scale(CVector3::ZERO);
 	absorption->get_material().color = CColor4::BLACK;
 	absorption->get_material().lightingType = LighingType::None;
+	absorption->set_active(false);
 
 	// でかいやつ
 	centerConstraint = world_manager()->create<WorldInstance>(this);
@@ -35,6 +36,7 @@ void PaladinHolySpiritEffectTarget::initialize(const Vector3& position) {
 		centerBillboard->get_transform().set_translate({ 0.0,0.0,0.01f });
 		centerBillboard->get_material().texture = TextureLibrary::GetTexture("PaladinHolySpiritEffectTargetCenter6.png");
 		centerBillboard->get_material().lightingType = LighingType::None;
+		centerBillboard->set_active(false);
 
 		++i;
 	}
@@ -73,6 +75,17 @@ void PaladinHolySpiritEffectTarget::terminate([[maybe_unused]] Reference<StaticM
 		rectDrawManager->unregister_instance(centerBillboard);
 	}
 	rectDrawManager->unregister_instance(lightBillboard);
+
+	// WorldManagerから削除
+	world_manager()->erase(absorption);
+	world_manager()->erase(centerConstraint);
+	for(auto& centerBillboard : centerBillboards) {
+		world_manager()->erase(centerBillboard);
+	}
+	world_manager()->erase(lightBillboard);
+	world_manager()->erase(etherDustEmitter);
+	world_manager()->erase(shiningEmitter);
+	world_manager()->erase(this);
 }
 
 void PaladinHolySpiritEffectTarget::update() {
@@ -114,6 +127,17 @@ void PaladinHolySpiritEffectTarget::update() {
 	// 最後のキラキラしたやつ
 	if (timer.just_crossed(1.0f)) {
 		shiningEmitter->set_active(true);
+	}
+	if (timer.just_crossed(0.15f)) {
+		lightBillboard->set_active(true);
+	}
+	if (timer.just_crossed(0.35f)) {
+		absorption->set_active(true);
+	}
+	if (timer.just_crossed(0.25f)) {
+		for (auto& centerBillboard : centerBillboards) {
+			centerBillboard->set_active(true);
+		}
 	}
 
 	etherDustEmitter->update();

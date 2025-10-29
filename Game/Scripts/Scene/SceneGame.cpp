@@ -120,7 +120,7 @@ void SceneGame::initialize() {
 	// SkinMesh
 	skinningMeshDrawManager->make_instancing(0, "Player.gltf", 100);
 	skinningMeshDrawManager->make_instancing(0, "Enemy.gltf", 100);
-	skinningMeshDrawManager->make_instancing(0, "RedComet.gltf", 1);
+	skinningMeshDrawManager->make_instancing(0, "RedComet.gltf", 1000);
 	// StaticMesh
 	staticMeshDrawManager->make_instancing(0, "skydome.gltf", 1);
 	staticMeshDrawManager->make_instancing(0, "Comet.obj", 100);
@@ -134,7 +134,7 @@ void SceneGame::initialize() {
 	entityManager->setup(worldManager, skinningMeshDrawManager, rect3dDrawManager);
 	enemyManager->setup(entityManager);
 	effectManager->setup(staticMeshDrawManager, rect3dDrawManager);
-	zoneHandler.setup(entityManager, networkCluster.connection_manager(), networkCluster.get_receiver(), networkCluster.get_sender());
+	zoneHandler.setup(entityManager, enemyManager, networkCluster.connection_manager(), networkCluster.get_receiver(), networkCluster.get_sender());
 	networkCluster.setup();
 	gameInputHandler->setup(zoneHandler);
 
@@ -161,7 +161,6 @@ void SceneGame::initialize() {
 	camera3D->initialize();
 	camera3D->set_offset({ 0,1,-40 });
 	camera3D->set_target(player);
-	enemyManager->generate("RedComet.json", Vector3{ 0,0,8 });
 	directionalLight->light_data_mut().intensity = 0.500f;
 
 #pragma region RenderPath

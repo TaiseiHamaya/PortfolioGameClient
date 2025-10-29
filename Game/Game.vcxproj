@@ -58,17 +58,19 @@
     <ClCompile Include="Scripts\Instance\IEntity\IActionBasic.cpp" />
     <ClCompile Include="Scripts\Instance\Player\Player.cpp" />
     <ClCompile Include="Scripts\Instance\IEntity\Shadow.cpp" />
-    <ClCompile Include="Scripts\Game\Zone\ZoneCommand\ZoneHandler.cpp" />
-    <ClCompile Include="Scripts\Game\Zone\ZoneCommand\Command\ZoneLoginPlayerCommand.cpp" />
-    <ClCompile Include="Scripts\Game\Zone\ZoneCommand\Command\ZoneSyncTransformCommand.cpp" />
-    <ClCompile Include="Scripts\Game\Zone\ZoneCommand\Command\ZoneLogoutPlayerCommand.cpp" />
+    <ClCompile Include="Scripts\Game\Zone\ZoneHandler.cpp" />
+    <ClCompile Include="Scripts\Game\Zone\Command\ZoneLoginPlayerCommand.cpp" />
+    <ClCompile Include="Scripts\Game\Zone\Command\ZoneSyncTransformCommand.cpp" />
+    <ClCompile Include="Scripts\Game\Zone\Command\ZoneLogoutPlayerCommand.cpp" />
+    <ClCompile Include="Scripts\Game\Zone\Command\ZoneEntityDamagedCommand.cpp" />
+    <ClCompile Include="Scripts\Game\Zone\Command\ZonePlayActionCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scripts\Extension\DrawExecutor\EnvironmentMeshExecutor.h" />
     <ClInclude Include="Scripts\Extension\RenderNode\EnvironmentMeshNode\EnvironmentMeshNode.h" />
     <ClInclude Include="Scripts\Instance\Player\RemotePlayer.h" />
     <ClInclude Include="Scripts\Game\GameInputHandler.h" />
-    <ClInclude Include="Scripts\Game\Zone\ZoneCommand\Command\IZoneCommand.h" />
+    <ClInclude Include="Scripts\Game\Zone\Command\IZoneCommand.h" />
     <ClInclude Include="Scripts\Extension\Util\winsock_include.h" />
     <ClInclude Include="Scripts\Network\NetworkCluster.h" />
     <ClInclude Include="Scripts\Network\GameServer\PacketBuffer.h" />
@@ -108,10 +110,12 @@
     <ClInclude Include="Scripts\Instance\IEntity\IActionBasic.h" />
     <ClInclude Include="Scripts\Instance\Player\Player.h" />
     <ClInclude Include="Scripts\Instance\IEntity\Shadow.h" />
-    <ClInclude Include="Scripts\Game\Zone\ZoneCommand\ZoneHandler.h" />
-    <ClInclude Include="Scripts\Game\Zone\ZoneCommand\Command\ZoneLoginPlayerCommand.h" />
-    <ClInclude Include="Scripts\Game\Zone\ZoneCommand\Command\ZoneSyncTransformCommand.h" />
-    <ClInclude Include="Scripts\Game\Zone\ZoneCommand\Command\ZoneLogoutPlayerCommand.h" />
+    <ClInclude Include="Scripts\Game\Zone\ZoneHandler.h" />
+    <ClInclude Include="Scripts\Game\Zone\Command\ZoneLoginPlayerCommand.h" />
+    <ClInclude Include="Scripts\Game\Zone\Command\ZoneSyncTransformCommand.h" />
+    <ClInclude Include="Scripts\Game\Zone\Command\ZoneLogoutPlayerCommand.h" />
+    <ClInclude Include="Scripts\Game\Zone\Command\ZoneEntityDamagedCommand.h" />
+    <ClInclude Include="Scripts\Game\Zone\Command\ZonePlayActionCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="DevTool\launch-bot.ps1" />

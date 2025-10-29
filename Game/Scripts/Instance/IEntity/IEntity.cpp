@@ -10,7 +10,9 @@
 
 using namespace std::literals::string_literals;
 
-void IEntity::initialize(const std::filesystem::path& file) {
+void IEntity::initialize(const std::filesystem::path& file, u64 localId_) {
+	localId = localId_;
+
 	JsonAsset json{ std::format(L".\\Game\\Resources\\Json\\Entity\\{}", file.native()) };
 	shadow = world_manager()->create<Shadow>();
 	ui = world_manager()->create<EntityUi>(this);
@@ -41,6 +43,16 @@ void IEntity::begin() {
 	SkinningMeshInstance::begin();
 }
 
+void IEntity::terminate(Reference<SkinningMeshDrawManager> skinDraw, Reference<Rect3dDrawManager> rectDraw) {
+	skinDraw->unregister_instance(this);
+	rectDraw->unregister_instance(shadow);
+	ui->terminate(rectDraw);
+
+	world_manager()->erase(shadow);
+	world_manager()->erase(ui);
+	world_manager()->erase(this);
+}
+
 void IEntity::update() {
 	if (currentAction) {
 		// 移動が停止するようなアクションでは実行しない
@@ -66,12 +78,21 @@ void IEntity::update() {
 }
 
 void IEntity::start_action(eps::string_hashed actionName) {
-	if (actionList.contains(actionName)) {
-		currentAction = actionList[actionName];
-		currentAction->reset();
-		currentAction->reset_animation();
-		currentAction->start();
+	if (!actionList.contains(actionName)) {
+		return;
 	}
+	if (currentAction && !currentAction->can_transition()) {
+		return;
+	}
+	Reference<IActionBasic> action = actionList[actionName];
+	if (!action) {
+		return;
+	}
+	
+	currentAction = action;
+	currentAction->reset();
+	currentAction->reset_animation();
+	currentAction->start();
 }
 
 void IEntity::jump() {
@@ -120,6 +141,10 @@ Reference<IEntity> IEntity::get_selection_target() const noexcept {
 
 Reference<IActionBasic> IEntity::now_action() const noexcept {
 	return currentAction;
+}
+
+void IEntity::set_target(Reference<IEntity> entity) noexcept {
+	selectionTarget = entity;
 }
 
 void IEntity::set_server_id(u64 id) {

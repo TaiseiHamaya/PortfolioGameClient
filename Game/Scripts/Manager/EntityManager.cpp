@@ -19,18 +19,22 @@ void EntityManager::update() {
 }
 
 void EntityManager::late_update() {
+	for (u64 serverId : removedEntityIds) {
+		Reference<IEntity> entity = inquire_server_id(serverId);
+		if (entity) {
+			entity->terminate(skinDraw, rectDraw);
+			entities.erase(entity->local_id());
+			entityRefByServerId.erase(serverId);
+		}
+	}
+
 	for (std::unique_ptr<IEntity>& entity : entities | std::views::values) {
 		entity->late_update();
 	}
 }
 
 void EntityManager::destroy(u64 serverId) {
-	Reference<IEntity> entity = inquire_server_id(serverId);
-	if (entity) {
-		entities.erase(entity->local_id());
-		entityRefByServerId.erase(serverId);
-		worldManager->erase(entity);
-	}
+	removedEntityIds.emplace(serverId);
 }
 
 Reference<IEntity> EntityManager::inquire_server_id(u64 id) const {

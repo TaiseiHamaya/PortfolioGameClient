@@ -16,6 +16,7 @@ PaladinHolySpirit::PaladinHolySpirit() noexcept {
 	timer.set(0);
 	effect = ActionEffect::Spell;
 	loopAnimation = false;
+	type = ActionType::Spell;
 }
 
 void PaladinHolySpirit::start() {
@@ -39,22 +40,3 @@ bool PaladinHolySpirit::can_transition() const {
 bool PaladinHolySpirit::end_action() const {
 	return timer >= 2.5f;
 }
-
-//std::vector<std::unique_ptr<IEffectInstance>> PaladinHolySpirit::on_impact(Reference<IEntity> entity, Reference<IEntity> target, Reference<WorldManager> world) {
-//	std::vector<std::unique_ptr<IEffectInstance>> result{};
-//
-//	// ホリスピ強化状態化のチェックと消費処理
-//	//bool isEnchantedHolySpirit = entity;
-//
-//	// 敵へのダメージ
-//	if (target) {
-//		target->on_damaged(100);
-//	}
-//
-//	// エフェクトの生成
-//	auto temp = world->create<PaladinHolySpiritEffectTarget>();
-//	temp->initialize(EffectTools::CalculateTargetPosition(entity, target));
-//	result.emplace_back(std::move(temp));
-//
-//	return result;
-//}

@@ -8,6 +8,6 @@
 
 #include "Scripts/Extension/Util/RandomUtil.h"
 
-void Enemy::move_to(const std::chrono::steady_clock::time_point& time, const Vector3& position) {
+void Enemy::move_to(const std::chrono::system_clock::time_point& time, const Vector3& position) {
 	// do nothing
 }

@@ -15,6 +15,4 @@ public:
 public:
 	bool can_transition() const override;
 	bool end_action() const override;
-
-	//std::vector<std::unique_ptr<IEffectInstance>> on_impact(Reference<IEntity> entity, Reference<IEntity> target, Reference<WorldManager> world) override;
 };

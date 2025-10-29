@@ -2,7 +2,7 @@
 
 #include "Scripts/Instance/IEntity/IEntity.h"
 
-ZoneSyncTransformCommand::ZoneSyncTransformCommand(Reference<IEntity> entity_, const std::chrono::steady_clock::time_point& time, const Vector3& position_) :
+ZoneSyncTransformCommand::ZoneSyncTransformCommand(Reference<IEntity> entity_, const std::chrono::system_clock::time_point& time, const Vector3& position_) :
 	entity(entity_),
 	position(position_) {
 }

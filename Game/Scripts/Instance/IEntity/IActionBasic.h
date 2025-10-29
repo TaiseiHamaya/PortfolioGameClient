@@ -9,11 +9,22 @@ class IEntity;
 #include <string>
 
 enum class ActionEffect {
-	Nane,
+	None,
 	Spell,
 	Stack
 };
 
+enum class ActionType {
+	Unknown,
+	WeaponSkill,
+	Spell,
+	Ability,
+	Misc,
+};
+
+/// <summary>
+/// アクション用インターフェース
+/// </summary>
 class IActionBasic {
 public:
 	IActionBasic() = default;
@@ -33,6 +44,7 @@ public:
 
 public:
 	ActionEffect action_effect() const { return effect; }
+	ActionType action_type() const noexcept;
 
 #ifdef DEBUG_FEATURES_ENABLE
 public:
@@ -41,7 +53,8 @@ public:
 
 protected:
 	WorldTimer timer;
-	ActionEffect effect;
+	ActionEffect effect{ ActionEffect::None };
+	ActionType type{ ActionType::Unknown };
 	Reference<IEntity> owner{ nullptr };
 	std::string useAnimationName{ "Armatureアクション" };
 	bool loopAnimation{ false };

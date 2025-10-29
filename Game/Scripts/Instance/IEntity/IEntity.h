@@ -37,11 +37,23 @@ __USE_BITFLAG(EntityFlag)
 /// </summary>
 class IEntity : public SkinningMeshInstance {
 public:
-	virtual void initialize(const std::filesystem::path& file);
+	IEntity() noexcept = default;
+	virtual ~IEntity() noexcept = default;
+
+	__CLASS_NON_COPYABLE(IEntity)
+
+public:
+	virtual void initialize(const std::filesystem::path& file, u64 localId);
 	void setup(
 		Reference<SkinningMeshDrawManager> skinDraw,
 		Reference<Rect3dDrawManager> rectDraw
 	);
+
+	virtual void terminate(
+		Reference<SkinningMeshDrawManager> skinDraw,
+		Reference<Rect3dDrawManager> rectDraw
+	);
+
 	virtual void begin() override;
 
 	virtual void update() override;
@@ -58,7 +70,7 @@ public:
 	/// </summary>
 	/// <param name="time"></param>
 	/// <param name="position"></param>
-	virtual void move_to(const std::chrono::steady_clock::time_point& time, const Vector3& position) = 0;
+	virtual void move_to(const std::chrono::system_clock::time_point& time, const Vector3& position) = 0;
 
 	/// <summary>
 	/// 削除予定
@@ -105,6 +117,7 @@ public:
 	r32 target_radius() const noexcept;
 	Reference<IEntity> get_selection_target() const noexcept;
 	Reference<IActionBasic> now_action() const noexcept;
+	void set_target(Reference<IEntity> entity) noexcept;
 
 	void set_server_id(u64 id);
 	void set_name(const std::string& name);

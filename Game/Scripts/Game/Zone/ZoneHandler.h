@@ -6,10 +6,11 @@
 
 #include <Scripts/Proto/types.pb.h>
 
-#include <Scripts/Game/Zone/ZoneCommand/Command/IZoneCommand.h>
+#include <Scripts/Game/Zone/Command/IZoneCommand.h>
 
 class Player;
 class EntityManager;
+class EnemyManager;
 class GameServerConnectionManager;
 class GameServerPacketReceiver;
 class GameServerPacketSender;
@@ -27,6 +28,7 @@ public:
 public:
 	void setup(
 		Reference<EntityManager> entityManager_,
+		Reference<EnemyManager> enemyManager_,
 		Reference<GameServerConnectionManager> gameServerConnectionManager_,
 		Reference<GameServerPacketReceiver> gameServerPacketReceiver_,
 		Reference<GameServerPacketSender> gameServerPacketSender_
@@ -54,17 +56,21 @@ public:
 	/// <param name="position">位置</param>
 	void move_client_player(const Vector3& position);
 
+	void request_play_action(u32 actionId);
+
 private:
-	void process_text_message(Proto::TextMessageType type, const std::string& payload);
-	void process_login_packet(Proto::LoginPacketType type, const std::string& payload);
-	void process_logout_packet(Proto::LogoutPacketType type, const std::string& payload);
-	void process_sync_packet(Proto::SyncPacketType type, const std::string& payload);
+	void process_text_message(Proto::CategoryTextMessage type, const std::string& payload);
+	void process_login_message(Proto::CategoryLoginMessage type, const std::string& payload);
+	void process_logout_message(Proto::CategoryLogoutMessage type, const std::string& payload);
+	void process_sync_message(Proto::CategorySyncMessage type, const std::string& payload);
+	void process_entity_message(Proto::CategoryEnemyMessage category, const std::string& payload);
 
 private:
 	std::vector<std::unique_ptr<IZoneCommand>> zoneCommands;
 
 	Reference<Player> player;
 	Reference<EntityManager> entityManager;
+	Reference<EnemyManager> enemyManager;
 	Reference<GameServerConnectionManager> gameServerConnectionManager;
 	Reference<GameServerPacketSender> gameServerPacketSender;
 	Reference<GameServerPacketReceiver> gameServerPacketReceiver;
