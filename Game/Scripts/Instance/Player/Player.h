@@ -9,7 +9,13 @@
 /// </summary>
 class Player final : public IEntity {
 public:
-	void initialize(const std::filesystem::path& file) override;
+	Player() noexcept = default;
+	~Player() noexcept = default;
+
+	__CLASS_NON_COPYABLE(Player)
+
+public:
+	void initialize(const std::filesystem::path& file, u64 localId_) override;
 
 	void update() override;
 

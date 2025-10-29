@@ -10,7 +10,9 @@
 
 using namespace std::literals::string_literals;
 
-void IEntity::initialize(const std::filesystem::path& file) {
+void IEntity::initialize(const std::filesystem::path& file, u64 localId_) {
+	localId = localId_;
+
 	JsonAsset json{ std::format(L".\\Game\\Resources\\Json\\Entity\\{}", file.native()) };
 	shadow = world_manager()->create<Shadow>();
 	ui = world_manager()->create<EntityUi>(this);
@@ -39,6 +41,16 @@ void IEntity::begin() {
 	}
 
 	SkinningMeshInstance::begin();
+}
+
+void IEntity::terminate(Reference<SkinningMeshDrawManager> skinDraw, Reference<Rect3dDrawManager> rectDraw) {
+	skinDraw->unregister_instance(this);
+	rectDraw->unregister_instance(shadow);
+	ui->terminate(rectDraw);
+
+	world_manager()->erase(shadow);
+	world_manager()->erase(ui);
+	world_manager()->erase(this);
 }
 
 void IEntity::update() {

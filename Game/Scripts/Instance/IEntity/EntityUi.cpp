@@ -15,3 +15,8 @@ void EntityUi::initialize(float offsetY, Color4 color) {
 void EntityUi::start(Reference<Rect3dDrawManager> rectDraw) {
 	rectDraw->register_instance(hpRect);
 }
+
+void EntityUi::terminate(Reference<Rect3dDrawManager> rectDraw) {
+	rectDraw->unregister_instance(hpRect);
+	world_manager()->erase(hpRect);
+}

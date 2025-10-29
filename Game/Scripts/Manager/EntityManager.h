@@ -76,6 +76,8 @@ private:
 	std::unordered_map<u64, std::unique_ptr<IEntity>> entities;
 	std::unordered_map<u64, Reference<IEntity>> entityRefByServerId;
 
+	std::unordered_set<u64> removedEntityIds;
+
 	u64 localIdCounter{ 0 };
 };
 
@@ -83,7 +85,7 @@ template<typename T>
 	requires std::derived_from<T, IEntity>
 inline Reference<T> EntityManager::generate(const std::filesystem::path& initJson) {
 	std::unique_ptr<T> temp = worldManager->create<T>(nullptr);
-	temp->initialize(initJson);
+	temp->initialize(initJson, localIdCounter);
 	temp->setup(skinDraw, rectDraw);
 	Reference<T> result = temp;
 	entities.emplace(localIdCounter, std::move(temp));

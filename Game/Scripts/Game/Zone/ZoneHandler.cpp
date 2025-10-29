@@ -189,13 +189,14 @@ void ZoneHandler::process_login_message(Proto::CategoryLoginMessage type, const 
 		player->set_name(body.username());
 		player->get_transform().set_translate(Vector3{ body.position().x(), body.position().y(), body.position().z() });
 		entityManager->register_server_id(body.id(), player);
+		szgInformation("Login succeeded. Id-\'{}\' Name-\'{}\'", body.id(), body.username());
 	}
 	break;
 	case Proto::LOGIN_NOTIFICATION:
 	{
 		Proto::PayloadLoginNotification body;
 		body.ParseFromString(payload);
-		szgInformation("[System]: Player added. Id-\'{}\' Name-\'{}\'", body.id(), body.username());
+		szgInformation("Player added. Id-\'{}\' Name-\'{}\'", body.id(), body.username());
 		Vector3 position(body.position().x(), body.position().y(), body.position().z());
 		zoneCommands.emplace_back(
 			std::make_unique<ZoneLoginPlayerCommand>(entityManager, body.id(), body.username(), position)
@@ -222,7 +223,7 @@ void ZoneHandler::process_logout_message(Proto::CategoryLogoutMessage type, cons
 		zoneCommands.emplace_back(
 			std::make_unique<ZoneLogoutPlayerCommand>(entityManager, body.id())
 		);
-		szgInformation("[System]: Player removed. Id-\'{}\'", body.id());
+		szgInformation("Player removed. Id-\'{}\'", body.id());
 	}
 	break;
 	default:

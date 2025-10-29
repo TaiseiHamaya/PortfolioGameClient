@@ -11,7 +11,13 @@
 /// </summary>
 class RemotePlayer final : public IEntity {
 public:
-	void initialize(const std::filesystem::path& file) override;
+	RemotePlayer() noexcept = default;
+	~RemotePlayer() noexcept = default;
+
+	__CLASS_NON_COPYABLE(RemotePlayer)
+
+public:
+	void initialize(const std::filesystem::path& file, u64 localId_) override;
 
 	void update() override;
 

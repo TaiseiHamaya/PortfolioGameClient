@@ -7,8 +7,8 @@
 
 using clock_type = std::chrono::system_clock;
 
-void RemotePlayer::initialize(const std::filesystem::path& file) {
-	IEntity::initialize(file);
+void RemotePlayer::initialize(const std::filesystem::path& file, u64 localId_) {
+	IEntity::initialize(file, localId_);
 	// プレイヤーのアクションを登録
 	auto jumpAction = std::make_unique<JumpAction>();
 	jumpAction->setup(this, std::format("{}.gltf-{}", file.stem().string(), "Dash"));
