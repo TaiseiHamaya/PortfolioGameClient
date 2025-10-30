@@ -1,8 +1,7 @@
 #pragma once
 
 #include <chrono>
-#include <list>
-#include <string>
+#include <deque>
 
 #include "Scripts/Instance/IEntity/IEntity.h"
 
@@ -39,9 +38,15 @@ public:
 
 private:
 	struct Waypoint {
-		std::chrono::system_clock::time_point timestamp;
+		std::chrono::system_clock::duration timestamp;
 		Vector3 position;
 	};
 
-	std::list<Waypoint> waypoints;
+	std::deque<Waypoint> waypoints;
+	WorldTimer latency{};
+	u32 waypointIndex{ 0 };
+	std::chrono::system_clock::time_point startTime;
+	std::chrono::system_clock::time_point fixedTime;
+
+	const u32 interval = 2;
 };

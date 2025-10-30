@@ -2,6 +2,8 @@
 
 #include <Library/Utility/Tools/Functions.h>
 
+#include <Engine/Runtime/Clock/WorldClock.h>
+
 #include "../IEntity/Actions/JumpAction.h"
 #include "Actions/PaladinHolySpirit.h"
 
@@ -19,54 +21,13 @@ void RemotePlayer::initialize(const std::filesystem::path& file, u64 localId_) {
 }
 
 void RemotePlayer::update() {
+	// 今の位置を記録
+	Vector3 dest = transform.get_translate();
 	// 移動補完
 	calculate_position();
 
-	IEntity::update();
-}
-
-void RemotePlayer::move_to([[maybe_unused]] const clock_type::time_point&, const Vector3& position) {
-	clock_type::time_point now = clock_type::now();
-	if (waypoints.empty()) {
-		waypoints.emplace_back(now, transform.get_translate());
-	}
-	// 50ms後に到達するようにする
-	clock_type::time_point time = std::chrono::time_point<clock_type>(now.time_since_epoch() + std::chrono::milliseconds(50));
-	waypoints.emplace_back(time, position);
-}
-
-void RemotePlayer::calculate_position() {
-	if (waypoints.size() < 2) {
-		return;
-	}
-
-	clock_type::time_point now = clock_type::now();
-	// 最初の2点を取り出す
-	const auto& [firstTime, firstPosition] = waypoints.front();
-	const auto& [secondTime, secondPosition] = *std::next(waypoints.begin());
-
-	if (now < firstTime) {
-		// 最初の点まで戻る
-		transform.set_translate(firstPosition);
-		return;
-	}
-
-	// 2点間の補完パラメータを計算
-	r32 param = (now - firstTime).count() / static_cast<r32>((secondTime - firstTime).count());
-
-	// 位置補完
-	Vector3 position = eps::lerp(firstPosition, secondPosition, param);
-	if (param >= 1.0f) {
-		// 2点目に到達したら最初の点を削除
-		waypoints.pop_front();
-	}
-	// 今の位置を記録
-	Vector3 dest = transform.get_translate();
-	// 移動
-	transform.set_translate(position);
-
 	// ----- 回転 -----
-	Vector3 diff = position - dest;
+	Vector3 diff = transform.get_translate() - dest;
 	Vector3 xzDiff = Vector3{ diff.x, 0.0f,diff.z };
 	if (xzDiff.length() < 0.01f) {
 		// あまり動いていない
@@ -79,6 +40,63 @@ void RemotePlayer::calculate_position() {
 	// Slerp補完
 	transform.set_quaternion(
 		Quaternion::Slerp(transform.get_quaternion(), forwardTo, 0.1f)
+	);
+
+	IEntity::update();
+}
+
+void RemotePlayer::move_to(const clock_type::time_point& time, const Vector3& position) {
+	if (fixedTime.time_since_epoch().count() == 0) {
+		// 初回
+		fixedTime = time;
+	}
+	clock_type::duration timeWaypoint;
+	timeWaypoint = time - fixedTime;
+	waypoints.emplace_back(
+		Waypoint{
+			timeWaypoint,
+			position
+		}
+	);
+}
+
+void RemotePlayer::calculate_position() {
+	using chronoTimeFloat = std::chrono::duration<float, std::chrono::seconds::period>;
+	auto now = clock_type::now();
+
+	Vector3 newPos;
+	// 現在時刻
+	r32 t = std::chrono::duration_cast<chronoTimeFloat>(now - startTime).count() - latency;
+	u32 index = waypointIndex;
+	while (index + interval < static_cast<u32>(waypoints.size())) {
+		Waypoint& from = waypoints[index];
+		Waypoint& to = waypoints[index + interval - 1];
+
+		r32 fromTime = std::chrono::duration_cast<chronoTimeFloat>(from.timestamp).count();
+		r32 toTime = std::chrono::duration_cast<chronoTimeFloat>(to.timestamp).count();
+		if (t >= fromTime && t < toTime) {
+			r32 rate = eps::lerp_inv(fromTime, toTime, t);
+			Vector3 newPos = eps::lerp(from.position, to.position, rate);
+			waypointIndex = std::max(index -1, 0u);
+			if (waypointIndex > 0) {
+				waypoints.pop_front();
+				latency.set(std::max(latency - WorldClock::DeltaSeconds(), 0.0f));
+			}
+			break;
+		}
+		++index;
+	}
+
+	if (index + interval >= static_cast<u32>(waypoints.size())) {
+		latency.ahead();
+	}
+
+	transform.set_translate(
+		eps::lerp(
+			transform.get_translate(),
+			newPos,
+			WorldClock::DeltaSeconds() * 12
+		)
 	);
 }
 
