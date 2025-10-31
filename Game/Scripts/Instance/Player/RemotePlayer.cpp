@@ -7,7 +7,8 @@
 #include "../IEntity/Actions/JumpAction.h"
 #include "Actions/PaladinHolySpirit.h"
 
-using clock_type = std::chrono::system_clock;
+using namespace std::chrono;
+using clock_type = system_clock;
 
 void RemotePlayer::initialize(const std::filesystem::path& file, u64 localId_) {
 	IEntity::initialize(file, localId_);
@@ -18,6 +19,8 @@ void RemotePlayer::initialize(const std::filesystem::path& file, u64 localId_) {
 	auto paladinHolySpirit = std::make_unique<PaladinHolySpirit>();
 	paladinHolySpirit->setup(this, std::format("{}.gltf-{}", file.stem().string(), "AttackSky"));
 	actionList.emplace("PaladinHolySpirit", std::move(paladinHolySpirit));
+
+	startTime = clock_type::now();
 }
 
 void RemotePlayer::update() {
@@ -61,23 +64,23 @@ void RemotePlayer::move_to(const clock_type::time_point& time, const Vector3& po
 }
 
 void RemotePlayer::calculate_position() {
-	using chronoTimeFloat = std::chrono::duration<float, std::chrono::seconds::period>;
+	using time_float = duration<float, seconds::period>;
 	auto now = clock_type::now();
 
-	Vector3 newPos;
-	// 現在時刻
-	r32 t = std::chrono::duration_cast<chronoTimeFloat>(now - startTime).count() - latency;
+	std::optional<Vector3> newPos;
+	r32 t = duration_cast<time_float>(now - startTime).count() - latency;
+	t = std::max(t, 0.0f);
 	u32 index = waypointIndex;
 	while (index + interval < static_cast<u32>(waypoints.size())) {
 		Waypoint& from = waypoints[index];
 		Waypoint& to = waypoints[index + interval - 1];
 
-		r32 fromTime = std::chrono::duration_cast<chronoTimeFloat>(from.timestamp).count();
-		r32 toTime = std::chrono::duration_cast<chronoTimeFloat>(to.timestamp).count();
-		if (t >= fromTime && t < toTime) {
+		r32 fromTime = duration_cast<time_float>(from.timestamp).count();
+		r32 toTime = duration_cast<time_float>(to.timestamp).count();
+		if (t < toTime) {
 			r32 rate = eps::lerp_inv(fromTime, toTime, t);
-			Vector3 newPos = eps::lerp(from.position, to.position, rate);
-			waypointIndex = std::max(index -1, 0u);
+			newPos = eps::lerp(from.position, to.position, rate);
+			waypointIndex = std::max(index, 1u) - 1;
 			if (waypointIndex > 0) {
 				waypoints.pop_front();
 				latency.set(std::max(latency - WorldClock::DeltaSeconds(), 0.0f));
@@ -91,13 +94,15 @@ void RemotePlayer::calculate_position() {
 		latency.ahead();
 	}
 
-	transform.set_translate(
-		eps::lerp(
-			transform.get_translate(),
-			newPos,
-			WorldClock::DeltaSeconds() * 12
-		)
-	);
+	if (newPos.has_value()) {
+		transform.set_translate(
+			eps::lerp(
+				transform.get_translate(),
+				newPos.value(),
+				WorldClock::DeltaSeconds() * 12
+			)
+		);
+	}
 }
 
 #ifdef DEBUG_FEATURES_ENABLE
