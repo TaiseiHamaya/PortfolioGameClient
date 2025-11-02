@@ -2,10 +2,14 @@
 
 #include <Library/Utility/Tools/Functions.h>
 
+#include <Engine/Runtime/Clock/WorldClock.h>
+
 #include "../IEntity/Actions/JumpAction.h"
 #include "Actions/PaladinHolySpirit.h"
 
-using clock_type = std::chrono::system_clock;
+using namespace std::chrono;
+using clock_type = system_clock;
+using time_float = duration<float, seconds::period>;
 
 void RemotePlayer::initialize(const std::filesystem::path& file, u64 localId_) {
 	IEntity::initialize(file, localId_);
@@ -16,70 +20,101 @@ void RemotePlayer::initialize(const std::filesystem::path& file, u64 localId_) {
 	auto paladinHolySpirit = std::make_unique<PaladinHolySpirit>();
 	paladinHolySpirit->setup(this, std::format("{}.gltf-{}", file.stem().string(), "AttackSky"));
 	actionList.emplace("PaladinHolySpirit", std::move(paladinHolySpirit));
+
+	startTime = clock_type::now();
 }
 
 void RemotePlayer::update() {
+	// 今の位置を記録
+	Vector3 dest = transform.get_translate();
 	// 移動補完
 	calculate_position();
+
+	// ----- 回転 -----
+	Vector3 diff = transform.get_translate() - dest;
+	Vector3 xzDiff = Vector3{ diff.x, 0.0f,diff.z };
+	if (xzDiff.length() >= 0.01f) { // 十分に移動している
+		Vector3 xzDirection = xzDiff.normalize();
+		// xz方向の向いている方向
+			// 向く方向
+		Quaternion forwardTo{ Quaternion::LookForward(xzDirection.normalize()) };
+		// Slerp補完
+		transform.set_quaternion(
+			Quaternion::Slerp(transform.get_quaternion(), forwardTo, 0.1f)
+		);
+	}
 
 	IEntity::update();
 }
 
-void RemotePlayer::move_to([[maybe_unused]] const clock_type::time_point&, const Vector3& position) {
-	clock_type::time_point now = clock_type::now();
-	if (waypoints.empty()) {
-		waypoints.emplace_back(now, transform.get_translate());
+/// <summary>
+/// 
+/// </summary>
+/// <param name="time">サーバー時刻</param>
+/// <param name="position">位置</param>
+void RemotePlayer::move_to(const clock_type::time_point& time, const Vector3& position) {
+	if (fixedTime.time_since_epoch().count() == 0) {
+		// 初回
+		fixedTime = time;
+		latency.set(duration_cast<time_float>(startTime - fixedTime).count());
 	}
-	// 50ms後に到達するようにする
-	clock_type::time_point time = std::chrono::time_point<clock_type>(now.time_since_epoch() + std::chrono::milliseconds(50));
-	waypoints.emplace_back(time, position);
+	clock_type::duration timeWaypoint;
+	timeWaypoint = time - fixedTime;
+	waypoints.emplace_back(
+		Waypoint{
+			timeWaypoint,
+			position
+		}
+	);
 }
 
 void RemotePlayer::calculate_position() {
-	if (waypoints.size() < 2) {
-		return;
+	auto now = clock_type::now();
+
+	std::optional<Vector3> newPos;
+	r32 t = duration_cast<time_float>(now - startTime).count() - latency;
+	u32 index = waypointIndex;
+	while (index + interval < static_cast<u32>(waypoints.size())) {
+		Waypoint& from = waypoints[index];
+		Waypoint& to = waypoints[index + interval - 1u];
+
+		r32 fromTime = duration_cast<time_float>(from.timestamp).count();
+		r32 toTime = duration_cast<time_float>(to.timestamp).count();
+		if (t >= fromTime && t < toTime) {
+			r32 rate = eps::lerp_inv(fromTime, toTime, t);
+			newPos = eps::lerp(from.position, to.position, rate);
+			waypointIndex = std::max(index, 1u) - 1;
+			if (waypointIndex > 0) {
+				waypoints.pop_front();
+				latency.back();
+				latency.set(std::max<r32>(latency, 0.0f));
+			}
+			break;
+		}
+		else if (t < fromTime) {
+			latency.back();
+			t = duration_cast<time_float>(now - startTime).count() - latency;
+		}
+		else {
+			++index;
+		}
 	}
 
-	clock_type::time_point now = clock_type::now();
-	// 最初の2点を取り出す
-	const auto& [firstTime, firstPosition] = waypoints.front();
-	const auto& [secondTime, secondPosition] = *std::next(waypoints.begin());
-
-	if (now < firstTime) {
-		// 最初の点まで戻る
-		transform.set_translate(firstPosition);
-		return;
+	if (index + interval >= static_cast<u32>(waypoints.size())) {
+		latency.ahead();
 	}
 
-	// 2点間の補完パラメータを計算
-	r32 param = (now - firstTime).count() / static_cast<r32>((secondTime - firstTime).count());
-
-	// 位置補完
-	Vector3 position = eps::lerp(firstPosition, secondPosition, param);
-	if (param >= 1.0f) {
-		// 2点目に到達したら最初の点を削除
-		waypoints.pop_front();
+	// 補間係数
+	constexpr r32 lerpParam = 0.1f;
+	if (newPos.has_value()) {
+		transform.set_translate(
+			eps::lerp(
+				transform.get_translate(),
+				newPos.value(),
+				lerpParam
+			)
+		);
 	}
-	// 今の位置を記録
-	Vector3 dest = transform.get_translate();
-	// 移動
-	transform.set_translate(position);
-
-	// ----- 回転 -----
-	Vector3 diff = position - dest;
-	Vector3 xzDiff = Vector3{ diff.x, 0.0f,diff.z };
-	if (xzDiff.length() < 0.01f) {
-		// あまり動いていない
-		return;
-	}
-	Vector3 xzDirection = xzDiff.normalize();
-	// xz方向の向いている方向
-		// 向く方向
-	Quaternion forwardTo{ Quaternion::LookForward(xzDirection.normalize()) };
-	// Slerp補完
-	transform.set_quaternion(
-		Quaternion::Slerp(transform.get_quaternion(), forwardTo, 0.1f)
-	);
 }
 
 #ifdef DEBUG_FEATURES_ENABLE
