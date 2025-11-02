@@ -8,7 +8,7 @@
 class Shadow final : public Rect3d {
 public:
 	void setup(Reference<WorldInstance> owner_, float scale);
-	void update() override;
+	void fixed_update() override;
 
 private:
 	Reference<WorldInstance> owner;

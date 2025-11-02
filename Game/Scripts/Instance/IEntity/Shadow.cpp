@@ -10,7 +10,7 @@ void Shadow::setup(Reference<WorldInstance> owner_, float scale_) {
 	get_material().texture = TextureLibrary::GetTexture("shadow.png");
 }
 
-void Shadow::update() {
+void Shadow::fixed_update() {
 	float scaleMag = 1 / (owner->world_position().y + 2);
 	initialize(Vector2{ scale * scaleMag,scale * scaleMag }, Vector2{ 0.5f,0.5f });
 	transform.set_translate(owner->world_position());
