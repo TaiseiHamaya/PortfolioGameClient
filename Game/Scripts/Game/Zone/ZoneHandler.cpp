@@ -99,6 +99,7 @@ void ZoneHandler::move_client_player(const Vector3& position) {
 	Proto::PayloadTransformSync body;
 	body.set_id(serverId.value());
 	body.set_timestamp(std::chrono::duration_cast<std::chrono::microseconds>(now.time_since_epoch()).count());
+	// 位置の書き込み
 	Proto::Vector3* pos = body.mutable_position();
 	pos->set_x(position.x);
 	pos->set_y(position.y);
@@ -109,11 +110,13 @@ void ZoneHandler::move_client_player(const Vector3& position) {
 
 void ZoneHandler::request_play_action(u32 actionId) {
 	std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
+	// TODO : 要修正
 	bool result = player->can_play_action("PaladinHolySpirit"_sh);
 	if (!result) {
 		szgInformation("Failed to start action Id:{}", actionId);
 		return;
 	}
+	// グローバルスキルの処理
 	bool isGlobalSkill = player->is_global_skill("PaladinHolySpirit"_sh);
 	if (isGlobalSkill) {
 		player->execute_global_skill();
@@ -155,7 +158,7 @@ void ZoneHandler::request_play_action(u32 actionId) {
 
 void ZoneHandler::process_text_message(Proto::CategoryTextMessage type, const std::string& payload) {
 	switch (type) {
-	case Proto::CHAT_RECEIVE:
+	case Proto::CHAT_RECEIVE: // チャット受け取り
 	{
 		Proto::PayloadTextMessage body;
 		body.ParseFromString(payload);
@@ -168,7 +171,7 @@ void ZoneHandler::process_text_message(Proto::CategoryTextMessage type, const st
 		}
 	}
 	break;
-	case Proto::SYSTEM_MESSAGE:
+	case Proto::SYSTEM_MESSAGE: // サーバーメッセージ受け取り
 	{
 		Proto::PayloadSystemMessage body;
 		body.ParseFromString(payload);
@@ -180,24 +183,25 @@ void ZoneHandler::process_text_message(Proto::CategoryTextMessage type, const st
 
 void ZoneHandler::process_login_message(Proto::CategoryLoginMessage type, const std::string& payload) {
 	switch (type) {
-	case Proto::LOGIN_RESULT:
+	case Proto::LOGIN_RESULT: // ログイン成功時の処理
 	{
 		Proto::PayloadLoginResult body;
 		body.ParseFromString(payload);
-		gameServerConnectionManager->on_connection_succeeded();
-		player->set_server_id(body.id());
-		player->set_name(body.username());
-		player->get_transform().set_translate(Vector3{ body.position().x(), body.position().y(), body.position().z() });
+		gameServerConnectionManager->on_connection_succeeded(); // 通知
+		player->set_server_id(body.id()); // サーバーIDの設定
+		player->set_name(body.username()); // 名前の設定
+		player->get_transform().set_translate(Vector3{ body.position().x(), body.position().y(), body.position().z() }); // 初期位置の設定
 		entityManager->register_server_id(body.id(), player);
 		szgInformation("Login succeeded. Id-\'{}\' Name-\'{}\'", body.id(), body.username());
 	}
 	break;
-	case Proto::LOGIN_NOTIFICATION:
+	case Proto::LOGIN_NOTIFICATION: // 他プレイヤーのログイン通知
 	{
 		Proto::PayloadLoginNotification body;
 		body.ParseFromString(payload);
 		szgInformation("Player added. Id-\'{}\' Name-\'{}\'", body.id(), body.username());
 		Vector3 position(body.position().x(), body.position().y(), body.position().z());
+		// コマンド追加
 		zoneCommands.emplace_back(
 			std::make_unique<ZoneLoginPlayerCommand>(entityManager, body.id(), body.username(), position)
 		);
@@ -210,16 +214,17 @@ void ZoneHandler::process_login_message(Proto::CategoryLoginMessage type, const 
 
 void ZoneHandler::process_logout_message(Proto::CategoryLogoutMessage type, const std::string& payload) {
 	switch (type) {
-	case Proto::LOGOUT_RESPONSE:
+	case Proto::LOGOUT_RESPONSE: // ログアウト結果
 	{
 		Proto::PayloadLogoutResponse body;
 		body.ParseFromString(payload);
 	}
 	break;
-	case Proto::LOGOUT_NOTIFICATION:
+	case Proto::LOGOUT_NOTIFICATION: // 他プレイヤーのログアウト通知
 	{
 		Proto::PayloadLogoutNotification body;
 		body.ParseFromString(payload);
+		// コマンド追加
 		zoneCommands.emplace_back(
 			std::make_unique<ZoneLogoutPlayerCommand>(entityManager, body.id())
 		);
@@ -233,7 +238,7 @@ void ZoneHandler::process_logout_message(Proto::CategoryLogoutMessage type, cons
 
 void ZoneHandler::process_sync_message(Proto::CategorySyncMessage type, const std::string& payload) {
 	switch (type) {
-	case Proto::SYNC_TRANSFORM:
+	case Proto::SYNC_TRANSFORM: // 位置同期
 	{
 		Proto::PayloadTransformSync body;
 		body.ParseFromString(payload);
@@ -242,12 +247,13 @@ void ZoneHandler::process_sync_message(Proto::CategorySyncMessage type, const st
 		time_point time{ std::chrono::duration_cast<time_point::duration>(std::chrono::microseconds(body.timestamp())) };
 
 		Reference<IEntity> entity = entityManager->inquire_server_id(body.id());
+		// コマンド追加
 		zoneCommands.emplace_back(
 			std::make_unique<ZoneSyncTransformCommand>(entity, time, position)
 		);
 	}
 	break;
-	case Proto::PLAY_ACTION:
+	case Proto::PLAY_ACTION: // アクション実行
 	{
 		Proto::PayloadPlayAction body;
 		body.ParseFromString(payload);
@@ -258,13 +264,14 @@ void ZoneHandler::process_sync_message(Proto::CategorySyncMessage type, const st
 		Reference<IEntity> entity = entityManager->inquire_server_id(body.id());
 		u64 targetId = body.entity_id();
 		Reference<IEntity> target = entityManager->inquire_server_id(targetId);
+		// コマンド追加
 		zoneCommands.emplace_back(
 			std::make_unique<ZonePlayActionCommand>(entity, body.action_id(), target)
 		);
 		szgInformation("Entity Id:{} Play Action Id:{}", body.id(), body.action_id());
 	}
 	break;
-	case Proto::ENTITY_DAMAGED:
+	case Proto::ENTITY_DAMAGED: // ダメージ同期
 	{
 		Proto::PayloadEntityDamaged body;
 		body.ParseFromString(payload);
@@ -282,7 +289,7 @@ void ZoneHandler::process_sync_message(Proto::CategorySyncMessage type, const st
 
 void ZoneHandler::process_entity_message(Proto::CategoryEnemyMessage category, const std::string& payload) {
 	switch (category) {
-	case Proto::ENEMY_SPAWN:
+	case Proto::ENEMY_SPAWN: // 敵のスポーン
 	{
 		// EnemyManagerに通知
 		Proto::PayloadEnemySpawn body;
@@ -296,7 +303,7 @@ void ZoneHandler::process_entity_message(Proto::CategoryEnemyMessage category, c
 		player->set_target(enemy);
 	}
 	break;
-	case Proto::ENEMY_DESPAWN:
+	case Proto::ENEMY_DESPAWN: // 敵のデスポーン
 		break;
 	default:
 		break;

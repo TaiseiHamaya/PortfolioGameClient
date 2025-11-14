@@ -20,25 +20,28 @@ void CometEffect::initialize(const Vector3& position, Reference<BlurInfo> blur_)
 	transform.set_translate(position);
 	transform.set_translate_y(0.02f);
 
+	// 煙のパーティクル1
 	dustCloudParticle0 = worldManager->create<ParticleEmitterInstance>(this, "DustCloud0.json", 100);
 	dustCloudParticle0->set_active(false);
 
+	// 煙のパーティクル1
 	dustCloudParticle1 = worldManager->create<ParticleEmitterInstance>(this, "DustCloud1.json", 100);
 	dustCloudParticle1->set_active(false);
 
+	// コメットの隕石部分
 	cometBody = worldManager->create<StaticMeshInstance>(this);
 	cometBody->reset_mesh("Comet.obj");
 	cometBody->set_active(false);
 	cometBody->get_materials()[0].color = Color3{ 0.5f,0.01f,0.01f };
 	cometBody->get_materials()[0].lightingType = LighingType::None;
-
+	// コメットの炎エフェクト
 	cometFire = worldManager->create<Rect3d>(this);
 	cometFire->set_active(false);
 	cometFire->initialize(Vector2{ 3, 7 }, Vector2{ 0.5f, 0.2f });
 	cometFire->get_material().color = Color4{ 0.5f,0.1f,0.1f,1.0f };
 	cometFire->get_material().lightingType = LighingType::None;
 	cometFire->get_material().texture = TextureLibrary::GetTexture("Fire.png");
-
+	// 隕石と地面が衝突した時に出すエフェクト
 	groundEffect = worldManager->create<Rect3d>(this);
 	groundEffect->set_active(false);
 	groundEffect->initialize(Vector2{ 10,10 }, Vector2{ 0.5f, 0.5f });
@@ -75,7 +78,7 @@ void CometEffect::terminate(Reference<StaticMeshDrawManager> meshDraw, Reference
 void CometEffect::update() {
 	timer.ahead();
 
-	constexpr float FallTime = 0.5f;
+	constexpr float FallTime = 0.5f; // 落下時間
 	if (timer.time() <= FallTime) {
 		cometBody->set_active(true);
 		cometFire->set_active(true);
@@ -83,6 +86,7 @@ void CometEffect::update() {
 		float posY = std::lerp(20.0f, 0.0f, param);
 		cometBody->get_transform().set_translate_y(posY);
 		cometFire->get_transform().set_translate_y(posY);
+		// カメラ方向に向ける
 		Vector3 forward = CVector3::FORWARD * camera->world_affine().get_basis();
 		forward.y = 0;
 		forward = -forward.normalize();
@@ -90,7 +94,7 @@ void CometEffect::update() {
 			Quaternion::LookForward(forward)
 		);
 	}
-	else if (timer.time() - FallTime <= WorldClock::DeltaSeconds()) {
+	else if (timer.just_crossed(FallTime)) {
 		cometBody->set_active(false);
 		cometFire->set_active(false);
 
@@ -102,8 +106,11 @@ void CometEffect::update() {
 		float param = std::clamp((timer.time() - FallTime) * 2, 0.0f, 1.0f);
 		dustCloudParticle0->update();
 		dustCloudParticle1->update();
+		// 地面のエフェクトをスケールで出現させる
 		groundEffect->get_transform().set_scale(CVector3::BASIS * param);
+		// 透明度を下げてフェードアウト
 		groundEffect->get_material().color.alpha = 1 - param;
+		// ブラーをかける
 		Vector2 blurPosition = Converter::ToVector2(
 				Transform3D::Homogeneous(
 					world_position() + CVector3::BASIS_Y,

@@ -9,6 +9,7 @@ Vector3 EffectTools::CalculateTargetPosition(Reference<IEntity> self, Reference<
 	}
 	Vector3 result{};
 	if (self && target) {
+		// 自分の方向に移動
 		Vector3 selfBackward = self->world_position() - target->world_position();
 		selfBackward.y = 0.0f;
 		selfBackward = selfBackward.normalize_safe();

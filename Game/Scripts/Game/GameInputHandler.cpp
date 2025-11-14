@@ -13,16 +13,18 @@
 
 void GameInputHandler::initialize() {
 	inputKey = {
-		{KeyID::Space, PadID::Y},
-		{KeyID::One, PadID::A},
+		{KeyID::Space, PadID::Y}, // ジャンプ
+		{KeyID::One, PadID::A}, // アクション1
 	};
 
 	std::vector<KeyID> keys;
 	std::vector<PadID> pads;
+	// 配列に並べ替え
 	for (auto& [key, pad] : inputKey) {
 		keys.emplace_back(key);
 		pads.emplace_back(pad);
 	}
+	// 入力の登録
 	actionHandlerK.initialize(std::move(keys));
 	actionHandlerP.initialize(std::move(pads));
 
@@ -36,9 +38,9 @@ void GameInputHandler::setup(Reference<ZoneHandler> zoneHandler_) {
 }
 
 void GameInputHandler::input() {
+	// キー入力
 	actionHandlerK.update();
 	actionHandlerP.update();
-	// キー入力
 	inputDirection = InputAdvanced::PressWASD();
 	if (inputDirection.length() == 0) {
 		inputDirection = Input::StickL();
@@ -51,9 +53,11 @@ void GameInputHandler::update() {
 	}
 
 #ifdef DEBUG_FEATURES_ENABLE
+	// 開発用自動移動ボット
 	if (ArgumentParser::Contains("-ENABLE_DEVELOP_BOT")) {
 		timer.ahead();
 		Vector3 center;
+		// 中心座標をコマンドライン引数から取得
 		std::optional<u64> xArgIndex = ArgumentParser::ArgIndexByValue("-x");
 		std::optional<u64> yArgIndex = ArgumentParser::ArgIndexByValue("-y");
 		if (xArgIndex) {
@@ -62,13 +66,14 @@ void GameInputHandler::update() {
 		if (yArgIndex) {
 			center.z = std::stof(ArgumentParser::ValueByIndex(yArgIndex.value() + 1));
 		}
-		// center中心で速度8m/sで円形移動
 		if (timer == 3.0f) {
 			timer.set(0.0f);
 		}
+		// 2piを3秒で一周
 		r32 angle = (timer / 3.0f) * PI2;
 		Vector3 angleVector = CVector3::FORWARD * 2.0f * Quaternion::AngleAxis(CVector3::BASIS_Y, angle);
 
+		// ゾーンに移動要求
 		zoneHandler->move_client_player(center + angleVector);
 		return;
 	}
@@ -77,18 +82,22 @@ void GameInputHandler::update() {
 	if (inputDirection.length() > 0) {
 		Vector3 cameraForward = CVector3::BASIS_Z * camera->get_transform().get_quaternion();
 		Vector2 xzForward = { -cameraForward.x, cameraForward.z };
+		// 正面
 		xzForward = xzForward.normalize();
+		// 入力方向をカメラ基準に変換
 		xzDirection = Vector2::Rotate(inputDirection, xzForward.x, xzForward.y);
 		Vector3 xzDirection3 = { xzDirection.x, 0.0f, xzDirection.y };
 
 		const Vector3& position = player->get_transform().get_translate();
 
+		// TODO : マジックナンバーを消す
 		Vector3 velocity = xzDirection3 * 8.0f;
 		Vector3 dest = position + velocity * WorldClock::DeltaSeconds();
 
 		zoneHandler->move_client_player(dest);
 	}
 
+	// アクション実行
 	if (actionHandlerK.trigger(inputKey[1].first) || actionHandlerP.trigger(inputKey[1].second)) {
 		zoneHandler->request_play_action(0);
 	}

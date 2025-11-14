@@ -2,8 +2,6 @@
 
 #include <Library/Utility/Tools/Functions.h>
 
-#include <Engine/Runtime/Clock/WorldClock.h>
-
 #include "../IEntity/Actions/JumpAction.h"
 #include "Actions/PaladinHolySpirit.h"
 
@@ -80,19 +78,24 @@ void RemotePlayer::calculate_position() {
 
 		r32 fromTime = duration_cast<time_float>(from.timestamp).count();
 		r32 toTime = duration_cast<time_float>(to.timestamp).count();
-		if (t >= fromTime && t < toTime) {
-			r32 rate = eps::lerp_inv(fromTime, toTime, t);
-			newPos = eps::lerp(from.position, to.position, rate);
+		if (t >= fromTime && t < toTime) { // 補間区間内
+			r32 param = eps::lerp_inv(fromTime, toTime, t);
+			newPos = eps::lerp(from.position, to.position, param);
+			// indexを-1する(0以上)
 			waypointIndex = std::max(index, 1u) - 1;
+			// 1以上の場合、古いウェイポイントを削除
 			if (waypointIndex > 0) {
 				waypoints.pop_front();
+				// レイテンシを調整
 				latency.back();
 				latency.set(std::max<r32>(latency, 0.0f));
 			}
 			break;
 		}
 		else if (t < fromTime) {
+			// 補間より早い
 			latency.back();
+			// 再計算
 			t = duration_cast<time_float>(now - startTime).count() - latency;
 		}
 		else {
@@ -100,6 +103,7 @@ void RemotePlayer::calculate_position() {
 		}
 	}
 
+	// 遅れてる
 	if (index + interval >= static_cast<u32>(waypoints.size())) {
 		latency.ahead();
 	}
@@ -107,6 +111,7 @@ void RemotePlayer::calculate_position() {
 	// 補間係数
 	constexpr r32 lerpParam = 0.1f;
 	if (newPos.has_value()) {
+		// 移動
 		transform.set_translate(
 			eps::lerp(
 				transform.get_translate(),

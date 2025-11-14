@@ -15,6 +15,7 @@ void CircleAoe::initialize(const Vector3& position, float radius, float duration
 
 	Quaternion rotate = Quaternion::AngleAxis(CVector3::BASIS_X, -PI / 2);
 
+	// 範囲表示の基礎部分
 	base = world_manager()->create<Rect3d>(this);
 	base->initialize(CVector3::BASIS * radius, CVector3::BASIS * 0.5f);
 	base->get_material().texture = TextureLibrary::GetTexture("AOEBase.png");
@@ -23,6 +24,7 @@ void CircleAoe::initialize(const Vector3& position, float radius, float duration
 	base->get_transform().set_scale(CVector3::ZERO);
 	base->get_transform().set_quaternion(rotate);
 	//base->set_layer(1);
+	// なんか動くところ
 	effect = world_manager()->create<Rect3d>(this);
 	effect->initialize(CVector3::BASIS * radius, CVector3::BASIS * 0.5f);
 	effect->get_material().texture = TextureLibrary::GetTexture("AOEBase.png");
@@ -50,7 +52,8 @@ void CircleAoe::end(Reference<Rect3dDrawManager> rectDraw) {
 void CircleAoe::update() {
 	timer.ahead();
 
-	if (timer * 3.0f < 1.0f) {
+	if (timer * 3.0f < 1.0f) { // 1/3秒以内
+		// 表示開始時の拡大
 		float param = std::clamp(timer * 3.0f, 0.0f, 1.0f);
 		base->get_transform().set_scale(Vector3::Lerp(CVector3::ZERO, CVector3::BASIS, param));
 		base->get_material().color.alpha = param * 0.5f;
@@ -59,11 +62,13 @@ void CircleAoe::update() {
 		float time = timer - 0.33f;
 		float param = time - std::trunc(time);
 		base->get_transform().set_scale(CVector3::BASIS);
+		// エフェクトの部分をいい感じに動かす
 		effect->get_transform().set_scale(CVector3::BASIS * param);
 		effect->get_material().color.alpha = (1 - param) * 0.5f;
 	}
 
 	if (timer >= duration) {
+		// 消える処理
 		float param = std::lerp(1.0f, 0.0f, (timer - duration) * 3.0f);
 		base->get_material().color.alpha = param * 0.5f;
 		effect->get_material().color.alpha = param * 0.5f;

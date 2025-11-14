@@ -11,6 +11,7 @@ std::vector<Proto::Packet> ReceiveBuffer::resolve_packets(std::span<u8> data) {
 			// ヘッダーが読み込まれていない場合、処理終了
 			break;
 		}
+		// サイズヘッダが0だとおかしいので終了
 		if (size == 0) {
 			return result;
 		}
@@ -20,10 +21,11 @@ std::vector<Proto::Packet> ReceiveBuffer::resolve_packets(std::span<u8> data) {
 			buffer.emplace_back(data[i]);
 			--size;
 		}
+		// 読んだ分を進める
 		data = data.subspan(readSize);
 
 		if (size == 0) {
-			// パケットが完成した場合、デコードして結果に追加
+			// パケットが完成した場合、デシリアライズして結果に追加
 			Proto::Packet packet;
 			if (packet.ParseFromArray(buffer.data(), static_cast<int>(buffer.size()))) {
 				result.emplace_back(std::move(packet));
@@ -50,7 +52,9 @@ bool ReceiveBuffer::read_length_header(std::span<u8>& data) {
 		return true;
 	}
 
+	// 残り読み込みバイト数
 	u8 neededSize = sizeof32 - received_header_size;
+	// 読み込み可能なバイト数
 	u64 readSize = std::min<u64>(static_cast<u64>(neededSize), data.size());
 	for (u64 i = 0; i < readSize; ++i) {
 		size |= static_cast<u32>(data[i]) << (received_header_size * 8);

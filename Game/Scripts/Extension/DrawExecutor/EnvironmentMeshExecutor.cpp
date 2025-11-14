@@ -35,6 +35,7 @@ void EnvironmentMeshExecutor::draw_command() const {
 		return;
 	}
 	auto& commandList = DxCommand::GetCommandList();
+	// コマンドを積む(EnvironmentMeshNode.cppを参照)
 	for (u32 i = 0; i < asset->material_count(); ++i) {
 		commandList->IASetVertexBuffers(0, 1, &asset->get_vbv(i));
 		commandList->IASetIndexBuffer(asset->get_p_ibv(i));
@@ -50,9 +51,11 @@ void EnvironmentMeshExecutor::draw_command() const {
 }
 
 void EnvironmentMeshExecutor::write_to_buffer(Reference<const StaticMeshInstance> instance) {
+	// 描画対象が存在しない or 描画しない場合はスキップ
 	if (!instance || !instance->is_draw()) {
 		return;
 	}
+	// 描画StructuredBufferのIndex
 	u32 next = instanceCounter;
 	++instanceCounter;
 	if (next >= maxInstance) {
@@ -61,10 +64,12 @@ void EnvironmentMeshExecutor::write_to_buffer(Reference<const StaticMeshInstance
 	const Affine& local = instance->local_affine();
 	const Affine& world = instance->world_affine();
 	Affine transformAffine = local * world;
+	// Matrix書き込み
 	matrices[next] = {
 		.world = transformAffine,
 		.itWorld = transformAffine.inverse().get_basis().transposed()
 	};
+	// Material書き込み
 	const std::vector<IMultiMeshInstance::Material>& instanceMaterials = instance->get_materials();
 	const size_t numMaterial = asset->material_count();
 	for (u32 i = 0; i < numMaterial; ++i) {

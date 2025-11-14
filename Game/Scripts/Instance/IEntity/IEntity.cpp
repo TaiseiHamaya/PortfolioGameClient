@@ -13,21 +13,24 @@ using namespace std::literals::string_literals;
 void IEntity::initialize(const std::filesystem::path& file, u64 localId_) {
 	localId = localId_;
 
-	JsonAsset json{ std::format(L".\\Game\\Resources\\Json\\Entity\\{}", file.native()) };
+	JsonAsset json{ std::format(L".\\Game\\Resources\\Json\\Entity\\{}", file.native()) }; // Jsonからデータの読み込み
+	// Instance生成
 	shadow = world_manager()->create<Shadow>();
 	ui = world_manager()->create<EntityUi>(this);
 	ui->initialize(2.5f, json.try_emplace<Color4>("HPColor"));
 
+	// アクションデータの生成
 	auto idleAction = std::make_unique<IdleAction>();
 	idleAction->setup(this, std::format("{}.gltf-{}", file.stem().string(), "Idle"));
 	actionList.emplace("Idle", std::move(idleAction));
-
+	// メッシュの設定
 	reset_animated_mesh(json.try_emplace<std::string>("Model"));
 
 	targetRadius = json.try_emplace<float>("TargetRadius");
 }
 
 void IEntity::setup(Reference<SkinningMeshDrawManager> skinDraw, Reference<Rect3dDrawManager> rectDraw) {
+	// 描画の登録
 	shadow->setup(this, 2.0f);
 	ui->start(rectDraw);
 	skinDraw->register_instance(this);
@@ -36,6 +39,7 @@ void IEntity::setup(Reference<SkinningMeshDrawManager> skinDraw, Reference<Rect3
 }
 
 void IEntity::begin() {
+	// 実行中のアクションが存在しない場合Idleにする
 	if (!currentAction) {
 		start_action("Idle");
 	}
@@ -44,10 +48,11 @@ void IEntity::begin() {
 }
 
 void IEntity::terminate(Reference<SkinningMeshDrawManager> skinDraw, Reference<Rect3dDrawManager> rectDraw) {
+	// 描画登録の解除
 	skinDraw->unregister_instance(this);
 	rectDraw->unregister_instance(shadow);
 	ui->terminate(rectDraw);
-
+	// WorldManager削除
 	world_manager()->erase(shadow);
 	world_manager()->erase(ui);
 	world_manager()->erase(this);
@@ -66,7 +71,7 @@ void IEntity::update() {
 		}
 
 		currentAction->update();
-
+		// アクションが終了したらIdleに戻す
 		if (currentAction->end_action()) {
 			start_action("Idle");
 		}
@@ -78,17 +83,17 @@ void IEntity::update() {
 }
 
 void IEntity::start_action(eps::string_hashed actionName) {
-	if (!actionList.contains(actionName)) {
+	if (!actionList.contains(actionName)) { // アクションが存在しない
 		return;
 	}
-	if (currentAction && !currentAction->can_transition()) {
+	if (currentAction && !currentAction->can_transition()) { // 遷移できない
 		return;
 	}
 	Reference<IActionBasic> action = actionList[actionName];
-	if (!action) {
+	if (!action) { // nullチェック
 		return;
 	}
-	
+	// 実行
 	currentAction = action;
 	currentAction->reset();
 	currentAction->reset_animation();

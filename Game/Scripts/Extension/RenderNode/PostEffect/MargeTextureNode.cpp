@@ -16,7 +16,7 @@ void MargeTextureNode::draw() const {
 	}
 
 	auto&& command = DxCommand::GetCommandList();
-	for (int i = 0; i < 4; ++i) {
+	for (int i = 0; i < 4; ++i) { // 0-3でSRVを設定
 		downSampledTextures[i]->get_as_srv()->use(i);
 	}
 	command->DrawInstanced(3, 1, 0, 0);

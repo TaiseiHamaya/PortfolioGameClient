@@ -24,11 +24,13 @@ void FollowCamera::initialize() {
 }
 
 void FollowCamera::update() {
+	// 画面揺れ
 	shakeTimer.back();
 	if (shakeTimer.time() >= 0.0f) {
-		bool singbit = std::signbit(std::sin(shakeTimer.time() * PI * 20));
-
+		// 揺れの減衰
 		shakeOffset = shakeDirection * (1 - shakeTimer.time() / 0.2f);
+		// 揺れる向きをいい感じにする
+		bool singbit = std::signbit(std::sin(shakeTimer.time() * PI * 20));
 		if (singbit) {
 			shakeOffset *= -1;
 		}
@@ -47,17 +49,17 @@ void FollowCamera::update() {
 
 	Vector3 beforeForward = CVector3::BASIS_Z * destingRotation;
 	float forwardDot = Vector3::Dot(beforeForward, -CVector3::BASIS_Y);
-	if (forwardDot >= 0.999f && rotateAngle.y > 0) {
+	if (forwardDot >= 0.999f && rotateAngle.y > 0) { // 真上に近い場合
 		// 真下と視線のの差を出す。
 		float angle = std::acos(std::clamp(forwardDot, -1.0f, 1.0f));
-		if (angle >= 88.9f * ToRadian) {
+		if (angle >= 88.9f * ToRadian) { // 最大89度まで
 			vertical = Quaternion::AngleAxis(CVector3::BASIS_X, angle - 1 * ToRadian);
 		}
 		else {
 			vertical = CQuaternion::IDENTITY;
 		}
 	}
-	else if (forwardDot <= 5.1f * ToRadian && rotateAngle.y < 0) {
+	else if (forwardDot <= 5.1f * ToRadian && rotateAngle.y < 0) { // 水平に近い場合
 		Vector3 beforeUpward = CVector3::BASIS_Y * destingRotation;
 		float upwardDot = Vector3::Dot(beforeUpward, CVector3::BASIS_Y);
 		float angle = std::acos(std::clamp(upwardDot, -1.0f, 1.0f));
@@ -73,11 +75,12 @@ void FollowCamera::update() {
 	// 垂直->元->平行で適用させる
 	destingRotation = holizontal * destingRotation * vertical;
 
-	if (isPressX) {
+	if (isPressX) { // 視点リセット
 		Vector3 targetForward = CVector3::BASIS_Z * target->get_transform().get_quaternion();
 		destingRotation = Quaternion::LookForward(targetForward) * Quaternion::AngleAxis(CVector3::BASIS_X, PI / 8);
 	}
 
+	// 補間
 	transform.set_quaternion(
 		Quaternion::Slerp(transform.get_quaternion(), destingRotation, 0.1f)
 	);
