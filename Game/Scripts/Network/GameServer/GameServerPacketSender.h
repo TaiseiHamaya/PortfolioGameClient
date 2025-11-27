@@ -50,6 +50,8 @@ public:
 	/// </summary>
 	void send_all_packets();
 
+	u64 packet_count() const noexcept;
+
 private:
 	void on_send_handler(const asio::error_code& errorCode, std::size_t bytesTransferred);
 

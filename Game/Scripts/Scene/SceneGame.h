@@ -121,6 +121,8 @@ private:
 
 	std::list<CometAction> comets;
 
+	std::unique_ptr<CometEffect> cometEffect;
+
 	GaussianBlurNode::GaussianBlurInfo blurData{
 		.dispersion = 1.0f,
 		.length = 40.0f,

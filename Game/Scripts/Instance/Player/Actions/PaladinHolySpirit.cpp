@@ -5,18 +5,17 @@
 #include "PaladinHolySpiritEffectSelf.h"
 #include "PaladinHolySpiritEffectTarget.h"
 
-PaladinHolySpirit::PaladinHolySpirit() noexcept {
-	targetType = TargetType::Target;
-	skillType = SkillType::Spell;
-	castTime.set(1.5f);
-	recastTime.set(2.5f);
-	mpCost = 1000;
-	range = 25.0f;
-	radius = 0.0f;
-	timer.set(0);
-	effect = ActionEffect::Spell;
-	loopAnimation = false;
-	type = ActionType::Spell;
+PaladinHolySpirit::PaladinHolySpirit() noexcept = default;
+PaladinHolySpirit::~PaladinHolySpirit() noexcept = default;
+
+void PaladinHolySpirit::setup(Reference<IEntity> owner_, const std::string& animationName) {
+	IActionBasic::setup(owner_, animationName);
+	load_from_json("Action/Player/Paladin/HolySpirit.json");
+
+#ifdef DEBUG_FEATURES_ENABLE
+	effectTarget = std::make_unique<PaladinHolySpiritEffectTarget>();
+	effectTarget->initialize(CVector3::ZERO);
+#endif // DEBUG_FEATURES_ENABLE
 }
 
 void PaladinHolySpirit::start() {
@@ -34,9 +33,30 @@ void PaladinHolySpirit::reset() {
 }
 
 bool PaladinHolySpirit::can_transition() const {
-	return timer >= 1.8f;
+	return timer >= castTime + 0.3f;
 }
 
 bool PaladinHolySpirit::end_action() const {
-	return timer >= 2.5f;
+	return timer >= recastTime;
 }
+
+
+#ifdef DEBUG_FEATURES_ENABLE
+
+void PaladinHolySpirit::debug_gui() {
+	// enumはラジオボタン
+	if (ImGui::TreeNode("PaladinHolySpirit")) {
+		ISkillAction::debug_gui();
+
+		if (ImGui::TreeNode("Effect")) {
+
+			effectTarget->debug_gui();
+
+			ImGui::TreePop();
+		}
+
+		ImGui::TreePop();
+	}
+}
+
+#endif // DEBUG_FEATURES_ENABLE

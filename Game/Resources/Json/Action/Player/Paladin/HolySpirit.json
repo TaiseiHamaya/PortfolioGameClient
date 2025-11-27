@@ -1,3 +1,11 @@
 {
-
+	"ActionEffect": 1,
+	"ActionType": 2,
+	"TargetType": 0,
+	"castTime": 1.5,
+	"loopAnimation": false,
+	"mpCost": 1000,
+	"radius": 0.0,
+	"range": 25.0,
+	"recastTime": 2.5
 }

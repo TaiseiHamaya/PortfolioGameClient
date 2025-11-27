@@ -31,7 +31,7 @@ public:
 	virtual ~IActionBasic() = default;
 
 public:
-	void setup(Reference<IEntity> owner_, const std::string& animationName);
+	virtual void setup(Reference<IEntity> owner_, const std::string& animationName);
 	virtual void start() = 0;
 	virtual void update() = 0;
 

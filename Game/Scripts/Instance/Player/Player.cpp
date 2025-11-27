@@ -14,6 +14,12 @@ void Player::initialize(const std::filesystem::path& file, u64 localId_) {
 	actionList.emplace("PaladinHolySpirit", std::move(paladinHolySpirit));
 
 	globalCoolDownTimer.set(0.0f);
+
+#ifndef DEBUG_FEATURES_ENABLE
+	JsonAsset json;
+#endif // DEBUG_FEATURES_ENABLE
+	json.load("Entity" / file); // Jsonからデータの読み込み
+	json.register_value("MoveSpeed", moveSpeed);
 }
 
 void Player::update() {
@@ -32,7 +38,7 @@ void Player::move_to([[maybe_unused]] const std::chrono::system_clock::time_poin
 	Vector3 diff = position - dest;
 	// ---------- 移動方向を向く ----------
 	Vector3 direction = diff.normalize_safe();
-	Vector3 xzDirection = Vector3{ direction.x, 0.0f,direction.z };
+	Vector3 xzDirection = Vector3{ direction.x, 0.0f, direction.z };
 	if (xzDirection.length() != 0) {
 		// 向く方向
 		Quaternion forwardTo{ Quaternion::LookForward(xzDirection.normalize()) };
@@ -61,7 +67,7 @@ bool Player::can_play_action(eps::string_hashed actionName) const noexcept {
 }
 
 bool Player::is_global_skill(eps::string_hashed actionName) const noexcept {
-	if(!actionList.contains(actionName)) {
+	if (!actionList.contains(actionName)) {
 		return false;
 	}
 	Reference<IActionBasic> action = actionList.at(actionName);
@@ -79,13 +85,22 @@ void Player::execute_global_skill() noexcept {
 	if (!is_ready_global_skill()) {
 		return;
 	}
-	globalCoolDownTimer.set(2.5f);
+	globalCoolDownTimer.set(GCDTime);
+}
+
+r32 Player::get_move_speed() const noexcept {
+	return moveSpeed;
 }
 
 #ifdef DEBUG_FEATURES_ENABLE
 #include <imgui.h>
 void Player::debug_gui() {
 	ImGui::Begin("Player");
+
+	json.show_imgui();
+	
+	ImGui::Separator();
+
 	for (auto& action : actionList | std::views::values) {
 		action->debug_gui();
 	}

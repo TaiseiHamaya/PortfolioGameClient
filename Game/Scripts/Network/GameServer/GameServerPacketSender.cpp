@@ -45,6 +45,10 @@ void GameServerPacketSender::send_all_packets() {
 	packetStack.clear();
 }
 
+u64 GameServerPacketSender::packet_count() const noexcept {
+	return packetStack.size();
+}
+
 void GameServerPacketSender::on_send_handler(const asio::error_code& errorCode, std::size_t bytesTransferred) {
 	if (errorCode) {
 		szgWarning("Failed to send packet to game server: {}\n", errorCode.message());

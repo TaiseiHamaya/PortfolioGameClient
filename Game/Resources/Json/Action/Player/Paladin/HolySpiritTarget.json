@@ -1,0 +1,80 @@
+{
+	"absorption.beginScale": {
+		"X": 0.0,
+		"Y": 0.0,
+		"Z": 0.0
+	},
+	"absorption.beginTime": 0.3499999940395355,
+	"absorption.color": {
+		"A": 1.0,
+		"B": 0.0,
+		"G": 0.0,
+		"R": 0.0
+	},
+	"absorption.endScale": {
+		"X": 0.0,
+		"Y": 0.0,
+		"Z": 0.0
+	},
+	"absorption.endTime": 0.699999988079071,
+	"absorption.pivot": {
+		"X": 0.5,
+		"Y": 0.5
+	},
+	"absorption.size": {
+		"X": 7.0,
+		"Y": 7.0
+	},
+	"center.beginScale": {
+		"X": 1.0,
+		"Y": 1.0,
+		"Z": 1.0
+	},
+	"center.beginTime": 0.25,
+	"center.color": {
+		"A": 0.0,
+		"B": 0.8529999852180481,
+		"G": 0.4620000123977661,
+		"R": 0.33399999141693115
+	},
+	"center.endScale": {
+		"X": 0.0,
+		"Y": 0.0,
+		"Z": 0.0
+	},
+	"center.endTime": 1.7999999523162842,
+	"center.pivot": {
+		"X": 0.5,
+		"Y": 0.0
+	},
+	"center.size": {
+		"X": 3.0,
+		"Y": 5.0
+	},
+	"light.beginScale": {
+		"X": 0.0,
+		"Y": 0.0,
+		"Z": 0.0
+	},
+	"light.beginTime": 0.15000000596046448,
+	"light.color": {
+		"A": 0.0,
+		"B": 0.8549019694328308,
+		"G": 0.4627451002597809,
+		"R": 0.3333333432674408
+	},
+	"light.endScale": {
+		"X": 0.0,
+		"Y": 0.0,
+		"Z": 0.0
+	},
+	"light.endTime": 1.25,
+	"light.pivot": {
+		"X": 0.5,
+		"Y": 0.5
+	},
+	"light.size": {
+		"X": 5.5,
+		"Y": 5.5
+	}
+}

@@ -24,7 +24,7 @@ public:
 	void initialize();
 
 	void setup(Reference<ZoneHandler> zoneHandler_);
-	
+
 	/// <summary>
 	/// 入力処理
 	/// </summary>
@@ -45,10 +45,11 @@ private:
 
 	Reference<ZoneHandler> zoneHandler;
 	Reference<const WorldInstance> camera;
-	
+
 	Reference<Player> player;
 
 #ifdef DEBUG_FEATURES_ENABLE
+	static constexpr r32 BOT_MOVE_TIME{ 3.0f };
 	WorldTimer timer;
 #endif // DEBUG_FEATURES_ENABLE
 

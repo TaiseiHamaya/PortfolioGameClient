@@ -12,6 +12,10 @@
 #include <Library/Utility/Tools/MathEPS.h>
 #include <Library/Utility/Tools/RandomEngine.h>
 
+#define COLOR3_SERIALIZER
+#define COLOR4_SERIALIZER
+#include <Engine/Assets/Json/JsonSerializer.h>
+
 CometEffect::CometEffect() = default;
 CometEffect::~CometEffect() = default;
 
@@ -28,24 +32,38 @@ void CometEffect::initialize(const Vector3& position, Reference<BlurInfo> blur_)
 	dustCloudParticle1 = worldManager->create<ParticleEmitterInstance>(this, "DustCloud1.json", 100);
 	dustCloudParticle1->set_active(false);
 
+	json.load("Action/RedComet/CometEffect.json");
+	json.register_value(__JSON_RESOURCE_REGISTER(CometHight));
+	json.register_value(__JSON_RESOURCE_REGISTER(CometBodyColor));
+	json.register_value(__JSON_RESOURCE_REGISTER(CometFireSize));
+	json.register_value(__JSON_RESOURCE_REGISTER(CometFirePivot));
+	json.register_value(__JSON_RESOURCE_REGISTER(CometFireColor));
+	json.register_value(__JSON_RESOURCE_REGISTER(GroundEffectSize));
+	json.register_value(__JSON_RESOURCE_REGISTER(GroundEffectPivot));
+	json.register_value(__JSON_RESOURCE_REGISTER(GroundEffectColor));
+	json.register_value(__JSON_RESOURCE_REGISTER(FallTime));
+	json.register_value(__JSON_RESOURCE_REGISTER(GroundEffectTime));
+	json.register_value(__JSON_RESOURCE_REGISTER(BlurLengthMax));
+	json.register_value(__JSON_RESOURCE_REGISTER(BlurWeight));
+
 	// コメットの隕石部分
 	cometBody = worldManager->create<StaticMeshInstance>(this);
 	cometBody->reset_mesh("Comet.obj");
 	cometBody->set_active(false);
-	cometBody->get_materials()[0].color = Color3{ 0.5f,0.01f,0.01f };
+	cometBody->get_materials()[0].color = CometBodyColor;
 	cometBody->get_materials()[0].lightingType = LighingType::None;
 	// コメットの炎エフェクト
 	cometFire = worldManager->create<Rect3d>(this);
 	cometFire->set_active(false);
-	cometFire->initialize(Vector2{ 3, 7 }, Vector2{ 0.5f, 0.2f });
-	cometFire->get_material().color = Color4{ 0.5f,0.1f,0.1f,1.0f };
+	cometFire->initialize(CometFireSize, CometFirePivot);
+	cometFire->get_material().color = CometFireColor;
 	cometFire->get_material().lightingType = LighingType::None;
 	cometFire->get_material().texture = TextureLibrary::GetTexture("Fire.png");
 	// 隕石と地面が衝突した時に出すエフェクト
 	groundEffect = worldManager->create<Rect3d>(this);
 	groundEffect->set_active(false);
-	groundEffect->initialize(Vector2{ 10,10 }, Vector2{ 0.5f, 0.5f });
-	groundEffect->get_material().color = Color4{ 0.8f, 0.8f, 0.8f, 0.8f };
+	groundEffect->initialize(GroundEffectSize, GroundEffectPivot);
+	groundEffect->get_material().color = GroundEffectColor;
 	groundEffect->get_material().lightingType = LighingType::None;
 	groundEffect->get_material().texture = TextureLibrary::GetTexture("CometGround3.png");
 	groundEffect->get_transform().set_quaternion(
@@ -78,12 +96,11 @@ void CometEffect::terminate(Reference<StaticMeshDrawManager> meshDraw, Reference
 void CometEffect::update() {
 	timer.ahead();
 
-	constexpr float FallTime = 0.5f; // 落下時間
 	if (timer.time() <= FallTime) {
 		cometBody->set_active(true);
 		cometFire->set_active(true);
 		float param = timer.time() / FallTime;
-		float posY = std::lerp(20.0f, 0.0f, param);
+		float posY = std::lerp(CometHight, 0.0f, param);
 		cometBody->get_transform().set_translate_y(posY);
 		cometFire->get_transform().set_translate_y(posY);
 		// カメラ方向に向ける
@@ -103,7 +120,7 @@ void CometEffect::update() {
 		groundEffect->set_active(true);
 	}
 	else {
-		float param = std::clamp((timer.time() - FallTime) * 2, 0.0f, 1.0f);
+		float param = eps::lerp_inv(0.0f, GroundEffectTime, timer - FallTime);
 		dustCloudParticle0->update();
 		dustCloudParticle1->update();
 		// 地面のエフェクトをスケールで出現させる
@@ -121,8 +138,8 @@ void CometEffect::update() {
 		blurPosition /= 2.0f;
 		blurData->center = blurPosition;
 		blurData->sampleCount = 8;
-		blurData->weight = 0.4f;
-		blurData->length = std::sin(param * PI) * 0.1f;
+		blurData->weight = BlurWeight;
+		blurData->length = std::sin(param * PI) * BlurLengthMax;
 	}
 
 	if (dustCloudParticle0->is_end_all() && dustCloudParticle1->is_end_all()) {
@@ -143,6 +160,7 @@ bool CometEffect::is_end() const {
 
 #ifdef DEBUG_FEATURES_ENABLE
 void CometEffect::debug_gui() {
+	json.show_imgui();
 	//if (ImGui::TreeNode("0")) {
 	//	dustCloudParticle0->debug_gui();
 	//	ImGui::TreePop();
