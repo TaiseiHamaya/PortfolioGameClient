@@ -18,6 +18,8 @@ void ISkillAction::load_from_json(const std::filesystem::path& file) {
 	timer.set(0);
 }
 
+#ifdef DEBUG_FEATURES_ERNABLE
+
 void ISkillAction::debug_gui() {
 	ImGui::Text("TargetType");
 	if (ImGui::RadioButton("Target", targetType == TargetType::Target)) {
@@ -66,3 +68,5 @@ void ISkillAction::debug_gui() {
 		json.save();
 	}
 }
+
+#endif // DEBUG_FEATURES_ERNABLE
