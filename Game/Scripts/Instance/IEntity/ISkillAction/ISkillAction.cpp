@@ -18,7 +18,7 @@ void ISkillAction::load_from_json(const std::filesystem::path& file) {
 	timer.set(0);
 }
 
-#ifdef DEBUG_FEATURES_ERNABLE
+#ifdef DEBUG_FEATURES_ENABLE
 
 void ISkillAction::debug_gui() {
 	ImGui::Text("TargetType");
@@ -69,4 +69,4 @@ void ISkillAction::debug_gui() {
 	}
 }
 
-#endif // DEBUG_FEATURES_ERNABLE
+#endif // DEBUG_FEATURES_ENABLE
