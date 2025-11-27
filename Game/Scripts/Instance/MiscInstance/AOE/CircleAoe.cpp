@@ -2,18 +2,20 @@
 
 #include <Engine/Module/DrawExecutor/Mesh/Primitive/Rect3dDrawManager.h>
 #include <Engine/Module/World/WorldManager.h>
+
 #include <Library/Math/Definition.h>
+#include <Library/Utility/Tools/MathEPS.h>
 
 CircleAoe::CircleAoe() = default;
 CircleAoe::~CircleAoe() = default;
 
 void CircleAoe::initialize(const Vector3& position, float radius, float duration_) {
 	transform.set_translate(position);
-	transform.set_translate_y(0.02f);
+	transform.set_translate_y(OFFSET_Y);
 
 	duration = duration_;
 
-	Quaternion rotate = Quaternion::AngleAxis(CVector3::BASIS_X, -PI / 2);
+	Quaternion rotate = Quaternion::AngleAxis(CVector3::BASIS_X, -PI / 2); // 上を向けtる
 
 	// 範囲表示の基礎部分
 	base = world_manager()->create<Rect3d>(this);
@@ -52,26 +54,26 @@ void CircleAoe::end(Reference<Rect3dDrawManager> rectDraw) {
 void CircleAoe::update() {
 	timer.ahead();
 
-	if (timer * 3.0f < 1.0f) { // 1/3秒以内
+	if (timer < EFFECT_START_TIME) {
 		// 表示開始時の拡大
-		float param = std::clamp(timer * 3.0f, 0.0f, 1.0f);
+		float param = eps::lerp_inv<r32>(0.0f, EFFECT_START_TIME, timer);
 		base->get_transform().set_scale(Vector3::Lerp(CVector3::ZERO, CVector3::BASIS, param));
-		base->get_material().color.alpha = param * 0.5f;
+		base->get_material().color.alpha = param * AOE_ALPHA;
 	}
 	else {
-		float time = timer - 0.33f;
-		float param = time - std::trunc(time);
+		float time = timer - EFFECT_START_TIME;
+		float param = time - std::trunc(time); // 小数部を抽出
 		base->get_transform().set_scale(CVector3::BASIS);
 		// エフェクトの部分をいい感じに動かす
 		effect->get_transform().set_scale(CVector3::BASIS * param);
-		effect->get_material().color.alpha = (1 - param) * 0.5f;
+		effect->get_material().color.alpha = (1 - param) * AOE_ALPHA;
 	}
 
 	if (timer >= duration) {
 		// 消える処理
-		float param = std::lerp(1.0f, 0.0f, (timer - duration) * 3.0f);
-		base->get_material().color.alpha = param * 0.5f;
-		effect->get_material().color.alpha = param * 0.5f;
+		float param = eps::lerp_inv<r32>(duration, duration + FADE_TIME, timer);
+		base->get_material().color.alpha = param * AOE_ALPHA;
+		effect->get_material().color.alpha = param * AOE_ALPHA;
 	}
 }
 

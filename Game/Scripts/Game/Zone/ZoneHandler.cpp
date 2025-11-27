@@ -67,6 +67,12 @@ void ZoneHandler::handle_zone() {
 			break;
 		}
 	}
+
+#ifdef DEBUG_FEATURES_ENABLE
+	debugRecivedMessageCount = static_cast<i32>(packets.size());
+	debugCommandCount = static_cast<i32>(zoneCommands.size());
+	debugSendedMessageCount = gameServerPacketSender ? static_cast<i32>(gameServerPacketSender->packet_count()) : 0;
+#endif // DEBUG_FEATURES_ENABLE
 }
 
 void ZoneHandler::stack_command(std::unique_ptr<IZoneCommand> command) {
@@ -313,3 +319,17 @@ void ZoneHandler::process_entity_message(Proto::CategoryEnemyMessage category, c
 void ZoneHandler::set_player(Reference<Player> player_) {
 	player = player_;
 }
+
+#ifdef DEBUG_FEATURES_ENABLE
+
+void ZoneHandler::debug_gui() {
+	ImGui::Text(std::format("SendedMessageCount-\'{}\'", debugSendedMessageCount).c_str());
+	ImGui::Text(std::format("RecivedMessageCount-\'{}\'", debugRecivedMessageCount).c_str());
+	ImGui::Text(std::format("CommandCount-\'{}\'", debugCommandCount).c_str());
+
+	ImGui::Separator();
+
+	player->debug_gui();
+}
+
+#endif // DEBUG_FEATURES_ENABLE

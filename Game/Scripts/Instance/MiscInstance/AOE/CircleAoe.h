@@ -21,7 +21,7 @@ public:
 	/// <param name="radius"></param>
 	/// <param name="duration_"></param>
 	void initialize(const Vector3& position, float radius, float duration_);
-	
+
 	/// <summary>
 	/// 開始処理
 	/// </summary>
@@ -48,4 +48,9 @@ private:
 
 	std::unique_ptr<Rect3d> base;
 	std::unique_ptr<Rect3d> effect;
+
+	static constexpr r32 OFFSET_Y{ 0.02f };
+	static constexpr r32 EFFECT_START_TIME{ 1.0f / 3.0f };
+	static constexpr r32 AOE_ALPHA{ 0.5f };
+	static constexpr r32 FADE_TIME{ 1.0f / 3.0f };
 };

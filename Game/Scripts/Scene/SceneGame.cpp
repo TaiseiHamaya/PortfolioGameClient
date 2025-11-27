@@ -159,7 +159,6 @@ void SceneGame::initialize() {
 	skydome->get_materials()[0].lightingType = LighingType::None;
 	skydome->set_active(false);
 	camera3D->initialize();
-	camera3D->set_offset({ 0,1,-40 });
 	camera3D->set_target(player);
 	directionalLight->light_data_mut().intensity = 0.500f;
 
@@ -482,6 +481,10 @@ void SceneGame::debug_update() {
 
 	ImGui::Begin("WorldClock");
 	WorldClock::DebugGui();
+	ImGui::End();
+
+	ImGui::Begin("Zone");
+	zoneHandler.debug_gui();
 	ImGui::End();
 
 	//ImGui::Begin("DirectionalLight");

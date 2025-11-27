@@ -103,7 +103,7 @@ void CometEffect::update() {
 		groundEffect->set_active(true);
 	}
 	else {
-		float param = std::clamp((timer.time() - FallTime) * 2, 0.0f, 1.0f);
+		float param = eps::lerp_inv(0.0f, 0.5f, timer - FallTime);
 		dustCloudParticle0->update();
 		dustCloudParticle1->update();
 		// 地面のエフェクトをスケールで出現させる

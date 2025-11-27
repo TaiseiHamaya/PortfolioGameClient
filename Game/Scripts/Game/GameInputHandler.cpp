@@ -29,7 +29,7 @@ void GameInputHandler::initialize() {
 	actionHandlerP.initialize(std::move(pads));
 
 #ifdef DEBUG_FEATURES_ENABLE
-	timer.set(RandomEngine::Random01MOD() + 3.0f);
+	timer.set(RandomEngine::Random01MOD() + BOT_MOVE_TIME);
 #endif // DEBUG_FEATURES_ENABLE
 };
 
@@ -66,12 +66,13 @@ void GameInputHandler::update() {
 		if (yArgIndex) {
 			center.z = std::stof(ArgumentParser::ValueByIndex(yArgIndex.value() + 1));
 		}
-		if (timer == 3.0f) {
-			timer.set(0.0f);
+		if (timer >= BOT_MOVE_TIME) {
+			timer.set(timer - BOT_MOVE_TIME);
 		}
 		// 2piを3秒で一周
-		r32 angle = (timer / 3.0f) * PI2;
-		Vector3 angleVector = CVector3::FORWARD * 2.0f * Quaternion::AngleAxis(CVector3::BASIS_Y, angle);
+		r32 angle = (timer / BOT_MOVE_TIME) * PI2;
+		constexpr r32 RADIUS = 2.0f;
+		Vector3 angleVector = CVector3::FORWARD * RADIUS * Quaternion::AngleAxis(CVector3::BASIS_Y, angle);
 
 		// ゾーンに移動要求
 		zoneHandler->move_client_player(center + angleVector);
@@ -90,8 +91,7 @@ void GameInputHandler::update() {
 
 		const Vector3& position = player->get_transform().get_translate();
 
-		// TODO : マジックナンバーを消す
-		Vector3 velocity = xzDirection3 * 8.0f;
+		Vector3 velocity = xzDirection3 * player->get_move_speed();
 		Vector3 dest = position + velocity * WorldClock::DeltaSeconds();
 
 		zoneHandler->move_client_player(dest);

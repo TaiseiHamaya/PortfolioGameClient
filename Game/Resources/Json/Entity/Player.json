@@ -1,14 +1,14 @@
 {
-  "HPColor": {
-    "R": 0.2000,
-    "G": 0.2000,
-    "B": 1.0000,
-    "A": 1.0000
-  },
-  "Model": "Player.gltf",
-  "TargetRadius": 0.5,
-
-  "Actions": [
-    "PaladinHolySpirit"
-  ]
+	"Actions": [
+		"PaladinHolySpirit"
+	],
+	"HPColor": {
+		"A": 1.0,
+		"B": 1.0,
+		"G": 0.2,
+		"R": 0.2
+	},
+	"Model": "Player.gltf",
+	"MoveSpeed": 8.0,
+	"TargetRadius": 0.5
 }

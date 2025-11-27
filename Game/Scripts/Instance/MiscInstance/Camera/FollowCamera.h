@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Engine/Assets/Json/JsonAsset.h>
 #include <Engine/Module/World/Camera/Camera3D.h>
 #include <Engine/Runtime/Clock/WorldTimer.h>
 #include <Engine/Runtime/Input/InputHandler.h>
@@ -26,10 +27,10 @@ public:
 
 	void set_target(Reference<const WorldInstance> target_);
 
-#ifdef _DEBUG
+#ifdef DEBUG_FEATURES_ENABLE
 public:
 	void debug_gui() override;
-#endif // _DEBUG
+#endif // DEBUG_FEATURES_ENABLE
 
 private:
 	Vector3 offset;
@@ -46,5 +47,15 @@ private:
 	Vector3 shakeOffset;
 	Vector3 shakeDirection;
 	WorldTimer shakeTimer;
+
+	r32 SlerpStrength;
+	r32 FollowStrength;
+	r32 MaxAngleDownward;
+	r32 MaxAngleHorizontal;
+	r32 ShakeTime;
+
+#ifdef DEBUG_FEATURES_ENABLE
+	JsonAsset json;
+#endif // DEBUG_FEATURES_ENABLE
 };
 

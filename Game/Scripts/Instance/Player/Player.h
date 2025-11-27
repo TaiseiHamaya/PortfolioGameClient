@@ -4,6 +4,8 @@
 
 #include "Scripts/Instance/IEntity/IEntity.h"
 
+#include <Engine/Assets/Json/JsonAsset.h>
+
 /// <summary>
 /// プレイヤー
 /// </summary>
@@ -28,11 +30,21 @@ public:
 	bool is_ready_global_skill() const noexcept;
 	void execute_global_skill() noexcept;
 
+public:
+	r32 get_move_speed() const noexcept;
+
 #ifdef DEBUG_FEATURES_ENABLE
 public:
 	void debug_gui();
 #endif // DEBUG_FEATURES_ENABLE
 
 private:
+	static constexpr r32 GCDTime{ 2.5f };
 	WorldTimer globalCoolDownTimer;
+
+	r32 moveSpeed{ 0.0f };
+
+#ifdef DEBUG_FEATURES_ENABLE
+	JsonAsset json;
+#endif // DEBUG_FEATURES_ENABLE
 };

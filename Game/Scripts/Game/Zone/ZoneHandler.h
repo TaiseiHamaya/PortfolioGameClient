@@ -77,4 +77,14 @@ private:
 
 public:
 	void set_player(Reference<Player> player_);
+
+#ifdef DEBUG_FEATURES_ENABLE
+public:
+	void debug_gui();
+
+private:
+	i32 debugCommandCount{ 0 };
+	i32 debugRecivedMessageCount{ 0 };
+	i32 debugSendedMessageCount{ 0 };
+#endif // DEBUG_FEATURES_ENABLE
 };

@@ -96,7 +96,7 @@ void GameServerConnectionManager::on_connect_handler(const asio::error_code& err
 		// Handle connection error
 		std::lock_guard lock{ mutex };
 		if (connectionState == ConnectionState::Disconnected) {
-			szgError("サーバーとの接続はタイムアウトしました。");
+			szgError("サーバーとの接続がタイムアウトしました。");
 		}
 		else {
 			switch (errorCode.value()) {
