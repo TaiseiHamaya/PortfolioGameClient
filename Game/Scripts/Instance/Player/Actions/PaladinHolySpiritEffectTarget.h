@@ -12,6 +12,16 @@
 
 class PaladinHolySpiritEffectTarget final : public IEffectInstance {
 public:
+	struct RectEffectValues {
+		Vector2 size;
+		Vector2 pivot;
+		Color4 color;
+		r32 beginTime;
+		r32 endTime;
+		Vector3 beginScale;
+	};
+
+public:
 	PaladinHolySpiritEffectTarget();
 	~PaladinHolySpiritEffectTarget() = default;
 
@@ -38,4 +48,9 @@ private:
 	std::unique_ptr<LookAtRect> lightBillboard;
 	std::unique_ptr<ParticleEmitterInstance> etherDustEmitter;
 	std::unique_ptr<ParticleEmitterInstance> shiningEmitter;
+
+	JsonAsset json;
+	RectEffectValues absorptionEffectValues{};
+	RectEffectValues centerEffectValues{};
+	RectEffectValues lightEffectValues{};
 };

@@ -162,6 +162,8 @@ void SceneGame::initialize() {
 	camera3D->set_target(player);
 	directionalLight->light_data_mut().intensity = 0.500f;
 
+	cometEffect = std::make_unique<CometEffect>();
+
 #pragma region RenderPath
 	// RenderPath
 	renderTextures.resize(10);
@@ -294,6 +296,8 @@ void SceneGame::initialize() {
 	gaussianBlurNode4->set_parameters(blurData.dispersion, blurData.length, blurData.sampleCount);
 	gaussianBlurNode8->set_parameters(blurData.dispersion, blurData.length, blurData.sampleCount);
 	gaussianBlurNode16->set_parameters(blurData.dispersion, blurData.length, blurData.sampleCount);
+
+	cometEffect->initialize(CVector3::ZERO, &radialBlurNode->data());
 }
 
 void SceneGame::finalize() {
@@ -485,6 +489,10 @@ void SceneGame::debug_update() {
 
 	ImGui::Begin("Zone");
 	zoneHandler.debug_gui();
+	ImGui::End();
+
+	ImGui::Begin("CometEffect");
+	cometEffect->debug_gui();
 	ImGui::End();
 
 	//ImGui::Begin("DirectionalLight");

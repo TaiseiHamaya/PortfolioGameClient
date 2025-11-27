@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Engine/Assets/Json/JsonAsset.h>
 #include <Engine/Runtime/Clock/WorldTimer.h>
 
 #include "../IActionBasic.h"
@@ -15,27 +16,26 @@ public:
 		Self,
 	};
 
-	enum class SkillType : i8 {
-		WeaponSkill,
-		Ability,
-		Spell,
-	};
-
 public:
 	ISkillAction() noexcept = default;
 	virtual ~ISkillAction() = default;
 
 public:
-
+	void load_from_json(const std::filesystem::path& file);
 
 protected:
+	JsonAsset json;
 	TargetType targetType{};
-	SkillType skillType{};
-	WorldTimer castTime;
-	WorldTimer recastTime;
+	r32 castTime;
+	r32 recastTime;
 	i32 mpCost{};
 	float range{};
 	float radius{};
+
+#ifdef DEBUG_FEATURES_ENABLE
+public:
+	void debug_gui() override;
+#endif // DEBUG_FEATURES_ENABLE
 
 public:
 	static void SetEffectManager(Reference<EffectManager> manager);

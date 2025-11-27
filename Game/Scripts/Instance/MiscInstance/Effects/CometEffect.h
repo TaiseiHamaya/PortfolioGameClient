@@ -50,6 +50,20 @@ private:
 
 	Reference<BlurInfo> blurData;
 
+	JsonAsset json;
+	Color3 CometBodyColor{};
+	Vector2 CometFireSize{};
+	Vector2 CometFirePivot{};
+	Color4 CometFireColor{};
+	Vector2 GroundEffectSize{};
+	Vector2 GroundEffectPivot{};
+	Color4 GroundEffectColor{};
+	r32 CometHight{};
+	r32 FallTime{};
+	r32 GroundEffectTime{};
+	r32 BlurLengthMax{};
+	r32 BlurWeight{};
+
 public:
 	inline static Reference<Camera3D> camera{ nullptr };
 };

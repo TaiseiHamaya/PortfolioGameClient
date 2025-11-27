@@ -36,6 +36,7 @@ void FollowCamera::initialize() {
 	json.register_value(__JSON_RESOURCE_REGISTER(MaxAngleDownward));
 	json.register_value(__JSON_RESOURCE_REGISTER(MaxAngleHorizontal));
 	json.register_value(__JSON_RESOURCE_REGISTER(ShakeTime));
+	json.register_value(__JSON_RESOURCE_REGISTER(ShakePower));
 }
 
 void FollowCamera::update() {
@@ -125,7 +126,7 @@ void FollowCamera::do_shake() {
 	shakeTimer.set(ShakeTime);
 	Vector3 base = CVector3::RIGHT * Quaternion::AngleAxis(CVector3::FORWARD, RandomEngine::Random01MOD() * PI2);
 	base = base * world_affine().get_basis();
-	shakeDirection = base * 0.4f;
+	shakeDirection = base * ShakePower;
 }
 
 void FollowCamera::set_offset(const Vector3& offset_) {

@@ -2,6 +2,7 @@
 	"FollowStrength": 0.4000000059604645,
 	"MaxAngleDownward": 89.4000015258789,
 	"MaxAngleHorizontal": 5.0,
+	"ShakePower": 0.4000000059604645,
 	"ShakeTime": 0.20000000298023224,
 	"SlerpStrength": 0.20000000298023224,
 	"offset": {

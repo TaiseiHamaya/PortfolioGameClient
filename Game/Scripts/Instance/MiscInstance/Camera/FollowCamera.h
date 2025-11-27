@@ -53,6 +53,7 @@ private:
 	r32 MaxAngleDownward;
 	r32 MaxAngleHorizontal;
 	r32 ShakeTime;
+	r32 ShakePower;
 
 #ifdef DEBUG_FEATURES_ENABLE
 	JsonAsset json;
