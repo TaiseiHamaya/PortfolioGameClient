@@ -36,6 +36,9 @@
 #include "Scripts/Instance/Player/Player.h"
 #include "Scripts/Network/NetworkCluster.h"
 
+#include <Engine/Module/DrawExecutor/Mesh/Primitive/StringRectDrawManager.h>
+#include <Engine/Module/World/Mesh/Primitive/StringRectInstance.h>
+
 struct CometAction {
 	std::unique_ptr<CircleAoe> circleAoE;
 	std::unique_ptr<CometEffect> cometEffect;
@@ -102,6 +105,7 @@ private:
 	std::unique_ptr<SkinningMeshDrawManager> skinningMeshDrawManager;
 	std::unique_ptr<Rect3dDrawManager> rect3dDrawManager;
 	std::unique_ptr<DirectionalLightingExecutor> directionalLightingExecutor;
+	std::unique_ptr<StringRectDrawManager> stringRectDrawManager;
 
 	std::unique_ptr<EnvironmentMeshExecutor> environmentMeshExecutor;
 	// その他
@@ -118,6 +122,7 @@ private:
 
 	std::unique_ptr<FollowCamera> camera3D;
 	std::unique_ptr<StaticMeshInstance> skydome;
+	std::unique_ptr<StringRectInstance> testString;
 
 	std::list<CometAction> comets;
 

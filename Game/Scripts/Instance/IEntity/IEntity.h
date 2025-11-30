@@ -11,6 +11,7 @@
 #include <Library/Utility/Template/string_hashed.h>
 
 #include <Engine/Module/DrawExecutor/Mesh/Primitive/Rect3dDrawManager.h>
+#include <Engine/Module/DrawExecutor/Mesh/Primitive/StringRectDrawManager.h>
 #include <Engine/Module/DrawExecutor/Mesh/SkinningMeshDrawManager.h>
 #include <Engine/Module/World/Mesh/SkinningMeshInstance.h>
 
@@ -46,12 +47,14 @@ public:
 	virtual void initialize(const std::filesystem::path& file, u64 localId);
 	void setup(
 		Reference<SkinningMeshDrawManager> skinDraw,
-		Reference<Rect3dDrawManager> rectDraw
+		Reference<Rect3dDrawManager> rectDraw,
+		Reference<StringRectDrawManager> stringDraw
 	);
 
 	virtual void terminate(
 		Reference<SkinningMeshDrawManager> skinDraw,
-		Reference<Rect3dDrawManager> rectDraw
+		Reference<Rect3dDrawManager> rectDraw,
+		Reference<StringRectDrawManager> stringDraw
 	);
 
 	virtual void begin() override;
