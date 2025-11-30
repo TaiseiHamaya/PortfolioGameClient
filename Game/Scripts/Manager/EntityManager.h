@@ -1,9 +1,11 @@
 #pragma once
 
+#include <Engine/Module/Manager/SceneScript/ISceneScript.h>
+
 #include <memory>
 #include <unordered_map>
 
-#include <Engine/Module/World/WorldManager.h>
+#include <Engine/Module/Manager/World/WorldRoot.h>
 
 #include <Library/Utility/Template/Reference.h>
 #include <Library/Utility/Tools/ConstructorMacro.h>
@@ -17,7 +19,7 @@ class Rect3dDrawManager;
 /// <summary>
 /// Zone上のエンティティ管理クラス
 /// </summary>
-class EntityManager final {
+class EntityManager final : public ISceneScript {
 public:
 	EntityManager() = default;
 	~EntityManager() = default;
@@ -25,11 +27,11 @@ public:
 	__CLASS_NON_COPYABLE(EntityManager)
 
 public:
-	void setup(Reference<WorldManager> worldManager_, Reference<SkinningMeshDrawManager> skinDraw_, Reference<Rect3dDrawManager> rectDraw_, Reference<StringRectDrawManager> stringDraw);
+	void prev_update() override;
 
-	void begin();
-	void update();
-	void late_update();
+	void post_update() override;
+
+	void setup(Reference<WorldRoot> worldRoot);
 
 public:
 	/// <summary>
@@ -70,12 +72,9 @@ public:
 	void register_server_id(u64 serverId, Reference<IEntity> entity);
 
 private:
-	Reference<WorldManager> worldManager;
-	Reference<SkinningMeshDrawManager> skinDraw;
-	Reference<Rect3dDrawManager> rectDraw;
-	Reference<StringRectDrawManager> stringDraw;
+	Reference<WorldRoot> worldRoot;
 
-	std::unordered_map<u64, std::unique_ptr<IEntity>> entities;
+	std::unordered_map<u64, Reference<IEntity>> entities;
 	std::unordered_map<u64, Reference<IEntity>> entityRefByServerId;
 
 	std::unordered_set<u64> removedEntityIds;
@@ -86,12 +85,10 @@ private:
 template<typename T>
 	requires std::derived_from<T, IEntity>
 inline Reference<T> EntityManager::generate(const std::filesystem::path& initJson) {
-	std::unique_ptr<T> temp = worldManager->create<T>(nullptr);
+	Reference<T> temp = worldRoot->instantiate<T>(nullptr);
 	temp->initialize(initJson, localIdCounter);
-	temp->setup(skinDraw, rectDraw, stringDraw);
-	Reference<T> result = temp;
-	entities.emplace(localIdCounter, std::move(temp));
+	entities.emplace(localIdCounter, temp);
 	++localIdCounter;
 
-	return result;
+	return temp;
 }

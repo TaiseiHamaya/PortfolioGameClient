@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Engine/Module/Manager/SceneScript/ISceneScript.h>
+
 #include <Library/Math/Vector3.h>
 #include <Library/Utility/Template/Reference.h>
 #include <Library/Utility/Tools/ConstructorMacro.h>
@@ -18,7 +20,7 @@ class GameServerPacketSender;
 /// <summary>
 /// ゾーン処理に関するハンドラ
 /// </summary>
-class ZoneHandler final {
+class ZoneHandler final : public ISceneScript {
 public:
 	ZoneHandler() = default;
 	~ZoneHandler() = default;
@@ -33,6 +35,10 @@ public:
 		Reference<GameServerPacketReceiver> gameServerPacketReceiver_,
 		Reference<GameServerPacketSender> gameServerPacketSender_
 	);
+
+	void prev_update() override;
+
+	void post_update() override;
 
 	/// <summary>
 	/// コマンドの実行

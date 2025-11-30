@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Engine/Module/Manager/SceneScript/ISceneScript.h>
+
 #include <Library/Utility/Template/Reference.h>
 #include <Library/Utility/Tools/ConstructorMacro.h>
 
@@ -13,7 +15,7 @@ class ZoneHandler;
 /// <summary>
 /// インゲームの入力ハンドラ
 /// </summary>
-class GameInputHandler final {
+class GameInputHandler final : public ISceneScript {
 public:
 	GameInputHandler() = default;
 	~GameInputHandler() = default;
@@ -24,6 +26,10 @@ public:
 	void initialize();
 
 	void setup(Reference<ZoneHandler> zoneHandler_);
+
+	void prev_update() override;
+
+	void post_update() override;
 
 	/// <summary>
 	/// 入力処理

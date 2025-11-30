@@ -13,10 +13,10 @@
     "SrvHeapSize": 65536,
     "RtvHeapSize": 30,
     "DsvHeapSize": 1,
-    "ScreenClearColor": {
-      "R": 0.39,
-      "G": 0.58,
-      "B": 0.92,
+    "ClearColor": {
+      "R": 0.0,
+      "G": 0.0,
+      "B": 0.0,
       "A": 1.0
     }
   },

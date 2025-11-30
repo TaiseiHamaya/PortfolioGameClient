@@ -1,0 +1,56 @@
+{
+	"Instances": [
+		{
+			"IsDraw": true,
+			"Layer": 0,
+			"Local transform": {
+				"Rotation": {
+					"W": 1.0,
+					"XYZ": {
+						"X": 0.0,
+						"Y": 0.0,
+						"Z": 0.0
+					}
+				},
+				"Scale": {
+					"X": 1.0,
+					"Y": 1.0,
+					"Z": 1.0
+				},
+				"Translate": {
+					"X": 0.0,
+					"Y": 0.0,
+					"Z": 0.0
+				}
+			},
+			"Materials": [
+				{
+					"Color": {
+						"B": 1.0,
+						"G": 1.0,
+						"R": 1.0
+					},
+					"LightingType": 2,
+					"Shininess": 50.0,
+					"Texture": "Grid.png",
+					"UV Transform": {
+						"Rotation": 0.0,
+						"Scale": {
+							"X": 20.0,
+							"Y": 20.0
+						},
+						"Translate": {
+							"X": 0.0,
+							"Y": 0.0
+						}
+					}
+				}
+			],
+			"MeshName": "Grid.obj",
+			"Name": "Ground",
+			"Type": 10
+		}
+	],
+	"Name": "MainWorld",
+	"NumLayer": 1
+}

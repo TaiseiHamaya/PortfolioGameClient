@@ -21,12 +21,12 @@ public:
 	bool is_end() const;
 
 private:
-	std::unique_ptr<LookAtRect> hitBillboard;
-	std::unique_ptr<ParticleEmitterInstance> emitter;
+	Reference<LookAtRect> hitBillboard;
+	Reference<ParticleEmitterInstance> emitter;
 
 	WorldTimer hitAnimationTimer;
 
 public:
-	static inline Reference<WorldManager> worldManager{};
+	static inline Reference<WorldRoot> worldRoot{};
 };
 

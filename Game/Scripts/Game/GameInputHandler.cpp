@@ -37,6 +37,14 @@ void GameInputHandler::setup(Reference<ZoneHandler> zoneHandler_) {
 	zoneHandler = zoneHandler_;
 }
 
+void GameInputHandler::prev_update() {
+	input();
+	update();
+}
+
+void GameInputHandler::post_update() {
+}
+
 void GameInputHandler::input() {
 	// キー入力
 	actionHandlerK.update();

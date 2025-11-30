@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Engine/Module/Render/RenderNode/SingleRenderTargetNode.h>
+#include <Engine/Module/Render/RenderPSO/PostEffectPSO.h>
 
 #include <Engine/GraphicsAPI/DirectX/DxResource/ConstantBuffer/ConstantBuffer.h>
 #include <Engine/GraphicsAPI/DirectX/DxResource/TextureResource/RenderTexture.h>
@@ -8,7 +8,7 @@
 /// <summary>
 /// Bloom
 /// </summary>
-class BloomNode : public SingleRenderTargetNode {
+class BloomNode : public PostEffectPSO {
 public:
 	BloomNode() = default;
 	~BloomNode() noexcept = default;
@@ -26,7 +26,7 @@ public:
 
 	void preprocess() override {};
 
-	void draw() const;
+	void execute_effect_command() override;
 
 	void set_base_texture(Reference<RenderTexture> baseTexture);
 	void set_blur_texture(Reference<RenderTexture> blurTexture);

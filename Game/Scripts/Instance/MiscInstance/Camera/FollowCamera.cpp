@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-#include <Engine/Module/World/WorldManager.h>
+#include <Engine/Module/Manager/World/WorldRoot.h>
 #include <Engine/Runtime/Clock/WorldClock.h>
 #include <Engine/Runtime/Input/Input.h>
 
@@ -17,7 +17,7 @@
 void FollowCamera::initialize() {
 	Camera3D::initialize();
 
-	lookAtInstance = world_manager()->create<WorldInstance>();
+	lookAtInstance = world_root_mut()->instantiate<WorldInstance>();
 	reparent(lookAtInstance);
 	destingRotation =
 		Quaternion::EulerDegree(45, 0, 0);
@@ -40,6 +40,7 @@ void FollowCamera::initialize() {
 }
 
 void FollowCamera::update() {
+	input();
 	// 画面揺れ
 	shakeTimer.back();
 	if (shakeTimer.time() >= 0.0f) {

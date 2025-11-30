@@ -10,7 +10,7 @@ void MargeTextureNode::initialize() {
 	primitiveTopology = D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 }
 
-void MargeTextureNode::draw() const {
+void MargeTextureNode::execute_effect_command() {
 	for (auto& texture : downSampledTextures) {
 		texture->start_read();
 	}

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Engine/Module/Render/RenderNode/SingleRenderTargetNode.h>
+#include <Engine/Module/Render/RenderPSO/PostEffectPSO.h>
 
 #include <array>
 
@@ -9,7 +9,7 @@
 /// <summary>
 /// 4枚のテクスチャを合成するノード
 /// </summary>
-class MargeTextureNode : public SingleRenderTargetNode {
+class MargeTextureNode : public PostEffectPSO {
 public:
 
 public:
@@ -20,7 +20,7 @@ public:
 
 	void preprocess() override {};
 
-	void draw() const;
+	void execute_effect_command() override;
 
 	void set_texture_resources(std::array<Reference<RenderTexture>, 4> downSampledTextures_);
 

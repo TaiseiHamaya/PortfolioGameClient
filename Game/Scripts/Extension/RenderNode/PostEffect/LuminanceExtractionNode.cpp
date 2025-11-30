@@ -11,7 +11,7 @@ void LuminanceExtractionNode::initialize() {
 	luminanceExtractionInfo.get_data()->intensity = 0.55f;
 }
 
-void LuminanceExtractionNode::draw() const {
+void LuminanceExtractionNode::execute_effect_command() const {
 	baseTexture->start_read();
 
 	auto&& command = DxCommand::GetCommandList();

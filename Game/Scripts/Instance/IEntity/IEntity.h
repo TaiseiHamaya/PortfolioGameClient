@@ -45,17 +45,6 @@ public:
 
 public:
 	virtual void initialize(const std::filesystem::path& file, u64 localId);
-	void setup(
-		Reference<SkinningMeshDrawManager> skinDraw,
-		Reference<Rect3dDrawManager> rectDraw,
-		Reference<StringRectDrawManager> stringDraw
-	);
-
-	virtual void terminate(
-		Reference<SkinningMeshDrawManager> skinDraw,
-		Reference<Rect3dDrawManager> rectDraw,
-		Reference<StringRectDrawManager> stringDraw
-	);
 
 	virtual void begin() override;
 
@@ -103,8 +92,8 @@ protected:
 
 	eps::bitflag<EntityFlag> flags;
 
-	std::unique_ptr<EntityUi> ui;
-	std::unique_ptr<Shadow> shadow;
+	Reference<EntityUi> ui;
+	Reference<Shadow> shadow;
 
 	Reference<IEntity> selectionTarget; // 選択対象
 	std::vector<u64> enmityIds; // 敵対一覧

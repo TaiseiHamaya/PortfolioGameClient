@@ -9,7 +9,6 @@
 #include <Engine/Module/World/Camera/Camera3D.h>
 
 void CubemapNode::initialize() {
-	depthStencil = RenderingSystemValues::GetDepthStencilTexture();
 	create_pipeline_state();
 	pipelineState->set_name("CubemapNode");
 	primitiveTopology = D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
@@ -52,7 +51,7 @@ void CubemapNode::create_pipeline_state() {
 	std::unique_ptr<PSOBuilder> psoBuilder = std::make_unique<PSOBuilder>();
 	psoBuilder->blendstate();
 	psoBuilder->depth_state(
-		depthStencil->get_as_dsv()->get_format(),
+		RenderingSystemValues::GetDepthStencilTexture()->get_as_dsv()->get_format(),
 		D3D12_DEPTH_WRITE_MASK_ZERO,
 		D3D12_COMPARISON_FUNC_LESS_EQUAL
 	);

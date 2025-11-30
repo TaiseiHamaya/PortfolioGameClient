@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Engine/Module/Render/RenderNode/SingleRenderTargetNode.h>
+#include <Engine/Module/Render/RenderPSO/BaseRenderNode.h>
 
 #include <Engine/Assets/Texture/TextureAsset.h>
 #include <Engine/GraphicsAPI/DirectX/DxResource/ConstantBuffer/ConstantBuffer.h>
@@ -12,7 +12,7 @@ class Camera3D;
 /// <summary>
 /// キューブマップ描画ノード
 /// </summary>
-class CubemapNode final : public SingleRenderTargetNode {
+class CubemapNode final : public BaseRenderNode {
 public:
 	/// <summary>
 	/// 初期化
