@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Engine/Module/Manager/SceneScript/ISceneScript.h>
+
 #include <filesystem>
 #include <list>
 
@@ -13,12 +15,16 @@ class EntityManager;
 /// 敵管理クラス
 /// 削除するかも
 /// </summary>
-class EnemyManager {
+class EnemyManager final : public ISceneScript {
 public:
 	EnemyManager() = default;
 	~EnemyManager() = default;
 
 public:
+	void prev_update() override {};
+
+	void post_update() override {};
+
 	void setup(Reference<EntityManager> entityManager_);
 
 public:

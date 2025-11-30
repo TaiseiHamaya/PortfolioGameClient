@@ -3,6 +3,7 @@
 #include "Scripts/Proto/types.pb.h"
 
 #include <Engine/Runtime/Scene/SceneManager.h>
+#include <Engine/Runtime/Scene/SceneManager2.h>
 
 #include "./Scene/FactoryPortfolio.h"
 
@@ -17,10 +18,10 @@
 
 void Portfolio::initialize() {
 #ifdef DEBUG_FEATURES_ENABLE
-	EditorMain::SetActiveEditor(false);
+	//EditorMain::SetActiveEditor(false);
 #endif // DEBUG_FEATURES_ENABLE
 
-	SceneManager::Setup(std::make_unique<FactoryPortfolio>());
+	SceneManager2::Setup(std::make_unique<FactoryPortfolio>());
 
 #ifdef DEBUG_FEATURES_ENABLE
 	if (ArgumentParser::Contains("-ENABLE_DEVELOP_BOT")) {
@@ -29,10 +30,10 @@ void Portfolio::initialize() {
 		szgInformation(L"Botモードが有効化されました。");
 	}
 #endif // DEBUG_FEATURES_ENABLE
+
+	ProtoBufManager::GetInstance().onDestroy;
 }
 
-void Portfolio::finalize() {
+Portfolio::ProtoBufManager::OnDestory::~OnDestory() {
 	google::protobuf::ShutdownProtobufLibrary();
-
-	WinApp::Finalize();
 }

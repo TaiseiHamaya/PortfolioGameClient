@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Engine/Module/Manager/SceneScript/ISceneScript.h>
+
 #include <Library/Utility/Tools/ConstructorMacro.h>
 
 #include "GameServer/GameServerConnectionManager.h"
@@ -8,7 +10,7 @@
 
 class IEntity;
 
-class NetworkCluster {
+class NetworkCluster final : public ISceneScript {
 public:
 	NetworkCluster() = default;
 	~NetworkCluster() = default;
@@ -17,6 +19,10 @@ public:
 	__CLASS_NON_COPYMOVEABLE(NetworkCluster)
 
 public:
+	void prev_update() override;
+
+	void post_update() override;
+
 	/// <summary>
 	/// 初期化
 	/// </summary>
@@ -30,7 +36,7 @@ public:
 	/// <summary>
 	/// 終了処理
 	/// </summary>
-	void finalize();
+	void finalize() override;
 
 	/// <summary>
 	/// メッセージ受け取り

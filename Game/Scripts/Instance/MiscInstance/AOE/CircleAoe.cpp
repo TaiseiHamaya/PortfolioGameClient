@@ -1,7 +1,7 @@
 #include "CircleAoe.h"
 
 #include <Engine/Module/DrawExecutor/Mesh/Primitive/Rect3dDrawManager.h>
-#include <Engine/Module/World/WorldManager.h>
+#include <Engine/Module/Manager/World/WorldRoot.h>
 
 #include <Library/Math/Definition.h>
 #include <Library/Utility/Tools/MathEPS.h>
@@ -18,7 +18,7 @@ void CircleAoe::initialize(const Vector3& position, float radius, float duration
 	Quaternion rotate = Quaternion::AngleAxis(CVector3::BASIS_X, -PI / 2); // 上を向けtる
 
 	// 範囲表示の基礎部分
-	base = world_manager()->create<Rect3d>(this);
+	base = world_root_mut()->instantiate<Rect3d>(this);
 	base->initialize(CVector3::BASIS * radius, CVector3::BASIS * 0.5f);
 	base->get_material().texture = TextureLibrary::GetTexture("AOEBase.png");
 	base->get_material().lightingType = LighingType::None;
@@ -27,7 +27,7 @@ void CircleAoe::initialize(const Vector3& position, float radius, float duration
 	base->get_transform().set_quaternion(rotate);
 	//base->set_layer(1);
 	// なんか動くところ
-	effect = world_manager()->create<Rect3d>(this);
+	effect = world_root_mut()->instantiate<Rect3d>(this);
 	effect->initialize(CVector3::BASIS * radius, CVector3::BASIS * 0.5f);
 	effect->get_material().texture = TextureLibrary::GetTexture("AOEBase.png");
 	effect->get_material().lightingType = LighingType::None;
@@ -35,20 +35,6 @@ void CircleAoe::initialize(const Vector3& position, float radius, float duration
 	effect->get_transform().set_scale(CVector3::ZERO);
 	effect->get_transform().set_quaternion(rotate);
 	//effect->set_layer(1);
-}
-
-void CircleAoe::start(Reference<Rect3dDrawManager> rectDraw) {
-	rectDraw->register_instance(base);
-	rectDraw->register_instance(effect);
-}
-
-void CircleAoe::end(Reference<Rect3dDrawManager> rectDraw) {
-	rectDraw->unregister_instance(base);
-	rectDraw->unregister_instance(effect);
-
-	Reference<WorldManager> worldManager= world_manager();
-	worldManager->erase(base);
-	worldManager->erase(effect);
 }
 
 void CircleAoe::update() {

@@ -23,6 +23,14 @@ void ZoneHandler::setup(Reference<EntityManager> entityManager_, Reference<Enemy
 	gameServerPacketSender = gameServerPacketSender_;
 }
 
+void ZoneHandler::prev_update() {
+	handle_zone();
+	execute_commands();
+}
+
+void ZoneHandler::post_update() {
+}
+
 void ZoneHandler::execute_commands() {
 	for (auto& command : zoneCommands) {
 		command->execute();
@@ -31,7 +39,7 @@ void ZoneHandler::execute_commands() {
 }
 
 void ZoneHandler::handle_zone() {
-	if (!gameServerPacketReceiver) {
+	if (!gameServerPacketReceiver || !player) {
 		return;
 	}
 

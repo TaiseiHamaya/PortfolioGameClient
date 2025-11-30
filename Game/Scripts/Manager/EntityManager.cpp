@@ -1,37 +1,21 @@
 #include "EntityManager.h"
 
-void EntityManager::setup(Reference<WorldManager> worldManager_, Reference<SkinningMeshDrawManager> skinDraw_, Reference<Rect3dDrawManager> rectDraw_, Reference<StringRectDrawManager> stringDraw_) {
-	worldManager = worldManager_;
-	skinDraw = skinDraw_;
-	rectDraw = rectDraw_;
-	stringDraw = stringDraw_;
+void EntityManager::prev_update() {
 }
 
-void EntityManager::begin() {
-	for (std::unique_ptr<IEntity>& entity : entities | std::views::values) {
-		entity->begin();
-	}
-}
-
-void EntityManager::update() {
-	for (std::unique_ptr<IEntity>& entity : entities | std::views::values) {
-		entity->update();
-	}
-}
-
-void EntityManager::late_update() {
+void EntityManager::post_update() {
 	for (u64 serverId : removedEntityIds) {
 		Reference<IEntity> entity = inquire_server_id(serverId);
 		if (entity) {
-			entity->terminate(skinDraw, rectDraw, stringDraw);
+			worldRoot->destroy(entity);
 			entities.erase(entity->local_id());
 			entityRefByServerId.erase(serverId);
 		}
 	}
+}
 
-	for (std::unique_ptr<IEntity>& entity : entities | std::views::values) {
-		entity->late_update();
-	}
+void EntityManager::setup(Reference<WorldRoot> worldRoot_) {
+	worldRoot = worldRoot_;
 }
 
 void EntityManager::destroy(u64 serverId) {

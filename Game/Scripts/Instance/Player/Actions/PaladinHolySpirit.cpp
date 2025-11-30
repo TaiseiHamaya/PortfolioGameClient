@@ -1,6 +1,6 @@
 #include "PaladinHolySpirit.h"
 
-#include <Engine/Module/World/WorldManager.h>
+#include <Engine/Module/Manager/World/WorldRoot.h>
 
 #include "PaladinHolySpiritEffectSelf.h"
 #include "PaladinHolySpiritEffectTarget.h"
@@ -14,12 +14,12 @@ void PaladinHolySpirit::setup(Reference<IEntity> owner_, const std::string& anim
 
 #ifdef DEBUG_FEATURES_ENABLE
 	effectTarget = std::make_unique<PaladinHolySpiritEffectTarget>();
-	effectTarget->initialize(CVector3::ZERO);
+	effectTarget->load_constant_values();
 #endif // DEBUG_FEATURES_ENABLE
 }
 
 void PaladinHolySpirit::start() {
-	auto temp = owner->world_manager()->create<PaladinHolySpiritEffectTarget>();
+	auto temp = owner->world_root_mut()->instantiate<PaladinHolySpiritEffectTarget>();
 	temp->initialize(EffectTools::CalculateTargetPosition(owner, owner->get_selection_target()));
 	effectManager->register_instance(std::move(temp));
 }

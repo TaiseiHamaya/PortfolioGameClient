@@ -5,9 +5,6 @@
 #include <Library/Utility/Tools/ConstructorMacro.h>
 #include <Library/Utility/Template/Reference.h>
 
-#include <Engine/Module/DrawExecutor/Mesh/Primitive/Rect3dDrawManager.h>
-#include <Engine/Module/DrawExecutor/Mesh/StaticMeshDrawManager.h>
-
 #include "Scripts/Instance/IEntity/IEntity.h"
 
 namespace EffectTools {
@@ -27,14 +24,12 @@ public:
 	__CLASS_NON_COPYABLE(IEffectInstance)
 
 public:
-	virtual void setup(Reference<StaticMeshDrawManager>, Reference<Rect3dDrawManager>) = 0;
-	virtual void terminate(Reference<StaticMeshDrawManager>, Reference<Rect3dDrawManager>) = 0;
 	virtual void draw_particle() const = 0;
 
-	bool is_destroy() const;
+	bool is_end_effect() const;
 
 protected:
-	bool isDestroy{ false };
+	bool isEnded{ false };
 
 public:
 #ifdef DEBUG_FEATURES_ENABLE

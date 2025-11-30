@@ -11,7 +11,7 @@ void BloomNode::initialize() {
 	bloomInfo.get_data()->weight = 1.0f;
 }
 
-void BloomNode::draw() const {
+void BloomNode::execute_effect_command() {
 	baseTexture->start_read();
 	blurTexture->start_read();
 

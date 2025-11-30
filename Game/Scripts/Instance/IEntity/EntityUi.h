@@ -12,13 +12,11 @@
 class EntityUi final : public WorldInstance {
 public:
 	void initialize(float offsetY, Color4 color);
-	void start(Reference<Rect3dDrawManager> rectDraw, Reference<StringRectDrawManager> stringDraw);
-	void terminate(Reference<Rect3dDrawManager> rectDraw, Reference<StringRectDrawManager> stringDraw);
 
 public:
 	void set_name(const std::string& name);
 
 private:
-	std::unique_ptr<LookAtRect> hpRect;
-	std::unique_ptr<StringRectInstance> nametag;
+	Reference<LookAtRect> hpRect;
+	Reference<StringRectInstance> nametag;
 };

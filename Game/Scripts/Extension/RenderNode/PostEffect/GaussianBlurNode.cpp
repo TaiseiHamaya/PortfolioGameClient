@@ -13,7 +13,7 @@ void GaussianBlurNode::initialize() {
 	blurInfo.get_data()->sampleCount = 4;
 }
 
-void GaussianBlurNode::draw() const {
+void GaussianBlurNode::execute_effect_command() {
 	baseTexture->start_read();
 	auto&& command = DxCommand::GetCommandList();
 	command->SetGraphicsRootConstantBufferView(0, blurInfo.get_resource()->GetGPUVirtualAddress());

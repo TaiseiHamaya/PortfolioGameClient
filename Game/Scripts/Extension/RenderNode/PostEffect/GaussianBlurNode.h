@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Engine/Module/Render/RenderNode/SingleRenderTargetNode.h>
+#include <Engine/Module/Render/RenderPSO/PostEffectPSO.h>
 
 #include <Engine/GraphicsAPI/DirectX/DxResource/ConstantBuffer/ConstantBuffer.h>
 #include <Engine/GraphicsAPI/DirectX/DxResource/TextureResource/RenderTexture.h>
@@ -8,7 +8,7 @@
 /// <summary>
 /// GaussianBlur
 /// </summary>
-class GaussianBlurNode : public SingleRenderTargetNode {
+class GaussianBlurNode : public PostEffectPSO {
 public:
 	struct GaussianBlurInfo {
 		r32 dispersion;
@@ -33,7 +33,7 @@ public:
 
 	void preprocess() override {};
 
-	void draw() const;
+	void execute_effect_command() override;
 
 	void set_base_texture(Reference<RenderTexture> baseTexture_);
 

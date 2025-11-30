@@ -2,6 +2,14 @@
 
 #include "Scripts/Instance/IEntity/IEntity.h"
 
+void NetworkCluster::prev_update() {
+	receive();
+}
+
+void NetworkCluster::post_update() {
+	send();
+}
+
 void NetworkCluster::initialize() {
 	connectionManager.initialize();
 	packetReceiver.initialize();
@@ -16,15 +24,17 @@ void NetworkCluster::setup() {
 }
 
 void NetworkCluster::finalize() {
-	const auto& id = player->server_id();
-	if (id.has_value()) {
-		Proto::Packet packet;
-		packet.set_category_logout_message(Proto::CategoryLogoutMessage::LOGOUT_REQUEST);
-		Proto::PayloadLogoutRequest body;
-		body.set_id(id.value());
-		packet.set_payload(body.SerializeAsString());
-		packetSender.stack_packet(packet);
-		packetSender.send_all_packets();
+	if (player) {
+		const auto& id = player->server_id();
+		if (id.has_value()) {
+			Proto::Packet packet;
+			packet.set_category_logout_message(Proto::CategoryLogoutMessage::LOGOUT_REQUEST);
+			Proto::PayloadLogoutRequest body;
+			body.set_id(id.value());
+			packet.set_payload(body.SerializeAsString());
+			packetSender.stack_packet(packet);
+			packetSender.send_all_packets();
+		}
 	}
 
 	connectionManager.disconnect();

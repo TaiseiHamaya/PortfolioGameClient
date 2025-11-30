@@ -9,7 +9,7 @@ void DownSamplingNode::initialize() {
 	primitiveTopology = D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 }
 
-void DownSamplingNode::draw() {
+void DownSamplingNode::execute_effect_command() {
 	texture->start_read();
 	auto&& command = DxCommand::GetCommandList();
 	texture->get_as_srv()->use(0);

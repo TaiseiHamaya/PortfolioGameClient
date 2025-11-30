@@ -1,37 +1,31 @@
 #include "EffectManager.h"
 
-void EffectManager::setup(Reference<StaticMeshDrawManager> meshDrawManager_, Reference<Rect3dDrawManager> rectDrawManager_) {
-	meshDrawManager = meshDrawManager_;
-	rectDrawManager = rectDrawManager_;
+#include <Engine/Module/Manager/World/WorldRoot.h>
+
+void EffectManager::prev_update() {
 }
 
-void EffectManager::update() {
-	for (std::unique_ptr<IEffectInstance>& instance : instances) {
-		instance->update();
-	}
-
+void EffectManager::post_update() {
 	std::erase_if(instances,
-		[&](const std::unique_ptr<IEffectInstance>& instance) {
-		if (instance->is_destroy()) {
-			instance->terminate(meshDrawManager, rectDrawManager);
-			return true;
+		[&](const Reference<IEffectInstance>& instance) {
+		if (instance->is_end_effect()) {
+			instance->world_root_mut()->destroy(instance);
 		}
 		return false;
 	});
 }
 
 void EffectManager::draw_particle() {
-	for (const std::unique_ptr<IEffectInstance>& instance : instances) {
+	for (const Reference<IEffectInstance>& instance : instances) {
 		instance->draw_particle();
 	}
 }
 
-void EffectManager::register_instance(std::unique_ptr<IEffectInstance> instance) {
+void EffectManager::register_instance(Reference<IEffectInstance> instance) {
 	if (!instance) {
 		return;
 	}
 
-	instance->setup(meshDrawManager, rectDrawManager);
 	instances.emplace_back(std::move(instance));
 }
 

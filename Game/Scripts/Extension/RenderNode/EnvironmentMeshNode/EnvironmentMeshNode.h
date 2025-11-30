@@ -2,9 +2,9 @@
 
 #include <Library/Utility/Tools/ConstructorMacro.h>
 
-#include <Engine/Module/Render/RenderNode/SingleRenderTargetNode.h>
+#include <Engine/Module/Render/RenderPSO/BaseRenderNode.h>
 
-class EnvironmentMeshNode final : public SingleRenderTargetNode {
+class EnvironmentMeshNode final : public BaseRenderNode {
 public:
 	EnvironmentMeshNode();
 	~EnvironmentMeshNode() noexcept;

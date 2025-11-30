@@ -12,6 +12,9 @@ void Shadow::setup(Reference<WorldInstance> owner_, float baseRadius_) {
 
 void Shadow::fixed_update() {
 	// 高さに応じて影の大きさを変える
+	if (!owner) {
+		return;
+	}
 	float radiusMag = 1 / (owner->world_position().y + 2);
 	initialize(Vector2{ baseRadius * radiusMag,baseRadius * radiusMag }, Vector2{ 0.5f,0.5f });
 	transform.set_translate(owner->world_position());

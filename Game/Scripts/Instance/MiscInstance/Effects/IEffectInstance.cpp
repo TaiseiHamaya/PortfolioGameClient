@@ -18,6 +18,6 @@ Vector3 EffectTools::CalculateTargetPosition(Reference<IEntity> self, Reference<
 	return result;
 }
 
-bool IEffectInstance::is_destroy() const {
-	return isDestroy;
+bool IEffectInstance::is_end_effect() const {
+	return isEnded;
 }

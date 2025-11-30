@@ -1,7 +1,7 @@
 #include "IEntity.h"
 
 #include <Engine/Assets/Json/JsonAsset.h>
-#include <Engine/Module/World/WorldManager.h>
+#include <Engine/Module/Manager/World/WorldRoot.h>
 #include <Engine/Runtime/Clock/WorldClock.h>
 #define COLOR4_SERIALIZER
 #include <Engine/Assets/Json/JsonSerializer.h>
@@ -15,9 +15,8 @@ void IEntity::initialize(const std::filesystem::path& file, u64 localId_) {
 
 	JsonAsset json{ std::format(L".\\Game\\Resources\\Json\\Entity\\{}", file.native()) }; // Jsonからデータの読み込み
 	// Instance生成
-	shadow = world_manager()->create<Shadow>();
-	ui = world_manager()->create<EntityUi>(this);
-	ui->initialize(2.5f, json.try_emplace<Color4>("HPColor"));
+	shadow = world_root_mut()->instantiate<Shadow>();
+	ui = world_root_mut()->instantiate<EntityUi>(this);
 
 	// アクションデータの生成
 	auto idleAction = std::make_unique<IdleAction>();
@@ -27,15 +26,9 @@ void IEntity::initialize(const std::filesystem::path& file, u64 localId_) {
 	reset_animated_mesh(json.try_emplace<std::string>("Model"));
 
 	targetRadius = json.try_emplace<float>("TargetRadius");
-}
 
-void IEntity::setup(Reference<SkinningMeshDrawManager> skinDraw, Reference<Rect3dDrawManager> rectDraw, Reference<StringRectDrawManager> stringDraw) {
-	// 描画の登録
-	shadow->setup(this, 2.0f);
-	ui->start(rectDraw, stringDraw);
-	skinDraw->register_instance(this);
-	//staticDraw->register_instance()
-	rectDraw->register_instance(shadow);
+	ui->initialize(targetRadius * 3.0f + 1.0f, json.try_emplace<Color4>("HPColor"));
+	shadow->setup(this, targetRadius * 4);
 }
 
 void IEntity::begin() {
@@ -45,17 +38,6 @@ void IEntity::begin() {
 	}
 
 	SkinningMeshInstance::begin();
-}
-
-void IEntity::terminate(Reference<SkinningMeshDrawManager> skinDraw, Reference<Rect3dDrawManager> rectDraw, Reference<StringRectDrawManager> stringDraw) {
-	// 描画登録の解除
-	skinDraw->unregister_instance(this);
-	rectDraw->unregister_instance(shadow);
-	ui->terminate(rectDraw, stringDraw);
-	// WorldManager削除
-	world_manager()->erase(shadow);
-	world_manager()->erase(ui);
-	world_manager()->erase(this);
 }
 
 void IEntity::update() {
@@ -76,10 +58,11 @@ void IEntity::update() {
 			start_action("Idle");
 		}
 	}
+	else {
+		start_action("Idle");
+	}
 
-	update_animation();
-	shadow->update();
-	ui->update();
+	SkinningMeshInstance::update();
 }
 
 void IEntity::start_action(eps::string_hashed actionName) {

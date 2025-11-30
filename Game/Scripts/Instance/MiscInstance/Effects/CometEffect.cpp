@@ -1,12 +1,12 @@
 #include "CometEffect.h"
 
-#include <Engine/Module/World/WorldManager.h>
+#include <Engine/Module/Manager/World/WorldRoot.h>
 #include <Engine/Runtime/Clock/WorldClock.h>
 
 #include <Engine/Module/DrawExecutor/Mesh/Primitive/Rect3dDrawManager.h>
 #include <Engine/Module/DrawExecutor/Mesh/StaticMeshDrawManager.h>
 
-#include <Engine/Module/Render/RenderNode/Posteffect/RadialBlur/RadialBlurNode.h>
+#include <Engine/Module/Render/RenderPSO/Posteffect/RadialBlur/RadialBlurNode.h>
 
 #include <Library/Math/VectorConverter.h>
 #include <Library/Utility/Tools/MathEPS.h>
@@ -20,16 +20,16 @@ CometEffect::CometEffect() = default;
 CometEffect::~CometEffect() = default;
 
 void CometEffect::initialize(const Vector3& position, Reference<BlurInfo> blur_) {
-	const auto& worldManager = world_manager();
+	const auto& worldRoot = world_root_mut();
 	transform.set_translate(position);
 	transform.set_translate_y(0.02f);
 
 	// 煙のパーティクル1
-	dustCloudParticle0 = worldManager->create<ParticleEmitterInstance>(this, "DustCloud0.json", 100);
+	dustCloudParticle0 = worldRoot->instantiate<ParticleEmitterInstance>(this, "DustCloud0.json", 100);
 	dustCloudParticle0->set_active(false);
 
 	// 煙のパーティクル1
-	dustCloudParticle1 = worldManager->create<ParticleEmitterInstance>(this, "DustCloud1.json", 100);
+	dustCloudParticle1 = worldRoot->instantiate<ParticleEmitterInstance>(this, "DustCloud1.json", 100);
 	dustCloudParticle1->set_active(false);
 
 	json.load("Action/RedComet/CometEffect.json");
@@ -47,20 +47,20 @@ void CometEffect::initialize(const Vector3& position, Reference<BlurInfo> blur_)
 	json.register_value(__JSON_RESOURCE_REGISTER(BlurWeight));
 
 	// コメットの隕石部分
-	cometBody = worldManager->create<StaticMeshInstance>(this);
+	cometBody = worldRoot->instantiate<StaticMeshInstance>(this);
 	cometBody->reset_mesh("Comet.obj");
 	cometBody->set_active(false);
 	cometBody->get_materials()[0].color = CometBodyColor;
 	cometBody->get_materials()[0].lightingType = LighingType::None;
 	// コメットの炎エフェクト
-	cometFire = worldManager->create<Rect3d>(this);
+	cometFire = worldRoot->instantiate<Rect3d>(this);
 	cometFire->set_active(false);
 	cometFire->initialize(CometFireSize, CometFirePivot);
 	cometFire->get_material().color = CometFireColor;
 	cometFire->get_material().lightingType = LighingType::None;
 	cometFire->get_material().texture = TextureLibrary::GetTexture("Fire.png");
 	// 隕石と地面が衝突した時に出すエフェクト
-	groundEffect = worldManager->create<Rect3d>(this);
+	groundEffect = worldRoot->instantiate<Rect3d>(this);
 	groundEffect->set_active(false);
 	groundEffect->initialize(GroundEffectSize, GroundEffectPivot);
 	groundEffect->get_material().color = GroundEffectColor;
@@ -72,25 +72,6 @@ void CometEffect::initialize(const Vector3& position, Reference<BlurInfo> blur_)
 	);
 
 	blurData = blur_;
-}
-
-void CometEffect::setup(Reference<StaticMeshDrawManager> meshDraw, Reference<Rect3dDrawManager> rectDraw) {
-	meshDraw->register_instance(cometBody);
-	rectDraw->register_instance(cometFire);
-	rectDraw->register_instance(groundEffect);
-}
-
-void CometEffect::terminate(Reference<StaticMeshDrawManager> meshDraw, Reference<Rect3dDrawManager> rectDraw) {
-	meshDraw->unregister_instance(cometBody);
-	rectDraw->unregister_instance(cometFire);
-	rectDraw->unregister_instance(groundEffect);
-
-	Reference<WorldManager> worldManager = world_manager();
-	worldManager->erase(dustCloudParticle0);
-	worldManager->erase(dustCloudParticle1);
-	worldManager->erase(cometBody);
-	worldManager->erase(cometFire);
-	worldManager->erase(groundEffect);
 }
 
 void CometEffect::update() {

@@ -22,8 +22,6 @@ public:
 
 public:
 	void initialize(const Vector3& position, Reference<BlurInfo> blur_);
-	void setup(Reference<StaticMeshDrawManager> meshDraw, Reference<Rect3dDrawManager> rectDraw) override;
-	void terminate(Reference<StaticMeshDrawManager> meshDraw, Reference<Rect3dDrawManager> rectDraw) override;
 
 public:
 	void update() override;
@@ -41,12 +39,12 @@ public:
 private:
 	WorldTimer timer;
 
-	std::unique_ptr<ParticleEmitterInstance> dustCloudParticle0;
-	std::unique_ptr<ParticleEmitterInstance> dustCloudParticle1;
+	Reference<ParticleEmitterInstance> dustCloudParticle0;
+	Reference<ParticleEmitterInstance> dustCloudParticle1;
 	//std::vector<LookAtRect> dustClouds;
-	std::unique_ptr<StaticMeshInstance> cometBody;
-	std::unique_ptr<Rect3d> cometFire;
-	std::unique_ptr<Rect3d> groundEffect;
+	Reference<StaticMeshInstance> cometBody;
+	Reference<Rect3d> cometFire;
+	Reference<Rect3d> groundEffect;
 
 	Reference<BlurInfo> blurData;
 

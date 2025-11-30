@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Engine/Module/Render/RenderNode/SingleRenderTargetNode.h>
+#include <Engine/Module/Render/RenderPSO/PostEffectPSO.h>
 
 #include <Engine/GraphicsAPI/DirectX/DxResource/ConstantBuffer/ConstantBuffer.h>
 #include <Engine/GraphicsAPI/DirectX/DxResource/TextureResource/RenderTexture.h>
@@ -8,7 +8,7 @@
 /// <summary>
 /// 色収差
 /// </summary>
-class LuminanceExtractionNode : public SingleRenderTargetNode {
+class LuminanceExtractionNode : public PostEffectPSO {
 public:
 	LuminanceExtractionNode() = default;
 	~LuminanceExtractionNode() noexcept = default;
@@ -26,7 +26,7 @@ public:
 
 	void preprocess() override {};
 
-	void draw() const;
+	void execute_effect_command() const;
 
 	void set_texture_resource(Reference<RenderTexture> baseTexture_);
 

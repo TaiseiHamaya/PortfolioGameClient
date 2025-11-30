@@ -1,13 +1,13 @@
 #pragma once
 
-#include <Engine/Module/Render/RenderNode/SingleRenderTargetNode.h>
+#include <Engine/Module/Render/RenderPSO/PostEffectPSO.h>
 
 #include <Engine/GraphicsAPI/DirectX/DxResource/TextureResource/RenderTexture.h>
 
 /// <summary>
 /// ダウンサンプリング
 /// </summary>
-class DownSamplingNode final : public SingleRenderTargetNode {
+class DownSamplingNode final : public PostEffectPSO {
 public:
 	/// <summary>
 	/// 初期化
@@ -19,7 +19,7 @@ public:
 	/// <summary>
 	/// 描画
 	/// </summary>
-	void draw();
+	void execute_effect_command() override;
 
 	void set_base_texture(Reference<RenderTexture> baseTexture);
 

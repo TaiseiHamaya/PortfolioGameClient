@@ -6,9 +6,9 @@
 #include <Engine/Module/World/Particle/ParticleEmitterInstance.h>
 #include <Engine/Runtime/Clock/WorldTimer.h>
 
-#include "Scripts/Instance/MiscInstance/Effects/IEffectInstance.h"
-#include "Scripts/Instance/IEntity/IEntity.h"
 #include "Scripts/Extension/Util/LookAtRect.h"
+#include "Scripts/Instance/IEntity/IEntity.h"
+#include "Scripts/Instance/MiscInstance/Effects/IEffectInstance.h"
 
 class PaladinHolySpiritEffectTarget final : public IEffectInstance {
 public:
@@ -27,10 +27,13 @@ public:
 
 public:
 	void initialize(const Vector3& position);
-	void setup(Reference<StaticMeshDrawManager> meshDrawManager, Reference<Rect3dDrawManager> rectDrawManager) override;
-	void terminate(Reference<StaticMeshDrawManager> meshDrawManager, Reference<Rect3dDrawManager> rectDrawManager) override;
+	
 	void update() override;
+	
 	void draw_particle() const override;
+
+public:
+	void load_constant_values();
 
 #ifdef DEBUG_FEATURES_ENABLE
 public:
@@ -42,12 +45,12 @@ private:
 
 	Reference<WorldInstance> camera;
 
-	std::unique_ptr<LookAtRect> absorption;
-	std::unique_ptr<WorldInstance> centerConstraint;
-	std::vector<std::unique_ptr<Rect3d>> centerBillboards;
-	std::unique_ptr<LookAtRect> lightBillboard;
-	std::unique_ptr<ParticleEmitterInstance> etherDustEmitter;
-	std::unique_ptr<ParticleEmitterInstance> shiningEmitter;
+	Reference<LookAtRect> absorption;
+	Reference<WorldInstance> centerConstraint;
+	std::vector<Reference<Rect3d>> centerBillboards;
+	Reference<LookAtRect> lightBillboard;
+	Reference<ParticleEmitterInstance> etherDustEmitter;
+	Reference<ParticleEmitterInstance> shiningEmitter;
 
 	JsonAsset json;
 	RectEffectValues absorptionEffectValues{};
