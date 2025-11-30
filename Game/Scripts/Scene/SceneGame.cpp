@@ -35,6 +35,9 @@
 
 #include <Engine/Debug/DebugValues/DebugValues.h>
 
+#include <Engine/Assets/FontAtlasMSDF/FontAtlasMSDFLibrary.h>
+#include <Engine/Module/Render/RenderNode/Forward/FontRenderingNode/FontRenderingNode.h>
+
 void SceneGame::load() {
 	PolygonMeshLibrary::RegisterLoadQue("./Game/Resources/Game/Models/skydome.gltf");
 	PolygonMeshLibrary::RegisterLoadQue("./Game/Resources/Game/Models/Comet.obj");
@@ -59,9 +62,9 @@ void SceneGame::load() {
 	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/PlayerEffect/PaladinHolySpiritEffectTargetAbsorption.png");
 	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/PlayerEffect/PaladinHolySpiritEffectTargetLight.png");
 	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/rogland_clear_night_2k.dds");
+	FontAtlasMSDFLibrary::RegisterLoadQue("./Game/Resources/Font/UDEVGothic35HS-Regular.mtsdf");
 
 	PolygonMeshLibrary::RegisterLoadQue(".\\DirectXGame\\EngineResources\\Models\\Grid\\Grid.obj");
-
 
 	PrimitiveGeometryLibrary::Transfer("Cubemap", std::make_shared<PrimitiveGeometryAsset>("Cubemap.json"));
 
@@ -87,6 +90,7 @@ void SceneGame::load() {
 	ShaderLibrary::RegisterLoadQue("./Game/Resources/HLSL/MargeTexture4.PS.hlsl");
 
 	EnvironmentMeshNode::BeginLoadShader();
+	FontRenderingNode::BeginLoadShader();
 }
 
 void SceneGame::initialize() {
@@ -115,8 +119,8 @@ void SceneGame::initialize() {
 	rect3dDrawManager = eps::CreateUnique<Rect3dDrawManager>();
 	rect3dDrawManager->initialize(1);
 	rect3dDrawManager->initialize(2);
-	rect3dDrawManager->make_instancing(0, 1024);
-	rect3dDrawManager->make_instancing(1, 32);
+	rect3dDrawManager->make_instancing(0, BlendMode::None, 1024);
+	rect3dDrawManager->make_instancing(1, BlendMode::None, 32);
 	// SkinMesh
 	skinningMeshDrawManager->make_instancing(0, "Player.gltf", 100);
 	skinningMeshDrawManager->make_instancing(0, "Enemy.gltf", 100);
@@ -127,11 +131,15 @@ void SceneGame::initialize() {
 	staticMeshDrawManager->make_instancing(0, "Grid.obj", 1);
 	// Light
 	directionalLightingExecutor = eps::CreateUnique<DirectionalLightingExecutor>(1);
+	// String
+	stringRectDrawManager = eps::CreateUnique<StringRectDrawManager>();
+	stringRectDrawManager->initialize(1);
+	stringRectDrawManager->make_instancing(0, BlendMode::None, 1024, 131072);
 
 	environmentMeshExecutor = eps::CreateUnique<EnvironmentMeshExecutor>("Grid.obj", 1, "rogland_clear_night_2k.dds");
 
 	// Setup
-	entityManager->setup(worldManager, skinningMeshDrawManager, rect3dDrawManager);
+	entityManager->setup(worldManager, skinningMeshDrawManager, rect3dDrawManager, stringRectDrawManager);
 	enemyManager->setup(entityManager);
 	effectManager->setup(staticMeshDrawManager, rect3dDrawManager);
 	zoneHandler.setup(entityManager, enemyManager, networkCluster.connection_manager(), networkCluster.get_receiver(), networkCluster.get_sender());
@@ -144,6 +152,7 @@ void SceneGame::initialize() {
 	Reference<Player> player = entityManager->generate<Player>("Player.json");
 	skydome = worldManager->create<StaticMeshInstance>(nullptr, "skydome.gltf");
 	camera3D = worldManager->create<FollowCamera>();
+	testString = worldManager->create<StringRectInstance>();
 
 	LookAtRect::camera = camera3D;
 	Particle::lookAtDefault = camera3D.get();
@@ -154,6 +163,7 @@ void SceneGame::initialize() {
 	gameInputHandler->set_instances(player, camera3D);
 	networkCluster.set_player(player);
 	environmentMeshExecutor->setup(directionalLightingExecutor, camera3D);
+	stringRectDrawManager->register_instance(testString);
 
 	skydome->get_transform().set_scale(CVector3::BASIS * 100);
 	skydome->get_materials()[0].lightingType = LighingType::None;
@@ -161,6 +171,9 @@ void SceneGame::initialize() {
 	camera3D->initialize();
 	camera3D->set_target(player);
 	directionalLight->light_data_mut().intensity = 0.500f;
+	testString->initialize("UDEVGothic35HS-Regular.mtsdf", 10.0f, CVector2::ZERO);
+	testString->set_string("MSDF Font Rendering Test ひらがなもできます");
+	testString->get_transform().set_translate_y(1);
 
 	cometEffect = std::make_unique<CometEffect>();
 
@@ -224,6 +237,11 @@ void SceneGame::initialize() {
 	rect3dNode->set_render_target(baseRenderTexture);
 	rect3dNode->set_config(RenderNodeConfig::NoClearRenderTarget | RenderNodeConfig::NoClearDepth);
 
+	auto fontRenderingNode= eps::CreateShared<FontRenderingNode>();
+	fontRenderingNode->initialize();
+	fontRenderingNode->set_render_target(baseRenderTexture);
+	fontRenderingNode->set_config(RenderNodeConfig::NoClearRenderTarget | RenderNodeConfig::NoClearDepth);
+
 	std::shared_ptr<ParticleBillboardNode> particleBillboardNode;
 	particleBillboardNode = std::make_unique<ParticleBillboardNode>();
 	particleBillboardNode->initialize();
@@ -284,10 +302,10 @@ void SceneGame::initialize() {
 
 	renderPath = eps::CreateUnique<RenderPath>();
 #ifdef DEBUG_FEATURES_ENABLE
-	renderPath->initialize({ deferredMeshNode,skinMeshNodeDeferred,nonLightingPixelNode,directionalLightingNode, environmentMeshNode, cubemapNode,rect3dNode,particleBillboardNode,
+	renderPath->initialize({ deferredMeshNode,skinMeshNodeDeferred,nonLightingPixelNode,directionalLightingNode, environmentMeshNode, cubemapNode,rect3dNode,fontRenderingNode,particleBillboardNode,
 		radialBlurNode, luminanceExtractionNode, gaussianBlurNode2, gaussianBlurNode4, gaussianBlurNode8, gaussianBlurNode16 , margeTextureNode, bloomNode, rect3dNodeAOE, primitiveLineNode });
 #else
-	renderPath->initialize({ deferredMeshNode,skinMeshNodeDeferred,nonLightingPixelNode,directionalLightingNode, environmentMeshNode, cubemapNode,rect3dNode,particleBillboardNode,
+	renderPath->initialize({ deferredMeshNode,skinMeshNodeDeferred,nonLightingPixelNode,directionalLightingNode, environmentMeshNode, cubemapNode,rect3dNode,fontRenderingNode,particleBillboardNode,
 		radialBlurNode, luminanceExtractionNode, gaussianBlurNode2, gaussianBlurNode4, gaussianBlurNode8, gaussianBlurNode16 , margeTextureNode, bloomNode, rect3dNodeAOE });
 #endif // DEFERRED_RENDERING
 #pragma endregion RenderPath
@@ -379,6 +397,7 @@ void SceneGame::begin_rendering() {
 	rect3dDrawManager->transfer();
 	staticMeshDrawManager->transfer();
 	skinningMeshDrawManager->transfer();
+	stringRectDrawManager->transfer();
 }
 
 void SceneGame::draw() const {
@@ -418,6 +437,11 @@ void SceneGame::draw() const {
 	camera3D->register_world_lighting(4);
 	directionalLightingExecutor->set_command(5);
 	rect3dDrawManager->draw_layer(0);
+
+	// Font
+	renderPath->next();
+	camera3D->register_world_projection(3);
+	stringRectDrawManager->draw_layer(0);
 
 	// ParticleBillboard
 	renderPath->next();
@@ -536,6 +560,10 @@ void SceneGame::debug_update() {
 
 	ImGui::Begin("NetworkCluster");
 	networkCluster.debug_gui();
+	ImGui::End();
+
+	ImGui::Begin("Font");
+	testString->debug_gui();
 	ImGui::End();
 }
 

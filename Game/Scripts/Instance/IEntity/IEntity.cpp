@@ -29,10 +29,10 @@ void IEntity::initialize(const std::filesystem::path& file, u64 localId_) {
 	targetRadius = json.try_emplace<float>("TargetRadius");
 }
 
-void IEntity::setup(Reference<SkinningMeshDrawManager> skinDraw, Reference<Rect3dDrawManager> rectDraw) {
+void IEntity::setup(Reference<SkinningMeshDrawManager> skinDraw, Reference<Rect3dDrawManager> rectDraw, Reference<StringRectDrawManager> stringDraw) {
 	// 描画の登録
 	shadow->setup(this, 2.0f);
-	ui->start(rectDraw);
+	ui->start(rectDraw, stringDraw);
 	skinDraw->register_instance(this);
 	//staticDraw->register_instance()
 	rectDraw->register_instance(shadow);
@@ -47,11 +47,11 @@ void IEntity::begin() {
 	SkinningMeshInstance::begin();
 }
 
-void IEntity::terminate(Reference<SkinningMeshDrawManager> skinDraw, Reference<Rect3dDrawManager> rectDraw) {
+void IEntity::terminate(Reference<SkinningMeshDrawManager> skinDraw, Reference<Rect3dDrawManager> rectDraw, Reference<StringRectDrawManager> stringDraw) {
 	// 描画登録の解除
 	skinDraw->unregister_instance(this);
 	rectDraw->unregister_instance(shadow);
-	ui->terminate(rectDraw);
+	ui->terminate(rectDraw, stringDraw);
 	// WorldManager削除
 	world_manager()->erase(shadow);
 	world_manager()->erase(ui);
@@ -158,4 +158,5 @@ void IEntity::set_server_id(u64 id) {
 
 void IEntity::set_name(const std::string& name_) {
 	name = name_;
+	ui->set_name(name);
 }

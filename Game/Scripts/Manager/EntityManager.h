@@ -11,6 +11,7 @@
 #include "Scripts/Instance/IEntity/IEntity.h"
 
 class SkinningMeshDrawManager;
+class StringRectDrawManager;
 class Rect3dDrawManager;
 
 /// <summary>
@@ -24,7 +25,7 @@ public:
 	__CLASS_NON_COPYABLE(EntityManager)
 
 public:
-	void setup(Reference<WorldManager> worldManager_, Reference<SkinningMeshDrawManager> skinDraw_, Reference<Rect3dDrawManager> rectDraw_);
+	void setup(Reference<WorldManager> worldManager_, Reference<SkinningMeshDrawManager> skinDraw_, Reference<Rect3dDrawManager> rectDraw_, Reference<StringRectDrawManager> stringDraw);
 
 	void begin();
 	void update();
@@ -72,6 +73,7 @@ private:
 	Reference<WorldManager> worldManager;
 	Reference<SkinningMeshDrawManager> skinDraw;
 	Reference<Rect3dDrawManager> rectDraw;
+	Reference<StringRectDrawManager> stringDraw;
 
 	std::unordered_map<u64, std::unique_ptr<IEntity>> entities;
 	std::unordered_map<u64, Reference<IEntity>> entityRefByServerId;
@@ -86,7 +88,7 @@ template<typename T>
 inline Reference<T> EntityManager::generate(const std::filesystem::path& initJson) {
 	std::unique_ptr<T> temp = worldManager->create<T>(nullptr);
 	temp->initialize(initJson, localIdCounter);
-	temp->setup(skinDraw, rectDraw);
+	temp->setup(skinDraw, rectDraw, stringDraw);
 	Reference<T> result = temp;
 	entities.emplace(localIdCounter, std::move(temp));
 	++localIdCounter;

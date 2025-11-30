@@ -1,9 +1,10 @@
 #include "EntityManager.h"
 
-void EntityManager::setup(Reference<WorldManager> worldManager_, Reference<SkinningMeshDrawManager> skinDraw_, Reference<Rect3dDrawManager> rectDraw_) {
+void EntityManager::setup(Reference<WorldManager> worldManager_, Reference<SkinningMeshDrawManager> skinDraw_, Reference<Rect3dDrawManager> rectDraw_, Reference<StringRectDrawManager> stringDraw_) {
 	worldManager = worldManager_;
 	skinDraw = skinDraw_;
 	rectDraw = rectDraw_;
+	stringDraw = stringDraw_;
 }
 
 void EntityManager::begin() {
@@ -22,7 +23,7 @@ void EntityManager::late_update() {
 	for (u64 serverId : removedEntityIds) {
 		Reference<IEntity> entity = inquire_server_id(serverId);
 		if (entity) {
-			entity->terminate(skinDraw, rectDraw);
+			entity->terminate(skinDraw, rectDraw, stringDraw);
 			entities.erase(entity->local_id());
 			entityRefByServerId.erase(serverId);
 		}

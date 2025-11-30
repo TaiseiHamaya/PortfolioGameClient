@@ -4,7 +4,6 @@
 #include "Engine/GraphicsAPI/DirectX/DxPipelineState/DxPipelineState.h"
 #include "Engine/GraphicsAPI/DirectX/DxPipelineState/PSOBuilder/PSOBuilder.h"
 
-
 void BloomNode::initialize() {
 	create_pipeline_state();
 	pipelineState->set_name("BloomNode");

@@ -18,6 +18,9 @@ void CubemapNode::initialize() {
 }
 
 void CubemapNode::preprocess() {
+	if (!indexBuffer) {
+		return;
+	}
 	materialBuffer.get_data()->texture = cubemapTexture->index();
 	auto& command = DxCommand::GetCommandList();
 	command->IASetIndexBuffer(indexBuffer->get_p_ibv());
