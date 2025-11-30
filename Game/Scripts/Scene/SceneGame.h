@@ -12,8 +12,6 @@
 #include <Engine/Module/DrawExecutor/Mesh/Primitive/Rect3dDrawManager.h>
 #include <Engine/Module/DrawExecutor/Mesh/SkinningMeshDrawManager.h>
 #include <Engine/Module/DrawExecutor/Mesh/StaticMeshDrawManager.h>
-//#include <Engine/Module/Render/RenderNode/Deferred/DeferredAdaptor.h>
-//#include <Engine/Module/Render/RenderNode/Posteffect/RadialBlur/RadialBlurNode.h>
 #include <Engine/Module/Render/RenderPath/RenderPath.h>
 #include <Engine/Module/World/Collision/CollisionManager.h>
 #include <Engine/Module/World/Light/DirectionalLight/DirectionalLightInstance.h>
@@ -64,38 +62,6 @@ public:
 
 private:
 	WorldTimer timer;
-
-	// ---------- 描画パス関連 ----------
-	//std::unique_ptr<RenderPath> renderPath;
-	//// RenderTarget
-	//std::vector<RenderTexture> renderTextures;
-	//DeferredAdaptor::GBuffersType gBuffer;
-	//SingleRenderTarget baseRenderTexture;
-	//SingleRenderTarget radialBlurRenderTexture;
-	//SingleRenderTarget luminanceRenderTexture;
-	//SingleRenderTarget downSampleRenderTexture2;
-	//SingleRenderTarget downSampleRenderTexture4;
-	//SingleRenderTarget downSampleRenderTexture8;
-	//SingleRenderTarget downSampleRenderTexture16;
-	//SingleRenderTarget bloomBaseRenderTexture;
-	//// RenderNode
-	//std::shared_ptr<RadialBlurNode> radialBlurNode;
-	//std::shared_ptr<LuminanceExtractionNode> luminanceExtractionNode;
-	//std::shared_ptr<GaussianBlurNode> gaussianBlurNode2;
-	//std::shared_ptr<GaussianBlurNode> gaussianBlurNode4;
-	//std::shared_ptr<GaussianBlurNode> gaussianBlurNode8;
-	//std::shared_ptr<GaussianBlurNode> gaussianBlurNode16;
-	//std::shared_ptr<MargeTextureNode> margeTextureNode;
-	//std::shared_ptr<BloomNode> bloomNode;
-	//std::shared_ptr<CubemapNode> cubemapNode;
-
-	// ---------- マネージャー関連 ----------
-	//// 描画管理
-	//std::unique_ptr<StaticMeshDrawManager> staticMeshDrawManager;
-	//std::unique_ptr<SkinningMeshDrawManager> skinningMeshDrawManager;
-	//std::unique_ptr<Rect3dDrawManager> rect3dDrawManager;
-	//std::unique_ptr<DirectionalLightingExecutor> directionalLightingExecutor;
-	//std::unique_ptr<StringRectDrawManager> stringRectDrawManager;
 
 	std::unique_ptr<EnvironmentMeshExecutor> environmentMeshExecutor;
 
