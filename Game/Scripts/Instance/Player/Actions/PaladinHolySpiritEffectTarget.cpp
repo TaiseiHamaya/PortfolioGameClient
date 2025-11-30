@@ -13,6 +13,8 @@ void PaladinHolySpiritEffectTarget::initialize(const Vector3& position) {
 	transform.set_translate(position);
 	update_affine();
 
+	load_constant_values();
+
 	// 黒いやつ
 	absorption = world_root_mut()->instantiate<LookAtRect>(this);
 	absorption->get_material().texture = TextureLibrary::GetTexture("PaladinHolySpiritEffectTargetAbsorption.png");
@@ -42,10 +44,10 @@ void PaladinHolySpiritEffectTarget::initialize(const Vector3& position) {
 
 	// 中心の丸いやつ
 	lightBillboard = world_root_mut()->instantiate<LookAtRect>(this);
-	lightBillboard->initialize(centerEffectValues.size, centerEffectValues.pivot);
+	lightBillboard->initialize(lightEffectValues.size, lightEffectValues.pivot);
 	lightBillboard->get_transform().set_translate({ 0.0,0.0,0.02f });
-	lightBillboard->get_transform().set_scale(centerEffectValues.beginScale);
-	lightBillboard->get_material().color = centerEffectValues.color;
+	lightBillboard->get_transform().set_scale(lightEffectValues.beginScale);
+	lightBillboard->get_material().color = lightEffectValues.color;
 	lightBillboard->get_material().texture = TextureLibrary::GetTexture("PaladinHolySpiritEffectTargetLight.png");
 	lightBillboard->get_material().lightingType = LighingType::None;
 
@@ -116,7 +118,7 @@ void PaladinHolySpiritEffectTarget::update() {
 	shiningEmitter->update();
 
 	if (etherDustEmitter->is_end_all() && shiningEmitter->is_end_all()) {
-		isDestroy = true;
+		isEnded = true;
 	}
 }
 

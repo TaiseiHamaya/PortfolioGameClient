@@ -1,4 +1,4 @@
-﻿param(
+param(
 	[Parameter(Position = 0)]
 	[int]$Count,
 
@@ -68,6 +68,18 @@ if (-not $NoBuild) {
 
 	if (-not (Test-Path $msbuild)) {
 		$msbuild = "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin\MSBuild.exe"
+	}
+
+	if (-not (Test-Path $msbuild)) {
+		$msbuild = "C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.exe"
+	}
+
+	if (-not (Test-Path $msbuild)) {
+		$msbuild = "C:\Program Files\Microsoft Visual Studio\18\Professional\MSBuild\Current\Bin\MSBuild.exe"
+	}
+
+	if (-not (Test-Path $msbuild)) {
+		$msbuild = "C:\Program Files\Microsoft Visual Studio\18\Enterprise\MSBuild\Current\Bin\MSBuild.exe"
 	}
 
 	if (-not (Test-Path $msbuild)) {

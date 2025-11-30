@@ -10,6 +10,7 @@ void EffectManager::post_update() {
 		[&](const Reference<IEffectInstance>& instance) {
 		if (instance->is_end_effect()) {
 			instance->world_root_mut()->destroy(instance);
+			return true;
 		}
 		return false;
 	});

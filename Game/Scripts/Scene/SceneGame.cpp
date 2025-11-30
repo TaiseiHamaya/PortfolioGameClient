@@ -148,11 +148,9 @@ void SceneGame::custom_setup() {
 	CometEffect::camera = camera3D;
 	ISkillAction::SetEffectManager(effectManagerRef);
 	zoneHandlerRef->set_player(player);
-	//staticMeshDrawManager->register_instance(skydome);
 	gameInputHandlerRef->set_instances(player, camera3D);
 	networkClusterRef->set_player(player);
 	//environmentMeshExecutor->setup(directionalLightingExecutor, camera3D);
-	//stringRectDrawManager->register_instance(testString);
 
 	skydome->get_transform().set_scale(CVector3::BASIS * 100);
 	skydome->get_materials()[0].lightingType = LighingType::None;

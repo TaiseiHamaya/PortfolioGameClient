@@ -124,7 +124,7 @@ void CometEffect::update() {
 	}
 
 	if (dustCloudParticle0->is_end_all() && dustCloudParticle1->is_end_all()) {
-		isDestroy = true;
+		isEnded = true;
 	}
 }
 
@@ -136,7 +136,7 @@ void CometEffect::draw_particle() const {
 }
 
 bool CometEffect::is_end() const {
-	return isDestroy;
+	return isEnded;
 }
 
 #ifdef DEBUG_FEATURES_ENABLE
