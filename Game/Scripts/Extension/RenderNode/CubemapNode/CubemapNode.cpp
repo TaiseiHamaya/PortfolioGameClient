@@ -20,7 +20,7 @@ void CubemapNode::preprocess() {
 	if (!indexBuffer) {
 		return;
 	}
-	materialBuffer.get_data()->texture = cubemapTexture->index();
+	materialBuffer.data_mut()->texture = cubemapTexture->index();
 	auto& command = DxCommand::GetCommandList();
 	command->IASetIndexBuffer(indexBuffer->get_p_ibv());
 	command->SetGraphicsRootConstantBufferView(0, vsBuffer.get_resource()->GetGPUVirtualAddress());
@@ -38,7 +38,7 @@ void CubemapNode::set_camera(Reference<const Camera3D> camera_) {
 }
 
 void CubemapNode::write_position(const Vector3& position) {
-	*vsBuffer.get_data() = position;
+	*vsBuffer.data_mut() = position;
 }
 
 void CubemapNode::create_pipeline_state() {

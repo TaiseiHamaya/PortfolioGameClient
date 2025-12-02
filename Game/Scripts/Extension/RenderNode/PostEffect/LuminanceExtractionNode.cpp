@@ -8,7 +8,7 @@ void LuminanceExtractionNode::initialize() {
 	create_pipeline_state();
 	pipelineState->set_name("LuminanceExtractionNode");
 	primitiveTopology = D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
-	luminanceExtractionInfo.get_data()->intensity = 0.55f;
+	luminanceExtractionInfo.data_mut()->intensity = 0.55f;
 }
 
 void LuminanceExtractionNode::execute_effect_command() const {
@@ -46,6 +46,6 @@ void LuminanceExtractionNode::create_pipeline_state() {
 #ifdef DEBUG_FEATURES_ENABLE
 #include <imgui.h>
 void LuminanceExtractionNode::debug_gui() {
-	ImGui::DragFloat("Intensity", &luminanceExtractionInfo.get_data()->intensity, 0.001f, 0.0f, 1.0f, "%.4f");
+	ImGui::DragFloat("Intensity", &luminanceExtractionInfo.data_mut()->intensity, 0.001f, 0.0f, 1.0f, "%.4f");
 }
 #endif // DEBUG_FEATURES_ENABLE

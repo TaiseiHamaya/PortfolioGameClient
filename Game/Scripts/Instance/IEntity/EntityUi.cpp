@@ -13,7 +13,7 @@ void EntityUi::initialize(float offsetY, Color4 color) {
 
 	nametag = world_root_mut()->instantiate<StringRectInstance>(hpRect);
 	nametag->initialize("UDEVGothic35HS-Regular.mtsdf", 8.0f, Vector2{ 0.5f,0.5f });
-	nametag->get_transform().set_translate_y(0.5f);
+	nametag->get_transform().set_translate_y(0.3f);
 }
 
 void EntityUi::set_name(const std::string& name) {

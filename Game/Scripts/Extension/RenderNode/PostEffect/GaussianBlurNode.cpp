@@ -8,9 +8,9 @@ void GaussianBlurNode::initialize() {
 	create_pipeline_state();
 	pipelineState->set_name("GaussianBlur");
 	primitiveTopology = D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
-	blurInfo.get_data()->dispersion = 0.4f;
-	blurInfo.get_data()->length = 10.0f;
-	blurInfo.get_data()->sampleCount = 4;
+	blurInfo.data_mut()->dispersion = 0.4f;
+	blurInfo.data_mut()->length = 10.0f;
+	blurInfo.data_mut()->sampleCount = 4;
 }
 
 void GaussianBlurNode::execute_effect_command() {
@@ -26,7 +26,7 @@ void GaussianBlurNode::set_base_texture(Reference<RenderTexture> baseTexture_) {
 }
 
 void GaussianBlurNode::set_parameters(r32 dispersion, r32 length, uint32_t sampleCount) {
-	*blurInfo.get_data() = {
+	*blurInfo.data_mut() = {
 		.dispersion = dispersion,
 		.length = length,
 		.sampleCount = sampleCount
@@ -60,10 +60,10 @@ void GaussianBlurNode::create_pipeline_state() {
 #ifdef DEBUG_FEATURES_ENABLE
 #include <imgui.h>
 void GaussianBlurNode::debug_gui() {
-	ImGui::DragFloat("Weight", &blurInfo.get_data()->dispersion, 0.001f, 0.0f, 1.0f, "%.4f");
-	ImGui::DragFloat("Length", &blurInfo.get_data()->length, 0.01f);
+	ImGui::DragFloat("Weight", &blurInfo.data_mut()->dispersion, 0.001f, 0.0f, 1.0f, "%.4f");
+	ImGui::DragFloat("Length", &blurInfo.data_mut()->length, 0.01f);
 	static uint32_t min = 1;
 	static uint32_t max = 16;
-	ImGui::DragScalar("SampleCount", ImGuiDataType_U32, reinterpret_cast<int*>(&blurInfo.get_data()->sampleCount), 0.02f, &min, &max);
+	ImGui::DragScalar("SampleCount", ImGuiDataType_U32, reinterpret_cast<int*>(&blurInfo.data_mut()->sampleCount), 0.02f, &min, &max);
 }
 #endif // DEBUG_FEATURES_ENABLE

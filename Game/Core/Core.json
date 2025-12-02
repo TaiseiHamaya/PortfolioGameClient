@@ -1,7 +1,7 @@
 {
   "ProjectName": "Portfolio",
   "WindowStyle": {
-    "Fullscreen": false,
+    "Fullscreen": true,
     "MaximizeBox": false,
     "MinimizeBox": true,
     "MaximizeDefault": false,
@@ -22,8 +22,8 @@
   },
   "Application": {
     "Window": {
-      "Width": 1280,
-      "Height": 720
+      "Width": 1920,
+      "Height": 1080
     },
     "FixDeltaSeconds": null,
     "TargetFrameRate": null

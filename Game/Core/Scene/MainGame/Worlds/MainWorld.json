@@ -1,6 +1,43 @@
 {
 	"Instances": [
 		{
+			"Children": [],
+			"Color": {
+				"B": 1.0,
+				"G": 1.0,
+				"R": 1.0
+			},
+			"Direction": {
+				"X": -0.0,
+				"Y": -1.0,
+				"Z": -0.0
+			},
+			"Influence Layer": 3,
+			"Intensity": 0.5,
+			"Local transform": {
+				"Rotation": {
+					"W": 0.595160961151123,
+					"XYZ": {
+						"X": 0.0,
+						"Y": 0.8036065697669983,
+						"Z": 0.0
+					}
+				},
+				"Scale": {
+					"X": 1.0000008344650269,
+					"Y": 1.0000020265579224,
+					"Z": 1.0000008344650269
+				},
+				"Translate": {
+					"X": 0.0,
+					"Y": 5.0,
+					"Z": 0.0
+				}
+			},
+			"Name": "DirectionalLight",
+			"Type": 5000
+		},
+		{
 			"IsDraw": true,
 			"Layer": 0,
 			"Local transform": {
@@ -48,9 +85,43 @@
 			],
 			"MeshName": "Grid.obj",
 			"Name": "Ground",
-			"Type": 10
+			"Type": 2000
+		},
+		{
+			"Children": [],
+			"Color": {
+				"B": 0.06127451732754707,
+				"G": 0.06127451732754707,
+				"R": 0.8333333134651184
+			},
+			"Decay": 4.699999809265137,
+			"Influence Layer": 1,
+			"Intensity": 9.699999809265137,
+			"Local transform": {
+				"Rotation": {
+					"W": 1.0,
+					"XYZ": {
+						"X": 0.0,
+						"Y": 0.0,
+						"Z": 0.0
+					}
+				},
+				"Scale": {
+					"X": 1.0,
+					"Y": 1.0,
+					"Z": 1.0
+				},
+				"Translate": {
+					"X": -2.925379514694214,
+					"Y": 1.0,
+					"Z": -3.790811777114868
+				}
+			},
+			"Name": "PointLight",
+			"Radius": 15.0,
+			"Type": 5001
 		}
 	],
 	"Name": "MainWorld",
-	"NumLayer": 1
+	"NumLayer": 2
 }

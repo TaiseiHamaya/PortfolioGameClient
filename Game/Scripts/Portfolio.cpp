@@ -24,7 +24,7 @@ void Portfolio::initialize() {
 	SceneManager2::Setup(std::make_unique<FactoryPortfolio>());
 
 #ifdef DEBUG_FEATURES_ENABLE
-	if (ArgumentParser::Contains("-ENABLE_DEVELOP_BOT")) {
+	if (ArgumentParser::Contains("--develop-bot-enable")) {
 		ProjectSettings::SetMaxFrameRate(60);
 		ProjectSettings::GetApplicationSettingsMut().hideWindowForce = true;
 		szgInformation(L"Botモードが有効化されました。");
