@@ -55,15 +55,6 @@ void SceneGame::load_asset() {
 
 	PrimitiveGeometryLibrary::Transfer("Cubemap", std::make_shared<PrimitiveGeometryAsset>("Cubemap.json"));
 
-	ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/FullscreenShader.VS.hlsl");
-	ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/Deferred/Mesh/StaticMesh.VS.hlsl");
-	ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/Deferred/Mesh/SkinningMesh.VS.hlsl");
-	ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/Deferred/Deferred.PS.hlsl");
-	ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/Deferred/Lighting/NonLighting.PS.hlsl");
-	ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/Deferred/Lighting/DirectionalLighting.PS.hlsl");
-	ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/Deferred/Lighting/PointLighting.PS.hlsl");
-	ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/Forward/Primitive/Rect3d.VS.hlsl");
-	ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/Forward/ForwardAlpha.PS.hlsl");
 	ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/Forward/Particle/ParticleBillboard/ParticleBillboard.VS.hlsl");
 	ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/Forward/Particle/ParticleBillboard/ParticleBillboard.PS.hlsl");
 	ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/Posteffect/RadialBlur/RadialBlur.PS.hlsl");
@@ -134,14 +125,9 @@ void SceneGame::custom_setup() {
 	entityManagerRef->setup(get_world(0)->world_root_mut());
 	// WorldInstances
 	// Allocation
-	directionalLight = get_world(0)->world_root_mut().instantiate<DirectionalLightInstance>();
-	directionalLight->set_influence_layer(1);
-	directionalLight->light_data_mut().direction = CVector3::DOWN;
-	directionalLight->light_data_mut().intensity = 0.5f;
 	Reference<Player> player = entityManagerRef->generate<Player>("Player.json");
 	skydome = get_world(0)->world_root_mut().instantiate<StaticMeshInstance>(nullptr, "skydome.gltf");
 	camera3D = get_world(0)->world_root_mut().instantiate<FollowCamera>();
-	testString = get_world(0)->world_root_mut().instantiate<StringRectInstance>();
 
 	LookAtRect::camera = camera3D;
 	Particle::lookAtDefault = camera3D.ptr();
@@ -157,10 +143,6 @@ void SceneGame::custom_setup() {
 	skydome->set_active(false);
 	camera3D->initialize();
 	camera3D->set_target(player);
-	directionalLight->light_data_mut().intensity = 0.500f;
-	testString->initialize("UDEVGothic35HS-Regular.mtsdf", 10.0f, CVector2::ZERO);
-	testString->set_string("MSDF Font Rendering Test ひらがなもできます");
-	testString->get_transform().set_translate_y(1);
 
 	cometEffect = std::make_unique<CometEffect>();
 }

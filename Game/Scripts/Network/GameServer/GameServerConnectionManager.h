@@ -50,11 +50,6 @@ public:
 	/// </summary>
 	void finalize();
 
-	/// <summary>
-	/// 更新処理
-	/// </summary>
-	void update();
-
 public:
 	/// <summary>
 	/// 接続完了時に呼ぶ
@@ -80,9 +75,6 @@ public:
 private:
 	void on_connect_handler(const asio::error_code& errorCode);
 
-private:
-	void attach_context_thread();
-
 #ifdef DEBUG_FEATURES_ENABLE
 public:
 	void debug_gui();
@@ -97,6 +89,7 @@ private:
 	asio::ip::tcp::endpoint endpoint{};
 
 	mutable std::mutex mutex;
-	bool isThreadEnded = true;
+	bool isThreadEnded{ false };
+	std::condition_variable waitConditionVariable;
 	std::thread contextThread;
 };

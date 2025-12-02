@@ -46,8 +46,6 @@ void NetworkCluster::finalize() {
 
 void NetworkCluster::receive() {
 	packetReceiver.read_packets();
-
-	connectionManager.update();
 }
 
 void NetworkCluster::send() {

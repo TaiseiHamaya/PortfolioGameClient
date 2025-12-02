@@ -75,6 +75,8 @@ public:
 	/// <param name="damage"></param>
 	void on_damaged(i32 damage);
 
+	void on_mark_destroy() override;
+
 protected:
 	const std::vector<u64>& get_enmity_ids() const noexcept;
 

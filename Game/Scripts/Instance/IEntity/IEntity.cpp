@@ -99,6 +99,10 @@ void IEntity::on_damaged(i32 damage) {
 	start_action("Damaged");
 }
 
+void IEntity::on_mark_destroy() {
+	world_root_mut()->destroy(shadow);
+}
+
 const std::vector<u64>& IEntity::get_enmity_ids() const noexcept {
 	return enmityIds;
 }

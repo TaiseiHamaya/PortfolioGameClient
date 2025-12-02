@@ -48,7 +48,7 @@ $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $gameDir = Split-Path -Parent $scriptDir
 $solutionDir = Split-Path -Parent $gameDir
 $rootDir = Split-Path -Parent $solutionDir
-$Path = Join-Path $rootDir "generated\outputs\x64\$BuildType\DirectXGame.exe"
+$Path = Join-Path $rootDir "generated\outputs\x64\$BuildType\Portfolio.exe"
 
 if (-not $NoBuild) {
 	Write-Host "ソリューションをビルドしています..." -ForegroundColor Cyan
@@ -180,7 +180,7 @@ $processes = @()
 # プログラムを指定回数起動
 for ($i = 0; $i -lt $Count; $i++) {
 	$pos = $positions[$i]
-	$runtimeArgs = "-x $($pos.X) -y $($pos.Y) -ENABLE_DEVELOP_BOT"
+	$runtimeArgs = "-x $($pos.X) -y $($pos.Y) --develop-bot-enable"
 	
 	Write-Host "[$($i+1)/$Count] 起動中... (座標: $($pos.X), $($pos.Y))" -ForegroundColor Yellow
 	$process = Start-Process -FilePath $tempExePath -ArgumentList $runtimeArgs -WorkingDirectory $tempDir -PassThru

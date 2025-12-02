@@ -6,7 +6,19 @@ static constexpr string_literal LOCAL_LOOPBACK_ADDRESS = "127.0.0.1";
 static constexpr string_literal AWS_SERVER_ADDRESS = "18.180.254.93";
 
 void GameServerConnectionManager::initialize() {
-	attach_context_thread();
+	contextThread = std::thread{
+	[&]() {
+		while (true) {
+			{
+				std::unique_lock lock{ mutex };
+				if (isThreadEnded) {
+					break;
+				}
+			}
+			context.run();
+		}
+	}
+	};
 }
 
 void GameServerConnectionManager::connect() {
@@ -34,7 +46,6 @@ void GameServerConnectionManager::connect() {
 	// 接続要求送信済み
 	std::lock_guard lock{ mutex };
 	connectionState = ConnectionState::ConnectionRequested;
-	attach_context_thread();
 }
 
 void GameServerConnectionManager::disconnect() {
@@ -48,14 +59,13 @@ void GameServerConnectionManager::disconnect() {
 
 void GameServerConnectionManager::finalize() {
 	context.stop();
+	{
+		std::lock_guard<std::mutex> lock{ mutex };
+		isThreadEnded = true;
+	}
 	if (contextThread.joinable()) {
 		contextThread.join();
 	}
-}
-
-void GameServerConnectionManager::update() {
-	std::lock_guard lock{ mutex };
-	attach_context_thread();
 }
 
 void GameServerConnectionManager::on_connection_succeeded() {
@@ -101,7 +111,7 @@ void GameServerConnectionManager::on_connect_handler(const asio::error_code& err
 		else {
 			switch (errorCode.value()) {
 			case asio::error::connection_refused:
-				szgError("サーバーと接続しましたが、拒否されました。");
+				//szgError("サーバーと接続しましたが、拒否されました。");
 				break;
 			case asio::error::operation_aborted:
 				szgError("サーバーとの接続は中止されました。");
@@ -116,21 +126,6 @@ void GameServerConnectionManager::on_connect_handler(const asio::error_code& err
 		}
 		connectionState = ConnectionState::Disconnected;
 	}
-}
-
-void GameServerConnectionManager::attach_context_thread() {
-	if (!isThreadEnded) {
-		return;
-	}
-	if (contextThread.joinable()) {
-		contextThread.join();
-	}
-	isThreadEnded = false;
-	contextThread = std::thread{ [&]() {
-		context.run();
-		std::lock_guard lock{ mutex };
-		isThreadEnded = true;
-	} };
 }
 
 #ifdef DEBUG_FEATURES_ENABLE

@@ -62,7 +62,7 @@ void GameInputHandler::update() {
 
 #ifdef DEBUG_FEATURES_ENABLE
 	// 開発用自動移動ボット
-	if (ArgumentParser::Contains("-ENABLE_DEVELOP_BOT")) {
+	if (ArgumentParser::Contains("--develop-bot-enable")) {
 		timer.ahead();
 		Vector3 center;
 		// 中心座標をコマンドライン引数から取得
