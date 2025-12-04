@@ -25,7 +25,7 @@ SceneGame::SceneGame() noexcept {
 	sceneName = "MainGame";
 }
 
-void SceneGame::load_asset() {
+void SceneGame::custom_load_asset() {
 	PolygonMeshLibrary::RegisterLoadQue("./Game/Resources/Game/Models/skydome.gltf");
 	PolygonMeshLibrary::RegisterLoadQue("./Game/Resources/Game/Models/Comet.obj");
 	PolygonMeshLibrary::RegisterLoadQue("./Game/Resources/Game/Models/Player.gltf");
@@ -57,15 +57,9 @@ void SceneGame::load_asset() {
 
 	ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/Forward/Particle/ParticleBillboard/ParticleBillboard.VS.hlsl");
 	ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/Forward/Particle/ParticleBillboard/ParticleBillboard.PS.hlsl");
-	ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/Posteffect/RadialBlur/RadialBlur.PS.hlsl");
 
 	ShaderLibrary::RegisterLoadQue("./Game/Resources/HLSL/Mesh/Skybox/Skybox.VS.hlsl");
 	ShaderLibrary::RegisterLoadQue("./Game/Resources/HLSL/Mesh/Skybox/Skybox.PS.hlsl");
-	ShaderLibrary::RegisterLoadQue("./Game/Resources/HLSL/Bloom.PS.hlsl");
-	ShaderLibrary::RegisterLoadQue("./Game/Resources/HLSL/DownSampling.PS.hlsl");
-	ShaderLibrary::RegisterLoadQue("./Game/Resources/HLSL/GaussianBlur.PS.hlsl");
-	ShaderLibrary::RegisterLoadQue("./Game/Resources/HLSL/LuminanceExtraction.PS.hlsl");
-	ShaderLibrary::RegisterLoadQue("./Game/Resources/HLSL/MargeTexture4.PS.hlsl");
 
 	EnvironmentMeshNode::BeginLoadShader();
 	FontRenderingNode::BeginLoadShader();

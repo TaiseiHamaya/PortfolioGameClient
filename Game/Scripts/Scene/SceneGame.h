@@ -55,7 +55,7 @@ public:
 	SceneGame() noexcept;
 
 public:
-	void load_asset() override;
+	void custom_load_asset() override;
 
 	void custom_setup() override;
 
