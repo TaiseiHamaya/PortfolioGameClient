@@ -132,18 +132,6 @@
     <ClCompile Include="Scripts\Extension\RenderNode\CubemapNode\CubemapNode.cpp">
       <Filter>Scripts\Extension\RenderNode\CubemapNode</Filter>
     </ClCompile>
-    <ClCompile Include="Scripts\Extension\RenderNode\PostEffect\GaussianBlurNode.cpp">
-      <Filter>Scripts\Extension\RenderNode\PostEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="Scripts\Extension\RenderNode\PostEffect\MargeTextureNode.cpp">
-      <Filter>Scripts\Extension\RenderNode\PostEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="Scripts\Extension\RenderNode\PostEffect\BloomNode.cpp">
-      <Filter>Scripts\Extension\RenderNode\PostEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="Scripts\Extension\RenderNode\PostEffect\DownSamplingNode.cpp">
-      <Filter>Scripts\Extension\RenderNode\PostEffect</Filter>
-    </ClCompile>
     <ClCompile Include="Scripts\Instance\MiscInstance\Effects\CometEffect.cpp">
       <Filter>Scripts\Instance\MiscInstance\Effects</Filter>
     </ClCompile>
@@ -155,9 +143,6 @@
     </ClCompile>
     <ClCompile Include="Scripts\Instance\IEntity\Actions\IdleAction.cpp">
       <Filter>Scripts\Instance\IEntity\Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="Scripts\Extension\RenderNode\PostEffect\LuminanceExtractionNode.cpp">
-      <Filter>Scripts\Extension\RenderNode\PostEffect</Filter>
     </ClCompile>
     <ClCompile Include="Scripts\Extension\Util\LookAtRect.cpp">
       <Filter>Scripts\Extension\Util</Filter>
@@ -273,18 +258,6 @@
     <ClInclude Include="Scripts\Extension\RenderNode\CubemapNode\CubemapNode.h">
       <Filter>Scripts\Extension\RenderNode\CubemapNode</Filter>
     </ClInclude>
-    <ClInclude Include="Scripts\Extension\RenderNode\PostEffect\GaussianBlurNode.h">
-      <Filter>Scripts\Extension\RenderNode\PostEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="Scripts\Extension\RenderNode\PostEffect\MargeTextureNode.h">
-      <Filter>Scripts\Extension\RenderNode\PostEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="Scripts\Extension\RenderNode\PostEffect\BloomNode.h">
-      <Filter>Scripts\Extension\RenderNode\PostEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="Scripts\Extension\RenderNode\PostEffect\DownSamplingNode.h">
-      <Filter>Scripts\Extension\RenderNode\PostEffect</Filter>
-    </ClInclude>
     <ClInclude Include="Scripts\Instance\MiscInstance\Effects\CometEffect.h">
       <Filter>Scripts\Instance\MiscInstance\Effects</Filter>
     </ClInclude>
@@ -296,9 +269,6 @@
     </ClInclude>
     <ClInclude Include="Scripts\Instance\IEntity\Actions\IdleAction.h">
       <Filter>Scripts\Instance\IEntity\Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="Scripts\Extension\RenderNode\PostEffect\LuminanceExtractionNode.h">
-      <Filter>Scripts\Extension\RenderNode\PostEffect</Filter>
     </ClInclude>
     <ClInclude Include="Scripts\Extension\Util\LookAtRect.h">
       <Filter>Scripts\Extension\Util</Filter>

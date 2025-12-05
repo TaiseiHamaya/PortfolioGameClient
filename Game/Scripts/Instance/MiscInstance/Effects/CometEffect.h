@@ -1,16 +1,16 @@
 #pragma once
 
+#include <Engine/Module/Render/RenderPipeline/Posteffect/RadialBlur/RadialBlurPipeline.h>
+#include <Engine/Module/World/Camera/Camera3D.h>
 #include <Engine/Module/World/Mesh/Primitive/Rect3d.h>
 #include <Engine/Module/World/Mesh/StaticMeshInstance.h>
 #include <Engine/Module/World/Particle/ParticleEmitterInstance.h>
 #include <Engine/Runtime/Clock/WorldTimer.h>
-#include <Engine/Module/World/Camera/Camera3D.h>
 
 #include "Scripts/Instance/MiscInstance/Effects/IEffectInstance.h"
 
 class StaticMeshDrawManager;
 class Rect3dDrawManager;
-struct BlurInfo;
 
 /// <summary>
 /// コメットのエフェクト
@@ -21,7 +21,7 @@ public:
 	~CometEffect();
 
 public:
-	void initialize(const Vector3& position, Reference<BlurInfo> blur_);
+	void initialize(const Vector3& position);
 
 public:
 	void update() override;
@@ -46,7 +46,7 @@ private:
 	Reference<Rect3d> cometFire;
 	Reference<Rect3d> groundEffect;
 
-	Reference<BlurInfo> blurData;
+	Reference<RadialBlurPipeline::Data> blurData;
 
 	JsonAsset json;
 	Color3 CometBodyColor{};

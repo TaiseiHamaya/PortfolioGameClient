@@ -6,8 +6,7 @@ static constexpr string_literal LOCAL_LOOPBACK_ADDRESS = "127.0.0.1";
 static constexpr string_literal AWS_SERVER_ADDRESS = "18.180.254.93";
 
 void GameServerConnectionManager::initialize() {
-	contextThread = std::thread{
-	[&]() {
+	contextThread = std::thread{ [&]() {
 		while (true) {
 			{
 				std::unique_lock lock{ mutex };
@@ -17,8 +16,8 @@ void GameServerConnectionManager::initialize() {
 			}
 			context.run();
 		}
-	}
-	};
+	} };
+	SetThreadDescription(contextThread.native_handle(), L"Asio Context Thread");
 }
 
 void GameServerConnectionManager::connect() {

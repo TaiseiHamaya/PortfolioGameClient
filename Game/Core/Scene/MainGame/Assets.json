@@ -1,0 +1,15 @@
+{
+	"Animations": [],
+	"Audios": [],
+	"MSDFFonts": [],
+	"Meshes": [],
+	"Shaders": [
+		"[[szg]]/PostEffect/MargeTexture4.PS.hlsl",
+		"[[szg]]/PostEffect/LuminanceExtraction.PS.hlsl",
+		"[[szg]]/PostEffect/GaussianBlur.PS.hlsl",
+		"[[szg]]/PostEffect/Bloom.PS.hlsl",
+		"[[szg]]/PostEffect/RadialBlur.PS.hlsl"
+	],
+	"Skeletons": [],
+	"Textures": []
+}

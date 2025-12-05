@@ -94,8 +94,8 @@
 				"G": 0.06127451732754707,
 				"R": 0.8333333134651184
 			},
-			"Decay": 4.699999809265137,
-			"Influence Layer": 1,
+			"Decay": 1.2000000476837158,
+			"Influence Layer": 3,
 			"Intensity": 9.699999809265137,
 			"Local transform": {
 				"Rotation": {

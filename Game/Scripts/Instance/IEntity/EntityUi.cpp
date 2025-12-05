@@ -17,5 +17,5 @@ void EntityUi::initialize(float offsetY, Color4 color) {
 }
 
 void EntityUi::set_name(const std::string& name) {
-	nametag->set_string(name);
+	nametag->reset_string(name);
 }
