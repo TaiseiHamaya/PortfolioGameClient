@@ -117,14 +117,15 @@ void PaladinHolySpiritEffectTarget::update() {
 	etherDustEmitter->update();
 	shiningEmitter->update();
 
+	etherDustEmitter->transfer();
+	shiningEmitter->transfer();
+
 	if (etherDustEmitter->is_end_all() && shiningEmitter->is_end_all()) {
 		isEnded = true;
 	}
 }
 
 void PaladinHolySpiritEffectTarget::draw_particle() const {
-	etherDustEmitter->transfer();
-	shiningEmitter->transfer();
 	etherDustEmitter->draw();
 	shiningEmitter->draw();
 }

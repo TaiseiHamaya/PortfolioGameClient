@@ -1,12 +1,8 @@
 #include "CometEffect.h"
 
 #include <Engine/Module/Manager/World/WorldRoot.h>
-#include <Engine/Runtime/Clock/WorldClock.h>
-
-#include <Engine/Module/DrawExecutor/Mesh/Primitive/Rect3dDrawManager.h>
-#include <Engine/Module/DrawExecutor/Mesh/StaticMeshDrawManager.h>
-
-#include <Engine/Module/Render/RenderPSO/Posteffect/RadialBlur/RadialBlurNode.h>
+#include <Engine/Module/Render/RenderPipeline/Posteffect/RadialBlur/RadialBlurPipeline.h>
+#include <Engine/Module/Manager/RuntimeStorage/RuntimeStorage.h>
 
 #include <Library/Math/VectorConverter.h>
 #include <Library/Utility/Tools/MathEPS.h>
@@ -19,8 +15,8 @@
 CometEffect::CometEffect() = default;
 CometEffect::~CometEffect() = default;
 
-void CometEffect::initialize(const Vector3& position, Reference<BlurInfo> blur_) {
-	const auto& worldRoot = world_root_mut();
+void CometEffect::initialize(const Vector3& position) {
+	Reference<WorldRoot> worldRoot = world_root_mut();
 	transform.set_translate(position);
 	transform.set_translate_y(0.02f);
 
@@ -71,7 +67,7 @@ void CometEffect::initialize(const Vector3& position, Reference<BlurInfo> blur_)
 		* Quaternion::LookForward(CVector3::UP, CVector3::FORWARD)
 	);
 
-	blurData = blur_;
+	blurData = std::any_cast<Reference<RadialBlurPipeline::Data>>(RuntimeStorage::GetValueMut("PostEffect", "Blur"));
 }
 
 void CometEffect::update() {
@@ -123,14 +119,15 @@ void CometEffect::update() {
 		blurData->length = std::sin(param * PI) * BlurLengthMax;
 	}
 
+	dustCloudParticle0->transfer();
+	dustCloudParticle1->transfer();
+
 	if (dustCloudParticle0->is_end_all() && dustCloudParticle1->is_end_all()) {
 		isEnded = true;
 	}
 }
 
 void CometEffect::draw_particle() const {
-	dustCloudParticle0->transfer();
-	dustCloudParticle1->transfer();
 	dustCloudParticle0->draw();
 	dustCloudParticle1->draw();
 }

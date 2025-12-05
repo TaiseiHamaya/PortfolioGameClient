@@ -16,10 +16,16 @@
 
 #include "Scripts/Extension/RenderNode/EnvironmentMeshNode/EnvironmentMeshNode.h"
 #include "Scripts/Extension/Util/LookAtRect.h"
+#include "Scripts/Game/GameInputHandler.h"
+#include "Scripts/Game/Zone/ZoneHandler.h"
 #include "Scripts/Instance/IEntity/ISkillAction/ISkillAction.h"
+#include "Scripts/Instance/MiscInstance/Enemy/EnemyManager.h"
+#include "Scripts/Instance/Player/Player.h"
+#include "Scripts/Manager/EffectManager.h"
+#include "Scripts/Manager/EntityManager.h"
+#include "Scripts/Network/NetworkCluster.h"
 
 #include <Engine/Assets/FontAtlasMSDF/FontAtlasMSDFLibrary.h>
-#include <Engine/Module/Render/RenderPSO/Forward/FontRenderingNode/FontRenderingNode.h>
 
 SceneGame::SceneGame() noexcept {
 	sceneName = "MainGame";
@@ -62,7 +68,6 @@ void SceneGame::custom_load_asset() {
 	ShaderLibrary::RegisterLoadQue("./Game/Resources/HLSL/Mesh/Skybox/Skybox.PS.hlsl");
 
 	EnvironmentMeshNode::BeginLoadShader();
-	FontRenderingNode::BeginLoadShader();
 }
 
 void SceneGame::custom_setup() {
