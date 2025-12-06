@@ -7,7 +7,7 @@
 #include <Engine/Assets/Animation/NodeAnimation/NodeAnimationPlayer.h>
 
 void IActionBasic::reset_animation() {
-	NodeAnimationPlayer* animation = owner->get_animation();
+	szg::NodeAnimationPlayer* animation = owner->get_animation();
 	animation->reset_animation(useAnimationName);
 	animation->restart();
 	animation->set_loop(loopAnimation);

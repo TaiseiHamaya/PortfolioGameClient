@@ -21,12 +21,12 @@ void Portfolio::initialize() {
 	//EditorMain::SetActiveEditor(false);
 #endif // DEBUG_FEATURES_ENABLE
 
-	SceneManager2::Setup(std::make_unique<FactoryPortfolio>());
+	szg::SceneManager2::Setup(std::make_unique<FactoryPortfolio>());
 
 #ifdef DEBUG_FEATURES_ENABLE
-	if (ArgumentParser::Contains("--develop-bot-enable")) {
-		ProjectSettings::SetMaxFrameRate(60);
-		ProjectSettings::GetApplicationSettingsMut().hideWindowForce = true;
+	if (szg::ArgumentParser::Contains("--develop-bot-enable")) {
+		szg::ProjectSettings::SetMaxFrameRate(60);
+		szg::ProjectSettings::GetApplicationSettingsMut().hideWindowForce = true;
 		szgInformation(L"Botモードが有効化されました。");
 	}
 #endif // DEBUG_FEATURES_ENABLE

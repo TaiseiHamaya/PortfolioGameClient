@@ -5,12 +5,12 @@
 /// <summary>
 /// 影描画用クラス
 /// </summary>
-class Shadow final : public Rect3d {
+class Shadow final : public szg::Rect3d {
 public:
-	void setup(Reference<WorldInstance> owner_, float baseRadius);
+	void setup(Reference<szg::WorldInstance> owner_, float baseRadius);
 	void fixed_update() override;
 
 private:
-	Reference<WorldInstance> owner;
+	Reference<szg::WorldInstance> owner;
 	float baseRadius;
 };

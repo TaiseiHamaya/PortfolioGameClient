@@ -4,12 +4,12 @@
 
 #include <Engine/Module/Render/RenderPipeline/BaseRenderPipeline.h>
 
-class EnvironmentMeshNode final : public BaseRenderPipeline {
+class EnvironmentMeshNode final : public szg::BaseRenderPipeline {
 public:
 	EnvironmentMeshNode();
 	~EnvironmentMeshNode() noexcept;
 
-	__CLASS_NON_COPYABLE(EnvironmentMeshNode)
+	SZG_CLASS_MOVE_ONLY(EnvironmentMeshNode)
 
 public:
 	static void BeginLoadShader();

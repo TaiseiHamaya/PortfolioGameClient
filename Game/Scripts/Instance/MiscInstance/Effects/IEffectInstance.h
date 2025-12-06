@@ -16,12 +16,12 @@ Vector3 CalculateTargetPosition(Reference<IEntity> self, Reference<IEntity> targ
 /// <summary>
 /// エフェクトインターフェース
 /// </summary>
-class IEffectInstance : public WorldInstance {
+class IEffectInstance : public szg::WorldInstance {
 public:
 	IEffectInstance() = default;
 	virtual ~IEffectInstance() = default;
 
-	__CLASS_NON_COPYABLE(IEffectInstance)
+	SZG_CLASS_MOVE_ONLY(IEffectInstance)
 
 public:
 	virtual void draw_particle() const = 0;

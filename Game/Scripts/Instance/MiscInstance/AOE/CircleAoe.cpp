@@ -18,18 +18,18 @@ void CircleAoe::initialize(const Vector3& position, float radius, float duration
 	Quaternion rotate = Quaternion::AngleAxis(CVector3::BASIS_X, -PI / 2); // 上を向けtる
 
 	// 範囲表示の基礎部分
-	base = world_root_mut()->instantiate<Rect3d>(this);
+	base = world_root_mut()->instantiate<szg::Rect3d>(this);
 	base->initialize(CVector3::BASIS * radius, CVector3::BASIS * 0.5f);
-	base->get_material().texture = TextureLibrary::GetTexture("AOEBase.png");
+	base->get_material().texture = szg::TextureLibrary::GetTexture("AOEBase.png");
 	base->get_material().lightingType = LighingType::None;
 	base->get_material().color.alpha = 0;
 	base->get_transform().set_scale(CVector3::ZERO);
 	base->get_transform().set_quaternion(rotate);
 	//base->set_layer(1);
 	// なんか動くところ
-	effect = world_root_mut()->instantiate<Rect3d>(this);
+	effect = world_root_mut()->instantiate<szg::Rect3d>(this);
 	effect->initialize(CVector3::BASIS * radius, CVector3::BASIS * 0.5f);
-	effect->get_material().texture = TextureLibrary::GetTexture("AOEBase.png");
+	effect->get_material().texture = szg::TextureLibrary::GetTexture("AOEBase.png");
 	effect->get_material().lightingType = LighingType::None;
 	effect->get_material().color.alpha = 0;
 	effect->get_transform().set_scale(CVector3::ZERO);

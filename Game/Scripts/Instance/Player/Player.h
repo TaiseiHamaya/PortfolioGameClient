@@ -14,7 +14,7 @@ public:
 	Player() noexcept = default;
 	~Player() noexcept = default;
 
-	__CLASS_NON_COPYABLE(Player)
+	SZG_CLASS_MOVE_ONLY(Player)
 
 public:
 	void initialize(const std::filesystem::path& file, u64 localId_) override;
@@ -40,11 +40,11 @@ public:
 
 private:
 	static constexpr r32 GCDTime{ 2.5f };
-	WorldTimer globalCoolDownTimer;
+	szg::WorldTimer globalCoolDownTimer;
 
 	r32 moveSpeed{ 0.0f };
 
 #ifdef DEBUG_FEATURES_ENABLE
-	JsonAsset json;
+	szg::JsonAsset json;
 #endif // DEBUG_FEATURES_ENABLE
 };

@@ -8,7 +8,7 @@
 /// <summary>
 /// 追跡カメラ
 /// </summary>
-class FollowCamera final : public Camera3D {
+class FollowCamera final : public szg::Camera3D {
 public:
 	void initialize() override;
 	void update();
@@ -25,7 +25,7 @@ public:
 	void set_offset(const Vector3& offset_);
 	const Vector3& get_offset() const;
 
-	void set_target(Reference<const WorldInstance> target_);
+	void set_target(Reference<const szg::WorldInstance> target_);
 
 #ifdef DEBUG_FEATURES_ENABLE
 public:
@@ -36,8 +36,8 @@ private:
 	Vector3 offset;
 
 	bool isPressX;
-	InputHandler<KeyID> keyHandler;
-	InputHandler<PadID> padHandler;
+	szg::InputHandler<KeyID> keyHandler;
+	szg::InputHandler<PadID> padHandler;
 	Vector2 inputStickR;
 
 	Reference<const WorldInstance> target;
@@ -46,7 +46,7 @@ private:
 
 	Vector3 shakeOffset;
 	Vector3 shakeDirection;
-	WorldTimer shakeTimer;
+	szg::WorldTimer shakeTimer;
 
 	r32 SlerpStrength;
 	r32 FollowStrength;
@@ -56,7 +56,7 @@ private:
 	r32 ShakePower;
 
 #ifdef DEBUG_FEATURES_ENABLE
-	JsonAsset json;
+	szg::JsonAsset json;
 #endif // DEBUG_FEATURES_ENABLE
 };
 

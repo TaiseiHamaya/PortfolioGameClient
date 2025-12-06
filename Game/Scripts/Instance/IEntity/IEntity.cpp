@@ -13,7 +13,7 @@ using namespace std::literals::string_literals;
 void IEntity::initialize(const std::filesystem::path& file, u64 localId_) {
 	localId = localId_;
 
-	JsonAsset json{ std::format(L".\\Game\\Resources\\Json\\Entity\\{}", file.native()) }; // Jsonからデータの読み込み
+	szg::JsonAsset json{ std::format(L".\\Game\\Resources\\Json\\Entity\\{}", file.native()) }; // Jsonからデータの読み込み
 	// Instance生成
 	shadow = world_root_mut()->instantiate<Shadow>();
 	ui = world_root_mut()->instantiate<EntityUi>(this);
@@ -45,7 +45,7 @@ void IEntity::update() {
 		// 移動が停止するようなアクションでは実行しない
 		if (currentAction->action_effect() != ActionEffect::Stack) {
 			// 重力処理
-			velocityY += -20.0f * WorldClock::DeltaSeconds();
+			velocityY += -20.0f * szg::WorldClock::DeltaSeconds();
 			// 地面に埋まらないようにする
 			if (transform.get_translate().y <= 0.0f) {
 				transform.set_translate_y(0.0f);

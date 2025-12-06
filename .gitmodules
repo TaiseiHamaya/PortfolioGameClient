@@ -1,3 +1,4 @@
-[submodule "DirectXGame"]
-	path = DirectXGame
-	url = https://github.com/TaiseiHamaya/DirectXGame.git
+[submodule "SyzygyEngine"]
+	path = SyzygyEngine
+	url = https://github.com/TaiseiHamaya/SyzygyEngine.git
+	branch = feature/engine-name

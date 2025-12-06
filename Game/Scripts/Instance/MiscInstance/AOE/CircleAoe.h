@@ -3,12 +3,10 @@
 #include <Engine/Module/World/Mesh/Primitive/Rect3d.h>
 #include <Engine/Runtime/Clock/WorldTimer.h>
 
-class Rect3dDrawManager;
-
 /// <summary>
 /// 円形サークル
 /// </summary>
-class CircleAoe : public WorldInstance {
+class CircleAoe : public szg::WorldInstance {
 public:
 	CircleAoe();
 	~CircleAoe();
@@ -31,11 +29,11 @@ public:
 	bool is_end() const;
 
 private:
-	WorldTimer timer;
+	szg::WorldTimer timer;
 	r32 duration{ 0.0f };
 
-	Reference<Rect3d> base;
-	Reference<Rect3d> effect;
+	Reference<szg::Rect3d> base;
+	Reference<szg::Rect3d> effect;
 
 	static constexpr r32 OFFSET_Y{ 0.02f };
 	static constexpr r32 EFFECT_START_TIME{ 1.0f / 3.0f };

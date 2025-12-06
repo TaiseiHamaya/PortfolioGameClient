@@ -12,12 +12,12 @@
 /// <summary>
 /// エフェクト管理クラス
 /// </summary>
-class EffectManager final : public ISceneScript {
+class EffectManager final : public szg::ISceneScript {
 public:
 	EffectManager() = default;
 	~EffectManager() = default;
 
-	__CLASS_NON_COPYABLE(EffectManager)
+	SZG_CLASS_MOVE_ONLY(EffectManager)
 
 public:
 	void prev_update() override;

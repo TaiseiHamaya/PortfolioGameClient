@@ -8,21 +8,21 @@
 #include <Engine/Module/World/Camera/Camera3D.h>
 
 EnvironmentMeshExecutor::EnvironmentMeshExecutor(std::string meshName, u32 maxInstance, std::string environmentTextureName) {
-	reinitialize(PolygonMeshLibrary::GetPolygonMesh(meshName), maxInstance, TextureLibrary::GetTexture(environmentTextureName));
+	reinitialize(szg::PolygonMeshLibrary::GetPolygonMesh(meshName), maxInstance, szg::TextureLibrary::GetTexture(environmentTextureName));
 }
 
-void EnvironmentMeshExecutor::reinitialize(std::shared_ptr<const PolygonMesh> mesh_, u32 maxInstance_, std::shared_ptr<const TextureAsset> environmentTexture_) {
+void EnvironmentMeshExecutor::reinitialize(std::shared_ptr<const szg::PolygonMesh> mesh_, u32 maxInstance_, std::shared_ptr<const szg::TextureAsset> environmentTexture_) {
 	asset = mesh_;
 	maxInstance = maxInstance_;
 	environmentTexture = environmentTexture_;
 	matrices.initialize(maxInstance);
 	materials.resize(asset->material_count());
-	for (StructuredBuffer<MaterialDataBuffer3>& material : materials) {
+	for (szg::StructuredBuffer<szg::MaterialDataBuffer3>& material : materials) {
 		material.initialize(maxInstance);
 	}
 }
 
-void EnvironmentMeshExecutor::setup(Reference<const DirectionalLightingExecutor> directionalLightingExecutor_, Reference<const Camera3D> camera_) {
+void EnvironmentMeshExecutor::setup(Reference<const szg::DirectionalLightingExecutor> directionalLightingExecutor_, Reference<const szg::Camera3D> camera_) {
 	directionalLightingExecutor = directionalLightingExecutor_;
 	camera = camera_;
 }
@@ -34,7 +34,7 @@ void EnvironmentMeshExecutor::draw_command() const {
 	if (!directionalLightingExecutor) {
 		return;
 	}
-	auto& commandList = DxCommand::GetCommandList();
+	auto& commandList = szg::DxCommand::GetCommandList();
 	// コマンドを積む(EnvironmentMeshNode.cppを参照)
 	for (u32 i = 0; i < asset->material_count(); ++i) {
 		commandList->IASetVertexBuffers(0, 1, &asset->get_vbv(i));
@@ -50,7 +50,7 @@ void EnvironmentMeshExecutor::draw_command() const {
 	}
 }
 
-void EnvironmentMeshExecutor::write_to_buffer(Reference<const StaticMeshInstance> instance) {
+void EnvironmentMeshExecutor::write_to_buffer(Reference<const szg::StaticMeshInstance> instance) {
 	// 描画対象が存在しない or 描画しない場合はスキップ
 	if (!instance || !instance->is_draw()) {
 		return;
@@ -70,10 +70,10 @@ void EnvironmentMeshExecutor::write_to_buffer(Reference<const StaticMeshInstance
 		.itWorld = transformAffine.inverse().get_basis().transposed()
 	};
 	// Material書き込み
-	const std::vector<IMultiMeshInstance::Material>& instanceMaterials = instance->get_materials();
+	const std::vector<szg::IMultiMeshInstance::Material>& instanceMaterials = instance->get_materials();
 	const size_t numMaterial = asset->material_count();
 	for (u32 i = 0; i < numMaterial; ++i) {
-		const IMultiMeshInstance::Material& source = instanceMaterials[i];
+		const szg::IMultiMeshInstance::Material& source = instanceMaterials[i];
 		materials[i][next] = {
 			source.color,
 			source.lightingType,

@@ -10,13 +10,13 @@
 
 class IEntity;
 
-class NetworkCluster final : public ISceneScript {
+class NetworkCluster final : public szg::ISceneScript {
 public:
 	NetworkCluster() = default;
 	~NetworkCluster() = default;
 
 	// ConnectionManagerがコピー/ムーブ禁止のため
-	__CLASS_NON_COPYMOVEABLE(NetworkCluster)
+	SZG_CLASS_DELETED(NetworkCluster)
 
 public:
 	void prev_update() override;

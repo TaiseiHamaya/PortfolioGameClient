@@ -27,7 +27,7 @@ public:
 	~GameServerConnectionManager() = default;
 
 	// mutexがあるため、コピー/ムーブ禁止
-	__CLASS_NON_COPYMOVEABLE(GameServerConnectionManager)
+	SZG_CLASS_DELETED(GameServerConnectionManager)
 
 public:
 	/// <summary>

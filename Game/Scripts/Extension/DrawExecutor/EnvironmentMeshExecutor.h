@@ -6,21 +6,25 @@
 #include <Engine/GraphicsAPI/DirectX/DxResource/StructuredBuffer/StructuredBuffer.h>
 #include <Engine/Module/World/Mesh/StaticMeshInstance.h>
 
+namespace szg {
+
 class DirectionalLightingExecutor;
 class Camera3D;
 class TextureAsset;
 
+}
+
 /// <summary>
 /// 環境マップ付きメッシュ描画実行クラス
 /// </summary>
-class EnvironmentMeshExecutor final : public BaseDrawExecutor<StaticMeshInstance> {
+class EnvironmentMeshExecutor final : public szg::BaseDrawExecutor<szg::StaticMeshInstance> {
 public:
 	EnvironmentMeshExecutor() = default;
 	~EnvironmentMeshExecutor() noexcept = default;
 
 	EnvironmentMeshExecutor(std::string meshName, u32 maxInstance, std::string environmentTextureName);
 
-	__CLASS_NON_COPYABLE(EnvironmentMeshExecutor)
+	SZG_CLASS_MOVE_ONLY(EnvironmentMeshExecutor)
 
 public:
 	/// <summary>
@@ -29,14 +33,14 @@ public:
 	/// <param name="mesh">メッシュ名</param>
 	/// <param name="maxInstance">最大インスタンス数</param>
 	/// <param name="environmentTexture_">環境マップテクスチャ</param>
-	void reinitialize(std::shared_ptr<const PolygonMesh> mesh, u32 maxInstance, std::shared_ptr<const TextureAsset> environmentTexture_);
+	void reinitialize(std::shared_ptr<const szg::PolygonMesh> mesh, u32 maxInstance, std::shared_ptr<const szg::TextureAsset> environmentTexture_);
 	
 	/// <summary>
 	/// ライトとカメラの設定
 	/// </summary>
 	/// <param name="directionalLightingExecutor_"></param>
 	/// <param name="camera_"></param>
-	void setup(Reference<const DirectionalLightingExecutor> directionalLightingExecutor_, Reference<const Camera3D> camera_);
+	void setup(Reference<const szg::DirectionalLightingExecutor> directionalLightingExecutor_, Reference<const szg::Camera3D> camera_);
 	
 	/// <summary>
 	/// コマンドを積む
@@ -47,15 +51,15 @@ public:
 	/// GPUバッファに書き込み
 	/// </summary>
 	/// <param name="instance"></param>
-	void write_to_buffer(Reference<const StaticMeshInstance> instance) override;
+	void write_to_buffer(Reference<const szg::StaticMeshInstance> instance) override;
 
 private:
-	std::shared_ptr<const PolygonMesh> asset;
-	std::shared_ptr<const TextureAsset> environmentTexture;
+	std::shared_ptr<const szg::PolygonMesh> asset;
+	std::shared_ptr<const szg::TextureAsset> environmentTexture;
 
-	StructuredBuffer<TransformMatrixDataBuffer> matrices;
-	std::vector<StructuredBuffer<MaterialDataBuffer3>> materials;
+	szg::StructuredBuffer<szg::TransformMatrixDataBuffer> matrices;
+	std::vector<szg::StructuredBuffer<szg::MaterialDataBuffer3>> materials;
 
-	Reference<const DirectionalLightingExecutor> directionalLightingExecutor;
-	Reference<const Camera3D> camera;
+	Reference<const szg::DirectionalLightingExecutor> directionalLightingExecutor;
+	Reference<const szg::Camera3D> camera;
 };

@@ -4,11 +4,11 @@
 	"MSDFFonts": [],
 	"Meshes": [],
 	"Shaders": [
+		"[[szg]]/PostEffect/RadialBlur.PS.hlsl",
 		"[[szg]]/PostEffect/MargeTexture4.PS.hlsl",
 		"[[szg]]/PostEffect/LuminanceExtraction.PS.hlsl",
 		"[[szg]]/PostEffect/GaussianBlur.PS.hlsl",
-		"[[szg]]/PostEffect/Bloom.PS.hlsl",
-		"[[szg]]/PostEffect/RadialBlur.PS.hlsl"
+		"[[szg]]/PostEffect/Bloom.PS.hlsl"
 	],
 	"Skeletons": [],
 	"Textures": []

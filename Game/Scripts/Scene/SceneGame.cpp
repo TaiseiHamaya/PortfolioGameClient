@@ -32,40 +32,40 @@ SceneGame::SceneGame() noexcept {
 }
 
 void SceneGame::custom_load_asset() {
-	PolygonMeshLibrary::RegisterLoadQue("./Game/Resources/Game/Models/skydome.gltf");
-	PolygonMeshLibrary::RegisterLoadQue("./Game/Resources/Game/Models/Comet.obj");
-	PolygonMeshLibrary::RegisterLoadQue("./Game/Resources/Game/Models/Player.gltf");
-	NodeAnimationLibrary::RegisterLoadQue("./Game/Resources/Game/Models/Player.gltf");
-	SkeletonLibrary::RegisterLoadQue("./Game/Resources/Game/Models/Player.gltf");
-	PolygonMeshLibrary::RegisterLoadQue("./Game/Resources/Game/Models/RedComet.gltf");
-	NodeAnimationLibrary::RegisterLoadQue("./Game/Resources/Game/Models/RedComet.gltf");
-	SkeletonLibrary::RegisterLoadQue("./Game/Resources/Game/Models/RedComet.gltf");
-	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/Circle.png");
-	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/white.png");
-	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/shadow.png");
-	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/AOEBase.png");
-	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/DustCloud1.png");
-	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/DustCloud2.png");
-	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/Fire.png");
-	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/CometGround1.png");
-	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/CometGround2.png");
-	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/CometGround3.png");
-	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/PlayerEffect/PaladinHolySpiritEffectTargetCenter6.png");
-	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/PlayerEffect/PaladinHolySpiritEffectTargetShining.png");
-	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/PlayerEffect/PaladinHolySpiritEffectTargetAbsorption.png");
-	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/PlayerEffect/PaladinHolySpiritEffectTargetLight.png");
-	TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/rogland_clear_night_2k.dds");
-	FontAtlasMSDFLibrary::RegisterLoadQue("./Game/Resources/Font/UDEVGothic35HS-Regular.mtsdf");
+	szg::PolygonMeshLibrary::RegisterLoadQue("./Game/Resources/Game/Models/skydome.gltf");
+	szg::PolygonMeshLibrary::RegisterLoadQue("./Game/Resources/Game/Models/Comet.obj");
+	szg::PolygonMeshLibrary::RegisterLoadQue("./Game/Resources/Game/Models/Player.gltf");
+	szg::NodeAnimationLibrary::RegisterLoadQue("./Game/Resources/Game/Models/Player.gltf");
+	szg::SkeletonLibrary::RegisterLoadQue("./Game/Resources/Game/Models/Player.gltf");
+	szg::PolygonMeshLibrary::RegisterLoadQue("./Game/Resources/Game/Models/RedComet.gltf");
+	szg::NodeAnimationLibrary::RegisterLoadQue("./Game/Resources/Game/Models/RedComet.gltf");
+	szg::SkeletonLibrary::RegisterLoadQue("./Game/Resources/Game/Models/RedComet.gltf");
+	szg::TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/Circle.png");
+	szg::TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/white.png");
+	szg::TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/shadow.png");
+	szg::TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/AOEBase.png");
+	szg::TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/DustCloud1.png");
+	szg::TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/DustCloud2.png");
+	szg::TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/Fire.png");
+	szg::TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/CometGround1.png");
+	szg::TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/CometGround2.png");
+	szg::TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/CometGround3.png");
+	szg::TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/PlayerEffect/PaladinHolySpiritEffectTargetCenter6.png");
+	szg::TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/PlayerEffect/PaladinHolySpiritEffectTargetShining.png");
+	szg::TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/PlayerEffect/PaladinHolySpiritEffectTargetAbsorption.png");
+	szg::TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/PlayerEffect/PaladinHolySpiritEffectTargetLight.png");
+	szg::TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/rogland_clear_night_2k.dds");
+	szg::FontAtlasMSDFLibrary::RegisterLoadQue("./Game/Resources/Font/UDEVGothic35HS-Regular.mtsdf");
 
-	PolygonMeshLibrary::RegisterLoadQue(".\\DirectXGame\\EngineResources\\Models\\Grid\\Grid.obj");
+	szg::PolygonMeshLibrary::RegisterLoadQue(".\\DirectXGame\\EngineResources\\Models\\Grid\\Grid.obj");
 
-	PrimitiveGeometryLibrary::Transfer("Cubemap", std::make_shared<PrimitiveGeometryAsset>("Cubemap.json"));
+	szg::PrimitiveGeometryLibrary::Transfer("Cubemap", std::make_shared<szg::PrimitiveGeometryAsset>("Cubemap.json"));
 
-	ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/Forward/Particle/ParticleBillboard/ParticleBillboard.VS.hlsl");
-	ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/Forward/Particle/ParticleBillboard/ParticleBillboard.PS.hlsl");
+	szg::ShaderLibrary::RegisterLoadQue("./SyzygyEngine/EngineResources/HLSL/Forward/Particle/ParticleBillboard/ParticleBillboard.VS.hlsl");
+	szg::ShaderLibrary::RegisterLoadQue("./SyzygyEngine/EngineResources/HLSL/Forward/Particle/ParticleBillboard/ParticleBillboard.PS.hlsl");
 
-	ShaderLibrary::RegisterLoadQue("./Game/Resources/HLSL/Mesh/Skybox/Skybox.VS.hlsl");
-	ShaderLibrary::RegisterLoadQue("./Game/Resources/HLSL/Mesh/Skybox/Skybox.PS.hlsl");
+	szg::ShaderLibrary::RegisterLoadQue("./Game/Resources/HLSL/Mesh/Skybox/Skybox.VS.hlsl");
+	szg::ShaderLibrary::RegisterLoadQue("./Game/Resources/HLSL/Mesh/Skybox/Skybox.PS.hlsl");
 
 	EnvironmentMeshNode::BeginLoadShader();
 }
@@ -125,11 +125,11 @@ void SceneGame::custom_setup() {
 	// WorldInstances
 	// Allocation
 	Reference<Player> player = entityManagerRef->generate<Player>("Player.json");
-	skydome = get_world(0)->world_root_mut().instantiate<StaticMeshInstance>(nullptr, "skydome.gltf");
+	skydome = get_world(0)->world_root_mut().instantiate<szg::StaticMeshInstance>(nullptr, "skydome.gltf");
 	camera3D = get_world(0)->world_root_mut().instantiate<FollowCamera>();
 
 	LookAtRect::camera = camera3D;
-	Particle::lookAtDefault = camera3D.ptr();
+	szg::Particle::lookAtDefault = camera3D.ptr();
 	CometEffect::camera = camera3D;
 	ISkillAction::SetEffectManager(effectManagerRef);
 	zoneHandlerRef->set_player(player);

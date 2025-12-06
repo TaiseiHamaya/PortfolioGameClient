@@ -12,26 +12,30 @@
 
 #include "Scripts/Instance/IEntity/IEntity.h"
 
+namespace szg {
+
 class SkinningMeshDrawManager;
 class StringRectDrawManager;
 class Rect3dDrawManager;
 
+} // namespace szg
+
 /// <summary>
 /// Zone上のエンティティ管理クラス
 /// </summary>
-class EntityManager final : public ISceneScript {
+class EntityManager final : public szg::ISceneScript {
 public:
 	EntityManager() = default;
 	~EntityManager() = default;
 
-	__CLASS_NON_COPYABLE(EntityManager)
+	SZG_CLASS_MOVE_ONLY(EntityManager)
 
 public:
 	void prev_update() override;
 
 	void post_update() override;
 
-	void setup(Reference<WorldRoot> worldRoot);
+	void setup(Reference<szg::WorldRoot> worldRoot);
 
 public:
 	/// <summary>
@@ -72,7 +76,7 @@ public:
 	void register_server_id(u64 serverId, Reference<IEntity> entity);
 
 private:
-	Reference<WorldRoot> worldRoot;
+	Reference<szg::WorldRoot> worldRoot;
 
 	std::unordered_map<u64, Reference<IEntity>> entities;
 	std::unordered_map<u64, Reference<IEntity>> entityRefByServerId;

@@ -8,19 +8,24 @@
 #include <Engine/Runtime/Clock/WorldTimer.h>
 #include <Engine/Runtime/Input/InputHandler.h>
 
-class Player;
+namespace szg {
+
 class WorldInstance;
+
+} // namespace szg
+
+class Player;
 class ZoneHandler;
 
 /// <summary>
 /// インゲームの入力ハンドラ
 /// </summary>
-class GameInputHandler final : public ISceneScript {
+class GameInputHandler final : public szg::ISceneScript {
 public:
 	GameInputHandler() = default;
 	~GameInputHandler() = default;
 
-	__CLASS_NON_COPYABLE(GameInputHandler)
+	SZG_CLASS_MOVE_ONLY(GameInputHandler)
 
 public:
 	void initialize();
@@ -42,23 +47,23 @@ public:
 	void update();
 
 private:
-	InputHandler<KeyID> actionHandlerK;
-	InputHandler<PadID> actionHandlerP;
+	szg::InputHandler<KeyID> actionHandlerK;
+	szg::InputHandler<PadID> actionHandlerP;
 	std::vector<std::pair<KeyID, PadID>> inputKey;
 
 	Vector2 inputDirection;
 	Vector2 xzDirection;
 
 	Reference<ZoneHandler> zoneHandler;
-	Reference<const WorldInstance> camera;
+	Reference<const szg::WorldInstance> camera;
 
 	Reference<Player> player;
 
 #ifdef DEBUG_FEATURES_ENABLE
 	static constexpr r32 BOT_MOVE_TIME{ 3.0f };
-	WorldTimer timer;
+	szg::WorldTimer timer;
 #endif // DEBUG_FEATURES_ENABLE
 
 public:
-	void set_instances(Reference<Player> player_, Reference<const WorldInstance> camera_);
+	void set_instances(Reference<Player> player_, Reference<const szg::WorldInstance> camera_);
 };

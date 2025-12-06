@@ -16,7 +16,7 @@ void Player::initialize(const std::filesystem::path& file, u64 localId_) {
 	globalCoolDownTimer.set(0.0f);
 
 #ifndef DEBUG_FEATURES_ENABLE
-	JsonAsset json;
+	szg::JsonAsset json;
 #endif // DEBUG_FEATURES_ENABLE
 	json.load("Entity" / file); // Jsonからデータの読み込み
 	json.register_value("MoveSpeed", moveSpeed);

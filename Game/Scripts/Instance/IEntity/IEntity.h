@@ -31,17 +31,17 @@ enum class EntityFlag {
 	ShowEnmityList = Battle | Invincible,
 };
 
-__USE_BITFLAG(EntityFlag)
+SZG_BITFLAG(EntityFlag)
 
 /// <summary>
 /// エンティティのインターフェース
 /// </summary>
-class IEntity : public SkinningMeshInstance {
+class IEntity : public szg::SkinningMeshInstance {
 public:
 	IEntity() noexcept = default;
 	virtual ~IEntity() noexcept = default;
 
-	__CLASS_NON_COPYABLE(IEntity)
+	SZG_CLASS_MOVE_ONLY(IEntity)
 
 public:
 	virtual void initialize(const std::filesystem::path& file, u64 localId);

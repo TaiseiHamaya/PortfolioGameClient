@@ -17,7 +17,7 @@ void PaladinHolySpiritEffectTarget::initialize(const Vector3& position) {
 
 	// 黒いやつ
 	absorption = world_root_mut()->instantiate<LookAtRect>(this);
-	absorption->get_material().texture = TextureLibrary::GetTexture("PaladinHolySpiritEffectTargetAbsorption.png");
+	absorption->get_material().texture = szg::TextureLibrary::GetTexture("PaladinHolySpiritEffectTargetAbsorption.png");
 	absorption->initialize(absorptionEffectValues.size, absorptionEffectValues.pivot);
 	absorption->get_transform().set_scale(absorptionEffectValues.beginScale);
 	absorption->get_material().color = absorptionEffectValues.color;
@@ -27,15 +27,15 @@ void PaladinHolySpiritEffectTarget::initialize(const Vector3& position) {
 	// でかいやつ
 	centerConstraint = world_root_mut()->instantiate<WorldInstance>(this);
 	centerBillboards.resize(6);
-	for (i32 i = 0; Reference<Rect3d>& centerBillboard : centerBillboards) {
-		centerBillboard = world_root_mut()->instantiate<Rect3d>(centerConstraint);
+	for (i32 i = 0; Reference<szg::Rect3d>& centerBillboard : centerBillboards) {
+		centerBillboard = world_root_mut()->instantiate<szg::Rect3d>(centerConstraint);
 		centerBillboard->initialize(centerEffectValues.size, centerEffectValues.pivot);
 		centerBillboard->get_transform().set_scale(centerEffectValues.beginScale);
 		centerBillboard->get_transform().set_quaternion(
 			Quaternion::AngleAxis(CVector3::FORWARD, PI2 * i / 6)
 		);
 		centerBillboard->get_transform().set_translate({ 0.0,0.0,0.01f });
-		centerBillboard->get_material().texture = TextureLibrary::GetTexture("PaladinHolySpiritEffectTargetCenter6.png");
+		centerBillboard->get_material().texture = szg::TextureLibrary::GetTexture("PaladinHolySpiritEffectTargetCenter6.png");
 		centerBillboard->get_material().lightingType = LighingType::None;
 		centerBillboard->set_active(false);
 
@@ -48,16 +48,16 @@ void PaladinHolySpiritEffectTarget::initialize(const Vector3& position) {
 	lightBillboard->get_transform().set_translate({ 0.0,0.0,0.02f });
 	lightBillboard->get_transform().set_scale(lightEffectValues.beginScale);
 	lightBillboard->get_material().color = lightEffectValues.color;
-	lightBillboard->get_material().texture = TextureLibrary::GetTexture("PaladinHolySpiritEffectTargetLight.png");
+	lightBillboard->get_material().texture = szg::TextureLibrary::GetTexture("PaladinHolySpiritEffectTargetLight.png");
 	lightBillboard->get_material().lightingType = LighingType::None;
 
 	// エーテルエフェクト
-	etherDustEmitter = world_root_mut()->instantiate<ParticleEmitterInstance>(this, "PaladinHolySpiritEffectTargetEther.json", 128);
+	etherDustEmitter = world_root_mut()->instantiate<szg::ParticleEmitterInstance>(this, "PaladinHolySpiritEffectTargetEther.json", 128);
 	etherDustEmitter->update_affine();
 	etherDustEmitter->set_active(false);
 
 	// キラキラしたやつ
-	shiningEmitter = world_root_mut()->instantiate<ParticleEmitterInstance>(this, "PaladinHolySpiritEffectTargetShining.json", 8);
+	shiningEmitter = world_root_mut()->instantiate<szg::ParticleEmitterInstance>(this, "PaladinHolySpiritEffectTargetShining.json", 8);
 	shiningEmitter->update_affine();
 	shiningEmitter->set_active(false);
 }
@@ -83,7 +83,7 @@ void PaladinHolySpiritEffectTarget::update() {
 	if (timer >= centerEffectValues.beginTime) {
 		centerConstraint->look_at(LookAtRect::camera);
 		r32 param = eps::saturate((timer - centerEffectValues.beginTime) / (centerEffectValues.endTime - centerEffectValues.beginTime));
-		for (Reference<Rect3d>& centerBillboard : centerBillboards) {
+		for (Reference<szg::Rect3d>& centerBillboard : centerBillboards) {
 			centerBillboard->get_transform().set_scale({
 				param,
 				Easing::Out::Back(param),

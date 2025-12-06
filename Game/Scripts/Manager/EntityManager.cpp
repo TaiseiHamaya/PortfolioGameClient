@@ -14,7 +14,7 @@ void EntityManager::post_update() {
 	}
 }
 
-void EntityManager::setup(Reference<WorldRoot> worldRoot_) {
+void EntityManager::setup(Reference<szg::WorldRoot> worldRoot_) {
 	worldRoot = worldRoot_;
 }
 

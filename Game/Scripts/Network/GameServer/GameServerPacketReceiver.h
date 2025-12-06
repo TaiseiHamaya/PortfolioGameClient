@@ -19,7 +19,7 @@ public:
 	GameServerPacketReceiver() = default;
 	~GameServerPacketReceiver() = default;
 
-	__CLASS_NON_COPYABLE(GameServerPacketReceiver)
+	SZG_CLASS_MOVE_ONLY(GameServerPacketReceiver)
 
 public:
 	/// <summary>
