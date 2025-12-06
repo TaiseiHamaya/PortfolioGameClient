@@ -4,11 +4,11 @@
 #include <Engine/Module/Manager/World/WorldRoot.h>
 
 HitAnimation::HitAnimation(Vector3&& position) {
-	emitter = worldRoot->instantiate<ParticleEmitterInstance>(nullptr, "./Resources/Game/Json/Particles.json", 128);
+	emitter = worldRoot->instantiate<szg::ParticleEmitterInstance>(nullptr, "./Resources/Game/Json/Particles.json", 128);
 
 	hitBillboard = worldRoot->instantiate<LookAtRect>(nullptr);
 	hitBillboard->get_material().lightingType = LighingType::None;
-	hitBillboard->get_material().texture = TextureLibrary::GetTexture("Circle.png");
+	hitBillboard->get_material().texture = szg::TextureLibrary::GetTexture("Circle.png");
 
 	emitter->get_transform().set_translate(position);
 	emitter->update_affine();

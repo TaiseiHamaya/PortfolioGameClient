@@ -7,12 +7,16 @@
 #include <Engine/Assets/PrimitiveGeometry/PrimitiveGeometryAsset.h>
 #include <Library/Math/Color3.h>
 
+namespace szg {
+
 class Camera3D;
+
+}
 
 /// <summary>
 /// キューブマップ描画ノード
 /// </summary>
-class CubemapNode final : public BaseRenderPipeline {
+class CubemapNode final : public szg::BaseRenderPipeline {
 public:
 	/// <summary>
 	/// 初期化
@@ -22,7 +26,7 @@ public:
 	void preprocess() override;
 
 	void set_cubemap_texture(const std::string& name);
-	void set_camera(Reference<const Camera3D> camera_);
+	void set_camera(Reference<const szg::Camera3D> camera_);
 
 	void write_position(const Vector3& position);
 
@@ -36,9 +40,9 @@ private:
 	};
 
 private:
-	std::shared_ptr<const PrimitiveGeometryAsset> indexBuffer;
-	Reference<const Camera3D> camera;
-	std::shared_ptr<const TextureAsset> cubemapTexture;
-	ConstantBuffer<Vector3> vsBuffer;
-	ConstantBuffer<Material> materialBuffer;
+	std::shared_ptr<const szg::PrimitiveGeometryAsset> indexBuffer;
+	Reference<const szg::Camera3D> camera;
+	std::shared_ptr<const szg::TextureAsset> cubemapTexture;
+	szg::ConstantBuffer<Vector3> vsBuffer;
+	szg::ConstantBuffer<Material> materialBuffer;
 };

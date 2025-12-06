@@ -5,10 +5,10 @@
 /// <summary>
 /// ビルボード
 /// </summary>
-class LookAtRect final : public Rect3d {
+class LookAtRect final : public szg::Rect3d {
 public:
 	void fixed_update() override;
 
 public:
-	static inline Reference<WorldInstance> camera{};
+	static inline Reference<szg::WorldInstance> camera{};
 };

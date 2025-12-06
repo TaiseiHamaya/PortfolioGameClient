@@ -4,12 +4,12 @@
 
 #include <Library/Utility/Template/SingletonInterface.h>
 
-class Portfolio final : public Framework {
+class Portfolio final : public szg::Framework {
 private:
 	class ProtoBufManager final : SingletonInterface<ProtoBufManager> {
 		friend class Portfolio;
 
-		__CLASS_SINGLETON_INTERFACE(ProtoBufManager)
+		SZG_CLASS_SINGLETON(ProtoBufManager)
 
 	public:
 		struct OnDestory {

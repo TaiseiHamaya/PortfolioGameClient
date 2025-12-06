@@ -15,7 +15,7 @@ public:
 	ReceiveBuffer() = default;
 	~ReceiveBuffer() = default;
 
-	__CLASS_NON_COPYABLE(ReceiveBuffer)
+	SZG_CLASS_MOVE_ONLY(ReceiveBuffer)
 
 public:
 	/// <summary>

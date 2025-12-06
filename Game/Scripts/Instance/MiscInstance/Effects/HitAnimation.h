@@ -11,7 +11,7 @@ public:
 	HitAnimation(Vector3&& position);
 	~HitAnimation() = default;
 
-	__CLASS_NON_COPYABLE(HitAnimation)
+	SZG_CLASS_MOVE_ONLY(HitAnimation)
 
 public:
 	void begin();
@@ -22,11 +22,11 @@ public:
 
 private:
 	Reference<LookAtRect> hitBillboard;
-	Reference<ParticleEmitterInstance> emitter;
+	Reference<szg::ParticleEmitterInstance> emitter;
 
-	WorldTimer hitAnimationTimer;
+	szg::WorldTimer hitAnimationTimer;
 
 public:
-	static inline Reference<WorldRoot> worldRoot{};
+	static inline Reference<szg::WorldRoot> worldRoot{};
 };
 

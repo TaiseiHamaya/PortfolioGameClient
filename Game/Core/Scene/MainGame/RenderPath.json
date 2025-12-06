@@ -78,7 +78,7 @@
 		},
 		{
 			"Data": {
-				"EffectTag": "RadialBlur",
+				"EffectTag": null,
 				"OutputSize": {
 					"X": 1920.0,
 					"Y": 1080.0

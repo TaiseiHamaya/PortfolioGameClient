@@ -9,8 +9,8 @@ EnvironmentMeshNode::EnvironmentMeshNode() = default;
 EnvironmentMeshNode::~EnvironmentMeshNode() noexcept = default;
 
 void EnvironmentMeshNode::BeginLoadShader() {
-	ShaderLibrary::RegisterLoadQue("[[szg]]/Forward/Mesh/StaticMeshForward.VS.hlsl");
-	ShaderLibrary::RegisterLoadQue("Mesh/EnvironmentMesh/EnvironmentForward.PS.hlsl");
+	szg::ShaderLibrary::RegisterLoadQue("[[szg]]/Forward/Mesh/StaticMeshForward.VS.hlsl");
+	szg::ShaderLibrary::RegisterLoadQue("Mesh/EnvironmentMesh/EnvironmentForward.PS.hlsl");
 }
 
 void EnvironmentMeshNode::initialize() {
@@ -20,7 +20,7 @@ void EnvironmentMeshNode::initialize() {
 }
 
 void EnvironmentMeshNode::create_pipeline_state() {
-	RootSignatureBuilder rootSignatureBuilder;
+	szg::RootSignatureBuilder rootSignatureBuilder;
 	rootSignatureBuilder.add_structured(D3D12_SHADER_VISIBILITY_VERTEX, 0, 1, 0); // 0 : transform(S0T0, V)
 	rootSignatureBuilder.add_structured(D3D12_SHADER_VISIBILITY_PIXEL, 0, 1, 0); // 1 : material(S0T0, P)
 	rootSignatureBuilder.add_cbv(D3D12_SHADER_VISIBILITY_VERTEX, 0, 1); // 2 : camera vs(S1B0, V)
@@ -34,22 +34,22 @@ void EnvironmentMeshNode::create_pipeline_state() {
 		D3D12_TEXTURE_ADDRESS_MODE_WRAP
 	);
 
-	InputLayoutBuilder inputLayoutBuilder;
+	szg::InputLayoutBuilder inputLayoutBuilder;
 	inputLayoutBuilder.add_element("POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT);
 	inputLayoutBuilder.add_element("TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT);
 	inputLayoutBuilder.add_element("NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT);
 
-	std::unique_ptr<PSOBuilder> psoBuilder = std::make_unique<PSOBuilder>();
+	std::unique_ptr<szg::PSOBuilder> psoBuilder = std::make_unique<szg::PSOBuilder>();
 	psoBuilder->blendstate();
-	psoBuilder->depth_state(RenderingSystemValues::GetDepthStencilTexture()->get_as_dsv()->get_format());
+	psoBuilder->depth_state(szg::RenderingSystemValues::GetDepthStencilTexture()->get_as_dsv()->get_format());
 	psoBuilder->inputlayout(inputLayoutBuilder.build());
 	psoBuilder->rasterizerstate();
 	psoBuilder->rootsignature(rootSignatureBuilder.build());
-	psoBuilder->shaders(ShaderType::Vertex, "StaticMeshForward.VS.hlsl");
-	psoBuilder->shaders(ShaderType::Pixel, "EnvironmentForward.PS.hlsl");
+	psoBuilder->shaders(szg::ShaderType::Vertex, "StaticMeshForward.VS.hlsl");
+	psoBuilder->shaders(szg::ShaderType::Pixel, "EnvironmentForward.PS.hlsl");
 	psoBuilder->primitivetopologytype();
 	psoBuilder->rendertarget();
 
-	pipelineState = std::make_unique<DxPipelineState>();
+	pipelineState = std::make_unique<szg::DxPipelineState>();
 	pipelineState->initialize(psoBuilder->get_rootsignature(), psoBuilder->build());
 }

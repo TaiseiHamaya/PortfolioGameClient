@@ -16,58 +16,58 @@ CometEffect::CometEffect() = default;
 CometEffect::~CometEffect() = default;
 
 void CometEffect::initialize(const Vector3& position) {
-	Reference<WorldRoot> worldRoot = world_root_mut();
+	Reference<szg::WorldRoot> worldRoot = world_root_mut();
 	transform.set_translate(position);
 	transform.set_translate_y(0.02f);
 
 	// 煙のパーティクル1
-	dustCloudParticle0 = worldRoot->instantiate<ParticleEmitterInstance>(this, "DustCloud0.json", 100);
+	dustCloudParticle0 = worldRoot->instantiate<szg::ParticleEmitterInstance>(this, "DustCloud0.json", 100);
 	dustCloudParticle0->set_active(false);
 
 	// 煙のパーティクル1
-	dustCloudParticle1 = worldRoot->instantiate<ParticleEmitterInstance>(this, "DustCloud1.json", 100);
+	dustCloudParticle1 = worldRoot->instantiate<szg::ParticleEmitterInstance>(this, "DustCloud1.json", 100);
 	dustCloudParticle1->set_active(false);
 
 	json.load("Action/RedComet/CometEffect.json");
-	json.register_value(__JSON_RESOURCE_REGISTER(CometHight));
-	json.register_value(__JSON_RESOURCE_REGISTER(CometBodyColor));
-	json.register_value(__JSON_RESOURCE_REGISTER(CometFireSize));
-	json.register_value(__JSON_RESOURCE_REGISTER(CometFirePivot));
-	json.register_value(__JSON_RESOURCE_REGISTER(CometFireColor));
-	json.register_value(__JSON_RESOURCE_REGISTER(GroundEffectSize));
-	json.register_value(__JSON_RESOURCE_REGISTER(GroundEffectPivot));
-	json.register_value(__JSON_RESOURCE_REGISTER(GroundEffectColor));
-	json.register_value(__JSON_RESOURCE_REGISTER(FallTime));
-	json.register_value(__JSON_RESOURCE_REGISTER(GroundEffectTime));
-	json.register_value(__JSON_RESOURCE_REGISTER(BlurLengthMax));
-	json.register_value(__JSON_RESOURCE_REGISTER(BlurWeight));
+	json.register_value(SZG_JSON_ASSET_REGISTER(CometHight));
+	json.register_value(SZG_JSON_ASSET_REGISTER(CometBodyColor));
+	json.register_value(SZG_JSON_ASSET_REGISTER(CometFireSize));
+	json.register_value(SZG_JSON_ASSET_REGISTER(CometFirePivot));
+	json.register_value(SZG_JSON_ASSET_REGISTER(CometFireColor));
+	json.register_value(SZG_JSON_ASSET_REGISTER(GroundEffectSize));
+	json.register_value(SZG_JSON_ASSET_REGISTER(GroundEffectPivot));
+	json.register_value(SZG_JSON_ASSET_REGISTER(GroundEffectColor));
+	json.register_value(SZG_JSON_ASSET_REGISTER(FallTime));
+	json.register_value(SZG_JSON_ASSET_REGISTER(GroundEffectTime));
+	json.register_value(SZG_JSON_ASSET_REGISTER(BlurLengthMax));
+	json.register_value(SZG_JSON_ASSET_REGISTER(BlurWeight));
 
 	// コメットの隕石部分
-	cometBody = worldRoot->instantiate<StaticMeshInstance>(this);
+	cometBody = worldRoot->instantiate<szg::StaticMeshInstance>(this);
 	cometBody->reset_mesh("Comet.obj");
 	cometBody->set_active(false);
 	cometBody->get_materials()[0].color = CometBodyColor;
 	cometBody->get_materials()[0].lightingType = LighingType::None;
 	// コメットの炎エフェクト
-	cometFire = worldRoot->instantiate<Rect3d>(this);
+	cometFire = worldRoot->instantiate<szg::Rect3d>(this);
 	cometFire->set_active(false);
 	cometFire->initialize(CometFireSize, CometFirePivot);
 	cometFire->get_material().color = CometFireColor;
 	cometFire->get_material().lightingType = LighingType::None;
-	cometFire->get_material().texture = TextureLibrary::GetTexture("Fire.png");
+	cometFire->get_material().texture = szg::TextureLibrary::GetTexture("Fire.png");
 	// 隕石と地面が衝突した時に出すエフェクト
-	groundEffect = worldRoot->instantiate<Rect3d>(this);
+	groundEffect = worldRoot->instantiate<szg::Rect3d>(this);
 	groundEffect->set_active(false);
 	groundEffect->initialize(GroundEffectSize, GroundEffectPivot);
 	groundEffect->get_material().color = GroundEffectColor;
 	groundEffect->get_material().lightingType = LighingType::None;
-	groundEffect->get_material().texture = TextureLibrary::GetTexture("CometGround3.png");
+	groundEffect->get_material().texture = szg::TextureLibrary::GetTexture("CometGround3.png");
 	groundEffect->get_transform().set_quaternion(
 		Quaternion::AngleAxis(CVector3::BASIS_Y, RandomEngine::Random01MOD() * PI2)
 		* Quaternion::LookForward(CVector3::UP, CVector3::FORWARD)
 	);
 
-	blurData = std::any_cast<Reference<RadialBlurPipeline::Data>>(RuntimeStorage::GetValueMut("PostEffect", "Blur"));
+	blurData = std::any_cast<Reference<szg::RadialBlurPipeline::Data>>(szg::RuntimeStorage::GetValueMut("PostEffect", "Blur"));
 }
 
 void CometEffect::update() {

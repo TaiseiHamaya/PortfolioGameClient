@@ -13,7 +13,7 @@ public:
 	RemotePlayer() noexcept = default;
 	~RemotePlayer() noexcept = default;
 
-	__CLASS_NON_COPYABLE(RemotePlayer)
+	SZG_CLASS_MOVE_ONLY(RemotePlayer)
 
 public:
 	void initialize(const std::filesystem::path& file, u64 localId_) override;
@@ -43,7 +43,7 @@ private:
 	};
 
 	std::deque<Waypoint> waypoints;
-	WorldTimer latency{};
+	szg::WorldTimer latency{};
 	u32 waypointIndex{ 0 };
 	std::chrono::system_clock::time_point startTime;
 	std::chrono::system_clock::time_point fixedTime;

@@ -49,9 +49,9 @@ void GameInputHandler::input() {
 	// キー入力
 	actionHandlerK.update();
 	actionHandlerP.update();
-	inputDirection = InputAdvanced::PressWASD();
+	inputDirection = szg::InputAdvanced::PressWASD();
 	if (inputDirection.length() == 0) {
-		inputDirection = Input::StickL();
+		inputDirection = szg::Input::StickL();
 	}
 }
 
@@ -62,17 +62,17 @@ void GameInputHandler::update() {
 
 #ifdef DEBUG_FEATURES_ENABLE
 	// 開発用自動移動ボット
-	if (ArgumentParser::Contains("--develop-bot-enable")) {
+	if (szg::ArgumentParser::Contains("--develop-bot-enable")) {
 		timer.ahead();
 		Vector3 center;
 		// 中心座標をコマンドライン引数から取得
-		std::optional<u64> xArgIndex = ArgumentParser::ArgIndexByValue("-x");
-		std::optional<u64> yArgIndex = ArgumentParser::ArgIndexByValue("-y");
+		std::optional<u64> xArgIndex = szg::ArgumentParser::ArgIndexByValue("-x");
+		std::optional<u64> yArgIndex = szg::ArgumentParser::ArgIndexByValue("-y");
 		if (xArgIndex) {
-			center.x = std::stof(ArgumentParser::ValueByIndex(xArgIndex.value() + 1));
+			center.x = std::stof(szg::ArgumentParser::ValueByIndex(xArgIndex.value() + 1));
 		}
 		if (yArgIndex) {
-			center.z = std::stof(ArgumentParser::ValueByIndex(yArgIndex.value() + 1));
+			center.z = std::stof(szg::ArgumentParser::ValueByIndex(yArgIndex.value() + 1));
 		}
 		if (timer >= BOT_MOVE_TIME) {
 			timer.set(timer - BOT_MOVE_TIME);
@@ -100,7 +100,7 @@ void GameInputHandler::update() {
 		const Vector3& position = player->get_transform().get_translate();
 
 		Vector3 velocity = xzDirection3 * player->get_move_speed();
-		Vector3 dest = position + velocity * WorldClock::DeltaSeconds();
+		Vector3 dest = position + velocity * szg::WorldClock::DeltaSeconds();
 
 		zoneHandler->move_client_player(dest);
 	}
@@ -111,7 +111,7 @@ void GameInputHandler::update() {
 	}
 }
 
-void GameInputHandler::set_instances(Reference<Player> player_, Reference<const WorldInstance> camera_) {
+void GameInputHandler::set_instances(Reference<Player> player_, Reference<const szg::WorldInstance> camera_) {
 	player = player_;
 	camera = camera_;
 }

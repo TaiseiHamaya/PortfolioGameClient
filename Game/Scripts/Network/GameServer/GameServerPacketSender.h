@@ -20,7 +20,7 @@ public:
 	GameServerPacketSender() = default;
 	~GameServerPacketSender() = default;
 
-	__CLASS_NON_COPYABLE(GameServerPacketSender)
+	SZG_CLASS_MOVE_ONLY(GameServerPacketSender)
 
 public:
 	/// <summary>

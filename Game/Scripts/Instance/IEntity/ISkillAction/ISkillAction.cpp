@@ -9,12 +9,12 @@ void ISkillAction::load_from_json(const std::filesystem::path& file) {
 	type = json.try_emplace<ActionType>("ActionType");
 	targetType = json.try_emplace<TargetType>("TargetType");
 	effect = json.try_emplace<ActionEffect>("ActionEffect");
-	json.register_value(__JSON_RESOURCE_REGISTER(castTime));
-	json.register_value(__JSON_RESOURCE_REGISTER(recastTime));
-	json.register_value(__JSON_RESOURCE_REGISTER(mpCost));
-	json.register_value(__JSON_RESOURCE_REGISTER(range));
-	json.register_value(__JSON_RESOURCE_REGISTER(radius));
-	json.register_value(__JSON_RESOURCE_REGISTER(loopAnimation));
+	json.register_value(SZG_JSON_ASSET_REGISTER(castTime));
+	json.register_value(SZG_JSON_ASSET_REGISTER(recastTime));
+	json.register_value(SZG_JSON_ASSET_REGISTER(mpCost));
+	json.register_value(SZG_JSON_ASSET_REGISTER(range));
+	json.register_value(SZG_JSON_ASSET_REGISTER(radius));
+	json.register_value(SZG_JSON_ASSET_REGISTER(loopAnimation));
 	timer.set(0);
 }
 

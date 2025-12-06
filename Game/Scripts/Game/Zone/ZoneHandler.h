@@ -20,12 +20,12 @@ class GameServerPacketSender;
 /// <summary>
 /// ゾーン処理に関するハンドラ
 /// </summary>
-class ZoneHandler final : public ISceneScript {
+class ZoneHandler final : public szg::ISceneScript {
 public:
 	ZoneHandler() = default;
 	~ZoneHandler() = default;
 
-	__CLASS_NON_COPYABLE(ZoneHandler)
+	SZG_CLASS_MOVE_ONLY(ZoneHandler)
 
 public:
 	void setup(

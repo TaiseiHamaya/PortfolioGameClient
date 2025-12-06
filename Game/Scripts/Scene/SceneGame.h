@@ -22,15 +22,12 @@ struct CometAction {
 	std::unique_ptr<CometEffect> cometEffect;
 };
 
-class LuminanceExtractionPSO;
-class MargeTexture4PSO;
-class BloomPipeline;
 class CubemapNode;
 
 /// <summary>
 /// メインゲームシーン
 /// </summary>
-class SceneGame final : public Scene {
+class SceneGame final : public szg::Scene {
 public:
 	SceneGame() noexcept;
 
@@ -41,22 +38,22 @@ public:
 
 
 private:
-	WorldTimer timer;
+	szg::WorldTimer timer;
 
 	std::unique_ptr<EnvironmentMeshExecutor> environmentMeshExecutor;
 
 	// WorldInstance
-	Reference<DirectionalLightInstance> directionalLight;
+	Reference<szg::DirectionalLightInstance> directionalLight;
 
 	Reference<FollowCamera> camera3D;
-	Reference<StaticMeshInstance> skydome;
-	Reference<StringRectInstance> testString;
+	Reference<szg::StaticMeshInstance> skydome;
+	Reference<szg::StringRectInstance> testString;
 
 	std::list<CometAction> comets;
 
 	Reference<CometEffect> cometEffect;
 
-	GaussianBlurPipeline::Data blurData{
+	szg::GaussianBlurPipeline::Data blurData{
 		.dispersion = 1.0f,
 		.length = 40.0f,
 		.sampleCount = 8

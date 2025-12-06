@@ -15,7 +15,7 @@ class EntityManager;
 /// 敵管理クラス
 /// 削除するかも
 /// </summary>
-class EnemyManager final : public ISceneScript {
+class EnemyManager final : public szg::ISceneScript {
 public:
 	EnemyManager() = default;
 	~EnemyManager() = default;

@@ -24,7 +24,7 @@ public:
 	void load_from_json(const std::filesystem::path& file);
 
 protected:
-	JsonAsset json;
+	szg::JsonAsset json;
 	TargetType targetType{};
 	r32 castTime;
 	r32 recastTime;

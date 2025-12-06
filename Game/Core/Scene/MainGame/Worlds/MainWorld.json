@@ -118,7 +118,7 @@
 				}
 			},
 			"Name": "PointLight",
-			"Radius": 15.0,
+			"Radius": 4.800000190734863,
 			"Type": 5001
 		}
 	],

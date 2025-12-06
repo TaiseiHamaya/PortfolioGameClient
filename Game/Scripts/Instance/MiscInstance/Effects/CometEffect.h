@@ -9,9 +9,6 @@
 
 #include "Scripts/Instance/MiscInstance/Effects/IEffectInstance.h"
 
-class StaticMeshDrawManager;
-class Rect3dDrawManager;
-
 /// <summary>
 /// コメットのエフェクト
 /// </summary>
@@ -37,18 +34,18 @@ public:
 #endif // DEBUG_FEATURES_ENABLE
 
 private:
-	WorldTimer timer;
+	szg::WorldTimer timer;
 
-	Reference<ParticleEmitterInstance> dustCloudParticle0;
-	Reference<ParticleEmitterInstance> dustCloudParticle1;
+	Reference<szg::ParticleEmitterInstance> dustCloudParticle0;
+	Reference<szg::ParticleEmitterInstance> dustCloudParticle1;
 	//std::vector<LookAtRect> dustClouds;
-	Reference<StaticMeshInstance> cometBody;
-	Reference<Rect3d> cometFire;
-	Reference<Rect3d> groundEffect;
+	Reference<szg::StaticMeshInstance> cometBody;
+	Reference<szg::Rect3d> cometFire;
+	Reference<szg::Rect3d> groundEffect;
 
-	Reference<RadialBlurPipeline::Data> blurData;
+	Reference<szg::RadialBlurPipeline::Data> blurData;
 
-	JsonAsset json;
+	szg::JsonAsset json;
 	Color3 CometBodyColor{};
 	Vector2 CometFireSize{};
 	Vector2 CometFirePivot{};
@@ -63,5 +60,5 @@ private:
 	r32 BlurWeight{};
 
 public:
-	inline static Reference<Camera3D> camera{ nullptr };
+	inline static Reference<szg::Camera3D> camera{ nullptr };
 };

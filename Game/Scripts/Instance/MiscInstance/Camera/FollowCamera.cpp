@@ -30,13 +30,13 @@ void FollowCamera::initialize() {
 	JsonAsset json;
 #endif // DEBUG_FEATURES_ENABLE
 	json.load("FollowCamera.json");
-	json.register_value(__JSON_RESOURCE_REGISTER(offset));
-	json.register_value(__JSON_RESOURCE_REGISTER(SlerpStrength));
-	json.register_value(__JSON_RESOURCE_REGISTER(FollowStrength));
-	json.register_value(__JSON_RESOURCE_REGISTER(MaxAngleDownward));
-	json.register_value(__JSON_RESOURCE_REGISTER(MaxAngleHorizontal));
-	json.register_value(__JSON_RESOURCE_REGISTER(ShakeTime));
-	json.register_value(__JSON_RESOURCE_REGISTER(ShakePower));
+	json.register_value(SZG_JSON_ASSET_REGISTER(offset));
+	json.register_value(SZG_JSON_ASSET_REGISTER(SlerpStrength));
+	json.register_value(SZG_JSON_ASSET_REGISTER(FollowStrength));
+	json.register_value(SZG_JSON_ASSET_REGISTER(MaxAngleDownward));
+	json.register_value(SZG_JSON_ASSET_REGISTER(MaxAngleHorizontal));
+	json.register_value(SZG_JSON_ASSET_REGISTER(ShakeTime));
+	json.register_value(SZG_JSON_ASSET_REGISTER(ShakePower));
 }
 
 void FollowCamera::update() {
@@ -58,7 +58,7 @@ void FollowCamera::update() {
 	}
 
 	// 入力から回転に変換
-	Vector2 rotateAngle = inputStickR * PI * WorldClock::DeltaSeconds();
+	Vector2 rotateAngle = inputStickR * PI * szg::WorldClock::DeltaSeconds();
 
 	rotateAngle.y *= -1;
 	// 平行成分と垂直成分でQuaternionを生成
@@ -116,9 +116,9 @@ void FollowCamera::update() {
 }
 
 void FollowCamera::input() {
-	inputStickR = Input::StickR();
+	inputStickR = szg::Input::StickR();
 	if (inputStickR.length() == 0) {
-		inputStickR = InputAdvanced::PressArrow();
+		inputStickR = szg::InputAdvanced::PressArrow();
 	}
 	isPressX = padHandler.trigger(PadID::Y) || keyHandler.trigger(KeyID::L);
 }

@@ -7,7 +7,7 @@ void Shadow::setup(Reference<WorldInstance> owner_, float baseRadius_) {
 		Quaternion::LookForward(CVector3::UP)
 	);
 	initialize(Vector2{ baseRadius,baseRadius }, Vector2{ 0.5f,0.5f });
-	get_material().texture = TextureLibrary::GetTexture("shadow.png");
+	get_material().texture = szg::TextureLibrary::GetTexture("shadow.png");
 }
 
 void Shadow::fixed_update() {

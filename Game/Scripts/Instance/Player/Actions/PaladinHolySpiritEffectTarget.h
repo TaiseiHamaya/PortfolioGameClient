@@ -41,18 +41,18 @@ public:
 #endif //DEBUG_FEATURES_ENABLE
 
 private:
-	WorldTimer timer;
+	szg::WorldTimer timer;
 
-	Reference<WorldInstance> camera;
+	Reference<szg::WorldInstance> camera;
 
 	Reference<LookAtRect> absorption;
-	Reference<WorldInstance> centerConstraint;
-	std::vector<Reference<Rect3d>> centerBillboards;
+	Reference<szg::WorldInstance> centerConstraint;
+	std::vector<Reference<szg::Rect3d>> centerBillboards;
 	Reference<LookAtRect> lightBillboard;
-	Reference<ParticleEmitterInstance> etherDustEmitter;
-	Reference<ParticleEmitterInstance> shiningEmitter;
+	Reference<szg::ParticleEmitterInstance> etherDustEmitter;
+	Reference<szg::ParticleEmitterInstance> shiningEmitter;
 
-	JsonAsset json;
+	szg::JsonAsset json;
 	RectEffectValues absorptionEffectValues{};
 	RectEffectValues centerEffectValues{};
 	RectEffectValues lightEffectValues{};

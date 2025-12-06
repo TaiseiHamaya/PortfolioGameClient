@@ -10,7 +10,7 @@ public:
 	IZoneCommand() = default;
 	virtual ~IZoneCommand() = default;
 
-	__CLASS_NON_COPYABLE(IZoneCommand)
+	SZG_CLASS_MOVE_ONLY(IZoneCommand)
 
 public:
 	/// <summary>

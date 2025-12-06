@@ -9,7 +9,7 @@
 /// <summary>
 /// HPバーのWorldInstance
 /// </summary>
-class EntityUi final : public WorldInstance {
+class EntityUi final : public szg::WorldInstance {
 public:
 	void initialize(float offsetY, Color4 color);
 
@@ -18,5 +18,5 @@ public:
 
 private:
 	Reference<LookAtRect> hpRect;
-	Reference<StringRectInstance> nametag;
+	Reference<szg::StringRectInstance> nametag;
 };

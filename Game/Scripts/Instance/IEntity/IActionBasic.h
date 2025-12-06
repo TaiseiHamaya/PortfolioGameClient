@@ -52,7 +52,7 @@ public:
 #endif // DEBUG_FEATURES_ENABLE
 
 protected:
-	WorldTimer timer;
+	szg::WorldTimer timer;
 	ActionEffect effect{ ActionEffect::None };
 	ActionType type{ ActionType::Unknown };
 	Reference<IEntity> owner{ nullptr };
