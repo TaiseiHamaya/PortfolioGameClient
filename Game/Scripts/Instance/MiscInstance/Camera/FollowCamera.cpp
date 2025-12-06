@@ -27,7 +27,7 @@ void FollowCamera::initialize() {
 	keyHandler.initialize({ KeyID::L });
 
 #ifndef DEBUG_FEATURES_ENABLE
-	JsonAsset json;
+	szg::JsonAsset json;
 #endif // DEBUG_FEATURES_ENABLE
 	json.load("FollowCamera.json");
 	json.register_value(SZG_JSON_ASSET_REGISTER(offset));

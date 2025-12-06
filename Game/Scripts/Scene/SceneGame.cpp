@@ -61,8 +61,8 @@ void SceneGame::custom_load_asset() {
 
 	szg::PrimitiveGeometryLibrary::Transfer("Cubemap", std::make_shared<szg::PrimitiveGeometryAsset>("Cubemap.json"));
 
-	szg::ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/Forward/Particle/ParticleBillboard/ParticleBillboard.VS.hlsl");
-	szg::ShaderLibrary::RegisterLoadQue("./DirectXGame/EngineResources/HLSL/Forward/Particle/ParticleBillboard/ParticleBillboard.PS.hlsl");
+	szg::ShaderLibrary::RegisterLoadQue("./SyzygyEngine/EngineResources/HLSL/Forward/Particle/ParticleBillboard/ParticleBillboard.VS.hlsl");
+	szg::ShaderLibrary::RegisterLoadQue("./SyzygyEngine/EngineResources/HLSL/Forward/Particle/ParticleBillboard/ParticleBillboard.PS.hlsl");
 
 	szg::ShaderLibrary::RegisterLoadQue("./Game/Resources/HLSL/Mesh/Skybox/Skybox.VS.hlsl");
 	szg::ShaderLibrary::RegisterLoadQue("./Game/Resources/HLSL/Mesh/Skybox/Skybox.PS.hlsl");
