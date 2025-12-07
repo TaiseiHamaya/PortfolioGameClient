@@ -328,6 +328,7 @@
     <ClCompile Include="Scripts\Extension\DrawExecutor\EnvironmentMeshExecutor.cpp" />
     <ClCompile Include="Scripts\Game\Zone\Command\ZonePlayActionCommand.cpp" />
     <ClCompile Include="Scripts\Game\Zone\Command\ZoneEntityDamagedCommand.cpp" />
+    <ClCompile Include="Scripts\Scene\LoginScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="DevTool\launch-bot.ps1" />
@@ -337,5 +338,6 @@
     <ClInclude Include="Scripts\Extension\DrawExecutor\EnvironmentMeshExecutor.h" />
     <ClInclude Include="Scripts\Game\Zone\Command\ZonePlayActionCommand.h" />
     <ClInclude Include="Scripts\Game\Zone\Command\ZoneEntityDamagedCommand.h" />
+    <ClInclude Include="Scripts\Scene\LoginScene.h" />
   </ItemGroup>
 </Project>

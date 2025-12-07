@@ -1,0 +1,155 @@
+{
+	"Instances": [
+		{
+			"AspectRatio": 1.7776999473571777,
+			"Children": [],
+			"FOV Y": 0.44999998807907104,
+			"FarClip": 1000.0,
+			"Local transform": {
+				"Rotation": {
+					"W": 1.0,
+					"XYZ": {
+						"X": 0.0,
+						"Y": 0.0,
+						"Z": 0.0
+					}
+				},
+				"Scale": {
+					"X": 1.0,
+					"Y": 1.0,
+					"Z": 1.0
+				},
+				"Translate": {
+					"X": 0.0,
+					"Y": 0.0,
+					"Z": -10.0
+				}
+			},
+			"Name": "Camera",
+			"NearClip": 0.10000000149011612,
+			"Type": 3000
+		},
+		{
+			"Children": [],
+			"Color": {
+				"A": 1.0,
+				"B": 1.0,
+				"G": 1.0,
+				"R": 1.0
+			},
+			"Font": "UDEVGothic35HS-Regular.mtsdf",
+			"IsDraw": false,
+			"Layer": 0,
+			"Local transform": {
+				"Rotation": {
+					"W": 3.67063620387853e-07,
+					"XYZ": {
+						"X": 0.0,
+						"Y": 1.0,
+						"Z": 0.0
+					}
+				},
+				"Scale": {
+					"X": 1.000004529953003,
+					"Y": 1.0000070333480835,
+					"Z": 1.000004529953003
+				},
+				"Translate": {
+					"X": 0.0,
+					"Y": 1.0,
+					"Z": 0.0
+				}
+			},
+			"Name": "Title",
+			"Pivot": {
+				"X": 0.5,
+				"Y": 0.5
+			},
+			"Size": 16.0,
+			"Text": "Title",
+			"Type": 2003
+		},
+		{
+			"Children": [],
+			"Color": {
+				"A": 1.0,
+				"B": 1.0,
+				"G": 1.0,
+				"R": 1.0
+			},
+			"Font": "UDEVGothic35HS-Regular.mtsdf",
+			"IsDraw": false,
+			"Layer": 0,
+			"Local transform": {
+				"Rotation": {
+					"W": 2.4785191499177017e-07,
+					"XYZ": {
+						"X": 0.0,
+						"Y": 1.0,
+						"Z": 0.0
+					}
+				},
+				"Scale": {
+					"X": 1.0000019073486328,
+					"Y": 1.0000042915344238,
+					"Z": 1.0000019073486328
+				},
+				"Translate": {
+					"X": 0.0,
+					"Y": -1.0,
+					"Z": 0.0
+				}
+			},
+			"Name": "Login",
+			"Pivot": {
+				"X": 0.0,
+				"Y": 0.0
+			},
+			"Size": 19.600000381469727,
+			"Text": "A",
+			"Type": 2003
+		},
+		{
+			"Children": [],
+			"Color": {
+				"A": 1.0,
+				"B": 1.0,
+				"G": 1.0,
+				"R": 1.0
+			},
+			"Font": "UDEVGothic35HS-Regular.mtsdf",
+			"IsDraw": true,
+			"Layer": 0,
+			"Local transform": {
+				"Rotation": {
+					"W": 0.00024395406944677234,
+					"XYZ": {
+						"X": 0.0,
+						"Y": 1.0,
+						"Z": 0.0
+					}
+				},
+				"Scale": {
+					"X": 1.0000079870224,
+					"Y": 1.0000239610671997,
+					"Z": 1.0000079870224
+				},
+				"Translate": {
+					"X": 0.0,
+					"Y": 0.0,
+					"Z": 0.0
+				}
+			},
+			"Name": "AAA",
+			"Pivot": {
+				"X": 0.0,
+				"Y": 0.0
+			},
+			"Size": 16.0,
+			"Text": "A\nA",
+			"Type": 2003
+		}
+	],
+	"Name": "MainWorld",
+	"NumLayer": 2
+}

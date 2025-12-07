@@ -1,6 +1,6 @@
 {
 	"SceneList": [
-		"SceneGame",
+		"LoginScene",
 		"MainGame"
 	]
 }
