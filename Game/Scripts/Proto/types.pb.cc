@@ -156,6 +156,33 @@ struct PayloadLogoutNotificationDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 PayloadLogoutNotificationDefaultTypeInternal _PayloadLogoutNotification_default_instance_;
 
+inline constexpr PayloadLoginRequest::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        username_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()) {}
+
+template <typename>
+PROTOBUF_CONSTEXPR PayloadLoginRequest::PayloadLoginRequest(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(PayloadLoginRequest_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct PayloadLoginRequestDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR PayloadLoginRequestDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~PayloadLoginRequestDefaultTypeInternal() {}
+  union {
+    PayloadLoginRequest _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 PayloadLoginRequestDefaultTypeInternal _PayloadLoginRequest_default_instance_;
+
 inline constexpr PayloadEntityDamaged::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
@@ -296,9 +323,6 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
 inline constexpr PayloadLoginResult::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
-        username_(
-            &::google::protobuf::internal::fixed_address_empty_string,
-            ::_pbi::ConstantInitialized()),
         position_{nullptr},
         id_{::uint64_t{0u}},
         is_successed_{false} {}
@@ -418,16 +442,19 @@ const ::uint32_t
         PROTOBUF_FIELD_OFFSET(::Proto::PayloadSystemMessage, _impl_.message_),
         0,
         0x081, // bitmap
+        PROTOBUF_FIELD_OFFSET(::Proto::PayloadLoginRequest, _impl_._has_bits_),
+        4, // hasbit index offset
+        PROTOBUF_FIELD_OFFSET(::Proto::PayloadLoginRequest, _impl_.username_),
+        0,
+        0x081, // bitmap
         PROTOBUF_FIELD_OFFSET(::Proto::PayloadLoginResult, _impl_._has_bits_),
-        7, // hasbit index offset
+        6, // hasbit index offset
         PROTOBUF_FIELD_OFFSET(::Proto::PayloadLoginResult, _impl_.id_),
         PROTOBUF_FIELD_OFFSET(::Proto::PayloadLoginResult, _impl_.is_successed_),
-        PROTOBUF_FIELD_OFFSET(::Proto::PayloadLoginResult, _impl_.username_),
         PROTOBUF_FIELD_OFFSET(::Proto::PayloadLoginResult, _impl_.position_),
-        2,
-        3,
-        0,
         1,
+        2,
+        0,
         0x081, // bitmap
         PROTOBUF_FIELD_OFFSET(::Proto::PayloadLoginNotification, _impl_._has_bits_),
         6, // hasbit index offset
@@ -506,21 +533,23 @@ static const ::_pbi::MigrationSchema
         {0, sizeof(::Proto::Packet)},
         {17, sizeof(::Proto::PayloadTextMessage)},
         {24, sizeof(::Proto::PayloadSystemMessage)},
-        {29, sizeof(::Proto::PayloadLoginResult)},
-        {40, sizeof(::Proto::PayloadLoginNotification)},
-        {49, sizeof(::Proto::PayloadLogoutRequest)},
-        {54, sizeof(::Proto::PayloadLogoutResponse)},
-        {59, sizeof(::Proto::PayloadLogoutNotification)},
-        {64, sizeof(::Proto::PayloadTransformSync)},
-        {73, sizeof(::Proto::PayloadPlayAction)},
-        {88, sizeof(::Proto::PayloadEntityDamaged)},
-        {97, sizeof(::Proto::PayloadEnemySpawn)},
-        {106, sizeof(::Proto::PayloadEnemyDespawn)},
+        {29, sizeof(::Proto::PayloadLoginRequest)},
+        {34, sizeof(::Proto::PayloadLoginResult)},
+        {43, sizeof(::Proto::PayloadLoginNotification)},
+        {52, sizeof(::Proto::PayloadLogoutRequest)},
+        {57, sizeof(::Proto::PayloadLogoutResponse)},
+        {62, sizeof(::Proto::PayloadLogoutNotification)},
+        {67, sizeof(::Proto::PayloadTransformSync)},
+        {76, sizeof(::Proto::PayloadPlayAction)},
+        {91, sizeof(::Proto::PayloadEntityDamaged)},
+        {100, sizeof(::Proto::PayloadEnemySpawn)},
+        {109, sizeof(::Proto::PayloadEnemyDespawn)},
 };
 static const ::_pb::Message* PROTOBUF_NONNULL const file_default_instances[] = {
     &::Proto::_Packet_default_instance_._instance,
     &::Proto::_PayloadTextMessage_default_instance_._instance,
     &::Proto::_PayloadSystemMessage_default_instance_._instance,
+    &::Proto::_PayloadLoginRequest_default_instance_._instance,
     &::Proto::_PayloadLoginResult_default_instance_._instance,
     &::Proto::_PayloadLoginNotification_default_instance_._instance,
     &::Proto::_PayloadLogoutRequest_default_instance_._instance,
@@ -545,36 +574,37 @@ const char descriptor_table_protodef_types_2eproto[] ABSL_ATTRIBUTE_SECTION_VARI
     "\005 \001(\0162\033.Proto.CategoryEnemyMessageH\000\022\017\n\007"
     "payload\030\006 \001(\014B\n\n\010category\"1\n\022PayloadText"
     "Message\022\n\n\002id\030\001 \001(\004\022\017\n\007message\030\002 \001(\t\"\'\n\024"
-    "PayloadSystemMessage\022\017\n\007message\030\001 \001(\t\"j\n"
-    "\022PayloadLoginResult\022\n\n\002id\030\001 \001(\004\022\024\n\014is_su"
-    "ccessed\030\002 \001(\010\022\020\n\010username\030\003 \001(\t\022 \n\010posit"
-    "ion\030\004 \001(\0132\016.Proto.Vector3\"Z\n\030PayloadLogi"
-    "nNotification\022\n\n\002id\030\001 \001(\004\022\020\n\010username\030\002 "
-    "\001(\t\022 \n\010position\030\003 \001(\0132\016.Proto.Vector3\"\"\n"
-    "\024PayloadLogoutRequest\022\n\n\002id\030\001 \001(\004\"-\n\025Pay"
-    "loadLogoutResponse\022\024\n\014is_successed\030\001 \001(\010"
-    "\"\'\n\031PayloadLogoutNotification\022\n\n\002id\030\001 \001("
-    "\004\"W\n\024PayloadTransformSync\022\n\n\002id\030\001 \001(\004\022\021\n"
-    "\ttimestamp\030\002 \001(\004\022 \n\010position\030\003 \001(\0132\016.Pro"
-    "to.Vector3\"\210\001\n\021PayloadPlayAction\022\n\n\002id\030\001"
-    " \001(\004\022\021\n\taction_id\030\002 \001(\r\022\021\n\ttimestamp\030\003 \001"
-    "(\004\022\023\n\tentity_id\030\004 \001(\004H\000\022\"\n\010position\030\005 \001("
-    "\0132\016.Proto.Vector3H\000B\010\n\006target\"N\n\024Payload"
-    "EntityDamaged\022\023\n\013attacker_id\030\001 \001(\004\022\021\n\tta"
-    "rget_id\030\002 \001(\004\022\016\n\006damage\030\003 \001(\005\"O\n\021Payload"
-    "EnemySpawn\022\n\n\002id\030\001 \001(\004\022\014\n\004name\030\002 \001(\t\022 \n\010"
-    "position\030\003 \001(\0132\016.Proto.Vector3\"!\n\023Payloa"
-    "dEnemyDespawn\022\n\n\002id\030\001 \001(\004*J\n\023CategoryTex"
-    "tMessage\022\r\n\tCHAT_SEND\020\000\022\020\n\014CHAT_RECEIVE\020"
-    "\001\022\022\n\016SYSTEM_MESSAGE\020\002*@\n\024CategoryLoginMe"
-    "ssage\022\020\n\014LOGIN_RESULT\020\000\022\026\n\022LOGIN_NOTIFIC"
-    "ATION\020\001*Y\n\025CategoryLogoutMessage\022\022\n\016LOGO"
-    "UT_REQUEST\020\000\022\023\n\017LOGOUT_RESPONSE\020\001\022\027\n\023LOG"
-    "OUT_NOTIFICATION\020\002*N\n\023CategorySyncMessag"
-    "e\022\022\n\016SYNC_TRANSFORM\020\000\022\017\n\013PLAY_ACTION\020\001\022\022"
-    "\n\016ENTITY_DAMAGED\020\002*:\n\024CategoryEnemyMessa"
-    "ge\022\017\n\013ENEMY_SPAWN\020\000\022\021\n\rENEMY_DESPAWN\020\001b\006"
-    "proto3"
+    "PayloadSystemMessage\022\017\n\007message\030\001 \001(\t\"\'\n"
+    "\023PayloadLoginRequest\022\020\n\010username\030\001 \001(\t\"X"
+    "\n\022PayloadLoginResult\022\n\n\002id\030\001 \001(\004\022\024\n\014is_s"
+    "uccessed\030\002 \001(\010\022 \n\010position\030\004 \001(\0132\016.Proto"
+    ".Vector3\"Z\n\030PayloadLoginNotification\022\n\n\002"
+    "id\030\001 \001(\004\022\020\n\010username\030\002 \001(\t\022 \n\010position\030\003"
+    " \001(\0132\016.Proto.Vector3\"\"\n\024PayloadLogoutReq"
+    "uest\022\n\n\002id\030\001 \001(\004\"-\n\025PayloadLogoutRespons"
+    "e\022\024\n\014is_successed\030\001 \001(\010\"\'\n\031PayloadLogout"
+    "Notification\022\n\n\002id\030\001 \001(\004\"W\n\024PayloadTrans"
+    "formSync\022\n\n\002id\030\001 \001(\004\022\021\n\ttimestamp\030\002 \001(\004\022"
+    " \n\010position\030\003 \001(\0132\016.Proto.Vector3\"\210\001\n\021Pa"
+    "yloadPlayAction\022\n\n\002id\030\001 \001(\004\022\021\n\taction_id"
+    "\030\002 \001(\r\022\021\n\ttimestamp\030\003 \001(\004\022\023\n\tentity_id\030\004"
+    " \001(\004H\000\022\"\n\010position\030\005 \001(\0132\016.Proto.Vector3"
+    "H\000B\010\n\006target\"N\n\024PayloadEntityDamaged\022\023\n\013"
+    "attacker_id\030\001 \001(\004\022\021\n\ttarget_id\030\002 \001(\004\022\016\n\006"
+    "damage\030\003 \001(\005\"O\n\021PayloadEnemySpawn\022\n\n\002id\030"
+    "\001 \001(\004\022\014\n\004name\030\002 \001(\t\022 \n\010position\030\003 \001(\0132\016."
+    "Proto.Vector3\"!\n\023PayloadEnemyDespawn\022\n\n\002"
+    "id\030\001 \001(\004*J\n\023CategoryTextMessage\022\r\n\tCHAT_"
+    "SEND\020\000\022\020\n\014CHAT_RECEIVE\020\001\022\022\n\016SYSTEM_MESSA"
+    "GE\020\002*S\n\024CategoryLoginMessage\022\021\n\rLOGIN_RE"
+    "QUEST\020\000\022\020\n\014LOGIN_RESULT\020\001\022\026\n\022LOGIN_NOTIF"
+    "ICATION\020\002*Y\n\025CategoryLogoutMessage\022\022\n\016LO"
+    "GOUT_REQUEST\020\000\022\023\n\017LOGOUT_RESPONSE\020\001\022\027\n\023L"
+    "OGOUT_NOTIFICATION\020\002*N\n\023CategorySyncMess"
+    "age\022\022\n\016SYNC_TRANSFORM\020\000\022\017\n\013PLAY_ACTION\020\001"
+    "\022\022\n\016ENTITY_DAMAGED\020\002*:\n\024CategoryEnemyMes"
+    "sage\022\017\n\013ENEMY_SPAWN\020\000\022\021\n\rENEMY_DESPAWN\020\001"
+    "b\006proto3"
 };
 static const ::_pbi::DescriptorTable* PROTOBUF_NONNULL const
     descriptor_table_types_2eproto_deps[1] = {
@@ -584,13 +614,13 @@ static ::absl::once_flag descriptor_table_types_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_types_2eproto = {
     false,
     false,
-    1606,
+    1648,
     descriptor_table_protodef_types_2eproto,
     "types.proto",
     &descriptor_table_types_2eproto_once,
     descriptor_table_types_2eproto_deps,
     1,
-    13,
+    14,
     schemas,
     file_default_instances,
     TableStruct_types_2eproto::offsets,
@@ -609,7 +639,7 @@ const ::google::protobuf::EnumDescriptor* PROTOBUF_NONNULL CategoryLoginMessage_
   return file_level_enum_descriptors_types_2eproto[1];
 }
 PROTOBUF_CONSTINIT const uint32_t CategoryLoginMessage_internal_data_[] = {
-    131072u, 0u, };
+    196608u, 0u, };
 const ::google::protobuf::EnumDescriptor* PROTOBUF_NONNULL CategoryLogoutMessage_descriptor() {
   ::google::protobuf::internal::AssignDescriptors(&descriptor_table_types_2eproto);
   return file_level_enum_descriptors_types_2eproto[2];
@@ -1645,6 +1675,276 @@ void PayloadSystemMessage::InternalSwap(PayloadSystemMessage* PROTOBUF_RESTRICT 
 }
 // ===================================================================
 
+class PayloadLoginRequest::_Internal {
+ public:
+  using HasBits =
+      decltype(::std::declval<PayloadLoginRequest>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+      8 * PROTOBUF_FIELD_OFFSET(PayloadLoginRequest, _impl_._has_bits_);
+};
+
+PayloadLoginRequest::PayloadLoginRequest(::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, PayloadLoginRequest_class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:Proto.PayloadLoginRequest)
+}
+PROTOBUF_NDEBUG_INLINE PayloadLoginRequest::Impl_::Impl_(
+    [[maybe_unused]] ::google::protobuf::internal::InternalVisibility visibility,
+    [[maybe_unused]] ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
+    [[maybe_unused]] const ::Proto::PayloadLoginRequest& from_msg)
+      : _has_bits_{from._has_bits_},
+        _cached_size_{0},
+        username_(arena, from.username_) {}
+
+PayloadLoginRequest::PayloadLoginRequest(
+    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena,
+    const PayloadLoginRequest& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, PayloadLoginRequest_class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  PayloadLoginRequest* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+
+  // @@protoc_insertion_point(copy_constructor:Proto.PayloadLoginRequest)
+}
+PROTOBUF_NDEBUG_INLINE PayloadLoginRequest::Impl_::Impl_(
+    [[maybe_unused]] ::google::protobuf::internal::InternalVisibility visibility,
+    [[maybe_unused]] ::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
+      : _cached_size_{0},
+        username_(arena) {}
+
+inline void PayloadLoginRequest::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+}
+PayloadLoginRequest::~PayloadLoginRequest() {
+  // @@protoc_insertion_point(destructor:Proto.PayloadLoginRequest)
+  SharedDtor(*this);
+}
+inline void PayloadLoginRequest::SharedDtor(MessageLite& self) {
+  PayloadLoginRequest& this_ = static_cast<PayloadLoginRequest&>(self);
+  if constexpr (::_pbi::DebugHardenVerifyHasBitConsistency()) {
+    this_.VerifyHasBitConsistency();
+  }
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.username_.Destroy();
+  this_._impl_.~Impl_();
+}
+
+inline void* PROTOBUF_NONNULL PayloadLoginRequest::PlacementNew_(
+    const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
+    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena) {
+  return ::new (mem) PayloadLoginRequest(arena);
+}
+constexpr auto PayloadLoginRequest::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(PayloadLoginRequest),
+                                            alignof(PayloadLoginRequest));
+}
+constexpr auto PayloadLoginRequest::InternalGenerateClassData_() {
+  return ::google::protobuf::internal::ClassDataFull{
+      ::google::protobuf::internal::ClassData{
+          &_PayloadLoginRequest_default_instance_._instance,
+          &_table_.header,
+          nullptr,  // OnDemandRegisterArenaDtor
+          nullptr,  // IsInitialized
+          &PayloadLoginRequest::MergeImpl,
+          ::google::protobuf::Message::GetNewImpl<PayloadLoginRequest>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+          &PayloadLoginRequest::SharedDtor,
+          ::google::protobuf::Message::GetClearImpl<PayloadLoginRequest>(), &PayloadLoginRequest::ByteSizeLong,
+              &PayloadLoginRequest::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          PROTOBUF_FIELD_OFFSET(PayloadLoginRequest, _impl_._cached_size_),
+          false,
+      },
+      &PayloadLoginRequest::kDescriptorMethods,
+      &descriptor_table_types_2eproto,
+      nullptr,  // tracker
+  };
+}
+
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 const
+    ::google::protobuf::internal::ClassDataFull PayloadLoginRequest_class_data_ =
+        PayloadLoginRequest::InternalGenerateClassData_();
+
+PROTOBUF_ATTRIBUTE_WEAK const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL
+PayloadLoginRequest::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&PayloadLoginRequest_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(PayloadLoginRequest_class_data_.tc_table);
+  return PayloadLoginRequest_class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 1, 0, 42, 2>
+PayloadLoginRequest::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(PayloadLoginRequest, _impl_._has_bits_),
+    0, // no _extensions_
+    1, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967294,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    PayloadLoginRequest_class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::Proto::PayloadLoginRequest>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // string username = 1;
+    {::_pbi::TcParser::FastUS1,
+     {10, 0, 0, PROTOBUF_FIELD_OFFSET(PayloadLoginRequest, _impl_.username_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // string username = 1;
+    {PROTOBUF_FIELD_OFFSET(PayloadLoginRequest, _impl_.username_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcOptional | ::_fl::kUtf8String | ::_fl::kRepAString)},
+  }},
+  // no aux_entries
+  {{
+    "\31\10\0\0\0\0\0\0"
+    "Proto.PayloadLoginRequest"
+    "username"
+  }},
+};
+PROTOBUF_NOINLINE void PayloadLoginRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:Proto.PayloadLoginRequest)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  cached_has_bits = _impl_._has_bits_[0];
+  if ((cached_has_bits & 0x00000001U) != 0) {
+    _impl_.username_.ClearNonDefaultToEmpty();
+  }
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+::uint8_t* PROTOBUF_NONNULL PayloadLoginRequest::_InternalSerialize(
+    const ::google::protobuf::MessageLite& base, ::uint8_t* PROTOBUF_NONNULL target,
+    ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) {
+  const PayloadLoginRequest& this_ = static_cast<const PayloadLoginRequest&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+::uint8_t* PROTOBUF_NONNULL PayloadLoginRequest::_InternalSerialize(
+    ::uint8_t* PROTOBUF_NONNULL target,
+    ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
+  const PayloadLoginRequest& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  if constexpr (::_pbi::DebugHardenVerifyHasBitConsistency()) {
+    this_.VerifyHasBitConsistency();
+  }
+  // @@protoc_insertion_point(serialize_to_array_start:Proto.PayloadLoginRequest)
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
+
+  // string username = 1;
+  if ((this_._impl_._has_bits_[0] & 0x00000001U) != 0) {
+    if (!this_._internal_username().empty()) {
+      const ::std::string& _s = this_._internal_username();
+      ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+          _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "Proto.PayloadLoginRequest.username");
+      target = stream->WriteStringMaybeAliased(1, _s, target);
+    }
+  }
+
+  if (ABSL_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:Proto.PayloadLoginRequest)
+  return target;
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+::size_t PayloadLoginRequest::ByteSizeLong(const MessageLite& base) {
+  const PayloadLoginRequest& this_ = static_cast<const PayloadLoginRequest&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+::size_t PayloadLoginRequest::ByteSizeLong() const {
+  const PayloadLoginRequest& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  // @@protoc_insertion_point(message_byte_size_start:Proto.PayloadLoginRequest)
+  ::size_t total_size = 0;
+
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void)cached_has_bits;
+
+   {
+    // string username = 1;
+    cached_has_bits = this_._impl_._has_bits_[0];
+    if ((cached_has_bits & 0x00000001U) != 0) {
+      if (!this_._internal_username().empty()) {
+        total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                        this_._internal_username());
+      }
+    }
+  }
+  return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                             &this_._impl_._cached_size_);
+}
+
+void PayloadLoginRequest::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<PayloadLoginRequest*>(&to_msg);
+  auto& from = static_cast<const PayloadLoginRequest&>(from_msg);
+  if constexpr (::_pbi::DebugHardenVerifyHasBitConsistency()) {
+    from.VerifyHasBitConsistency();
+  }
+  // @@protoc_insertion_point(class_specific_merge_from_start:Proto.PayloadLoginRequest)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._impl_._has_bits_[0];
+  if ((cached_has_bits & 0x00000001U) != 0) {
+    if (!from._internal_username().empty()) {
+      _this->_internal_set_username(from._internal_username());
+    } else {
+      if (_this->_impl_.username_.IsDefault()) {
+        _this->_internal_set_username("");
+      }
+    }
+  }
+  _this->_impl_._has_bits_[0] |= cached_has_bits;
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void PayloadLoginRequest::CopyFrom(const PayloadLoginRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Proto.PayloadLoginRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void PayloadLoginRequest::InternalSwap(PayloadLoginRequest* PROTOBUF_RESTRICT PROTOBUF_NONNULL other) {
+  using ::std::swap;
+  auto* arena = GetArena();
+  ABSL_DCHECK_EQ(arena, other->GetArena());
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.username_, &other->_impl_.username_, arena);
+}
+
+::google::protobuf::Metadata PayloadLoginRequest::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
 class PayloadLoginResult::_Internal {
  public:
   using HasBits =
@@ -1656,7 +1956,7 @@ class PayloadLoginResult::_Internal {
 void PayloadLoginResult::clear_position() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (_impl_.position_ != nullptr) _impl_.position_->Clear();
-  _impl_._has_bits_[0] &= ~0x00000002U;
+  _impl_._has_bits_[0] &= ~0x00000001U;
 }
 PayloadLoginResult::PayloadLoginResult(::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
@@ -1672,8 +1972,7 @@ PROTOBUF_NDEBUG_INLINE PayloadLoginResult::Impl_::Impl_(
     [[maybe_unused]] ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
     [[maybe_unused]] const ::Proto::PayloadLoginResult& from_msg)
       : _has_bits_{from._has_bits_},
-        _cached_size_{0},
-        username_(arena, from.username_) {}
+        _cached_size_{0} {}
 
 PayloadLoginResult::PayloadLoginResult(
     ::google::protobuf::Arena* PROTOBUF_NULLABLE arena,
@@ -1689,7 +1988,7 @@ PayloadLoginResult::PayloadLoginResult(
       from._internal_metadata_);
   new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
   ::uint32_t cached_has_bits = _impl_._has_bits_[0];
-  _impl_.position_ = ((cached_has_bits & 0x00000002U) != 0)
+  _impl_.position_ = ((cached_has_bits & 0x00000001U) != 0)
                 ? ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.position_)
                 : nullptr;
   ::memcpy(reinterpret_cast<char *>(&_impl_) +
@@ -1705,8 +2004,7 @@ PayloadLoginResult::PayloadLoginResult(
 PROTOBUF_NDEBUG_INLINE PayloadLoginResult::Impl_::Impl_(
     [[maybe_unused]] ::google::protobuf::internal::InternalVisibility visibility,
     [[maybe_unused]] ::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
-      : _cached_size_{0},
-        username_(arena) {}
+      : _cached_size_{0} {}
 
 inline void PayloadLoginResult::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
@@ -1728,7 +2026,6 @@ inline void PayloadLoginResult::SharedDtor(MessageLite& self) {
   }
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
-  this_._impl_.username_.Destroy();
   delete this_._impl_.position_;
   this_._impl_.~Impl_();
 }
@@ -1739,7 +2036,7 @@ inline void* PROTOBUF_NONNULL PayloadLoginResult::PlacementNew_(
   return ::new (mem) PayloadLoginResult(arena);
 }
 constexpr auto PayloadLoginResult::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(PayloadLoginResult),
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(PayloadLoginResult),
                                             alignof(PayloadLoginResult));
 }
 constexpr auto PayloadLoginResult::InternalGenerateClassData_() {
@@ -1776,16 +2073,16 @@ PayloadLoginResult::GetClassData() const {
   return PayloadLoginResult_class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 4, 1, 41, 2>
+const ::_pbi::TcParseTable<2, 3, 1, 0, 2>
 PayloadLoginResult::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(PayloadLoginResult, _impl_._has_bits_),
     0, // no _extensions_
     4, 24,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967280,  // skipmap
+    4294967284,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    4,  // num_field_entries
+    3,  // num_field_entries
     1,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     PayloadLoginResult_class_data_.base(),
@@ -1797,35 +2094,28 @@ PayloadLoginResult::_table_ = {
   }, {{
     // .Proto.Vector3 position = 4;
     {::_pbi::TcParser::FastMtS1,
-     {34, 1, 0, PROTOBUF_FIELD_OFFSET(PayloadLoginResult, _impl_.position_)}},
+     {34, 0, 0, PROTOBUF_FIELD_OFFSET(PayloadLoginResult, _impl_.position_)}},
     // uint64 id = 1;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(PayloadLoginResult, _impl_.id_), 2>(),
-     {8, 2, 0, PROTOBUF_FIELD_OFFSET(PayloadLoginResult, _impl_.id_)}},
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(PayloadLoginResult, _impl_.id_), 1>(),
+     {8, 1, 0, PROTOBUF_FIELD_OFFSET(PayloadLoginResult, _impl_.id_)}},
     // bool is_successed = 2;
-    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(PayloadLoginResult, _impl_.is_successed_), 3>(),
-     {16, 3, 0, PROTOBUF_FIELD_OFFSET(PayloadLoginResult, _impl_.is_successed_)}},
-    // string username = 3;
-    {::_pbi::TcParser::FastUS1,
-     {26, 0, 0, PROTOBUF_FIELD_OFFSET(PayloadLoginResult, _impl_.username_)}},
+    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(PayloadLoginResult, _impl_.is_successed_), 2>(),
+     {16, 2, 0, PROTOBUF_FIELD_OFFSET(PayloadLoginResult, _impl_.is_successed_)}},
+    {::_pbi::TcParser::MiniParse, {}},
   }}, {{
     65535, 65535
   }}, {{
     // uint64 id = 1;
-    {PROTOBUF_FIELD_OFFSET(PayloadLoginResult, _impl_.id_), _Internal::kHasBitsOffset + 2, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt64)},
+    {PROTOBUF_FIELD_OFFSET(PayloadLoginResult, _impl_.id_), _Internal::kHasBitsOffset + 1, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt64)},
     // bool is_successed = 2;
-    {PROTOBUF_FIELD_OFFSET(PayloadLoginResult, _impl_.is_successed_), _Internal::kHasBitsOffset + 3, 0, (0 | ::_fl::kFcOptional | ::_fl::kBool)},
-    // string username = 3;
-    {PROTOBUF_FIELD_OFFSET(PayloadLoginResult, _impl_.username_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcOptional | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    {PROTOBUF_FIELD_OFFSET(PayloadLoginResult, _impl_.is_successed_), _Internal::kHasBitsOffset + 2, 0, (0 | ::_fl::kFcOptional | ::_fl::kBool)},
     // .Proto.Vector3 position = 4;
-    {PROTOBUF_FIELD_OFFSET(PayloadLoginResult, _impl_.position_), _Internal::kHasBitsOffset + 1, 0, (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    {PROTOBUF_FIELD_OFFSET(PayloadLoginResult, _impl_.position_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
   }},
   {{
       {::_pbi::TcParser::GetTable<::Proto::Vector3>()},
   }},
   {{
-    "\30\0\0\10\0\0\0\0"
-    "Proto.PayloadLoginResult"
-    "username"
   }},
 };
 PROTOBUF_NOINLINE void PayloadLoginResult::Clear() {
@@ -1836,16 +2126,11 @@ PROTOBUF_NOINLINE void PayloadLoginResult::Clear() {
   (void) cached_has_bits;
 
   cached_has_bits = _impl_._has_bits_[0];
-  if ((cached_has_bits & 0x00000003U) != 0) {
-    if ((cached_has_bits & 0x00000001U) != 0) {
-      _impl_.username_.ClearNonDefaultToEmpty();
-    }
-    if ((cached_has_bits & 0x00000002U) != 0) {
-      ABSL_DCHECK(_impl_.position_ != nullptr);
-      _impl_.position_->Clear();
-    }
+  if ((cached_has_bits & 0x00000001U) != 0) {
+    ABSL_DCHECK(_impl_.position_ != nullptr);
+    _impl_.position_->Clear();
   }
-  if ((cached_has_bits & 0x0000000cU) != 0) {
+  if ((cached_has_bits & 0x00000006U) != 0) {
     ::memset(&_impl_.id_, 0, static_cast<::size_t>(
         reinterpret_cast<char*>(&_impl_.is_successed_) -
         reinterpret_cast<char*>(&_impl_.id_)) + sizeof(_impl_.is_successed_));
@@ -1873,7 +2158,7 @@ PROTOBUF_NOINLINE void PayloadLoginResult::Clear() {
   (void)cached_has_bits;
 
   // uint64 id = 1;
-  if ((this_._impl_._has_bits_[0] & 0x00000004U) != 0) {
+  if ((this_._impl_._has_bits_[0] & 0x00000002U) != 0) {
     if (this_._internal_id() != 0) {
       target = stream->EnsureSpace(target);
       target = ::_pbi::WireFormatLite::WriteUInt64ToArray(
@@ -1882,7 +2167,7 @@ PROTOBUF_NOINLINE void PayloadLoginResult::Clear() {
   }
 
   // bool is_successed = 2;
-  if ((this_._impl_._has_bits_[0] & 0x00000008U) != 0) {
+  if ((this_._impl_._has_bits_[0] & 0x00000004U) != 0) {
     if (this_._internal_is_successed() != 0) {
       target = stream->EnsureSpace(target);
       target = ::_pbi::WireFormatLite::WriteBoolToArray(
@@ -1890,19 +2175,9 @@ PROTOBUF_NOINLINE void PayloadLoginResult::Clear() {
     }
   }
 
-  // string username = 3;
-  if ((this_._impl_._has_bits_[0] & 0x00000001U) != 0) {
-    if (!this_._internal_username().empty()) {
-      const ::std::string& _s = this_._internal_username();
-      ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-          _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "Proto.PayloadLoginResult.username");
-      target = stream->WriteStringMaybeAliased(3, _s, target);
-    }
-  }
-
   cached_has_bits = this_._impl_._has_bits_[0];
   // .Proto.Vector3 position = 4;
-  if ((cached_has_bits & 0x00000002U) != 0) {
+  if ((cached_has_bits & 0x00000001U) != 0) {
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
         4, *this_._impl_.position_, this_._impl_.position_->GetCachedSize(), target,
         stream);
@@ -1933,28 +2208,21 @@ PROTOBUF_NOINLINE void PayloadLoginResult::Clear() {
 
   ::_pbi::Prefetch5LinesFrom7Lines(&this_);
   cached_has_bits = this_._impl_._has_bits_[0];
-  if ((cached_has_bits & 0x0000000fU) != 0) {
-    // string username = 3;
-    if ((cached_has_bits & 0x00000001U) != 0) {
-      if (!this_._internal_username().empty()) {
-        total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
-                                        this_._internal_username());
-      }
-    }
+  if ((cached_has_bits & 0x00000007U) != 0) {
     // .Proto.Vector3 position = 4;
-    if ((cached_has_bits & 0x00000002U) != 0) {
+    if ((cached_has_bits & 0x00000001U) != 0) {
       total_size += 1 +
                     ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.position_);
     }
     // uint64 id = 1;
-    if ((cached_has_bits & 0x00000004U) != 0) {
+    if ((cached_has_bits & 0x00000002U) != 0) {
       if (this_._internal_id() != 0) {
         total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(
             this_._internal_id());
       }
     }
     // bool is_successed = 2;
-    if ((cached_has_bits & 0x00000008U) != 0) {
+    if ((cached_has_bits & 0x00000004U) != 0) {
       if (this_._internal_is_successed() != 0) {
         total_size += 2;
       }
@@ -1977,17 +2245,8 @@ void PayloadLoginResult::MergeImpl(::google::protobuf::MessageLite& to_msg, cons
   (void) cached_has_bits;
 
   cached_has_bits = from._impl_._has_bits_[0];
-  if ((cached_has_bits & 0x0000000fU) != 0) {
+  if ((cached_has_bits & 0x00000007U) != 0) {
     if ((cached_has_bits & 0x00000001U) != 0) {
-      if (!from._internal_username().empty()) {
-        _this->_internal_set_username(from._internal_username());
-      } else {
-        if (_this->_impl_.username_.IsDefault()) {
-          _this->_internal_set_username("");
-        }
-      }
-    }
-    if ((cached_has_bits & 0x00000002U) != 0) {
       ABSL_DCHECK(from._impl_.position_ != nullptr);
       if (_this->_impl_.position_ == nullptr) {
         _this->_impl_.position_ = ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.position_);
@@ -1995,12 +2254,12 @@ void PayloadLoginResult::MergeImpl(::google::protobuf::MessageLite& to_msg, cons
         _this->_impl_.position_->MergeFrom(*from._impl_.position_);
       }
     }
-    if ((cached_has_bits & 0x00000004U) != 0) {
+    if ((cached_has_bits & 0x00000002U) != 0) {
       if (from._internal_id() != 0) {
         _this->_impl_.id_ = from._impl_.id_;
       }
     }
-    if ((cached_has_bits & 0x00000008U) != 0) {
+    if ((cached_has_bits & 0x00000004U) != 0) {
       if (from._internal_is_successed() != 0) {
         _this->_impl_.is_successed_ = from._impl_.is_successed_;
       }
@@ -2020,11 +2279,8 @@ void PayloadLoginResult::CopyFrom(const PayloadLoginResult& from) {
 
 void PayloadLoginResult::InternalSwap(PayloadLoginResult* PROTOBUF_RESTRICT PROTOBUF_NONNULL other) {
   using ::std::swap;
-  auto* arena = GetArena();
-  ABSL_DCHECK_EQ(arena, other->GetArena());
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
-  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.username_, &other->_impl_.username_, arena);
   ::google::protobuf::internal::memswap<
       PROTOBUF_FIELD_OFFSET(PayloadLoginResult, _impl_.is_successed_)
       + sizeof(PayloadLoginResult::_impl_.is_successed_)

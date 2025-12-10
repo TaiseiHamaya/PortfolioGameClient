@@ -23,8 +23,8 @@ void FollowCamera::initialize() {
 		Quaternion::EulerDegree(45, 0, 0);
 
 	offset = { 0,0,-15 };
-	padHandler.initialize({ PadID::Y });
-	keyHandler.initialize({ KeyID::L });
+	padHandler.initialize({ szg::PadID::Y });
+	keyHandler.initialize({ szg::KeyID::L });
 
 #ifndef DEBUG_FEATURES_ENABLE
 	szg::JsonAsset json;
@@ -120,7 +120,7 @@ void FollowCamera::input() {
 	if (inputStickR.length() == 0) {
 		inputStickR = szg::InputAdvanced::PressArrow();
 	}
-	isPressX = padHandler.trigger(PadID::Y) || keyHandler.trigger(KeyID::L);
+	isPressX = padHandler.trigger(szg::PadID::Y) || keyHandler.trigger(szg::KeyID::L);
 }
 
 void FollowCamera::do_shake() {

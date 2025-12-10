@@ -124,22 +124,22 @@ $exeDir = Split-Path -Parent $Path
 Write-Host "実行ファイルと依存ファイルをコピーしています..." -ForegroundColor Cyan
 Copy-Item -Path "$exeDir\*" -Destination $tempDir -Recurse -Force
 
-# DirectXGame のリソースフォルダをコピー
-$directXGameDir = Join-Path $solutionDir "DirectXGame"
-$engineResourcesSource = Join-Path $directXGameDir "EngineResources"
-$editorResourcesSource = Join-Path $directXGameDir "EditorResources"
+# SyzygyEngine のリソースフォルダをコピー
+$SyzygyEngineDir = Join-Path $solutionDir "SyzygyEngine"
+$engineResourcesSource = Join-Path $SyzygyEngineDir "EngineResources"
+$editorResourcesSource = Join-Path $SyzygyEngineDir "EditorResources"
 
-$directXGameTempDir = Join-Path $tempDir "DirectXGame"
-New-Item -ItemType Directory -Path $directXGameTempDir -Force | Out-Null
+$SyzygyEngineTempDir = Join-Path $tempDir "SyzygyEngine"
+New-Item -ItemType Directory -Path $SyzygyEngineTempDir -Force | Out-Null
 
 if (Test-Path $engineResourcesSource) {
 	Write-Host "EngineResourcesをコピーしています..." -ForegroundColor Cyan
-	Copy-Item -Path $engineResourcesSource -Destination $directXGameTempDir -Recurse -Force
+	Copy-Item -Path $engineResourcesSource -Destination $SyzygyEngineTempDir -Recurse -Force
 }
 
 if (Test-Path $editorResourcesSource) {
 	Write-Host "EditorResourcesをコピーしています..." -ForegroundColor Cyan
-	Copy-Item -Path $editorResourcesSource -Destination $directXGameTempDir -Recurse -Force
+	Copy-Item -Path $editorResourcesSource -Destination $SyzygyEngineTempDir -Recurse -Force
 }
 
 # Game のリソースフォルダをコピー

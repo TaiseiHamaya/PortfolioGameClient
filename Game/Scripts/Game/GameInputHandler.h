@@ -47,9 +47,9 @@ public:
 	void update();
 
 private:
-	szg::InputHandler<KeyID> actionHandlerK;
-	szg::InputHandler<PadID> actionHandlerP;
-	std::vector<std::pair<KeyID, PadID>> inputKey;
+	szg::InputHandler<szg::KeyID> actionHandlerK;
+	szg::InputHandler<szg::PadID> actionHandlerP;
+	std::vector<std::pair<szg::KeyID, szg::PadID>> inputKey;
 
 	Vector2 inputDirection;
 	Vector2 xzDirection;

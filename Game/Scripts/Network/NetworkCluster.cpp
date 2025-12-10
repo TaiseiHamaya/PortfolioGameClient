@@ -16,11 +16,19 @@ void NetworkCluster::initialize() {
 	packetSender.initialize();
 }
 
-void NetworkCluster::setup() {
+void NetworkCluster::setup(const std::string& userName) {
 	packetReceiver.setup(connectionManager);
 	packetSender.setup(connectionManager);
 
 	connectionManager.connect();
+
+	Proto::Packet packet;
+	packet.set_category_login_message(Proto::CategoryLoginMessage::LOGIN_REQUEST);
+	Proto::PayloadLoginRequest body;
+	body.set_username(userName);
+
+	packet.set_payload(body.SerializeAsString());
+	packetSender.stack_packet(packet);
 }
 
 void NetworkCluster::finalize() {

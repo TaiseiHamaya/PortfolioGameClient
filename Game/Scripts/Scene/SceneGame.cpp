@@ -13,6 +13,7 @@
 #include <Engine/Assets/PolygonMesh/PolygonMeshLibrary.h>
 #include <Engine/Assets/PrimitiveGeometry/PrimitiveGeometryLibrary.h>
 #include <Engine/Assets/Texture/TextureLibrary.h>
+#include <Engine/Module/Manager/RuntimeStorage/RuntimeStorage.h>
 
 #include "Scripts/Extension/RenderNode/EnvironmentMeshNode/EnvironmentMeshNode.h"
 #include "Scripts/Extension/Util/LookAtRect.h"
@@ -114,7 +115,16 @@ void SceneGame::custom_setup() {
 	// Setup
 	enemyManagerRef->setup(entityManagerRef);
 	zoneHandlerRef->setup(entityManagerRef, enemyManagerRef, networkClusterRef->connection_manager(), networkClusterRef->get_receiver(), networkClusterRef->get_sender());
-	networkClusterRef->setup();
+	std::string userName;
+	auto temp = szg::RuntimeStorage::GetValueImm("Temp", "PlayerName");
+	if (temp.is_null()) {
+		userName = "Unknown";
+	}
+	else {
+		userName = std::any_cast<std::string>(*temp);
+	}
+	userName.push_back(' ');
+	networkClusterRef->setup(userName);
 	gameInputHandlerRef->setup(zoneHandlerRef);
 
 	if (!get_world(0)) {
@@ -125,6 +135,7 @@ void SceneGame::custom_setup() {
 	// WorldInstances
 	// Allocation
 	Reference<Player> player = entityManagerRef->generate<Player>("Player.json");
+	player->set_name(userName);
 	skydome = get_world(0)->world_root_mut().instantiate<szg::StaticMeshInstance>(nullptr, "skydome.gltf");
 	camera3D = get_world(0)->world_root_mut().instantiate<FollowCamera>();
 

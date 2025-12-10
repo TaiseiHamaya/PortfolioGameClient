@@ -13,12 +13,12 @@
 
 void GameInputHandler::initialize() {
 	inputKey = {
-		{KeyID::Space, PadID::Y}, // ジャンプ
-		{KeyID::One, PadID::A}, // アクション1
+		{szg::KeyID::Space, szg::PadID::Y}, // ジャンプ
+		{szg::KeyID::One, szg::PadID::A}, // アクション1
 	};
 
-	std::vector<KeyID> keys;
-	std::vector<PadID> pads;
+	std::vector<szg::KeyID> keys;
+	std::vector<szg::PadID> pads;
 	// 配列に並べ替え
 	for (auto& [key, pad] : inputKey) {
 		keys.emplace_back(key);

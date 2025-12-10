@@ -203,10 +203,9 @@ void ZoneHandler::process_login_message(Proto::CategoryLoginMessage type, const 
 		body.ParseFromString(payload);
 		gameServerConnectionManager->on_connection_succeeded(); // 通知
 		player->set_server_id(body.id()); // サーバーIDの設定
-		player->set_name(body.username()); // 名前の設定
 		player->get_transform().set_translate(Vector3{ body.position().x(), body.position().y(), body.position().z() }); // 初期位置の設定
 		entityManager->register_server_id(body.id(), player);
-		szgInformation("Login succeeded. Id-\'{}\' Name-\'{}\'", body.id(), body.username());
+		szgInformation("Login succeeded. Id-\'{}\'", body.id());
 	}
 	break;
 	case Proto::LOGIN_NOTIFICATION: // 他プレイヤーのログイン通知
