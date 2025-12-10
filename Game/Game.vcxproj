@@ -15,6 +15,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Scripts\Scene\LoginScene.cpp" />
     <ClCompile Include="Scripts\Extension\DrawExecutor\EnvironmentMeshExecutor.cpp" />
     <ClCompile Include="Scripts\Extension\RenderNode\EnvironmentMeshNode\EnvironmentMeshNode.cpp" />
     <ClCompile Include="Scripts\Instance\Player\RemotePlayer.cpp" />
@@ -59,8 +60,10 @@
     <ClCompile Include="Scripts\Game\Zone\Command\ZoneLogoutPlayerCommand.cpp" />
     <ClCompile Include="Scripts\Game\Zone\Command\ZoneEntityDamagedCommand.cpp" />
     <ClCompile Include="Scripts\Game\Zone\Command\ZonePlayActionCommand.cpp" />
+    <ClCompile Include="Scripts\ScriptTitle\TitleStateScript.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Scripts\Scene\LoginScene.h" />
     <ClInclude Include="Scripts\Extension\DrawExecutor\EnvironmentMeshExecutor.h" />
     <ClInclude Include="Scripts\Extension\RenderNode\EnvironmentMeshNode\EnvironmentMeshNode.h" />
     <ClInclude Include="Scripts\Instance\Player\RemotePlayer.h" />
@@ -106,6 +109,7 @@
     <ClInclude Include="Scripts\Game\Zone\Command\ZoneLogoutPlayerCommand.h" />
     <ClInclude Include="Scripts\Game\Zone\Command\ZoneEntityDamagedCommand.h" />
     <ClInclude Include="Scripts\Game\Zone\Command\ZonePlayActionCommand.h" />
+    <ClInclude Include="Scripts\ScriptTitle\TitleStateScript.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="DevTool\launch-bot.ps1" />

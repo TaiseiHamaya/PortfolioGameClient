@@ -31,7 +31,7 @@ public:
 	/// <summary>
 	/// 遅延初期化
 	/// </summary>
-	void setup();
+	void setup(const std::string& userName);
 
 	/// <summary>
 	/// 終了処理

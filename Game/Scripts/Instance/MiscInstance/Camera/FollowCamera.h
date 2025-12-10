@@ -36,8 +36,8 @@ private:
 	Vector3 offset;
 
 	bool isPressX;
-	szg::InputHandler<KeyID> keyHandler;
-	szg::InputHandler<PadID> padHandler;
+	szg::InputHandler<szg::KeyID> keyHandler;
+	szg::InputHandler<szg::PadID> padHandler;
 	Vector2 inputStickR;
 
 	Reference<const WorldInstance> target;

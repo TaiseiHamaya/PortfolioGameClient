@@ -4,6 +4,7 @@
 
 enum SceneListPortfolio {
 	SCENE_GAME,
+	SCENE_LOGIN,
 };
 
 class FactoryPortfolio final : public szg::BaseSceneFactory {
@@ -13,6 +14,6 @@ public:
 
 public:
 	std::unique_ptr<szg::Scene> initialize_scene2() override;
-	std::unique_ptr<szg::Scene> create_scene2(int32_t next) override;
+	std::unique_ptr<szg::Scene> create_scene2(i32 next) override;
 };
 

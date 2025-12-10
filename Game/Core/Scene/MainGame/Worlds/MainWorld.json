@@ -35,7 +35,8 @@
 				}
 			},
 			"Name": "DirectionalLight",
-			"Type": 5000
+			"Type": 5000,
+			"Use runtime": false
 		},
 		{
 			"IsDraw": true,
@@ -119,7 +120,8 @@
 			},
 			"Name": "PointLight",
 			"Radius": 4.800000190734863,
-			"Type": 5001
+			"Type": 5001,
+			"Use runtime": false
 		}
 	],
 	"Name": "MainWorld",

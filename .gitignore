@@ -326,4 +326,7 @@ imgui.ini
 
 # Ignore DirectXTex compiled shader
 /Library/Externals/DirectXTex/Shaders/Compiled
+
+# SyzygyEngine ignore rules
 /Log/*
+/Game/DebugData/*
