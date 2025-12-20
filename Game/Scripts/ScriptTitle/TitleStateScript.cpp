@@ -15,7 +15,7 @@ void TitleStateScript::setup() {
 	nameString = std::any_cast<Reference<szg::StringRectInstance>>(*szg::RuntimeStorage::GetValueMut("RuntimeInstance", "Name"));
 	inputString = std::any_cast<Reference<szg::StringRectInstance>>(*szg::RuntimeStorage::GetValueMut("RuntimeInstance", "InputtingString"));
 
-	inputKey.initialize({ szg::KeyID::Space, szg::KeyID::Return, szg::KeyID::W, szg::KeyID::S, szg::KeyID::DownArrow, szg::KeyID::UpArrow, szg::KeyID::Backspace });
+	inputKey.initialize({ szg::KeyID::Space, szg::KeyID::Return, szg::KeyID::W, szg::KeyID::S, szg::KeyID::DownArrow, szg::KeyID::UpArrow });
 	inputPad.initialize({ szg::PadID::A,szg::PadID::Up,szg::PadID::Down });
 }
 
@@ -83,7 +83,7 @@ void TitleStateScript::prev_update() {
 	}
 
 	if (isInputText) {
-		if (inputKey.trigger(szg::KeyID::Backspace)) {
+		if (szg::TextInput::IsDeleteInput()) {
 			inputString->pop_back();
 		}
 		const std::wstring& inputChars = szg::TextInput::FrameInputImm();

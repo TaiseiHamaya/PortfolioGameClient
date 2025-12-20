@@ -127,7 +127,7 @@ void ZoneHandler::request_play_action(u32 actionId) {
 	// TODO : 要修正
 	bool result = player->can_play_action("PaladinHolySpirit"_sh);
 	if (!result) {
-		szgInformation("Failed to start action Id:{}", actionId);
+		szgWarning("Failed to start action Id:{}", actionId);
 		return;
 	}
 	// グローバルスキルの処理

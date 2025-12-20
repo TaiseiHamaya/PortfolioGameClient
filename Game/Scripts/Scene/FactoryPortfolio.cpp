@@ -14,7 +14,7 @@ std::unique_ptr<szg::BaseScene> FactoryPortfolio::create_scene([[maybe_unused]] 
 }
 
 std::unique_ptr<szg::Scene> FactoryPortfolio::initialize_scene2() {
-	return create_scene2(0);
+	return create_scene2(SceneListPortfolio::SCENE_LOGIN);
 }
 
 std::unique_ptr<szg::Scene> FactoryPortfolio::create_scene2(i32 next) {

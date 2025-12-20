@@ -14,6 +14,9 @@ void GameServerConnectionManager::initialize() {
 					break;
 				}
 			}
+			std::this_thread::sleep_for(
+				std::chrono::milliseconds(100)
+			);
 			context.run();
 		}
 	} };
@@ -110,7 +113,7 @@ void GameServerConnectionManager::on_connect_handler(const asio::error_code& err
 		else {
 			switch (errorCode.value()) {
 			case asio::error::connection_refused:
-				//szgError("サーバーと接続しましたが、拒否されました。");
+				szgError("サーバーと接続しましたが、拒否されました。");
 				break;
 			case asio::error::operation_aborted:
 				szgError("サーバーとの接続は中止されました。");
