@@ -6,5 +6,6 @@
 		"A": 1.0000
 	},
   "Model": "RedComet.gltf",
-  "TargetRadius": 1.5
+  "TargetRadius": 1.5,
+  "Name": "Red Comet"
 }

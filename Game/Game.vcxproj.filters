@@ -330,6 +330,7 @@
     <ClCompile Include="Scripts\Game\Zone\Command\ZoneEntityDamagedCommand.cpp" />
     <ClCompile Include="Scripts\Scene\LoginScene.cpp" />
     <ClCompile Include="Scripts\ScriptTitle\TitleStateScript.cpp" />
+    <ClCompile Include="Scripts\Manager\GameLogWindowManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="DevTool\launch-bot.ps1" />
@@ -341,5 +342,6 @@
     <ClInclude Include="Scripts\Game\Zone\Command\ZoneEntityDamagedCommand.h" />
     <ClInclude Include="Scripts\Scene\LoginScene.h" />
     <ClInclude Include="Scripts\ScriptTitle\TitleStateScript.h" />
+    <ClInclude Include="Scripts\Manager\GameLogWindowManager.h" />
   </ItemGroup>
 </Project>

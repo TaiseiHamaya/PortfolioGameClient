@@ -28,6 +28,7 @@ void IEntity::initialize(const std::filesystem::path& file, u64 localId_) {
 	targetRadius = json.try_emplace<float>("TargetRadius");
 
 	ui->initialize(targetRadius * 3.0f + 1.0f, json.try_emplace<Color4>("HPColor"));
+	set_name(json.get().value("Name", "Unknown"));
 	shadow->setup(this, targetRadius * 4);
 }
 

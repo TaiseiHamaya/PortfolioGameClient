@@ -24,6 +24,7 @@
 #include "Scripts/Instance/Player/Player.h"
 #include "Scripts/Manager/EffectManager.h"
 #include "Scripts/Manager/EntityManager.h"
+#include "Scripts/Manager/GameLogWindowManager.h"
 #include "Scripts/Network/NetworkCluster.h"
 
 #include <Engine/Assets/FontAtlasMSDF/FontAtlasMSDFLibrary.h>
@@ -80,6 +81,8 @@ void SceneGame::custom_setup() {
 	std::unique_ptr<GameInputHandler> gameInputHandler; // プレイヤー入力
 	std::unique_ptr<NetworkCluster> networkCluster; // ネットワーク
 	std::unique_ptr<ZoneHandler> zoneHandler; // ゾーン処理
+
+	std::unique_ptr<GameLogWindowManager> gameLogWindowManager;
 	// ---------- Initialize ----------
 	// WorldManager
 	entityManager = eps::CreateUnique<EntityManager>();
@@ -95,6 +98,8 @@ void SceneGame::custom_setup() {
 	gameInputHandler = eps::CreateUnique<GameInputHandler>();
 	gameInputHandler->initialize();
 
+	gameLogWindowManager = eps::CreateUnique<GameLogWindowManager>();
+
 	// Reference
 	Reference<EntityManager> entityManagerRef = entityManager;
 	Reference<EnemyManager> enemyManagerRef = enemyManager;
@@ -102,6 +107,7 @@ void SceneGame::custom_setup() {
 	Reference<NetworkCluster> networkClusterRef = networkCluster;
 	Reference<GameInputHandler> gameInputHandlerRef = gameInputHandler;
 	Reference<ZoneHandler> zoneHandlerRef = zoneHandler;
+	Reference<GameLogWindowManager> gameLogWindowManagerRef = gameLogWindowManager;
 
 	sceneScriptManager.register_script(std::move(gameInputHandler));
 	sceneScriptManager.register_script(std::move(zoneHandler));
@@ -109,12 +115,14 @@ void SceneGame::custom_setup() {
 	sceneScriptManager.register_script(std::move(enemyManager));
 	sceneScriptManager.register_script(std::move(entityManager));
 	sceneScriptManager.register_script(std::move(effectManager));
+	sceneScriptManager.register_script(std::move(gameLogWindowManager));
 
 	environmentMeshExecutor = eps::CreateUnique<EnvironmentMeshExecutor>("Grid.obj", 1, "rogland_clear_night_2k.dds");
 
+	gameLogWindowManagerRef->initialize();
 	// Setup
 	enemyManagerRef->setup(entityManagerRef);
-	zoneHandlerRef->setup(entityManagerRef, enemyManagerRef, networkClusterRef->connection_manager(), networkClusterRef->get_receiver(), networkClusterRef->get_sender());
+	zoneHandlerRef->setup(entityManagerRef, enemyManagerRef, networkClusterRef->connection_manager(), networkClusterRef->get_receiver(), networkClusterRef->get_sender(), gameLogWindowManagerRef);
 	std::string userName;
 	auto temp = szg::RuntimeStorage::GetValueImm("Temp", "PlayerName");
 	if (temp.is_null()) {
@@ -123,7 +131,6 @@ void SceneGame::custom_setup() {
 	else {
 		userName = std::any_cast<std::string>(*temp);
 	}
-	userName.push_back(' ');
 	networkClusterRef->setup(userName);
 	gameInputHandlerRef->setup(zoneHandlerRef);
 

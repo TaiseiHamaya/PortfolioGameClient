@@ -2,7 +2,6 @@
 
 #include <Engine/Module/Manager/SceneScript/ISceneScript.h>
 
-#include <memory>
 #include <unordered_map>
 
 #include <Engine/Module/Manager/World/WorldRoot.h>

@@ -16,6 +16,7 @@ class EnemyManager;
 class GameServerConnectionManager;
 class GameServerPacketReceiver;
 class GameServerPacketSender;
+class GameLogWindowManager;
 
 /// <summary>
 /// ゾーン処理に関するハンドラ
@@ -33,7 +34,8 @@ public:
 		Reference<EnemyManager> enemyManager_,
 		Reference<GameServerConnectionManager> gameServerConnectionManager_,
 		Reference<GameServerPacketReceiver> gameServerPacketReceiver_,
-		Reference<GameServerPacketSender> gameServerPacketSender_
+		Reference<GameServerPacketSender> gameServerPacketSender_,
+		Reference<GameLogWindowManager> gameLogWindowManager_
 	);
 
 	void prev_update() override;
@@ -80,6 +82,7 @@ private:
 	Reference<GameServerConnectionManager> gameServerConnectionManager;
 	Reference<GameServerPacketSender> gameServerPacketSender;
 	Reference<GameServerPacketReceiver> gameServerPacketReceiver;
+	Reference<GameLogWindowManager> gameLogWindowManager;
 
 public:
 	void set_player(Reference<Player> player_);

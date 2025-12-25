@@ -1,15 +1,13 @@
 #include "EffectManager.h"
 
-#include <Engine/Module/Manager/World/WorldRoot.h>
-
 void EffectManager::prev_update() {
 }
 
 void EffectManager::post_update() {
 	std::erase_if(instances,
-		[&](const Reference<IEffectInstance>& instance) {
+		[&](Reference<IEffectInstance>& instance) {
 		if (instance->is_end_effect()) {
-			instance->world_root_mut()->destroy(instance);
+			instance->destroy_self();
 			return true;
 		}
 		return false;
