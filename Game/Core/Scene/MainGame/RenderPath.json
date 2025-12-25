@@ -30,7 +30,7 @@
 			},
 			"Debug": {
 				"Position": {
-					"X": -240.0,
+					"X": -220.0,
 					"Y": 110.0
 				}
 			},
@@ -67,7 +67,7 @@
 			},
 			"Debug": {
 				"Position": {
-					"X": 90.0,
+					"X": 100.0,
 					"Y": 110.0
 				}
 			},
@@ -231,7 +231,7 @@
 			"Debug": {
 				"Position": {
 					"X": 1370.0,
-					"Y": 100.0
+					"Y": 110.0
 				}
 			},
 			"Links": {
@@ -239,13 +239,91 @@
 				"CombinedTexture": 8
 			},
 			"Type": 1
+		},
+		{
+			"Data": {
+				"BottomRight": {
+					"X": 1920.0,
+					"Y": 1080.0
+				},
+				"CameraId": 0,
+				"GBufferSize": {
+					"X": 1920.0,
+					"Y": 1080.0
+				},
+				"Height": 1080.0,
+				"LayerIndex": 0,
+				"Left": 0.0,
+				"MaxDepth": 1.0,
+				"MinDepth": 0.0,
+				"OutputSize": {
+					"X": 1920.0,
+					"Y": 1080.0
+				},
+				"Top": 0.0,
+				"TopLeft": {
+					"X": 0.0,
+					"Y": 0.0
+				},
+				"Width": 1920.0,
+				"WorldIndex": 1
+			},
+			"Debug": {
+				"Position": {
+					"X": 1760.0,
+					"Y": 110.0
+				}
+			},
+			"Links": {
+				"Base": 9
+			},
+			"Type": 0
+		},
+		{
+			"Data": {
+				"BottomRight": {
+					"X": 1920.0,
+					"Y": 1080.0
+				},
+				"CameraId": 0,
+				"GBufferSize": {
+					"X": 1920.0,
+					"Y": 1080.0
+				},
+				"Height": 1080.0,
+				"LayerIndex": 1,
+				"Left": 0.0,
+				"MaxDepth": 1.0,
+				"MinDepth": 0.0,
+				"OutputSize": {
+					"X": 1920.0,
+					"Y": 1080.0
+				},
+				"Top": 0.0,
+				"TopLeft": {
+					"X": 0.0,
+					"Y": 0.0
+				},
+				"Width": 1920.0,
+				"WorldIndex": 1
+			},
+			"Debug": {
+				"Position": {
+					"X": 2080.0,
+					"Y": 110.0
+				}
+			},
+			"Links": {
+				"Base": 10
+			},
+			"Type": 0
 		}
 	],
 	"ResultNode": {
-		"Connect": 10,
+		"Connect": 12,
 		"Debug": {
 			"Position": {
-				"X": 1750.0,
+				"X": 2400.0,
 				"Y": 110.0
 			}
 		}

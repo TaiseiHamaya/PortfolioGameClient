@@ -11,16 +11,18 @@
 #include "Scripts/Instance/MiscInstance/Enemy/EnemyManager.h"
 #include "Scripts/Instance/Player/Player.h"
 #include "Scripts/Manager/EntityManager.h"
+#include "Scripts/Manager/GameLogWindowManager.h"
 #include "Scripts/Network/GameServer/GameServerConnectionManager.h"
 #include "Scripts/Network/GameServer/GameServerPacketReceiver.h"
 #include "Scripts/Network/GameServer/GameServerPacketSender.h"
 
-void ZoneHandler::setup(Reference<EntityManager> entityManager_, Reference<EnemyManager> enemyManager_, Reference<GameServerConnectionManager> gameServerConnectionManager_, Reference<GameServerPacketReceiver> gameServerPacketReceiver_, Reference<GameServerPacketSender> gameServerPacketSender_) {
+void ZoneHandler::setup(Reference<EntityManager> entityManager_, Reference<EnemyManager> enemyManager_, Reference<GameServerConnectionManager> gameServerConnectionManager_, Reference<GameServerPacketReceiver> gameServerPacketReceiver_, Reference<GameServerPacketSender> gameServerPacketSender_, Reference<GameLogWindowManager> gameLogWindowManager_) {
 	entityManager = entityManager_;
 	enemyManager = enemyManager_;
 	gameServerConnectionManager = gameServerConnectionManager_;
 	gameServerPacketReceiver = gameServerPacketReceiver_;
 	gameServerPacketSender = gameServerPacketSender_;
+	gameLogWindowManager = gameLogWindowManager_;
 }
 
 void ZoneHandler::prev_update() {
@@ -179,9 +181,17 @@ void ZoneHandler::process_text_message(Proto::CategoryTextMessage type, const st
 		Reference<IEntity> entity = entityManager->inquire_server_id(body.id());
 		if (entity) {
 			szgInformation("[{}]: {}", entity->name_imm(), body.message());
+			gameLogWindowManager->add_log(
+				GameLogWindowManager::Type::ChatMessage,
+				ConvertString(std::format("[{}]: {}", entity->name_imm(), body.message()))
+			);
 		}
 		else {
 			szgInformation("[Unknown]: {}", body.message());
+			gameLogWindowManager->add_log(
+				GameLogWindowManager::Type::ChatMessage,
+				ConvertString(std::format("[Unknown]: {}", body.message()))
+			);
 		}
 	}
 	break;
@@ -190,6 +200,10 @@ void ZoneHandler::process_text_message(Proto::CategoryTextMessage type, const st
 		Proto::PayloadSystemMessage body;
 		body.ParseFromString(payload);
 		szgInformation("[System]: {}", body.message());
+		gameLogWindowManager->add_log(
+			GameLogWindowManager::Type::SystemMessage,
+			ConvertString(std::format("[System]: {}", body.message()))
+		);
 	}
 	break;
 	}
@@ -206,6 +220,10 @@ void ZoneHandler::process_login_message(Proto::CategoryLoginMessage type, const 
 		player->get_transform().set_translate(Vector3{ body.position().x(), body.position().y(), body.position().z() }); // 初期位置の設定
 		entityManager->register_server_id(body.id(), player);
 		szgInformation("Login succeeded. Id-\'{}\'", body.id());
+		gameLogWindowManager->add_log(
+			GameLogWindowManager::Type::SystemMessage,
+			L"Welcome to server!"
+		);
 	}
 	break;
 	case Proto::LOGIN_NOTIFICATION: // 他プレイヤーのログイン通知
@@ -213,6 +231,10 @@ void ZoneHandler::process_login_message(Proto::CategoryLoginMessage type, const 
 		Proto::PayloadLoginNotification body;
 		body.ParseFromString(payload);
 		szgInformation("Player added. Id-\'{}\' Name-\'{}\'", body.id(), body.username());
+		gameLogWindowManager->add_log(
+			GameLogWindowManager::Type::SystemMessage,
+			ConvertString(std::format("Player {} has joined the game.", body.username()))
+		);
 		Vector3 position(body.position().x(), body.position().y(), body.position().z());
 		// コマンド追加
 		zoneCommands.emplace_back(
@@ -241,7 +263,14 @@ void ZoneHandler::process_logout_message(Proto::CategoryLogoutMessage type, cons
 		zoneCommands.emplace_back(
 			std::make_unique<ZoneLogoutPlayerCommand>(entityManager, body.id())
 		);
-		szgInformation("Player removed. Id-\'{}\'", body.id());
+		Reference<IEntity> entity = entityManager->inquire_server_id(body.id());
+		if (entity) {
+			szgInformation("Player removed. Id-\'{}\' Name-\'{}\'", body.id(), entity->name_imm());
+			gameLogWindowManager->add_log(
+				GameLogWindowManager::Type::SystemMessage,
+				ConvertString(std::format("Player {} has left the game.", entity->name_imm()))
+			);
+		}
 	}
 	break;
 	default:
@@ -270,18 +299,25 @@ void ZoneHandler::process_sync_message(Proto::CategorySyncMessage type, const st
 	{
 		Proto::PayloadPlayAction body;
 		body.ParseFromString(payload);
+		Reference<IEntity> entity = entityManager->inquire_server_id(body.id());
+		u64 targetId = body.entity_id();
+		Reference<IEntity> target = entityManager->inquire_server_id(targetId);
+		if (entity && target) {
+			szgInformation("Entity Id:{} Play Action Id:{}", body.id(), body.action_id());
+			szgInformation("{} used action {} on {}.", entity->name_imm(), body.action_id(), target->name_imm());
+			gameLogWindowManager->add_log(
+				GameLogWindowManager::Type::DamagedLog,
+				ConvertString(std::format("{} action {}.", entity->name_imm(), body.action_id()))
+			);
+		}
 		// 自分自身のアクションは処理しない
 		if (player->server_id().has_value() && body.id() == player->server_id().value()) {
 			break;
 		}
-		Reference<IEntity> entity = entityManager->inquire_server_id(body.id());
-		u64 targetId = body.entity_id();
-		Reference<IEntity> target = entityManager->inquire_server_id(targetId);
 		// コマンド追加
 		zoneCommands.emplace_back(
 			std::make_unique<ZonePlayActionCommand>(entity, body.action_id(), target)
 		);
-		szgInformation("Entity Id:{} Play Action Id:{}", body.id(), body.action_id());
 	}
 	break;
 	case Proto::ENTITY_DAMAGED: // ダメージ同期
@@ -293,7 +329,13 @@ void ZoneHandler::process_sync_message(Proto::CategorySyncMessage type, const st
 		zoneCommands.emplace_back(
 			std::make_unique<ZoneEntityDamagedCommand>(target, body.damage())
 		);
-		szgInformation("Entity Id:{} Damaged by Id:{} Damage:{}", body.target_id(), body.attacker_id(), body.damage());
+		if (attacker && target) {
+			szgInformation("{} dealt {} damage to {}.", attacker->name_imm(), body.damage(), target->name_imm());
+			gameLogWindowManager->add_log(
+				GameLogWindowManager::Type::DamagedLog,
+				ConvertString(std::format("{} damage to {}.", body.damage(), target->name_imm()))
+			);
+		}
 	}
 	default:
 		break;

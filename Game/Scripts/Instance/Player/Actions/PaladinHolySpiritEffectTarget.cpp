@@ -15,8 +15,9 @@ void PaladinHolySpiritEffectTarget::initialize(const Vector3& position) {
 
 	load_constant_values();
 
+	Reference<szg::WorldRoot> worldRoot = world_root_mut();
 	// 黒いやつ
-	absorption = world_root_mut()->instantiate<LookAtRect>(this);
+	absorption = worldRoot->instantiate<LookAtRect>(this);
 	absorption->get_material().texture = szg::TextureLibrary::GetTexture("PaladinHolySpiritEffectTargetAbsorption.png");
 	absorption->initialize(absorptionEffectValues.size, absorptionEffectValues.pivot);
 	absorption->get_transform().set_scale(absorptionEffectValues.beginScale);
@@ -25,10 +26,10 @@ void PaladinHolySpiritEffectTarget::initialize(const Vector3& position) {
 	absorption->set_active(false);
 
 	// でかいやつ
-	centerConstraint = world_root_mut()->instantiate<WorldInstance>(this);
+	centerConstraint = worldRoot->instantiate<WorldInstance>(this);
 	centerBillboards.resize(6);
 	for (i32 i = 0; Reference<szg::Rect3d>& centerBillboard : centerBillboards) {
-		centerBillboard = world_root_mut()->instantiate<szg::Rect3d>(centerConstraint);
+		centerBillboard = worldRoot->instantiate<szg::Rect3d>(centerConstraint);
 		centerBillboard->initialize(centerEffectValues.size, centerEffectValues.pivot);
 		centerBillboard->get_transform().set_scale(centerEffectValues.beginScale);
 		centerBillboard->get_transform().set_quaternion(
@@ -43,21 +44,22 @@ void PaladinHolySpiritEffectTarget::initialize(const Vector3& position) {
 	}
 
 	// 中心の丸いやつ
-	lightBillboard = world_root_mut()->instantiate<LookAtRect>(this);
+	lightBillboard = worldRoot->instantiate<LookAtRect>(this);
 	lightBillboard->initialize(lightEffectValues.size, lightEffectValues.pivot);
 	lightBillboard->get_transform().set_translate({ 0.0,0.0,0.02f });
 	lightBillboard->get_transform().set_scale(lightEffectValues.beginScale);
 	lightBillboard->get_material().color = lightEffectValues.color;
 	lightBillboard->get_material().texture = szg::TextureLibrary::GetTexture("PaladinHolySpiritEffectTargetLight.png");
 	lightBillboard->get_material().lightingType = LighingType::None;
+	lightBillboard->set_active(false);
 
 	// エーテルエフェクト
-	etherDustEmitter = world_root_mut()->instantiate<szg::ParticleEmitterInstance>(this, "PaladinHolySpiritEffectTargetEther.json", 128);
+	etherDustEmitter = worldRoot->instantiate<szg::ParticleEmitterInstance>(this, "PaladinHolySpiritEffectTargetEther.json", 128);
 	etherDustEmitter->update_affine();
 	etherDustEmitter->set_active(false);
 
 	// キラキラしたやつ
-	shiningEmitter = world_root_mut()->instantiate<szg::ParticleEmitterInstance>(this, "PaladinHolySpiritEffectTargetShining.json", 8);
+	shiningEmitter = worldRoot->instantiate<szg::ParticleEmitterInstance>(this, "PaladinHolySpiritEffectTargetShining.json", 8);
 	shiningEmitter->update_affine();
 	shiningEmitter->set_active(false);
 }
@@ -71,6 +73,12 @@ void PaladinHolySpiritEffectTarget::update() {
 		r32 scaleBase = eps::lerp(0.0f, 1.0f, Easing::Out::Cubic(param));
 		lightBillboard->get_transform().set_scale(Vector3{ scaleBase, scaleBase, 1.0f });
 		lightBillboard->get_material().color.alpha = std::sin(param * PI);
+		if (timer < lightEffectValues.endTime) {
+			lightBillboard->set_active(true);
+		}
+		else {
+			lightBillboard->set_active(false);
+		}
 	}
 	// 周りの黒いやつ
 	if (timer >= absorptionEffectValues.beginTime) {
@@ -78,6 +86,12 @@ void PaladinHolySpiritEffectTarget::update() {
 		r32 scaleBase = eps::lerp(1.0f, 0.0f, param);
 		absorption->get_transform().set_scale(Vector3{ scaleBase, scaleBase, 1.0f });
 		absorption->get_material().color.alpha = eps::lerp(0.0f, 1.0f, Easing::Out::Expo(param));
+		if (timer < absorptionEffectValues.endTime) {
+			absorption->set_active(true);
+		}
+		else {
+			absorption->set_active(false);
+		}
 	}
 	// 一番でかい派手なやつ
 	if (timer >= centerEffectValues.beginTime) {
@@ -93,25 +107,24 @@ void PaladinHolySpiritEffectTarget::update() {
 				Color4::Lerp(centerEffectValues.color, CColor4::ZERO, Easing::In::Cubic(param));
 			centerBillboard->get_material().color.alpha = eps::lerp(1.0f, 0.0f, Easing::In::Expo(param));
 		}
+		if (timer < centerEffectValues.endTime) {
+			for (auto& centerBillboard : centerBillboards) {
+				centerBillboard->set_active(true);
+			}
+		}
+		else {
+			for (auto& centerBillboard : centerBillboards) {
+				centerBillboard->set_active(false);
+			}
+		}
 	}
-	// 煙のパーティクル
+	//// 煙のパーティクル
 	if (timer.just_crossed(0.6f)) {
 		etherDustEmitter->set_active(true);
 	}
 	// 最後のキラキラしたやつ
 	if (timer.just_crossed(1.0f)) {
 		shiningEmitter->set_active(true);
-	}
-	if (timer.just_crossed(lightEffectValues.beginTime)) {
-		lightBillboard->set_active(true);
-	}
-	if (timer.just_crossed(absorptionEffectValues.beginTime)) {
-		absorption->set_active(true);
-	}
-	if (timer.just_crossed(centerEffectValues.beginTime)) {
-		for (auto& centerBillboard : centerBillboards) {
-			centerBillboard->set_active(true);
-		}
 	}
 
 	etherDustEmitter->update();

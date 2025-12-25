@@ -1,0 +1,189 @@
+{
+	"Instances": [
+		{
+			"AspectRatio": 1.7776999473571777,
+			"Children": [],
+			"FOV Y": 0.44999998807907104,
+			"FarClip": 1000.0,
+			"Local transform": {
+				"Rotation": {
+					"W": 1.0,
+					"XYZ": {
+						"X": 0.0,
+						"Y": 0.0,
+						"Z": 0.0
+					}
+				},
+				"Scale": {
+					"X": 1.0,
+					"Y": 1.0,
+					"Z": 1.0
+				},
+				"Translate": {
+					"X": 0.0,
+					"Y": 0.0,
+					"Z": -10.0
+				}
+			},
+			"Name": "Camera",
+			"NearClip": 0.10000000149011612,
+			"Type": 3000,
+			"Use runtime": false
+		},
+		{
+			"Children": [
+				{
+					"Children": [],
+					"IsDraw": true,
+					"IsFlipY": false,
+					"Layer": 0,
+					"Local transform": {
+						"Rotation": {
+							"W": 1.0,
+							"XYZ": {
+								"X": 0.0,
+								"Y": 0.0,
+								"Z": 0.0
+							}
+						},
+						"Scale": {
+							"X": 1.0,
+							"Y": 1.0,
+							"Z": 1.0
+						},
+						"Translate": {
+							"X": 0.0,
+							"Y": 0.0,
+							"Z": -0.0010000000474974513
+						}
+					},
+					"Material": {
+						"Color": {
+							"A": 0.23899999260902405,
+							"B": 0.0,
+							"G": 0.0,
+							"R": 0.0
+						},
+						"LightingType": 0,
+						"Shininess": 50.0,
+						"Texture": "Grid.png",
+						"UV Transform": {
+							"Rotation": 0.0,
+							"Scale": {
+								"X": 1.0,
+								"Y": 1.0
+							},
+							"Translate": {
+								"X": 0.0,
+								"Y": 0.0
+							}
+						}
+					},
+					"Name": "LogWindowBG",
+					"Pivot": {
+						"X": 1.0,
+						"Y": 0.0
+					},
+					"Size": {
+						"X": 2.5,
+						"Y": 1.7000000476837158
+					},
+					"Type": 2002,
+					"Use runtime": false
+				},
+				{
+					"Children": [],
+					"Local transform": {
+						"Rotation": {
+							"W": 1.0,
+							"XYZ": {
+								"X": 0.0,
+								"Y": 0.0,
+								"Z": 0.0
+							}
+						},
+						"Scale": {
+							"X": 1.0,
+							"Y": 1.0,
+							"Z": 1.0
+						},
+						"Translate": {
+							"X": 0.0,
+							"Y": 0.2199999988079071,
+							"Z": 0.0
+						}
+					},
+					"Name": "LogTextRoot",
+					"Type": 1000,
+					"Use runtime": true
+				},
+				{
+					"Children": [],
+					"Color": {
+						"A": 1.0,
+						"B": 1.0,
+						"G": 1.0,
+						"R": 1.0
+					},
+					"Font": "UDEVGothic35HS-Regular.mtsdf",
+					"IsDraw": true,
+					"Layer": 0,
+					"Local transform": {
+						"Rotation": {
+							"W": 1.0,
+							"XYZ": {
+								"X": 0.0,
+								"Y": 0.0,
+								"Z": 0.0
+							}
+						},
+						"Scale": {
+							"X": 1.0,
+							"Y": 1.0,
+							"Z": 1.0
+						},
+						"Translate": {
+							"X": 0.0,
+							"Y": 0.05999999865889549,
+							"Z": 0.0
+						}
+					},
+					"Name": "InputtingText",
+					"Pivot": {
+						"X": 0.0,
+						"Y": 0.0
+					},
+					"Size": 2.700000047683716,
+					"Text": "",
+					"Type": 2003,
+					"Use runtime": true
+				}
+			],
+			"Local transform": {
+				"Rotation": {
+					"W": 0.0,
+					"XYZ": {
+						"X": 0.0,
+						"Y": 1.0,
+						"Z": 0.0
+					}
+				},
+				"Scale": {
+					"X": 1.0000118017196655,
+					"Y": 1.0000178813934326,
+					"Z": 1.0000118017196655
+				},
+				"Translate": {
+					"X": -4.07216215133667,
+					"Y": -2.2919914722442627,
+					"Z": 0.0
+				}
+			},
+			"Name": "LogWindowRoot",
+			"Type": 1000,
+			"Use runtime": false
+		}
+	],
+	"Name": "UI",
+	"NumLayer": 2
+}
