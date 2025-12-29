@@ -8,7 +8,8 @@
 
 #include <Scripts/Proto/types.pb.h>
 
-#include <Scripts/Game/Zone/Command/IZoneCommand.h>
+#include "Scripts/Game/Zone/Command/IZoneCommand.h"
+#include "Scripts/Manager/ChatBoxManager.h"
 
 class Player;
 class EntityManager;
@@ -83,6 +84,8 @@ private:
 	Reference<GameServerPacketSender> gameServerPacketSender;
 	Reference<GameServerPacketReceiver> gameServerPacketReceiver;
 	Reference<GameLogWindowManager> gameLogWindowManager;
+
+	ChatBoxManager chatBoxManager;
 
 public:
 	void set_player(Reference<Player> player_);

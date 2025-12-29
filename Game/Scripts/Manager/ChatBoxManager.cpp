@@ -1,0 +1,80 @@
+#include "ChatBoxManager.h"
+
+#include <Engine/Module/Manager/RuntimeStorage/RuntimeStorage.h>
+#include <Engine/Runtime/Input/InputTextFrame.h>
+
+void ChatBoxManager::initialize() {
+	auto inputtingTextAny = szg::RuntimeStorage::GetValueMut("RuntimeInstance", "InputtingText");
+	if (inputtingTextAny) {
+		chatBoxString = std::any_cast<Reference<szg::StringRectInstance>>(*inputtingTextAny);
+	}
+
+	auto chatBoxCursorAny = szg::RuntimeStorage::GetValueMut("RuntimeInstance", "ChatBoxCursor");
+	if (chatBoxCursorAny) {
+		chatBoxCursor = std::any_cast<Reference<szg::Rect3d>>(*chatBoxCursorAny);
+	}
+	// トリガーとなるキーの登録
+	keys.initialize({ szg::KeyID::Return, szg::KeyID::Escape });
+}
+
+void ChatBoxManager::update() {
+	keys.update();
+	isSendFrame = false;
+	if (textBox.is_inputting()) {
+		// テキストボックスの更新
+		textBox.update();
+
+		// チャットボックスの文字列更新
+		const std::wstring& text = textBox.text_imm();
+		if (chatBoxString) {
+			chatBoxString->reset_string(text);
+		}
+
+		// カーソル位置の更新
+		if (chatBoxCursor && chatBoxString) {
+			r32 offset =
+				textBox.calculate_cursor_offset(chatBoxString);
+			chatBoxCursor->get_transform().set_translate_x(-offset - 0.06f);
+		}
+
+		// Enter + IME確定ではない場合、送信
+		if (textBox.is_return()) {
+			textBox.end_input();
+			if (!text.empty()) { // 空文字列出ない場合のみ
+				isSendFrame = true;
+			}
+		}
+		// ESCキーで入力解除
+		else if (keys.trigger(szg::KeyID::Escape)) {
+			textBox.end_input();
+		}
+
+		// 入力終了処理
+		if (!textBox.is_inputting()) {
+			// カーソルの非表示
+			if (chatBoxCursor) {
+				chatBoxCursor->set_draw(false);
+			}
+		}
+	}
+	else {
+		if (keys.trigger(szg::KeyID::Return)) {
+			// 入力開始
+			Vector2 position{ 0, 1080 };
+			textBox.start_input(position);
+			chatBoxCursor->set_draw(true);
+		}
+	}
+}
+
+bool ChatBoxManager::is_enter_frame() const {
+	return isSendFrame;
+}
+
+std::wstring ChatBoxManager::into_string() {
+	std::wstring result = textBox.text_imm();
+	textBox.clear();
+	chatBoxString->reset_string(L"");
+
+	return result;
+}
