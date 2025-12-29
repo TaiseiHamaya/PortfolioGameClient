@@ -23,10 +23,34 @@ void ZoneHandler::setup(Reference<EntityManager> entityManager_, Reference<Enemy
 	gameServerPacketReceiver = gameServerPacketReceiver_;
 	gameServerPacketSender = gameServerPacketSender_;
 	gameLogWindowManager = gameLogWindowManager_;
+
+	chatBoxManager.initialize();
 }
 
 void ZoneHandler::prev_update() {
 	handle_zone();
+
+	chatBoxManager.update();
+	if (chatBoxManager.is_enter_frame()) {
+		std::wstring message = chatBoxManager.into_string();
+		szgInformation(L"Send chat message: {}", message);
+
+		if (gameServerConnectionManager && gameServerConnectionManager->is_connected() && gameServerPacketSender && player) {
+			const std::optional<u64>& serverId = player->server_id();
+			if (serverId.has_value()) {
+				// パケット作成
+				Proto::Packet packet;
+				packet.set_category_text_message(Proto::CHAT_SEND);
+				Proto::PayloadTextMessage body;
+				body.set_id(serverId.value());
+				body.set_message(ConvertString(message));
+				packet.set_payload(body.SerializeAsString());
+				// 送信
+				gameServerPacketSender->stack_packet(packet);
+			}
+		}
+	}
+
 	execute_commands();
 }
 
@@ -222,7 +246,7 @@ void ZoneHandler::process_login_message(Proto::CategoryLoginMessage type, const 
 		szgInformation("Login succeeded. Id-\'{}\'", body.id());
 		gameLogWindowManager->add_log(
 			GameLogWindowManager::Type::SystemMessage,
-			L"Welcome to server!"
+			L"Welcome to game!"
 		);
 	}
 	break;
@@ -306,7 +330,7 @@ void ZoneHandler::process_sync_message(Proto::CategorySyncMessage type, const st
 			szgInformation("Entity Id:{} Play Action Id:{}", body.id(), body.action_id());
 			szgInformation("{} used action {} on {}.", entity->name_imm(), body.action_id(), target->name_imm());
 			gameLogWindowManager->add_log(
-				GameLogWindowManager::Type::DamagedLog,
+				GameLogWindowManager::Type::ActionLog,
 				ConvertString(std::format("{} action {}.", entity->name_imm(), body.action_id()))
 			);
 		}

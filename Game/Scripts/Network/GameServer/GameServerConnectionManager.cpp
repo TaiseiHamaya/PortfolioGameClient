@@ -108,25 +108,27 @@ void GameServerConnectionManager::on_connect_handler(const asio::error_code& err
 		// Handle connection error
 		std::lock_guard lock{ mutex };
 		if (connectionState == ConnectionState::Disconnected) {
-			szgError("サーバーとの接続がタイムアウトしました。");
+			szgWarning("サーバーとの接続がタイムアウトしました。");
 		}
 		else {
 			switch (errorCode.value()) {
 			case asio::error::connection_refused:
-				szgError("サーバーと接続しましたが、拒否されました。");
+				szgWarning("サーバーと接続しましたが、拒否されました。");
 				break;
 			case asio::error::operation_aborted:
-				szgError("サーバーとの接続は中止されました。");
+				szgWarning("サーバーとの接続は中止されました。");
 				break;
 			case asio::error::already_connected:
-				szgError("サーバーとの既に接続されています。");
+				szgWarning("サーバーとの既に接続されています。");
 				break;
 			default:
-				szgError("不明な理由でサーバーとの接続に失敗しました。: ErrorCode-\'{}\'", errorCode.message());
+				szgWarning("不明な理由でサーバーとの接続に失敗しました。: ErrorCode-\'{}\'", errorCode.message());
 				break;
 			}
 		}
 		connectionState = ConnectionState::Disconnected;
+		// ログウィンドウに表示
+		// TODO: mutexがいるのでどうにかする
 	}
 }
 

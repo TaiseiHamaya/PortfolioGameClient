@@ -1,10 +1,11 @@
 #include "TitleStateScript.h"
 
-#include <Engine/Module/World/Mesh/Primitive/StringRectInstance.h>
-#include <Engine/Module/World/Mesh/Primitive/Rect3d.h>
 #include <Engine/Module/Manager/RuntimeStorage/RuntimeStorage.h>
-#include <Engine/Runtime/Input/TextInput.h>
+#include <Engine/Module/World/Mesh/Primitive/Rect3d.h>
+#include <Engine/Module/World/Mesh/Primitive/StringRectInstance.h>
 #include <Engine/Runtime/Input/Input.h>
+#include <Engine/Runtime/Input/InputTextFrame.h>
+#include <Engine/Runtime/Input/InputVKeyState.h>
 #include <Engine/Runtime/Scene/SceneManager2.h>
 
 #include <Library/Math/Definition.h>
@@ -83,10 +84,10 @@ void TitleStateScript::prev_update() {
 	}
 
 	if (isInputText) {
-		if (szg::TextInput::IsDeleteInput()) {
+		if (szg::InputVKeyState::IsDownVKey(szg::VirtualKeyID::Backspace)) {
 			inputString->pop_back();
 		}
-		const std::wstring& inputChars = szg::TextInput::FrameInputImm();
+		const std::wstring& inputChars = szg::InputTextFrame::FrameInputTextImm();
 		std::wstring appendStr;
 		for (wchar_t c : inputChars) {
 			if (((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')) && inputString->glyph_data_imm().size() + appendStr.size() < 12) {
@@ -99,7 +100,7 @@ void TitleStateScript::prev_update() {
 	}
 
 	selectingRect->get_transform().set_translate_y(
-		std::vector{ nameString->get_transform().get_translate().y, loginString->get_transform().get_translate().y }[selectIndex]
+		std::vector{ nameString->get_transform().get_translate().y, loginString->get_transform().get_translate().y } [selectIndex]
 	);
 	if (isInputText) {
 		selectingRect->get_material().color.alpha = 0.5f;

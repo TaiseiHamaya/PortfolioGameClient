@@ -1,8 +1,8 @@
 #include "GameLogWindowManager.h"
 
-#include <Engine/Runtime/Input/Input.h>
 #include <Engine/Module/Manager/RuntimeStorage/RuntimeStorage.h>
 #include <Engine/Module/Manager/World/WorldRoot.h>
+#include <Engine/Runtime/Input/Input.h>
 
 void GameLogWindowManager::initialize() {
 	auto logTextRoot = szg::RuntimeStorage::GetValueMut("RuntimeInstance", "LogTextRoot");
@@ -10,18 +10,17 @@ void GameLogWindowManager::initialize() {
 		std::any_cast<Reference<szg::WorldInstance>>(
 			*logTextRoot
 		);
-	if (!chatTextRoot) {
-		return;
-	}
-	// ログ表示用のStringRectInstanceを作成
-	Reference<szg::WorldRoot> world = chatTextRoot->world_root_mut();
-	r32 lineHeight = 0.142f;
-	for (i32 i = 0; i < MaxLogCount; ++i) {
-		Reference<szg::StringRectInstance> instance = world->instantiate<szg::StringRectInstance>(chatTextRoot);
-		instance->initialize("UDEVGothic35HS-Regular.mtsdf", 2.4f, CVector2::ZERO);
-		instance->get_transform().set_translate_y(lineHeight * (MaxLogCount - i - 1) + 0.04f);
-		instance->set_draw(false);
-		logInstances[i] = instance;
+	if (chatTextRoot) {
+		// ログ表示用のStringRectInstanceを作成
+		Reference<szg::WorldRoot> world = chatTextRoot->world_root_mut();
+		r32 lineHeight = 0.142f;
+		for (i32 i = 0; i < MaxLogCount; ++i) {
+			Reference<szg::StringRectInstance> instance = world->instantiate<szg::StringRectInstance>(chatTextRoot);
+			instance->initialize("UDEVGothic35HS-Regular.mtsdf", 2.4f, CVector2::ZERO);
+			instance->get_transform().set_translate_y(lineHeight * (MaxLogCount - i - 1) + 0.04f);
+			instance->set_draw(false);
+			logInstances[i] = instance;
+		}
 	}
 }
 
@@ -35,9 +34,24 @@ void GameLogWindowManager::prev_update() {
 		isChanged = true;
 	}
 
-	if (!isChanged) {
-		return;
+	if (isChanged) {
+		update_log_window();
 	}
+}
+
+void GameLogWindowManager::post_update() {
+}
+
+void GameLogWindowManager::add_log(Type type, const std::wstring& log) {
+	logs.emplace_back(type, log);
+	isChanged = true;
+	// 一番下だったらスクロールを維持
+	if (index + 1 + MaxLogCount >= static_cast<i32>(logs.size())) {
+		index = std::max(0, static_cast<i32>(logs.size()) - MaxLogCount);
+	}
+}
+
+void GameLogWindowManager::update_log_window() {
 	// ログ表示更新
 	// 最大MaxLogCount件表示
 	for (i32 li = 0; li < MaxLogCount; ++li) {
@@ -56,16 +70,4 @@ void GameLogWindowManager::prev_update() {
 		instance->set_draw(true);
 	}
 	isChanged = false;
-}
-
-void GameLogWindowManager::post_update() {
-}
-
-void GameLogWindowManager::add_log(Type type, const std::wstring& log) {
-	logs.emplace_back(type, log);
-	isChanged = true;
-	// 一番下だったらスクロールを維持
-	if (index + 1 + MaxLogCount >= static_cast<i32>(logs.size())) {
-		index = std::max(0, static_cast<i32>(logs.size()) - MaxLogCount);
-	}
 }

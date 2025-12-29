@@ -118,7 +118,67 @@
 					"Use runtime": true
 				},
 				{
-					"Children": [],
+					"Children": [
+						{
+							"Children": [],
+							"IsDraw": false,
+							"IsFlipY": false,
+							"Layer": 0,
+							"Local transform": {
+								"Rotation": {
+									"W": 1.0,
+									"XYZ": {
+										"X": 0.0,
+										"Y": 0.0,
+										"Z": 0.0
+									}
+								},
+								"Scale": {
+									"X": 1.0,
+									"Y": 1.0,
+									"Z": 1.0
+								},
+								"Translate": {
+									"X": -0.03805971145629883,
+									"Y": 0.0,
+									"Z": 0.0
+								}
+							},
+							"Material": {
+								"Color": {
+									"A": 1.0,
+									"B": 1.0,
+									"G": 1.0,
+									"R": 1.0
+								},
+								"LightingType": 0,
+								"Shininess": 50.0,
+								"Texture": "White.png",
+								"UV Transform": {
+									"Rotation": 0.0,
+									"Scale": {
+										"X": 1.0,
+										"Y": 1.0
+									},
+									"Translate": {
+										"X": 0.0,
+										"Y": 0.0
+									}
+								}
+							},
+							"Name": "ChatBoxCursor",
+							"Pivot": {
+								"X": 1.0,
+								"Y": 0.0
+							},
+							"Size": {
+								"X": 0.009999999776482582,
+								"Y": 0.10000000149011612
+							},
+							"Type": 2002,
+							"Use runtime": true
+						}
+					],
 					"Color": {
 						"A": 1.0,
 						"B": 1.0,

@@ -7,7 +7,7 @@ void EntityManager::post_update() {
 	for (u64 serverId : removedEntityIds) {
 		Reference<IEntity> entity = inquire_server_id(serverId);
 		if (entity) {
-			worldRoot->destroy(entity);
+			entity->destroy_self();
 			entities.erase(entity->local_id());
 			entityRefByServerId.erase(serverId);
 		}
