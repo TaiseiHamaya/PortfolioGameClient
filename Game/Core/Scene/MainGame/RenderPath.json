@@ -7,6 +7,7 @@
 					"Y": 1080.0
 				},
 				"CameraId": 0,
+				"ClearDepthStencil": true,
 				"GBufferSize": {
 					"X": 1920.0,
 					"Y": 1080.0
@@ -39,11 +40,176 @@
 		},
 		{
 			"Data": {
+				"EffectTag": null,
+				"OutputSize": {
+					"X": 1920.0,
+					"Y": 1080.0
+				},
+				"Type": 8
+			},
+			"Debug": {
+				"Position": {
+					"X": 100.0,
+					"Y": 110.0
+				}
+			},
+			"Links": {
+				"Base": 0
+			},
+			"Type": 1
+		},
+		{
+			"Data": {
+				"EffectTag": null,
+				"OutputSize": {
+					"X": 1920.0,
+					"Y": 1080.0
+				},
+				"Type": 5
+			},
+			"Debug": {
+				"Position": {
+					"X": 410.0,
+					"Y": 200.0
+				}
+			},
+			"Links": {
+				"Base": 1
+			},
+			"Type": 1
+		},
+		{
+			"Data": {
+				"EffectTag": null,
+				"OutputSize": {
+					"X": 960.0,
+					"Y": 540.0
+				},
+				"Type": 3
+			},
+			"Debug": {
+				"Position": {
+					"X": 450.0,
+					"Y": 300.0
+				}
+			},
+			"Links": {
+				"Base": 2
+			},
+			"Type": 1
+		},
+		{
+			"Data": {
+				"EffectTag": null,
+				"OutputSize": {
+					"X": 480.0,
+					"Y": 270.0
+				},
+				"Type": 3
+			},
+			"Debug": {
+				"Position": {
+					"X": 450.0,
+					"Y": 400.0
+				}
+			},
+			"Links": {
+				"Base": 3
+			},
+			"Type": 1
+		},
+		{
+			"Data": {
+				"EffectTag": null,
+				"OutputSize": {
+					"X": 240.0,
+					"Y": 135.0
+				},
+				"Type": 3
+			},
+			"Debug": {
+				"Position": {
+					"X": 450.0,
+					"Y": 500.0
+				}
+			},
+			"Links": {
+				"Base": 4
+			},
+			"Type": 1
+		},
+		{
+			"Data": {
+				"EffectTag": null,
+				"OutputSize": {
+					"X": 120.0,
+					"Y": 67.0
+				},
+				"Type": 3
+			},
+			"Debug": {
+				"Position": {
+					"X": 450.0,
+					"Y": 600.0
+				}
+			},
+			"Links": {
+				"Base": 5
+			},
+			"Type": 1
+		},
+		{
+			"Data": {
+				"EffectTag": null,
+				"OutputSize": {
+					"X": 1920.0,
+					"Y": 1080.0
+				},
+				"Type": 6
+			},
+			"Debug": {
+				"Position": {
+					"X": 740.0,
+					"Y": 200.0
+				}
+			},
+			"Links": {
+				"Base": 3,
+				"MixTexture1": 4,
+				"MixTexture2": 5,
+				"MixTexture3": 6
+			},
+			"Type": 1
+		},
+		{
+			"Data": {
+				"EffectTag": null,
+				"OutputSize": {
+					"X": 1920.0,
+					"Y": 1080.0
+				},
+				"Type": 1
+			},
+			"Debug": {
+				"Position": {
+					"X": 1050.0,
+					"Y": 110.0
+				}
+			},
+			"Links": {
+				"Base": 1,
+				"CombinedTexture": 7
+			},
+			"Type": 1
+		},
+		{
+			"Data": {
 				"BottomRight": {
 					"X": 1920.0,
 					"Y": 1080.0
 				},
 				"CameraId": 0,
+				"ClearDepthStencil": false,
 				"GBufferSize": {
 					"X": 1920.0,
 					"Y": 1080.0
@@ -67,178 +233,14 @@
 			},
 			"Debug": {
 				"Position": {
-					"X": 100.0,
+					"X": 1440.0,
 					"Y": 110.0
 				}
 			},
 			"Links": {
-				"Base": 0
+				"Base": 8
 			},
 			"Type": 0
-		},
-		{
-			"Data": {
-				"EffectTag": null,
-				"OutputSize": {
-					"X": 1920.0,
-					"Y": 1080.0
-				},
-				"Type": 8
-			},
-			"Debug": {
-				"Position": {
-					"X": 420.0,
-					"Y": 110.0
-				}
-			},
-			"Links": {
-				"Base": 1
-			},
-			"Type": 1
-		},
-		{
-			"Data": {
-				"EffectTag": null,
-				"OutputSize": {
-					"X": 1920.0,
-					"Y": 1080.0
-				},
-				"Type": 5
-			},
-			"Debug": {
-				"Position": {
-					"X": 730.0,
-					"Y": 200.0
-				}
-			},
-			"Links": {
-				"Base": 2
-			},
-			"Type": 1
-		},
-		{
-			"Data": {
-				"EffectTag": null,
-				"OutputSize": {
-					"X": 960.0,
-					"Y": 540.0
-				},
-				"Type": 3
-			},
-			"Debug": {
-				"Position": {
-					"X": 770.0,
-					"Y": 300.0
-				}
-			},
-			"Links": {
-				"Base": 3
-			},
-			"Type": 1
-		},
-		{
-			"Data": {
-				"EffectTag": null,
-				"OutputSize": {
-					"X": 480.0,
-					"Y": 270.0
-				},
-				"Type": 3
-			},
-			"Debug": {
-				"Position": {
-					"X": 770.0,
-					"Y": 400.0
-				}
-			},
-			"Links": {
-				"Base": 4
-			},
-			"Type": 1
-		},
-		{
-			"Data": {
-				"EffectTag": null,
-				"OutputSize": {
-					"X": 240.0,
-					"Y": 135.0
-				},
-				"Type": 3
-			},
-			"Debug": {
-				"Position": {
-					"X": 770.0,
-					"Y": 500.0
-				}
-			},
-			"Links": {
-				"Base": 5
-			},
-			"Type": 1
-		},
-		{
-			"Data": {
-				"EffectTag": null,
-				"OutputSize": {
-					"X": 120.0,
-					"Y": 67.0
-				},
-				"Type": 3
-			},
-			"Debug": {
-				"Position": {
-					"X": 770.0,
-					"Y": 600.0
-				}
-			},
-			"Links": {
-				"Base": 6
-			},
-			"Type": 1
-		},
-		{
-			"Data": {
-				"EffectTag": null,
-				"OutputSize": {
-					"X": 1920.0,
-					"Y": 1080.0
-				},
-				"Type": 6
-			},
-			"Debug": {
-				"Position": {
-					"X": 1060.0,
-					"Y": 200.0
-				}
-			},
-			"Links": {
-				"Base": 4,
-				"MixTexture1": 5,
-				"MixTexture2": 6,
-				"MixTexture3": 7
-			},
-			"Type": 1
-		},
-		{
-			"Data": {
-				"EffectTag": null,
-				"OutputSize": {
-					"X": 1920.0,
-					"Y": 1080.0
-				},
-				"Type": 1
-			},
-			"Debug": {
-				"Position": {
-					"X": 1370.0,
-					"Y": 110.0
-				}
-			},
-			"Links": {
-				"Base": 2,
-				"CombinedTexture": 8
-			},
-			"Type": 1
 		},
 		{
 			"Data": {
@@ -247,6 +249,7 @@
 					"Y": 1080.0
 				},
 				"CameraId": 0,
+				"ClearDepthStencil": true,
 				"GBufferSize": {
 					"X": 1920.0,
 					"Y": 1080.0
@@ -286,6 +289,7 @@
 					"Y": 1080.0
 				},
 				"CameraId": 0,
+				"ClearDepthStencil": false,
 				"GBufferSize": {
 					"X": 1920.0,
 					"Y": 1080.0
