@@ -15,6 +15,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Scripts\Instance\MiscInstance\Effects\DamageNumberEffect.cpp" />
     <ClCompile Include="Scripts\Manager\ChatBoxManager.cpp" />
     <ClCompile Include="Scripts\Manager\GameLogWindowManager.cpp" />
     <ClCompile Include="Scripts\Scene\LoginScene.cpp" />
@@ -65,6 +66,7 @@
     <ClCompile Include="Scripts\ScriptTitle\TitleStateScript.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Scripts\Instance\MiscInstance\Effects\DamageNumberEffect.h" />
     <ClInclude Include="Scripts\Manager\ChatBoxManager.h" />
     <ClInclude Include="Scripts\Manager\GameLogWindowManager.h" />
     <ClInclude Include="Scripts\Scene\LoginScene.h" />

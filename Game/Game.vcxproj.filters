@@ -332,6 +332,7 @@
     <ClCompile Include="Scripts\ScriptTitle\TitleStateScript.cpp" />
     <ClCompile Include="Scripts\Manager\GameLogWindowManager.cpp" />
     <ClCompile Include="Scripts\Manager\ChatBoxManager.cpp" />
+    <ClCompile Include="Scripts\Instance\MiscInstance\Effects\DamageNumberEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="DevTool\launch-bot.ps1" />
@@ -345,5 +346,6 @@
     <ClInclude Include="Scripts\ScriptTitle\TitleStateScript.h" />
     <ClInclude Include="Scripts\Manager\GameLogWindowManager.h" />
     <ClInclude Include="Scripts\Manager\ChatBoxManager.h" />
+    <ClInclude Include="Scripts\Instance\MiscInstance\Effects\DamageNumberEffect.h" />
   </ItemGroup>
 </Project>

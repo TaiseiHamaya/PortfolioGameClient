@@ -45,7 +45,7 @@ private:
 	// WorldInstance
 	Reference<szg::DirectionalLightInstance> directionalLight;
 
-	Reference<FollowCamera> camera3D;
+	Reference<FollowCamera> cameraInstance;
 	Reference<szg::StaticMeshInstance> skydome;
 	Reference<szg::StringRectInstance> testString;
 

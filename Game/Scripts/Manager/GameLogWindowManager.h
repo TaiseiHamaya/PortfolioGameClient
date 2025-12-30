@@ -55,8 +55,8 @@ private:
 	std::array<Color4, static_cast<i32>(Type::Count)> typeColors{
 		Color4{ 0xC6C6C6FF }, // ChatMessage
 		Color4{ 0x663FE5FF }, // SystemMessage
-		Color4{ 0xE6DB8AFF }, // DamagedLog
-		Color4{ 0xE02929FF }, // ActionLog
+		Color4{ 0xE6DB8AFF }, // ActionLog
+		Color4{ 0xE02929FF }, // DamagedLog
 
 		Color4{ 0xB630D8FF }, // DebugInfo
 	};

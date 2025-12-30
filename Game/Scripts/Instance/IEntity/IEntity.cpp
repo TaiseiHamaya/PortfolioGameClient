@@ -3,6 +3,7 @@
 #include <Engine/Assets/Json/JsonAsset.h>
 #include <Engine/Module/Manager/World/WorldRoot.h>
 #include <Engine/Runtime/Clock/WorldClock.h>
+
 #define COLOR4_SERIALIZER
 #include <Engine/Assets/Json/JsonSerializer.h>
 
@@ -18,6 +19,10 @@ void IEntity::initialize(const std::filesystem::path& file, u64 localId_) {
 	shadow = world_root_mut()->instantiate<Shadow>();
 	ui = world_root_mut()->instantiate<EntityUi>(this);
 
+	// HPデータのロード
+	maxHP = json.try_emplace<i32>("MaxHP");
+	hp = maxHP;
+
 	// アクションデータの生成
 	auto idleAction = std::make_unique<IdleAction>();
 	idleAction->setup(this, std::format("{}.gltf-{}", file.stem().string(), "Idle"));
@@ -27,7 +32,7 @@ void IEntity::initialize(const std::filesystem::path& file, u64 localId_) {
 
 	targetRadius = json.try_emplace<float>("TargetRadius");
 
-	ui->initialize(targetRadius * 3.0f + 1.0f, json.try_emplace<Color4>("HPColor"));
+	ui->initialize(targetRadius * 3.0f + 1.4f, json.try_emplace<Color4>("HPColor"));
 	set_name(json.get().value("Name", "Unknown"));
 	shadow->setup(this, targetRadius * 4);
 }
@@ -96,7 +101,12 @@ void IEntity::jump() {
 }
 
 void IEntity::on_damaged(i32 damage) {
-	hitpoint -= damage;
+	hp -= damage;
+	if (hp < 0) {
+		hp = 0;
+		hp = maxHP;
+	}
+	ui->update_ui(hp / (r32)maxHP);
 	start_action("Damaged");
 }
 

@@ -1,6 +1,6 @@
 #include "IEffectInstance.h"
 
-Vector3 EffectTools::CalculateTargetPosition(Reference<IEntity> self, Reference<IEntity> target) {
+Vector3 EffectTools::CalculateTargetPosition(Reference<const szg::WorldInstance> self, Reference<const IEntity> target) {
 	Vector3 worldPosition{};
 	Vector3 offset = Vector3{ 0.0f, 1.5f, 1.0f };
 	if (target) {

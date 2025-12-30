@@ -18,8 +18,10 @@
 #include "Scripts/Extension/RenderNode/EnvironmentMeshNode/EnvironmentMeshNode.h"
 #include "Scripts/Extension/Util/LookAtRect.h"
 #include "Scripts/Game/GameInputHandler.h"
+#include "Scripts/Game/Zone/Command/ZoneEntityDamagedCommand.h"
 #include "Scripts/Game/Zone/ZoneHandler.h"
 #include "Scripts/Instance/IEntity/ISkillAction/ISkillAction.h"
+#include "Scripts/Instance/MiscInstance/Effects/DamageNumberEffect.h"
 #include "Scripts/Instance/MiscInstance/Enemy/EnemyManager.h"
 #include "Scripts/Instance/Player/Player.h"
 #include "Scripts/Manager/EffectManager.h"
@@ -144,22 +146,25 @@ void SceneGame::custom_setup() {
 	Reference<Player> player = entityManagerRef->generate<Player>("Player.json");
 	player->set_name(userName);
 	skydome = get_world(0)->world_root_mut().instantiate<szg::StaticMeshInstance>(nullptr, "skydome.gltf");
-	camera3D = get_world(0)->world_root_mut().instantiate<FollowCamera>();
+	cameraInstance = get_world(0)->world_root_mut().instantiate<FollowCamera>();
 
-	LookAtRect::camera = camera3D;
-	szg::Particle::lookAtDefault = camera3D.ptr();
-	CometEffect::camera = camera3D;
+	LookAtRect::camera = cameraInstance;
+	szg::Particle::lookAtDefault = cameraInstance.ptr();
+	CometEffect::camera = cameraInstance;
+	DamageNumberEffect::cameraInstance = cameraInstance;
+	ZoneEntityDamagedCommand::cameraInstance = cameraInstance;
+	ZoneEntityDamagedCommand::effectManager = effectManagerRef;
 	ISkillAction::SetEffectManager(effectManagerRef);
 	zoneHandlerRef->set_player(player);
-	gameInputHandlerRef->set_instances(player, camera3D);
+	gameInputHandlerRef->set_instances(player, cameraInstance);
 	networkClusterRef->set_player(player);
 	//environmentMeshExecutor->setup(directionalLightingExecutor, camera3D);
 
 	skydome->transform_mut().set_scale(CVector3::BASIS * 100);
 	skydome->get_materials()[0].lightingType = LighingType::None;
 	skydome->set_active(false);
-	camera3D->initialize();
-	camera3D->set_target(player);
+	cameraInstance->initialize();
+	cameraInstance->set_target(player);
 
 	cometEffect = std::make_unique<CometEffect>();
 }

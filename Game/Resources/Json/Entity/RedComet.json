@@ -1,11 +1,12 @@
 {
-	"HPColor": {
-		"R": 1.0000,
-		"G": 0.2000,
-		"B": 0.2000,
-		"A": 1.0000
-	},
+  "HPColor": {
+    "R": 1.0000,
+    "G": 0.2000,
+    "B": 0.2000,
+    "A": 1.0000
+  },
   "Model": "RedComet.gltf",
   "TargetRadius": 1.5,
-  "Name": "Red Comet"
+  "Name": "Red Comet",
+  "MaxHP": 10000
 }

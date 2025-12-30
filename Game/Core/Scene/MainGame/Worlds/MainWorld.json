@@ -86,7 +86,8 @@
 			],
 			"MeshName": "Grid.obj",
 			"Name": "Ground",
-			"Type": 2000
+			"Type": 2000,
+			"Use runtime": false
 		},
 		{
 			"Children": [],
@@ -113,9 +114,9 @@
 					"Z": 1.0
 				},
 				"Translate": {
-					"X": -2.925379514694214,
-					"Y": 1.0,
-					"Z": -3.790811777114868
+					"X": -3.0,
+					"Y": 2.0,
+					"Z": -4.0
 				}
 			},
 			"Name": "PointLight",
@@ -125,5 +126,5 @@
 		}
 	],
 	"Name": "MainWorld",
-	"NumLayer": 2
+	"NumLayer": 3
 }

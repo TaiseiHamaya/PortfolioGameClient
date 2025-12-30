@@ -9,7 +9,7 @@
 
 namespace EffectTools {
 
-Vector3 CalculateTargetPosition(Reference<IEntity> self, Reference<IEntity> target);
+Vector3 CalculateTargetPosition(Reference<const szg::WorldInstance> self, Reference<const IEntity> target);
 
 }
 

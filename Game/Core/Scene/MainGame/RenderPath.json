@@ -255,6 +255,46 @@
 					"Y": 1080.0
 				},
 				"Height": 1080.0,
+				"LayerIndex": 2,
+				"Left": 0.0,
+				"MaxDepth": 1.0,
+				"MinDepth": 0.0,
+				"OutputSize": {
+					"X": 1920.0,
+					"Y": 1080.0
+				},
+				"Top": 0.0,
+				"TopLeft": {
+					"X": 0.0,
+					"Y": 0.0
+				},
+				"Width": 1920.0,
+				"WorldIndex": 0
+			},
+			"Debug": {
+				"Position": {
+					"X": 1770.0,
+					"Y": 110.0
+				}
+			},
+			"Links": {
+				"Base": 9
+			},
+			"Type": 0
+		},
+		{
+			"Data": {
+				"BottomRight": {
+					"X": 1920.0,
+					"Y": 1080.0
+				},
+				"CameraId": 0,
+				"ClearDepthStencil": true,
+				"GBufferSize": {
+					"X": 1920.0,
+					"Y": 1080.0
+				},
+				"Height": 1080.0,
 				"LayerIndex": 0,
 				"Left": 0.0,
 				"MaxDepth": 1.0,
@@ -273,12 +313,12 @@
 			},
 			"Debug": {
 				"Position": {
-					"X": 1760.0,
+					"X": 2090.0,
 					"Y": 110.0
 				}
 			},
 			"Links": {
-				"Base": 9
+				"Base": 10
 			},
 			"Type": 0
 		},
@@ -313,21 +353,21 @@
 			},
 			"Debug": {
 				"Position": {
-					"X": 2080.0,
+					"X": 2410.0,
 					"Y": 110.0
 				}
 			},
 			"Links": {
-				"Base": 10
+				"Base": 11
 			},
 			"Type": 0
 		}
 	],
 	"ResultNode": {
-		"Connect": 12,
+		"Connect": 13,
 		"Debug": {
 			"Position": {
-				"X": 2400.0,
+				"X": 2730.0,
 				"Y": 110.0
 			}
 		}

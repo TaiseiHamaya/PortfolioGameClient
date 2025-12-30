@@ -11,8 +11,6 @@
 #include <Library/Utility/Template/string_hashed.h>
 
 #include <Engine/Module/DrawExecutor/Mesh/Primitive/Rect3dDrawManager.h>
-#include <Engine/Module/DrawExecutor/Mesh/Primitive/StringRectDrawManager.h>
-#include <Engine/Module/DrawExecutor/Mesh/SkinningMeshDrawManager.h>
 #include <Engine/Module/World/Mesh/SkinningMeshInstance.h>
 
 #include "EntityUi.h"
@@ -85,7 +83,8 @@ protected:
 	std::optional<u64> serverId;
 	std::string name{ "Unknown" };
 
-	i32 hitpoint;
+	i32 hp;
+	i32 maxHP;
 
 	r32 targetRadius{};
 

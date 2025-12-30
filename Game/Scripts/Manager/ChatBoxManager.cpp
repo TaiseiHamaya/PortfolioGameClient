@@ -1,6 +1,7 @@
 #include "ChatBoxManager.h"
 
 #include <Engine/Module/Manager/RuntimeStorage/RuntimeStorage.h>
+#include <Engine/Runtime/Input/InputTextFrame.h>
 
 void ChatBoxManager::initialize() {
 	auto inputtingTextAny = szg::RuntimeStorage::GetValueMut("RuntimeInstance", "InputtingText");
@@ -23,7 +24,7 @@ void ChatBoxManager::update() {
 	// 切り替え
 	if (textBox.is_inputting()) {
 		// Enter + IME確定ではない場合、送信
-		if (textBox.is_return()) {
+		if (keys.trigger(szg::KeyID::Return) && !szg::InputTextFrame::IsImmEnter()) {
 			textBox.end_input();
 			const std::wstring& text = textBox.text_imm();
 			if (!text.empty()) { // 空文字列出ない場合のみ

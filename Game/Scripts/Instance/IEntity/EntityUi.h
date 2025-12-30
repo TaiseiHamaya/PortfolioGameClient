@@ -1,10 +1,7 @@
 #pragma once
 
-#include <Engine/Module/DrawExecutor/Mesh/Primitive/Rect3dDrawManager.h>
-#include <Engine/Module/DrawExecutor/Mesh/Primitive/StringRectDrawManager.h>
-
-#include "Scripts/Extension/Util/LookAtRect.h"
-#include "Engine/Module/World/Mesh/Primitive/StringRectInstance.h"
+#include <Engine/Module/World/Mesh/Primitive/Rect3d.h>
+#include <Engine/Module/World/Mesh/Primitive/StringRectInstance.h>
 
 /// <summary>
 /// HPバーのWorldInstance
@@ -16,7 +13,11 @@ public:
 public:
 	void set_name(const std::string& name);
 
+	void update_affine() override;
+
+	void update_ui(r32 percentage);
+
 private:
-	Reference<LookAtRect> hpRect;
+	Reference<szg::Rect3d> hpRect;
 	Reference<szg::StringRectInstance> nametag;
 };
