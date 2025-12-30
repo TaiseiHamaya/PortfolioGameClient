@@ -3,6 +3,8 @@
 #include <Engine/Module/Manager/RuntimeStorage/RuntimeStorage.h>
 #include <Engine/Runtime/Input/InputTextFrame.h>
 
+#include <Library/Math/Definition.h>
+
 void ChatBoxManager::initialize() {
 	auto inputtingTextAny = szg::RuntimeStorage::GetValueMut("RuntimeInstance", "InputtingText");
 	if (inputtingTextAny) {
@@ -19,6 +21,7 @@ void ChatBoxManager::initialize() {
 
 void ChatBoxManager::update() {
 	keys.update();
+	cursorTimer.ahead();
 	isSendFrame = false;
 
 	// 切り替え
@@ -50,6 +53,7 @@ void ChatBoxManager::update() {
 			Vector2 position{ 0, 1080 };
 			textBox.start_input(position);
 			chatBoxCursor->set_draw(true);
+			cursorTimer.set(0.0f);
 		}
 	}
 
@@ -60,6 +64,11 @@ void ChatBoxManager::update() {
 	const std::wstring& text = textBox.text_imm();
 	if (chatBoxString) {
 		chatBoxString->reset_string(text);
+	}
+
+	if(chatBoxCursor){
+		// カーソルの点滅処理
+		chatBoxCursor->get_material().color.alpha = std::sin(cursorTimer * PI2);
 	}
 
 	// カーソル位置の更新

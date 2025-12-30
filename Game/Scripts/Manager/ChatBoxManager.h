@@ -28,6 +28,7 @@ public:
 
 private:
 	bool isSendFrame{ false };
+	szg::WorldTimer cursorTimer;
 	szg::InputHandler<szg::KeyID> keys;
 	Reference<szg::StringRectInstance> chatBoxString;
 	Reference<szg::Rect3d> chatBoxCursor;
