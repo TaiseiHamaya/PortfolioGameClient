@@ -16,6 +16,7 @@ class WorldInstance;
 
 class Player;
 class ZoneHandler;
+class ChatBoxManager;
 
 /// <summary>
 /// インゲームの入力ハンドラ
@@ -30,7 +31,7 @@ public:
 public:
 	void initialize();
 
-	void setup(Reference<ZoneHandler> zoneHandler_);
+	void setup(Reference<ZoneHandler> zoneHandler_, Reference<const ChatBoxManager> chatBox);
 
 	void prev_update() override;
 
@@ -55,6 +56,7 @@ private:
 	Vector2 xzDirection;
 
 	Reference<ZoneHandler> zoneHandler;
+	Reference<const ChatBoxManager> chatBox;
 	Reference<const szg::WorldInstance> camera;
 
 	Reference<Player> player;

@@ -17,5 +17,5 @@ bool JumpAction::can_transition() const {
 }
 
 bool JumpAction::end_action() const {
-	return owner->get_transform().get_translate().y <= 0;
+	return owner->transform_imm().get_translate().y <= 0;
 }

@@ -94,7 +94,7 @@ void FollowCamera::update() {
 	destingRotation = holizontal * destingRotation * vertical;
 
 	if (isPressX) { // 視点リセット
-		Vector3 targetForward = CVector3::BASIS_Z * target->get_transform().get_quaternion();
+		Vector3 targetForward = CVector3::BASIS_Z * target->transform_imm().get_quaternion();
 		destingRotation = Quaternion::LookForward(targetForward) * Quaternion::AngleAxis(CVector3::BASIS_X, PI / 8);
 	}
 
@@ -109,7 +109,7 @@ void FollowCamera::update() {
 	}
 	// 今のworld座標と注視対象のworld座標で補完
 	Vector3 lookAt = Vector3::Lerp(lookAtInstance->world_position(), target->world_position(), FollowStrength);
-	lookAtInstance->get_transform().set_translate(lookAt);
+	lookAtInstance->transform_mut().set_translate(lookAt);
 	// offsetを回転させて視線を向ける
 	Vector3 translate = offset * transform.get_quaternion();
 	transform.set_translate(translate + shakeOffset);

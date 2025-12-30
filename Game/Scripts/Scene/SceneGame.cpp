@@ -132,7 +132,7 @@ void SceneGame::custom_setup() {
 		userName = std::any_cast<std::string>(*temp);
 	}
 	networkClusterRef->setup(userName);
-	gameInputHandlerRef->setup(zoneHandlerRef);
+	gameInputHandlerRef->setup(zoneHandlerRef, zoneHandlerRef->chat_box_imm());
 
 	if (!get_world(0)) {
 		return;
@@ -155,7 +155,7 @@ void SceneGame::custom_setup() {
 	networkClusterRef->set_player(player);
 	//environmentMeshExecutor->setup(directionalLightingExecutor, camera3D);
 
-	skydome->get_transform().set_scale(CVector3::BASIS * 100);
+	skydome->transform_mut().set_scale(CVector3::BASIS * 100);
 	skydome->get_materials()[0].lightingType = LighingType::None;
 	skydome->set_active(false);
 	camera3D->initialize();

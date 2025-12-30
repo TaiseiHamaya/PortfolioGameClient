@@ -67,6 +67,9 @@ public:
 
 	void request_play_action(u32 actionId);
 
+public:
+	Reference<const ChatBoxManager> chat_box_imm() const noexcept;
+
 private:
 	void process_text_message(Proto::CategoryTextMessage type, const std::string& payload);
 	void process_login_message(Proto::CategoryLoginMessage type, const std::string& payload);

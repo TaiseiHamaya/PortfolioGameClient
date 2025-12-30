@@ -33,8 +33,9 @@ void GameInputHandler::initialize() {
 #endif // DEBUG_FEATURES_ENABLE
 };
 
-void GameInputHandler::setup(Reference<ZoneHandler> zoneHandler_) {
+void GameInputHandler::setup(Reference<ZoneHandler> zoneHandler_, Reference<const ChatBoxManager> chatBox_) {
 	zoneHandler = zoneHandler_;
+	chatBox = chatBox_;
 }
 
 void GameInputHandler::prev_update() {
@@ -57,6 +58,9 @@ void GameInputHandler::input() {
 
 void GameInputHandler::update() {
 	if (!player) {
+		return;
+	}
+	if (chatBox->is_inputting()) {
 		return;
 	}
 
@@ -89,7 +93,7 @@ void GameInputHandler::update() {
 #endif // DEBUG_FEATURES_ENABLE
 
 	if (inputDirection.length() > 0) {
-		Vector3 cameraForward = CVector3::BASIS_Z * camera->get_transform().get_quaternion();
+		Vector3 cameraForward = CVector3::BASIS_Z * camera->transform_imm().get_quaternion();
 		Vector2 xzForward = { -cameraForward.x, cameraForward.z };
 		// 正面
 		xzForward = xzForward.normalize();
@@ -97,7 +101,7 @@ void GameInputHandler::update() {
 		xzDirection = Vector2::Rotate(inputDirection, xzForward.x, xzForward.y);
 		Vector3 xzDirection3 = { xzDirection.x, 0.0f, xzDirection.y };
 
-		const Vector3& position = player->get_transform().get_translate();
+		const Vector3& position = player->transform_mut().get_translate();
 
 		Vector3 velocity = xzDirection3 * player->get_move_speed();
 		Vector3 dest = position + velocity * szg::WorldClock::DeltaSeconds();

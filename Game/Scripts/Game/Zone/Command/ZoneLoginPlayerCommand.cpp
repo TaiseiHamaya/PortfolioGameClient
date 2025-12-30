@@ -15,6 +15,6 @@ void ZoneLoginPlayerCommand::execute() {
 	Reference<RemotePlayer> temp = entityManager->generate<RemotePlayer>("Player.json");
 	temp->set_name(name);
 	temp->set_server_id(serverId);
-	temp->get_transform().set_translate(position);
+	temp->transform_mut().set_translate(position);
 	entityManager->register_server_id(serverId, temp);
 }

@@ -62,7 +62,7 @@ void CometEffect::initialize(const Vector3& position) {
 	groundEffect->get_material().color = GroundEffectColor;
 	groundEffect->get_material().lightingType = LighingType::None;
 	groundEffect->get_material().texture = szg::TextureLibrary::GetTexture("CometGround3.png");
-	groundEffect->get_transform().set_quaternion(
+	groundEffect->transform_mut().set_quaternion(
 		Quaternion::AngleAxis(CVector3::BASIS_Y, RandomEngine::Random01MOD() * PI2)
 		* Quaternion::LookForward(CVector3::UP, CVector3::FORWARD)
 	);
@@ -78,13 +78,13 @@ void CometEffect::update() {
 		cometFire->set_active(true);
 		float param = timer.time() / FallTime;
 		float posY = std::lerp(CometHight, 0.0f, param);
-		cometBody->get_transform().set_translate_y(posY);
-		cometFire->get_transform().set_translate_y(posY);
+		cometBody->transform_mut().set_translate_y(posY);
+		cometFire->transform_mut().set_translate_y(posY);
 		// カメラ方向に向ける
 		Vector3 forward = CVector3::FORWARD * camera->world_affine().get_basis();
 		forward.y = 0;
 		forward = -forward.normalize();
-		cometFire->get_transform().set_quaternion(
+		cometFire->transform_mut().set_quaternion(
 			Quaternion::LookForward(forward)
 		);
 	}
@@ -101,7 +101,7 @@ void CometEffect::update() {
 		dustCloudParticle0->update();
 		dustCloudParticle1->update();
 		// 地面のエフェクトをスケールで出現させる
-		groundEffect->get_transform().set_scale(CVector3::BASIS * param);
+		groundEffect->transform_mut().set_scale(CVector3::BASIS * param);
 		// 透明度を下げてフェードアウト
 		groundEffect->get_material().color.alpha = 1 - param;
 		// ブラーをかける

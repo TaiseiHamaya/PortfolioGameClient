@@ -22,6 +22,8 @@ public:
 public:
 	bool is_enter_frame() const;
 
+	bool is_inputting() const;
+
 	std::wstring into_string();
 
 private:

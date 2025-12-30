@@ -23,8 +23,8 @@ void CircleAoe::initialize(const Vector3& position, float radius, float duration
 	base->get_material().texture = szg::TextureLibrary::GetTexture("AOEBase.png");
 	base->get_material().lightingType = LighingType::None;
 	base->get_material().color.alpha = 0;
-	base->get_transform().set_scale(CVector3::ZERO);
-	base->get_transform().set_quaternion(rotate);
+	base->transform_mut().set_scale(CVector3::ZERO);
+	base->transform_mut().set_quaternion(rotate);
 	//base->set_layer(1);
 	// なんか動くところ
 	effect = world_root_mut()->instantiate<szg::Rect3d>(this);
@@ -32,8 +32,8 @@ void CircleAoe::initialize(const Vector3& position, float radius, float duration
 	effect->get_material().texture = szg::TextureLibrary::GetTexture("AOEBase.png");
 	effect->get_material().lightingType = LighingType::None;
 	effect->get_material().color.alpha = 0;
-	effect->get_transform().set_scale(CVector3::ZERO);
-	effect->get_transform().set_quaternion(rotate);
+	effect->transform_mut().set_scale(CVector3::ZERO);
+	effect->transform_mut().set_quaternion(rotate);
 	//effect->set_layer(1);
 }
 
@@ -43,15 +43,15 @@ void CircleAoe::update() {
 	if (timer < EFFECT_START_TIME) {
 		// 表示開始時の拡大
 		float param = eps::lerp_inv<r32>(0.0f, EFFECT_START_TIME, timer);
-		base->get_transform().set_scale(Vector3::Lerp(CVector3::ZERO, CVector3::BASIS, param));
+		base->transform_mut().set_scale(Vector3::Lerp(CVector3::ZERO, CVector3::BASIS, param));
 		base->get_material().color.alpha = param * AOE_ALPHA;
 	}
 	else {
 		float time = timer - EFFECT_START_TIME;
 		float param = time - std::trunc(time); // 小数部を抽出
-		base->get_transform().set_scale(CVector3::BASIS);
+		base->transform_mut().set_scale(CVector3::BASIS);
 		// エフェクトの部分をいい感じに動かす
-		effect->get_transform().set_scale(CVector3::BASIS * param);
+		effect->transform_mut().set_scale(CVector3::BASIS * param);
 		effect->get_material().color.alpha = (1 - param) * AOE_ALPHA;
 	}
 

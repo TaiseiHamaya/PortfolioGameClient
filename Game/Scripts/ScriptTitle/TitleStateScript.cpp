@@ -99,8 +99,8 @@ void TitleStateScript::prev_update() {
 		}
 	}
 
-	selectingRect->get_transform().set_translate_y(
-		std::vector{ nameString->get_transform().get_translate().y, loginString->get_transform().get_translate().y } [selectIndex]
+	selectingRect->transform_mut().set_translate_y(
+		std::vector{ nameString->transform_mut().get_translate().y, loginString->transform_mut().get_translate().y } [selectIndex]
 	);
 	if (isInputText) {
 		selectingRect->get_material().color.alpha = 0.5f;

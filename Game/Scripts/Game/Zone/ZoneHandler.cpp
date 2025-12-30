@@ -196,6 +196,10 @@ void ZoneHandler::request_play_action(u32 actionId) {
 	gameServerPacketSender->stack_packet(packet);
 }
 
+Reference<const ChatBoxManager> ZoneHandler::chat_box_imm() const noexcept {
+	return chatBoxManager;
+}
+
 void ZoneHandler::process_text_message(Proto::CategoryTextMessage type, const std::string& payload) {
 	switch (type) {
 	case Proto::CHAT_RECEIVE: // チャット受け取り
@@ -241,7 +245,7 @@ void ZoneHandler::process_login_message(Proto::CategoryLoginMessage type, const 
 		body.ParseFromString(payload);
 		gameServerConnectionManager->on_connection_succeeded(); // 通知
 		player->set_server_id(body.id()); // サーバーIDの設定
-		player->get_transform().set_translate(Vector3{ body.position().x(), body.position().y(), body.position().z() }); // 初期位置の設定
+		player->transform_mut().set_translate(Vector3{ body.position().x(), body.position().y(), body.position().z() }); // 初期位置の設定
 		entityManager->register_server_id(body.id(), player);
 		szgInformation("Login succeeded. Id-\'{}\'", body.id());
 		gameLogWindowManager->add_log(

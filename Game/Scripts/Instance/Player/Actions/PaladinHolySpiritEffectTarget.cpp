@@ -20,7 +20,7 @@ void PaladinHolySpiritEffectTarget::initialize(const Vector3& position) {
 	absorption = worldRoot->instantiate<LookAtRect>(this);
 	absorption->get_material().texture = szg::TextureLibrary::GetTexture("PaladinHolySpiritEffectTargetAbsorption.png");
 	absorption->initialize(absorptionEffectValues.size, absorptionEffectValues.pivot);
-	absorption->get_transform().set_scale(absorptionEffectValues.beginScale);
+	absorption->transform_mut().set_scale(absorptionEffectValues.beginScale);
 	absorption->get_material().color = absorptionEffectValues.color;
 	absorption->get_material().lightingType = LighingType::None;
 	absorption->set_active(false);
@@ -31,11 +31,11 @@ void PaladinHolySpiritEffectTarget::initialize(const Vector3& position) {
 	for (i32 i = 0; Reference<szg::Rect3d>& centerBillboard : centerBillboards) {
 		centerBillboard = worldRoot->instantiate<szg::Rect3d>(centerConstraint);
 		centerBillboard->initialize(centerEffectValues.size, centerEffectValues.pivot);
-		centerBillboard->get_transform().set_scale(centerEffectValues.beginScale);
-		centerBillboard->get_transform().set_quaternion(
+		centerBillboard->transform_mut().set_scale(centerEffectValues.beginScale);
+		centerBillboard->transform_mut().set_quaternion(
 			Quaternion::AngleAxis(CVector3::FORWARD, PI2 * i / 6)
 		);
-		centerBillboard->get_transform().set_translate({ 0.0,0.0,0.01f });
+		centerBillboard->transform_mut().set_translate({ 0.0,0.0,0.01f });
 		centerBillboard->get_material().texture = szg::TextureLibrary::GetTexture("PaladinHolySpiritEffectTargetCenter6.png");
 		centerBillboard->get_material().lightingType = LighingType::None;
 		centerBillboard->set_active(false);
@@ -46,8 +46,8 @@ void PaladinHolySpiritEffectTarget::initialize(const Vector3& position) {
 	// 中心の丸いやつ
 	lightBillboard = worldRoot->instantiate<LookAtRect>(this);
 	lightBillboard->initialize(lightEffectValues.size, lightEffectValues.pivot);
-	lightBillboard->get_transform().set_translate({ 0.0,0.0,0.02f });
-	lightBillboard->get_transform().set_scale(lightEffectValues.beginScale);
+	lightBillboard->transform_mut().set_translate({ 0.0,0.0,0.02f });
+	lightBillboard->transform_mut().set_scale(lightEffectValues.beginScale);
 	lightBillboard->get_material().color = lightEffectValues.color;
 	lightBillboard->get_material().texture = szg::TextureLibrary::GetTexture("PaladinHolySpiritEffectTargetLight.png");
 	lightBillboard->get_material().lightingType = LighingType::None;
@@ -71,7 +71,7 @@ void PaladinHolySpiritEffectTarget::update() {
 	if (timer >= lightEffectValues.beginTime) {
 		r32 param = eps::saturate((timer - lightEffectValues.beginTime) / (lightEffectValues.endTime - lightEffectValues.beginTime));
 		r32 scaleBase = eps::lerp(0.0f, 1.0f, Easing::Out::Cubic(param));
-		lightBillboard->get_transform().set_scale(Vector3{ scaleBase, scaleBase, 1.0f });
+		lightBillboard->transform_mut().set_scale(Vector3{ scaleBase, scaleBase, 1.0f });
 		lightBillboard->get_material().color.alpha = std::sin(param * PI);
 		if (timer < lightEffectValues.endTime) {
 			lightBillboard->set_active(true);
@@ -84,7 +84,7 @@ void PaladinHolySpiritEffectTarget::update() {
 	if (timer >= absorptionEffectValues.beginTime) {
 		r32 param = eps::saturate((timer - absorptionEffectValues.beginTime) / (absorptionEffectValues.endTime - absorptionEffectValues.beginTime));
 		r32 scaleBase = eps::lerp(1.0f, 0.0f, param);
-		absorption->get_transform().set_scale(Vector3{ scaleBase, scaleBase, 1.0f });
+		absorption->transform_mut().set_scale(Vector3{ scaleBase, scaleBase, 1.0f });
 		absorption->get_material().color.alpha = eps::lerp(0.0f, 1.0f, Easing::Out::Expo(param));
 		if (timer < absorptionEffectValues.endTime) {
 			absorption->set_active(true);
@@ -98,7 +98,7 @@ void PaladinHolySpiritEffectTarget::update() {
 		centerConstraint->look_at(LookAtRect::camera);
 		r32 param = eps::saturate((timer - centerEffectValues.beginTime) / (centerEffectValues.endTime - centerEffectValues.beginTime));
 		for (Reference<szg::Rect3d>& centerBillboard : centerBillboards) {
-			centerBillboard->get_transform().set_scale({
+			centerBillboard->transform_mut().set_scale({
 				param,
 				Easing::Out::Back(param),
 				1.0f
