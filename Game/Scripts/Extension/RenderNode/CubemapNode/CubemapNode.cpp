@@ -6,7 +6,7 @@
 #include <Engine/GraphicsAPI/DirectX/DxPipelineState/DxPipelineState.h>
 #include <Engine/GraphicsAPI/DirectX/DxPipelineState/PSOBuilder/PSOBuilder.h>
 #include <Engine/GraphicsAPI/RenderingSystemValues.h>
-#include <Engine/Module/World/Camera/Camera3D.h>
+#include <Engine/Module/World/Camera/CameraInstance.h>
 
 void CubemapNode::initialize() {
 	create_pipeline_state();
@@ -33,7 +33,7 @@ void CubemapNode::set_cubemap_texture(const std::string& name) {
 	cubemapTexture = szg::TextureLibrary::GetTexture(name);
 }
 
-void CubemapNode::set_camera(Reference<const szg::Camera3D> camera_) {
+void CubemapNode::set_camera(Reference<const szg::CameraInstance> camera_) {
 	camera = camera_;
 }
 

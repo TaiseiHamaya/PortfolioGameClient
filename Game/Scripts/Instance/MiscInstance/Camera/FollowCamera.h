@@ -1,16 +1,16 @@
 #pragma once
 
 #include <Engine/Assets/Json/JsonAsset.h>
-#include <Engine/Module/World/Camera/Camera3D.h>
+#include <Engine/Module/World/Camera/CameraInstance.h>
 #include <Engine/Runtime/Clock/WorldTimer.h>
 #include <Engine/Runtime/Input/InputHandler.h>
 
 /// <summary>
 /// 追跡カメラ
 /// </summary>
-class FollowCamera final : public szg::Camera3D {
+class FollowCamera final : public szg::CameraInstance {
 public:
-	void initialize() override;
+	void initialize();
 	void update();
 
 	void input();
@@ -26,11 +26,6 @@ public:
 	const Vector3& get_offset() const;
 
 	void set_target(Reference<const szg::WorldInstance> target_);
-
-#ifdef DEBUG_FEATURES_ENABLE
-public:
-	void debug_gui() override;
-#endif // DEBUG_FEATURES_ENABLE
 
 private:
 	Vector3 offset;

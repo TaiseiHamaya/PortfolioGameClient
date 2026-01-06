@@ -9,7 +9,7 @@
 
 namespace szg {
 
-class Camera3D;
+class CameraInstance;
 
 }
 
@@ -26,7 +26,7 @@ public:
 	void preprocess() override;
 
 	void set_cubemap_texture(const std::string& name);
-	void set_camera(Reference<const szg::Camera3D> camera_);
+	void set_camera(Reference<const szg::CameraInstance> camera_);
 
 	void write_position(const Vector3& position);
 
@@ -41,7 +41,7 @@ private:
 
 private:
 	std::shared_ptr<const szg::PrimitiveGeometryAsset> indexBuffer;
-	Reference<const szg::Camera3D> camera;
+	Reference<const szg::CameraInstance> camera;
 	std::shared_ptr<const szg::TextureAsset> cubemapTexture;
 	szg::ConstantBuffer<Vector3> vsBuffer;
 	szg::ConstantBuffer<Material> materialBuffer;

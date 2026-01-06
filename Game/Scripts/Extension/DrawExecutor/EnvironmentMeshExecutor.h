@@ -9,7 +9,7 @@
 namespace szg {
 
 class DirectionalLightingExecutor;
-class Camera3D;
+class CameraInstance;
 class TextureAsset;
 
 }
@@ -40,7 +40,7 @@ public:
 	/// </summary>
 	/// <param name="directionalLightingExecutor_"></param>
 	/// <param name="camera_"></param>
-	void setup(Reference<const szg::DirectionalLightingExecutor> directionalLightingExecutor_, Reference<const szg::Camera3D> camera_);
+	void setup(Reference<const szg::DirectionalLightingExecutor> directionalLightingExecutor_, Reference<const szg::CameraInstance> camera_);
 	
 	/// <summary>
 	/// コマンドを積む
@@ -61,5 +61,5 @@ private:
 	std::vector<szg::StructuredBuffer<szg::MaterialDataBuffer3>> materials;
 
 	Reference<const szg::DirectionalLightingExecutor> directionalLightingExecutor;
-	Reference<const szg::Camera3D> camera;
+	Reference<const szg::CameraInstance> camera;
 };

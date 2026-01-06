@@ -5,7 +5,7 @@
 #include <Engine/Assets/Texture/TextureLibrary.h>
 #include <Engine/GraphicsAPI/DirectX/DxCommand/DxCommand.h>
 #include <Engine/Module/DrawExecutor/LightingExecutor/DirectionalLightingExecutor.h>
-#include <Engine/Module/World/Camera/Camera3D.h>
+#include <Engine/Module/World/Camera/CameraInstance.h>
 
 EnvironmentMeshExecutor::EnvironmentMeshExecutor(std::string meshName, u32 maxInstance, std::string environmentTextureName) {
 	reinitialize(szg::PolygonMeshLibrary::GetPolygonMesh(meshName), maxInstance, szg::TextureLibrary::GetTexture(environmentTextureName));
@@ -22,7 +22,7 @@ void EnvironmentMeshExecutor::reinitialize(std::shared_ptr<const szg::PolygonMes
 	}
 }
 
-void EnvironmentMeshExecutor::setup(Reference<const szg::DirectionalLightingExecutor> directionalLightingExecutor_, Reference<const szg::Camera3D> camera_) {
+void EnvironmentMeshExecutor::setup(Reference<const szg::DirectionalLightingExecutor> directionalLightingExecutor_, Reference<const szg::CameraInstance> camera_) {
 	directionalLightingExecutor = directionalLightingExecutor_;
 	camera = camera_;
 }

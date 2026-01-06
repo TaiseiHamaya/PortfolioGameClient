@@ -27,7 +27,11 @@ void EntityUi::set_name(const std::string& name) {
 void EntityUi::update_affine() {
 	WorldInstance::update_affine();
 
-	nametag->look_at(LookAtRect::camera);
+	Vector3 cameraBackward = CVector3::BACKWARD * LookAtRect::camera->world_affine().get_basis().to_quaternion();
+
+	nametag->transform_mut().set_quaternion(
+		world_affine().get_basis().to_quaternion().inverse() * Quaternion::LookForward(cameraBackward)
+	);
 }
 
 void EntityUi::update_ui(r32 percentage) {

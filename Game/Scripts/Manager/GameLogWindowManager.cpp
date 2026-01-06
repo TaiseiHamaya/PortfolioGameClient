@@ -13,11 +13,11 @@ void GameLogWindowManager::initialize() {
 	if (chatTextRoot) {
 		// ログ表示用のStringRectInstanceを作成
 		Reference<szg::WorldRoot> world = chatTextRoot->world_root_mut();
-		r32 lineHeight = 0.142f;
+		r32 lineHeight = 34;
 		for (i32 i = 0; i < MaxLogCount; ++i) {
 			Reference<szg::StringRectInstance> instance = world->instantiate<szg::StringRectInstance>(chatTextRoot);
-			instance->initialize("UDEVGothic35HS-Regular.mtsdf", 2.4f, CVector2::ZERO);
-			instance->transform_mut().set_translate_y(lineHeight * (MaxLogCount - i - 1) + 0.04f);
+			instance->initialize("UDEVGothic35HS-Regular.mtsdf", 550, CVector2::ZERO);
+			instance->transform_mut().set_translate_y(lineHeight * (MaxLogCount - i - 1) + 60);
 			instance->set_draw(false);
 			logInstances[i] = instance;
 		}

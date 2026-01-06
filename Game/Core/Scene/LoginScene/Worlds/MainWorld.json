@@ -1,10 +1,7 @@
 {
 	"Instances": [
 		{
-			"AspectRatio": 1.7776999473571777,
 			"Children": [],
-			"FOV Y": 0.44999998807907104,
-			"FarClip": 1000.0,
 			"Local transform": {
 				"Rotation": {
 					"W": 1.0,
@@ -26,7 +23,13 @@
 				}
 			},
 			"Name": "Camera",
-			"NearClip": 0.10000000149011612,
+			"Projection": {
+				"AspectRatio": 1.7776999473571777,
+				"FOV Y": 0.44999998807907104,
+				"FarClip": 1000.0,
+				"NearClip": 0.10000000149011612,
+				"Type": 0
+			},
 			"Type": 3000,
 			"Use runtime": false
 		},

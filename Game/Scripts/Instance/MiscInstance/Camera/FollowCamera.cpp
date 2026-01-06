@@ -2,7 +2,9 @@
 
 #include <algorithm>
 
+#include <Engine/Application/ProjectSettings/ProjectSettings.h>
 #include <Engine/Module/Manager/World/WorldRoot.h>
+#include <Engine/Module/World/Camera/ProjectionAdapter/CameraPerspectiveProjection.h>
 #include <Engine/Runtime/Clock/WorldClock.h>
 #include <Engine/Runtime/Input/Input.h>
 
@@ -15,7 +17,13 @@
 #include <Engine/Assets/Json/JsonSerializer.h>
 
 void FollowCamera::initialize() {
-	Camera3D::initialize();
+	auto projection = std::make_unique<szg::CameraPerspectiveProjection>();
+	projection->initialize(
+		0.45f,
+		(float)szg::ProjectSettings::ClientWidth() / szg::ProjectSettings::ClientHeight(),
+		0.1f, 1000
+	);
+	setup(std::move(projection));
 
 	lookAtInstance = world_root_mut()->instantiate<WorldInstance>();
 	reparent(lookAtInstance);
@@ -141,17 +149,3 @@ const Vector3& FollowCamera::get_offset() const {
 void FollowCamera::set_target(Reference<const WorldInstance> target_) {
 	target = target_;
 }
-
-#ifdef DEBUG_FEATURES_ENABLE
-
-#include <imgui.h>
-
-void FollowCamera::debug_gui() {
-	ImGui::Begin("Camera3D");
-	ImGui::DragFloat3("Offset", &offset.x, 0.1f);
-	Camera3D::debug_gui();
-	ImGui::Separator();
-	json.show_imgui();
-	ImGui::End();
-}
-#endif // DEBUG_FEATURES_ENABLE

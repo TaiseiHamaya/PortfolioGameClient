@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Engine/Module/Render/RenderPipeline/Posteffect/RadialBlur/RadialBlurPipeline.h>
-#include <Engine/Module/World/Camera/Camera3D.h>
+#include <Engine/Module/World/Camera/CameraInstance.h>
 #include <Engine/Module/World/Mesh/Primitive/Rect3d.h>
 #include <Engine/Module/World/Mesh/StaticMeshInstance.h>
 #include <Engine/Module/World/Particle/ParticleEmitterInstance.h>
@@ -60,5 +60,5 @@ private:
 	r32 BlurWeight{};
 
 public:
-	inline static Reference<szg::Camera3D> camera{ nullptr };
+	inline static Reference<szg::CameraInstance> camera{ nullptr };
 };

@@ -75,7 +75,7 @@ void ChatBoxManager::update() {
 	if (chatBoxCursor && chatBoxString) {
 		r32 offset =
 			textBox.calculate_cursor_offset(chatBoxString);
-		chatBoxCursor->transform_mut().set_translate_x(-offset - 0.06f);
+		chatBoxCursor->transform_mut().set_translate_x(-offset - 12);
 	}
 }
 
