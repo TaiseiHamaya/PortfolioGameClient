@@ -10,6 +10,8 @@
 
 #include <Library/Math/Definition.h>
 
+#include "Scripts/Scene/FactoryPortfolio.h"
+
 void TitleStateScript::setup() {
 	selectingRect = std::any_cast<Reference<szg::Rect3d>>(*szg::RuntimeStorage::GetValueMut("RuntimeInstance", "Selecting"));
 	loginString = std::any_cast<Reference<szg::StringRectInstance>>(*szg::RuntimeStorage::GetValueMut("RuntimeInstance", "Login"));
@@ -62,7 +64,7 @@ void TitleStateScript::prev_update() {
 		if (inputKey.trigger(szg::KeyID::Return) || inputPad.trigger(szg::PadID::A)) {
 			if (state == State::Title) {
 				szg::RuntimeStorage::GetValueList("Temp")["PlayerName"] = inputString->string_imm();
-				szg::SceneManager2::SceneChange(0, 0.5f);
+				szg::SceneManager2::SceneChange(SceneListPortfolio::SCENE_GAME, 0.5f);
 				state = State::Login;
 			}
 		}

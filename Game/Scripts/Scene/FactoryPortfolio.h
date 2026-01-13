@@ -3,8 +3,8 @@
 #include "Engine/Runtime/Scene/BaseSceneFactory.h"
 
 enum SceneListPortfolio {
-	SCENE_GAME,
 	SCENE_LOGIN,
+	SCENE_GAME,
 };
 
 class FactoryPortfolio final : public szg::BaseSceneFactory {
