@@ -264,19 +264,19 @@ class ActionAcquired final : public ::google::protobuf::Message
     kJobNameFieldNumber = 1,
     kLevelFieldNumber = 2,
   };
-  // string jobName = 1;
-  void clear_jobname() ;
-  const ::std::string& jobname() const;
+  // string job_name = 1;
+  void clear_job_name() ;
+  const ::std::string& job_name() const;
   template <typename Arg_ = const ::std::string&, typename... Args_>
-  void set_jobname(Arg_&& arg, Args_... args);
-  ::std::string* PROTOBUF_NONNULL mutable_jobname();
-  [[nodiscard]] ::std::string* PROTOBUF_NULLABLE release_jobname();
-  void set_allocated_jobname(::std::string* PROTOBUF_NULLABLE value);
+  void set_job_name(Arg_&& arg, Args_... args);
+  ::std::string* PROTOBUF_NONNULL mutable_job_name();
+  [[nodiscard]] ::std::string* PROTOBUF_NULLABLE release_job_name();
+  void set_allocated_job_name(::std::string* PROTOBUF_NULLABLE value);
 
   private:
-  const ::std::string& _internal_jobname() const;
-  PROTOBUF_ALWAYS_INLINE void _internal_set_jobname(const ::std::string& value);
-  ::std::string* PROTOBUF_NONNULL _internal_mutable_jobname();
+  const ::std::string& _internal_job_name() const;
+  PROTOBUF_ALWAYS_INLINE void _internal_set_job_name(const ::std::string& value);
+  ::std::string* PROTOBUF_NONNULL _internal_mutable_job_name();
 
   public:
   // uint32 level = 2;
@@ -294,7 +294,7 @@ class ActionAcquired final : public ::google::protobuf::Message
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<1, 2,
-                                   0, 36,
+                                   0, 37,
                                    2>
       _table_;
 
@@ -315,7 +315,7 @@ class ActionAcquired final : public ::google::protobuf::Message
         const ActionAcquired& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
-    ::google::protobuf::internal::ArenaStringPtr jobname_;
+    ::google::protobuf::internal::ArenaStringPtr job_name_;
     ::uint32_t level_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
@@ -509,56 +509,56 @@ class EntityAction final : public ::google::protobuf::Message
   ::Proto::ActionAcquired* PROTOBUF_NONNULL _internal_mutable_acquired();
 
   public:
-  // uint32 actionId = 1;
-  void clear_actionid() ;
-  ::uint32_t actionid() const;
-  void set_actionid(::uint32_t value);
+  // uint32 action_id = 1;
+  void clear_action_id() ;
+  ::uint32_t action_id() const;
+  void set_action_id(::uint32_t value);
 
   private:
-  ::uint32_t _internal_actionid() const;
-  void _internal_set_actionid(::uint32_t value);
+  ::uint32_t _internal_action_id() const;
+  void _internal_set_action_id(::uint32_t value);
 
   public:
-  // .Proto.ActionType actionType = 4;
-  void clear_actiontype() ;
-  ::Proto::ActionType actiontype() const;
-  void set_actiontype(::Proto::ActionType value);
+  // .Proto.ActionType action_type = 4;
+  void clear_action_type() ;
+  ::Proto::ActionType action_type() const;
+  void set_action_type(::Proto::ActionType value);
 
   private:
-  ::Proto::ActionType _internal_actiontype() const;
-  void _internal_set_actiontype(::Proto::ActionType value);
+  ::Proto::ActionType _internal_action_type() const;
+  void _internal_set_action_type(::Proto::ActionType value);
 
   public:
-  // optional float castTime = 5;
-  bool has_casttime() const;
-  void clear_casttime() ;
-  float casttime() const;
-  void set_casttime(float value);
+  // optional float cast_time = 5;
+  bool has_cast_time() const;
+  void clear_cast_time() ;
+  float cast_time() const;
+  void set_cast_time(float value);
 
   private:
-  float _internal_casttime() const;
-  void _internal_set_casttime(float value);
+  float _internal_cast_time() const;
+  void _internal_set_cast_time(float value);
 
   public:
-  // float recastTime = 6;
-  void clear_recasttime() ;
-  float recasttime() const;
-  void set_recasttime(float value);
+  // float recast_time = 6;
+  void clear_recast_time() ;
+  float recast_time() const;
+  void set_recast_time(float value);
 
   private:
-  float _internal_recasttime() const;
-  void _internal_set_recasttime(float value);
+  float _internal_recast_time() const;
+  void _internal_set_recast_time(float value);
 
   public:
-  // optional int32 mpCost = 7;
-  bool has_mpcost() const;
-  void clear_mpcost() ;
-  ::int32_t mpcost() const;
-  void set_mpcost(::int32_t value);
+  // optional int32 mp_cost = 7;
+  bool has_mp_cost() const;
+  void clear_mp_cost() ;
+  ::int32_t mp_cost() const;
+  void set_mp_cost(::int32_t value);
 
   private:
-  ::int32_t _internal_mpcost() const;
-  void _internal_set_mpcost(::int32_t value);
+  ::int32_t _internal_mp_cost() const;
+  void _internal_set_mp_cost(::int32_t value);
 
   public:
   // float range = 8;
@@ -609,11 +609,11 @@ class EntityAction final : public ::google::protobuf::Message
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::google::protobuf::internal::ArenaStringPtr name_;
     ::Proto::ActionAcquired* PROTOBUF_NULLABLE acquired_;
-    ::uint32_t actionid_;
-    int actiontype_;
-    float casttime_;
-    float recasttime_;
-    ::int32_t mpcost_;
+    ::uint32_t action_id_;
+    int action_type_;
+    float cast_time_;
+    float recast_time_;
+    ::int32_t mp_cost_;
     float range_;
     float radius_;
     PROTOBUF_TSAN_DECLARE_MEMBER
@@ -640,69 +640,69 @@ extern const ::google::protobuf::internal::ClassDataFull EntityAction_class_data
 
 // ActionAcquired
 
-// string jobName = 1;
-inline void ActionAcquired::clear_jobname() {
+// string job_name = 1;
+inline void ActionAcquired::clear_job_name() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.jobname_.ClearToEmpty();
+  _impl_.job_name_.ClearToEmpty();
   _impl_._has_bits_[0] &= ~0x00000001U;
 }
-inline const ::std::string& ActionAcquired::jobname() const
+inline const ::std::string& ActionAcquired::job_name() const
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:Proto.ActionAcquired.jobName)
-  return _internal_jobname();
+  // @@protoc_insertion_point(field_get:Proto.ActionAcquired.job_name)
+  return _internal_job_name();
 }
 template <typename Arg_, typename... Args_>
-PROTOBUF_ALWAYS_INLINE void ActionAcquired::set_jobname(Arg_&& arg, Args_... args) {
+PROTOBUF_ALWAYS_INLINE void ActionAcquired::set_job_name(Arg_&& arg, Args_... args) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_._has_bits_[0] |= 0x00000001U;
-  _impl_.jobname_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:Proto.ActionAcquired.jobName)
+  _impl_.job_name_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:Proto.ActionAcquired.job_name)
 }
-inline ::std::string* PROTOBUF_NONNULL ActionAcquired::mutable_jobname()
+inline ::std::string* PROTOBUF_NONNULL ActionAcquired::mutable_job_name()
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  ::std::string* _s = _internal_mutable_jobname();
-  // @@protoc_insertion_point(field_mutable:Proto.ActionAcquired.jobName)
+  ::std::string* _s = _internal_mutable_job_name();
+  // @@protoc_insertion_point(field_mutable:Proto.ActionAcquired.job_name)
   return _s;
 }
-inline const ::std::string& ActionAcquired::_internal_jobname() const {
+inline const ::std::string& ActionAcquired::_internal_job_name() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.jobname_.Get();
+  return _impl_.job_name_.Get();
 }
-inline void ActionAcquired::_internal_set_jobname(const ::std::string& value) {
+inline void ActionAcquired::_internal_set_job_name(const ::std::string& value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_._has_bits_[0] |= 0x00000001U;
-  _impl_.jobname_.Set(value, GetArena());
+  _impl_.job_name_.Set(value, GetArena());
 }
-inline ::std::string* PROTOBUF_NONNULL ActionAcquired::_internal_mutable_jobname() {
+inline ::std::string* PROTOBUF_NONNULL ActionAcquired::_internal_mutable_job_name() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_._has_bits_[0] |= 0x00000001U;
-  return _impl_.jobname_.Mutable( GetArena());
+  return _impl_.job_name_.Mutable( GetArena());
 }
-inline ::std::string* PROTOBUF_NULLABLE ActionAcquired::release_jobname() {
+inline ::std::string* PROTOBUF_NULLABLE ActionAcquired::release_job_name() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:Proto.ActionAcquired.jobName)
+  // @@protoc_insertion_point(field_release:Proto.ActionAcquired.job_name)
   if ((_impl_._has_bits_[0] & 0x00000001U) == 0) {
     return nullptr;
   }
   _impl_._has_bits_[0] &= ~0x00000001U;
-  auto* released = _impl_.jobname_.Release();
+  auto* released = _impl_.job_name_.Release();
   if (::google::protobuf::internal::DebugHardenForceCopyDefaultString()) {
-    _impl_.jobname_.Set("", GetArena());
+    _impl_.job_name_.Set("", GetArena());
   }
   return released;
 }
-inline void ActionAcquired::set_allocated_jobname(::std::string* PROTOBUF_NULLABLE value) {
+inline void ActionAcquired::set_allocated_job_name(::std::string* PROTOBUF_NULLABLE value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (value != nullptr) {
     _impl_._has_bits_[0] |= 0x00000001U;
   } else {
     _impl_._has_bits_[0] &= ~0x00000001U;
   }
-  _impl_.jobname_.SetAllocated(value, GetArena());
-  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.jobname_.IsDefault()) {
-    _impl_.jobname_.Set("", GetArena());
+  _impl_.job_name_.SetAllocated(value, GetArena());
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.job_name_.IsDefault()) {
+    _impl_.job_name_.Set("", GetArena());
   }
-  // @@protoc_insertion_point(field_set_allocated:Proto.ActionAcquired.jobName)
+  // @@protoc_insertion_point(field_set_allocated:Proto.ActionAcquired.job_name)
 }
 
 // uint32 level = 2;
@@ -733,28 +733,28 @@ inline void ActionAcquired::_internal_set_level(::uint32_t value) {
 
 // EntityAction
 
-// uint32 actionId = 1;
-inline void EntityAction::clear_actionid() {
+// uint32 action_id = 1;
+inline void EntityAction::clear_action_id() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.actionid_ = 0u;
+  _impl_.action_id_ = 0u;
   _impl_._has_bits_[0] &= ~0x00000004U;
 }
-inline ::uint32_t EntityAction::actionid() const {
-  // @@protoc_insertion_point(field_get:Proto.EntityAction.actionId)
-  return _internal_actionid();
+inline ::uint32_t EntityAction::action_id() const {
+  // @@protoc_insertion_point(field_get:Proto.EntityAction.action_id)
+  return _internal_action_id();
 }
-inline void EntityAction::set_actionid(::uint32_t value) {
-  _internal_set_actionid(value);
+inline void EntityAction::set_action_id(::uint32_t value) {
+  _internal_set_action_id(value);
   _impl_._has_bits_[0] |= 0x00000004U;
-  // @@protoc_insertion_point(field_set:Proto.EntityAction.actionId)
+  // @@protoc_insertion_point(field_set:Proto.EntityAction.action_id)
 }
-inline ::uint32_t EntityAction::_internal_actionid() const {
+inline ::uint32_t EntityAction::_internal_action_id() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.actionid_;
+  return _impl_.action_id_;
 }
-inline void EntityAction::_internal_set_actionid(::uint32_t value) {
+inline void EntityAction::_internal_set_action_id(::uint32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.actionid_ = value;
+  _impl_.action_id_ = value;
 }
 
 // string name = 2;
@@ -920,108 +920,108 @@ inline void EntityAction::set_allocated_acquired(::Proto::ActionAcquired* PROTOB
   // @@protoc_insertion_point(field_set_allocated:Proto.EntityAction.acquired)
 }
 
-// .Proto.ActionType actionType = 4;
-inline void EntityAction::clear_actiontype() {
+// .Proto.ActionType action_type = 4;
+inline void EntityAction::clear_action_type() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.actiontype_ = 0;
+  _impl_.action_type_ = 0;
   _impl_._has_bits_[0] &= ~0x00000008U;
 }
-inline ::Proto::ActionType EntityAction::actiontype() const {
-  // @@protoc_insertion_point(field_get:Proto.EntityAction.actionType)
-  return _internal_actiontype();
+inline ::Proto::ActionType EntityAction::action_type() const {
+  // @@protoc_insertion_point(field_get:Proto.EntityAction.action_type)
+  return _internal_action_type();
 }
-inline void EntityAction::set_actiontype(::Proto::ActionType value) {
-  _internal_set_actiontype(value);
+inline void EntityAction::set_action_type(::Proto::ActionType value) {
+  _internal_set_action_type(value);
   _impl_._has_bits_[0] |= 0x00000008U;
-  // @@protoc_insertion_point(field_set:Proto.EntityAction.actionType)
+  // @@protoc_insertion_point(field_set:Proto.EntityAction.action_type)
 }
-inline ::Proto::ActionType EntityAction::_internal_actiontype() const {
+inline ::Proto::ActionType EntityAction::_internal_action_type() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return static_cast<::Proto::ActionType>(_impl_.actiontype_);
+  return static_cast<::Proto::ActionType>(_impl_.action_type_);
 }
-inline void EntityAction::_internal_set_actiontype(::Proto::ActionType value) {
+inline void EntityAction::_internal_set_action_type(::Proto::ActionType value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.actiontype_ = value;
+  _impl_.action_type_ = value;
 }
 
-// optional float castTime = 5;
-inline bool EntityAction::has_casttime() const {
+// optional float cast_time = 5;
+inline bool EntityAction::has_cast_time() const {
   bool value = (_impl_._has_bits_[0] & 0x00000010U) != 0;
   return value;
 }
-inline void EntityAction::clear_casttime() {
+inline void EntityAction::clear_cast_time() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.casttime_ = 0;
+  _impl_.cast_time_ = 0;
   _impl_._has_bits_[0] &= ~0x00000010U;
 }
-inline float EntityAction::casttime() const {
-  // @@protoc_insertion_point(field_get:Proto.EntityAction.castTime)
-  return _internal_casttime();
+inline float EntityAction::cast_time() const {
+  // @@protoc_insertion_point(field_get:Proto.EntityAction.cast_time)
+  return _internal_cast_time();
 }
-inline void EntityAction::set_casttime(float value) {
-  _internal_set_casttime(value);
+inline void EntityAction::set_cast_time(float value) {
+  _internal_set_cast_time(value);
   _impl_._has_bits_[0] |= 0x00000010U;
-  // @@protoc_insertion_point(field_set:Proto.EntityAction.castTime)
+  // @@protoc_insertion_point(field_set:Proto.EntityAction.cast_time)
 }
-inline float EntityAction::_internal_casttime() const {
+inline float EntityAction::_internal_cast_time() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.casttime_;
+  return _impl_.cast_time_;
 }
-inline void EntityAction::_internal_set_casttime(float value) {
+inline void EntityAction::_internal_set_cast_time(float value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.casttime_ = value;
+  _impl_.cast_time_ = value;
 }
 
-// float recastTime = 6;
-inline void EntityAction::clear_recasttime() {
+// float recast_time = 6;
+inline void EntityAction::clear_recast_time() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.recasttime_ = 0;
+  _impl_.recast_time_ = 0;
   _impl_._has_bits_[0] &= ~0x00000020U;
 }
-inline float EntityAction::recasttime() const {
-  // @@protoc_insertion_point(field_get:Proto.EntityAction.recastTime)
-  return _internal_recasttime();
+inline float EntityAction::recast_time() const {
+  // @@protoc_insertion_point(field_get:Proto.EntityAction.recast_time)
+  return _internal_recast_time();
 }
-inline void EntityAction::set_recasttime(float value) {
-  _internal_set_recasttime(value);
+inline void EntityAction::set_recast_time(float value) {
+  _internal_set_recast_time(value);
   _impl_._has_bits_[0] |= 0x00000020U;
-  // @@protoc_insertion_point(field_set:Proto.EntityAction.recastTime)
+  // @@protoc_insertion_point(field_set:Proto.EntityAction.recast_time)
 }
-inline float EntityAction::_internal_recasttime() const {
+inline float EntityAction::_internal_recast_time() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.recasttime_;
+  return _impl_.recast_time_;
 }
-inline void EntityAction::_internal_set_recasttime(float value) {
+inline void EntityAction::_internal_set_recast_time(float value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.recasttime_ = value;
+  _impl_.recast_time_ = value;
 }
 
-// optional int32 mpCost = 7;
-inline bool EntityAction::has_mpcost() const {
+// optional int32 mp_cost = 7;
+inline bool EntityAction::has_mp_cost() const {
   bool value = (_impl_._has_bits_[0] & 0x00000040U) != 0;
   return value;
 }
-inline void EntityAction::clear_mpcost() {
+inline void EntityAction::clear_mp_cost() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.mpcost_ = 0;
+  _impl_.mp_cost_ = 0;
   _impl_._has_bits_[0] &= ~0x00000040U;
 }
-inline ::int32_t EntityAction::mpcost() const {
-  // @@protoc_insertion_point(field_get:Proto.EntityAction.mpCost)
-  return _internal_mpcost();
+inline ::int32_t EntityAction::mp_cost() const {
+  // @@protoc_insertion_point(field_get:Proto.EntityAction.mp_cost)
+  return _internal_mp_cost();
 }
-inline void EntityAction::set_mpcost(::int32_t value) {
-  _internal_set_mpcost(value);
+inline void EntityAction::set_mp_cost(::int32_t value) {
+  _internal_set_mp_cost(value);
   _impl_._has_bits_[0] |= 0x00000040U;
-  // @@protoc_insertion_point(field_set:Proto.EntityAction.mpCost)
+  // @@protoc_insertion_point(field_set:Proto.EntityAction.mp_cost)
 }
-inline ::int32_t EntityAction::_internal_mpcost() const {
+inline ::int32_t EntityAction::_internal_mp_cost() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.mpcost_;
+  return _impl_.mp_cost_;
 }
-inline void EntityAction::_internal_set_mpcost(::int32_t value) {
+inline void EntityAction::_internal_set_mp_cost(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.mpcost_ = value;
+  _impl_.mp_cost_ = value;
 }
 
 // float range = 8;

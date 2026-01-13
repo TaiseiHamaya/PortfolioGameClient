@@ -5,7 +5,7 @@
 #include <Engine/Assets/Texture/TextureAsset.h>
 #include <Engine/GraphicsAPI/DirectX/DxResource/ConstantBuffer/ConstantBuffer.h>
 #include <Engine/Assets/PrimitiveGeometry/PrimitiveGeometryAsset.h>
-#include <Library/Math/Color3.h>
+#include <Library/Math/ColorRGB.h>
 
 namespace szg {
 
@@ -35,7 +35,7 @@ private:
 
 private:
 	struct Material {
-		Color3 color{ CColor3::WHITE };
+		ColorRGB color{ CColorRGB::WHITE };
 		u32 texture;
 	};
 

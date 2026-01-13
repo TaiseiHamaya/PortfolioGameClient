@@ -22,7 +22,7 @@ public:
 	EnvironmentMeshExecutor() = default;
 	~EnvironmentMeshExecutor() noexcept = default;
 
-	EnvironmentMeshExecutor(std::string meshName, u32 maxInstance, std::string environmentTextureName);
+	EnvironmentMeshExecutor(const std::string& meshName, u32 maxInstance, const std::string& environmentTextureName);
 
 	SZG_CLASS_MOVE_ONLY(EnvironmentMeshExecutor)
 
@@ -58,7 +58,7 @@ private:
 	std::shared_ptr<const szg::TextureAsset> environmentTexture;
 
 	szg::StructuredBuffer<szg::TransformMatrixDataBuffer> matrices;
-	std::vector<szg::StructuredBuffer<szg::MaterialDataBuffer3>> materials;
+	std::vector<szg::StructuredBuffer<szg::MaterialDataBufferRGB>> materials;
 
 	Reference<const szg::DirectionalLightingExecutor> directionalLightingExecutor;
 	Reference<const szg::CameraInstance> camera;

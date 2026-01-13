@@ -4,7 +4,7 @@
 #include <Engine/Module/Manager/World/WorldRoot.h>
 #include <Engine/Runtime/Clock/WorldClock.h>
 
-#define COLOR4_SERIALIZER
+#define COLOR_RGBA_SERIALIZER
 #include <Engine/Assets/Json/JsonSerializer.h>
 
 #include "Actions/IdleAction.h"
@@ -32,7 +32,7 @@ void IEntity::initialize(const std::filesystem::path& file, u64 localId_) {
 
 	targetRadius = json.try_emplace<float>("TargetRadius");
 
-	ui->initialize(targetRadius * 3.0f + 1.4f, json.try_emplace<Color4>("HPColor"));
+	ui->initialize(targetRadius * 3.0f + 1.4f, json.try_emplace<ColorRGBA>("HPColor"));
 	set_name(json.get().value("Name", "Unknown"));
 	shadow->setup(this, targetRadius * 4);
 }

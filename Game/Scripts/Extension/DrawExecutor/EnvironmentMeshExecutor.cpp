@@ -7,7 +7,7 @@
 #include <Engine/Module/DrawExecutor/LightingExecutor/DirectionalLightingExecutor.h>
 #include <Engine/Module/World/Camera/CameraInstance.h>
 
-EnvironmentMeshExecutor::EnvironmentMeshExecutor(std::string meshName, u32 maxInstance, std::string environmentTextureName) {
+EnvironmentMeshExecutor::EnvironmentMeshExecutor(const std::string& meshName, u32 maxInstance, const std::string& environmentTextureName) {
 	reinitialize(szg::PolygonMeshLibrary::GetPolygonMesh(meshName), maxInstance, szg::TextureLibrary::GetTexture(environmentTextureName));
 }
 
@@ -17,7 +17,7 @@ void EnvironmentMeshExecutor::reinitialize(std::shared_ptr<const szg::PolygonMes
 	environmentTexture = environmentTexture_;
 	matrices.initialize(maxInstance);
 	materials.resize(asset->material_count());
-	for (szg::StructuredBuffer<szg::MaterialDataBuffer3>& material : materials) {
+	for (szg::StructuredBuffer<szg::MaterialDataBufferRGB>& material : materials) {
 		material.initialize(maxInstance);
 	}
 }

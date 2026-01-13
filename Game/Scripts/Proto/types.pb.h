@@ -880,16 +880,16 @@ class PayloadLogoutResponse final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
-    kIsSuccessedFieldNumber = 1,
+    kIsSucceededFieldNumber = 1,
   };
-  // bool is_successed = 1;
-  void clear_is_successed() ;
-  bool is_successed() const;
-  void set_is_successed(bool value);
+  // bool is_succeeded = 1;
+  void clear_is_succeeded() ;
+  bool is_succeeded() const;
+  void set_is_succeeded(bool value);
 
   private:
-  bool _internal_is_successed() const;
-  void _internal_set_is_successed(bool value);
+  bool _internal_is_succeeded() const;
+  void _internal_set_is_succeeded(bool value);
 
   public:
   // @@protoc_insertion_point(class_scope:Proto.PayloadLogoutResponse)
@@ -918,7 +918,7 @@ class PayloadLogoutResponse final : public ::google::protobuf::Message
         const PayloadLogoutResponse& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
-    bool is_successed_;
+    bool is_succeeded_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -2825,7 +2825,7 @@ class PayloadLoginResult final : public ::google::protobuf::Message
   enum : int {
     kPositionFieldNumber = 4,
     kIdFieldNumber = 1,
-    kIsSuccessedFieldNumber = 2,
+    kIsSucceededFieldNumber = 2,
   };
   // .Proto.Vector3 position = 4;
   bool has_position() const;
@@ -2852,14 +2852,14 @@ class PayloadLoginResult final : public ::google::protobuf::Message
   void _internal_set_id(::uint64_t value);
 
   public:
-  // bool is_successed = 2;
-  void clear_is_successed() ;
-  bool is_successed() const;
-  void set_is_successed(bool value);
+  // bool is_succeeded = 2;
+  void clear_is_succeeded() ;
+  bool is_succeeded() const;
+  void set_is_succeeded(bool value);
 
   private:
-  bool _internal_is_successed() const;
-  void _internal_set_is_successed(bool value);
+  bool _internal_is_succeeded() const;
+  void _internal_set_is_succeeded(bool value);
 
   public:
   // @@protoc_insertion_point(class_scope:Proto.PayloadLoginResult)
@@ -2890,7 +2890,7 @@ class PayloadLoginResult final : public ::google::protobuf::Message
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::Proto::Vector3* PROTOBUF_NULLABLE position_;
     ::uint64_t id_;
-    bool is_successed_;
+    bool is_succeeded_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -3863,28 +3863,28 @@ inline void PayloadLoginResult::_internal_set_id(::uint64_t value) {
   _impl_.id_ = value;
 }
 
-// bool is_successed = 2;
-inline void PayloadLoginResult::clear_is_successed() {
+// bool is_succeeded = 2;
+inline void PayloadLoginResult::clear_is_succeeded() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.is_successed_ = false;
+  _impl_.is_succeeded_ = false;
   _impl_._has_bits_[0] &= ~0x00000004U;
 }
-inline bool PayloadLoginResult::is_successed() const {
-  // @@protoc_insertion_point(field_get:Proto.PayloadLoginResult.is_successed)
-  return _internal_is_successed();
+inline bool PayloadLoginResult::is_succeeded() const {
+  // @@protoc_insertion_point(field_get:Proto.PayloadLoginResult.is_succeeded)
+  return _internal_is_succeeded();
 }
-inline void PayloadLoginResult::set_is_successed(bool value) {
-  _internal_set_is_successed(value);
+inline void PayloadLoginResult::set_is_succeeded(bool value) {
+  _internal_set_is_succeeded(value);
   _impl_._has_bits_[0] |= 0x00000004U;
-  // @@protoc_insertion_point(field_set:Proto.PayloadLoginResult.is_successed)
+  // @@protoc_insertion_point(field_set:Proto.PayloadLoginResult.is_succeeded)
 }
-inline bool PayloadLoginResult::_internal_is_successed() const {
+inline bool PayloadLoginResult::_internal_is_succeeded() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.is_successed_;
+  return _impl_.is_succeeded_;
 }
-inline void PayloadLoginResult::_internal_set_is_successed(bool value) {
+inline void PayloadLoginResult::_internal_set_is_succeeded(bool value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.is_successed_ = value;
+  _impl_.is_succeeded_ = value;
 }
 
 // .Proto.Vector3 position = 4;
@@ -4198,28 +4198,28 @@ inline void PayloadLogoutRequest::_internal_set_id(::uint64_t value) {
 
 // PayloadLogoutResponse
 
-// bool is_successed = 1;
-inline void PayloadLogoutResponse::clear_is_successed() {
+// bool is_succeeded = 1;
+inline void PayloadLogoutResponse::clear_is_succeeded() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.is_successed_ = false;
+  _impl_.is_succeeded_ = false;
   _impl_._has_bits_[0] &= ~0x00000001U;
 }
-inline bool PayloadLogoutResponse::is_successed() const {
-  // @@protoc_insertion_point(field_get:Proto.PayloadLogoutResponse.is_successed)
-  return _internal_is_successed();
+inline bool PayloadLogoutResponse::is_succeeded() const {
+  // @@protoc_insertion_point(field_get:Proto.PayloadLogoutResponse.is_succeeded)
+  return _internal_is_succeeded();
 }
-inline void PayloadLogoutResponse::set_is_successed(bool value) {
-  _internal_set_is_successed(value);
+inline void PayloadLogoutResponse::set_is_succeeded(bool value) {
+  _internal_set_is_succeeded(value);
   _impl_._has_bits_[0] |= 0x00000001U;
-  // @@protoc_insertion_point(field_set:Proto.PayloadLogoutResponse.is_successed)
+  // @@protoc_insertion_point(field_set:Proto.PayloadLogoutResponse.is_succeeded)
 }
-inline bool PayloadLogoutResponse::_internal_is_successed() const {
+inline bool PayloadLogoutResponse::_internal_is_succeeded() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.is_successed_;
+  return _impl_.is_succeeded_;
 }
-inline void PayloadLogoutResponse::_internal_set_is_successed(bool value) {
+inline void PayloadLogoutResponse::_internal_set_is_succeeded(bool value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.is_successed_ = value;
+  _impl_.is_succeeded_ = value;
 }
 
 // -------------------------------------------------------------------

@@ -8,7 +8,7 @@
 /// </summary>
 class EntityUi final : public szg::WorldInstance {
 public:
-	void initialize(float offsetY, Color4 color);
+	void initialize(float offsetY, ColorRGBA color);
 
 public:
 	void set_name(const std::string& name);

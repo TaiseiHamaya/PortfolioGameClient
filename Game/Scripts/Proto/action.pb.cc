@@ -29,7 +29,7 @@ namespace Proto {
 inline constexpr ActionAcquired::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
-        jobname_(
+        job_name_(
             &::google::protobuf::internal::fixed_address_empty_string,
             ::_pbi::ConstantInitialized()),
         level_{0u} {}
@@ -61,11 +61,11 @@ inline constexpr EntityAction::Impl_::Impl_(
             &::google::protobuf::internal::fixed_address_empty_string,
             ::_pbi::ConstantInitialized()),
         acquired_{nullptr},
-        actionid_{0u},
-        actiontype_{static_cast< ::Proto::ActionType >(0)},
-        casttime_{0},
-        recasttime_{0},
-        mpcost_{0},
+        action_id_{0u},
+        action_type_{static_cast< ::Proto::ActionType >(0)},
+        cast_time_{0},
+        recast_time_{0},
+        mp_cost_{0},
         range_{0},
         radius_{0} {}
 
@@ -99,20 +99,20 @@ const ::uint32_t
         0x081, // bitmap
         PROTOBUF_FIELD_OFFSET(::Proto::ActionAcquired, _impl_._has_bits_),
         5, // hasbit index offset
-        PROTOBUF_FIELD_OFFSET(::Proto::ActionAcquired, _impl_.jobname_),
+        PROTOBUF_FIELD_OFFSET(::Proto::ActionAcquired, _impl_.job_name_),
         PROTOBUF_FIELD_OFFSET(::Proto::ActionAcquired, _impl_.level_),
         0,
         1,
         0x081, // bitmap
         PROTOBUF_FIELD_OFFSET(::Proto::EntityAction, _impl_._has_bits_),
         12, // hasbit index offset
-        PROTOBUF_FIELD_OFFSET(::Proto::EntityAction, _impl_.actionid_),
+        PROTOBUF_FIELD_OFFSET(::Proto::EntityAction, _impl_.action_id_),
         PROTOBUF_FIELD_OFFSET(::Proto::EntityAction, _impl_.name_),
         PROTOBUF_FIELD_OFFSET(::Proto::EntityAction, _impl_.acquired_),
-        PROTOBUF_FIELD_OFFSET(::Proto::EntityAction, _impl_.actiontype_),
-        PROTOBUF_FIELD_OFFSET(::Proto::EntityAction, _impl_.casttime_),
-        PROTOBUF_FIELD_OFFSET(::Proto::EntityAction, _impl_.recasttime_),
-        PROTOBUF_FIELD_OFFSET(::Proto::EntityAction, _impl_.mpcost_),
+        PROTOBUF_FIELD_OFFSET(::Proto::EntityAction, _impl_.action_type_),
+        PROTOBUF_FIELD_OFFSET(::Proto::EntityAction, _impl_.cast_time_),
+        PROTOBUF_FIELD_OFFSET(::Proto::EntityAction, _impl_.recast_time_),
+        PROTOBUF_FIELD_OFFSET(::Proto::EntityAction, _impl_.mp_cost_),
         PROTOBUF_FIELD_OFFSET(::Proto::EntityAction, _impl_.range_),
         PROTOBUF_FIELD_OFFSET(::Proto::EntityAction, _impl_.radius_),
         2,
@@ -137,22 +137,23 @@ static const ::_pb::Message* PROTOBUF_NONNULL const file_default_instances[] = {
 };
 const char descriptor_table_protodef_action_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
-    "\n\014action.proto\022\005Proto\"0\n\016ActionAcquired\022"
-    "\017\n\007jobName\030\001 \001(\t\022\r\n\005level\030\002 \001(\r\"\365\001\n\014Enti"
-    "tyAction\022\020\n\010actionId\030\001 \001(\r\022\014\n\004name\030\002 \001(\t"
-    "\022\'\n\010acquired\030\003 \001(\0132\025.Proto.ActionAcquire"
-    "d\022%\n\nactionType\030\004 \001(\0162\021.Proto.ActionType"
-    "\022\025\n\010castTime\030\005 \001(\002H\000\210\001\001\022\022\n\nrecastTime\030\006 "
-    "\001(\002\022\023\n\006mpCost\030\007 \001(\005H\001\210\001\001\022\r\n\005range\030\010 \001(\002\022"
-    "\016\n\006radius\030\t \001(\002B\013\n\t_castTimeB\t\n\007_mpCost*"
-    "F\n\nActionType\022\017\n\013UNSPECIFIED\020\000\022\017\n\013WEAPON"
-    "SKILL\020\001\022\013\n\007ABILITY\020\002\022\t\n\005SPELL\020\003b\006proto3"
+    "\n\014action.proto\022\005Proto\"1\n\016ActionAcquired\022"
+    "\020\n\010job_name\030\001 \001(\t\022\r\n\005level\030\002 \001(\r\"\374\001\n\014Ent"
+    "ityAction\022\021\n\taction_id\030\001 \001(\r\022\014\n\004name\030\002 \001"
+    "(\t\022\'\n\010acquired\030\003 \001(\0132\025.Proto.ActionAcqui"
+    "red\022&\n\013action_type\030\004 \001(\0162\021.Proto.ActionT"
+    "ype\022\026\n\tcast_time\030\005 \001(\002H\000\210\001\001\022\023\n\013recast_ti"
+    "me\030\006 \001(\002\022\024\n\007mp_cost\030\007 \001(\005H\001\210\001\001\022\r\n\005range\030"
+    "\010 \001(\002\022\016\n\006radius\030\t \001(\002B\014\n\n_cast_timeB\n\n\010_"
+    "mp_cost*F\n\nActionType\022\017\n\013UNSPECIFIED\020\000\022\017"
+    "\n\013WEAPONSKILL\020\001\022\013\n\007ABILITY\020\002\022\t\n\005SPELL\020\003b"
+    "\006proto3"
 };
 static ::absl::once_flag descriptor_table_action_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_action_2eproto = {
     false,
     false,
-    399,
+    407,
     descriptor_table_protodef_action_2eproto,
     "action.proto",
     &descriptor_table_action_2eproto_once,
@@ -197,7 +198,7 @@ PROTOBUF_NDEBUG_INLINE ActionAcquired::Impl_::Impl_(
     [[maybe_unused]] const ::Proto::ActionAcquired& from_msg)
       : _has_bits_{from._has_bits_},
         _cached_size_{0},
-        jobname_(arena, from.jobname_) {}
+        job_name_(arena, from.job_name_) {}
 
 ActionAcquired::ActionAcquired(
     ::google::protobuf::Arena* PROTOBUF_NULLABLE arena,
@@ -220,7 +221,7 @@ PROTOBUF_NDEBUG_INLINE ActionAcquired::Impl_::Impl_(
     [[maybe_unused]] ::google::protobuf::internal::InternalVisibility visibility,
     [[maybe_unused]] ::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
       : _cached_size_{0},
-        jobname_(arena) {}
+        job_name_(arena) {}
 
 inline void ActionAcquired::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
@@ -237,7 +238,7 @@ inline void ActionAcquired::SharedDtor(MessageLite& self) {
   }
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
-  this_._impl_.jobname_.Destroy();
+  this_._impl_.job_name_.Destroy();
   this_._impl_.~Impl_();
 }
 
@@ -284,7 +285,7 @@ ActionAcquired::GetClassData() const {
   return ActionAcquired_class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<1, 2, 0, 36, 2>
+const ::_pbi::TcParseTable<1, 2, 0, 37, 2>
 ActionAcquired::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(ActionAcquired, _impl_._has_bits_),
@@ -306,22 +307,22 @@ ActionAcquired::_table_ = {
     // uint32 level = 2;
     {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(ActionAcquired, _impl_.level_), 1>(),
      {16, 1, 0, PROTOBUF_FIELD_OFFSET(ActionAcquired, _impl_.level_)}},
-    // string jobName = 1;
+    // string job_name = 1;
     {::_pbi::TcParser::FastUS1,
-     {10, 0, 0, PROTOBUF_FIELD_OFFSET(ActionAcquired, _impl_.jobname_)}},
+     {10, 0, 0, PROTOBUF_FIELD_OFFSET(ActionAcquired, _impl_.job_name_)}},
   }}, {{
     65535, 65535
   }}, {{
-    // string jobName = 1;
-    {PROTOBUF_FIELD_OFFSET(ActionAcquired, _impl_.jobname_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcOptional | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // string job_name = 1;
+    {PROTOBUF_FIELD_OFFSET(ActionAcquired, _impl_.job_name_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcOptional | ::_fl::kUtf8String | ::_fl::kRepAString)},
     // uint32 level = 2;
     {PROTOBUF_FIELD_OFFSET(ActionAcquired, _impl_.level_), _Internal::kHasBitsOffset + 1, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt32)},
   }},
   // no aux_entries
   {{
-    "\24\7\0\0\0\0\0\0"
+    "\24\10\0\0\0\0\0\0"
     "Proto.ActionAcquired"
-    "jobName"
+    "job_name"
   }},
 };
 PROTOBUF_NOINLINE void ActionAcquired::Clear() {
@@ -333,7 +334,7 @@ PROTOBUF_NOINLINE void ActionAcquired::Clear() {
 
   cached_has_bits = _impl_._has_bits_[0];
   if ((cached_has_bits & 0x00000001U) != 0) {
-    _impl_.jobname_.ClearNonDefaultToEmpty();
+    _impl_.job_name_.ClearNonDefaultToEmpty();
   }
   _impl_.level_ = 0u;
   _impl_._has_bits_.Clear();
@@ -358,12 +359,12 @@ PROTOBUF_NOINLINE void ActionAcquired::Clear() {
   ::uint32_t cached_has_bits = 0;
   (void)cached_has_bits;
 
-  // string jobName = 1;
+  // string job_name = 1;
   if ((this_._impl_._has_bits_[0] & 0x00000001U) != 0) {
-    if (!this_._internal_jobname().empty()) {
-      const ::std::string& _s = this_._internal_jobname();
+    if (!this_._internal_job_name().empty()) {
+      const ::std::string& _s = this_._internal_job_name();
       ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-          _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "Proto.ActionAcquired.jobName");
+          _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "Proto.ActionAcquired.job_name");
       target = stream->WriteStringMaybeAliased(1, _s, target);
     }
   }
@@ -403,11 +404,11 @@ PROTOBUF_NOINLINE void ActionAcquired::Clear() {
   ::_pbi::Prefetch5LinesFrom7Lines(&this_);
   cached_has_bits = this_._impl_._has_bits_[0];
   if ((cached_has_bits & 0x00000003U) != 0) {
-    // string jobName = 1;
+    // string job_name = 1;
     if ((cached_has_bits & 0x00000001U) != 0) {
-      if (!this_._internal_jobname().empty()) {
+      if (!this_._internal_job_name().empty()) {
         total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
-                                        this_._internal_jobname());
+                                        this_._internal_job_name());
       }
     }
     // uint32 level = 2;
@@ -436,11 +437,11 @@ void ActionAcquired::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::
   cached_has_bits = from._impl_._has_bits_[0];
   if ((cached_has_bits & 0x00000003U) != 0) {
     if ((cached_has_bits & 0x00000001U) != 0) {
-      if (!from._internal_jobname().empty()) {
-        _this->_internal_set_jobname(from._internal_jobname());
+      if (!from._internal_job_name().empty()) {
+        _this->_internal_set_job_name(from._internal_job_name());
       } else {
-        if (_this->_impl_.jobname_.IsDefault()) {
-          _this->_internal_set_jobname("");
+        if (_this->_impl_.job_name_.IsDefault()) {
+          _this->_internal_set_job_name("");
         }
       }
     }
@@ -468,7 +469,7 @@ void ActionAcquired::InternalSwap(ActionAcquired* PROTOBUF_RESTRICT PROTOBUF_NON
   ABSL_DCHECK_EQ(arena, other->GetArena());
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
-  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.jobname_, &other->_impl_.jobname_, arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.job_name_, &other->_impl_.job_name_, arena);
   swap(_impl_.level_, other->_impl_.level_);
 }
 
@@ -520,11 +521,11 @@ EntityAction::EntityAction(
                 ? ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.acquired_)
                 : nullptr;
   ::memcpy(reinterpret_cast<char *>(&_impl_) +
-               offsetof(Impl_, actionid_),
+               offsetof(Impl_, action_id_),
            reinterpret_cast<const char *>(&from._impl_) +
-               offsetof(Impl_, actionid_),
+               offsetof(Impl_, action_id_),
            offsetof(Impl_, radius_) -
-               offsetof(Impl_, actionid_) +
+               offsetof(Impl_, action_id_) +
                sizeof(Impl_::radius_));
 
   // @@protoc_insertion_point(copy_constructor:Proto.EntityAction)
@@ -623,27 +624,27 @@ EntityAction::_table_ = {
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
     {::_pbi::TcParser::MiniParse, {}},
-    // uint32 actionId = 1;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(EntityAction, _impl_.actionid_), 2>(),
-     {8, 2, 0, PROTOBUF_FIELD_OFFSET(EntityAction, _impl_.actionid_)}},
+    // uint32 action_id = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(EntityAction, _impl_.action_id_), 2>(),
+     {8, 2, 0, PROTOBUF_FIELD_OFFSET(EntityAction, _impl_.action_id_)}},
     // string name = 2;
     {::_pbi::TcParser::FastUS1,
      {18, 0, 0, PROTOBUF_FIELD_OFFSET(EntityAction, _impl_.name_)}},
     // .Proto.ActionAcquired acquired = 3;
     {::_pbi::TcParser::FastMtS1,
      {26, 1, 0, PROTOBUF_FIELD_OFFSET(EntityAction, _impl_.acquired_)}},
-    // .Proto.ActionType actionType = 4;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(EntityAction, _impl_.actiontype_), 3>(),
-     {32, 3, 0, PROTOBUF_FIELD_OFFSET(EntityAction, _impl_.actiontype_)}},
-    // optional float castTime = 5;
+    // .Proto.ActionType action_type = 4;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(EntityAction, _impl_.action_type_), 3>(),
+     {32, 3, 0, PROTOBUF_FIELD_OFFSET(EntityAction, _impl_.action_type_)}},
+    // optional float cast_time = 5;
     {::_pbi::TcParser::FastF32S1,
-     {45, 4, 0, PROTOBUF_FIELD_OFFSET(EntityAction, _impl_.casttime_)}},
-    // float recastTime = 6;
+     {45, 4, 0, PROTOBUF_FIELD_OFFSET(EntityAction, _impl_.cast_time_)}},
+    // float recast_time = 6;
     {::_pbi::TcParser::FastF32S1,
-     {53, 5, 0, PROTOBUF_FIELD_OFFSET(EntityAction, _impl_.recasttime_)}},
-    // optional int32 mpCost = 7;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(EntityAction, _impl_.mpcost_), 6>(),
-     {56, 6, 0, PROTOBUF_FIELD_OFFSET(EntityAction, _impl_.mpcost_)}},
+     {53, 5, 0, PROTOBUF_FIELD_OFFSET(EntityAction, _impl_.recast_time_)}},
+    // optional int32 mp_cost = 7;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(EntityAction, _impl_.mp_cost_), 6>(),
+     {56, 6, 0, PROTOBUF_FIELD_OFFSET(EntityAction, _impl_.mp_cost_)}},
     // float range = 8;
     {::_pbi::TcParser::FastF32S1,
      {69, 7, 0, PROTOBUF_FIELD_OFFSET(EntityAction, _impl_.range_)}},
@@ -659,20 +660,20 @@ EntityAction::_table_ = {
   }}, {{
     65535, 65535
   }}, {{
-    // uint32 actionId = 1;
-    {PROTOBUF_FIELD_OFFSET(EntityAction, _impl_.actionid_), _Internal::kHasBitsOffset + 2, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt32)},
+    // uint32 action_id = 1;
+    {PROTOBUF_FIELD_OFFSET(EntityAction, _impl_.action_id_), _Internal::kHasBitsOffset + 2, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt32)},
     // string name = 2;
     {PROTOBUF_FIELD_OFFSET(EntityAction, _impl_.name_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcOptional | ::_fl::kUtf8String | ::_fl::kRepAString)},
     // .Proto.ActionAcquired acquired = 3;
     {PROTOBUF_FIELD_OFFSET(EntityAction, _impl_.acquired_), _Internal::kHasBitsOffset + 1, 0, (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
-    // .Proto.ActionType actionType = 4;
-    {PROTOBUF_FIELD_OFFSET(EntityAction, _impl_.actiontype_), _Internal::kHasBitsOffset + 3, 0, (0 | ::_fl::kFcOptional | ::_fl::kOpenEnum)},
-    // optional float castTime = 5;
-    {PROTOBUF_FIELD_OFFSET(EntityAction, _impl_.casttime_), _Internal::kHasBitsOffset + 4, 0, (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
-    // float recastTime = 6;
-    {PROTOBUF_FIELD_OFFSET(EntityAction, _impl_.recasttime_), _Internal::kHasBitsOffset + 5, 0, (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
-    // optional int32 mpCost = 7;
-    {PROTOBUF_FIELD_OFFSET(EntityAction, _impl_.mpcost_), _Internal::kHasBitsOffset + 6, 0, (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
+    // .Proto.ActionType action_type = 4;
+    {PROTOBUF_FIELD_OFFSET(EntityAction, _impl_.action_type_), _Internal::kHasBitsOffset + 3, 0, (0 | ::_fl::kFcOptional | ::_fl::kOpenEnum)},
+    // optional float cast_time = 5;
+    {PROTOBUF_FIELD_OFFSET(EntityAction, _impl_.cast_time_), _Internal::kHasBitsOffset + 4, 0, (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
+    // float recast_time = 6;
+    {PROTOBUF_FIELD_OFFSET(EntityAction, _impl_.recast_time_), _Internal::kHasBitsOffset + 5, 0, (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
+    // optional int32 mp_cost = 7;
+    {PROTOBUF_FIELD_OFFSET(EntityAction, _impl_.mp_cost_), _Internal::kHasBitsOffset + 6, 0, (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
     // float range = 8;
     {PROTOBUF_FIELD_OFFSET(EntityAction, _impl_.range_), _Internal::kHasBitsOffset + 7, 0, (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
     // float radius = 9;
@@ -705,9 +706,9 @@ PROTOBUF_NOINLINE void EntityAction::Clear() {
     }
   }
   if ((cached_has_bits & 0x000000fcU) != 0) {
-    ::memset(&_impl_.actionid_, 0, static_cast<::size_t>(
+    ::memset(&_impl_.action_id_, 0, static_cast<::size_t>(
         reinterpret_cast<char*>(&_impl_.range_) -
-        reinterpret_cast<char*>(&_impl_.actionid_)) + sizeof(_impl_.range_));
+        reinterpret_cast<char*>(&_impl_.action_id_)) + sizeof(_impl_.range_));
   }
   _impl_.radius_ = 0;
   _impl_._has_bits_.Clear();
@@ -732,12 +733,12 @@ PROTOBUF_NOINLINE void EntityAction::Clear() {
   ::uint32_t cached_has_bits = 0;
   (void)cached_has_bits;
 
-  // uint32 actionId = 1;
+  // uint32 action_id = 1;
   if ((this_._impl_._has_bits_[0] & 0x00000004U) != 0) {
-    if (this_._internal_actionid() != 0) {
+    if (this_._internal_action_id() != 0) {
       target = stream->EnsureSpace(target);
       target = ::_pbi::WireFormatLite::WriteUInt32ToArray(
-          1, this_._internal_actionid(), target);
+          1, this_._internal_action_id(), target);
     }
   }
 
@@ -759,36 +760,36 @@ PROTOBUF_NOINLINE void EntityAction::Clear() {
         stream);
   }
 
-  // .Proto.ActionType actionType = 4;
+  // .Proto.ActionType action_type = 4;
   if ((cached_has_bits & 0x00000008U) != 0) {
-    if (this_._internal_actiontype() != 0) {
+    if (this_._internal_action_type() != 0) {
       target = stream->EnsureSpace(target);
       target = ::_pbi::WireFormatLite::WriteEnumToArray(
-          4, this_._internal_actiontype(), target);
+          4, this_._internal_action_type(), target);
     }
   }
 
-  // optional float castTime = 5;
+  // optional float cast_time = 5;
   if ((cached_has_bits & 0x00000010U) != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteFloatToArray(
-        5, this_._internal_casttime(), target);
+        5, this_._internal_cast_time(), target);
   }
 
-  // float recastTime = 6;
+  // float recast_time = 6;
   if ((cached_has_bits & 0x00000020U) != 0) {
-    if (::absl::bit_cast<::uint32_t>(this_._internal_recasttime()) != 0) {
+    if (::absl::bit_cast<::uint32_t>(this_._internal_recast_time()) != 0) {
       target = stream->EnsureSpace(target);
       target = ::_pbi::WireFormatLite::WriteFloatToArray(
-          6, this_._internal_recasttime(), target);
+          6, this_._internal_recast_time(), target);
     }
   }
 
-  // optional int32 mpCost = 7;
+  // optional int32 mp_cost = 7;
   if ((cached_has_bits & 0x00000040U) != 0) {
     target =
         ::google::protobuf::internal::WireFormatLite::WriteInt32ToArrayWithField<7>(
-            stream, this_._internal_mpcost(), target);
+            stream, this_._internal_mp_cost(), target);
   }
 
   // float range = 8;
@@ -848,30 +849,30 @@ PROTOBUF_NOINLINE void EntityAction::Clear() {
       total_size += 1 +
                     ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.acquired_);
     }
-    // uint32 actionId = 1;
+    // uint32 action_id = 1;
     if ((cached_has_bits & 0x00000004U) != 0) {
-      if (this_._internal_actionid() != 0) {
+      if (this_._internal_action_id() != 0) {
         total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(
-            this_._internal_actionid());
+            this_._internal_action_id());
       }
     }
-    // .Proto.ActionType actionType = 4;
+    // .Proto.ActionType action_type = 4;
     if ((cached_has_bits & 0x00000008U) != 0) {
-      if (this_._internal_actiontype() != 0) {
+      if (this_._internal_action_type() != 0) {
         total_size += 1 +
-                      ::_pbi::WireFormatLite::EnumSize(this_._internal_actiontype());
+                      ::_pbi::WireFormatLite::EnumSize(this_._internal_action_type());
       }
     }
-    // float recastTime = 6;
+    // float recast_time = 6;
     if ((cached_has_bits & 0x00000020U) != 0) {
-      if (::absl::bit_cast<::uint32_t>(this_._internal_recasttime()) != 0) {
+      if (::absl::bit_cast<::uint32_t>(this_._internal_recast_time()) != 0) {
         total_size += 5;
       }
     }
-    // optional int32 mpCost = 7;
+    // optional int32 mp_cost = 7;
     if ((cached_has_bits & 0x00000040U) != 0) {
       total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
-          this_._internal_mpcost());
+          this_._internal_mp_cost());
     }
     // float range = 8;
     if ((cached_has_bits & 0x00000080U) != 0) {
@@ -924,25 +925,25 @@ void EntityAction::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::go
       }
     }
     if ((cached_has_bits & 0x00000004U) != 0) {
-      if (from._internal_actionid() != 0) {
-        _this->_impl_.actionid_ = from._impl_.actionid_;
+      if (from._internal_action_id() != 0) {
+        _this->_impl_.action_id_ = from._impl_.action_id_;
       }
     }
     if ((cached_has_bits & 0x00000008U) != 0) {
-      if (from._internal_actiontype() != 0) {
-        _this->_impl_.actiontype_ = from._impl_.actiontype_;
+      if (from._internal_action_type() != 0) {
+        _this->_impl_.action_type_ = from._impl_.action_type_;
       }
     }
     if ((cached_has_bits & 0x00000010U) != 0) {
-      _this->_impl_.casttime_ = from._impl_.casttime_;
+      _this->_impl_.cast_time_ = from._impl_.cast_time_;
     }
     if ((cached_has_bits & 0x00000020U) != 0) {
-      if (::absl::bit_cast<::uint32_t>(from._internal_recasttime()) != 0) {
-        _this->_impl_.recasttime_ = from._impl_.recasttime_;
+      if (::absl::bit_cast<::uint32_t>(from._internal_recast_time()) != 0) {
+        _this->_impl_.recast_time_ = from._impl_.recast_time_;
       }
     }
     if ((cached_has_bits & 0x00000040U) != 0) {
-      _this->_impl_.mpcost_ = from._impl_.mpcost_;
+      _this->_impl_.mp_cost_ = from._impl_.mp_cost_;
     }
     if ((cached_has_bits & 0x00000080U) != 0) {
       if (::absl::bit_cast<::uint32_t>(from._internal_range()) != 0) {

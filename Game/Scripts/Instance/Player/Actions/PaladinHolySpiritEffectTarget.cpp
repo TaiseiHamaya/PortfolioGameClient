@@ -104,7 +104,7 @@ void PaladinHolySpiritEffectTarget::update() {
 				1.0f
 			});
 			centerBillboard->get_material().color =
-				Color4::Lerp(centerEffectValues.color, CColor4::ZERO, Easing::In::Cubic(param));
+				ColorRGBA::Lerp(centerEffectValues.color, CColorRGBA::ZERO, Easing::In::Cubic(param));
 			centerBillboard->get_material().color.alpha = eps::lerp(1.0f, 0.0f, Easing::In::Expo(param));
 		}
 		if (timer < centerEffectValues.endTime) {

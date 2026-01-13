@@ -6,7 +6,7 @@
 #include <Engine/Module/World/Mesh/Primitive/StringRectInstance.h>
 #include <Engine/Runtime/Clock/WorldClock.h>
 
-void DamageNumberEffect::initialize(i32 damage, Color4 color) {
+void DamageNumberEffect::initialize(i32 damage, ColorRGBA color) {
 	damageNumber = world_root_mut()->instantiate<szg::StringRectInstance>(this);
 
 	damageNumber->initialize("UDEVGothic35HS-Regular.mtsdf", 12.0f, CVector2::ONE / 2);

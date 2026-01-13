@@ -15,7 +15,7 @@ public:
 	struct RectEffectValues {
 		Vector2 size;
 		Vector2 pivot;
-		Color4 color;
+		ColorRGBA color;
 		r32 beginTime;
 		r32 endTime;
 		Vector3 beginScale;

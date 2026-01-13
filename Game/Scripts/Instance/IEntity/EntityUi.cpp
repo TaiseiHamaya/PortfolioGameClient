@@ -4,7 +4,7 @@
 
 #include "Scripts/Extension/Util/LookAtRect.h"
 
-void EntityUi::initialize(float offsetY, Color4 color) {
+void EntityUi::initialize(float offsetY, ColorRGBA color) {
 	nametag = world_root_mut()->instantiate<szg::StringRectInstance>(this);
 	nametag->initialize("UDEVGothic35HS-Regular.mtsdf", 8.0f, Vector2{ 0.5f,0.5f });
 	nametag->transform_mut().set_translate_y(offsetY);

@@ -100,6 +100,6 @@ public:
 private:
 	i32 debugCommandCount{ 0 };
 	i32 debugRecivedMessageCount{ 0 };
-	i32 debugSendedMessageCount{ 0 };
+	i32 debugSentMessageCount{ 0 };
 #endif // DEBUG_FEATURES_ENABLE
 };

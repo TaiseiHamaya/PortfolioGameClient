@@ -12,8 +12,8 @@ private:
 		SZG_CLASS_SINGLETON(ProtoBufManager)
 
 	public:
-		struct OnDestory {
-			~OnDestory();
+		struct OnDestroy {
+			~OnDestroy();
 		} onDestroy;
 	};
 

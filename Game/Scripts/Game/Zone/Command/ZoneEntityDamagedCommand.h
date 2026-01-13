@@ -2,7 +2,7 @@
 
 #include "./IZoneCommand.h"
 
-#include <Library/Math/Color4.h>
+#include <Library/Math/ColorRGBA.h>
 #include <Library/Math/Vector3.h>
 #include <Library/Utility/Template/Reference.h>
 
@@ -34,5 +34,5 @@ private:
 public:
 	static inline Reference<class EffectManager> effectManager{};
 	static inline Reference<const szg::WorldInstance> cameraInstance{};
-	static inline Color4 DamageColor{ 0xE02929FF };
+	static inline ColorRGBA DamageColor{ 0xE02929FF };
 };

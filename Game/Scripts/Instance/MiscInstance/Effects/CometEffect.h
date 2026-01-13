@@ -46,14 +46,14 @@ private:
 	Reference<szg::RadialBlurPipeline::Data> blurData;
 
 	szg::JsonAsset json;
-	Color3 CometBodyColor{};
+	ColorRGB CometBodyColor{};
 	Vector2 CometFireSize{};
 	Vector2 CometFirePivot{};
-	Color4 CometFireColor{};
+	ColorRGBA CometFireColor{};
 	Vector2 GroundEffectSize{};
 	Vector2 GroundEffectPivot{};
-	Color4 GroundEffectColor{};
-	r32 CometHight{};
+	ColorRGBA GroundEffectColor{};
+	r32 CometHeight{};
 	r32 FallTime{};
 	r32 GroundEffectTime{};
 	r32 BlurLengthMax{};

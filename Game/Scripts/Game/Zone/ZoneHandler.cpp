@@ -105,7 +105,7 @@ void ZoneHandler::handle_zone() {
 #ifdef DEBUG_FEATURES_ENABLE
 	debugRecivedMessageCount = static_cast<i32>(packets.size());
 	debugCommandCount = static_cast<i32>(zoneCommands.size());
-	debugSendedMessageCount = gameServerPacketSender ? static_cast<i32>(gameServerPacketSender->packet_count()) : 0;
+	debugSentMessageCount = gameServerPacketSender ? static_cast<i32>(gameServerPacketSender->packet_count()) : 0;
 #endif // DEBUG_FEATURES_ENABLE
 }
 
@@ -400,8 +400,8 @@ void ZoneHandler::set_player(Reference<Player> player_) {
 #ifdef DEBUG_FEATURES_ENABLE
 
 void ZoneHandler::debug_gui() {
-	ImGui::Text(std::format("SendedMessageCount-\'{}\'", debugSendedMessageCount).c_str());
-	ImGui::Text(std::format("RecivedMessageCount-\'{}\'", debugRecivedMessageCount).c_str());
+	ImGui::Text(std::format("SentMessageCount-\'{}\'", debugSentMessageCount).c_str());
+	ImGui::Text(std::format("ReceivedMessageCount-\'{}\'", debugRecivedMessageCount).c_str());
 	ImGui::Text(std::format("CommandCount-\'{}\'", debugCommandCount).c_str());
 
 	ImGui::Separator();

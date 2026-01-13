@@ -8,8 +8,8 @@
 #include <Library/Utility/Tools/MathEPS.h>
 #include <Library/Utility/Tools/RandomEngine.h>
 
-#define COLOR3_SERIALIZER
-#define COLOR4_SERIALIZER
+#define COLOR_RGB_SERIALIZER
+#define COLOR_RGBA_SERIALIZER
 #include <Engine/Assets/Json/JsonSerializer.h>
 
 CometEffect::CometEffect() = default;
@@ -29,7 +29,7 @@ void CometEffect::initialize(const Vector3& position) {
 	dustCloudParticle1->set_active(false);
 
 	json.load("Action/RedComet/CometEffect.json");
-	json.register_value(SZG_JSON_ASSET_REGISTER(CometHight));
+	json.register_value(SZG_JSON_ASSET_REGISTER(CometHeight));
 	json.register_value(SZG_JSON_ASSET_REGISTER(CometBodyColor));
 	json.register_value(SZG_JSON_ASSET_REGISTER(CometFireSize));
 	json.register_value(SZG_JSON_ASSET_REGISTER(CometFirePivot));
@@ -77,7 +77,7 @@ void CometEffect::update() {
 		cometBody->set_active(true);
 		cometFire->set_active(true);
 		float param = timer.time() / FallTime;
-		float posY = std::lerp(CometHight, 0.0f, param);
+		float posY = std::lerp(CometHeight, 0.0f, param);
 		cometBody->transform_mut().set_translate_y(posY);
 		cometFire->transform_mut().set_translate_y(posY);
 		// カメラ方向に向ける

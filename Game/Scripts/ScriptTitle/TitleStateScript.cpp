@@ -73,12 +73,12 @@ void TitleStateScript::prev_update() {
 
 
 	if (inputString->glyph_data_imm().empty()) {
-		loginString->get_material().color = Color4(0x202020ff);
+		loginString->get_material().color = ColorRGBA(0x202020ff);
 		nameString->set_draw(true);
 		inputString->set_draw(false);
 	}
 	else {
-		loginString->get_material().color = CColor4::WHITE;
+		loginString->get_material().color = CColorRGBA::WHITE;
 		nameString->set_draw(false);
 		inputString->set_draw(true);
 	}

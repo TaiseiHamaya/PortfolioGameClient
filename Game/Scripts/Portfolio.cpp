@@ -2,7 +2,6 @@
 
 #include "Scripts/Proto/types.pb.h"
 
-#include <Engine/Runtime/Scene/SceneManager.h>
 #include <Engine/Runtime/Scene/SceneManager2.h>
 
 #include "./Scene/FactoryPortfolio.h"
@@ -34,6 +33,6 @@ void Portfolio::initialize() {
 	ProtoBufManager::GetInstance().onDestroy;
 }
 
-Portfolio::ProtoBufManager::OnDestory::~OnDestory() {
+Portfolio::ProtoBufManager::OnDestroy::~OnDestroy() {
 	google::protobuf::ShutdownProtobufLibrary();
 }

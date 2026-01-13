@@ -2,7 +2,7 @@
 
 #include "./IEffectInstance.h"
 
-#include <Library/Math/Color4.h>
+#include <Library/Math/ColorRGBA.h>
 
 namespace szg {
 
@@ -18,7 +18,7 @@ public:
 	SZG_CLASS_MOVE_ONLY(DamageNumberEffect)
 
 public:
-	void initialize(i32 damage, Color4 color);
+	void initialize(i32 damage, ColorRGBA color);
 
 	void update() override;
 

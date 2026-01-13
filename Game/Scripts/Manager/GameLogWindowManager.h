@@ -52,13 +52,13 @@ private:
 	constexpr static i32 MaxLogCount{ 10 };
 	std::array<Reference<szg::StringRectInstance>, MaxLogCount> logInstances;
 
-	std::array<Color4, static_cast<i32>(Type::Count)> typeColors{
-		Color4{ 0xC6C6C6FF }, // ChatMessage
-		Color4{ 0x663FE5FF }, // SystemMessage
-		Color4{ 0xE6DB8AFF }, // ActionLog
-		Color4{ 0xE02929FF }, // DamagedLog
+	std::array<ColorRGBA, static_cast<i32>(Type::Count)> typeColors{
+		ColorRGBA{ 0xC6C6C6FF }, // ChatMessage
+		ColorRGBA{ 0x663FE5FF }, // SystemMessage
+		ColorRGBA{ 0xE6DB8AFF }, // ActionLog
+		ColorRGBA{ 0xE02929FF }, // DamagedLog
 
-		Color4{ 0xB630D8FF }, // DebugInfo
+		ColorRGBA{ 0xB630D8FF }, // DebugInfo
 	};
 };
 
