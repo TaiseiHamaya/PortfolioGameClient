@@ -49,13 +49,13 @@ void TitleStateScript::prev_update() {
 		selectIndex = std::clamp(selectIndex, 0, 1);
 	}
 
-	switch (selectIndex) {
-	case 0:
+	switch (static_cast<SelectIndex>(selectIndex)) {
+	case SelectIndex::Login:
 		if (inputKey.trigger(szg::KeyID::Space) || inputKey.trigger(szg::KeyID::Return) || inputPad.trigger(szg::PadID::A)) {
 			isInputText ^= 1;
 		}
 		break;
-	case 1:
+	case SelectIndex::StartGame:
 		if (inputString->glyph_data_imm().empty()) {
 			break;
 		}

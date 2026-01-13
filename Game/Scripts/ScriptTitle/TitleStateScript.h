@@ -19,6 +19,11 @@ public:
 		Transition,
 	};
 
+	enum class SelectIndex {
+		Login,
+		StartGame,
+	};
+
 public:
 	TitleStateScript() = default;
 	~TitleStateScript() noexcept = default;
