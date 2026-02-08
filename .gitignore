@@ -330,3 +330,5 @@ imgui.ini
 # SyzygyEngine ignore rules
 /Log/*
 /Game/DebugData/*
+
+*.blend1

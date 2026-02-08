@@ -61,7 +61,7 @@ void SceneGame::custom_load_asset() {
 	szg::TextureLibrary::RegisterLoadQue("./Game/Resources/Game/Texture/rogland_clear_night_2k.dds");
 	szg::FontAtlasMSDFLibrary::RegisterLoadQue("./Game/Resources/Font/UDEVGothic35HS-Regular.mtsdf");
 
-	szg::PolygonMeshLibrary::RegisterLoadQue(".\\DirectXGame\\EngineResources\\Models\\Grid\\Grid.obj");
+	szg::PolygonMeshLibrary::RegisterLoadQue(".\\DirectXGame\\EngineResources\\Models\\Grid\\Grid.gltf");
 
 	szg::PrimitiveGeometryLibrary::Transfer("Cubemap", std::make_shared<szg::PrimitiveGeometryAsset>("Cubemap.json"));
 
@@ -119,7 +119,7 @@ void SceneGame::custom_setup() {
 	sceneScriptManager.register_script(std::move(effectManager));
 	sceneScriptManager.register_script(std::move(gameLogWindowManager));
 
-	environmentMeshExecutor = eps::CreateUnique<EnvironmentMeshExecutor>("Grid.obj", 1, "rogland_clear_night_2k.dds");
+	environmentMeshExecutor = eps::CreateUnique<EnvironmentMeshExecutor>("Grid.gltf", 1, "rogland_clear_night_2k.dds");
 
 	gameLogWindowManagerRef->initialize();
 	// Setup

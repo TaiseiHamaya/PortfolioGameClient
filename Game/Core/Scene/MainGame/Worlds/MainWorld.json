@@ -79,12 +79,12 @@
 						},
 						"Translate": {
 							"X": 0.0,
-							"Y": 0.0
+							"Y": -0.0
 						}
 					}
 				}
 			],
-			"MeshName": "Grid.obj",
+			"MeshName": "Grid.gltf",
 			"Name": "Ground",
 			"Type": 2000,
 			"Use runtime": false
