@@ -9,7 +9,7 @@ LoginScene::LoginScene() noexcept {
 }
 
 void LoginScene::custom_load_asset() {
-	szg::FontAtlasMSDFLibrary::RegisterLoadQue("./Game/Resources/Font/UDEVGothic35HS-Regular.mtsdf");
+	szg::FontAtlasMSDFLibrary::RegisterLoadQue("./Game/Assets/Font/UDEVGothic35HS-Regular.mtsdf");
 }
 
 void LoginScene::custom_setup() {

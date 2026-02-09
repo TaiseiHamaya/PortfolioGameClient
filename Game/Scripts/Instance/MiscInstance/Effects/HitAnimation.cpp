@@ -4,7 +4,7 @@
 #include <Engine/Module/Manager/World/WorldRoot.h>
 
 HitAnimation::HitAnimation(Vector3&& position) {
-	emitter = worldRoot->instantiate<szg::ParticleEmitterInstance>(nullptr, "./Resources/Game/Json/Particles.json", 128);
+	emitter = worldRoot->instantiate<szg::ParticleEmitterInstance>(nullptr, "./Assets/Game/Json/Particles.json", 128);
 
 	hitBillboard = worldRoot->instantiate<LookAtRect>(nullptr);
 	hitBillboard->get_material().lightingType = LighingType::None;
