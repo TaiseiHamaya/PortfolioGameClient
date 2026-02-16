@@ -18,7 +18,7 @@ void Player::initialize(const std::filesystem::path& file, u64 localId_) {
 #ifndef DEBUG_FEATURES_ENABLE
 	szg::JsonAsset json;
 #endif // DEBUG_FEATURES_ENABLE
-	json.load("Entity" / file); // Jsonからデータの読み込み
+	json.load("[[game]]\\Entity" / file); // Jsonからデータの読み込み
 	json.register_value("MoveSpeed", moveSpeed);
 }
 

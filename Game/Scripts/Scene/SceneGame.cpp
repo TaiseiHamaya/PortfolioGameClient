@@ -45,7 +45,6 @@ void SceneGame::custom_load_asset() {
 	szg::NodeAnimationLibrary::RegisterLoadQue("./Game/Assets/Game/Models/RedComet.gltf");
 	szg::SkeletonLibrary::RegisterLoadQue("./Game/Assets/Game/Models/RedComet.gltf");
 	szg::TextureLibrary::RegisterLoadQue("./Game/Assets/Game/Texture/Circle.png");
-	szg::TextureLibrary::RegisterLoadQue("./Game/Assets/Game/Texture/white.png");
 	szg::TextureLibrary::RegisterLoadQue("./Game/Assets/Game/Texture/shadow.png");
 	szg::TextureLibrary::RegisterLoadQue("./Game/Assets/Game/Texture/AOEBase.png");
 	szg::TextureLibrary::RegisterLoadQue("./Game/Assets/Game/Texture/DustCloud1.png");
@@ -59,19 +58,6 @@ void SceneGame::custom_load_asset() {
 	szg::TextureLibrary::RegisterLoadQue("./Game/Assets/Game/Texture/PlayerEffect/PaladinHolySpiritEffectTargetAbsorption.png");
 	szg::TextureLibrary::RegisterLoadQue("./Game/Assets/Game/Texture/PlayerEffect/PaladinHolySpiritEffectTargetLight.png");
 	szg::TextureLibrary::RegisterLoadQue("./Game/Assets/Game/Texture/rogland_clear_night_2k.dds");
-	szg::FontAtlasMSDFLibrary::RegisterLoadQue("UDEVGothic35HS-Regular.mtsdf");
-
-	szg::PolygonMeshLibrary::RegisterLoadQue(".\\DirectXGame\\EngineResources\\Models\\Grid\\Grid.gltf");
-
-	szg::PrimitiveGeometryLibrary::Transfer("Cubemap", std::make_shared<szg::PrimitiveGeometryAsset>("Cubemap.json"));
-
-	szg::ShaderLibrary::RegisterLoadQue("./SyzygyEngine/EngineResources/HLSL/Forward/Particle/ParticleBillboard/ParticleBillboard.VS.hlsl");
-	szg::ShaderLibrary::RegisterLoadQue("./SyzygyEngine/EngineResources/HLSL/Forward/Particle/ParticleBillboard/ParticleBillboard.PS.hlsl");
-
-	szg::ShaderLibrary::RegisterLoadQue("./Game/Assets/HLSL/Mesh/Skybox/Skybox.VS.hlsl");
-	szg::ShaderLibrary::RegisterLoadQue("./Game/Assets/HLSL/Mesh/Skybox/Skybox.PS.hlsl");
-
-	EnvironmentMeshNode::BeginLoadShader();
 }
 
 void SceneGame::custom_setup() {

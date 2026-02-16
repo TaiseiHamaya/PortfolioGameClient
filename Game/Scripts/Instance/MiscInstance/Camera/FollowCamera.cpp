@@ -37,7 +37,7 @@ void FollowCamera::initialize() {
 #ifndef DEBUG_FEATURES_ENABLE
 	szg::JsonAsset json;
 #endif // DEBUG_FEATURES_ENABLE
-	json.load("FollowCamera.json");
+	json.load("[[game]]\\FollowCamera.json");
 	json.register_value(SZG_JSON_ASSET_REGISTER(offset));
 	json.register_value(SZG_JSON_ASSET_REGISTER(SlerpStrength));
 	json.register_value(SZG_JSON_ASSET_REGISTER(FollowStrength));
