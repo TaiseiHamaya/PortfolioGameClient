@@ -6,9 +6,6 @@
 
 #include "./Scene/FactoryPortfolio.h"
 
-#include <Engine/Application/WinApp.h>
-#include <Engine/Debug/Editor/EditorMain.h>
-
 #ifdef DEBUG_FEATURES_ENABLE
 #include <Engine/Application/ArgumentParser.h>
 #include <Engine/Application/ProjectSettings/ProjectSettings.h>
@@ -16,10 +13,6 @@
 #endif // DEBUG_FEATURES_ENABLE
 
 void Portfolio::initialize() {
-#ifdef DEBUG_FEATURES_ENABLE
-	//EditorMain::SetActiveEditor(false);
-#endif // DEBUG_FEATURES_ENABLE
-
 	szg::SceneManager2::Setup(std::make_unique<FactoryPortfolio>());
 
 #ifdef DEBUG_FEATURES_ENABLE
