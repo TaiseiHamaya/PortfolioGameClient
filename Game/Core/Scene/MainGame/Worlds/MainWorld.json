@@ -84,7 +84,7 @@
 					}
 				}
 			],
-			"MeshName": "Grid.gltf",
+			"Mesh": "Grid.gltf",
 			"Name": "Ground",
 			"Type": 2000,
 			"Use runtime": false

@@ -59,7 +59,7 @@ void SceneGame::custom_load_asset() {
 	szg::TextureLibrary::RegisterLoadQue("./Game/Assets/Game/Texture/PlayerEffect/PaladinHolySpiritEffectTargetAbsorption.png");
 	szg::TextureLibrary::RegisterLoadQue("./Game/Assets/Game/Texture/PlayerEffect/PaladinHolySpiritEffectTargetLight.png");
 	szg::TextureLibrary::RegisterLoadQue("./Game/Assets/Game/Texture/rogland_clear_night_2k.dds");
-	szg::FontAtlasMSDFLibrary::RegisterLoadQue("./Game/Assets/Font/UDEVGothic35HS-Regular.mtsdf");
+	szg::FontAtlasMSDFLibrary::RegisterLoadQue("UDEVGothic35HS-Regular.mtsdf");
 
 	szg::PolygonMeshLibrary::RegisterLoadQue(".\\DirectXGame\\EngineResources\\Models\\Grid\\Grid.gltf");
 

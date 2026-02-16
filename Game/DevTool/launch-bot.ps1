@@ -145,7 +145,7 @@ if (Test-Path $editorResourcesSource) {
 # Game のリソースフォルダをコピー
 $coreSource = Join-Path $gameDir "Core"
 $debugDataSource = Join-Path $gameDir "DebugData"
-$resourcesSource = Join-Path $gameDir "Resources"
+$resourcesSource = Join-Path $gameDir "Assets"
 
 $gameTempDir = Join-Path $tempDir "Game"
 New-Item -ItemType Directory -Path $gameTempDir -Force | Out-Null
@@ -161,7 +161,7 @@ if (Test-Path $debugDataSource) {
 }
 
 if (Test-Path $resourcesSource) {
-	Write-Host "Resourcesをコピーしています..." -ForegroundColor Cyan
+	Write-Host "Assetsをコピーしています..." -ForegroundColor Cyan
 	Copy-Item -Path $resourcesSource -Destination $gameTempDir -Recurse -Force
 }
 
