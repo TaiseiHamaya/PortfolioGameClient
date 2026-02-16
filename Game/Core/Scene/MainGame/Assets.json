@@ -1,15 +1,22 @@
 {
-	"Animations": [],
-	"Audios": [],
-	"MSDFFonts": [],
-	"Meshes": [],
-	"Shaders": [
+	"Animation": [],
+	"Audio": [],
+	"Font": [
+		".\\Game\\Assets\\FontAtlasMSDF\\UDEVGothic35HS-Regular.mtsdf"
+	],
+	"Json": [],
+	"Mesh": [
+		".\\SyzygyEngine\\EngineResources\\Models\\Grid\\Grid.gltf"
+	],
+	"Shader": [
 		"[[szg]]/PostEffect/RadialBlur.PS.hlsl",
 		"[[szg]]/PostEffect/MargeTexture4.PS.hlsl",
 		"[[szg]]/PostEffect/LuminanceExtraction.PS.hlsl",
 		"[[szg]]/PostEffect/GaussianBlur.PS.hlsl",
 		"[[szg]]/PostEffect/Bloom.PS.hlsl"
 	],
-	"Skeletons": [],
-	"Textures": []
+	"Skeleton": [],
+	"Texture": [
+		".\\SyzygyEngine\\EngineResources\\Texture\\White.png"
+	]
 }

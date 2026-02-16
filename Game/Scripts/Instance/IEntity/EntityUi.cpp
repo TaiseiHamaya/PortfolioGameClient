@@ -17,7 +17,7 @@ void EntityUi::initialize(float offsetY, ColorRGBA color) {
 	szg::PrimitiveMaterial& material = hpRect->get_material();
 	material.lightingType = LighingType::None;
 	material.color = color;
-	material.texture = szg::TextureLibrary::GetTexture("white.png");
+	material.texture = szg::TextureLibrary::GetTexture("White.png");
 }
 
 void EntityUi::set_name(const std::string& name) {

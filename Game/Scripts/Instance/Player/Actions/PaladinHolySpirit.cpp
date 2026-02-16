@@ -10,7 +10,7 @@ PaladinHolySpirit::~PaladinHolySpirit() noexcept = default;
 
 void PaladinHolySpirit::setup(Reference<IEntity> owner_, const std::string& animationName) {
 	IActionBasic::setup(owner_, animationName);
-	load_from_json("Action/Player/Paladin/HolySpirit.json");
+	load_from_json("[[game]]\\Action\\Player\\Paladin\\HolySpirit.json");
 
 #ifdef DEBUG_FEATURES_ENABLE
 	effectTarget = std::make_unique<PaladinHolySpiritEffectTarget>();

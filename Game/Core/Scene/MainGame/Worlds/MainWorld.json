@@ -1,44 +1,6 @@
 {
 	"Instances": [
 		{
-			"Children": [],
-			"Color": {
-				"B": 1.0,
-				"G": 1.0,
-				"R": 1.0
-			},
-			"Direction": {
-				"X": -0.0,
-				"Y": -1.0,
-				"Z": -0.0
-			},
-			"Influence Layer": 3,
-			"Intensity": 0.5,
-			"Local transform": {
-				"Rotation": {
-					"W": 0.595160961151123,
-					"XYZ": {
-						"X": 0.0,
-						"Y": 0.8036065697669983,
-						"Z": 0.0
-					}
-				},
-				"Scale": {
-					"X": 1.0000008344650269,
-					"Y": 1.0000020265579224,
-					"Z": 1.0000008344650269
-				},
-				"Translate": {
-					"X": 0.0,
-					"Y": 5.0,
-					"Z": 0.0
-				}
-			},
-			"Name": "DirectionalLight",
-			"Type": 5000,
-			"Use runtime": false
-		},
-		{
 			"IsDraw": true,
 			"Layer": 0,
 			"Local transform": {
@@ -90,39 +52,83 @@
 			"Use runtime": false
 		},
 		{
-			"Children": [],
-			"Color": {
-				"B": 0.06127451732754707,
-				"G": 0.06127451732754707,
-				"R": 0.8333333134651184
-			},
-			"Decay": 1.2000000476837158,
-			"Influence Layer": 3,
-			"Intensity": 9.699999809265137,
-			"Local transform": {
-				"Rotation": {
-					"W": 1.0,
-					"XYZ": {
-						"X": 0.0,
-						"Y": 0.0,
-						"Z": 0.0
-					}
+			"Children": [
+				{
+					"Children": [],
+					"Color": {
+						"B": 1.0,
+						"G": 1.0,
+						"R": 1.0
+					},
+					"Direction": {
+						"X": -0.0,
+						"Y": -1.0,
+						"Z": -0.0
+					},
+					"Influence Layer": 3,
+					"Intensity": 0.5,
+					"Local transform": {
+						"Rotation": {
+							"W": 0.595160961151123,
+							"XYZ": {
+								"X": 0.0,
+								"Y": 0.8036065697669983,
+								"Z": 0.0
+							}
+						},
+						"Scale": {
+							"X": 1.0000008344650269,
+							"Y": 1.0000020265579224,
+							"Z": 1.0000008344650269
+						},
+						"Translate": {
+							"X": 0.0,
+							"Y": 5.0,
+							"Z": 0.0
+						}
+					},
+					"Name": "DirectionalLight",
+					"Type": 5000,
+					"Use runtime": false
 				},
-				"Scale": {
-					"X": 1.0,
-					"Y": 1.0,
-					"Z": 1.0
-				},
-				"Translate": {
-					"X": -3.0,
-					"Y": 2.0,
-					"Z": -4.0
+				{
+					"Children": [],
+					"Color": {
+						"B": 0.06127451732754707,
+						"G": 0.06127451732754707,
+						"R": 0.8333333134651184
+					},
+					"Decay": 1.2000000476837158,
+					"Influence Layer": 3,
+					"Intensity": 9.699999809265137,
+					"Local transform": {
+						"Rotation": {
+							"W": 1.0,
+							"XYZ": {
+								"X": 0.0,
+								"Y": 0.0,
+								"Z": 0.0
+							}
+						},
+						"Scale": {
+							"X": 1.0,
+							"Y": 1.0,
+							"Z": 1.0
+						},
+						"Translate": {
+							"X": -3.0,
+							"Y": 2.0,
+							"Z": -4.0
+						}
+					},
+					"Name": "PointLight",
+					"Radius": 4.800000190734863,
+					"Type": 5001,
+					"Use runtime": false
 				}
-			},
-			"Name": "PointLight",
-			"Radius": 4.800000190734863,
-			"Type": 5001,
-			"Use runtime": false
+			],
+			"Name": "LightFolder",
+			"Type": 9000
 		}
 	],
 	"Name": "MainWorld",

@@ -14,7 +14,7 @@ using namespace std::literals::string_literals;
 void IEntity::initialize(const std::filesystem::path& file, u64 localId_) {
 	localId = localId_;
 
-	szg::JsonAsset json{ std::format(L".\\Game\\Resources\\Json\\Entity\\{}", file.native()) }; // Jsonからデータの読み込み
+	szg::JsonAsset json{ std::format(L"[[game]]\\Entity\\{}", file.native()) }; // Jsonからデータの読み込み
 	// Instance生成
 	shadow = world_root_mut()->instantiate<Shadow>();
 	ui = world_root_mut()->instantiate<EntityUi>(this);

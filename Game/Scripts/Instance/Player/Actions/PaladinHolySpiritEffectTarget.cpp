@@ -145,7 +145,7 @@ void PaladinHolySpiritEffectTarget::draw_particle() const {
 
 void PaladinHolySpiritEffectTarget::load_constant_values() {
 	// エフェクト値設定
-	json.load("Action/Player/Paladin/HolySpiritTarget.json");
+	json.load("[[game]]\\Action\\Player\\Paladin\\HolySpiritTarget.json");
 	json.register_value("absorption.size", absorptionEffectValues.size);
 	json.register_value("absorption.pivot", absorptionEffectValues.pivot);
 	json.register_value("absorption.color", absorptionEffectValues.color);
