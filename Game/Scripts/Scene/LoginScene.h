@@ -10,8 +10,6 @@ public:
 	SZG_CLASS_MOVE_ONLY(LoginScene)
 
 public:
-	void custom_load_asset() override;
-
 	void custom_setup() override;
 
 private:

@@ -219,7 +219,7 @@
 				},
 				"Translate": {
 					"X": -2.165820598602295,
-					"Y": -0.8640000224113464,
+					"Y": -1.0,
 					"Z": -1.9554136088117957e-11
 				}
 			},
@@ -232,7 +232,7 @@
 				},
 				"LightingType": 0,
 				"Shininess": 50.0,
-				"Texture": "Error.png",
+				"Texture": "keyboard_arrow_right_24dp_EFEFEF_FILL0_wght400_GRAD0_opsz24.dds",
 				"UV Transform": {
 					"Rotation": 0.0,
 					"Scale": {
