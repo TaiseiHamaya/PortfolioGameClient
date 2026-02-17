@@ -24,11 +24,13 @@
 			},
 			"Name": "Camera",
 			"Projection": {
-				"AspectRatio": 1.7776999473571777,
-				"FOV Y": 0.44999998807907104,
-				"FarClip": 1000.0,
-				"NearClip": 0.10000000149011612,
-				"Type": 0
+				"Bottom": -2.2850000858306885,
+				"FarClip": 20.0,
+				"Left": -4.064000129699707,
+				"NearClip": 0.0,
+				"Right": 4.064000129699707,
+				"Top": 2.2850000858306885,
+				"Type": 1
 			},
 			"Type": 3000,
 			"Use runtime": false
