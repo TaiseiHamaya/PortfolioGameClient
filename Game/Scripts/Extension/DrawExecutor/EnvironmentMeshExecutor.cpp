@@ -41,8 +41,9 @@ void EnvironmentMeshExecutor::draw_command() const {
 		commandList->IASetIndexBuffer(asset->get_p_ibv(i));
 		commandList->SetGraphicsRootDescriptorTable(0, matrices.get_handle_gpu());
 		commandList->SetGraphicsRootDescriptorTable(1, materials[i].get_handle_gpu());
-		camera->register_world_projection(2);
-		camera->register_world_lighting(3);
+		// DOTO: システム移行が必要
+		//camera->register_world_projection(2);
+		//camera->register_world_lighting(3);
 		directionalLightingExecutor->set_command(4);
 		commandList->SetGraphicsRootDescriptorTable(5, environmentTexture->handle());
 
