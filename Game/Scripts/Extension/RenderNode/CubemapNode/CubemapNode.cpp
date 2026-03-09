@@ -25,7 +25,7 @@ void CubemapNode::preprocess() {
 	command->IASetIndexBuffer(indexBuffer->get_p_ibv());
 	command->SetGraphicsRootConstantBufferView(0, vsBuffer.get_resource()->GetGPUVirtualAddress());
 	command->SetGraphicsRootConstantBufferView(1, materialBuffer.get_resource()->GetGPUVirtualAddress());
-	camera->register_world_projection(2);
+	//camera->register_world_projection(2);
 	command->DrawIndexedInstanced(indexBuffer->index_size(), 1, 0, 0, 0);
 }
 
