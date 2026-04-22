@@ -28,7 +28,6 @@
 #include "google/protobuf/message_lite.h"
 #include "google/protobuf/repeated_field.h"  // IWYU pragma: export
 #include "google/protobuf/extension_set.h"  // IWYU pragma: export
-#include "google/protobuf/generated_enum_reflection.h"
 #include "google/protobuf/unknown_field_set.h"
 #include "common/math.pb.h"
 // @@protoc_insertion_point(includes)
@@ -55,8 +54,6 @@ extern "C" {
 extern const ::google::protobuf::internal::DescriptorTable descriptor_table_process_2fzone_2fenemy_2eproto;
 }  // extern "C"
 namespace Proto {
-enum CategoryEnemyMessage : int;
-extern const uint32_t CategoryEnemyMessage_internal_data_[];
 class PayloadEnemyDespawn;
 struct PayloadEnemyDespawnDefaultTypeInternal;
 extern PayloadEnemyDespawnDefaultTypeInternal _PayloadEnemyDespawn_default_instance_;
@@ -68,49 +65,10 @@ extern const ::google::protobuf::internal::ClassDataFull PayloadEnemySpawn_class
 }  // namespace Proto
 namespace google {
 namespace protobuf {
-template <>
-internal::EnumTraitsT<::Proto::CategoryEnemyMessage_internal_data_>
-    internal::EnumTraitsImpl::value<::Proto::CategoryEnemyMessage>;
 }  // namespace protobuf
 }  // namespace google
 
 namespace Proto {
-enum CategoryEnemyMessage : int {
-  ENEMY_SPAWN = 0,
-  ENEMY_DESPAWN = 1,
-  CategoryEnemyMessage_INT_MIN_SENTINEL_DO_NOT_USE_ =
-      ::std::numeric_limits<::int32_t>::min(),
-  CategoryEnemyMessage_INT_MAX_SENTINEL_DO_NOT_USE_ =
-      ::std::numeric_limits<::int32_t>::max(),
-};
-
-extern const uint32_t CategoryEnemyMessage_internal_data_[];
-inline constexpr CategoryEnemyMessage CategoryEnemyMessage_MIN =
-    static_cast<CategoryEnemyMessage>(0);
-inline constexpr CategoryEnemyMessage CategoryEnemyMessage_MAX =
-    static_cast<CategoryEnemyMessage>(1);
-inline bool CategoryEnemyMessage_IsValid(int value) {
-  return 0 <= value && value <= 1;
-}
-inline constexpr int CategoryEnemyMessage_ARRAYSIZE = 1 + 1;
-const ::google::protobuf::EnumDescriptor* PROTOBUF_NONNULL CategoryEnemyMessage_descriptor();
-template <typename T>
-const ::std::string& CategoryEnemyMessage_Name(T value) {
-  static_assert(::std::is_same<T, CategoryEnemyMessage>::value ||
-                    ::std::is_integral<T>::value,
-                "Incorrect type passed to CategoryEnemyMessage_Name().");
-  return CategoryEnemyMessage_Name(static_cast<CategoryEnemyMessage>(value));
-}
-template <>
-inline const ::std::string& CategoryEnemyMessage_Name(CategoryEnemyMessage value) {
-  return ::google::protobuf::internal::NameOfDenseEnum<CategoryEnemyMessage_descriptor, 0, 1>(
-      static_cast<int>(value));
-}
-inline bool CategoryEnemyMessage_Parse(
-    ::absl::string_view name, CategoryEnemyMessage* PROTOBUF_NONNULL value) {
-  return ::google::protobuf::internal::ParseNamedEnum<CategoryEnemyMessage>(CategoryEnemyMessage_descriptor(), name,
-                                           value);
-}
 
 // ===================================================================
 
@@ -765,19 +723,6 @@ inline void PayloadEnemyDespawn::_internal_set_id(::uint64_t value) {
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace Proto
 
-
-namespace google {
-namespace protobuf {
-
-template <>
-struct is_proto_enum<::Proto::CategoryEnemyMessage> : std::true_type {};
-template <>
-inline const EnumDescriptor* PROTOBUF_NONNULL GetEnumDescriptor<::Proto::CategoryEnemyMessage>() {
-  return ::Proto::CategoryEnemyMessage_descriptor();
-}
-
-}  // namespace protobuf
-}  // namespace google
 
 // @@protoc_insertion_point(global_scope)
 

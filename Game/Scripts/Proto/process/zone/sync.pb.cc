@@ -26,11 +26,63 @@ namespace _pbi = ::google::protobuf::internal;
 namespace _fl = ::google::protobuf::internal::field_layout;
 namespace Proto {
 
+inline constexpr PayloadZoneExitNotification::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        id_{::uint64_t{0u}} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR PayloadZoneExitNotification::PayloadZoneExitNotification(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(PayloadZoneExitNotification_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct PayloadZoneExitNotificationDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR PayloadZoneExitNotificationDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~PayloadZoneExitNotificationDefaultTypeInternal() {}
+  union {
+    PayloadZoneExitNotification _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 PayloadZoneExitNotificationDefaultTypeInternal _PayloadZoneExitNotification_default_instance_;
+
+inline constexpr PayloadPlayAction::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        id_{::uint64_t{0u}},
+        target_id_{::uint64_t{0u}},
+        timestamp_{::int64_t{0}},
+        action_id_{0u} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR PayloadPlayAction::PayloadPlayAction(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(PayloadPlayAction_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct PayloadPlayActionDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR PayloadPlayActionDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~PayloadPlayActionDefaultTypeInternal() {}
+  union {
+    PayloadPlayAction _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 PayloadPlayActionDefaultTypeInternal _PayloadPlayAction_default_instance_;
+
 inline constexpr PayloadEntityDamaged::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
-        attacker_id_{::uint64_t{0u}},
-        target_id_{::uint64_t{0u}},
+        entity_id_{::uint64_t{0u}},
         damage_{0} {}
 
 template <typename>
@@ -52,6 +104,35 @@ struct PayloadEntityDamagedDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 PayloadEntityDamagedDefaultTypeInternal _PayloadEntityDamaged_default_instance_;
+
+inline constexpr PayloadZoneEnterNotification::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        username_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        position_{nullptr},
+        id_{::uint64_t{0u}} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR PayloadZoneEnterNotification::PayloadZoneEnterNotification(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(PayloadZoneEnterNotification_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct PayloadZoneEnterNotificationDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR PayloadZoneEnterNotificationDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~PayloadZoneEnterNotificationDefaultTypeInternal() {}
+  union {
+    PayloadZoneEnterNotification _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 PayloadZoneEnterNotificationDefaultTypeInternal _PayloadZoneEnterNotification_default_instance_;
 
 inline constexpr PayloadTransformSync::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
@@ -79,38 +160,9 @@ struct PayloadTransformSyncDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 PayloadTransformSyncDefaultTypeInternal _PayloadTransformSync_default_instance_;
-
-inline constexpr PayloadPlayAction::Impl_::Impl_(
-    ::_pbi::ConstantInitialized) noexcept
-      : _cached_size_{0},
-        id_{::uint64_t{0u}},
-        timestamp_{::uint64_t{0u}},
-        action_id_{0u},
-        target_{},
-        _oneof_case_{} {}
-
-template <typename>
-PROTOBUF_CONSTEXPR PayloadPlayAction::PayloadPlayAction(::_pbi::ConstantInitialized)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(PayloadPlayAction_class_data_.base()),
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(),
-#endif  // PROTOBUF_CUSTOM_VTABLE
-      _impl_(::_pbi::ConstantInitialized()) {
-}
-struct PayloadPlayActionDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR PayloadPlayActionDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~PayloadPlayActionDefaultTypeInternal() {}
-  union {
-    PayloadPlayAction _instance;
-  };
-};
-
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 PayloadPlayActionDefaultTypeInternal _PayloadPlayAction_default_instance_;
 }  // namespace Proto
-static const ::_pb::EnumDescriptor* PROTOBUF_NONNULL
-    file_level_enum_descriptors_process_2fzone_2fsync_2eproto[1];
+static constexpr const ::_pb::EnumDescriptor *PROTOBUF_NONNULL *PROTOBUF_NULLABLE
+    file_level_enum_descriptors_process_2fzone_2fsync_2eproto = nullptr;
 static constexpr const ::_pb::ServiceDescriptor *PROTOBUF_NONNULL *PROTOBUF_NULLABLE
     file_level_service_descriptors_process_2fzone_2fsync_2eproto = nullptr;
 const ::uint32_t
@@ -125,57 +177,68 @@ const ::uint32_t
         1,
         2,
         0,
-        0x085, // bitmap
+        0x081, // bitmap
         PROTOBUF_FIELD_OFFSET(::Proto::PayloadPlayAction, _impl_._has_bits_),
-        PROTOBUF_FIELD_OFFSET(::Proto::PayloadPlayAction, _impl_._oneof_case_[0]),
-        10, // hasbit index offset
+        7, // hasbit index offset
         PROTOBUF_FIELD_OFFSET(::Proto::PayloadPlayAction, _impl_.id_),
+        PROTOBUF_FIELD_OFFSET(::Proto::PayloadPlayAction, _impl_.target_id_),
         PROTOBUF_FIELD_OFFSET(::Proto::PayloadPlayAction, _impl_.action_id_),
         PROTOBUF_FIELD_OFFSET(::Proto::PayloadPlayAction, _impl_.timestamp_),
-        PROTOBUF_FIELD_OFFSET(::Proto::PayloadPlayAction, _impl_.target_),
-        PROTOBUF_FIELD_OFFSET(::Proto::PayloadPlayAction, _impl_.target_),
-        PROTOBUF_FIELD_OFFSET(::Proto::PayloadPlayAction, _impl_.target_),
         0,
-        2,
         1,
-        ~0u,
-        ~0u,
+        3,
+        2,
         0x081, // bitmap
         PROTOBUF_FIELD_OFFSET(::Proto::PayloadEntityDamaged, _impl_._has_bits_),
-        6, // hasbit index offset
-        PROTOBUF_FIELD_OFFSET(::Proto::PayloadEntityDamaged, _impl_.attacker_id_),
-        PROTOBUF_FIELD_OFFSET(::Proto::PayloadEntityDamaged, _impl_.target_id_),
+        5, // hasbit index offset
+        PROTOBUF_FIELD_OFFSET(::Proto::PayloadEntityDamaged, _impl_.entity_id_),
         PROTOBUF_FIELD_OFFSET(::Proto::PayloadEntityDamaged, _impl_.damage_),
         0,
         1,
+        0x081, // bitmap
+        PROTOBUF_FIELD_OFFSET(::Proto::PayloadZoneEnterNotification, _impl_._has_bits_),
+        6, // hasbit index offset
+        PROTOBUF_FIELD_OFFSET(::Proto::PayloadZoneEnterNotification, _impl_.id_),
+        PROTOBUF_FIELD_OFFSET(::Proto::PayloadZoneEnterNotification, _impl_.username_),
+        PROTOBUF_FIELD_OFFSET(::Proto::PayloadZoneEnterNotification, _impl_.position_),
         2,
+        0,
+        1,
+        0x081, // bitmap
+        PROTOBUF_FIELD_OFFSET(::Proto::PayloadZoneExitNotification, _impl_._has_bits_),
+        4, // hasbit index offset
+        PROTOBUF_FIELD_OFFSET(::Proto::PayloadZoneExitNotification, _impl_.id_),
+        0,
 };
 
 static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
         {0, sizeof(::Proto::PayloadTransformSync)},
         {9, sizeof(::Proto::PayloadPlayAction)},
-        {24, sizeof(::Proto::PayloadEntityDamaged)},
+        {20, sizeof(::Proto::PayloadEntityDamaged)},
+        {27, sizeof(::Proto::PayloadZoneEnterNotification)},
+        {36, sizeof(::Proto::PayloadZoneExitNotification)},
 };
 static const ::_pb::Message* PROTOBUF_NONNULL const file_default_instances[] = {
     &::Proto::_PayloadTransformSync_default_instance_._instance,
     &::Proto::_PayloadPlayAction_default_instance_._instance,
     &::Proto::_PayloadEntityDamaged_default_instance_._instance,
+    &::Proto::_PayloadZoneEnterNotification_default_instance_._instance,
+    &::Proto::_PayloadZoneExitNotification_default_instance_._instance,
 };
 const char descriptor_table_protodef_process_2fzone_2fsync_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
     "\n\027process/zone/sync.proto\022\005Proto\032\021common"
     "/math.proto\"W\n\024PayloadTransformSync\022\n\n\002i"
     "d\030\001 \001(\004\022\021\n\ttimestamp\030\002 \001(\004\022 \n\010position\030\003"
-    " \001(\0132\016.Proto.Vector3\"\210\001\n\021PayloadPlayActi"
-    "on\022\n\n\002id\030\001 \001(\004\022\021\n\taction_id\030\002 \001(\r\022\021\n\ttim"
-    "estamp\030\003 \001(\004\022\023\n\tentity_id\030\004 \001(\004H\000\022\"\n\010pos"
-    "ition\030\005 \001(\0132\016.Proto.Vector3H\000B\010\n\006target\""
-    "N\n\024PayloadEntityDamaged\022\023\n\013attacker_id\030\001"
-    " \001(\004\022\021\n\ttarget_id\030\002 \001(\004\022\016\n\006damage\030\003 \001(\005*"
-    "N\n\023CategorySyncMessage\022\022\n\016SYNC_TRANSFORM"
-    "\020\000\022\017\n\013PLAY_ACTION\020\001\022\022\n\016ENTITY_DAMAGED\020\002b"
-    "\006proto3"
+    " \001(\0132\016.Proto.Vector3\"X\n\021PayloadPlayActio"
+    "n\022\n\n\002id\030\001 \001(\004\022\021\n\ttarget_id\030\002 \001(\004\022\021\n\tacti"
+    "on_id\030\003 \001(\r\022\021\n\ttimestamp\030\004 \001(\003\"9\n\024Payloa"
+    "dEntityDamaged\022\021\n\tentity_id\030\002 \001(\004\022\016\n\006dam"
+    "age\030\003 \001(\005\"^\n\034PayloadZoneEnterNotificatio"
+    "n\022\n\n\002id\030\001 \001(\004\022\020\n\010username\030\002 \001(\t\022 \n\010posit"
+    "ion\030\003 \001(\0132\016.Proto.Vector3\")\n\033PayloadZone"
+    "ExitNotification\022\n\n\002id\030\001 \001(\004b\006proto3"
 };
 static const ::_pbi::DescriptorTable* PROTOBUF_NONNULL const
     descriptor_table_process_2fzone_2fsync_2eproto_deps[1] = {
@@ -185,13 +248,13 @@ static ::absl::once_flag descriptor_table_process_2fzone_2fsync_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_process_2fzone_2fsync_2eproto = {
     false,
     false,
-    447,
+    436,
     descriptor_table_protodef_process_2fzone_2fsync_2eproto,
     "process/zone/sync.proto",
     &descriptor_table_process_2fzone_2fsync_2eproto_once,
     descriptor_table_process_2fzone_2fsync_2eproto_deps,
     1,
-    3,
+    5,
     schemas,
     file_default_instances,
     TableStruct_process_2fzone_2fsync_2eproto::offsets,
@@ -199,12 +262,6 @@ PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_process_2fzone
     file_level_service_descriptors_process_2fzone_2fsync_2eproto,
 };
 namespace Proto {
-const ::google::protobuf::EnumDescriptor* PROTOBUF_NONNULL CategorySyncMessage_descriptor() {
-  ::google::protobuf::internal::AssignDescriptors(&descriptor_table_process_2fzone_2fsync_2eproto);
-  return file_level_enum_descriptors_process_2fzone_2fsync_2eproto[0];
-}
-PROTOBUF_CONSTINIT const uint32_t CategorySyncMessage_internal_data_[] = {
-    196608u, 0u, };
 // ===================================================================
 
 class PayloadTransformSync::_Internal {
@@ -563,34 +620,8 @@ class PayloadPlayAction::_Internal {
       decltype(::std::declval<PayloadPlayAction>()._impl_._has_bits_);
   static constexpr ::int32_t kHasBitsOffset =
       8 * PROTOBUF_FIELD_OFFSET(PayloadPlayAction, _impl_._has_bits_);
-  static constexpr ::int32_t kOneofCaseOffset =
-      PROTOBUF_FIELD_OFFSET(::Proto::PayloadPlayAction, _impl_._oneof_case_);
 };
 
-void PayloadPlayAction::set_allocated_position(::Proto::Vector3* PROTOBUF_NULLABLE position) {
-  ::google::protobuf::Arena* message_arena = GetArena();
-  clear_target();
-  if (position) {
-    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::Message*>(position)->GetArena();
-    if (message_arena != submessage_arena) {
-      position = ::google::protobuf::internal::GetOwnedMessage(message_arena, position, submessage_arena);
-    }
-    set_has_position();
-    _impl_.target_.position_ = position;
-  }
-  // @@protoc_insertion_point(field_set_allocated:Proto.PayloadPlayAction.position)
-}
-void PayloadPlayAction::clear_position() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (target_case() == kPosition) {
-    if (GetArena() == nullptr) {
-      delete _impl_.target_.position_;
-    } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
-      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.target_.position_);
-    }
-    clear_has_target();
-  }
-}
 PayloadPlayAction::PayloadPlayAction(::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, PayloadPlayAction_class_data_.base()) {
@@ -600,54 +631,21 @@ PayloadPlayAction::PayloadPlayAction(::google::protobuf::Arena* PROTOBUF_NULLABL
   SharedCtor(arena);
   // @@protoc_insertion_point(arena_constructor:Proto.PayloadPlayAction)
 }
-PROTOBUF_NDEBUG_INLINE PayloadPlayAction::Impl_::Impl_(
-    [[maybe_unused]] ::google::protobuf::internal::InternalVisibility visibility,
-    [[maybe_unused]] ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
-    [[maybe_unused]] const ::Proto::PayloadPlayAction& from_msg)
-      : _has_bits_{from._has_bits_},
-        _cached_size_{0},
-        target_{},
-        _oneof_case_{from._oneof_case_[0]} {}
-
 PayloadPlayAction::PayloadPlayAction(
-    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena,
-    const PayloadPlayAction& from)
+    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const PayloadPlayAction& from)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, PayloadPlayAction_class_data_.base()) {
+    : ::google::protobuf::Message(arena, PayloadPlayAction_class_data_.base()),
 #else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(arena) {
+    : ::google::protobuf::Message(arena),
 #endif  // PROTOBUF_CUSTOM_VTABLE
-  PayloadPlayAction* const _this = this;
-  (void)_this;
+      _impl_(from._impl_) {
   _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
-  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
-  ::memcpy(reinterpret_cast<char *>(&_impl_) +
-               offsetof(Impl_, id_),
-           reinterpret_cast<const char *>(&from._impl_) +
-               offsetof(Impl_, id_),
-           offsetof(Impl_, action_id_) -
-               offsetof(Impl_, id_) +
-               sizeof(Impl_::action_id_));
-  switch (target_case()) {
-    case TARGET_NOT_SET:
-      break;
-      case kEntityId:
-        _impl_.target_.entity_id_ = from._impl_.target_.entity_id_;
-        break;
-      case kPosition:
-        _impl_.target_.position_ = ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.target_.position_);
-        break;
-  }
-
-  // @@protoc_insertion_point(copy_constructor:Proto.PayloadPlayAction)
 }
 PROTOBUF_NDEBUG_INLINE PayloadPlayAction::Impl_::Impl_(
     [[maybe_unused]] ::google::protobuf::internal::InternalVisibility visibility,
     [[maybe_unused]] ::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
-      : _cached_size_{0},
-        target_{},
-        _oneof_case_{} {}
+      : _cached_size_{0} {}
 
 inline void PayloadPlayAction::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
@@ -669,35 +667,8 @@ inline void PayloadPlayAction::SharedDtor(MessageLite& self) {
   }
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
-  if (this_.has_target()) {
-    this_.clear_target();
-  }
   this_._impl_.~Impl_();
 }
-
-void PayloadPlayAction::clear_target() {
-// @@protoc_insertion_point(one_of_clear_start:Proto.PayloadPlayAction)
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  switch (target_case()) {
-    case kEntityId: {
-      // No need to clear
-      break;
-    }
-    case kPosition: {
-      if (GetArena() == nullptr) {
-        delete _impl_.target_.position_;
-      } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
-        ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.target_.position_);
-      }
-      break;
-    }
-    case TARGET_NOT_SET: {
-      break;
-    }
-  }
-  _impl_._oneof_case_[0] = TARGET_NOT_SET;
-}
-
 
 inline void* PROTOBUF_NONNULL PayloadPlayAction::PlacementNew_(
     const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
@@ -742,18 +713,18 @@ PayloadPlayAction::GetClassData() const {
   return PayloadPlayAction_class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 5, 1, 0, 2>
+const ::_pbi::TcParseTable<2, 4, 0, 0, 2>
 PayloadPlayAction::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(PayloadPlayAction, _impl_._has_bits_),
     0, // no _extensions_
-    5, 24,  // max_field_number, fast_idx_mask
+    4, 24,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967264,  // skipmap
+    4294967280,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    5,  // num_field_entries
-    1,  // num_aux_entries
-    offsetof(decltype(_table_), aux_entries),
+    4,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
     PayloadPlayAction_class_data_.base(),
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
@@ -761,33 +732,31 @@ PayloadPlayAction::_table_ = {
     ::_pbi::TcParser::GetTable<::Proto::PayloadPlayAction>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    {::_pbi::TcParser::MiniParse, {}},
+    // int64 timestamp = 4;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(PayloadPlayAction, _impl_.timestamp_), 2>(),
+     {32, 2, 0, PROTOBUF_FIELD_OFFSET(PayloadPlayAction, _impl_.timestamp_)}},
     // uint64 id = 1;
     {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(PayloadPlayAction, _impl_.id_), 0>(),
      {8, 0, 0, PROTOBUF_FIELD_OFFSET(PayloadPlayAction, _impl_.id_)}},
-    // uint32 action_id = 2;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(PayloadPlayAction, _impl_.action_id_), 2>(),
-     {16, 2, 0, PROTOBUF_FIELD_OFFSET(PayloadPlayAction, _impl_.action_id_)}},
-    // uint64 timestamp = 3;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(PayloadPlayAction, _impl_.timestamp_), 1>(),
-     {24, 1, 0, PROTOBUF_FIELD_OFFSET(PayloadPlayAction, _impl_.timestamp_)}},
+    // uint64 target_id = 2;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(PayloadPlayAction, _impl_.target_id_), 1>(),
+     {16, 1, 0, PROTOBUF_FIELD_OFFSET(PayloadPlayAction, _impl_.target_id_)}},
+    // uint32 action_id = 3;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(PayloadPlayAction, _impl_.action_id_), 3>(),
+     {24, 3, 0, PROTOBUF_FIELD_OFFSET(PayloadPlayAction, _impl_.action_id_)}},
   }}, {{
     65535, 65535
   }}, {{
     // uint64 id = 1;
     {PROTOBUF_FIELD_OFFSET(PayloadPlayAction, _impl_.id_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt64)},
-    // uint32 action_id = 2;
-    {PROTOBUF_FIELD_OFFSET(PayloadPlayAction, _impl_.action_id_), _Internal::kHasBitsOffset + 2, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt32)},
-    // uint64 timestamp = 3;
-    {PROTOBUF_FIELD_OFFSET(PayloadPlayAction, _impl_.timestamp_), _Internal::kHasBitsOffset + 1, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt64)},
-    // uint64 entity_id = 4;
-    {PROTOBUF_FIELD_OFFSET(PayloadPlayAction, _impl_.target_.entity_id_), _Internal::kOneofCaseOffset + 0, 0, (0 | ::_fl::kFcOneof | ::_fl::kUInt64)},
-    // .Proto.Vector3 position = 5;
-    {PROTOBUF_FIELD_OFFSET(PayloadPlayAction, _impl_.target_.position_), _Internal::kOneofCaseOffset + 0, 0, (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
+    // uint64 target_id = 2;
+    {PROTOBUF_FIELD_OFFSET(PayloadPlayAction, _impl_.target_id_), _Internal::kHasBitsOffset + 1, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt64)},
+    // uint32 action_id = 3;
+    {PROTOBUF_FIELD_OFFSET(PayloadPlayAction, _impl_.action_id_), _Internal::kHasBitsOffset + 3, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt32)},
+    // int64 timestamp = 4;
+    {PROTOBUF_FIELD_OFFSET(PayloadPlayAction, _impl_.timestamp_), _Internal::kHasBitsOffset + 2, 0, (0 | ::_fl::kFcOptional | ::_fl::kInt64)},
   }},
-  {{
-      {::_pbi::TcParser::GetTable<::Proto::Vector3>()},
-  }},
+  // no aux_entries
   {{
   }},
 };
@@ -799,12 +768,11 @@ PROTOBUF_NOINLINE void PayloadPlayAction::Clear() {
   (void) cached_has_bits;
 
   cached_has_bits = _impl_._has_bits_[0];
-  if ((cached_has_bits & 0x00000007U) != 0) {
+  if ((cached_has_bits & 0x0000000fU) != 0) {
     ::memset(&_impl_.id_, 0, static_cast<::size_t>(
         reinterpret_cast<char*>(&_impl_.action_id_) -
         reinterpret_cast<char*>(&_impl_.id_)) + sizeof(_impl_.action_id_));
   }
-  clear_target();
   _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
@@ -836,40 +804,33 @@ PROTOBUF_NOINLINE void PayloadPlayAction::Clear() {
     }
   }
 
-  // uint32 action_id = 2;
-  if ((this_._impl_._has_bits_[0] & 0x00000004U) != 0) {
+  // uint64 target_id = 2;
+  if ((this_._impl_._has_bits_[0] & 0x00000002U) != 0) {
+    if (this_._internal_target_id() != 0) {
+      target = stream->EnsureSpace(target);
+      target = ::_pbi::WireFormatLite::WriteUInt64ToArray(
+          2, this_._internal_target_id(), target);
+    }
+  }
+
+  // uint32 action_id = 3;
+  if ((this_._impl_._has_bits_[0] & 0x00000008U) != 0) {
     if (this_._internal_action_id() != 0) {
       target = stream->EnsureSpace(target);
       target = ::_pbi::WireFormatLite::WriteUInt32ToArray(
-          2, this_._internal_action_id(), target);
+          3, this_._internal_action_id(), target);
     }
   }
 
-  // uint64 timestamp = 3;
-  if ((this_._impl_._has_bits_[0] & 0x00000002U) != 0) {
+  // int64 timestamp = 4;
+  if ((this_._impl_._has_bits_[0] & 0x00000004U) != 0) {
     if (this_._internal_timestamp() != 0) {
-      target = stream->EnsureSpace(target);
-      target = ::_pbi::WireFormatLite::WriteUInt64ToArray(
-          3, this_._internal_timestamp(), target);
+      target =
+          ::google::protobuf::internal::WireFormatLite::WriteInt64ToArrayWithField<4>(
+              stream, this_._internal_timestamp(), target);
     }
   }
 
-  switch (this_.target_case()) {
-    case kEntityId: {
-      target = stream->EnsureSpace(target);
-      target = ::_pbi::WireFormatLite::WriteUInt64ToArray(
-          4, this_._internal_entity_id(), target);
-      break;
-    }
-    case kPosition: {
-      target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-          5, *this_._impl_.target_.position_, this_._impl_.target_.position_->GetCachedSize(), target,
-          stream);
-      break;
-    }
-    default:
-      break;
-  }
   if (ABSL_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
     target =
         ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
@@ -895,7 +856,7 @@ PROTOBUF_NOINLINE void PayloadPlayAction::Clear() {
 
   ::_pbi::Prefetch5LinesFrom7Lines(&this_);
   cached_has_bits = this_._impl_._has_bits_[0];
-  if ((cached_has_bits & 0x00000007U) != 0) {
+  if ((cached_has_bits & 0x0000000fU) != 0) {
     // uint64 id = 1;
     if ((cached_has_bits & 0x00000001U) != 0) {
       if (this_._internal_id() != 0) {
@@ -903,36 +864,26 @@ PROTOBUF_NOINLINE void PayloadPlayAction::Clear() {
             this_._internal_id());
       }
     }
-    // uint64 timestamp = 3;
+    // uint64 target_id = 2;
     if ((cached_has_bits & 0x00000002U) != 0) {
-      if (this_._internal_timestamp() != 0) {
+      if (this_._internal_target_id() != 0) {
         total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(
+            this_._internal_target_id());
+      }
+    }
+    // int64 timestamp = 4;
+    if ((cached_has_bits & 0x00000004U) != 0) {
+      if (this_._internal_timestamp() != 0) {
+        total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(
             this_._internal_timestamp());
       }
     }
-    // uint32 action_id = 2;
-    if ((cached_has_bits & 0x00000004U) != 0) {
+    // uint32 action_id = 3;
+    if ((cached_has_bits & 0x00000008U) != 0) {
       if (this_._internal_action_id() != 0) {
         total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(
             this_._internal_action_id());
       }
-    }
-  }
-  switch (this_.target_case()) {
-    // uint64 entity_id = 4;
-    case kEntityId: {
-      total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(
-          this_._internal_entity_id());
-      break;
-    }
-    // .Proto.Vector3 position = 5;
-    case kPosition: {
-      total_size += 1 +
-                    ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.target_.position_);
-      break;
-    }
-    case TARGET_NOT_SET: {
-      break;
     }
   }
   return this_.MaybeComputeUnknownFieldsSize(total_size,
@@ -945,58 +896,35 @@ void PayloadPlayAction::MergeImpl(::google::protobuf::MessageLite& to_msg, const
   if constexpr (::_pbi::DebugHardenVerifyHasBitConsistency()) {
     from.VerifyHasBitConsistency();
   }
-  ::google::protobuf::Arena* arena = _this->GetArena();
   // @@protoc_insertion_point(class_specific_merge_from_start:Proto.PayloadPlayAction)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = from._impl_._has_bits_[0];
-  if ((cached_has_bits & 0x00000007U) != 0) {
+  if ((cached_has_bits & 0x0000000fU) != 0) {
     if ((cached_has_bits & 0x00000001U) != 0) {
       if (from._internal_id() != 0) {
         _this->_impl_.id_ = from._impl_.id_;
       }
     }
     if ((cached_has_bits & 0x00000002U) != 0) {
+      if (from._internal_target_id() != 0) {
+        _this->_impl_.target_id_ = from._impl_.target_id_;
+      }
+    }
+    if ((cached_has_bits & 0x00000004U) != 0) {
       if (from._internal_timestamp() != 0) {
         _this->_impl_.timestamp_ = from._impl_.timestamp_;
       }
     }
-    if ((cached_has_bits & 0x00000004U) != 0) {
+    if ((cached_has_bits & 0x00000008U) != 0) {
       if (from._internal_action_id() != 0) {
         _this->_impl_.action_id_ = from._impl_.action_id_;
       }
     }
   }
   _this->_impl_._has_bits_[0] |= cached_has_bits;
-  if (const uint32_t oneof_from_case = from._impl_._oneof_case_[0]) {
-    const uint32_t oneof_to_case = _this->_impl_._oneof_case_[0];
-    const bool oneof_needs_init = oneof_to_case != oneof_from_case;
-    if (oneof_needs_init) {
-      if (oneof_to_case != 0) {
-        _this->clear_target();
-      }
-      _this->_impl_._oneof_case_[0] = oneof_from_case;
-    }
-
-    switch (oneof_from_case) {
-      case kEntityId: {
-        _this->_impl_.target_.entity_id_ = from._impl_.target_.entity_id_;
-        break;
-      }
-      case kPosition: {
-        if (oneof_needs_init) {
-          _this->_impl_.target_.position_ = ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.target_.position_);
-        } else {
-          _this->_impl_.target_.position_->MergeFrom(*from._impl_.target_.position_);
-        }
-        break;
-      }
-      case TARGET_NOT_SET:
-        break;
-    }
-  }
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
@@ -1018,8 +946,6 @@ void PayloadPlayAction::InternalSwap(PayloadPlayAction* PROTOBUF_RESTRICT PROTOB
       - PROTOBUF_FIELD_OFFSET(PayloadPlayAction, _impl_.id_)>(
           reinterpret_cast<char*>(&_impl_.id_),
           reinterpret_cast<char*>(&other->_impl_.id_));
-  swap(_impl_.target_, other->_impl_.target_);
-  swap(_impl_._oneof_case_[0], other->_impl_._oneof_case_[0]);
 }
 
 ::google::protobuf::Metadata PayloadPlayAction::GetMetadata() const {
@@ -1063,10 +989,10 @@ PROTOBUF_NDEBUG_INLINE PayloadEntityDamaged::Impl_::Impl_(
 inline void PayloadEntityDamaged::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
   ::memset(reinterpret_cast<char *>(&_impl_) +
-               offsetof(Impl_, attacker_id_),
+               offsetof(Impl_, entity_id_),
            0,
            offsetof(Impl_, damage_) -
-               offsetof(Impl_, attacker_id_) +
+               offsetof(Impl_, entity_id_) +
                sizeof(Impl_::damage_));
 }
 PayloadEntityDamaged::~PayloadEntityDamaged() {
@@ -1126,16 +1052,16 @@ PayloadEntityDamaged::GetClassData() const {
   return PayloadEntityDamaged_class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 3, 0, 0, 2>
+const ::_pbi::TcParseTable<1, 2, 0, 0, 2>
 PayloadEntityDamaged::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(PayloadEntityDamaged, _impl_._has_bits_),
     0, // no _extensions_
-    3, 24,  // max_field_number, fast_idx_mask
+    3, 8,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967288,  // skipmap
+    4294967289,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    3,  // num_field_entries
+    2,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
     PayloadEntityDamaged_class_data_.base(),
@@ -1145,25 +1071,19 @@ PayloadEntityDamaged::_table_ = {
     ::_pbi::TcParser::GetTable<::Proto::PayloadEntityDamaged>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    {::_pbi::TcParser::MiniParse, {}},
-    // uint64 attacker_id = 1;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(PayloadEntityDamaged, _impl_.attacker_id_), 0>(),
-     {8, 0, 0, PROTOBUF_FIELD_OFFSET(PayloadEntityDamaged, _impl_.attacker_id_)}},
-    // uint64 target_id = 2;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(PayloadEntityDamaged, _impl_.target_id_), 1>(),
-     {16, 1, 0, PROTOBUF_FIELD_OFFSET(PayloadEntityDamaged, _impl_.target_id_)}},
+    // uint64 entity_id = 2;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(PayloadEntityDamaged, _impl_.entity_id_), 0>(),
+     {16, 0, 0, PROTOBUF_FIELD_OFFSET(PayloadEntityDamaged, _impl_.entity_id_)}},
     // int32 damage = 3;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(PayloadEntityDamaged, _impl_.damage_), 2>(),
-     {24, 2, 0, PROTOBUF_FIELD_OFFSET(PayloadEntityDamaged, _impl_.damage_)}},
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(PayloadEntityDamaged, _impl_.damage_), 1>(),
+     {24, 1, 0, PROTOBUF_FIELD_OFFSET(PayloadEntityDamaged, _impl_.damage_)}},
   }}, {{
     65535, 65535
   }}, {{
-    // uint64 attacker_id = 1;
-    {PROTOBUF_FIELD_OFFSET(PayloadEntityDamaged, _impl_.attacker_id_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt64)},
-    // uint64 target_id = 2;
-    {PROTOBUF_FIELD_OFFSET(PayloadEntityDamaged, _impl_.target_id_), _Internal::kHasBitsOffset + 1, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt64)},
+    // uint64 entity_id = 2;
+    {PROTOBUF_FIELD_OFFSET(PayloadEntityDamaged, _impl_.entity_id_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt64)},
     // int32 damage = 3;
-    {PROTOBUF_FIELD_OFFSET(PayloadEntityDamaged, _impl_.damage_), _Internal::kHasBitsOffset + 2, 0, (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
+    {PROTOBUF_FIELD_OFFSET(PayloadEntityDamaged, _impl_.damage_), _Internal::kHasBitsOffset + 1, 0, (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
   }},
   // no aux_entries
   {{
@@ -1177,10 +1097,10 @@ PROTOBUF_NOINLINE void PayloadEntityDamaged::Clear() {
   (void) cached_has_bits;
 
   cached_has_bits = _impl_._has_bits_[0];
-  if ((cached_has_bits & 0x00000007U) != 0) {
-    ::memset(&_impl_.attacker_id_, 0, static_cast<::size_t>(
+  if ((cached_has_bits & 0x00000003U) != 0) {
+    ::memset(&_impl_.entity_id_, 0, static_cast<::size_t>(
         reinterpret_cast<char*>(&_impl_.damage_) -
-        reinterpret_cast<char*>(&_impl_.attacker_id_)) + sizeof(_impl_.damage_));
+        reinterpret_cast<char*>(&_impl_.entity_id_)) + sizeof(_impl_.damage_));
   }
   _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
@@ -1204,26 +1124,17 @@ PROTOBUF_NOINLINE void PayloadEntityDamaged::Clear() {
   ::uint32_t cached_has_bits = 0;
   (void)cached_has_bits;
 
-  // uint64 attacker_id = 1;
+  // uint64 entity_id = 2;
   if ((this_._impl_._has_bits_[0] & 0x00000001U) != 0) {
-    if (this_._internal_attacker_id() != 0) {
+    if (this_._internal_entity_id() != 0) {
       target = stream->EnsureSpace(target);
       target = ::_pbi::WireFormatLite::WriteUInt64ToArray(
-          1, this_._internal_attacker_id(), target);
-    }
-  }
-
-  // uint64 target_id = 2;
-  if ((this_._impl_._has_bits_[0] & 0x00000002U) != 0) {
-    if (this_._internal_target_id() != 0) {
-      target = stream->EnsureSpace(target);
-      target = ::_pbi::WireFormatLite::WriteUInt64ToArray(
-          2, this_._internal_target_id(), target);
+          2, this_._internal_entity_id(), target);
     }
   }
 
   // int32 damage = 3;
-  if ((this_._impl_._has_bits_[0] & 0x00000004U) != 0) {
+  if ((this_._impl_._has_bits_[0] & 0x00000002U) != 0) {
     if (this_._internal_damage() != 0) {
       target =
           ::google::protobuf::internal::WireFormatLite::WriteInt32ToArrayWithField<3>(
@@ -1256,23 +1167,16 @@ PROTOBUF_NOINLINE void PayloadEntityDamaged::Clear() {
 
   ::_pbi::Prefetch5LinesFrom7Lines(&this_);
   cached_has_bits = this_._impl_._has_bits_[0];
-  if ((cached_has_bits & 0x00000007U) != 0) {
-    // uint64 attacker_id = 1;
+  if ((cached_has_bits & 0x00000003U) != 0) {
+    // uint64 entity_id = 2;
     if ((cached_has_bits & 0x00000001U) != 0) {
-      if (this_._internal_attacker_id() != 0) {
+      if (this_._internal_entity_id() != 0) {
         total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(
-            this_._internal_attacker_id());
-      }
-    }
-    // uint64 target_id = 2;
-    if ((cached_has_bits & 0x00000002U) != 0) {
-      if (this_._internal_target_id() != 0) {
-        total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(
-            this_._internal_target_id());
+            this_._internal_entity_id());
       }
     }
     // int32 damage = 3;
-    if ((cached_has_bits & 0x00000004U) != 0) {
+    if ((cached_has_bits & 0x00000002U) != 0) {
       if (this_._internal_damage() != 0) {
         total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
             this_._internal_damage());
@@ -1295,18 +1199,13 @@ void PayloadEntityDamaged::MergeImpl(::google::protobuf::MessageLite& to_msg, co
   (void) cached_has_bits;
 
   cached_has_bits = from._impl_._has_bits_[0];
-  if ((cached_has_bits & 0x00000007U) != 0) {
+  if ((cached_has_bits & 0x00000003U) != 0) {
     if ((cached_has_bits & 0x00000001U) != 0) {
-      if (from._internal_attacker_id() != 0) {
-        _this->_impl_.attacker_id_ = from._impl_.attacker_id_;
+      if (from._internal_entity_id() != 0) {
+        _this->_impl_.entity_id_ = from._impl_.entity_id_;
       }
     }
     if ((cached_has_bits & 0x00000002U) != 0) {
-      if (from._internal_target_id() != 0) {
-        _this->_impl_.target_id_ = from._impl_.target_id_;
-      }
-    }
-    if ((cached_has_bits & 0x00000004U) != 0) {
       if (from._internal_damage() != 0) {
         _this->_impl_.damage_ = from._impl_.damage_;
       }
@@ -1331,12 +1230,614 @@ void PayloadEntityDamaged::InternalSwap(PayloadEntityDamaged* PROTOBUF_RESTRICT 
   ::google::protobuf::internal::memswap<
       PROTOBUF_FIELD_OFFSET(PayloadEntityDamaged, _impl_.damage_)
       + sizeof(PayloadEntityDamaged::_impl_.damage_)
-      - PROTOBUF_FIELD_OFFSET(PayloadEntityDamaged, _impl_.attacker_id_)>(
-          reinterpret_cast<char*>(&_impl_.attacker_id_),
-          reinterpret_cast<char*>(&other->_impl_.attacker_id_));
+      - PROTOBUF_FIELD_OFFSET(PayloadEntityDamaged, _impl_.entity_id_)>(
+          reinterpret_cast<char*>(&_impl_.entity_id_),
+          reinterpret_cast<char*>(&other->_impl_.entity_id_));
 }
 
 ::google::protobuf::Metadata PayloadEntityDamaged::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class PayloadZoneEnterNotification::_Internal {
+ public:
+  using HasBits =
+      decltype(::std::declval<PayloadZoneEnterNotification>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+      8 * PROTOBUF_FIELD_OFFSET(PayloadZoneEnterNotification, _impl_._has_bits_);
+};
+
+void PayloadZoneEnterNotification::clear_position() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.position_ != nullptr) _impl_.position_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000002U;
+}
+PayloadZoneEnterNotification::PayloadZoneEnterNotification(::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, PayloadZoneEnterNotification_class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:Proto.PayloadZoneEnterNotification)
+}
+PROTOBUF_NDEBUG_INLINE PayloadZoneEnterNotification::Impl_::Impl_(
+    [[maybe_unused]] ::google::protobuf::internal::InternalVisibility visibility,
+    [[maybe_unused]] ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
+    [[maybe_unused]] const ::Proto::PayloadZoneEnterNotification& from_msg)
+      : _has_bits_{from._has_bits_},
+        _cached_size_{0},
+        username_(arena, from.username_) {}
+
+PayloadZoneEnterNotification::PayloadZoneEnterNotification(
+    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena,
+    const PayloadZoneEnterNotification& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, PayloadZoneEnterNotification_class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  PayloadZoneEnterNotification* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  ::uint32_t cached_has_bits = _impl_._has_bits_[0];
+  _impl_.position_ = ((cached_has_bits & 0x00000002U) != 0)
+                ? ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.position_)
+                : nullptr;
+  _impl_.id_ = from._impl_.id_;
+
+  // @@protoc_insertion_point(copy_constructor:Proto.PayloadZoneEnterNotification)
+}
+PROTOBUF_NDEBUG_INLINE PayloadZoneEnterNotification::Impl_::Impl_(
+    [[maybe_unused]] ::google::protobuf::internal::InternalVisibility visibility,
+    [[maybe_unused]] ::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
+      : _cached_size_{0},
+        username_(arena) {}
+
+inline void PayloadZoneEnterNotification::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, position_),
+           0,
+           offsetof(Impl_, id_) -
+               offsetof(Impl_, position_) +
+               sizeof(Impl_::id_));
+}
+PayloadZoneEnterNotification::~PayloadZoneEnterNotification() {
+  // @@protoc_insertion_point(destructor:Proto.PayloadZoneEnterNotification)
+  SharedDtor(*this);
+}
+inline void PayloadZoneEnterNotification::SharedDtor(MessageLite& self) {
+  PayloadZoneEnterNotification& this_ = static_cast<PayloadZoneEnterNotification&>(self);
+  if constexpr (::_pbi::DebugHardenVerifyHasBitConsistency()) {
+    this_.VerifyHasBitConsistency();
+  }
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.username_.Destroy();
+  delete this_._impl_.position_;
+  this_._impl_.~Impl_();
+}
+
+inline void* PROTOBUF_NONNULL PayloadZoneEnterNotification::PlacementNew_(
+    const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
+    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena) {
+  return ::new (mem) PayloadZoneEnterNotification(arena);
+}
+constexpr auto PayloadZoneEnterNotification::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(PayloadZoneEnterNotification),
+                                            alignof(PayloadZoneEnterNotification));
+}
+constexpr auto PayloadZoneEnterNotification::InternalGenerateClassData_() {
+  return ::google::protobuf::internal::ClassDataFull{
+      ::google::protobuf::internal::ClassData{
+          &_PayloadZoneEnterNotification_default_instance_._instance,
+          &_table_.header,
+          nullptr,  // OnDemandRegisterArenaDtor
+          nullptr,  // IsInitialized
+          &PayloadZoneEnterNotification::MergeImpl,
+          ::google::protobuf::Message::GetNewImpl<PayloadZoneEnterNotification>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+          &PayloadZoneEnterNotification::SharedDtor,
+          ::google::protobuf::Message::GetClearImpl<PayloadZoneEnterNotification>(), &PayloadZoneEnterNotification::ByteSizeLong,
+              &PayloadZoneEnterNotification::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          PROTOBUF_FIELD_OFFSET(PayloadZoneEnterNotification, _impl_._cached_size_),
+          false,
+      },
+      &PayloadZoneEnterNotification::kDescriptorMethods,
+      &descriptor_table_process_2fzone_2fsync_2eproto,
+      nullptr,  // tracker
+  };
+}
+
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 const
+    ::google::protobuf::internal::ClassDataFull PayloadZoneEnterNotification_class_data_ =
+        PayloadZoneEnterNotification::InternalGenerateClassData_();
+
+PROTOBUF_ATTRIBUTE_WEAK const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL
+PayloadZoneEnterNotification::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&PayloadZoneEnterNotification_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(PayloadZoneEnterNotification_class_data_.tc_table);
+  return PayloadZoneEnterNotification_class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<2, 3, 1, 51, 2>
+PayloadZoneEnterNotification::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(PayloadZoneEnterNotification, _impl_._has_bits_),
+    0, // no _extensions_
+    3, 24,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967288,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    3,  // num_field_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    PayloadZoneEnterNotification_class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::Proto::PayloadZoneEnterNotification>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    {::_pbi::TcParser::MiniParse, {}},
+    // uint64 id = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(PayloadZoneEnterNotification, _impl_.id_), 2>(),
+     {8, 2, 0, PROTOBUF_FIELD_OFFSET(PayloadZoneEnterNotification, _impl_.id_)}},
+    // string username = 2;
+    {::_pbi::TcParser::FastUS1,
+     {18, 0, 0, PROTOBUF_FIELD_OFFSET(PayloadZoneEnterNotification, _impl_.username_)}},
+    // .Proto.Vector3 position = 3;
+    {::_pbi::TcParser::FastMtS1,
+     {26, 1, 0, PROTOBUF_FIELD_OFFSET(PayloadZoneEnterNotification, _impl_.position_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // uint64 id = 1;
+    {PROTOBUF_FIELD_OFFSET(PayloadZoneEnterNotification, _impl_.id_), _Internal::kHasBitsOffset + 2, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt64)},
+    // string username = 2;
+    {PROTOBUF_FIELD_OFFSET(PayloadZoneEnterNotification, _impl_.username_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcOptional | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // .Proto.Vector3 position = 3;
+    {PROTOBUF_FIELD_OFFSET(PayloadZoneEnterNotification, _impl_.position_), _Internal::kHasBitsOffset + 1, 0, (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+  }},
+  {{
+      {::_pbi::TcParser::GetTable<::Proto::Vector3>()},
+  }},
+  {{
+    "\42\0\10\0\0\0\0\0"
+    "Proto.PayloadZoneEnterNotification"
+    "username"
+  }},
+};
+PROTOBUF_NOINLINE void PayloadZoneEnterNotification::Clear() {
+// @@protoc_insertion_point(message_clear_start:Proto.PayloadZoneEnterNotification)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  cached_has_bits = _impl_._has_bits_[0];
+  if ((cached_has_bits & 0x00000003U) != 0) {
+    if ((cached_has_bits & 0x00000001U) != 0) {
+      _impl_.username_.ClearNonDefaultToEmpty();
+    }
+    if ((cached_has_bits & 0x00000002U) != 0) {
+      ABSL_DCHECK(_impl_.position_ != nullptr);
+      _impl_.position_->Clear();
+    }
+  }
+  _impl_.id_ = ::uint64_t{0u};
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+::uint8_t* PROTOBUF_NONNULL PayloadZoneEnterNotification::_InternalSerialize(
+    const ::google::protobuf::MessageLite& base, ::uint8_t* PROTOBUF_NONNULL target,
+    ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) {
+  const PayloadZoneEnterNotification& this_ = static_cast<const PayloadZoneEnterNotification&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+::uint8_t* PROTOBUF_NONNULL PayloadZoneEnterNotification::_InternalSerialize(
+    ::uint8_t* PROTOBUF_NONNULL target,
+    ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
+  const PayloadZoneEnterNotification& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  if constexpr (::_pbi::DebugHardenVerifyHasBitConsistency()) {
+    this_.VerifyHasBitConsistency();
+  }
+  // @@protoc_insertion_point(serialize_to_array_start:Proto.PayloadZoneEnterNotification)
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
+
+  // uint64 id = 1;
+  if ((this_._impl_._has_bits_[0] & 0x00000004U) != 0) {
+    if (this_._internal_id() != 0) {
+      target = stream->EnsureSpace(target);
+      target = ::_pbi::WireFormatLite::WriteUInt64ToArray(
+          1, this_._internal_id(), target);
+    }
+  }
+
+  // string username = 2;
+  if ((this_._impl_._has_bits_[0] & 0x00000001U) != 0) {
+    if (!this_._internal_username().empty()) {
+      const ::std::string& _s = this_._internal_username();
+      ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+          _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "Proto.PayloadZoneEnterNotification.username");
+      target = stream->WriteStringMaybeAliased(2, _s, target);
+    }
+  }
+
+  cached_has_bits = this_._impl_._has_bits_[0];
+  // .Proto.Vector3 position = 3;
+  if ((cached_has_bits & 0x00000002U) != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+        3, *this_._impl_.position_, this_._impl_.position_->GetCachedSize(), target,
+        stream);
+  }
+
+  if (ABSL_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:Proto.PayloadZoneEnterNotification)
+  return target;
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+::size_t PayloadZoneEnterNotification::ByteSizeLong(const MessageLite& base) {
+  const PayloadZoneEnterNotification& this_ = static_cast<const PayloadZoneEnterNotification&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+::size_t PayloadZoneEnterNotification::ByteSizeLong() const {
+  const PayloadZoneEnterNotification& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  // @@protoc_insertion_point(message_byte_size_start:Proto.PayloadZoneEnterNotification)
+  ::size_t total_size = 0;
+
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void)cached_has_bits;
+
+  ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+  cached_has_bits = this_._impl_._has_bits_[0];
+  if ((cached_has_bits & 0x00000007U) != 0) {
+    // string username = 2;
+    if ((cached_has_bits & 0x00000001U) != 0) {
+      if (!this_._internal_username().empty()) {
+        total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                        this_._internal_username());
+      }
+    }
+    // .Proto.Vector3 position = 3;
+    if ((cached_has_bits & 0x00000002U) != 0) {
+      total_size += 1 +
+                    ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.position_);
+    }
+    // uint64 id = 1;
+    if ((cached_has_bits & 0x00000004U) != 0) {
+      if (this_._internal_id() != 0) {
+        total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(
+            this_._internal_id());
+      }
+    }
+  }
+  return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                             &this_._impl_._cached_size_);
+}
+
+void PayloadZoneEnterNotification::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<PayloadZoneEnterNotification*>(&to_msg);
+  auto& from = static_cast<const PayloadZoneEnterNotification&>(from_msg);
+  if constexpr (::_pbi::DebugHardenVerifyHasBitConsistency()) {
+    from.VerifyHasBitConsistency();
+  }
+  ::google::protobuf::Arena* arena = _this->GetArena();
+  // @@protoc_insertion_point(class_specific_merge_from_start:Proto.PayloadZoneEnterNotification)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._impl_._has_bits_[0];
+  if ((cached_has_bits & 0x00000007U) != 0) {
+    if ((cached_has_bits & 0x00000001U) != 0) {
+      if (!from._internal_username().empty()) {
+        _this->_internal_set_username(from._internal_username());
+      } else {
+        if (_this->_impl_.username_.IsDefault()) {
+          _this->_internal_set_username("");
+        }
+      }
+    }
+    if ((cached_has_bits & 0x00000002U) != 0) {
+      ABSL_DCHECK(from._impl_.position_ != nullptr);
+      if (_this->_impl_.position_ == nullptr) {
+        _this->_impl_.position_ = ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.position_);
+      } else {
+        _this->_impl_.position_->MergeFrom(*from._impl_.position_);
+      }
+    }
+    if ((cached_has_bits & 0x00000004U) != 0) {
+      if (from._internal_id() != 0) {
+        _this->_impl_.id_ = from._impl_.id_;
+      }
+    }
+  }
+  _this->_impl_._has_bits_[0] |= cached_has_bits;
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void PayloadZoneEnterNotification::CopyFrom(const PayloadZoneEnterNotification& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Proto.PayloadZoneEnterNotification)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void PayloadZoneEnterNotification::InternalSwap(PayloadZoneEnterNotification* PROTOBUF_RESTRICT PROTOBUF_NONNULL other) {
+  using ::std::swap;
+  auto* arena = GetArena();
+  ABSL_DCHECK_EQ(arena, other->GetArena());
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.username_, &other->_impl_.username_, arena);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(PayloadZoneEnterNotification, _impl_.id_)
+      + sizeof(PayloadZoneEnterNotification::_impl_.id_)
+      - PROTOBUF_FIELD_OFFSET(PayloadZoneEnterNotification, _impl_.position_)>(
+          reinterpret_cast<char*>(&_impl_.position_),
+          reinterpret_cast<char*>(&other->_impl_.position_));
+}
+
+::google::protobuf::Metadata PayloadZoneEnterNotification::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class PayloadZoneExitNotification::_Internal {
+ public:
+  using HasBits =
+      decltype(::std::declval<PayloadZoneExitNotification>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+      8 * PROTOBUF_FIELD_OFFSET(PayloadZoneExitNotification, _impl_._has_bits_);
+};
+
+PayloadZoneExitNotification::PayloadZoneExitNotification(::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, PayloadZoneExitNotification_class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:Proto.PayloadZoneExitNotification)
+}
+PayloadZoneExitNotification::PayloadZoneExitNotification(
+    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const PayloadZoneExitNotification& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, PayloadZoneExitNotification_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(from._impl_) {
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+}
+PROTOBUF_NDEBUG_INLINE PayloadZoneExitNotification::Impl_::Impl_(
+    [[maybe_unused]] ::google::protobuf::internal::InternalVisibility visibility,
+    [[maybe_unused]] ::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
+      : _cached_size_{0} {}
+
+inline void PayloadZoneExitNotification::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  _impl_.id_ = {};
+}
+PayloadZoneExitNotification::~PayloadZoneExitNotification() {
+  // @@protoc_insertion_point(destructor:Proto.PayloadZoneExitNotification)
+  SharedDtor(*this);
+}
+inline void PayloadZoneExitNotification::SharedDtor(MessageLite& self) {
+  PayloadZoneExitNotification& this_ = static_cast<PayloadZoneExitNotification&>(self);
+  if constexpr (::_pbi::DebugHardenVerifyHasBitConsistency()) {
+    this_.VerifyHasBitConsistency();
+  }
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.~Impl_();
+}
+
+inline void* PROTOBUF_NONNULL PayloadZoneExitNotification::PlacementNew_(
+    const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
+    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena) {
+  return ::new (mem) PayloadZoneExitNotification(arena);
+}
+constexpr auto PayloadZoneExitNotification::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(PayloadZoneExitNotification),
+                                            alignof(PayloadZoneExitNotification));
+}
+constexpr auto PayloadZoneExitNotification::InternalGenerateClassData_() {
+  return ::google::protobuf::internal::ClassDataFull{
+      ::google::protobuf::internal::ClassData{
+          &_PayloadZoneExitNotification_default_instance_._instance,
+          &_table_.header,
+          nullptr,  // OnDemandRegisterArenaDtor
+          nullptr,  // IsInitialized
+          &PayloadZoneExitNotification::MergeImpl,
+          ::google::protobuf::Message::GetNewImpl<PayloadZoneExitNotification>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+          &PayloadZoneExitNotification::SharedDtor,
+          ::google::protobuf::Message::GetClearImpl<PayloadZoneExitNotification>(), &PayloadZoneExitNotification::ByteSizeLong,
+              &PayloadZoneExitNotification::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          PROTOBUF_FIELD_OFFSET(PayloadZoneExitNotification, _impl_._cached_size_),
+          false,
+      },
+      &PayloadZoneExitNotification::kDescriptorMethods,
+      &descriptor_table_process_2fzone_2fsync_2eproto,
+      nullptr,  // tracker
+  };
+}
+
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 const
+    ::google::protobuf::internal::ClassDataFull PayloadZoneExitNotification_class_data_ =
+        PayloadZoneExitNotification::InternalGenerateClassData_();
+
+PROTOBUF_ATTRIBUTE_WEAK const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL
+PayloadZoneExitNotification::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&PayloadZoneExitNotification_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(PayloadZoneExitNotification_class_data_.tc_table);
+  return PayloadZoneExitNotification_class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 1, 0, 0, 2>
+PayloadZoneExitNotification::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(PayloadZoneExitNotification, _impl_._has_bits_),
+    0, // no _extensions_
+    1, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967294,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    PayloadZoneExitNotification_class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::Proto::PayloadZoneExitNotification>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // uint64 id = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(PayloadZoneExitNotification, _impl_.id_), 0>(),
+     {8, 0, 0, PROTOBUF_FIELD_OFFSET(PayloadZoneExitNotification, _impl_.id_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // uint64 id = 1;
+    {PROTOBUF_FIELD_OFFSET(PayloadZoneExitNotification, _impl_.id_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt64)},
+  }},
+  // no aux_entries
+  {{
+  }},
+};
+PROTOBUF_NOINLINE void PayloadZoneExitNotification::Clear() {
+// @@protoc_insertion_point(message_clear_start:Proto.PayloadZoneExitNotification)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.id_ = ::uint64_t{0u};
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+::uint8_t* PROTOBUF_NONNULL PayloadZoneExitNotification::_InternalSerialize(
+    const ::google::protobuf::MessageLite& base, ::uint8_t* PROTOBUF_NONNULL target,
+    ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) {
+  const PayloadZoneExitNotification& this_ = static_cast<const PayloadZoneExitNotification&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+::uint8_t* PROTOBUF_NONNULL PayloadZoneExitNotification::_InternalSerialize(
+    ::uint8_t* PROTOBUF_NONNULL target,
+    ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
+  const PayloadZoneExitNotification& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  if constexpr (::_pbi::DebugHardenVerifyHasBitConsistency()) {
+    this_.VerifyHasBitConsistency();
+  }
+  // @@protoc_insertion_point(serialize_to_array_start:Proto.PayloadZoneExitNotification)
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
+
+  // uint64 id = 1;
+  if ((this_._impl_._has_bits_[0] & 0x00000001U) != 0) {
+    if (this_._internal_id() != 0) {
+      target = stream->EnsureSpace(target);
+      target = ::_pbi::WireFormatLite::WriteUInt64ToArray(
+          1, this_._internal_id(), target);
+    }
+  }
+
+  if (ABSL_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:Proto.PayloadZoneExitNotification)
+  return target;
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+::size_t PayloadZoneExitNotification::ByteSizeLong(const MessageLite& base) {
+  const PayloadZoneExitNotification& this_ = static_cast<const PayloadZoneExitNotification&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+::size_t PayloadZoneExitNotification::ByteSizeLong() const {
+  const PayloadZoneExitNotification& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  // @@protoc_insertion_point(message_byte_size_start:Proto.PayloadZoneExitNotification)
+  ::size_t total_size = 0;
+
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void)cached_has_bits;
+
+   {
+    // uint64 id = 1;
+    cached_has_bits = this_._impl_._has_bits_[0];
+    if ((cached_has_bits & 0x00000001U) != 0) {
+      if (this_._internal_id() != 0) {
+        total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(
+            this_._internal_id());
+      }
+    }
+  }
+  return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                             &this_._impl_._cached_size_);
+}
+
+void PayloadZoneExitNotification::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<PayloadZoneExitNotification*>(&to_msg);
+  auto& from = static_cast<const PayloadZoneExitNotification&>(from_msg);
+  if constexpr (::_pbi::DebugHardenVerifyHasBitConsistency()) {
+    from.VerifyHasBitConsistency();
+  }
+  // @@protoc_insertion_point(class_specific_merge_from_start:Proto.PayloadZoneExitNotification)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._impl_._has_bits_[0];
+  if ((cached_has_bits & 0x00000001U) != 0) {
+    if (from._internal_id() != 0) {
+      _this->_impl_.id_ = from._impl_.id_;
+    }
+  }
+  _this->_impl_._has_bits_[0] |= cached_has_bits;
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void PayloadZoneExitNotification::CopyFrom(const PayloadZoneExitNotification& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Proto.PayloadZoneExitNotification)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void PayloadZoneExitNotification::InternalSwap(PayloadZoneExitNotification* PROTOBUF_RESTRICT PROTOBUF_NONNULL other) {
+  using ::std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  swap(_impl_.id_, other->_impl_.id_);
+}
+
+::google::protobuf::Metadata PayloadZoneExitNotification::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // @@protoc_insertion_point(namespace_scope)

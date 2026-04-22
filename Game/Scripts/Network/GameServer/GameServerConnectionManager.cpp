@@ -23,11 +23,14 @@ void GameServerConnectionManager::initialize() {
 	SetThreadDescription(contextThread.native_handle(), L"Asio Context Thread");
 }
 
-void GameServerConnectionManager::connect() {
+void GameServerConnectionManager::setup(const std::string& address, u16 port) {
 	endpoint = {
-		asio::ip::make_address(AWS_SERVER_ADDRESS),
-		3215
+		asio::ip::make_address(address),
+		port
 	};
+}
+
+void GameServerConnectionManager::connect() {
 	// 非同期接続要求
 	// タイムアウト処理
 	timer.expires_after(std::chrono::seconds{ 5 });

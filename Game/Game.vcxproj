@@ -15,9 +15,30 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Scripts\Game\Zone\MessageHandler\ZoneEnemyMessageHandler.cpp" />
+    <ClCompile Include="Scripts\Game\Zone\MessageHandler\ZoneLoginMessageHandler.cpp" />
+    <ClCompile Include="Scripts\Game\Zone\MessageHandler\ZoneLogoutMessageHandler.cpp" />
+    <ClCompile Include="Scripts\Game\Zone\MessageHandler\ZoneSyncMessageHandler.cpp" />
+    <ClCompile Include="Scripts\Game\Zone\MessageHandler\ZoneTextMessageHandler.cpp" />
+    <ClCompile Include="Scripts\Game\Zone\Zone.cpp" />
+    <ClCompile Include="Scripts\Network\GameServer\ReceivedMessageRouter.cpp" />
     <ClCompile Include="Scripts\Instance\MiscInstance\Effects\DamageNumberEffect.cpp" />
     <ClCompile Include="Scripts\Manager\ChatBoxManager.cpp" />
     <ClCompile Include="Scripts\Manager\GameLogWindowManager.cpp" />
+    <ClCompile Include="Scripts\Proto\common\math.pb.cc" />
+    <ClCompile Include="Scripts\Proto\common\session.pb.cc" />
+    <ClCompile Include="Scripts\Proto\process\db\user\login.pb.cc" />
+    <ClCompile Include="Scripts\Proto\process\db\user\logout.pb.cc" />
+    <ClCompile Include="Scripts\Proto\process\db\user\signup.pb.cc" />
+    <ClCompile Include="Scripts\Proto\process\gateway\packet.pb.cc" />
+    <ClCompile Include="Scripts\Proto\process\lobby\end_game.pb.cc" />
+    <ClCompile Include="Scripts\Proto\process\lobby\enter.pb.cc" />
+    <ClCompile Include="Scripts\Proto\process\lobby\exit.pb.cc" />
+    <ClCompile Include="Scripts\Proto\process\lobby\start_game.pb.cc" />
+    <ClCompile Include="Scripts\Proto\process\network\text.pb.cc" />
+    <ClCompile Include="Scripts\Proto\process\world\player_route.pb.cc" />
+    <ClCompile Include="Scripts\Proto\process\zone\enemy.pb.cc" />
+    <ClCompile Include="Scripts\Proto\process\zone\sync.pb.cc" />
     <ClCompile Include="Scripts\Scene\LoginScene.cpp" />
     <ClCompile Include="Scripts\Extension\DrawExecutor\EnvironmentMeshExecutor.cpp" />
     <ClCompile Include="Scripts\Extension\RenderNode\EnvironmentMeshNode\EnvironmentMeshNode.cpp" />
@@ -35,8 +56,6 @@
     <ClCompile Include="Scripts\Instance\Player\Actions\PaladinHolySpiritEffectSelf.cpp" />
     <ClCompile Include="Scripts\Instance\Player\Actions\PaladinHolySpiritEffectTarget.cpp" />
     <ClCompile Include="Scripts\Instance\Player\Actions\PaladinHolySpirit.cpp" />
-    <ClCompile Include="Scripts\Proto\math.pb.cc" />
-    <ClCompile Include="Scripts\Proto\types.pb.cc" />
     <ClCompile Include="Scripts\Extension\RenderNode\CubemapNode\CubemapNode.cpp" />
     <ClCompile Include="Scripts\Instance\MiscInstance\Effects\CometEffect.cpp" />
     <ClCompile Include="Scripts\Instance\MiscInstance\AOE\BaseAoe.cpp" />
@@ -64,11 +83,34 @@
     <ClCompile Include="Scripts\Game\Zone\Command\ZoneEntityDamagedCommand.cpp" />
     <ClCompile Include="Scripts\Game\Zone\Command\ZonePlayActionCommand.cpp" />
     <ClCompile Include="Scripts\ScriptTitle\TitleStateScript.cpp" />
+    <ClCompile Include="Scripts\Game\Zone\Command\ZoneOnEnterCommand.cpp" />
+    <ClCompile Include="Scripts\Utility\WaitUntil.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Scripts\Game\Zone\MessageHandler\ZoneEnemyMessageHandler.h" />
+    <ClInclude Include="Scripts\Game\Zone\MessageHandler\ZoneLoginMessageHandler.h" />
+    <ClInclude Include="Scripts\Game\Zone\MessageHandler\ZoneLogoutMessageHandler.h" />
+    <ClInclude Include="Scripts\Game\Zone\MessageHandler\ZoneSyncMessageHandler.h" />
+    <ClInclude Include="Scripts\Game\Zone\MessageHandler\ZoneTextMessageHandler.h" />
+    <ClInclude Include="Scripts\Game\Zone\Zone.h" />
+    <ClInclude Include="Scripts\Network\GameServer\ReceivedMessageRouter.h" />
     <ClInclude Include="Scripts\Instance\MiscInstance\Effects\DamageNumberEffect.h" />
     <ClInclude Include="Scripts\Manager\ChatBoxManager.h" />
     <ClInclude Include="Scripts\Manager\GameLogWindowManager.h" />
+    <ClInclude Include="Scripts\Proto\common\math.pb.h" />
+    <ClInclude Include="Scripts\Proto\common\session.pb.h" />
+    <ClInclude Include="Scripts\Proto\process\db\user\login.pb.h" />
+    <ClInclude Include="Scripts\Proto\process\db\user\logout.pb.h" />
+    <ClInclude Include="Scripts\Proto\process\db\user\signup.pb.h" />
+    <ClInclude Include="Scripts\Proto\process\gateway\packet.pb.h" />
+    <ClInclude Include="Scripts\Proto\process\lobby\end_game.pb.h" />
+    <ClInclude Include="Scripts\Proto\process\lobby\enter.pb.h" />
+    <ClInclude Include="Scripts\Proto\process\lobby\exit.pb.h" />
+    <ClInclude Include="Scripts\Proto\process\lobby\start_game.pb.h" />
+    <ClInclude Include="Scripts\Proto\process\network\text.pb.h" />
+    <ClInclude Include="Scripts\Proto\process\world\player_route.pb.h" />
+    <ClInclude Include="Scripts\Proto\process\zone\enemy.pb.h" />
+    <ClInclude Include="Scripts\Proto\process\zone\sync.pb.h" />
     <ClInclude Include="Scripts\Scene\LoginScene.h" />
     <ClInclude Include="Scripts\Extension\DrawExecutor\EnvironmentMeshExecutor.h" />
     <ClInclude Include="Scripts\Extension\RenderNode\EnvironmentMeshNode\EnvironmentMeshNode.h" />
@@ -88,8 +130,6 @@
     <ClInclude Include="Scripts\Instance\Player\Actions\PaladinHolySpiritEffectTarget.h" />
     <ClInclude Include="Scripts\Instance\Player\Actions\PaladinHolySpirit.h" />
     <ClInclude Include="Scripts\Instance\IEntity\ISkillAction\ISkillAction.h" />
-    <ClInclude Include="Scripts\Proto\math.pb.h" />
-    <ClInclude Include="Scripts\Proto\types.pb.h" />
     <ClInclude Include="Scripts\Extension\RenderNode\CubemapNode\CubemapNode.h" />
     <ClInclude Include="Scripts\Instance\MiscInstance\Effects\CometEffect.h" />
     <ClInclude Include="Scripts\Instance\MiscInstance\AOE\BaseAoe.h" />
@@ -116,6 +156,8 @@
     <ClInclude Include="Scripts\Game\Zone\Command\ZoneEntityDamagedCommand.h" />
     <ClInclude Include="Scripts\Game\Zone\Command\ZonePlayActionCommand.h" />
     <ClInclude Include="Scripts\ScriptTitle\TitleStateScript.h" />
+    <ClInclude Include="Scripts\Game\Zone\Command\ZoneOnEnterCommand.h" />
+    <ClInclude Include="Scripts\Utility\WaitUntil.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="DevTool\launch-bot.ps1" />
@@ -181,7 +223,7 @@
       <PreprocessorDefinitions>_WINDOWS;NOMINMAX;_WIN32_WINNT=0x0A00;ASIO_STANDALONE;DEBUG_FEATURES_ENABLE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)SyzygyEngine;$(SolutionDir)SyzygyEngine\Library\Externals\nlohmann;$(SolutionDir)SyzygyEngine\Library\Externals\DirectXTex;$(SolutionDir)SyzygyEngine\Library\Externals\assimp\include;$(SolutionDir)SyzygyEngine\Library\Externals\asio-1.34.2\include;$(SolutionDir)Game\ThirdParty\protobuf;$(SolutionDir)Game\ThirdParty\protobuf\absl;$(SolutionDir)SyzygyEngine\Library\Externals\imgui</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)SyzygyEngine;$(SolutionDir)SyzygyEngine\Library\Externals\nlohmann;$(SolutionDir)SyzygyEngine\Library\Externals\DirectXTex;$(SolutionDir)SyzygyEngine\Library\Externals\assimp\include;$(SolutionDir)SyzygyEngine\Library\Externals\asio-1.34.2\include;$(SolutionDir)Game\ThirdParty\protobuf;$(SolutionDir)Game\ThirdParty\protobuf\absl;$(SolutionDir)Game\Scripts\Proto;$(SolutionDir)SyzygyEngine\Library\Externals\imgui</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
@@ -210,7 +252,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_WINDOWS;NOMINMAX;_WIN32_WINNT=0x0A00;ASIO_STANDALONE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)SyzygyEngine;$(SolutionDir)SyzygyEngine\Library\Externals\nlohmann;$(SolutionDir)SyzygyEngine\Library\Externals\DirectXTex;$(SolutionDir)SyzygyEngine\Library\Externals\assimp\include;$(SolutionDir)SyzygyEngine\Library\Externals\asio-1.34.2\include;$(SolutionDir)Game\ThirdParty\protobuf;$(SolutionDir)Game\ThirdParty\protobuf\absl;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)SyzygyEngine;$(SolutionDir)SyzygyEngine\Library\Externals\nlohmann;$(SolutionDir)SyzygyEngine\Library\Externals\DirectXTex;$(SolutionDir)SyzygyEngine\Library\Externals\assimp\include;$(SolutionDir)SyzygyEngine\Library\Externals\asio-1.34.2\include;$(SolutionDir)Game\ThirdParty\protobuf;$(SolutionDir)Game\ThirdParty\protobuf\absl;$(SolutionDir)Game\Scripts\Proto;</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -239,7 +281,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_WINDOWS;NOMINMAX;_WIN32_WINNT=0x0A00;ASIO_STANDALONE;DEBUG_FEATURES_ENABLE;_DEVELOP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)SyzygyEngine;$(SolutionDir)SyzygyEngine\Library\Externals\nlohmann;$(SolutionDir)SyzygyEngine\Library\Externals\DirectXTex;$(SolutionDir)SyzygyEngine\Library\Externals\assimp\include;$(SolutionDir)SyzygyEngine\Library\Externals\asio-1.34.2\include;$(SolutionDir)Game\ThirdParty\protobuf;$(SolutionDir)Game\ThirdParty\protobuf\absl;$(SolutionDir)SyzygyEngine\Library\Externals\imgui</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)SyzygyEngine;$(SolutionDir)SyzygyEngine\Library\Externals\nlohmann;$(SolutionDir)SyzygyEngine\Library\Externals\DirectXTex;$(SolutionDir)SyzygyEngine\Library\Externals\assimp\include;$(SolutionDir)SyzygyEngine\Library\Externals\asio-1.34.2\include;$(SolutionDir)Game\ThirdParty\protobuf;$(SolutionDir)Game\ThirdParty\protobuf\absl;$(SolutionDir)Game\Scripts\Proto;$(SolutionDir)SyzygyEngine\Library\Externals\imgui</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>

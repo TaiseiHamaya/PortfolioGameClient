@@ -28,7 +28,6 @@
 #include "google/protobuf/message_lite.h"
 #include "google/protobuf/repeated_field.h"  // IWYU pragma: export
 #include "google/protobuf/extension_set.h"  // IWYU pragma: export
-#include "google/protobuf/generated_enum_reflection.h"
 #include "google/protobuf/unknown_field_set.h"
 // @@protoc_insertion_point(includes)
 
@@ -54,8 +53,6 @@ extern "C" {
 extern const ::google::protobuf::internal::DescriptorTable descriptor_table_process_2fnetwork_2ftext_2eproto;
 }  // extern "C"
 namespace Proto {
-enum CategoryTextMessage : int;
-extern const uint32_t CategoryTextMessage_internal_data_[];
 class PayloadSystemMessage;
 struct PayloadSystemMessageDefaultTypeInternal;
 extern PayloadSystemMessageDefaultTypeInternal _PayloadSystemMessage_default_instance_;
@@ -67,50 +64,10 @@ extern const ::google::protobuf::internal::ClassDataFull PayloadTextMessage_clas
 }  // namespace Proto
 namespace google {
 namespace protobuf {
-template <>
-internal::EnumTraitsT<::Proto::CategoryTextMessage_internal_data_>
-    internal::EnumTraitsImpl::value<::Proto::CategoryTextMessage>;
 }  // namespace protobuf
 }  // namespace google
 
 namespace Proto {
-enum CategoryTextMessage : int {
-  CHAT_SEND = 0,
-  CHAT_RECEIVE = 1,
-  SYSTEM_MESSAGE = 2,
-  CategoryTextMessage_INT_MIN_SENTINEL_DO_NOT_USE_ =
-      ::std::numeric_limits<::int32_t>::min(),
-  CategoryTextMessage_INT_MAX_SENTINEL_DO_NOT_USE_ =
-      ::std::numeric_limits<::int32_t>::max(),
-};
-
-extern const uint32_t CategoryTextMessage_internal_data_[];
-inline constexpr CategoryTextMessage CategoryTextMessage_MIN =
-    static_cast<CategoryTextMessage>(0);
-inline constexpr CategoryTextMessage CategoryTextMessage_MAX =
-    static_cast<CategoryTextMessage>(2);
-inline bool CategoryTextMessage_IsValid(int value) {
-  return 0 <= value && value <= 2;
-}
-inline constexpr int CategoryTextMessage_ARRAYSIZE = 2 + 1;
-const ::google::protobuf::EnumDescriptor* PROTOBUF_NONNULL CategoryTextMessage_descriptor();
-template <typename T>
-const ::std::string& CategoryTextMessage_Name(T value) {
-  static_assert(::std::is_same<T, CategoryTextMessage>::value ||
-                    ::std::is_integral<T>::value,
-                "Incorrect type passed to CategoryTextMessage_Name().");
-  return CategoryTextMessage_Name(static_cast<CategoryTextMessage>(value));
-}
-template <>
-inline const ::std::string& CategoryTextMessage_Name(CategoryTextMessage value) {
-  return ::google::protobuf::internal::NameOfDenseEnum<CategoryTextMessage_descriptor, 0, 2>(
-      static_cast<int>(value));
-}
-inline bool CategoryTextMessage_Parse(
-    ::absl::string_view name, CategoryTextMessage* PROTOBUF_NONNULL value) {
-  return ::google::protobuf::internal::ParseNamedEnum<CategoryTextMessage>(CategoryTextMessage_descriptor(), name,
-                                           value);
-}
 
 // ===================================================================
 
@@ -701,19 +658,6 @@ inline void PayloadSystemMessage::set_allocated_message(::std::string* PROTOBUF_
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace Proto
 
-
-namespace google {
-namespace protobuf {
-
-template <>
-struct is_proto_enum<::Proto::CategoryTextMessage> : std::true_type {};
-template <>
-inline const EnumDescriptor* PROTOBUF_NONNULL GetEnumDescriptor<::Proto::CategoryTextMessage>() {
-  return ::Proto::CategoryTextMessage_descriptor();
-}
-
-}  // namespace protobuf
-}  // namespace google
 
 // @@protoc_insertion_point(global_scope)
 

@@ -3,7 +3,7 @@
 #include <span>
 #include <vector>
 
-#include "Scripts/Proto/types.pb.h"
+#include "process/gateway/packet.pb.h"
 
 #include <Library/Utility/Tools/ConstructorMacro.h>
 
@@ -22,8 +22,8 @@ public:
 	/// パケット解析
 	/// </summary>
 	/// <param name="data"></param>
-	/// <returns>解析したProto::Packet配列</returns>
-	std::vector<Proto::Packet> resolve_packets(std::span<u8> data);
+	/// <returns>解析したProto::ToClientMessage配列</returns>
+	std::vector<Proto::ToClientMessage> resolve_packets(std::span<u8> data);
 
 private:
 	/// <summary>

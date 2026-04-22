@@ -4,17 +4,12 @@
 #include <Engine/Runtime/Input/InputTextFrame.h>
 
 #include <Library/Math/Definition.h>
+#include <Library/Utility/Template/Reference.h>
 
 void ChatBoxManager::initialize() {
-	auto inputtingTextAny = szg::RuntimeStorage::GetValueMut("RuntimeInstance", "InputtingText");
-	if (inputtingTextAny) {
-		chatBoxString = std::any_cast<Reference<szg::StringRectInstance>>(*inputtingTextAny);
-	}
+	chatBoxString = szg::RuntimeStorage::GetValue<Reference<szg::StringRectInstance>>("RuntimeInstance", "InputtingText").value();
+	chatBoxCursor = szg::RuntimeStorage::GetValue<Reference<szg::Rect3d>>("RuntimeInstance", "ChatBoxCursor").value();
 
-	auto chatBoxCursorAny = szg::RuntimeStorage::GetValueMut("RuntimeInstance", "ChatBoxCursor");
-	if (chatBoxCursorAny) {
-		chatBoxCursor = std::any_cast<Reference<szg::Rect3d>>(*chatBoxCursorAny);
-	}
 	// トリガーとなるキーの登録
 	keys.initialize({ szg::KeyID::Return, szg::KeyID::Escape });
 }
@@ -66,7 +61,7 @@ void ChatBoxManager::update() {
 		chatBoxString->reset_string(text);
 	}
 
-	if(chatBoxCursor){
+	if (chatBoxCursor) {
 		// カーソルの点滅処理
 		chatBoxCursor->get_material().color.alpha = std::sin(cursorTimer * PI2);
 	}

@@ -13,7 +13,7 @@ void GameServerPacketReceiver::finalize() {
 	packetStack.clear();
 }
 
-std::vector<Proto::Packet> GameServerPacketReceiver::take_packet_stack() {
+std::vector<Proto::ToClientMessage> GameServerPacketReceiver::take_packet_stack() {
 	return std::move(packetStack);
 }
 

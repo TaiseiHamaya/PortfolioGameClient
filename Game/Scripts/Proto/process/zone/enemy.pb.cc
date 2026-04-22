@@ -80,8 +80,8 @@ struct PayloadEnemySpawnDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 PayloadEnemySpawnDefaultTypeInternal _PayloadEnemySpawn_default_instance_;
 }  // namespace Proto
-static const ::_pb::EnumDescriptor* PROTOBUF_NONNULL
-    file_level_enum_descriptors_process_2fzone_2fenemy_2eproto[1];
+static constexpr const ::_pb::EnumDescriptor *PROTOBUF_NONNULL *PROTOBUF_NULLABLE
+    file_level_enum_descriptors_process_2fzone_2fenemy_2eproto = nullptr;
 static constexpr const ::_pb::ServiceDescriptor *PROTOBUF_NONNULL *PROTOBUF_NULLABLE
     file_level_service_descriptors_process_2fzone_2fenemy_2eproto = nullptr;
 const ::uint32_t
@@ -118,8 +118,7 @@ const char descriptor_table_protodef_process_2fzone_2fenemy_2eproto[] ABSL_ATTRI
     "n/math.proto\"O\n\021PayloadEnemySpawn\022\n\n\002id\030"
     "\001 \001(\004\022\014\n\004name\030\002 \001(\t\022 \n\010position\030\003 \001(\0132\016."
     "Proto.Vector3\"!\n\023PayloadEnemyDespawn\022\n\n\002"
-    "id\030\001 \001(\004*:\n\024CategoryEnemyMessage\022\017\n\013ENEM"
-    "Y_SPAWN\020\000\022\021\n\rENEMY_DESPAWN\020\001b\006proto3"
+    "id\030\001 \001(\004b\006proto3"
 };
 static const ::_pbi::DescriptorTable* PROTOBUF_NONNULL const
     descriptor_table_process_2fzone_2fenemy_2eproto_deps[1] = {
@@ -129,7 +128,7 @@ static ::absl::once_flag descriptor_table_process_2fzone_2fenemy_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_process_2fzone_2fenemy_2eproto = {
     false,
     false,
-    236,
+    176,
     descriptor_table_protodef_process_2fzone_2fenemy_2eproto,
     "process/zone/enemy.proto",
     &descriptor_table_process_2fzone_2fenemy_2eproto_once,
@@ -143,12 +142,6 @@ PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_process_2fzone
     file_level_service_descriptors_process_2fzone_2fenemy_2eproto,
 };
 namespace Proto {
-const ::google::protobuf::EnumDescriptor* PROTOBUF_NONNULL CategoryEnemyMessage_descriptor() {
-  ::google::protobuf::internal::AssignDescriptors(&descriptor_table_process_2fzone_2fenemy_2eproto);
-  return file_level_enum_descriptors_process_2fzone_2fenemy_2eproto[0];
-}
-PROTOBUF_CONSTINIT const uint32_t CategoryEnemyMessage_internal_data_[] = {
-    131072u, 0u, };
 // ===================================================================
 
 class PayloadEnemySpawn::_Internal {

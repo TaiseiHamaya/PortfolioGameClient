@@ -1,6 +1,6 @@
 #include "Portfolio.h"
 
-#include "Scripts/Proto/types.pb.h"
+#include "google/protobuf/message_lite.h"
 
 #include <Engine/Runtime/Scene/SceneManager2.h>
 

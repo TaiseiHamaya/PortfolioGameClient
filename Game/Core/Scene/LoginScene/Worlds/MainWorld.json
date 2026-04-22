@@ -260,10 +260,110 @@
 					},
 					"Type": 2002,
 					"Use runtime": true
+				},
+				{
+					"Children": [],
+					"Color": {
+						"A": 1.0,
+						"B": 0.08073817193508148,
+						"G": 0.08073817193508148,
+						"R": 0.8235294222831726
+					},
+					"Font": "UDEVGothic35HS-Regular.mtsdf",
+					"IsDraw": true,
+					"Layer": 0,
+					"Local transform": {
+						"Rotation": {
+							"W": -2.1060012045381882e-07,
+							"XYZ": {
+								"X": 0.0,
+								"Y": 1.0,
+								"Z": 0.0
+							}
+						},
+						"Scale": {
+							"X": 1.000001072883606,
+							"Y": 1.0000026226043701,
+							"Z": 1.000001072883606
+						},
+						"Translate": {
+							"X": 0.0,
+							"Y": -2.1773276329040527,
+							"Z": 0.0
+						}
+					},
+					"Name": "ErrorMessage",
+					"Pivot": {
+						"X": 0.5,
+						"Y": 0.0
+					},
+					"Size": 4.599999904632568,
+					"Text": "",
+					"Type": 2003,
+					"Use runtime": true
 				}
 			],
 			"Name": "Select",
 			"Type": 9000
+		},
+		{
+			"Children": [],
+			"IsDraw": true,
+			"IsFlipY": false,
+			"Layer": 0,
+			"Local transform": {
+				"Rotation": {
+					"W": -1.9371482551377994e-07,
+					"XYZ": {
+						"X": 0.0,
+						"Y": 1.0,
+						"Z": 0.0
+					}
+				},
+				"Scale": {
+					"X": 1.0000014305114746,
+					"Y": 1.0000030994415283,
+					"Z": 1.0000014305114746
+				},
+				"Translate": {
+					"X": 0.0,
+					"Y": 0.0,
+					"Z": 0.0
+				}
+			},
+			"Material": {
+				"Color": {
+					"A": 1.0,
+					"B": 1.0,
+					"G": 1.0,
+					"R": 1.0
+				},
+				"LightingType": 0,
+				"Shininess": 50.0,
+				"Texture": "loading-icon.png",
+				"UV Transform": {
+					"Rotation": 0.0,
+					"Scale": {
+						"X": 1.0,
+						"Y": 1.0
+					},
+					"Translate": {
+						"X": 0.0,
+						"Y": 0.0
+					}
+				}
+			},
+			"Name": "LoadingIcon",
+			"Pivot": {
+				"X": 0.5,
+				"Y": 0.5
+			},
+			"Size": {
+				"X": 1.0,
+				"Y": 1.0
+			},
+			"Type": 2002,
+			"Use runtime": true
 		}
 	],
 	"Name": "MainWorld",

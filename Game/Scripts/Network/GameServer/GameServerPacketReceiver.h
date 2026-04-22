@@ -2,7 +2,7 @@
 
 #include <vector>
 
-#include <Scripts/Proto/types.pb.h>
+#include <Scripts/Proto/process/gateway/packet.pb.h>
 
 #include <Library/Utility/Template/Reference.h>
 #include <Library/Utility/Tools/ConstructorMacro.h>
@@ -43,7 +43,7 @@ public:
 	/// Recv済みパケットの転送
 	/// </summary>
 	/// <returns></returns>
-	std::vector<Proto::Packet> take_packet_stack();
+	std::vector<Proto::ToClientMessage> take_packet_stack();
 
 	/// <summary>
 	/// メッセージ読み取り
@@ -53,7 +53,7 @@ public:
 private:
 	static constexpr size_t BufferSize = 4096;
 
-	std::vector<Proto::Packet> packetStack;
+	std::vector<Proto::ToClientMessage> packetStack;
 	Reference<GameServerConnectionManager> connectionManager;
 
 	ReceiveBuffer receiveBuffer;

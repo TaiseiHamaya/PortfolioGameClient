@@ -17,13 +17,13 @@
 #include <Engine/Assets/Json/JsonSerializer.h>
 
 void FollowCamera::initialize() {
-	auto projection = std::make_unique<szg::CameraPerspectiveProjection>();
-	projection->initialize(
+	auto projection_ = std::make_unique<szg::CameraPerspectiveProjection>();
+	projection_->initialize(
 		0.45f,
 		(float)szg::ProjectSettings::ClientWidth() / szg::ProjectSettings::ClientHeight(),
 		0.1f, 1000
 	);
-	setup(std::move(projection));
+	setup(std::move(projection_));
 
 	lookAtInstance = world_root_mut()->instantiate<WorldInstance>();
 	reparent(lookAtInstance);

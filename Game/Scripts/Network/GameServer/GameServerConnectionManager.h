@@ -35,6 +35,8 @@ public:
 	/// </summary>
 	void initialize();
 
+	void setup(const std::string& address, u16 port);
+
 	/// <summary>
 	/// 接続要求
 	/// </summary>

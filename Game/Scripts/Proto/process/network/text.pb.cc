@@ -81,8 +81,8 @@ struct PayloadSystemMessageDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 PayloadSystemMessageDefaultTypeInternal _PayloadSystemMessage_default_instance_;
 }  // namespace Proto
-static const ::_pb::EnumDescriptor* PROTOBUF_NONNULL
-    file_level_enum_descriptors_process_2fnetwork_2ftext_2eproto[1];
+static constexpr const ::_pb::EnumDescriptor *PROTOBUF_NONNULL *PROTOBUF_NULLABLE
+    file_level_enum_descriptors_process_2fnetwork_2ftext_2eproto = nullptr;
 static constexpr const ::_pb::ServiceDescriptor *PROTOBUF_NONNULL *PROTOBUF_NULLABLE
     file_level_service_descriptors_process_2fnetwork_2ftext_2eproto = nullptr;
 const ::uint32_t
@@ -116,15 +116,13 @@ const char descriptor_table_protodef_process_2fnetwork_2ftext_2eproto[] ABSL_ATT
     "\n\032process/network/text.proto\022\005Proto\"1\n\022P"
     "ayloadTextMessage\022\n\n\002id\030\001 \001(\004\022\017\n\007message"
     "\030\002 \001(\t\"\'\n\024PayloadSystemMessage\022\017\n\007messag"
-    "e\030\001 \001(\t*J\n\023CategoryTextMessage\022\r\n\tCHAT_S"
-    "END\020\000\022\020\n\014CHAT_RECEIVE\020\001\022\022\n\016SYSTEM_MESSAG"
-    "E\020\002b\006proto3"
+    "e\030\001 \001(\tb\006proto3"
 };
 static ::absl::once_flag descriptor_table_process_2fnetwork_2ftext_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_process_2fnetwork_2ftext_2eproto = {
     false,
     false,
-    211,
+    135,
     descriptor_table_protodef_process_2fnetwork_2ftext_2eproto,
     "process/network/text.proto",
     &descriptor_table_process_2fnetwork_2ftext_2eproto_once,
@@ -138,12 +136,6 @@ PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_process_2fnetw
     file_level_service_descriptors_process_2fnetwork_2ftext_2eproto,
 };
 namespace Proto {
-const ::google::protobuf::EnumDescriptor* PROTOBUF_NONNULL CategoryTextMessage_descriptor() {
-  ::google::protobuf::internal::AssignDescriptors(&descriptor_table_process_2fnetwork_2ftext_2eproto);
-  return file_level_enum_descriptors_process_2fnetwork_2ftext_2eproto[0];
-}
-PROTOBUF_CONSTINIT const uint32_t CategoryTextMessage_internal_data_[] = {
-    196608u, 0u, };
 // ===================================================================
 
 class PayloadTextMessage::_Internal {

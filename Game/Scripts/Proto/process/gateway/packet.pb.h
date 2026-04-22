@@ -30,11 +30,16 @@
 #include "google/protobuf/extension_set.h"  // IWYU pragma: export
 #include "google/protobuf/unknown_field_set.h"
 #include "process/network/text.pb.h"
-#include "process/login/login.pb.h"
-#include "process/login/logout.pb.h"
+#include "process/db/user/login.pb.h"
+#include "process/db/user/logout.pb.h"
+#include "process/db/user/signup.pb.h"
 #include "process/zone/sync.pb.h"
 #include "process/zone/enemy.pb.h"
 #include "process/world/player_route.pb.h"
+#include "process/lobby/start_game.pb.h"
+#include "process/lobby/end_game.pb.h"
+#include "process/lobby/enter.pb.h"
+#include "process/lobby/exit.pb.h"
 // @@protoc_insertion_point(includes)
 
 // Must be included last.
@@ -59,10 +64,14 @@ extern "C" {
 extern const ::google::protobuf::internal::DescriptorTable descriptor_table_process_2fgateway_2fpacket_2eproto;
 }  // extern "C"
 namespace Proto {
-class Packet;
-struct PacketDefaultTypeInternal;
-extern PacketDefaultTypeInternal _Packet_default_instance_;
-extern const ::google::protobuf::internal::ClassDataFull Packet_class_data_;
+class ToClientMessage;
+struct ToClientMessageDefaultTypeInternal;
+extern ToClientMessageDefaultTypeInternal _ToClientMessage_default_instance_;
+extern const ::google::protobuf::internal::ClassDataFull ToClientMessage_class_data_;
+class ToServerMessage;
+struct ToServerMessageDefaultTypeInternal;
+extern ToServerMessageDefaultTypeInternal _ToServerMessage_default_instance_;
+extern const ::google::protobuf::internal::ClassDataFull ToServerMessage_class_data_;
 }  // namespace Proto
 namespace google {
 namespace protobuf {
@@ -76,30 +85,30 @@ namespace Proto {
 
 // -------------------------------------------------------------------
 
-class Packet final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:Proto.Packet) */ {
+class ToServerMessage final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:Proto.ToServerMessage) */ {
  public:
-  inline Packet() : Packet(nullptr) {}
-  ~Packet() PROTOBUF_FINAL;
+  inline ToServerMessage() : ToServerMessage(nullptr) {}
+  ~ToServerMessage() PROTOBUF_FINAL;
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-  void operator delete(Packet* PROTOBUF_NONNULL msg, ::std::destroying_delete_t) {
+  void operator delete(ToServerMessage* PROTOBUF_NONNULL msg, ::std::destroying_delete_t) {
     SharedDtor(*msg);
-    ::google::protobuf::internal::SizedDelete(msg, sizeof(Packet));
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(ToServerMessage));
   }
 #endif
 
   template <typename = void>
-  explicit PROTOBUF_CONSTEXPR Packet(::google::protobuf::internal::ConstantInitialized);
+  explicit PROTOBUF_CONSTEXPR ToServerMessage(::google::protobuf::internal::ConstantInitialized);
 
-  inline Packet(const Packet& from) : Packet(nullptr, from) {}
-  inline Packet(Packet&& from) noexcept
-      : Packet(nullptr, ::std::move(from)) {}
-  inline Packet& operator=(const Packet& from) {
+  inline ToServerMessage(const ToServerMessage& from) : ToServerMessage(nullptr, from) {}
+  inline ToServerMessage(ToServerMessage&& from) noexcept
+      : ToServerMessage(nullptr, ::std::move(from)) {}
+  inline ToServerMessage& operator=(const ToServerMessage& from) {
     CopyFrom(from);
     return *this;
   }
-  inline Packet& operator=(Packet&& from) noexcept {
+  inline ToServerMessage& operator=(ToServerMessage&& from) noexcept {
     if (this == &from) return *this;
     if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
       InternalSwap(&from);
@@ -127,32 +136,24 @@ class Packet final : public ::google::protobuf::Message
   static const ::google::protobuf::Reflection* PROTOBUF_NONNULL GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const Packet& default_instance() {
-    return *reinterpret_cast<const Packet*>(
-        &_Packet_default_instance_);
+  static const ToServerMessage& default_instance() {
+    return *reinterpret_cast<const ToServerMessage*>(
+        &_ToServerMessage_default_instance_);
   }
   enum MessageCase {
     kLoginRequest = 1,
-    kLoginResult = 2,
-    kLoginNotification = 3,
-    kLogoutRequest = 4,
-    kLogoutResponse = 5,
-    kLogoutNotification = 6,
-    kTransformSync = 7,
-    kPlayAction = 8,
-    kEntityDamaged = 9,
-    kEnemySpawn = 10,
-    kEnemyDespawn = 11,
-    kTextMessage = 12,
-    kSystemMessage = 13,
-    kZoneEnterRequest = 14,
-    kZoneEnterResponse = 15,
-    kZoneExit = 16,
+    kLogoutRequest = 2,
+    kSignupRequest = 3,
+    kStartGame = 4,
+    kEndGame = 5,
+    kTransformSync = 6,
+    kPlayAction = 7,
+    kTextMessage = 8,
     MESSAGE_NOT_SET = 0,
   };
   static constexpr int kIndexInFileMessages = 0;
-  friend void swap(Packet& a, Packet& b) { a.Swap(&b); }
-  inline void Swap(Packet* PROTOBUF_NONNULL other) {
+  friend void swap(ToServerMessage& a, ToServerMessage& b) { a.Swap(&b); }
+  inline void Swap(ToServerMessage* PROTOBUF_NONNULL other) {
     if (other == this) return;
     if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
       InternalSwap(other);
@@ -160,7 +161,7 @@ class Packet final : public ::google::protobuf::Message
       ::google::protobuf::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(Packet* PROTOBUF_NONNULL other) {
+  void UnsafeArenaSwap(ToServerMessage* PROTOBUF_NONNULL other) {
     if (other == this) return;
     ABSL_DCHECK(GetArena() == other->GetArena());
     InternalSwap(other);
@@ -168,13 +169,13 @@ class Packet final : public ::google::protobuf::Message
 
   // implements Message ----------------------------------------------
 
-  Packet* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
-    return ::google::protobuf::Message::DefaultConstruct<Packet>(arena);
+  ToServerMessage* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<ToServerMessage>(arena);
   }
   using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const Packet& from);
+  void CopyFrom(const ToServerMessage& from);
   using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const Packet& from) { Packet::MergeImpl(*this, from); }
+  void MergeFrom(const ToServerMessage& from) { ToServerMessage::MergeImpl(*this, from); }
 
   private:
   static void MergeImpl(::google::protobuf::MessageLite& to_msg,
@@ -210,18 +211,18 @@ class Packet final : public ::google::protobuf::Message
   private:
   void SharedCtor(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
   static void SharedDtor(MessageLite& self);
-  void InternalSwap(Packet* PROTOBUF_NONNULL other);
+  void InternalSwap(ToServerMessage* PROTOBUF_NONNULL other);
  private:
   template <typename T>
   friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "Proto.Packet"; }
+  static ::absl::string_view FullMessageName() { return "Proto.ToServerMessage"; }
 
  protected:
-  explicit Packet(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
-  Packet(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Packet& from);
-  Packet(
-      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, Packet&& from) noexcept
-      : Packet(arena) {
+  explicit ToServerMessage(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  ToServerMessage(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const ToServerMessage& from);
+  ToServerMessage(
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, ToServerMessage&& from) noexcept
+      : ToServerMessage(arena) {
     *this = ::std::move(from);
   }
   const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL GetClassData() const PROTOBUF_FINAL;
@@ -239,21 +240,13 @@ class Packet final : public ::google::protobuf::Message
   // accessors -------------------------------------------------------
   enum : int {
     kLoginRequestFieldNumber = 1,
-    kLoginResultFieldNumber = 2,
-    kLoginNotificationFieldNumber = 3,
-    kLogoutRequestFieldNumber = 4,
-    kLogoutResponseFieldNumber = 5,
-    kLogoutNotificationFieldNumber = 6,
-    kTransformSyncFieldNumber = 7,
-    kPlayActionFieldNumber = 8,
-    kEntityDamagedFieldNumber = 9,
-    kEnemySpawnFieldNumber = 10,
-    kEnemyDespawnFieldNumber = 11,
-    kTextMessageFieldNumber = 12,
-    kSystemMessageFieldNumber = 13,
-    kZoneEnterRequestFieldNumber = 14,
-    kZoneEnterResponseFieldNumber = 15,
-    kZoneExitFieldNumber = 16,
+    kLogoutRequestFieldNumber = 2,
+    kSignupRequestFieldNumber = 3,
+    kStartGameFieldNumber = 4,
+    kEndGameFieldNumber = 5,
+    kTransformSyncFieldNumber = 6,
+    kPlayActionFieldNumber = 7,
+    kTextMessageFieldNumber = 8,
   };
   // .Proto.PayloadLoginRequest login_request = 1;
   bool has_login_request() const;
@@ -274,45 +267,7 @@ class Packet final : public ::google::protobuf::Message
   ::Proto::PayloadLoginRequest* PROTOBUF_NONNULL _internal_mutable_login_request();
 
   public:
-  // .Proto.PayloadLoginResult login_result = 2;
-  bool has_login_result() const;
-  private:
-  bool _internal_has_login_result() const;
-
-  public:
-  void clear_login_result() ;
-  const ::Proto::PayloadLoginResult& login_result() const;
-  [[nodiscard]] ::Proto::PayloadLoginResult* PROTOBUF_NULLABLE release_login_result();
-  ::Proto::PayloadLoginResult* PROTOBUF_NONNULL mutable_login_result();
-  void set_allocated_login_result(::Proto::PayloadLoginResult* PROTOBUF_NULLABLE value);
-  void unsafe_arena_set_allocated_login_result(::Proto::PayloadLoginResult* PROTOBUF_NULLABLE value);
-  ::Proto::PayloadLoginResult* PROTOBUF_NULLABLE unsafe_arena_release_login_result();
-
-  private:
-  const ::Proto::PayloadLoginResult& _internal_login_result() const;
-  ::Proto::PayloadLoginResult* PROTOBUF_NONNULL _internal_mutable_login_result();
-
-  public:
-  // .Proto.PayloadLoginNotification login_notification = 3;
-  bool has_login_notification() const;
-  private:
-  bool _internal_has_login_notification() const;
-
-  public:
-  void clear_login_notification() ;
-  const ::Proto::PayloadLoginNotification& login_notification() const;
-  [[nodiscard]] ::Proto::PayloadLoginNotification* PROTOBUF_NULLABLE release_login_notification();
-  ::Proto::PayloadLoginNotification* PROTOBUF_NONNULL mutable_login_notification();
-  void set_allocated_login_notification(::Proto::PayloadLoginNotification* PROTOBUF_NULLABLE value);
-  void unsafe_arena_set_allocated_login_notification(::Proto::PayloadLoginNotification* PROTOBUF_NULLABLE value);
-  ::Proto::PayloadLoginNotification* PROTOBUF_NULLABLE unsafe_arena_release_login_notification();
-
-  private:
-  const ::Proto::PayloadLoginNotification& _internal_login_notification() const;
-  ::Proto::PayloadLoginNotification* PROTOBUF_NONNULL _internal_mutable_login_notification();
-
-  public:
-  // .Proto.PayloadLogoutRequest logout_request = 4;
+  // .Proto.PayloadLogoutRequest logout_request = 2;
   bool has_logout_request() const;
   private:
   bool _internal_has_logout_request() const;
@@ -331,45 +286,64 @@ class Packet final : public ::google::protobuf::Message
   ::Proto::PayloadLogoutRequest* PROTOBUF_NONNULL _internal_mutable_logout_request();
 
   public:
-  // .Proto.PayloadLogoutResponse logout_response = 5;
-  bool has_logout_response() const;
+  // .Proto.PayloadSignupRequest signup_request = 3;
+  bool has_signup_request() const;
   private:
-  bool _internal_has_logout_response() const;
+  bool _internal_has_signup_request() const;
 
   public:
-  void clear_logout_response() ;
-  const ::Proto::PayloadLogoutResponse& logout_response() const;
-  [[nodiscard]] ::Proto::PayloadLogoutResponse* PROTOBUF_NULLABLE release_logout_response();
-  ::Proto::PayloadLogoutResponse* PROTOBUF_NONNULL mutable_logout_response();
-  void set_allocated_logout_response(::Proto::PayloadLogoutResponse* PROTOBUF_NULLABLE value);
-  void unsafe_arena_set_allocated_logout_response(::Proto::PayloadLogoutResponse* PROTOBUF_NULLABLE value);
-  ::Proto::PayloadLogoutResponse* PROTOBUF_NULLABLE unsafe_arena_release_logout_response();
+  void clear_signup_request() ;
+  const ::Proto::PayloadSignupRequest& signup_request() const;
+  [[nodiscard]] ::Proto::PayloadSignupRequest* PROTOBUF_NULLABLE release_signup_request();
+  ::Proto::PayloadSignupRequest* PROTOBUF_NONNULL mutable_signup_request();
+  void set_allocated_signup_request(::Proto::PayloadSignupRequest* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_signup_request(::Proto::PayloadSignupRequest* PROTOBUF_NULLABLE value);
+  ::Proto::PayloadSignupRequest* PROTOBUF_NULLABLE unsafe_arena_release_signup_request();
 
   private:
-  const ::Proto::PayloadLogoutResponse& _internal_logout_response() const;
-  ::Proto::PayloadLogoutResponse* PROTOBUF_NONNULL _internal_mutable_logout_response();
+  const ::Proto::PayloadSignupRequest& _internal_signup_request() const;
+  ::Proto::PayloadSignupRequest* PROTOBUF_NONNULL _internal_mutable_signup_request();
 
   public:
-  // .Proto.PayloadLogoutNotification logout_notification = 6;
-  bool has_logout_notification() const;
+  // .Proto.PayloadLobbyStartGameRequest start_game = 4;
+  bool has_start_game() const;
   private:
-  bool _internal_has_logout_notification() const;
+  bool _internal_has_start_game() const;
 
   public:
-  void clear_logout_notification() ;
-  const ::Proto::PayloadLogoutNotification& logout_notification() const;
-  [[nodiscard]] ::Proto::PayloadLogoutNotification* PROTOBUF_NULLABLE release_logout_notification();
-  ::Proto::PayloadLogoutNotification* PROTOBUF_NONNULL mutable_logout_notification();
-  void set_allocated_logout_notification(::Proto::PayloadLogoutNotification* PROTOBUF_NULLABLE value);
-  void unsafe_arena_set_allocated_logout_notification(::Proto::PayloadLogoutNotification* PROTOBUF_NULLABLE value);
-  ::Proto::PayloadLogoutNotification* PROTOBUF_NULLABLE unsafe_arena_release_logout_notification();
+  void clear_start_game() ;
+  const ::Proto::PayloadLobbyStartGameRequest& start_game() const;
+  [[nodiscard]] ::Proto::PayloadLobbyStartGameRequest* PROTOBUF_NULLABLE release_start_game();
+  ::Proto::PayloadLobbyStartGameRequest* PROTOBUF_NONNULL mutable_start_game();
+  void set_allocated_start_game(::Proto::PayloadLobbyStartGameRequest* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_start_game(::Proto::PayloadLobbyStartGameRequest* PROTOBUF_NULLABLE value);
+  ::Proto::PayloadLobbyStartGameRequest* PROTOBUF_NULLABLE unsafe_arena_release_start_game();
 
   private:
-  const ::Proto::PayloadLogoutNotification& _internal_logout_notification() const;
-  ::Proto::PayloadLogoutNotification* PROTOBUF_NONNULL _internal_mutable_logout_notification();
+  const ::Proto::PayloadLobbyStartGameRequest& _internal_start_game() const;
+  ::Proto::PayloadLobbyStartGameRequest* PROTOBUF_NONNULL _internal_mutable_start_game();
 
   public:
-  // .Proto.PayloadTransformSync transform_sync = 7;
+  // .Proto.PayloadLobbyEndGameRequest end_game = 5;
+  bool has_end_game() const;
+  private:
+  bool _internal_has_end_game() const;
+
+  public:
+  void clear_end_game() ;
+  const ::Proto::PayloadLobbyEndGameRequest& end_game() const;
+  [[nodiscard]] ::Proto::PayloadLobbyEndGameRequest* PROTOBUF_NULLABLE release_end_game();
+  ::Proto::PayloadLobbyEndGameRequest* PROTOBUF_NONNULL mutable_end_game();
+  void set_allocated_end_game(::Proto::PayloadLobbyEndGameRequest* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_end_game(::Proto::PayloadLobbyEndGameRequest* PROTOBUF_NULLABLE value);
+  ::Proto::PayloadLobbyEndGameRequest* PROTOBUF_NULLABLE unsafe_arena_release_end_game();
+
+  private:
+  const ::Proto::PayloadLobbyEndGameRequest& _internal_end_game() const;
+  ::Proto::PayloadLobbyEndGameRequest* PROTOBUF_NONNULL _internal_mutable_end_game();
+
+  public:
+  // .Proto.PayloadTransformSync transform_sync = 6;
   bool has_transform_sync() const;
   private:
   bool _internal_has_transform_sync() const;
@@ -388,7 +362,7 @@ class Packet final : public ::google::protobuf::Message
   ::Proto::PayloadTransformSync* PROTOBUF_NONNULL _internal_mutable_transform_sync();
 
   public:
-  // .Proto.PayloadPlayAction play_action = 8;
+  // .Proto.PayloadPlayAction play_action = 7;
   bool has_play_action() const;
   private:
   bool _internal_has_play_action() const;
@@ -407,64 +381,7 @@ class Packet final : public ::google::protobuf::Message
   ::Proto::PayloadPlayAction* PROTOBUF_NONNULL _internal_mutable_play_action();
 
   public:
-  // .Proto.PayloadEntityDamaged entity_damaged = 9;
-  bool has_entity_damaged() const;
-  private:
-  bool _internal_has_entity_damaged() const;
-
-  public:
-  void clear_entity_damaged() ;
-  const ::Proto::PayloadEntityDamaged& entity_damaged() const;
-  [[nodiscard]] ::Proto::PayloadEntityDamaged* PROTOBUF_NULLABLE release_entity_damaged();
-  ::Proto::PayloadEntityDamaged* PROTOBUF_NONNULL mutable_entity_damaged();
-  void set_allocated_entity_damaged(::Proto::PayloadEntityDamaged* PROTOBUF_NULLABLE value);
-  void unsafe_arena_set_allocated_entity_damaged(::Proto::PayloadEntityDamaged* PROTOBUF_NULLABLE value);
-  ::Proto::PayloadEntityDamaged* PROTOBUF_NULLABLE unsafe_arena_release_entity_damaged();
-
-  private:
-  const ::Proto::PayloadEntityDamaged& _internal_entity_damaged() const;
-  ::Proto::PayloadEntityDamaged* PROTOBUF_NONNULL _internal_mutable_entity_damaged();
-
-  public:
-  // .Proto.PayloadEnemySpawn enemy_spawn = 10;
-  bool has_enemy_spawn() const;
-  private:
-  bool _internal_has_enemy_spawn() const;
-
-  public:
-  void clear_enemy_spawn() ;
-  const ::Proto::PayloadEnemySpawn& enemy_spawn() const;
-  [[nodiscard]] ::Proto::PayloadEnemySpawn* PROTOBUF_NULLABLE release_enemy_spawn();
-  ::Proto::PayloadEnemySpawn* PROTOBUF_NONNULL mutable_enemy_spawn();
-  void set_allocated_enemy_spawn(::Proto::PayloadEnemySpawn* PROTOBUF_NULLABLE value);
-  void unsafe_arena_set_allocated_enemy_spawn(::Proto::PayloadEnemySpawn* PROTOBUF_NULLABLE value);
-  ::Proto::PayloadEnemySpawn* PROTOBUF_NULLABLE unsafe_arena_release_enemy_spawn();
-
-  private:
-  const ::Proto::PayloadEnemySpawn& _internal_enemy_spawn() const;
-  ::Proto::PayloadEnemySpawn* PROTOBUF_NONNULL _internal_mutable_enemy_spawn();
-
-  public:
-  // .Proto.PayloadEnemyDespawn enemy_despawn = 11;
-  bool has_enemy_despawn() const;
-  private:
-  bool _internal_has_enemy_despawn() const;
-
-  public:
-  void clear_enemy_despawn() ;
-  const ::Proto::PayloadEnemyDespawn& enemy_despawn() const;
-  [[nodiscard]] ::Proto::PayloadEnemyDespawn* PROTOBUF_NULLABLE release_enemy_despawn();
-  ::Proto::PayloadEnemyDespawn* PROTOBUF_NONNULL mutable_enemy_despawn();
-  void set_allocated_enemy_despawn(::Proto::PayloadEnemyDespawn* PROTOBUF_NULLABLE value);
-  void unsafe_arena_set_allocated_enemy_despawn(::Proto::PayloadEnemyDespawn* PROTOBUF_NULLABLE value);
-  ::Proto::PayloadEnemyDespawn* PROTOBUF_NULLABLE unsafe_arena_release_enemy_despawn();
-
-  private:
-  const ::Proto::PayloadEnemyDespawn& _internal_enemy_despawn() const;
-  ::Proto::PayloadEnemyDespawn* PROTOBUF_NONNULL _internal_mutable_enemy_despawn();
-
-  public:
-  // .Proto.PayloadTextMessage text_message = 12;
+  // .Proto.PayloadTextMessage text_message = 8;
   bool has_text_message() const;
   private:
   bool _internal_has_text_message() const;
@@ -483,108 +400,24 @@ class Packet final : public ::google::protobuf::Message
   ::Proto::PayloadTextMessage* PROTOBUF_NONNULL _internal_mutable_text_message();
 
   public:
-  // .Proto.PayloadSystemMessage system_message = 13;
-  bool has_system_message() const;
-  private:
-  bool _internal_has_system_message() const;
-
-  public:
-  void clear_system_message() ;
-  const ::Proto::PayloadSystemMessage& system_message() const;
-  [[nodiscard]] ::Proto::PayloadSystemMessage* PROTOBUF_NULLABLE release_system_message();
-  ::Proto::PayloadSystemMessage* PROTOBUF_NONNULL mutable_system_message();
-  void set_allocated_system_message(::Proto::PayloadSystemMessage* PROTOBUF_NULLABLE value);
-  void unsafe_arena_set_allocated_system_message(::Proto::PayloadSystemMessage* PROTOBUF_NULLABLE value);
-  ::Proto::PayloadSystemMessage* PROTOBUF_NULLABLE unsafe_arena_release_system_message();
-
-  private:
-  const ::Proto::PayloadSystemMessage& _internal_system_message() const;
-  ::Proto::PayloadSystemMessage* PROTOBUF_NONNULL _internal_mutable_system_message();
-
-  public:
-  // .Proto.PayloadZoneEnterRequest zone_enter_request = 14;
-  bool has_zone_enter_request() const;
-  private:
-  bool _internal_has_zone_enter_request() const;
-
-  public:
-  void clear_zone_enter_request() ;
-  const ::Proto::PayloadZoneEnterRequest& zone_enter_request() const;
-  [[nodiscard]] ::Proto::PayloadZoneEnterRequest* PROTOBUF_NULLABLE release_zone_enter_request();
-  ::Proto::PayloadZoneEnterRequest* PROTOBUF_NONNULL mutable_zone_enter_request();
-  void set_allocated_zone_enter_request(::Proto::PayloadZoneEnterRequest* PROTOBUF_NULLABLE value);
-  void unsafe_arena_set_allocated_zone_enter_request(::Proto::PayloadZoneEnterRequest* PROTOBUF_NULLABLE value);
-  ::Proto::PayloadZoneEnterRequest* PROTOBUF_NULLABLE unsafe_arena_release_zone_enter_request();
-
-  private:
-  const ::Proto::PayloadZoneEnterRequest& _internal_zone_enter_request() const;
-  ::Proto::PayloadZoneEnterRequest* PROTOBUF_NONNULL _internal_mutable_zone_enter_request();
-
-  public:
-  // .Proto.PayloadZoneEnterResponse zone_enter_response = 15;
-  bool has_zone_enter_response() const;
-  private:
-  bool _internal_has_zone_enter_response() const;
-
-  public:
-  void clear_zone_enter_response() ;
-  const ::Proto::PayloadZoneEnterResponse& zone_enter_response() const;
-  [[nodiscard]] ::Proto::PayloadZoneEnterResponse* PROTOBUF_NULLABLE release_zone_enter_response();
-  ::Proto::PayloadZoneEnterResponse* PROTOBUF_NONNULL mutable_zone_enter_response();
-  void set_allocated_zone_enter_response(::Proto::PayloadZoneEnterResponse* PROTOBUF_NULLABLE value);
-  void unsafe_arena_set_allocated_zone_enter_response(::Proto::PayloadZoneEnterResponse* PROTOBUF_NULLABLE value);
-  ::Proto::PayloadZoneEnterResponse* PROTOBUF_NULLABLE unsafe_arena_release_zone_enter_response();
-
-  private:
-  const ::Proto::PayloadZoneEnterResponse& _internal_zone_enter_response() const;
-  ::Proto::PayloadZoneEnterResponse* PROTOBUF_NONNULL _internal_mutable_zone_enter_response();
-
-  public:
-  // .Proto.PayloadZoneExit zone_exit = 16;
-  bool has_zone_exit() const;
-  private:
-  bool _internal_has_zone_exit() const;
-
-  public:
-  void clear_zone_exit() ;
-  const ::Proto::PayloadZoneExit& zone_exit() const;
-  [[nodiscard]] ::Proto::PayloadZoneExit* PROTOBUF_NULLABLE release_zone_exit();
-  ::Proto::PayloadZoneExit* PROTOBUF_NONNULL mutable_zone_exit();
-  void set_allocated_zone_exit(::Proto::PayloadZoneExit* PROTOBUF_NULLABLE value);
-  void unsafe_arena_set_allocated_zone_exit(::Proto::PayloadZoneExit* PROTOBUF_NULLABLE value);
-  ::Proto::PayloadZoneExit* PROTOBUF_NULLABLE unsafe_arena_release_zone_exit();
-
-  private:
-  const ::Proto::PayloadZoneExit& _internal_zone_exit() const;
-  ::Proto::PayloadZoneExit* PROTOBUF_NONNULL _internal_mutable_zone_exit();
-
-  public:
   void clear_message();
   MessageCase message_case() const;
-  // @@protoc_insertion_point(class_scope:Proto.Packet)
+  // @@protoc_insertion_point(class_scope:Proto.ToServerMessage)
  private:
   class _Internal;
   void set_has_login_request();
-  void set_has_login_result();
-  void set_has_login_notification();
   void set_has_logout_request();
-  void set_has_logout_response();
-  void set_has_logout_notification();
+  void set_has_signup_request();
+  void set_has_start_game();
+  void set_has_end_game();
   void set_has_transform_sync();
   void set_has_play_action();
-  void set_has_entity_damaged();
-  void set_has_enemy_spawn();
-  void set_has_enemy_despawn();
   void set_has_text_message();
-  void set_has_system_message();
-  void set_has_zone_enter_request();
-  void set_has_zone_enter_response();
-  void set_has_zone_exit();
   inline bool has_message() const;
   inline void clear_has_message();
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<0, 16,
-                                   16, 0,
+  static const ::google::protobuf::internal::TcParseTable<0, 8,
+                                   8, 0,
                                    2>
       _table_;
 
@@ -602,26 +435,18 @@ class Packet final : public ::google::protobuf::Message
     inline explicit Impl_(
         ::google::protobuf::internal::InternalVisibility visibility,
         ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
-        const Packet& from_msg);
+        const ToServerMessage& from_msg);
     union MessageUnion {
       constexpr MessageUnion() : _constinit_{} {}
       ::google::protobuf::internal::ConstantInitialized _constinit_;
       ::google::protobuf::Message* PROTOBUF_NULLABLE login_request_;
-      ::google::protobuf::Message* PROTOBUF_NULLABLE login_result_;
-      ::google::protobuf::Message* PROTOBUF_NULLABLE login_notification_;
       ::google::protobuf::Message* PROTOBUF_NULLABLE logout_request_;
-      ::google::protobuf::Message* PROTOBUF_NULLABLE logout_response_;
-      ::google::protobuf::Message* PROTOBUF_NULLABLE logout_notification_;
+      ::google::protobuf::Message* PROTOBUF_NULLABLE signup_request_;
+      ::google::protobuf::Message* PROTOBUF_NULLABLE start_game_;
+      ::google::protobuf::Message* PROTOBUF_NULLABLE end_game_;
       ::google::protobuf::Message* PROTOBUF_NULLABLE transform_sync_;
       ::google::protobuf::Message* PROTOBUF_NULLABLE play_action_;
-      ::google::protobuf::Message* PROTOBUF_NULLABLE entity_damaged_;
-      ::google::protobuf::Message* PROTOBUF_NULLABLE enemy_spawn_;
-      ::google::protobuf::Message* PROTOBUF_NULLABLE enemy_despawn_;
       ::google::protobuf::Message* PROTOBUF_NULLABLE text_message_;
-      ::google::protobuf::Message* PROTOBUF_NULLABLE system_message_;
-      ::google::protobuf::Message* PROTOBUF_NULLABLE zone_enter_request_;
-      ::google::protobuf::Message* PROTOBUF_NULLABLE zone_enter_response_;
-      ::google::protobuf::Message* PROTOBUF_NULLABLE zone_exit_;
     } message_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::uint32_t _oneof_case_[1];
@@ -631,7 +456,473 @@ class Packet final : public ::google::protobuf::Message
   friend struct ::TableStruct_process_2fgateway_2fpacket_2eproto;
 };
 
-extern const ::google::protobuf::internal::ClassDataFull Packet_class_data_;
+extern const ::google::protobuf::internal::ClassDataFull ToServerMessage_class_data_;
+// -------------------------------------------------------------------
+
+class ToClientMessage final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:Proto.ToClientMessage) */ {
+ public:
+  inline ToClientMessage() : ToClientMessage(nullptr) {}
+  ~ToClientMessage() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(ToClientMessage* PROTOBUF_NONNULL msg, ::std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(ToClientMessage));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR ToClientMessage(::google::protobuf::internal::ConstantInitialized);
+
+  inline ToClientMessage(const ToClientMessage& from) : ToClientMessage(nullptr, from) {}
+  inline ToClientMessage(ToClientMessage&& from) noexcept
+      : ToClientMessage(nullptr, ::std::move(from)) {}
+  inline ToClientMessage& operator=(const ToClientMessage& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline ToClientMessage& operator=(ToClientMessage&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* PROTOBUF_NONNULL mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* PROTOBUF_NONNULL GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const ToClientMessage& default_instance() {
+    return *reinterpret_cast<const ToClientMessage*>(
+        &_ToClientMessage_default_instance_);
+  }
+  enum MessageCase {
+    kLogoutResponse = 2,
+    kSignupResponse = 3,
+    kLobbyEnterResponse = 4,
+    kEndGameResponse = 5,
+    kTransformSync = 6,
+    kPlayAction = 7,
+    kEntityDamaged = 8,
+    kEnemySpawn = 9,
+    kEnemyDespawn = 10,
+    kZoneEnterNotification = 11,
+    kZoneExitNotification = 12,
+    kTextMessage = 13,
+    MESSAGE_NOT_SET = 0,
+  };
+  static constexpr int kIndexInFileMessages = 1;
+  friend void swap(ToClientMessage& a, ToClientMessage& b) { a.Swap(&b); }
+  inline void Swap(ToClientMessage* PROTOBUF_NONNULL other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(ToClientMessage* PROTOBUF_NONNULL other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  ToClientMessage* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<ToClientMessage>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const ToClientMessage& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const ToClientMessage& from) { ToClientMessage::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(::google::protobuf::MessageLite& to_msg,
+                        const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      const ::google::protobuf::MessageLite& msg, ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(ToClientMessage* PROTOBUF_NONNULL other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "Proto.ToClientMessage"; }
+
+ protected:
+  explicit ToClientMessage(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  ToClientMessage(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const ToClientMessage& from);
+  ToClientMessage(
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, ToClientMessage&& from) noexcept
+      : ToClientMessage(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL GetClassData() const PROTOBUF_FINAL;
+  static void* PROTOBUF_NONNULL PlacementNew_(
+      const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static constexpr auto InternalNewImpl_();
+
+ public:
+  static constexpr auto InternalGenerateClassData_();
+
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kLogoutResponseFieldNumber = 2,
+    kSignupResponseFieldNumber = 3,
+    kLobbyEnterResponseFieldNumber = 4,
+    kEndGameResponseFieldNumber = 5,
+    kTransformSyncFieldNumber = 6,
+    kPlayActionFieldNumber = 7,
+    kEntityDamagedFieldNumber = 8,
+    kEnemySpawnFieldNumber = 9,
+    kEnemyDespawnFieldNumber = 10,
+    kZoneEnterNotificationFieldNumber = 11,
+    kZoneExitNotificationFieldNumber = 12,
+    kTextMessageFieldNumber = 13,
+  };
+  // .Proto.PayloadLogoutResponse logout_response = 2;
+  bool has_logout_response() const;
+  private:
+  bool _internal_has_logout_response() const;
+
+  public:
+  void clear_logout_response() ;
+  const ::Proto::PayloadLogoutResponse& logout_response() const;
+  [[nodiscard]] ::Proto::PayloadLogoutResponse* PROTOBUF_NULLABLE release_logout_response();
+  ::Proto::PayloadLogoutResponse* PROTOBUF_NONNULL mutable_logout_response();
+  void set_allocated_logout_response(::Proto::PayloadLogoutResponse* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_logout_response(::Proto::PayloadLogoutResponse* PROTOBUF_NULLABLE value);
+  ::Proto::PayloadLogoutResponse* PROTOBUF_NULLABLE unsafe_arena_release_logout_response();
+
+  private:
+  const ::Proto::PayloadLogoutResponse& _internal_logout_response() const;
+  ::Proto::PayloadLogoutResponse* PROTOBUF_NONNULL _internal_mutable_logout_response();
+
+  public:
+  // .Proto.PayloadSignupResponse signup_response = 3;
+  bool has_signup_response() const;
+  private:
+  bool _internal_has_signup_response() const;
+
+  public:
+  void clear_signup_response() ;
+  const ::Proto::PayloadSignupResponse& signup_response() const;
+  [[nodiscard]] ::Proto::PayloadSignupResponse* PROTOBUF_NULLABLE release_signup_response();
+  ::Proto::PayloadSignupResponse* PROTOBUF_NONNULL mutable_signup_response();
+  void set_allocated_signup_response(::Proto::PayloadSignupResponse* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_signup_response(::Proto::PayloadSignupResponse* PROTOBUF_NULLABLE value);
+  ::Proto::PayloadSignupResponse* PROTOBUF_NULLABLE unsafe_arena_release_signup_response();
+
+  private:
+  const ::Proto::PayloadSignupResponse& _internal_signup_response() const;
+  ::Proto::PayloadSignupResponse* PROTOBUF_NONNULL _internal_mutable_signup_response();
+
+  public:
+  // .Proto.PayloadLobbyEnterResponse lobby_enter_response = 4;
+  bool has_lobby_enter_response() const;
+  private:
+  bool _internal_has_lobby_enter_response() const;
+
+  public:
+  void clear_lobby_enter_response() ;
+  const ::Proto::PayloadLobbyEnterResponse& lobby_enter_response() const;
+  [[nodiscard]] ::Proto::PayloadLobbyEnterResponse* PROTOBUF_NULLABLE release_lobby_enter_response();
+  ::Proto::PayloadLobbyEnterResponse* PROTOBUF_NONNULL mutable_lobby_enter_response();
+  void set_allocated_lobby_enter_response(::Proto::PayloadLobbyEnterResponse* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_lobby_enter_response(::Proto::PayloadLobbyEnterResponse* PROTOBUF_NULLABLE value);
+  ::Proto::PayloadLobbyEnterResponse* PROTOBUF_NULLABLE unsafe_arena_release_lobby_enter_response();
+
+  private:
+  const ::Proto::PayloadLobbyEnterResponse& _internal_lobby_enter_response() const;
+  ::Proto::PayloadLobbyEnterResponse* PROTOBUF_NONNULL _internal_mutable_lobby_enter_response();
+
+  public:
+  // .Proto.PayloadLobbyEndGameResponse end_game_response = 5;
+  bool has_end_game_response() const;
+  private:
+  bool _internal_has_end_game_response() const;
+
+  public:
+  void clear_end_game_response() ;
+  const ::Proto::PayloadLobbyEndGameResponse& end_game_response() const;
+  [[nodiscard]] ::Proto::PayloadLobbyEndGameResponse* PROTOBUF_NULLABLE release_end_game_response();
+  ::Proto::PayloadLobbyEndGameResponse* PROTOBUF_NONNULL mutable_end_game_response();
+  void set_allocated_end_game_response(::Proto::PayloadLobbyEndGameResponse* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_end_game_response(::Proto::PayloadLobbyEndGameResponse* PROTOBUF_NULLABLE value);
+  ::Proto::PayloadLobbyEndGameResponse* PROTOBUF_NULLABLE unsafe_arena_release_end_game_response();
+
+  private:
+  const ::Proto::PayloadLobbyEndGameResponse& _internal_end_game_response() const;
+  ::Proto::PayloadLobbyEndGameResponse* PROTOBUF_NONNULL _internal_mutable_end_game_response();
+
+  public:
+  // .Proto.PayloadTransformSync transform_sync = 6;
+  bool has_transform_sync() const;
+  private:
+  bool _internal_has_transform_sync() const;
+
+  public:
+  void clear_transform_sync() ;
+  const ::Proto::PayloadTransformSync& transform_sync() const;
+  [[nodiscard]] ::Proto::PayloadTransformSync* PROTOBUF_NULLABLE release_transform_sync();
+  ::Proto::PayloadTransformSync* PROTOBUF_NONNULL mutable_transform_sync();
+  void set_allocated_transform_sync(::Proto::PayloadTransformSync* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_transform_sync(::Proto::PayloadTransformSync* PROTOBUF_NULLABLE value);
+  ::Proto::PayloadTransformSync* PROTOBUF_NULLABLE unsafe_arena_release_transform_sync();
+
+  private:
+  const ::Proto::PayloadTransformSync& _internal_transform_sync() const;
+  ::Proto::PayloadTransformSync* PROTOBUF_NONNULL _internal_mutable_transform_sync();
+
+  public:
+  // .Proto.PayloadPlayAction play_action = 7;
+  bool has_play_action() const;
+  private:
+  bool _internal_has_play_action() const;
+
+  public:
+  void clear_play_action() ;
+  const ::Proto::PayloadPlayAction& play_action() const;
+  [[nodiscard]] ::Proto::PayloadPlayAction* PROTOBUF_NULLABLE release_play_action();
+  ::Proto::PayloadPlayAction* PROTOBUF_NONNULL mutable_play_action();
+  void set_allocated_play_action(::Proto::PayloadPlayAction* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_play_action(::Proto::PayloadPlayAction* PROTOBUF_NULLABLE value);
+  ::Proto::PayloadPlayAction* PROTOBUF_NULLABLE unsafe_arena_release_play_action();
+
+  private:
+  const ::Proto::PayloadPlayAction& _internal_play_action() const;
+  ::Proto::PayloadPlayAction* PROTOBUF_NONNULL _internal_mutable_play_action();
+
+  public:
+  // .Proto.PayloadEntityDamaged entity_damaged = 8;
+  bool has_entity_damaged() const;
+  private:
+  bool _internal_has_entity_damaged() const;
+
+  public:
+  void clear_entity_damaged() ;
+  const ::Proto::PayloadEntityDamaged& entity_damaged() const;
+  [[nodiscard]] ::Proto::PayloadEntityDamaged* PROTOBUF_NULLABLE release_entity_damaged();
+  ::Proto::PayloadEntityDamaged* PROTOBUF_NONNULL mutable_entity_damaged();
+  void set_allocated_entity_damaged(::Proto::PayloadEntityDamaged* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_entity_damaged(::Proto::PayloadEntityDamaged* PROTOBUF_NULLABLE value);
+  ::Proto::PayloadEntityDamaged* PROTOBUF_NULLABLE unsafe_arena_release_entity_damaged();
+
+  private:
+  const ::Proto::PayloadEntityDamaged& _internal_entity_damaged() const;
+  ::Proto::PayloadEntityDamaged* PROTOBUF_NONNULL _internal_mutable_entity_damaged();
+
+  public:
+  // .Proto.PayloadEnemySpawn enemy_spawn = 9;
+  bool has_enemy_spawn() const;
+  private:
+  bool _internal_has_enemy_spawn() const;
+
+  public:
+  void clear_enemy_spawn() ;
+  const ::Proto::PayloadEnemySpawn& enemy_spawn() const;
+  [[nodiscard]] ::Proto::PayloadEnemySpawn* PROTOBUF_NULLABLE release_enemy_spawn();
+  ::Proto::PayloadEnemySpawn* PROTOBUF_NONNULL mutable_enemy_spawn();
+  void set_allocated_enemy_spawn(::Proto::PayloadEnemySpawn* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_enemy_spawn(::Proto::PayloadEnemySpawn* PROTOBUF_NULLABLE value);
+  ::Proto::PayloadEnemySpawn* PROTOBUF_NULLABLE unsafe_arena_release_enemy_spawn();
+
+  private:
+  const ::Proto::PayloadEnemySpawn& _internal_enemy_spawn() const;
+  ::Proto::PayloadEnemySpawn* PROTOBUF_NONNULL _internal_mutable_enemy_spawn();
+
+  public:
+  // .Proto.PayloadEnemyDespawn enemy_despawn = 10;
+  bool has_enemy_despawn() const;
+  private:
+  bool _internal_has_enemy_despawn() const;
+
+  public:
+  void clear_enemy_despawn() ;
+  const ::Proto::PayloadEnemyDespawn& enemy_despawn() const;
+  [[nodiscard]] ::Proto::PayloadEnemyDespawn* PROTOBUF_NULLABLE release_enemy_despawn();
+  ::Proto::PayloadEnemyDespawn* PROTOBUF_NONNULL mutable_enemy_despawn();
+  void set_allocated_enemy_despawn(::Proto::PayloadEnemyDespawn* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_enemy_despawn(::Proto::PayloadEnemyDespawn* PROTOBUF_NULLABLE value);
+  ::Proto::PayloadEnemyDespawn* PROTOBUF_NULLABLE unsafe_arena_release_enemy_despawn();
+
+  private:
+  const ::Proto::PayloadEnemyDespawn& _internal_enemy_despawn() const;
+  ::Proto::PayloadEnemyDespawn* PROTOBUF_NONNULL _internal_mutable_enemy_despawn();
+
+  public:
+  // .Proto.PayloadZoneEnterNotification zone_enter_notification = 11;
+  bool has_zone_enter_notification() const;
+  private:
+  bool _internal_has_zone_enter_notification() const;
+
+  public:
+  void clear_zone_enter_notification() ;
+  const ::Proto::PayloadZoneEnterNotification& zone_enter_notification() const;
+  [[nodiscard]] ::Proto::PayloadZoneEnterNotification* PROTOBUF_NULLABLE release_zone_enter_notification();
+  ::Proto::PayloadZoneEnterNotification* PROTOBUF_NONNULL mutable_zone_enter_notification();
+  void set_allocated_zone_enter_notification(::Proto::PayloadZoneEnterNotification* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_zone_enter_notification(::Proto::PayloadZoneEnterNotification* PROTOBUF_NULLABLE value);
+  ::Proto::PayloadZoneEnterNotification* PROTOBUF_NULLABLE unsafe_arena_release_zone_enter_notification();
+
+  private:
+  const ::Proto::PayloadZoneEnterNotification& _internal_zone_enter_notification() const;
+  ::Proto::PayloadZoneEnterNotification* PROTOBUF_NONNULL _internal_mutable_zone_enter_notification();
+
+  public:
+  // .Proto.PayloadZoneExitNotification zone_exit_notification = 12;
+  bool has_zone_exit_notification() const;
+  private:
+  bool _internal_has_zone_exit_notification() const;
+
+  public:
+  void clear_zone_exit_notification() ;
+  const ::Proto::PayloadZoneExitNotification& zone_exit_notification() const;
+  [[nodiscard]] ::Proto::PayloadZoneExitNotification* PROTOBUF_NULLABLE release_zone_exit_notification();
+  ::Proto::PayloadZoneExitNotification* PROTOBUF_NONNULL mutable_zone_exit_notification();
+  void set_allocated_zone_exit_notification(::Proto::PayloadZoneExitNotification* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_zone_exit_notification(::Proto::PayloadZoneExitNotification* PROTOBUF_NULLABLE value);
+  ::Proto::PayloadZoneExitNotification* PROTOBUF_NULLABLE unsafe_arena_release_zone_exit_notification();
+
+  private:
+  const ::Proto::PayloadZoneExitNotification& _internal_zone_exit_notification() const;
+  ::Proto::PayloadZoneExitNotification* PROTOBUF_NONNULL _internal_mutable_zone_exit_notification();
+
+  public:
+  // .Proto.PayloadTextMessage text_message = 13;
+  bool has_text_message() const;
+  private:
+  bool _internal_has_text_message() const;
+
+  public:
+  void clear_text_message() ;
+  const ::Proto::PayloadTextMessage& text_message() const;
+  [[nodiscard]] ::Proto::PayloadTextMessage* PROTOBUF_NULLABLE release_text_message();
+  ::Proto::PayloadTextMessage* PROTOBUF_NONNULL mutable_text_message();
+  void set_allocated_text_message(::Proto::PayloadTextMessage* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_text_message(::Proto::PayloadTextMessage* PROTOBUF_NULLABLE value);
+  ::Proto::PayloadTextMessage* PROTOBUF_NULLABLE unsafe_arena_release_text_message();
+
+  private:
+  const ::Proto::PayloadTextMessage& _internal_text_message() const;
+  ::Proto::PayloadTextMessage* PROTOBUF_NONNULL _internal_mutable_text_message();
+
+  public:
+  void clear_message();
+  MessageCase message_case() const;
+  // @@protoc_insertion_point(class_scope:Proto.ToClientMessage)
+ private:
+  class _Internal;
+  void set_has_logout_response();
+  void set_has_signup_response();
+  void set_has_lobby_enter_response();
+  void set_has_end_game_response();
+  void set_has_transform_sync();
+  void set_has_play_action();
+  void set_has_entity_damaged();
+  void set_has_enemy_spawn();
+  void set_has_enemy_despawn();
+  void set_has_zone_enter_notification();
+  void set_has_zone_exit_notification();
+  void set_has_text_message();
+  inline bool has_message() const;
+  inline void clear_has_message();
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<0, 12,
+                                   12, 0,
+                                   2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(
+        ::google::protobuf::internal::InternalVisibility visibility,
+        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+    inline explicit Impl_(
+        ::google::protobuf::internal::InternalVisibility visibility,
+        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
+        const ToClientMessage& from_msg);
+    union MessageUnion {
+      constexpr MessageUnion() : _constinit_{} {}
+      ::google::protobuf::internal::ConstantInitialized _constinit_;
+      ::google::protobuf::Message* PROTOBUF_NULLABLE logout_response_;
+      ::google::protobuf::Message* PROTOBUF_NULLABLE signup_response_;
+      ::google::protobuf::Message* PROTOBUF_NULLABLE lobby_enter_response_;
+      ::google::protobuf::Message* PROTOBUF_NULLABLE end_game_response_;
+      ::google::protobuf::Message* PROTOBUF_NULLABLE transform_sync_;
+      ::google::protobuf::Message* PROTOBUF_NULLABLE play_action_;
+      ::google::protobuf::Message* PROTOBUF_NULLABLE entity_damaged_;
+      ::google::protobuf::Message* PROTOBUF_NULLABLE enemy_spawn_;
+      ::google::protobuf::Message* PROTOBUF_NULLABLE enemy_despawn_;
+      ::google::protobuf::Message* PROTOBUF_NULLABLE zone_enter_notification_;
+      ::google::protobuf::Message* PROTOBUF_NULLABLE zone_exit_notification_;
+      ::google::protobuf::Message* PROTOBUF_NULLABLE text_message_;
+    } message_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    ::uint32_t _oneof_case_[1];
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_process_2fgateway_2fpacket_2eproto;
+};
+
+extern const ::google::protobuf::internal::ClassDataFull ToClientMessage_class_data_;
 
 // ===================================================================
 
@@ -647,20 +938,20 @@ extern const ::google::protobuf::internal::ClassDataFull Packet_class_data_;
 #endif  // __GNUC__
 // -------------------------------------------------------------------
 
-// Packet
+// ToServerMessage
 
 // .Proto.PayloadLoginRequest login_request = 1;
-inline bool Packet::has_login_request() const {
+inline bool ToServerMessage::has_login_request() const {
   return message_case() == kLoginRequest;
 }
-inline bool Packet::_internal_has_login_request() const {
+inline bool ToServerMessage::_internal_has_login_request() const {
   return message_case() == kLoginRequest;
 }
-inline void Packet::set_has_login_request() {
+inline void ToServerMessage::set_has_login_request() {
   _impl_._oneof_case_[0] = kLoginRequest;
 }
-inline ::Proto::PayloadLoginRequest* PROTOBUF_NULLABLE Packet::release_login_request() {
-  // @@protoc_insertion_point(field_release:Proto.Packet.login_request)
+inline ::Proto::PayloadLoginRequest* PROTOBUF_NULLABLE ToServerMessage::release_login_request() {
+  // @@protoc_insertion_point(field_release:Proto.ToServerMessage.login_request)
   if (message_case() == kLoginRequest) {
     clear_has_message();
     auto* temp = reinterpret_cast<::Proto::PayloadLoginRequest*>(_impl_.message_.login_request_);
@@ -673,15 +964,15 @@ inline ::Proto::PayloadLoginRequest* PROTOBUF_NULLABLE Packet::release_login_req
     return nullptr;
   }
 }
-inline const ::Proto::PayloadLoginRequest& Packet::_internal_login_request() const {
+inline const ::Proto::PayloadLoginRequest& ToServerMessage::_internal_login_request() const {
   return message_case() == kLoginRequest ? *reinterpret_cast<::Proto::PayloadLoginRequest*>(_impl_.message_.login_request_) : reinterpret_cast<::Proto::PayloadLoginRequest&>(::Proto::_PayloadLoginRequest_default_instance_);
 }
-inline const ::Proto::PayloadLoginRequest& Packet::login_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:Proto.Packet.login_request)
+inline const ::Proto::PayloadLoginRequest& ToServerMessage::login_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:Proto.ToServerMessage.login_request)
   return _internal_login_request();
 }
-inline ::Proto::PayloadLoginRequest* PROTOBUF_NULLABLE Packet::unsafe_arena_release_login_request() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.Packet.login_request)
+inline ::Proto::PayloadLoginRequest* PROTOBUF_NULLABLE ToServerMessage::unsafe_arena_release_login_request() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.ToServerMessage.login_request)
   if (message_case() == kLoginRequest) {
     clear_has_message();
     auto* temp = reinterpret_cast<::Proto::PayloadLoginRequest*>(_impl_.message_.login_request_);
@@ -691,7 +982,7 @@ inline ::Proto::PayloadLoginRequest* PROTOBUF_NULLABLE Packet::unsafe_arena_rele
     return nullptr;
   }
 }
-inline void Packet::unsafe_arena_set_allocated_login_request(
+inline void ToServerMessage::unsafe_arena_set_allocated_login_request(
     ::Proto::PayloadLoginRequest* PROTOBUF_NULLABLE value) {
   // We rely on the oneof clear method to free the earlier contents
   // of this oneof. We can directly use the pointer we're given to
@@ -701,9 +992,9 @@ inline void Packet::unsafe_arena_set_allocated_login_request(
     set_has_login_request();
     _impl_.message_.login_request_ = reinterpret_cast<::google::protobuf::Message*>(value);
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.Packet.login_request)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.ToServerMessage.login_request)
 }
-inline ::Proto::PayloadLoginRequest* PROTOBUF_NONNULL Packet::_internal_mutable_login_request() {
+inline ::Proto::PayloadLoginRequest* PROTOBUF_NONNULL ToServerMessage::_internal_mutable_login_request() {
   if (message_case() != kLoginRequest) {
     clear_message();
     set_has_login_request();
@@ -712,165 +1003,25 @@ inline ::Proto::PayloadLoginRequest* PROTOBUF_NONNULL Packet::_internal_mutable_
   }
   return reinterpret_cast<::Proto::PayloadLoginRequest*>(_impl_.message_.login_request_);
 }
-inline ::Proto::PayloadLoginRequest* PROTOBUF_NONNULL Packet::mutable_login_request()
+inline ::Proto::PayloadLoginRequest* PROTOBUF_NONNULL ToServerMessage::mutable_login_request()
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
   ::Proto::PayloadLoginRequest* _msg = _internal_mutable_login_request();
-  // @@protoc_insertion_point(field_mutable:Proto.Packet.login_request)
+  // @@protoc_insertion_point(field_mutable:Proto.ToServerMessage.login_request)
   return _msg;
 }
 
-// .Proto.PayloadLoginResult login_result = 2;
-inline bool Packet::has_login_result() const {
-  return message_case() == kLoginResult;
-}
-inline bool Packet::_internal_has_login_result() const {
-  return message_case() == kLoginResult;
-}
-inline void Packet::set_has_login_result() {
-  _impl_._oneof_case_[0] = kLoginResult;
-}
-inline ::Proto::PayloadLoginResult* PROTOBUF_NULLABLE Packet::release_login_result() {
-  // @@protoc_insertion_point(field_release:Proto.Packet.login_result)
-  if (message_case() == kLoginResult) {
-    clear_has_message();
-    auto* temp = reinterpret_cast<::Proto::PayloadLoginResult*>(_impl_.message_.login_result_);
-    if (GetArena() != nullptr) {
-      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-    }
-    _impl_.message_.login_result_ = nullptr;
-    return temp;
-  } else {
-    return nullptr;
-  }
-}
-inline const ::Proto::PayloadLoginResult& Packet::_internal_login_result() const {
-  return message_case() == kLoginResult ? *reinterpret_cast<::Proto::PayloadLoginResult*>(_impl_.message_.login_result_) : reinterpret_cast<::Proto::PayloadLoginResult&>(::Proto::_PayloadLoginResult_default_instance_);
-}
-inline const ::Proto::PayloadLoginResult& Packet::login_result() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:Proto.Packet.login_result)
-  return _internal_login_result();
-}
-inline ::Proto::PayloadLoginResult* PROTOBUF_NULLABLE Packet::unsafe_arena_release_login_result() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.Packet.login_result)
-  if (message_case() == kLoginResult) {
-    clear_has_message();
-    auto* temp = reinterpret_cast<::Proto::PayloadLoginResult*>(_impl_.message_.login_result_);
-    _impl_.message_.login_result_ = nullptr;
-    return temp;
-  } else {
-    return nullptr;
-  }
-}
-inline void Packet::unsafe_arena_set_allocated_login_result(
-    ::Proto::PayloadLoginResult* PROTOBUF_NULLABLE value) {
-  // We rely on the oneof clear method to free the earlier contents
-  // of this oneof. We can directly use the pointer we're given to
-  // set the new value.
-  clear_message();
-  if (value) {
-    set_has_login_result();
-    _impl_.message_.login_result_ = reinterpret_cast<::google::protobuf::Message*>(value);
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.Packet.login_result)
-}
-inline ::Proto::PayloadLoginResult* PROTOBUF_NONNULL Packet::_internal_mutable_login_result() {
-  if (message_case() != kLoginResult) {
-    clear_message();
-    set_has_login_result();
-    _impl_.message_.login_result_ = reinterpret_cast<::google::protobuf::Message*>(
-        ::google::protobuf::Message::DefaultConstruct<::Proto::PayloadLoginResult>(GetArena()));
-  }
-  return reinterpret_cast<::Proto::PayloadLoginResult*>(_impl_.message_.login_result_);
-}
-inline ::Proto::PayloadLoginResult* PROTOBUF_NONNULL Packet::mutable_login_result()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  ::Proto::PayloadLoginResult* _msg = _internal_mutable_login_result();
-  // @@protoc_insertion_point(field_mutable:Proto.Packet.login_result)
-  return _msg;
-}
-
-// .Proto.PayloadLoginNotification login_notification = 3;
-inline bool Packet::has_login_notification() const {
-  return message_case() == kLoginNotification;
-}
-inline bool Packet::_internal_has_login_notification() const {
-  return message_case() == kLoginNotification;
-}
-inline void Packet::set_has_login_notification() {
-  _impl_._oneof_case_[0] = kLoginNotification;
-}
-inline ::Proto::PayloadLoginNotification* PROTOBUF_NULLABLE Packet::release_login_notification() {
-  // @@protoc_insertion_point(field_release:Proto.Packet.login_notification)
-  if (message_case() == kLoginNotification) {
-    clear_has_message();
-    auto* temp = reinterpret_cast<::Proto::PayloadLoginNotification*>(_impl_.message_.login_notification_);
-    if (GetArena() != nullptr) {
-      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-    }
-    _impl_.message_.login_notification_ = nullptr;
-    return temp;
-  } else {
-    return nullptr;
-  }
-}
-inline const ::Proto::PayloadLoginNotification& Packet::_internal_login_notification() const {
-  return message_case() == kLoginNotification ? *reinterpret_cast<::Proto::PayloadLoginNotification*>(_impl_.message_.login_notification_) : reinterpret_cast<::Proto::PayloadLoginNotification&>(::Proto::_PayloadLoginNotification_default_instance_);
-}
-inline const ::Proto::PayloadLoginNotification& Packet::login_notification() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:Proto.Packet.login_notification)
-  return _internal_login_notification();
-}
-inline ::Proto::PayloadLoginNotification* PROTOBUF_NULLABLE Packet::unsafe_arena_release_login_notification() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.Packet.login_notification)
-  if (message_case() == kLoginNotification) {
-    clear_has_message();
-    auto* temp = reinterpret_cast<::Proto::PayloadLoginNotification*>(_impl_.message_.login_notification_);
-    _impl_.message_.login_notification_ = nullptr;
-    return temp;
-  } else {
-    return nullptr;
-  }
-}
-inline void Packet::unsafe_arena_set_allocated_login_notification(
-    ::Proto::PayloadLoginNotification* PROTOBUF_NULLABLE value) {
-  // We rely on the oneof clear method to free the earlier contents
-  // of this oneof. We can directly use the pointer we're given to
-  // set the new value.
-  clear_message();
-  if (value) {
-    set_has_login_notification();
-    _impl_.message_.login_notification_ = reinterpret_cast<::google::protobuf::Message*>(value);
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.Packet.login_notification)
-}
-inline ::Proto::PayloadLoginNotification* PROTOBUF_NONNULL Packet::_internal_mutable_login_notification() {
-  if (message_case() != kLoginNotification) {
-    clear_message();
-    set_has_login_notification();
-    _impl_.message_.login_notification_ = reinterpret_cast<::google::protobuf::Message*>(
-        ::google::protobuf::Message::DefaultConstruct<::Proto::PayloadLoginNotification>(GetArena()));
-  }
-  return reinterpret_cast<::Proto::PayloadLoginNotification*>(_impl_.message_.login_notification_);
-}
-inline ::Proto::PayloadLoginNotification* PROTOBUF_NONNULL Packet::mutable_login_notification()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  ::Proto::PayloadLoginNotification* _msg = _internal_mutable_login_notification();
-  // @@protoc_insertion_point(field_mutable:Proto.Packet.login_notification)
-  return _msg;
-}
-
-// .Proto.PayloadLogoutRequest logout_request = 4;
-inline bool Packet::has_logout_request() const {
+// .Proto.PayloadLogoutRequest logout_request = 2;
+inline bool ToServerMessage::has_logout_request() const {
   return message_case() == kLogoutRequest;
 }
-inline bool Packet::_internal_has_logout_request() const {
+inline bool ToServerMessage::_internal_has_logout_request() const {
   return message_case() == kLogoutRequest;
 }
-inline void Packet::set_has_logout_request() {
+inline void ToServerMessage::set_has_logout_request() {
   _impl_._oneof_case_[0] = kLogoutRequest;
 }
-inline ::Proto::PayloadLogoutRequest* PROTOBUF_NULLABLE Packet::release_logout_request() {
-  // @@protoc_insertion_point(field_release:Proto.Packet.logout_request)
+inline ::Proto::PayloadLogoutRequest* PROTOBUF_NULLABLE ToServerMessage::release_logout_request() {
+  // @@protoc_insertion_point(field_release:Proto.ToServerMessage.logout_request)
   if (message_case() == kLogoutRequest) {
     clear_has_message();
     auto* temp = reinterpret_cast<::Proto::PayloadLogoutRequest*>(_impl_.message_.logout_request_);
@@ -883,15 +1034,15 @@ inline ::Proto::PayloadLogoutRequest* PROTOBUF_NULLABLE Packet::release_logout_r
     return nullptr;
   }
 }
-inline const ::Proto::PayloadLogoutRequest& Packet::_internal_logout_request() const {
+inline const ::Proto::PayloadLogoutRequest& ToServerMessage::_internal_logout_request() const {
   return message_case() == kLogoutRequest ? *reinterpret_cast<::Proto::PayloadLogoutRequest*>(_impl_.message_.logout_request_) : reinterpret_cast<::Proto::PayloadLogoutRequest&>(::Proto::_PayloadLogoutRequest_default_instance_);
 }
-inline const ::Proto::PayloadLogoutRequest& Packet::logout_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:Proto.Packet.logout_request)
+inline const ::Proto::PayloadLogoutRequest& ToServerMessage::logout_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:Proto.ToServerMessage.logout_request)
   return _internal_logout_request();
 }
-inline ::Proto::PayloadLogoutRequest* PROTOBUF_NULLABLE Packet::unsafe_arena_release_logout_request() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.Packet.logout_request)
+inline ::Proto::PayloadLogoutRequest* PROTOBUF_NULLABLE ToServerMessage::unsafe_arena_release_logout_request() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.ToServerMessage.logout_request)
   if (message_case() == kLogoutRequest) {
     clear_has_message();
     auto* temp = reinterpret_cast<::Proto::PayloadLogoutRequest*>(_impl_.message_.logout_request_);
@@ -901,7 +1052,7 @@ inline ::Proto::PayloadLogoutRequest* PROTOBUF_NULLABLE Packet::unsafe_arena_rel
     return nullptr;
   }
 }
-inline void Packet::unsafe_arena_set_allocated_logout_request(
+inline void ToServerMessage::unsafe_arena_set_allocated_logout_request(
     ::Proto::PayloadLogoutRequest* PROTOBUF_NULLABLE value) {
   // We rely on the oneof clear method to free the earlier contents
   // of this oneof. We can directly use the pointer we're given to
@@ -911,9 +1062,9 @@ inline void Packet::unsafe_arena_set_allocated_logout_request(
     set_has_logout_request();
     _impl_.message_.logout_request_ = reinterpret_cast<::google::protobuf::Message*>(value);
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.Packet.logout_request)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.ToServerMessage.logout_request)
 }
-inline ::Proto::PayloadLogoutRequest* PROTOBUF_NONNULL Packet::_internal_mutable_logout_request() {
+inline ::Proto::PayloadLogoutRequest* PROTOBUF_NONNULL ToServerMessage::_internal_mutable_logout_request() {
   if (message_case() != kLogoutRequest) {
     clear_message();
     set_has_logout_request();
@@ -922,165 +1073,235 @@ inline ::Proto::PayloadLogoutRequest* PROTOBUF_NONNULL Packet::_internal_mutable
   }
   return reinterpret_cast<::Proto::PayloadLogoutRequest*>(_impl_.message_.logout_request_);
 }
-inline ::Proto::PayloadLogoutRequest* PROTOBUF_NONNULL Packet::mutable_logout_request()
+inline ::Proto::PayloadLogoutRequest* PROTOBUF_NONNULL ToServerMessage::mutable_logout_request()
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
   ::Proto::PayloadLogoutRequest* _msg = _internal_mutable_logout_request();
-  // @@protoc_insertion_point(field_mutable:Proto.Packet.logout_request)
+  // @@protoc_insertion_point(field_mutable:Proto.ToServerMessage.logout_request)
   return _msg;
 }
 
-// .Proto.PayloadLogoutResponse logout_response = 5;
-inline bool Packet::has_logout_response() const {
-  return message_case() == kLogoutResponse;
+// .Proto.PayloadSignupRequest signup_request = 3;
+inline bool ToServerMessage::has_signup_request() const {
+  return message_case() == kSignupRequest;
 }
-inline bool Packet::_internal_has_logout_response() const {
-  return message_case() == kLogoutResponse;
+inline bool ToServerMessage::_internal_has_signup_request() const {
+  return message_case() == kSignupRequest;
 }
-inline void Packet::set_has_logout_response() {
-  _impl_._oneof_case_[0] = kLogoutResponse;
+inline void ToServerMessage::set_has_signup_request() {
+  _impl_._oneof_case_[0] = kSignupRequest;
 }
-inline ::Proto::PayloadLogoutResponse* PROTOBUF_NULLABLE Packet::release_logout_response() {
-  // @@protoc_insertion_point(field_release:Proto.Packet.logout_response)
-  if (message_case() == kLogoutResponse) {
+inline ::Proto::PayloadSignupRequest* PROTOBUF_NULLABLE ToServerMessage::release_signup_request() {
+  // @@protoc_insertion_point(field_release:Proto.ToServerMessage.signup_request)
+  if (message_case() == kSignupRequest) {
     clear_has_message();
-    auto* temp = reinterpret_cast<::Proto::PayloadLogoutResponse*>(_impl_.message_.logout_response_);
+    auto* temp = reinterpret_cast<::Proto::PayloadSignupRequest*>(_impl_.message_.signup_request_);
     if (GetArena() != nullptr) {
       temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    _impl_.message_.logout_response_ = nullptr;
+    _impl_.message_.signup_request_ = nullptr;
     return temp;
   } else {
     return nullptr;
   }
 }
-inline const ::Proto::PayloadLogoutResponse& Packet::_internal_logout_response() const {
-  return message_case() == kLogoutResponse ? *reinterpret_cast<::Proto::PayloadLogoutResponse*>(_impl_.message_.logout_response_) : reinterpret_cast<::Proto::PayloadLogoutResponse&>(::Proto::_PayloadLogoutResponse_default_instance_);
+inline const ::Proto::PayloadSignupRequest& ToServerMessage::_internal_signup_request() const {
+  return message_case() == kSignupRequest ? *reinterpret_cast<::Proto::PayloadSignupRequest*>(_impl_.message_.signup_request_) : reinterpret_cast<::Proto::PayloadSignupRequest&>(::Proto::_PayloadSignupRequest_default_instance_);
 }
-inline const ::Proto::PayloadLogoutResponse& Packet::logout_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:Proto.Packet.logout_response)
-  return _internal_logout_response();
+inline const ::Proto::PayloadSignupRequest& ToServerMessage::signup_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:Proto.ToServerMessage.signup_request)
+  return _internal_signup_request();
 }
-inline ::Proto::PayloadLogoutResponse* PROTOBUF_NULLABLE Packet::unsafe_arena_release_logout_response() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.Packet.logout_response)
-  if (message_case() == kLogoutResponse) {
+inline ::Proto::PayloadSignupRequest* PROTOBUF_NULLABLE ToServerMessage::unsafe_arena_release_signup_request() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.ToServerMessage.signup_request)
+  if (message_case() == kSignupRequest) {
     clear_has_message();
-    auto* temp = reinterpret_cast<::Proto::PayloadLogoutResponse*>(_impl_.message_.logout_response_);
-    _impl_.message_.logout_response_ = nullptr;
+    auto* temp = reinterpret_cast<::Proto::PayloadSignupRequest*>(_impl_.message_.signup_request_);
+    _impl_.message_.signup_request_ = nullptr;
     return temp;
   } else {
     return nullptr;
   }
 }
-inline void Packet::unsafe_arena_set_allocated_logout_response(
-    ::Proto::PayloadLogoutResponse* PROTOBUF_NULLABLE value) {
+inline void ToServerMessage::unsafe_arena_set_allocated_signup_request(
+    ::Proto::PayloadSignupRequest* PROTOBUF_NULLABLE value) {
   // We rely on the oneof clear method to free the earlier contents
   // of this oneof. We can directly use the pointer we're given to
   // set the new value.
   clear_message();
   if (value) {
-    set_has_logout_response();
-    _impl_.message_.logout_response_ = reinterpret_cast<::google::protobuf::Message*>(value);
+    set_has_signup_request();
+    _impl_.message_.signup_request_ = reinterpret_cast<::google::protobuf::Message*>(value);
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.Packet.logout_response)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.ToServerMessage.signup_request)
 }
-inline ::Proto::PayloadLogoutResponse* PROTOBUF_NONNULL Packet::_internal_mutable_logout_response() {
-  if (message_case() != kLogoutResponse) {
+inline ::Proto::PayloadSignupRequest* PROTOBUF_NONNULL ToServerMessage::_internal_mutable_signup_request() {
+  if (message_case() != kSignupRequest) {
     clear_message();
-    set_has_logout_response();
-    _impl_.message_.logout_response_ = reinterpret_cast<::google::protobuf::Message*>(
-        ::google::protobuf::Message::DefaultConstruct<::Proto::PayloadLogoutResponse>(GetArena()));
+    set_has_signup_request();
+    _impl_.message_.signup_request_ = reinterpret_cast<::google::protobuf::Message*>(
+        ::google::protobuf::Message::DefaultConstruct<::Proto::PayloadSignupRequest>(GetArena()));
   }
-  return reinterpret_cast<::Proto::PayloadLogoutResponse*>(_impl_.message_.logout_response_);
+  return reinterpret_cast<::Proto::PayloadSignupRequest*>(_impl_.message_.signup_request_);
 }
-inline ::Proto::PayloadLogoutResponse* PROTOBUF_NONNULL Packet::mutable_logout_response()
+inline ::Proto::PayloadSignupRequest* PROTOBUF_NONNULL ToServerMessage::mutable_signup_request()
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  ::Proto::PayloadLogoutResponse* _msg = _internal_mutable_logout_response();
-  // @@protoc_insertion_point(field_mutable:Proto.Packet.logout_response)
+  ::Proto::PayloadSignupRequest* _msg = _internal_mutable_signup_request();
+  // @@protoc_insertion_point(field_mutable:Proto.ToServerMessage.signup_request)
   return _msg;
 }
 
-// .Proto.PayloadLogoutNotification logout_notification = 6;
-inline bool Packet::has_logout_notification() const {
-  return message_case() == kLogoutNotification;
+// .Proto.PayloadLobbyStartGameRequest start_game = 4;
+inline bool ToServerMessage::has_start_game() const {
+  return message_case() == kStartGame;
 }
-inline bool Packet::_internal_has_logout_notification() const {
-  return message_case() == kLogoutNotification;
+inline bool ToServerMessage::_internal_has_start_game() const {
+  return message_case() == kStartGame;
 }
-inline void Packet::set_has_logout_notification() {
-  _impl_._oneof_case_[0] = kLogoutNotification;
+inline void ToServerMessage::set_has_start_game() {
+  _impl_._oneof_case_[0] = kStartGame;
 }
-inline ::Proto::PayloadLogoutNotification* PROTOBUF_NULLABLE Packet::release_logout_notification() {
-  // @@protoc_insertion_point(field_release:Proto.Packet.logout_notification)
-  if (message_case() == kLogoutNotification) {
+inline ::Proto::PayloadLobbyStartGameRequest* PROTOBUF_NULLABLE ToServerMessage::release_start_game() {
+  // @@protoc_insertion_point(field_release:Proto.ToServerMessage.start_game)
+  if (message_case() == kStartGame) {
     clear_has_message();
-    auto* temp = reinterpret_cast<::Proto::PayloadLogoutNotification*>(_impl_.message_.logout_notification_);
+    auto* temp = reinterpret_cast<::Proto::PayloadLobbyStartGameRequest*>(_impl_.message_.start_game_);
     if (GetArena() != nullptr) {
       temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    _impl_.message_.logout_notification_ = nullptr;
+    _impl_.message_.start_game_ = nullptr;
     return temp;
   } else {
     return nullptr;
   }
 }
-inline const ::Proto::PayloadLogoutNotification& Packet::_internal_logout_notification() const {
-  return message_case() == kLogoutNotification ? *reinterpret_cast<::Proto::PayloadLogoutNotification*>(_impl_.message_.logout_notification_) : reinterpret_cast<::Proto::PayloadLogoutNotification&>(::Proto::_PayloadLogoutNotification_default_instance_);
+inline const ::Proto::PayloadLobbyStartGameRequest& ToServerMessage::_internal_start_game() const {
+  return message_case() == kStartGame ? *reinterpret_cast<::Proto::PayloadLobbyStartGameRequest*>(_impl_.message_.start_game_) : reinterpret_cast<::Proto::PayloadLobbyStartGameRequest&>(::Proto::_PayloadLobbyStartGameRequest_default_instance_);
 }
-inline const ::Proto::PayloadLogoutNotification& Packet::logout_notification() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:Proto.Packet.logout_notification)
-  return _internal_logout_notification();
+inline const ::Proto::PayloadLobbyStartGameRequest& ToServerMessage::start_game() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:Proto.ToServerMessage.start_game)
+  return _internal_start_game();
 }
-inline ::Proto::PayloadLogoutNotification* PROTOBUF_NULLABLE Packet::unsafe_arena_release_logout_notification() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.Packet.logout_notification)
-  if (message_case() == kLogoutNotification) {
+inline ::Proto::PayloadLobbyStartGameRequest* PROTOBUF_NULLABLE ToServerMessage::unsafe_arena_release_start_game() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.ToServerMessage.start_game)
+  if (message_case() == kStartGame) {
     clear_has_message();
-    auto* temp = reinterpret_cast<::Proto::PayloadLogoutNotification*>(_impl_.message_.logout_notification_);
-    _impl_.message_.logout_notification_ = nullptr;
+    auto* temp = reinterpret_cast<::Proto::PayloadLobbyStartGameRequest*>(_impl_.message_.start_game_);
+    _impl_.message_.start_game_ = nullptr;
     return temp;
   } else {
     return nullptr;
   }
 }
-inline void Packet::unsafe_arena_set_allocated_logout_notification(
-    ::Proto::PayloadLogoutNotification* PROTOBUF_NULLABLE value) {
+inline void ToServerMessage::unsafe_arena_set_allocated_start_game(
+    ::Proto::PayloadLobbyStartGameRequest* PROTOBUF_NULLABLE value) {
   // We rely on the oneof clear method to free the earlier contents
   // of this oneof. We can directly use the pointer we're given to
   // set the new value.
   clear_message();
   if (value) {
-    set_has_logout_notification();
-    _impl_.message_.logout_notification_ = reinterpret_cast<::google::protobuf::Message*>(value);
+    set_has_start_game();
+    _impl_.message_.start_game_ = reinterpret_cast<::google::protobuf::Message*>(value);
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.Packet.logout_notification)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.ToServerMessage.start_game)
 }
-inline ::Proto::PayloadLogoutNotification* PROTOBUF_NONNULL Packet::_internal_mutable_logout_notification() {
-  if (message_case() != kLogoutNotification) {
+inline ::Proto::PayloadLobbyStartGameRequest* PROTOBUF_NONNULL ToServerMessage::_internal_mutable_start_game() {
+  if (message_case() != kStartGame) {
     clear_message();
-    set_has_logout_notification();
-    _impl_.message_.logout_notification_ = reinterpret_cast<::google::protobuf::Message*>(
-        ::google::protobuf::Message::DefaultConstruct<::Proto::PayloadLogoutNotification>(GetArena()));
+    set_has_start_game();
+    _impl_.message_.start_game_ = reinterpret_cast<::google::protobuf::Message*>(
+        ::google::protobuf::Message::DefaultConstruct<::Proto::PayloadLobbyStartGameRequest>(GetArena()));
   }
-  return reinterpret_cast<::Proto::PayloadLogoutNotification*>(_impl_.message_.logout_notification_);
+  return reinterpret_cast<::Proto::PayloadLobbyStartGameRequest*>(_impl_.message_.start_game_);
 }
-inline ::Proto::PayloadLogoutNotification* PROTOBUF_NONNULL Packet::mutable_logout_notification()
+inline ::Proto::PayloadLobbyStartGameRequest* PROTOBUF_NONNULL ToServerMessage::mutable_start_game()
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  ::Proto::PayloadLogoutNotification* _msg = _internal_mutable_logout_notification();
-  // @@protoc_insertion_point(field_mutable:Proto.Packet.logout_notification)
+  ::Proto::PayloadLobbyStartGameRequest* _msg = _internal_mutable_start_game();
+  // @@protoc_insertion_point(field_mutable:Proto.ToServerMessage.start_game)
   return _msg;
 }
 
-// .Proto.PayloadTransformSync transform_sync = 7;
-inline bool Packet::has_transform_sync() const {
+// .Proto.PayloadLobbyEndGameRequest end_game = 5;
+inline bool ToServerMessage::has_end_game() const {
+  return message_case() == kEndGame;
+}
+inline bool ToServerMessage::_internal_has_end_game() const {
+  return message_case() == kEndGame;
+}
+inline void ToServerMessage::set_has_end_game() {
+  _impl_._oneof_case_[0] = kEndGame;
+}
+inline ::Proto::PayloadLobbyEndGameRequest* PROTOBUF_NULLABLE ToServerMessage::release_end_game() {
+  // @@protoc_insertion_point(field_release:Proto.ToServerMessage.end_game)
+  if (message_case() == kEndGame) {
+    clear_has_message();
+    auto* temp = reinterpret_cast<::Proto::PayloadLobbyEndGameRequest*>(_impl_.message_.end_game_);
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.message_.end_game_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::Proto::PayloadLobbyEndGameRequest& ToServerMessage::_internal_end_game() const {
+  return message_case() == kEndGame ? *reinterpret_cast<::Proto::PayloadLobbyEndGameRequest*>(_impl_.message_.end_game_) : reinterpret_cast<::Proto::PayloadLobbyEndGameRequest&>(::Proto::_PayloadLobbyEndGameRequest_default_instance_);
+}
+inline const ::Proto::PayloadLobbyEndGameRequest& ToServerMessage::end_game() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:Proto.ToServerMessage.end_game)
+  return _internal_end_game();
+}
+inline ::Proto::PayloadLobbyEndGameRequest* PROTOBUF_NULLABLE ToServerMessage::unsafe_arena_release_end_game() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.ToServerMessage.end_game)
+  if (message_case() == kEndGame) {
+    clear_has_message();
+    auto* temp = reinterpret_cast<::Proto::PayloadLobbyEndGameRequest*>(_impl_.message_.end_game_);
+    _impl_.message_.end_game_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void ToServerMessage::unsafe_arena_set_allocated_end_game(
+    ::Proto::PayloadLobbyEndGameRequest* PROTOBUF_NULLABLE value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_end_game();
+    _impl_.message_.end_game_ = reinterpret_cast<::google::protobuf::Message*>(value);
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.ToServerMessage.end_game)
+}
+inline ::Proto::PayloadLobbyEndGameRequest* PROTOBUF_NONNULL ToServerMessage::_internal_mutable_end_game() {
+  if (message_case() != kEndGame) {
+    clear_message();
+    set_has_end_game();
+    _impl_.message_.end_game_ = reinterpret_cast<::google::protobuf::Message*>(
+        ::google::protobuf::Message::DefaultConstruct<::Proto::PayloadLobbyEndGameRequest>(GetArena()));
+  }
+  return reinterpret_cast<::Proto::PayloadLobbyEndGameRequest*>(_impl_.message_.end_game_);
+}
+inline ::Proto::PayloadLobbyEndGameRequest* PROTOBUF_NONNULL ToServerMessage::mutable_end_game()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::Proto::PayloadLobbyEndGameRequest* _msg = _internal_mutable_end_game();
+  // @@protoc_insertion_point(field_mutable:Proto.ToServerMessage.end_game)
+  return _msg;
+}
+
+// .Proto.PayloadTransformSync transform_sync = 6;
+inline bool ToServerMessage::has_transform_sync() const {
   return message_case() == kTransformSync;
 }
-inline bool Packet::_internal_has_transform_sync() const {
+inline bool ToServerMessage::_internal_has_transform_sync() const {
   return message_case() == kTransformSync;
 }
-inline void Packet::set_has_transform_sync() {
+inline void ToServerMessage::set_has_transform_sync() {
   _impl_._oneof_case_[0] = kTransformSync;
 }
-inline ::Proto::PayloadTransformSync* PROTOBUF_NULLABLE Packet::release_transform_sync() {
-  // @@protoc_insertion_point(field_release:Proto.Packet.transform_sync)
+inline ::Proto::PayloadTransformSync* PROTOBUF_NULLABLE ToServerMessage::release_transform_sync() {
+  // @@protoc_insertion_point(field_release:Proto.ToServerMessage.transform_sync)
   if (message_case() == kTransformSync) {
     clear_has_message();
     auto* temp = reinterpret_cast<::Proto::PayloadTransformSync*>(_impl_.message_.transform_sync_);
@@ -1093,15 +1314,15 @@ inline ::Proto::PayloadTransformSync* PROTOBUF_NULLABLE Packet::release_transfor
     return nullptr;
   }
 }
-inline const ::Proto::PayloadTransformSync& Packet::_internal_transform_sync() const {
+inline const ::Proto::PayloadTransformSync& ToServerMessage::_internal_transform_sync() const {
   return message_case() == kTransformSync ? *reinterpret_cast<::Proto::PayloadTransformSync*>(_impl_.message_.transform_sync_) : reinterpret_cast<::Proto::PayloadTransformSync&>(::Proto::_PayloadTransformSync_default_instance_);
 }
-inline const ::Proto::PayloadTransformSync& Packet::transform_sync() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:Proto.Packet.transform_sync)
+inline const ::Proto::PayloadTransformSync& ToServerMessage::transform_sync() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:Proto.ToServerMessage.transform_sync)
   return _internal_transform_sync();
 }
-inline ::Proto::PayloadTransformSync* PROTOBUF_NULLABLE Packet::unsafe_arena_release_transform_sync() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.Packet.transform_sync)
+inline ::Proto::PayloadTransformSync* PROTOBUF_NULLABLE ToServerMessage::unsafe_arena_release_transform_sync() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.ToServerMessage.transform_sync)
   if (message_case() == kTransformSync) {
     clear_has_message();
     auto* temp = reinterpret_cast<::Proto::PayloadTransformSync*>(_impl_.message_.transform_sync_);
@@ -1111,7 +1332,7 @@ inline ::Proto::PayloadTransformSync* PROTOBUF_NULLABLE Packet::unsafe_arena_rel
     return nullptr;
   }
 }
-inline void Packet::unsafe_arena_set_allocated_transform_sync(
+inline void ToServerMessage::unsafe_arena_set_allocated_transform_sync(
     ::Proto::PayloadTransformSync* PROTOBUF_NULLABLE value) {
   // We rely on the oneof clear method to free the earlier contents
   // of this oneof. We can directly use the pointer we're given to
@@ -1121,9 +1342,9 @@ inline void Packet::unsafe_arena_set_allocated_transform_sync(
     set_has_transform_sync();
     _impl_.message_.transform_sync_ = reinterpret_cast<::google::protobuf::Message*>(value);
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.Packet.transform_sync)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.ToServerMessage.transform_sync)
 }
-inline ::Proto::PayloadTransformSync* PROTOBUF_NONNULL Packet::_internal_mutable_transform_sync() {
+inline ::Proto::PayloadTransformSync* PROTOBUF_NONNULL ToServerMessage::_internal_mutable_transform_sync() {
   if (message_case() != kTransformSync) {
     clear_message();
     set_has_transform_sync();
@@ -1132,25 +1353,25 @@ inline ::Proto::PayloadTransformSync* PROTOBUF_NONNULL Packet::_internal_mutable
   }
   return reinterpret_cast<::Proto::PayloadTransformSync*>(_impl_.message_.transform_sync_);
 }
-inline ::Proto::PayloadTransformSync* PROTOBUF_NONNULL Packet::mutable_transform_sync()
+inline ::Proto::PayloadTransformSync* PROTOBUF_NONNULL ToServerMessage::mutable_transform_sync()
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
   ::Proto::PayloadTransformSync* _msg = _internal_mutable_transform_sync();
-  // @@protoc_insertion_point(field_mutable:Proto.Packet.transform_sync)
+  // @@protoc_insertion_point(field_mutable:Proto.ToServerMessage.transform_sync)
   return _msg;
 }
 
-// .Proto.PayloadPlayAction play_action = 8;
-inline bool Packet::has_play_action() const {
+// .Proto.PayloadPlayAction play_action = 7;
+inline bool ToServerMessage::has_play_action() const {
   return message_case() == kPlayAction;
 }
-inline bool Packet::_internal_has_play_action() const {
+inline bool ToServerMessage::_internal_has_play_action() const {
   return message_case() == kPlayAction;
 }
-inline void Packet::set_has_play_action() {
+inline void ToServerMessage::set_has_play_action() {
   _impl_._oneof_case_[0] = kPlayAction;
 }
-inline ::Proto::PayloadPlayAction* PROTOBUF_NULLABLE Packet::release_play_action() {
-  // @@protoc_insertion_point(field_release:Proto.Packet.play_action)
+inline ::Proto::PayloadPlayAction* PROTOBUF_NULLABLE ToServerMessage::release_play_action() {
+  // @@protoc_insertion_point(field_release:Proto.ToServerMessage.play_action)
   if (message_case() == kPlayAction) {
     clear_has_message();
     auto* temp = reinterpret_cast<::Proto::PayloadPlayAction*>(_impl_.message_.play_action_);
@@ -1163,15 +1384,15 @@ inline ::Proto::PayloadPlayAction* PROTOBUF_NULLABLE Packet::release_play_action
     return nullptr;
   }
 }
-inline const ::Proto::PayloadPlayAction& Packet::_internal_play_action() const {
+inline const ::Proto::PayloadPlayAction& ToServerMessage::_internal_play_action() const {
   return message_case() == kPlayAction ? *reinterpret_cast<::Proto::PayloadPlayAction*>(_impl_.message_.play_action_) : reinterpret_cast<::Proto::PayloadPlayAction&>(::Proto::_PayloadPlayAction_default_instance_);
 }
-inline const ::Proto::PayloadPlayAction& Packet::play_action() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:Proto.Packet.play_action)
+inline const ::Proto::PayloadPlayAction& ToServerMessage::play_action() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:Proto.ToServerMessage.play_action)
   return _internal_play_action();
 }
-inline ::Proto::PayloadPlayAction* PROTOBUF_NULLABLE Packet::unsafe_arena_release_play_action() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.Packet.play_action)
+inline ::Proto::PayloadPlayAction* PROTOBUF_NULLABLE ToServerMessage::unsafe_arena_release_play_action() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.ToServerMessage.play_action)
   if (message_case() == kPlayAction) {
     clear_has_message();
     auto* temp = reinterpret_cast<::Proto::PayloadPlayAction*>(_impl_.message_.play_action_);
@@ -1181,7 +1402,7 @@ inline ::Proto::PayloadPlayAction* PROTOBUF_NULLABLE Packet::unsafe_arena_releas
     return nullptr;
   }
 }
-inline void Packet::unsafe_arena_set_allocated_play_action(
+inline void ToServerMessage::unsafe_arena_set_allocated_play_action(
     ::Proto::PayloadPlayAction* PROTOBUF_NULLABLE value) {
   // We rely on the oneof clear method to free the earlier contents
   // of this oneof. We can directly use the pointer we're given to
@@ -1191,9 +1412,9 @@ inline void Packet::unsafe_arena_set_allocated_play_action(
     set_has_play_action();
     _impl_.message_.play_action_ = reinterpret_cast<::google::protobuf::Message*>(value);
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.Packet.play_action)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.ToServerMessage.play_action)
 }
-inline ::Proto::PayloadPlayAction* PROTOBUF_NONNULL Packet::_internal_mutable_play_action() {
+inline ::Proto::PayloadPlayAction* PROTOBUF_NONNULL ToServerMessage::_internal_mutable_play_action() {
   if (message_case() != kPlayAction) {
     clear_message();
     set_has_play_action();
@@ -1202,235 +1423,25 @@ inline ::Proto::PayloadPlayAction* PROTOBUF_NONNULL Packet::_internal_mutable_pl
   }
   return reinterpret_cast<::Proto::PayloadPlayAction*>(_impl_.message_.play_action_);
 }
-inline ::Proto::PayloadPlayAction* PROTOBUF_NONNULL Packet::mutable_play_action()
+inline ::Proto::PayloadPlayAction* PROTOBUF_NONNULL ToServerMessage::mutable_play_action()
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
   ::Proto::PayloadPlayAction* _msg = _internal_mutable_play_action();
-  // @@protoc_insertion_point(field_mutable:Proto.Packet.play_action)
+  // @@protoc_insertion_point(field_mutable:Proto.ToServerMessage.play_action)
   return _msg;
 }
 
-// .Proto.PayloadEntityDamaged entity_damaged = 9;
-inline bool Packet::has_entity_damaged() const {
-  return message_case() == kEntityDamaged;
-}
-inline bool Packet::_internal_has_entity_damaged() const {
-  return message_case() == kEntityDamaged;
-}
-inline void Packet::set_has_entity_damaged() {
-  _impl_._oneof_case_[0] = kEntityDamaged;
-}
-inline ::Proto::PayloadEntityDamaged* PROTOBUF_NULLABLE Packet::release_entity_damaged() {
-  // @@protoc_insertion_point(field_release:Proto.Packet.entity_damaged)
-  if (message_case() == kEntityDamaged) {
-    clear_has_message();
-    auto* temp = reinterpret_cast<::Proto::PayloadEntityDamaged*>(_impl_.message_.entity_damaged_);
-    if (GetArena() != nullptr) {
-      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-    }
-    _impl_.message_.entity_damaged_ = nullptr;
-    return temp;
-  } else {
-    return nullptr;
-  }
-}
-inline const ::Proto::PayloadEntityDamaged& Packet::_internal_entity_damaged() const {
-  return message_case() == kEntityDamaged ? *reinterpret_cast<::Proto::PayloadEntityDamaged*>(_impl_.message_.entity_damaged_) : reinterpret_cast<::Proto::PayloadEntityDamaged&>(::Proto::_PayloadEntityDamaged_default_instance_);
-}
-inline const ::Proto::PayloadEntityDamaged& Packet::entity_damaged() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:Proto.Packet.entity_damaged)
-  return _internal_entity_damaged();
-}
-inline ::Proto::PayloadEntityDamaged* PROTOBUF_NULLABLE Packet::unsafe_arena_release_entity_damaged() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.Packet.entity_damaged)
-  if (message_case() == kEntityDamaged) {
-    clear_has_message();
-    auto* temp = reinterpret_cast<::Proto::PayloadEntityDamaged*>(_impl_.message_.entity_damaged_);
-    _impl_.message_.entity_damaged_ = nullptr;
-    return temp;
-  } else {
-    return nullptr;
-  }
-}
-inline void Packet::unsafe_arena_set_allocated_entity_damaged(
-    ::Proto::PayloadEntityDamaged* PROTOBUF_NULLABLE value) {
-  // We rely on the oneof clear method to free the earlier contents
-  // of this oneof. We can directly use the pointer we're given to
-  // set the new value.
-  clear_message();
-  if (value) {
-    set_has_entity_damaged();
-    _impl_.message_.entity_damaged_ = reinterpret_cast<::google::protobuf::Message*>(value);
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.Packet.entity_damaged)
-}
-inline ::Proto::PayloadEntityDamaged* PROTOBUF_NONNULL Packet::_internal_mutable_entity_damaged() {
-  if (message_case() != kEntityDamaged) {
-    clear_message();
-    set_has_entity_damaged();
-    _impl_.message_.entity_damaged_ = reinterpret_cast<::google::protobuf::Message*>(
-        ::google::protobuf::Message::DefaultConstruct<::Proto::PayloadEntityDamaged>(GetArena()));
-  }
-  return reinterpret_cast<::Proto::PayloadEntityDamaged*>(_impl_.message_.entity_damaged_);
-}
-inline ::Proto::PayloadEntityDamaged* PROTOBUF_NONNULL Packet::mutable_entity_damaged()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  ::Proto::PayloadEntityDamaged* _msg = _internal_mutable_entity_damaged();
-  // @@protoc_insertion_point(field_mutable:Proto.Packet.entity_damaged)
-  return _msg;
-}
-
-// .Proto.PayloadEnemySpawn enemy_spawn = 10;
-inline bool Packet::has_enemy_spawn() const {
-  return message_case() == kEnemySpawn;
-}
-inline bool Packet::_internal_has_enemy_spawn() const {
-  return message_case() == kEnemySpawn;
-}
-inline void Packet::set_has_enemy_spawn() {
-  _impl_._oneof_case_[0] = kEnemySpawn;
-}
-inline ::Proto::PayloadEnemySpawn* PROTOBUF_NULLABLE Packet::release_enemy_spawn() {
-  // @@protoc_insertion_point(field_release:Proto.Packet.enemy_spawn)
-  if (message_case() == kEnemySpawn) {
-    clear_has_message();
-    auto* temp = reinterpret_cast<::Proto::PayloadEnemySpawn*>(_impl_.message_.enemy_spawn_);
-    if (GetArena() != nullptr) {
-      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-    }
-    _impl_.message_.enemy_spawn_ = nullptr;
-    return temp;
-  } else {
-    return nullptr;
-  }
-}
-inline const ::Proto::PayloadEnemySpawn& Packet::_internal_enemy_spawn() const {
-  return message_case() == kEnemySpawn ? *reinterpret_cast<::Proto::PayloadEnemySpawn*>(_impl_.message_.enemy_spawn_) : reinterpret_cast<::Proto::PayloadEnemySpawn&>(::Proto::_PayloadEnemySpawn_default_instance_);
-}
-inline const ::Proto::PayloadEnemySpawn& Packet::enemy_spawn() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:Proto.Packet.enemy_spawn)
-  return _internal_enemy_spawn();
-}
-inline ::Proto::PayloadEnemySpawn* PROTOBUF_NULLABLE Packet::unsafe_arena_release_enemy_spawn() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.Packet.enemy_spawn)
-  if (message_case() == kEnemySpawn) {
-    clear_has_message();
-    auto* temp = reinterpret_cast<::Proto::PayloadEnemySpawn*>(_impl_.message_.enemy_spawn_);
-    _impl_.message_.enemy_spawn_ = nullptr;
-    return temp;
-  } else {
-    return nullptr;
-  }
-}
-inline void Packet::unsafe_arena_set_allocated_enemy_spawn(
-    ::Proto::PayloadEnemySpawn* PROTOBUF_NULLABLE value) {
-  // We rely on the oneof clear method to free the earlier contents
-  // of this oneof. We can directly use the pointer we're given to
-  // set the new value.
-  clear_message();
-  if (value) {
-    set_has_enemy_spawn();
-    _impl_.message_.enemy_spawn_ = reinterpret_cast<::google::protobuf::Message*>(value);
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.Packet.enemy_spawn)
-}
-inline ::Proto::PayloadEnemySpawn* PROTOBUF_NONNULL Packet::_internal_mutable_enemy_spawn() {
-  if (message_case() != kEnemySpawn) {
-    clear_message();
-    set_has_enemy_spawn();
-    _impl_.message_.enemy_spawn_ = reinterpret_cast<::google::protobuf::Message*>(
-        ::google::protobuf::Message::DefaultConstruct<::Proto::PayloadEnemySpawn>(GetArena()));
-  }
-  return reinterpret_cast<::Proto::PayloadEnemySpawn*>(_impl_.message_.enemy_spawn_);
-}
-inline ::Proto::PayloadEnemySpawn* PROTOBUF_NONNULL Packet::mutable_enemy_spawn()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  ::Proto::PayloadEnemySpawn* _msg = _internal_mutable_enemy_spawn();
-  // @@protoc_insertion_point(field_mutable:Proto.Packet.enemy_spawn)
-  return _msg;
-}
-
-// .Proto.PayloadEnemyDespawn enemy_despawn = 11;
-inline bool Packet::has_enemy_despawn() const {
-  return message_case() == kEnemyDespawn;
-}
-inline bool Packet::_internal_has_enemy_despawn() const {
-  return message_case() == kEnemyDespawn;
-}
-inline void Packet::set_has_enemy_despawn() {
-  _impl_._oneof_case_[0] = kEnemyDespawn;
-}
-inline ::Proto::PayloadEnemyDespawn* PROTOBUF_NULLABLE Packet::release_enemy_despawn() {
-  // @@protoc_insertion_point(field_release:Proto.Packet.enemy_despawn)
-  if (message_case() == kEnemyDespawn) {
-    clear_has_message();
-    auto* temp = reinterpret_cast<::Proto::PayloadEnemyDespawn*>(_impl_.message_.enemy_despawn_);
-    if (GetArena() != nullptr) {
-      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-    }
-    _impl_.message_.enemy_despawn_ = nullptr;
-    return temp;
-  } else {
-    return nullptr;
-  }
-}
-inline const ::Proto::PayloadEnemyDespawn& Packet::_internal_enemy_despawn() const {
-  return message_case() == kEnemyDespawn ? *reinterpret_cast<::Proto::PayloadEnemyDespawn*>(_impl_.message_.enemy_despawn_) : reinterpret_cast<::Proto::PayloadEnemyDespawn&>(::Proto::_PayloadEnemyDespawn_default_instance_);
-}
-inline const ::Proto::PayloadEnemyDespawn& Packet::enemy_despawn() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:Proto.Packet.enemy_despawn)
-  return _internal_enemy_despawn();
-}
-inline ::Proto::PayloadEnemyDespawn* PROTOBUF_NULLABLE Packet::unsafe_arena_release_enemy_despawn() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.Packet.enemy_despawn)
-  if (message_case() == kEnemyDespawn) {
-    clear_has_message();
-    auto* temp = reinterpret_cast<::Proto::PayloadEnemyDespawn*>(_impl_.message_.enemy_despawn_);
-    _impl_.message_.enemy_despawn_ = nullptr;
-    return temp;
-  } else {
-    return nullptr;
-  }
-}
-inline void Packet::unsafe_arena_set_allocated_enemy_despawn(
-    ::Proto::PayloadEnemyDespawn* PROTOBUF_NULLABLE value) {
-  // We rely on the oneof clear method to free the earlier contents
-  // of this oneof. We can directly use the pointer we're given to
-  // set the new value.
-  clear_message();
-  if (value) {
-    set_has_enemy_despawn();
-    _impl_.message_.enemy_despawn_ = reinterpret_cast<::google::protobuf::Message*>(value);
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.Packet.enemy_despawn)
-}
-inline ::Proto::PayloadEnemyDespawn* PROTOBUF_NONNULL Packet::_internal_mutable_enemy_despawn() {
-  if (message_case() != kEnemyDespawn) {
-    clear_message();
-    set_has_enemy_despawn();
-    _impl_.message_.enemy_despawn_ = reinterpret_cast<::google::protobuf::Message*>(
-        ::google::protobuf::Message::DefaultConstruct<::Proto::PayloadEnemyDespawn>(GetArena()));
-  }
-  return reinterpret_cast<::Proto::PayloadEnemyDespawn*>(_impl_.message_.enemy_despawn_);
-}
-inline ::Proto::PayloadEnemyDespawn* PROTOBUF_NONNULL Packet::mutable_enemy_despawn()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  ::Proto::PayloadEnemyDespawn* _msg = _internal_mutable_enemy_despawn();
-  // @@protoc_insertion_point(field_mutable:Proto.Packet.enemy_despawn)
-  return _msg;
-}
-
-// .Proto.PayloadTextMessage text_message = 12;
-inline bool Packet::has_text_message() const {
+// .Proto.PayloadTextMessage text_message = 8;
+inline bool ToServerMessage::has_text_message() const {
   return message_case() == kTextMessage;
 }
-inline bool Packet::_internal_has_text_message() const {
+inline bool ToServerMessage::_internal_has_text_message() const {
   return message_case() == kTextMessage;
 }
-inline void Packet::set_has_text_message() {
+inline void ToServerMessage::set_has_text_message() {
   _impl_._oneof_case_[0] = kTextMessage;
 }
-inline ::Proto::PayloadTextMessage* PROTOBUF_NULLABLE Packet::release_text_message() {
-  // @@protoc_insertion_point(field_release:Proto.Packet.text_message)
+inline ::Proto::PayloadTextMessage* PROTOBUF_NULLABLE ToServerMessage::release_text_message() {
+  // @@protoc_insertion_point(field_release:Proto.ToServerMessage.text_message)
   if (message_case() == kTextMessage) {
     clear_has_message();
     auto* temp = reinterpret_cast<::Proto::PayloadTextMessage*>(_impl_.message_.text_message_);
@@ -1443,15 +1454,15 @@ inline ::Proto::PayloadTextMessage* PROTOBUF_NULLABLE Packet::release_text_messa
     return nullptr;
   }
 }
-inline const ::Proto::PayloadTextMessage& Packet::_internal_text_message() const {
+inline const ::Proto::PayloadTextMessage& ToServerMessage::_internal_text_message() const {
   return message_case() == kTextMessage ? *reinterpret_cast<::Proto::PayloadTextMessage*>(_impl_.message_.text_message_) : reinterpret_cast<::Proto::PayloadTextMessage&>(::Proto::_PayloadTextMessage_default_instance_);
 }
-inline const ::Proto::PayloadTextMessage& Packet::text_message() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:Proto.Packet.text_message)
+inline const ::Proto::PayloadTextMessage& ToServerMessage::text_message() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:Proto.ToServerMessage.text_message)
   return _internal_text_message();
 }
-inline ::Proto::PayloadTextMessage* PROTOBUF_NULLABLE Packet::unsafe_arena_release_text_message() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.Packet.text_message)
+inline ::Proto::PayloadTextMessage* PROTOBUF_NULLABLE ToServerMessage::unsafe_arena_release_text_message() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.ToServerMessage.text_message)
   if (message_case() == kTextMessage) {
     clear_has_message();
     auto* temp = reinterpret_cast<::Proto::PayloadTextMessage*>(_impl_.message_.text_message_);
@@ -1461,7 +1472,7 @@ inline ::Proto::PayloadTextMessage* PROTOBUF_NULLABLE Packet::unsafe_arena_relea
     return nullptr;
   }
 }
-inline void Packet::unsafe_arena_set_allocated_text_message(
+inline void ToServerMessage::unsafe_arena_set_allocated_text_message(
     ::Proto::PayloadTextMessage* PROTOBUF_NULLABLE value) {
   // We rely on the oneof clear method to free the earlier contents
   // of this oneof. We can directly use the pointer we're given to
@@ -1471,9 +1482,9 @@ inline void Packet::unsafe_arena_set_allocated_text_message(
     set_has_text_message();
     _impl_.message_.text_message_ = reinterpret_cast<::google::protobuf::Message*>(value);
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.Packet.text_message)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.ToServerMessage.text_message)
 }
-inline ::Proto::PayloadTextMessage* PROTOBUF_NONNULL Packet::_internal_mutable_text_message() {
+inline ::Proto::PayloadTextMessage* PROTOBUF_NONNULL ToServerMessage::_internal_mutable_text_message() {
   if (message_case() != kTextMessage) {
     clear_message();
     set_has_text_message();
@@ -1482,301 +1493,874 @@ inline ::Proto::PayloadTextMessage* PROTOBUF_NONNULL Packet::_internal_mutable_t
   }
   return reinterpret_cast<::Proto::PayloadTextMessage*>(_impl_.message_.text_message_);
 }
-inline ::Proto::PayloadTextMessage* PROTOBUF_NONNULL Packet::mutable_text_message()
+inline ::Proto::PayloadTextMessage* PROTOBUF_NONNULL ToServerMessage::mutable_text_message()
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
   ::Proto::PayloadTextMessage* _msg = _internal_mutable_text_message();
-  // @@protoc_insertion_point(field_mutable:Proto.Packet.text_message)
+  // @@protoc_insertion_point(field_mutable:Proto.ToServerMessage.text_message)
   return _msg;
 }
 
-// .Proto.PayloadSystemMessage system_message = 13;
-inline bool Packet::has_system_message() const {
-  return message_case() == kSystemMessage;
-}
-inline bool Packet::_internal_has_system_message() const {
-  return message_case() == kSystemMessage;
-}
-inline void Packet::set_has_system_message() {
-  _impl_._oneof_case_[0] = kSystemMessage;
-}
-inline ::Proto::PayloadSystemMessage* PROTOBUF_NULLABLE Packet::release_system_message() {
-  // @@protoc_insertion_point(field_release:Proto.Packet.system_message)
-  if (message_case() == kSystemMessage) {
-    clear_has_message();
-    auto* temp = reinterpret_cast<::Proto::PayloadSystemMessage*>(_impl_.message_.system_message_);
-    if (GetArena() != nullptr) {
-      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-    }
-    _impl_.message_.system_message_ = nullptr;
-    return temp;
-  } else {
-    return nullptr;
-  }
-}
-inline const ::Proto::PayloadSystemMessage& Packet::_internal_system_message() const {
-  return message_case() == kSystemMessage ? *reinterpret_cast<::Proto::PayloadSystemMessage*>(_impl_.message_.system_message_) : reinterpret_cast<::Proto::PayloadSystemMessage&>(::Proto::_PayloadSystemMessage_default_instance_);
-}
-inline const ::Proto::PayloadSystemMessage& Packet::system_message() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:Proto.Packet.system_message)
-  return _internal_system_message();
-}
-inline ::Proto::PayloadSystemMessage* PROTOBUF_NULLABLE Packet::unsafe_arena_release_system_message() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.Packet.system_message)
-  if (message_case() == kSystemMessage) {
-    clear_has_message();
-    auto* temp = reinterpret_cast<::Proto::PayloadSystemMessage*>(_impl_.message_.system_message_);
-    _impl_.message_.system_message_ = nullptr;
-    return temp;
-  } else {
-    return nullptr;
-  }
-}
-inline void Packet::unsafe_arena_set_allocated_system_message(
-    ::Proto::PayloadSystemMessage* PROTOBUF_NULLABLE value) {
-  // We rely on the oneof clear method to free the earlier contents
-  // of this oneof. We can directly use the pointer we're given to
-  // set the new value.
-  clear_message();
-  if (value) {
-    set_has_system_message();
-    _impl_.message_.system_message_ = reinterpret_cast<::google::protobuf::Message*>(value);
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.Packet.system_message)
-}
-inline ::Proto::PayloadSystemMessage* PROTOBUF_NONNULL Packet::_internal_mutable_system_message() {
-  if (message_case() != kSystemMessage) {
-    clear_message();
-    set_has_system_message();
-    _impl_.message_.system_message_ = reinterpret_cast<::google::protobuf::Message*>(
-        ::google::protobuf::Message::DefaultConstruct<::Proto::PayloadSystemMessage>(GetArena()));
-  }
-  return reinterpret_cast<::Proto::PayloadSystemMessage*>(_impl_.message_.system_message_);
-}
-inline ::Proto::PayloadSystemMessage* PROTOBUF_NONNULL Packet::mutable_system_message()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  ::Proto::PayloadSystemMessage* _msg = _internal_mutable_system_message();
-  // @@protoc_insertion_point(field_mutable:Proto.Packet.system_message)
-  return _msg;
-}
-
-// .Proto.PayloadZoneEnterRequest zone_enter_request = 14;
-inline bool Packet::has_zone_enter_request() const {
-  return message_case() == kZoneEnterRequest;
-}
-inline bool Packet::_internal_has_zone_enter_request() const {
-  return message_case() == kZoneEnterRequest;
-}
-inline void Packet::set_has_zone_enter_request() {
-  _impl_._oneof_case_[0] = kZoneEnterRequest;
-}
-inline ::Proto::PayloadZoneEnterRequest* PROTOBUF_NULLABLE Packet::release_zone_enter_request() {
-  // @@protoc_insertion_point(field_release:Proto.Packet.zone_enter_request)
-  if (message_case() == kZoneEnterRequest) {
-    clear_has_message();
-    auto* temp = reinterpret_cast<::Proto::PayloadZoneEnterRequest*>(_impl_.message_.zone_enter_request_);
-    if (GetArena() != nullptr) {
-      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-    }
-    _impl_.message_.zone_enter_request_ = nullptr;
-    return temp;
-  } else {
-    return nullptr;
-  }
-}
-inline const ::Proto::PayloadZoneEnterRequest& Packet::_internal_zone_enter_request() const {
-  return message_case() == kZoneEnterRequest ? *reinterpret_cast<::Proto::PayloadZoneEnterRequest*>(_impl_.message_.zone_enter_request_) : reinterpret_cast<::Proto::PayloadZoneEnterRequest&>(::Proto::_PayloadZoneEnterRequest_default_instance_);
-}
-inline const ::Proto::PayloadZoneEnterRequest& Packet::zone_enter_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:Proto.Packet.zone_enter_request)
-  return _internal_zone_enter_request();
-}
-inline ::Proto::PayloadZoneEnterRequest* PROTOBUF_NULLABLE Packet::unsafe_arena_release_zone_enter_request() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.Packet.zone_enter_request)
-  if (message_case() == kZoneEnterRequest) {
-    clear_has_message();
-    auto* temp = reinterpret_cast<::Proto::PayloadZoneEnterRequest*>(_impl_.message_.zone_enter_request_);
-    _impl_.message_.zone_enter_request_ = nullptr;
-    return temp;
-  } else {
-    return nullptr;
-  }
-}
-inline void Packet::unsafe_arena_set_allocated_zone_enter_request(
-    ::Proto::PayloadZoneEnterRequest* PROTOBUF_NULLABLE value) {
-  // We rely on the oneof clear method to free the earlier contents
-  // of this oneof. We can directly use the pointer we're given to
-  // set the new value.
-  clear_message();
-  if (value) {
-    set_has_zone_enter_request();
-    _impl_.message_.zone_enter_request_ = reinterpret_cast<::google::protobuf::Message*>(value);
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.Packet.zone_enter_request)
-}
-inline ::Proto::PayloadZoneEnterRequest* PROTOBUF_NONNULL Packet::_internal_mutable_zone_enter_request() {
-  if (message_case() != kZoneEnterRequest) {
-    clear_message();
-    set_has_zone_enter_request();
-    _impl_.message_.zone_enter_request_ = reinterpret_cast<::google::protobuf::Message*>(
-        ::google::protobuf::Message::DefaultConstruct<::Proto::PayloadZoneEnterRequest>(GetArena()));
-  }
-  return reinterpret_cast<::Proto::PayloadZoneEnterRequest*>(_impl_.message_.zone_enter_request_);
-}
-inline ::Proto::PayloadZoneEnterRequest* PROTOBUF_NONNULL Packet::mutable_zone_enter_request()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  ::Proto::PayloadZoneEnterRequest* _msg = _internal_mutable_zone_enter_request();
-  // @@protoc_insertion_point(field_mutable:Proto.Packet.zone_enter_request)
-  return _msg;
-}
-
-// .Proto.PayloadZoneEnterResponse zone_enter_response = 15;
-inline bool Packet::has_zone_enter_response() const {
-  return message_case() == kZoneEnterResponse;
-}
-inline bool Packet::_internal_has_zone_enter_response() const {
-  return message_case() == kZoneEnterResponse;
-}
-inline void Packet::set_has_zone_enter_response() {
-  _impl_._oneof_case_[0] = kZoneEnterResponse;
-}
-inline ::Proto::PayloadZoneEnterResponse* PROTOBUF_NULLABLE Packet::release_zone_enter_response() {
-  // @@protoc_insertion_point(field_release:Proto.Packet.zone_enter_response)
-  if (message_case() == kZoneEnterResponse) {
-    clear_has_message();
-    auto* temp = reinterpret_cast<::Proto::PayloadZoneEnterResponse*>(_impl_.message_.zone_enter_response_);
-    if (GetArena() != nullptr) {
-      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-    }
-    _impl_.message_.zone_enter_response_ = nullptr;
-    return temp;
-  } else {
-    return nullptr;
-  }
-}
-inline const ::Proto::PayloadZoneEnterResponse& Packet::_internal_zone_enter_response() const {
-  return message_case() == kZoneEnterResponse ? *reinterpret_cast<::Proto::PayloadZoneEnterResponse*>(_impl_.message_.zone_enter_response_) : reinterpret_cast<::Proto::PayloadZoneEnterResponse&>(::Proto::_PayloadZoneEnterResponse_default_instance_);
-}
-inline const ::Proto::PayloadZoneEnterResponse& Packet::zone_enter_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:Proto.Packet.zone_enter_response)
-  return _internal_zone_enter_response();
-}
-inline ::Proto::PayloadZoneEnterResponse* PROTOBUF_NULLABLE Packet::unsafe_arena_release_zone_enter_response() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.Packet.zone_enter_response)
-  if (message_case() == kZoneEnterResponse) {
-    clear_has_message();
-    auto* temp = reinterpret_cast<::Proto::PayloadZoneEnterResponse*>(_impl_.message_.zone_enter_response_);
-    _impl_.message_.zone_enter_response_ = nullptr;
-    return temp;
-  } else {
-    return nullptr;
-  }
-}
-inline void Packet::unsafe_arena_set_allocated_zone_enter_response(
-    ::Proto::PayloadZoneEnterResponse* PROTOBUF_NULLABLE value) {
-  // We rely on the oneof clear method to free the earlier contents
-  // of this oneof. We can directly use the pointer we're given to
-  // set the new value.
-  clear_message();
-  if (value) {
-    set_has_zone_enter_response();
-    _impl_.message_.zone_enter_response_ = reinterpret_cast<::google::protobuf::Message*>(value);
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.Packet.zone_enter_response)
-}
-inline ::Proto::PayloadZoneEnterResponse* PROTOBUF_NONNULL Packet::_internal_mutable_zone_enter_response() {
-  if (message_case() != kZoneEnterResponse) {
-    clear_message();
-    set_has_zone_enter_response();
-    _impl_.message_.zone_enter_response_ = reinterpret_cast<::google::protobuf::Message*>(
-        ::google::protobuf::Message::DefaultConstruct<::Proto::PayloadZoneEnterResponse>(GetArena()));
-  }
-  return reinterpret_cast<::Proto::PayloadZoneEnterResponse*>(_impl_.message_.zone_enter_response_);
-}
-inline ::Proto::PayloadZoneEnterResponse* PROTOBUF_NONNULL Packet::mutable_zone_enter_response()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  ::Proto::PayloadZoneEnterResponse* _msg = _internal_mutable_zone_enter_response();
-  // @@protoc_insertion_point(field_mutable:Proto.Packet.zone_enter_response)
-  return _msg;
-}
-
-// .Proto.PayloadZoneExit zone_exit = 16;
-inline bool Packet::has_zone_exit() const {
-  return message_case() == kZoneExit;
-}
-inline bool Packet::_internal_has_zone_exit() const {
-  return message_case() == kZoneExit;
-}
-inline void Packet::set_has_zone_exit() {
-  _impl_._oneof_case_[0] = kZoneExit;
-}
-inline ::Proto::PayloadZoneExit* PROTOBUF_NULLABLE Packet::release_zone_exit() {
-  // @@protoc_insertion_point(field_release:Proto.Packet.zone_exit)
-  if (message_case() == kZoneExit) {
-    clear_has_message();
-    auto* temp = reinterpret_cast<::Proto::PayloadZoneExit*>(_impl_.message_.zone_exit_);
-    if (GetArena() != nullptr) {
-      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-    }
-    _impl_.message_.zone_exit_ = nullptr;
-    return temp;
-  } else {
-    return nullptr;
-  }
-}
-inline const ::Proto::PayloadZoneExit& Packet::_internal_zone_exit() const {
-  return message_case() == kZoneExit ? *reinterpret_cast<::Proto::PayloadZoneExit*>(_impl_.message_.zone_exit_) : reinterpret_cast<::Proto::PayloadZoneExit&>(::Proto::_PayloadZoneExit_default_instance_);
-}
-inline const ::Proto::PayloadZoneExit& Packet::zone_exit() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:Proto.Packet.zone_exit)
-  return _internal_zone_exit();
-}
-inline ::Proto::PayloadZoneExit* PROTOBUF_NULLABLE Packet::unsafe_arena_release_zone_exit() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.Packet.zone_exit)
-  if (message_case() == kZoneExit) {
-    clear_has_message();
-    auto* temp = reinterpret_cast<::Proto::PayloadZoneExit*>(_impl_.message_.zone_exit_);
-    _impl_.message_.zone_exit_ = nullptr;
-    return temp;
-  } else {
-    return nullptr;
-  }
-}
-inline void Packet::unsafe_arena_set_allocated_zone_exit(
-    ::Proto::PayloadZoneExit* PROTOBUF_NULLABLE value) {
-  // We rely on the oneof clear method to free the earlier contents
-  // of this oneof. We can directly use the pointer we're given to
-  // set the new value.
-  clear_message();
-  if (value) {
-    set_has_zone_exit();
-    _impl_.message_.zone_exit_ = reinterpret_cast<::google::protobuf::Message*>(value);
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.Packet.zone_exit)
-}
-inline ::Proto::PayloadZoneExit* PROTOBUF_NONNULL Packet::_internal_mutable_zone_exit() {
-  if (message_case() != kZoneExit) {
-    clear_message();
-    set_has_zone_exit();
-    _impl_.message_.zone_exit_ = reinterpret_cast<::google::protobuf::Message*>(
-        ::google::protobuf::Message::DefaultConstruct<::Proto::PayloadZoneExit>(GetArena()));
-  }
-  return reinterpret_cast<::Proto::PayloadZoneExit*>(_impl_.message_.zone_exit_);
-}
-inline ::Proto::PayloadZoneExit* PROTOBUF_NONNULL Packet::mutable_zone_exit()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  ::Proto::PayloadZoneExit* _msg = _internal_mutable_zone_exit();
-  // @@protoc_insertion_point(field_mutable:Proto.Packet.zone_exit)
-  return _msg;
-}
-
-inline bool Packet::has_message() const {
+inline bool ToServerMessage::has_message() const {
   return message_case() != MESSAGE_NOT_SET;
 }
-inline void Packet::clear_has_message() {
+inline void ToServerMessage::clear_has_message() {
   _impl_._oneof_case_[0] = MESSAGE_NOT_SET;
 }
-inline Packet::MessageCase Packet::message_case() const {
-  return Packet::MessageCase(_impl_._oneof_case_[0]);
+inline ToServerMessage::MessageCase ToServerMessage::message_case() const {
+  return ToServerMessage::MessageCase(_impl_._oneof_case_[0]);
+}
+// -------------------------------------------------------------------
+
+// ToClientMessage
+
+// .Proto.PayloadLogoutResponse logout_response = 2;
+inline bool ToClientMessage::has_logout_response() const {
+  return message_case() == kLogoutResponse;
+}
+inline bool ToClientMessage::_internal_has_logout_response() const {
+  return message_case() == kLogoutResponse;
+}
+inline void ToClientMessage::set_has_logout_response() {
+  _impl_._oneof_case_[0] = kLogoutResponse;
+}
+inline ::Proto::PayloadLogoutResponse* PROTOBUF_NULLABLE ToClientMessage::release_logout_response() {
+  // @@protoc_insertion_point(field_release:Proto.ToClientMessage.logout_response)
+  if (message_case() == kLogoutResponse) {
+    clear_has_message();
+    auto* temp = reinterpret_cast<::Proto::PayloadLogoutResponse*>(_impl_.message_.logout_response_);
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.message_.logout_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::Proto::PayloadLogoutResponse& ToClientMessage::_internal_logout_response() const {
+  return message_case() == kLogoutResponse ? *reinterpret_cast<::Proto::PayloadLogoutResponse*>(_impl_.message_.logout_response_) : reinterpret_cast<::Proto::PayloadLogoutResponse&>(::Proto::_PayloadLogoutResponse_default_instance_);
+}
+inline const ::Proto::PayloadLogoutResponse& ToClientMessage::logout_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:Proto.ToClientMessage.logout_response)
+  return _internal_logout_response();
+}
+inline ::Proto::PayloadLogoutResponse* PROTOBUF_NULLABLE ToClientMessage::unsafe_arena_release_logout_response() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.ToClientMessage.logout_response)
+  if (message_case() == kLogoutResponse) {
+    clear_has_message();
+    auto* temp = reinterpret_cast<::Proto::PayloadLogoutResponse*>(_impl_.message_.logout_response_);
+    _impl_.message_.logout_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void ToClientMessage::unsafe_arena_set_allocated_logout_response(
+    ::Proto::PayloadLogoutResponse* PROTOBUF_NULLABLE value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_logout_response();
+    _impl_.message_.logout_response_ = reinterpret_cast<::google::protobuf::Message*>(value);
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.ToClientMessage.logout_response)
+}
+inline ::Proto::PayloadLogoutResponse* PROTOBUF_NONNULL ToClientMessage::_internal_mutable_logout_response() {
+  if (message_case() != kLogoutResponse) {
+    clear_message();
+    set_has_logout_response();
+    _impl_.message_.logout_response_ = reinterpret_cast<::google::protobuf::Message*>(
+        ::google::protobuf::Message::DefaultConstruct<::Proto::PayloadLogoutResponse>(GetArena()));
+  }
+  return reinterpret_cast<::Proto::PayloadLogoutResponse*>(_impl_.message_.logout_response_);
+}
+inline ::Proto::PayloadLogoutResponse* PROTOBUF_NONNULL ToClientMessage::mutable_logout_response()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::Proto::PayloadLogoutResponse* _msg = _internal_mutable_logout_response();
+  // @@protoc_insertion_point(field_mutable:Proto.ToClientMessage.logout_response)
+  return _msg;
+}
+
+// .Proto.PayloadSignupResponse signup_response = 3;
+inline bool ToClientMessage::has_signup_response() const {
+  return message_case() == kSignupResponse;
+}
+inline bool ToClientMessage::_internal_has_signup_response() const {
+  return message_case() == kSignupResponse;
+}
+inline void ToClientMessage::set_has_signup_response() {
+  _impl_._oneof_case_[0] = kSignupResponse;
+}
+inline ::Proto::PayloadSignupResponse* PROTOBUF_NULLABLE ToClientMessage::release_signup_response() {
+  // @@protoc_insertion_point(field_release:Proto.ToClientMessage.signup_response)
+  if (message_case() == kSignupResponse) {
+    clear_has_message();
+    auto* temp = reinterpret_cast<::Proto::PayloadSignupResponse*>(_impl_.message_.signup_response_);
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.message_.signup_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::Proto::PayloadSignupResponse& ToClientMessage::_internal_signup_response() const {
+  return message_case() == kSignupResponse ? *reinterpret_cast<::Proto::PayloadSignupResponse*>(_impl_.message_.signup_response_) : reinterpret_cast<::Proto::PayloadSignupResponse&>(::Proto::_PayloadSignupResponse_default_instance_);
+}
+inline const ::Proto::PayloadSignupResponse& ToClientMessage::signup_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:Proto.ToClientMessage.signup_response)
+  return _internal_signup_response();
+}
+inline ::Proto::PayloadSignupResponse* PROTOBUF_NULLABLE ToClientMessage::unsafe_arena_release_signup_response() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.ToClientMessage.signup_response)
+  if (message_case() == kSignupResponse) {
+    clear_has_message();
+    auto* temp = reinterpret_cast<::Proto::PayloadSignupResponse*>(_impl_.message_.signup_response_);
+    _impl_.message_.signup_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void ToClientMessage::unsafe_arena_set_allocated_signup_response(
+    ::Proto::PayloadSignupResponse* PROTOBUF_NULLABLE value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_signup_response();
+    _impl_.message_.signup_response_ = reinterpret_cast<::google::protobuf::Message*>(value);
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.ToClientMessage.signup_response)
+}
+inline ::Proto::PayloadSignupResponse* PROTOBUF_NONNULL ToClientMessage::_internal_mutable_signup_response() {
+  if (message_case() != kSignupResponse) {
+    clear_message();
+    set_has_signup_response();
+    _impl_.message_.signup_response_ = reinterpret_cast<::google::protobuf::Message*>(
+        ::google::protobuf::Message::DefaultConstruct<::Proto::PayloadSignupResponse>(GetArena()));
+  }
+  return reinterpret_cast<::Proto::PayloadSignupResponse*>(_impl_.message_.signup_response_);
+}
+inline ::Proto::PayloadSignupResponse* PROTOBUF_NONNULL ToClientMessage::mutable_signup_response()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::Proto::PayloadSignupResponse* _msg = _internal_mutable_signup_response();
+  // @@protoc_insertion_point(field_mutable:Proto.ToClientMessage.signup_response)
+  return _msg;
+}
+
+// .Proto.PayloadLobbyEnterResponse lobby_enter_response = 4;
+inline bool ToClientMessage::has_lobby_enter_response() const {
+  return message_case() == kLobbyEnterResponse;
+}
+inline bool ToClientMessage::_internal_has_lobby_enter_response() const {
+  return message_case() == kLobbyEnterResponse;
+}
+inline void ToClientMessage::set_has_lobby_enter_response() {
+  _impl_._oneof_case_[0] = kLobbyEnterResponse;
+}
+inline ::Proto::PayloadLobbyEnterResponse* PROTOBUF_NULLABLE ToClientMessage::release_lobby_enter_response() {
+  // @@protoc_insertion_point(field_release:Proto.ToClientMessage.lobby_enter_response)
+  if (message_case() == kLobbyEnterResponse) {
+    clear_has_message();
+    auto* temp = reinterpret_cast<::Proto::PayloadLobbyEnterResponse*>(_impl_.message_.lobby_enter_response_);
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.message_.lobby_enter_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::Proto::PayloadLobbyEnterResponse& ToClientMessage::_internal_lobby_enter_response() const {
+  return message_case() == kLobbyEnterResponse ? *reinterpret_cast<::Proto::PayloadLobbyEnterResponse*>(_impl_.message_.lobby_enter_response_) : reinterpret_cast<::Proto::PayloadLobbyEnterResponse&>(::Proto::_PayloadLobbyEnterResponse_default_instance_);
+}
+inline const ::Proto::PayloadLobbyEnterResponse& ToClientMessage::lobby_enter_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:Proto.ToClientMessage.lobby_enter_response)
+  return _internal_lobby_enter_response();
+}
+inline ::Proto::PayloadLobbyEnterResponse* PROTOBUF_NULLABLE ToClientMessage::unsafe_arena_release_lobby_enter_response() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.ToClientMessage.lobby_enter_response)
+  if (message_case() == kLobbyEnterResponse) {
+    clear_has_message();
+    auto* temp = reinterpret_cast<::Proto::PayloadLobbyEnterResponse*>(_impl_.message_.lobby_enter_response_);
+    _impl_.message_.lobby_enter_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void ToClientMessage::unsafe_arena_set_allocated_lobby_enter_response(
+    ::Proto::PayloadLobbyEnterResponse* PROTOBUF_NULLABLE value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_lobby_enter_response();
+    _impl_.message_.lobby_enter_response_ = reinterpret_cast<::google::protobuf::Message*>(value);
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.ToClientMessage.lobby_enter_response)
+}
+inline ::Proto::PayloadLobbyEnterResponse* PROTOBUF_NONNULL ToClientMessage::_internal_mutable_lobby_enter_response() {
+  if (message_case() != kLobbyEnterResponse) {
+    clear_message();
+    set_has_lobby_enter_response();
+    _impl_.message_.lobby_enter_response_ = reinterpret_cast<::google::protobuf::Message*>(
+        ::google::protobuf::Message::DefaultConstruct<::Proto::PayloadLobbyEnterResponse>(GetArena()));
+  }
+  return reinterpret_cast<::Proto::PayloadLobbyEnterResponse*>(_impl_.message_.lobby_enter_response_);
+}
+inline ::Proto::PayloadLobbyEnterResponse* PROTOBUF_NONNULL ToClientMessage::mutable_lobby_enter_response()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::Proto::PayloadLobbyEnterResponse* _msg = _internal_mutable_lobby_enter_response();
+  // @@protoc_insertion_point(field_mutable:Proto.ToClientMessage.lobby_enter_response)
+  return _msg;
+}
+
+// .Proto.PayloadLobbyEndGameResponse end_game_response = 5;
+inline bool ToClientMessage::has_end_game_response() const {
+  return message_case() == kEndGameResponse;
+}
+inline bool ToClientMessage::_internal_has_end_game_response() const {
+  return message_case() == kEndGameResponse;
+}
+inline void ToClientMessage::set_has_end_game_response() {
+  _impl_._oneof_case_[0] = kEndGameResponse;
+}
+inline ::Proto::PayloadLobbyEndGameResponse* PROTOBUF_NULLABLE ToClientMessage::release_end_game_response() {
+  // @@protoc_insertion_point(field_release:Proto.ToClientMessage.end_game_response)
+  if (message_case() == kEndGameResponse) {
+    clear_has_message();
+    auto* temp = reinterpret_cast<::Proto::PayloadLobbyEndGameResponse*>(_impl_.message_.end_game_response_);
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.message_.end_game_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::Proto::PayloadLobbyEndGameResponse& ToClientMessage::_internal_end_game_response() const {
+  return message_case() == kEndGameResponse ? *reinterpret_cast<::Proto::PayloadLobbyEndGameResponse*>(_impl_.message_.end_game_response_) : reinterpret_cast<::Proto::PayloadLobbyEndGameResponse&>(::Proto::_PayloadLobbyEndGameResponse_default_instance_);
+}
+inline const ::Proto::PayloadLobbyEndGameResponse& ToClientMessage::end_game_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:Proto.ToClientMessage.end_game_response)
+  return _internal_end_game_response();
+}
+inline ::Proto::PayloadLobbyEndGameResponse* PROTOBUF_NULLABLE ToClientMessage::unsafe_arena_release_end_game_response() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.ToClientMessage.end_game_response)
+  if (message_case() == kEndGameResponse) {
+    clear_has_message();
+    auto* temp = reinterpret_cast<::Proto::PayloadLobbyEndGameResponse*>(_impl_.message_.end_game_response_);
+    _impl_.message_.end_game_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void ToClientMessage::unsafe_arena_set_allocated_end_game_response(
+    ::Proto::PayloadLobbyEndGameResponse* PROTOBUF_NULLABLE value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_end_game_response();
+    _impl_.message_.end_game_response_ = reinterpret_cast<::google::protobuf::Message*>(value);
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.ToClientMessage.end_game_response)
+}
+inline ::Proto::PayloadLobbyEndGameResponse* PROTOBUF_NONNULL ToClientMessage::_internal_mutable_end_game_response() {
+  if (message_case() != kEndGameResponse) {
+    clear_message();
+    set_has_end_game_response();
+    _impl_.message_.end_game_response_ = reinterpret_cast<::google::protobuf::Message*>(
+        ::google::protobuf::Message::DefaultConstruct<::Proto::PayloadLobbyEndGameResponse>(GetArena()));
+  }
+  return reinterpret_cast<::Proto::PayloadLobbyEndGameResponse*>(_impl_.message_.end_game_response_);
+}
+inline ::Proto::PayloadLobbyEndGameResponse* PROTOBUF_NONNULL ToClientMessage::mutable_end_game_response()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::Proto::PayloadLobbyEndGameResponse* _msg = _internal_mutable_end_game_response();
+  // @@protoc_insertion_point(field_mutable:Proto.ToClientMessage.end_game_response)
+  return _msg;
+}
+
+// .Proto.PayloadTransformSync transform_sync = 6;
+inline bool ToClientMessage::has_transform_sync() const {
+  return message_case() == kTransformSync;
+}
+inline bool ToClientMessage::_internal_has_transform_sync() const {
+  return message_case() == kTransformSync;
+}
+inline void ToClientMessage::set_has_transform_sync() {
+  _impl_._oneof_case_[0] = kTransformSync;
+}
+inline ::Proto::PayloadTransformSync* PROTOBUF_NULLABLE ToClientMessage::release_transform_sync() {
+  // @@protoc_insertion_point(field_release:Proto.ToClientMessage.transform_sync)
+  if (message_case() == kTransformSync) {
+    clear_has_message();
+    auto* temp = reinterpret_cast<::Proto::PayloadTransformSync*>(_impl_.message_.transform_sync_);
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.message_.transform_sync_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::Proto::PayloadTransformSync& ToClientMessage::_internal_transform_sync() const {
+  return message_case() == kTransformSync ? *reinterpret_cast<::Proto::PayloadTransformSync*>(_impl_.message_.transform_sync_) : reinterpret_cast<::Proto::PayloadTransformSync&>(::Proto::_PayloadTransformSync_default_instance_);
+}
+inline const ::Proto::PayloadTransformSync& ToClientMessage::transform_sync() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:Proto.ToClientMessage.transform_sync)
+  return _internal_transform_sync();
+}
+inline ::Proto::PayloadTransformSync* PROTOBUF_NULLABLE ToClientMessage::unsafe_arena_release_transform_sync() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.ToClientMessage.transform_sync)
+  if (message_case() == kTransformSync) {
+    clear_has_message();
+    auto* temp = reinterpret_cast<::Proto::PayloadTransformSync*>(_impl_.message_.transform_sync_);
+    _impl_.message_.transform_sync_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void ToClientMessage::unsafe_arena_set_allocated_transform_sync(
+    ::Proto::PayloadTransformSync* PROTOBUF_NULLABLE value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_transform_sync();
+    _impl_.message_.transform_sync_ = reinterpret_cast<::google::protobuf::Message*>(value);
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.ToClientMessage.transform_sync)
+}
+inline ::Proto::PayloadTransformSync* PROTOBUF_NONNULL ToClientMessage::_internal_mutable_transform_sync() {
+  if (message_case() != kTransformSync) {
+    clear_message();
+    set_has_transform_sync();
+    _impl_.message_.transform_sync_ = reinterpret_cast<::google::protobuf::Message*>(
+        ::google::protobuf::Message::DefaultConstruct<::Proto::PayloadTransformSync>(GetArena()));
+  }
+  return reinterpret_cast<::Proto::PayloadTransformSync*>(_impl_.message_.transform_sync_);
+}
+inline ::Proto::PayloadTransformSync* PROTOBUF_NONNULL ToClientMessage::mutable_transform_sync()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::Proto::PayloadTransformSync* _msg = _internal_mutable_transform_sync();
+  // @@protoc_insertion_point(field_mutable:Proto.ToClientMessage.transform_sync)
+  return _msg;
+}
+
+// .Proto.PayloadPlayAction play_action = 7;
+inline bool ToClientMessage::has_play_action() const {
+  return message_case() == kPlayAction;
+}
+inline bool ToClientMessage::_internal_has_play_action() const {
+  return message_case() == kPlayAction;
+}
+inline void ToClientMessage::set_has_play_action() {
+  _impl_._oneof_case_[0] = kPlayAction;
+}
+inline ::Proto::PayloadPlayAction* PROTOBUF_NULLABLE ToClientMessage::release_play_action() {
+  // @@protoc_insertion_point(field_release:Proto.ToClientMessage.play_action)
+  if (message_case() == kPlayAction) {
+    clear_has_message();
+    auto* temp = reinterpret_cast<::Proto::PayloadPlayAction*>(_impl_.message_.play_action_);
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.message_.play_action_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::Proto::PayloadPlayAction& ToClientMessage::_internal_play_action() const {
+  return message_case() == kPlayAction ? *reinterpret_cast<::Proto::PayloadPlayAction*>(_impl_.message_.play_action_) : reinterpret_cast<::Proto::PayloadPlayAction&>(::Proto::_PayloadPlayAction_default_instance_);
+}
+inline const ::Proto::PayloadPlayAction& ToClientMessage::play_action() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:Proto.ToClientMessage.play_action)
+  return _internal_play_action();
+}
+inline ::Proto::PayloadPlayAction* PROTOBUF_NULLABLE ToClientMessage::unsafe_arena_release_play_action() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.ToClientMessage.play_action)
+  if (message_case() == kPlayAction) {
+    clear_has_message();
+    auto* temp = reinterpret_cast<::Proto::PayloadPlayAction*>(_impl_.message_.play_action_);
+    _impl_.message_.play_action_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void ToClientMessage::unsafe_arena_set_allocated_play_action(
+    ::Proto::PayloadPlayAction* PROTOBUF_NULLABLE value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_play_action();
+    _impl_.message_.play_action_ = reinterpret_cast<::google::protobuf::Message*>(value);
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.ToClientMessage.play_action)
+}
+inline ::Proto::PayloadPlayAction* PROTOBUF_NONNULL ToClientMessage::_internal_mutable_play_action() {
+  if (message_case() != kPlayAction) {
+    clear_message();
+    set_has_play_action();
+    _impl_.message_.play_action_ = reinterpret_cast<::google::protobuf::Message*>(
+        ::google::protobuf::Message::DefaultConstruct<::Proto::PayloadPlayAction>(GetArena()));
+  }
+  return reinterpret_cast<::Proto::PayloadPlayAction*>(_impl_.message_.play_action_);
+}
+inline ::Proto::PayloadPlayAction* PROTOBUF_NONNULL ToClientMessage::mutable_play_action()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::Proto::PayloadPlayAction* _msg = _internal_mutable_play_action();
+  // @@protoc_insertion_point(field_mutable:Proto.ToClientMessage.play_action)
+  return _msg;
+}
+
+// .Proto.PayloadEntityDamaged entity_damaged = 8;
+inline bool ToClientMessage::has_entity_damaged() const {
+  return message_case() == kEntityDamaged;
+}
+inline bool ToClientMessage::_internal_has_entity_damaged() const {
+  return message_case() == kEntityDamaged;
+}
+inline void ToClientMessage::set_has_entity_damaged() {
+  _impl_._oneof_case_[0] = kEntityDamaged;
+}
+inline ::Proto::PayloadEntityDamaged* PROTOBUF_NULLABLE ToClientMessage::release_entity_damaged() {
+  // @@protoc_insertion_point(field_release:Proto.ToClientMessage.entity_damaged)
+  if (message_case() == kEntityDamaged) {
+    clear_has_message();
+    auto* temp = reinterpret_cast<::Proto::PayloadEntityDamaged*>(_impl_.message_.entity_damaged_);
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.message_.entity_damaged_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::Proto::PayloadEntityDamaged& ToClientMessage::_internal_entity_damaged() const {
+  return message_case() == kEntityDamaged ? *reinterpret_cast<::Proto::PayloadEntityDamaged*>(_impl_.message_.entity_damaged_) : reinterpret_cast<::Proto::PayloadEntityDamaged&>(::Proto::_PayloadEntityDamaged_default_instance_);
+}
+inline const ::Proto::PayloadEntityDamaged& ToClientMessage::entity_damaged() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:Proto.ToClientMessage.entity_damaged)
+  return _internal_entity_damaged();
+}
+inline ::Proto::PayloadEntityDamaged* PROTOBUF_NULLABLE ToClientMessage::unsafe_arena_release_entity_damaged() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.ToClientMessage.entity_damaged)
+  if (message_case() == kEntityDamaged) {
+    clear_has_message();
+    auto* temp = reinterpret_cast<::Proto::PayloadEntityDamaged*>(_impl_.message_.entity_damaged_);
+    _impl_.message_.entity_damaged_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void ToClientMessage::unsafe_arena_set_allocated_entity_damaged(
+    ::Proto::PayloadEntityDamaged* PROTOBUF_NULLABLE value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_entity_damaged();
+    _impl_.message_.entity_damaged_ = reinterpret_cast<::google::protobuf::Message*>(value);
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.ToClientMessage.entity_damaged)
+}
+inline ::Proto::PayloadEntityDamaged* PROTOBUF_NONNULL ToClientMessage::_internal_mutable_entity_damaged() {
+  if (message_case() != kEntityDamaged) {
+    clear_message();
+    set_has_entity_damaged();
+    _impl_.message_.entity_damaged_ = reinterpret_cast<::google::protobuf::Message*>(
+        ::google::protobuf::Message::DefaultConstruct<::Proto::PayloadEntityDamaged>(GetArena()));
+  }
+  return reinterpret_cast<::Proto::PayloadEntityDamaged*>(_impl_.message_.entity_damaged_);
+}
+inline ::Proto::PayloadEntityDamaged* PROTOBUF_NONNULL ToClientMessage::mutable_entity_damaged()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::Proto::PayloadEntityDamaged* _msg = _internal_mutable_entity_damaged();
+  // @@protoc_insertion_point(field_mutable:Proto.ToClientMessage.entity_damaged)
+  return _msg;
+}
+
+// .Proto.PayloadEnemySpawn enemy_spawn = 9;
+inline bool ToClientMessage::has_enemy_spawn() const {
+  return message_case() == kEnemySpawn;
+}
+inline bool ToClientMessage::_internal_has_enemy_spawn() const {
+  return message_case() == kEnemySpawn;
+}
+inline void ToClientMessage::set_has_enemy_spawn() {
+  _impl_._oneof_case_[0] = kEnemySpawn;
+}
+inline ::Proto::PayloadEnemySpawn* PROTOBUF_NULLABLE ToClientMessage::release_enemy_spawn() {
+  // @@protoc_insertion_point(field_release:Proto.ToClientMessage.enemy_spawn)
+  if (message_case() == kEnemySpawn) {
+    clear_has_message();
+    auto* temp = reinterpret_cast<::Proto::PayloadEnemySpawn*>(_impl_.message_.enemy_spawn_);
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.message_.enemy_spawn_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::Proto::PayloadEnemySpawn& ToClientMessage::_internal_enemy_spawn() const {
+  return message_case() == kEnemySpawn ? *reinterpret_cast<::Proto::PayloadEnemySpawn*>(_impl_.message_.enemy_spawn_) : reinterpret_cast<::Proto::PayloadEnemySpawn&>(::Proto::_PayloadEnemySpawn_default_instance_);
+}
+inline const ::Proto::PayloadEnemySpawn& ToClientMessage::enemy_spawn() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:Proto.ToClientMessage.enemy_spawn)
+  return _internal_enemy_spawn();
+}
+inline ::Proto::PayloadEnemySpawn* PROTOBUF_NULLABLE ToClientMessage::unsafe_arena_release_enemy_spawn() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.ToClientMessage.enemy_spawn)
+  if (message_case() == kEnemySpawn) {
+    clear_has_message();
+    auto* temp = reinterpret_cast<::Proto::PayloadEnemySpawn*>(_impl_.message_.enemy_spawn_);
+    _impl_.message_.enemy_spawn_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void ToClientMessage::unsafe_arena_set_allocated_enemy_spawn(
+    ::Proto::PayloadEnemySpawn* PROTOBUF_NULLABLE value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_enemy_spawn();
+    _impl_.message_.enemy_spawn_ = reinterpret_cast<::google::protobuf::Message*>(value);
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.ToClientMessage.enemy_spawn)
+}
+inline ::Proto::PayloadEnemySpawn* PROTOBUF_NONNULL ToClientMessage::_internal_mutable_enemy_spawn() {
+  if (message_case() != kEnemySpawn) {
+    clear_message();
+    set_has_enemy_spawn();
+    _impl_.message_.enemy_spawn_ = reinterpret_cast<::google::protobuf::Message*>(
+        ::google::protobuf::Message::DefaultConstruct<::Proto::PayloadEnemySpawn>(GetArena()));
+  }
+  return reinterpret_cast<::Proto::PayloadEnemySpawn*>(_impl_.message_.enemy_spawn_);
+}
+inline ::Proto::PayloadEnemySpawn* PROTOBUF_NONNULL ToClientMessage::mutable_enemy_spawn()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::Proto::PayloadEnemySpawn* _msg = _internal_mutable_enemy_spawn();
+  // @@protoc_insertion_point(field_mutable:Proto.ToClientMessage.enemy_spawn)
+  return _msg;
+}
+
+// .Proto.PayloadEnemyDespawn enemy_despawn = 10;
+inline bool ToClientMessage::has_enemy_despawn() const {
+  return message_case() == kEnemyDespawn;
+}
+inline bool ToClientMessage::_internal_has_enemy_despawn() const {
+  return message_case() == kEnemyDespawn;
+}
+inline void ToClientMessage::set_has_enemy_despawn() {
+  _impl_._oneof_case_[0] = kEnemyDespawn;
+}
+inline ::Proto::PayloadEnemyDespawn* PROTOBUF_NULLABLE ToClientMessage::release_enemy_despawn() {
+  // @@protoc_insertion_point(field_release:Proto.ToClientMessage.enemy_despawn)
+  if (message_case() == kEnemyDespawn) {
+    clear_has_message();
+    auto* temp = reinterpret_cast<::Proto::PayloadEnemyDespawn*>(_impl_.message_.enemy_despawn_);
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.message_.enemy_despawn_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::Proto::PayloadEnemyDespawn& ToClientMessage::_internal_enemy_despawn() const {
+  return message_case() == kEnemyDespawn ? *reinterpret_cast<::Proto::PayloadEnemyDespawn*>(_impl_.message_.enemy_despawn_) : reinterpret_cast<::Proto::PayloadEnemyDespawn&>(::Proto::_PayloadEnemyDespawn_default_instance_);
+}
+inline const ::Proto::PayloadEnemyDespawn& ToClientMessage::enemy_despawn() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:Proto.ToClientMessage.enemy_despawn)
+  return _internal_enemy_despawn();
+}
+inline ::Proto::PayloadEnemyDespawn* PROTOBUF_NULLABLE ToClientMessage::unsafe_arena_release_enemy_despawn() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.ToClientMessage.enemy_despawn)
+  if (message_case() == kEnemyDespawn) {
+    clear_has_message();
+    auto* temp = reinterpret_cast<::Proto::PayloadEnemyDespawn*>(_impl_.message_.enemy_despawn_);
+    _impl_.message_.enemy_despawn_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void ToClientMessage::unsafe_arena_set_allocated_enemy_despawn(
+    ::Proto::PayloadEnemyDespawn* PROTOBUF_NULLABLE value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_enemy_despawn();
+    _impl_.message_.enemy_despawn_ = reinterpret_cast<::google::protobuf::Message*>(value);
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.ToClientMessage.enemy_despawn)
+}
+inline ::Proto::PayloadEnemyDespawn* PROTOBUF_NONNULL ToClientMessage::_internal_mutable_enemy_despawn() {
+  if (message_case() != kEnemyDespawn) {
+    clear_message();
+    set_has_enemy_despawn();
+    _impl_.message_.enemy_despawn_ = reinterpret_cast<::google::protobuf::Message*>(
+        ::google::protobuf::Message::DefaultConstruct<::Proto::PayloadEnemyDespawn>(GetArena()));
+  }
+  return reinterpret_cast<::Proto::PayloadEnemyDespawn*>(_impl_.message_.enemy_despawn_);
+}
+inline ::Proto::PayloadEnemyDespawn* PROTOBUF_NONNULL ToClientMessage::mutable_enemy_despawn()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::Proto::PayloadEnemyDespawn* _msg = _internal_mutable_enemy_despawn();
+  // @@protoc_insertion_point(field_mutable:Proto.ToClientMessage.enemy_despawn)
+  return _msg;
+}
+
+// .Proto.PayloadZoneEnterNotification zone_enter_notification = 11;
+inline bool ToClientMessage::has_zone_enter_notification() const {
+  return message_case() == kZoneEnterNotification;
+}
+inline bool ToClientMessage::_internal_has_zone_enter_notification() const {
+  return message_case() == kZoneEnterNotification;
+}
+inline void ToClientMessage::set_has_zone_enter_notification() {
+  _impl_._oneof_case_[0] = kZoneEnterNotification;
+}
+inline ::Proto::PayloadZoneEnterNotification* PROTOBUF_NULLABLE ToClientMessage::release_zone_enter_notification() {
+  // @@protoc_insertion_point(field_release:Proto.ToClientMessage.zone_enter_notification)
+  if (message_case() == kZoneEnterNotification) {
+    clear_has_message();
+    auto* temp = reinterpret_cast<::Proto::PayloadZoneEnterNotification*>(_impl_.message_.zone_enter_notification_);
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.message_.zone_enter_notification_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::Proto::PayloadZoneEnterNotification& ToClientMessage::_internal_zone_enter_notification() const {
+  return message_case() == kZoneEnterNotification ? *reinterpret_cast<::Proto::PayloadZoneEnterNotification*>(_impl_.message_.zone_enter_notification_) : reinterpret_cast<::Proto::PayloadZoneEnterNotification&>(::Proto::_PayloadZoneEnterNotification_default_instance_);
+}
+inline const ::Proto::PayloadZoneEnterNotification& ToClientMessage::zone_enter_notification() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:Proto.ToClientMessage.zone_enter_notification)
+  return _internal_zone_enter_notification();
+}
+inline ::Proto::PayloadZoneEnterNotification* PROTOBUF_NULLABLE ToClientMessage::unsafe_arena_release_zone_enter_notification() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.ToClientMessage.zone_enter_notification)
+  if (message_case() == kZoneEnterNotification) {
+    clear_has_message();
+    auto* temp = reinterpret_cast<::Proto::PayloadZoneEnterNotification*>(_impl_.message_.zone_enter_notification_);
+    _impl_.message_.zone_enter_notification_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void ToClientMessage::unsafe_arena_set_allocated_zone_enter_notification(
+    ::Proto::PayloadZoneEnterNotification* PROTOBUF_NULLABLE value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_zone_enter_notification();
+    _impl_.message_.zone_enter_notification_ = reinterpret_cast<::google::protobuf::Message*>(value);
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.ToClientMessage.zone_enter_notification)
+}
+inline ::Proto::PayloadZoneEnterNotification* PROTOBUF_NONNULL ToClientMessage::_internal_mutable_zone_enter_notification() {
+  if (message_case() != kZoneEnterNotification) {
+    clear_message();
+    set_has_zone_enter_notification();
+    _impl_.message_.zone_enter_notification_ = reinterpret_cast<::google::protobuf::Message*>(
+        ::google::protobuf::Message::DefaultConstruct<::Proto::PayloadZoneEnterNotification>(GetArena()));
+  }
+  return reinterpret_cast<::Proto::PayloadZoneEnterNotification*>(_impl_.message_.zone_enter_notification_);
+}
+inline ::Proto::PayloadZoneEnterNotification* PROTOBUF_NONNULL ToClientMessage::mutable_zone_enter_notification()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::Proto::PayloadZoneEnterNotification* _msg = _internal_mutable_zone_enter_notification();
+  // @@protoc_insertion_point(field_mutable:Proto.ToClientMessage.zone_enter_notification)
+  return _msg;
+}
+
+// .Proto.PayloadZoneExitNotification zone_exit_notification = 12;
+inline bool ToClientMessage::has_zone_exit_notification() const {
+  return message_case() == kZoneExitNotification;
+}
+inline bool ToClientMessage::_internal_has_zone_exit_notification() const {
+  return message_case() == kZoneExitNotification;
+}
+inline void ToClientMessage::set_has_zone_exit_notification() {
+  _impl_._oneof_case_[0] = kZoneExitNotification;
+}
+inline ::Proto::PayloadZoneExitNotification* PROTOBUF_NULLABLE ToClientMessage::release_zone_exit_notification() {
+  // @@protoc_insertion_point(field_release:Proto.ToClientMessage.zone_exit_notification)
+  if (message_case() == kZoneExitNotification) {
+    clear_has_message();
+    auto* temp = reinterpret_cast<::Proto::PayloadZoneExitNotification*>(_impl_.message_.zone_exit_notification_);
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.message_.zone_exit_notification_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::Proto::PayloadZoneExitNotification& ToClientMessage::_internal_zone_exit_notification() const {
+  return message_case() == kZoneExitNotification ? *reinterpret_cast<::Proto::PayloadZoneExitNotification*>(_impl_.message_.zone_exit_notification_) : reinterpret_cast<::Proto::PayloadZoneExitNotification&>(::Proto::_PayloadZoneExitNotification_default_instance_);
+}
+inline const ::Proto::PayloadZoneExitNotification& ToClientMessage::zone_exit_notification() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:Proto.ToClientMessage.zone_exit_notification)
+  return _internal_zone_exit_notification();
+}
+inline ::Proto::PayloadZoneExitNotification* PROTOBUF_NULLABLE ToClientMessage::unsafe_arena_release_zone_exit_notification() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.ToClientMessage.zone_exit_notification)
+  if (message_case() == kZoneExitNotification) {
+    clear_has_message();
+    auto* temp = reinterpret_cast<::Proto::PayloadZoneExitNotification*>(_impl_.message_.zone_exit_notification_);
+    _impl_.message_.zone_exit_notification_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void ToClientMessage::unsafe_arena_set_allocated_zone_exit_notification(
+    ::Proto::PayloadZoneExitNotification* PROTOBUF_NULLABLE value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_zone_exit_notification();
+    _impl_.message_.zone_exit_notification_ = reinterpret_cast<::google::protobuf::Message*>(value);
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.ToClientMessage.zone_exit_notification)
+}
+inline ::Proto::PayloadZoneExitNotification* PROTOBUF_NONNULL ToClientMessage::_internal_mutable_zone_exit_notification() {
+  if (message_case() != kZoneExitNotification) {
+    clear_message();
+    set_has_zone_exit_notification();
+    _impl_.message_.zone_exit_notification_ = reinterpret_cast<::google::protobuf::Message*>(
+        ::google::protobuf::Message::DefaultConstruct<::Proto::PayloadZoneExitNotification>(GetArena()));
+  }
+  return reinterpret_cast<::Proto::PayloadZoneExitNotification*>(_impl_.message_.zone_exit_notification_);
+}
+inline ::Proto::PayloadZoneExitNotification* PROTOBUF_NONNULL ToClientMessage::mutable_zone_exit_notification()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::Proto::PayloadZoneExitNotification* _msg = _internal_mutable_zone_exit_notification();
+  // @@protoc_insertion_point(field_mutable:Proto.ToClientMessage.zone_exit_notification)
+  return _msg;
+}
+
+// .Proto.PayloadTextMessage text_message = 13;
+inline bool ToClientMessage::has_text_message() const {
+  return message_case() == kTextMessage;
+}
+inline bool ToClientMessage::_internal_has_text_message() const {
+  return message_case() == kTextMessage;
+}
+inline void ToClientMessage::set_has_text_message() {
+  _impl_._oneof_case_[0] = kTextMessage;
+}
+inline ::Proto::PayloadTextMessage* PROTOBUF_NULLABLE ToClientMessage::release_text_message() {
+  // @@protoc_insertion_point(field_release:Proto.ToClientMessage.text_message)
+  if (message_case() == kTextMessage) {
+    clear_has_message();
+    auto* temp = reinterpret_cast<::Proto::PayloadTextMessage*>(_impl_.message_.text_message_);
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.message_.text_message_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::Proto::PayloadTextMessage& ToClientMessage::_internal_text_message() const {
+  return message_case() == kTextMessage ? *reinterpret_cast<::Proto::PayloadTextMessage*>(_impl_.message_.text_message_) : reinterpret_cast<::Proto::PayloadTextMessage&>(::Proto::_PayloadTextMessage_default_instance_);
+}
+inline const ::Proto::PayloadTextMessage& ToClientMessage::text_message() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:Proto.ToClientMessage.text_message)
+  return _internal_text_message();
+}
+inline ::Proto::PayloadTextMessage* PROTOBUF_NULLABLE ToClientMessage::unsafe_arena_release_text_message() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.ToClientMessage.text_message)
+  if (message_case() == kTextMessage) {
+    clear_has_message();
+    auto* temp = reinterpret_cast<::Proto::PayloadTextMessage*>(_impl_.message_.text_message_);
+    _impl_.message_.text_message_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void ToClientMessage::unsafe_arena_set_allocated_text_message(
+    ::Proto::PayloadTextMessage* PROTOBUF_NULLABLE value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_text_message();
+    _impl_.message_.text_message_ = reinterpret_cast<::google::protobuf::Message*>(value);
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.ToClientMessage.text_message)
+}
+inline ::Proto::PayloadTextMessage* PROTOBUF_NONNULL ToClientMessage::_internal_mutable_text_message() {
+  if (message_case() != kTextMessage) {
+    clear_message();
+    set_has_text_message();
+    _impl_.message_.text_message_ = reinterpret_cast<::google::protobuf::Message*>(
+        ::google::protobuf::Message::DefaultConstruct<::Proto::PayloadTextMessage>(GetArena()));
+  }
+  return reinterpret_cast<::Proto::PayloadTextMessage*>(_impl_.message_.text_message_);
+}
+inline ::Proto::PayloadTextMessage* PROTOBUF_NONNULL ToClientMessage::mutable_text_message()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::Proto::PayloadTextMessage* _msg = _internal_mutable_text_message();
+  // @@protoc_insertion_point(field_mutable:Proto.ToClientMessage.text_message)
+  return _msg;
+}
+
+inline bool ToClientMessage::has_message() const {
+  return message_case() != MESSAGE_NOT_SET;
+}
+inline void ToClientMessage::clear_has_message() {
+  _impl_._oneof_case_[0] = MESSAGE_NOT_SET;
+}
+inline ToClientMessage::MessageCase ToClientMessage::message_case() const {
+  return ToClientMessage::MessageCase(_impl_._oneof_case_[0]);
 }
 #ifdef __GNUC__
 #pragma GCC diagnostic pop
