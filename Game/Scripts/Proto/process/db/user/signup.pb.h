@@ -414,10 +414,11 @@ class PayloadSignupResponse final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
-    kSessionIdFieldNumber = 2,
+    kSessionIdFieldNumber = 3,
+    kUserIdFieldNumber = 2,
     kIsSucceededFieldNumber = 1,
   };
-  // .Proto.SessionId session_id = 2;
+  // .Proto.SessionId session_id = 3;
   bool has_session_id() const;
   void clear_session_id() ;
   const ::Proto::SessionId& session_id() const;
@@ -430,6 +431,16 @@ class PayloadSignupResponse final : public ::google::protobuf::Message
   private:
   const ::Proto::SessionId& _internal_session_id() const;
   ::Proto::SessionId* PROTOBUF_NONNULL _internal_mutable_session_id();
+
+  public:
+  // uint64 user_id = 2;
+  void clear_user_id() ;
+  ::uint64_t user_id() const;
+  void set_user_id(::uint64_t value);
+
+  private:
+  ::uint64_t _internal_user_id() const;
+  void _internal_set_user_id(::uint64_t value);
 
   public:
   // bool is_succeeded = 1;
@@ -446,7 +457,7 @@ class PayloadSignupResponse final : public ::google::protobuf::Message
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<1, 2,
+  static const ::google::protobuf::internal::TcParseTable<2, 3,
                                    1, 0,
                                    2>
       _table_;
@@ -469,6 +480,7 @@ class PayloadSignupResponse final : public ::google::protobuf::Message
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::Proto::SessionId* PROTOBUF_NULLABLE session_id_;
+    ::uint64_t user_id_;
     bool is_succeeded_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
@@ -567,7 +579,7 @@ inline void PayloadSignupRequest::set_allocated_username(::std::string* PROTOBUF
 inline void PayloadSignupResponse::clear_is_succeeded() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.is_succeeded_ = false;
-  _impl_._has_bits_[0] &= ~0x00000002U;
+  _impl_._has_bits_[0] &= ~0x00000004U;
 }
 inline bool PayloadSignupResponse::is_succeeded() const {
   // @@protoc_insertion_point(field_get:Proto.PayloadSignupResponse.is_succeeded)
@@ -575,7 +587,7 @@ inline bool PayloadSignupResponse::is_succeeded() const {
 }
 inline void PayloadSignupResponse::set_is_succeeded(bool value) {
   _internal_set_is_succeeded(value);
-  _impl_._has_bits_[0] |= 0x00000002U;
+  _impl_._has_bits_[0] |= 0x00000004U;
   // @@protoc_insertion_point(field_set:Proto.PayloadSignupResponse.is_succeeded)
 }
 inline bool PayloadSignupResponse::_internal_is_succeeded() const {
@@ -587,7 +599,31 @@ inline void PayloadSignupResponse::_internal_set_is_succeeded(bool value) {
   _impl_.is_succeeded_ = value;
 }
 
-// .Proto.SessionId session_id = 2;
+// uint64 user_id = 2;
+inline void PayloadSignupResponse::clear_user_id() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.user_id_ = ::uint64_t{0u};
+  _impl_._has_bits_[0] &= ~0x00000002U;
+}
+inline ::uint64_t PayloadSignupResponse::user_id() const {
+  // @@protoc_insertion_point(field_get:Proto.PayloadSignupResponse.user_id)
+  return _internal_user_id();
+}
+inline void PayloadSignupResponse::set_user_id(::uint64_t value) {
+  _internal_set_user_id(value);
+  _impl_._has_bits_[0] |= 0x00000002U;
+  // @@protoc_insertion_point(field_set:Proto.PayloadSignupResponse.user_id)
+}
+inline ::uint64_t PayloadSignupResponse::_internal_user_id() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.user_id_;
+}
+inline void PayloadSignupResponse::_internal_set_user_id(::uint64_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.user_id_ = value;
+}
+
+// .Proto.SessionId session_id = 3;
 inline bool PayloadSignupResponse::has_session_id() const {
   bool value = (_impl_._has_bits_[0] & 0x00000001U) != 0;
   PROTOBUF_ASSUME(!value || _impl_.session_id_ != nullptr);

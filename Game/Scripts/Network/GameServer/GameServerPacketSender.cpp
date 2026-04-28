@@ -31,7 +31,7 @@ void GameServerPacketSender::stack_packet(const Proto::ToServerMessage& packet) 
 }
 
 void GameServerPacketSender::send_all_packets() {
-	if (!connectionManager || !connectionManager->is_connected()) {
+	if (!connectionManager || !connectionManager->is_established()) {
 		return;
 	}
 	asio::ip::tcp::socket& socket = connectionManager->get_socket();

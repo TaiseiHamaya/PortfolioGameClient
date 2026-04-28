@@ -30,8 +30,8 @@ inline constexpr PayloadLoginResponse::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
         session_id_{nullptr},
-        is_succeeded_{false},
-        user_id_{0u} {}
+        user_id_{::uint64_t{0u}},
+        is_succeeded_{false} {}
 
 template <typename>
 PROTOBUF_CONSTEXPR PayloadLoginResponse::PayloadLoginResponse(::_pbi::ConstantInitialized)
@@ -96,8 +96,8 @@ const ::uint32_t
         PROTOBUF_FIELD_OFFSET(::Proto::PayloadLoginResponse, _impl_.is_succeeded_),
         PROTOBUF_FIELD_OFFSET(::Proto::PayloadLoginResponse, _impl_.user_id_),
         PROTOBUF_FIELD_OFFSET(::Proto::PayloadLoginResponse, _impl_.session_id_),
-        1,
         2,
+        1,
         0,
 };
 
@@ -117,7 +117,7 @@ const char descriptor_table_protodef_process_2fdb_2fuser_2flogin_2eproto[] ABSL_
     "\023PayloadLoginRequest\022$\n\nsession_id\030\001 \001(\013"
     "2\020.Proto.SessionId\"c\n\024PayloadLoginRespon"
     "se\022\024\n\014is_succeeded\030\001 \001(\010\022\017\n\007user_id\030\002 \001("
-    "\r\022$\n\nsession_id\030\003 \001(\0132\020.Proto.SessionIdb"
+    "\004\022$\n\nsession_id\030\003 \001(\0132\020.Proto.SessionIdb"
     "\006proto3"
 };
 static const ::_pbi::DescriptorTable* PROTOBUF_NONNULL const
@@ -464,12 +464,12 @@ PayloadLoginResponse::PayloadLoginResponse(
                 ? ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.session_id_)
                 : nullptr;
   ::memcpy(reinterpret_cast<char *>(&_impl_) +
-               offsetof(Impl_, is_succeeded_),
+               offsetof(Impl_, user_id_),
            reinterpret_cast<const char *>(&from._impl_) +
-               offsetof(Impl_, is_succeeded_),
-           offsetof(Impl_, user_id_) -
-               offsetof(Impl_, is_succeeded_) +
-               sizeof(Impl_::user_id_));
+               offsetof(Impl_, user_id_),
+           offsetof(Impl_, is_succeeded_) -
+               offsetof(Impl_, user_id_) +
+               sizeof(Impl_::is_succeeded_));
 
   // @@protoc_insertion_point(copy_constructor:Proto.PayloadLoginResponse)
 }
@@ -483,9 +483,9 @@ inline void PayloadLoginResponse::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE are
   ::memset(reinterpret_cast<char *>(&_impl_) +
                offsetof(Impl_, session_id_),
            0,
-           offsetof(Impl_, user_id_) -
+           offsetof(Impl_, is_succeeded_) -
                offsetof(Impl_, session_id_) +
-               sizeof(Impl_::user_id_));
+               sizeof(Impl_::is_succeeded_));
 }
 PayloadLoginResponse::~PayloadLoginResponse() {
   // @@protoc_insertion_point(destructor:Proto.PayloadLoginResponse)
@@ -566,11 +566,11 @@ PayloadLoginResponse::_table_ = {
   }, {{
     {::_pbi::TcParser::MiniParse, {}},
     // bool is_succeeded = 1;
-    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(PayloadLoginResponse, _impl_.is_succeeded_), 1>(),
-     {8, 1, 0, PROTOBUF_FIELD_OFFSET(PayloadLoginResponse, _impl_.is_succeeded_)}},
-    // uint32 user_id = 2;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(PayloadLoginResponse, _impl_.user_id_), 2>(),
-     {16, 2, 0, PROTOBUF_FIELD_OFFSET(PayloadLoginResponse, _impl_.user_id_)}},
+    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(PayloadLoginResponse, _impl_.is_succeeded_), 2>(),
+     {8, 2, 0, PROTOBUF_FIELD_OFFSET(PayloadLoginResponse, _impl_.is_succeeded_)}},
+    // uint64 user_id = 2;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(PayloadLoginResponse, _impl_.user_id_), 1>(),
+     {16, 1, 0, PROTOBUF_FIELD_OFFSET(PayloadLoginResponse, _impl_.user_id_)}},
     // .Proto.SessionId session_id = 3;
     {::_pbi::TcParser::FastMtS1,
      {26, 0, 0, PROTOBUF_FIELD_OFFSET(PayloadLoginResponse, _impl_.session_id_)}},
@@ -578,9 +578,9 @@ PayloadLoginResponse::_table_ = {
     65535, 65535
   }}, {{
     // bool is_succeeded = 1;
-    {PROTOBUF_FIELD_OFFSET(PayloadLoginResponse, _impl_.is_succeeded_), _Internal::kHasBitsOffset + 1, 0, (0 | ::_fl::kFcOptional | ::_fl::kBool)},
-    // uint32 user_id = 2;
-    {PROTOBUF_FIELD_OFFSET(PayloadLoginResponse, _impl_.user_id_), _Internal::kHasBitsOffset + 2, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt32)},
+    {PROTOBUF_FIELD_OFFSET(PayloadLoginResponse, _impl_.is_succeeded_), _Internal::kHasBitsOffset + 2, 0, (0 | ::_fl::kFcOptional | ::_fl::kBool)},
+    // uint64 user_id = 2;
+    {PROTOBUF_FIELD_OFFSET(PayloadLoginResponse, _impl_.user_id_), _Internal::kHasBitsOffset + 1, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt64)},
     // .Proto.SessionId session_id = 3;
     {PROTOBUF_FIELD_OFFSET(PayloadLoginResponse, _impl_.session_id_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
   }},
@@ -603,9 +603,9 @@ PROTOBUF_NOINLINE void PayloadLoginResponse::Clear() {
     _impl_.session_id_->Clear();
   }
   if ((cached_has_bits & 0x00000006U) != 0) {
-    ::memset(&_impl_.is_succeeded_, 0, static_cast<::size_t>(
-        reinterpret_cast<char*>(&_impl_.user_id_) -
-        reinterpret_cast<char*>(&_impl_.is_succeeded_)) + sizeof(_impl_.user_id_));
+    ::memset(&_impl_.user_id_, 0, static_cast<::size_t>(
+        reinterpret_cast<char*>(&_impl_.is_succeeded_) -
+        reinterpret_cast<char*>(&_impl_.user_id_)) + sizeof(_impl_.is_succeeded_));
   }
   _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
@@ -630,7 +630,7 @@ PROTOBUF_NOINLINE void PayloadLoginResponse::Clear() {
   (void)cached_has_bits;
 
   // bool is_succeeded = 1;
-  if ((this_._impl_._has_bits_[0] & 0x00000002U) != 0) {
+  if ((this_._impl_._has_bits_[0] & 0x00000004U) != 0) {
     if (this_._internal_is_succeeded() != 0) {
       target = stream->EnsureSpace(target);
       target = ::_pbi::WireFormatLite::WriteBoolToArray(
@@ -638,11 +638,11 @@ PROTOBUF_NOINLINE void PayloadLoginResponse::Clear() {
     }
   }
 
-  // uint32 user_id = 2;
-  if ((this_._impl_._has_bits_[0] & 0x00000004U) != 0) {
+  // uint64 user_id = 2;
+  if ((this_._impl_._has_bits_[0] & 0x00000002U) != 0) {
     if (this_._internal_user_id() != 0) {
       target = stream->EnsureSpace(target);
-      target = ::_pbi::WireFormatLite::WriteUInt32ToArray(
+      target = ::_pbi::WireFormatLite::WriteUInt64ToArray(
           2, this_._internal_user_id(), target);
     }
   }
@@ -686,17 +686,17 @@ PROTOBUF_NOINLINE void PayloadLoginResponse::Clear() {
       total_size += 1 +
                     ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.session_id_);
     }
-    // bool is_succeeded = 1;
+    // uint64 user_id = 2;
     if ((cached_has_bits & 0x00000002U) != 0) {
-      if (this_._internal_is_succeeded() != 0) {
-        total_size += 2;
+      if (this_._internal_user_id() != 0) {
+        total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(
+            this_._internal_user_id());
       }
     }
-    // uint32 user_id = 2;
+    // bool is_succeeded = 1;
     if ((cached_has_bits & 0x00000004U) != 0) {
-      if (this_._internal_user_id() != 0) {
-        total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(
-            this_._internal_user_id());
+      if (this_._internal_is_succeeded() != 0) {
+        total_size += 2;
       }
     }
   }
@@ -727,13 +727,13 @@ void PayloadLoginResponse::MergeImpl(::google::protobuf::MessageLite& to_msg, co
       }
     }
     if ((cached_has_bits & 0x00000002U) != 0) {
-      if (from._internal_is_succeeded() != 0) {
-        _this->_impl_.is_succeeded_ = from._impl_.is_succeeded_;
+      if (from._internal_user_id() != 0) {
+        _this->_impl_.user_id_ = from._impl_.user_id_;
       }
     }
     if ((cached_has_bits & 0x00000004U) != 0) {
-      if (from._internal_user_id() != 0) {
-        _this->_impl_.user_id_ = from._impl_.user_id_;
+      if (from._internal_is_succeeded() != 0) {
+        _this->_impl_.is_succeeded_ = from._impl_.is_succeeded_;
       }
     }
   }
@@ -754,8 +754,8 @@ void PayloadLoginResponse::InternalSwap(PayloadLoginResponse* PROTOBUF_RESTRICT 
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(PayloadLoginResponse, _impl_.user_id_)
-      + sizeof(PayloadLoginResponse::_impl_.user_id_)
+      PROTOBUF_FIELD_OFFSET(PayloadLoginResponse, _impl_.is_succeeded_)
+      + sizeof(PayloadLoginResponse::_impl_.is_succeeded_)
       - PROTOBUF_FIELD_OFFSET(PayloadLoginResponse, _impl_.session_id_)>(
           reinterpret_cast<char*>(&_impl_.session_id_),
           reinterpret_cast<char*>(&other->_impl_.session_id_));

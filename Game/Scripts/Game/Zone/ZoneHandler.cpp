@@ -37,7 +37,7 @@ void ZoneHandler::setup(Reference<EntityManager> entityManager_, Reference<Enemy
 	enemyMessageHandler.setup(enemyManager_, entityManager_);
 
 	router.register_handler(Proto::ToClientMessage::kTextMessage, std::ref(textMessageHandler));
-	//router.register_handler(Proto::ToClientMessage::kSystemMessage, std::ref(textMessageHandler));
+	router.register_handler(Proto::ToClientMessage::kStartGameResponse, std::ref(loginMessageHandler));
 	router.register_handler(Proto::ToClientMessage::kLogoutResponse, std::ref(logoutMessageHandler));
 	router.register_handler(Proto::ToClientMessage::kZoneEnterNotification, std::ref(loginMessageHandler));
 	router.register_handler(Proto::ToClientMessage::kZoneExitNotification, std::ref(logoutMessageHandler));
@@ -48,9 +48,17 @@ void ZoneHandler::setup(Reference<EntityManager> entityManager_, Reference<Enemy
 	router.register_handler(Proto::ToClientMessage::kEnemyDespawn, std::ref(enemyMessageHandler));
 
 	chatBoxManager.initialize();
+
+	Proto::ToServerMessage enter;
+	Proto::PayloadLobbyStartGameRequest* payload = enter.mutable_start_game();
+	NetworkCluster::SenderMut()->stack_packet(enter);
+
+	NetworkCluster::Send();
 }
 
 void ZoneHandler::prev_update() {
+	NetworkCluster::Receive();
+
 	handle_zone();
 
 	chatBoxManager.update();
@@ -58,7 +66,7 @@ void ZoneHandler::prev_update() {
 		std::wstring message = chatBoxManager.into_string();
 		szgInformation(L"Send chat message: {}", message);
 
-		if (gameServerConnectionManager && gameServerConnectionManager->is_connected() && gameServerPacketSender && player) {
+		if (gameServerConnectionManager && gameServerConnectionManager->is_established() && gameServerPacketSender && player) {
 			const std::optional<u64>& serverId = player->server_id();
 			if (serverId.has_value()) {
 				// パケット作成
@@ -74,11 +82,17 @@ void ZoneHandler::prev_update() {
 	}
 
 	execute_commands();
-
-	NetworkCluster::Receive();
 }
 
 void ZoneHandler::post_update() {
+	NetworkCluster::Send();
+}
+
+void ZoneHandler::finalize() {
+	Proto::ToServerMessage enter;
+	Proto::PayloadLobbyEndGameRequest* payload = enter.mutable_end_game();
+	NetworkCluster::SenderMut()->stack_packet(enter);
+
 	NetworkCluster::Send();
 }
 
@@ -87,7 +101,7 @@ void ZoneHandler::execute_commands() {
 		command->execute(zone);
 	}
 	zoneCommands.clear();
-}
+}	
 
 void ZoneHandler::handle_zone() {
 	if (!gameServerPacketReceiver || !player) {
@@ -119,7 +133,7 @@ void ZoneHandler::move_client_player(const Vector3& position) {
 			position
 		)
 	);
-	if (!gameServerConnectionManager || !gameServerConnectionManager->is_connected()) {
+	if (!gameServerConnectionManager || !gameServerConnectionManager->is_established()) {
 		return;
 	}
 	if (!gameServerPacketSender) {
@@ -131,15 +145,14 @@ void ZoneHandler::move_client_player(const Vector3& position) {
 	}
 	// パケット作成
 	Proto::ToServerMessage packet;
-	Proto::PayloadTransformSync body;
-	body.set_id(serverId.value());
-	body.set_timestamp(std::chrono::duration_cast<std::chrono::microseconds>(now.time_since_epoch()).count());
+	Proto::PayloadTransformSync* payload = packet.mutable_transform_sync();
+	payload->set_id(serverId.value());
+	payload->set_timestamp(std::chrono::duration_cast<std::chrono::microseconds>(now.time_since_epoch()).count());
 	// 位置の書き込み
-	Proto::Vector3* pos = body.mutable_position();
+	Proto::Vector3* pos = payload->mutable_position();
 	pos->set_x(position.x);
 	pos->set_y(position.y);
 	pos->set_z(position.z);
-	packet.set_allocated_transform_sync(&body);
 	gameServerPacketSender->stack_packet(packet);
 }
 
@@ -164,7 +177,7 @@ void ZoneHandler::request_play_action(u32 actionId) {
 			player->get_selection_target()
 		)
 	);
-	if (!gameServerConnectionManager || !gameServerConnectionManager->is_connected()) {
+	if (!gameServerConnectionManager || !gameServerConnectionManager->is_established()) {
 		return;
 	}
 	if (!gameServerPacketSender) {

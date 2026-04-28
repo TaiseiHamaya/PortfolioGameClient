@@ -518,15 +518,16 @@ class ToClientMessage final : public ::google::protobuf::Message
     kLogoutResponse = 2,
     kSignupResponse = 3,
     kLobbyEnterResponse = 4,
-    kEndGameResponse = 5,
-    kTransformSync = 6,
-    kPlayAction = 7,
-    kEntityDamaged = 8,
-    kEnemySpawn = 9,
-    kEnemyDespawn = 10,
-    kZoneEnterNotification = 11,
-    kZoneExitNotification = 12,
-    kTextMessage = 13,
+    kStartGameResponse = 5,
+    kEndGameResponse = 6,
+    kTransformSync = 7,
+    kPlayAction = 8,
+    kEntityDamaged = 9,
+    kEnemySpawn = 10,
+    kEnemyDespawn = 11,
+    kZoneEnterNotification = 12,
+    kZoneExitNotification = 13,
+    kTextMessage = 14,
     MESSAGE_NOT_SET = 0,
   };
   static constexpr int kIndexInFileMessages = 1;
@@ -620,15 +621,16 @@ class ToClientMessage final : public ::google::protobuf::Message
     kLogoutResponseFieldNumber = 2,
     kSignupResponseFieldNumber = 3,
     kLobbyEnterResponseFieldNumber = 4,
-    kEndGameResponseFieldNumber = 5,
-    kTransformSyncFieldNumber = 6,
-    kPlayActionFieldNumber = 7,
-    kEntityDamagedFieldNumber = 8,
-    kEnemySpawnFieldNumber = 9,
-    kEnemyDespawnFieldNumber = 10,
-    kZoneEnterNotificationFieldNumber = 11,
-    kZoneExitNotificationFieldNumber = 12,
-    kTextMessageFieldNumber = 13,
+    kStartGameResponseFieldNumber = 5,
+    kEndGameResponseFieldNumber = 6,
+    kTransformSyncFieldNumber = 7,
+    kPlayActionFieldNumber = 8,
+    kEntityDamagedFieldNumber = 9,
+    kEnemySpawnFieldNumber = 10,
+    kEnemyDespawnFieldNumber = 11,
+    kZoneEnterNotificationFieldNumber = 12,
+    kZoneExitNotificationFieldNumber = 13,
+    kTextMessageFieldNumber = 14,
   };
   // .Proto.PayloadLogoutResponse logout_response = 2;
   bool has_logout_response() const;
@@ -687,7 +689,26 @@ class ToClientMessage final : public ::google::protobuf::Message
   ::Proto::PayloadLobbyEnterResponse* PROTOBUF_NONNULL _internal_mutable_lobby_enter_response();
 
   public:
-  // .Proto.PayloadLobbyEndGameResponse end_game_response = 5;
+  // .Proto.PayloadLobbyStartGameResponse start_game_response = 5;
+  bool has_start_game_response() const;
+  private:
+  bool _internal_has_start_game_response() const;
+
+  public:
+  void clear_start_game_response() ;
+  const ::Proto::PayloadLobbyStartGameResponse& start_game_response() const;
+  [[nodiscard]] ::Proto::PayloadLobbyStartGameResponse* PROTOBUF_NULLABLE release_start_game_response();
+  ::Proto::PayloadLobbyStartGameResponse* PROTOBUF_NONNULL mutable_start_game_response();
+  void set_allocated_start_game_response(::Proto::PayloadLobbyStartGameResponse* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_start_game_response(::Proto::PayloadLobbyStartGameResponse* PROTOBUF_NULLABLE value);
+  ::Proto::PayloadLobbyStartGameResponse* PROTOBUF_NULLABLE unsafe_arena_release_start_game_response();
+
+  private:
+  const ::Proto::PayloadLobbyStartGameResponse& _internal_start_game_response() const;
+  ::Proto::PayloadLobbyStartGameResponse* PROTOBUF_NONNULL _internal_mutable_start_game_response();
+
+  public:
+  // .Proto.PayloadLobbyEndGameResponse end_game_response = 6;
   bool has_end_game_response() const;
   private:
   bool _internal_has_end_game_response() const;
@@ -706,7 +727,7 @@ class ToClientMessage final : public ::google::protobuf::Message
   ::Proto::PayloadLobbyEndGameResponse* PROTOBUF_NONNULL _internal_mutable_end_game_response();
 
   public:
-  // .Proto.PayloadTransformSync transform_sync = 6;
+  // .Proto.PayloadTransformSync transform_sync = 7;
   bool has_transform_sync() const;
   private:
   bool _internal_has_transform_sync() const;
@@ -725,7 +746,7 @@ class ToClientMessage final : public ::google::protobuf::Message
   ::Proto::PayloadTransformSync* PROTOBUF_NONNULL _internal_mutable_transform_sync();
 
   public:
-  // .Proto.PayloadPlayAction play_action = 7;
+  // .Proto.PayloadPlayAction play_action = 8;
   bool has_play_action() const;
   private:
   bool _internal_has_play_action() const;
@@ -744,7 +765,7 @@ class ToClientMessage final : public ::google::protobuf::Message
   ::Proto::PayloadPlayAction* PROTOBUF_NONNULL _internal_mutable_play_action();
 
   public:
-  // .Proto.PayloadEntityDamaged entity_damaged = 8;
+  // .Proto.PayloadEntityDamaged entity_damaged = 9;
   bool has_entity_damaged() const;
   private:
   bool _internal_has_entity_damaged() const;
@@ -763,7 +784,7 @@ class ToClientMessage final : public ::google::protobuf::Message
   ::Proto::PayloadEntityDamaged* PROTOBUF_NONNULL _internal_mutable_entity_damaged();
 
   public:
-  // .Proto.PayloadEnemySpawn enemy_spawn = 9;
+  // .Proto.PayloadEnemySpawn enemy_spawn = 10;
   bool has_enemy_spawn() const;
   private:
   bool _internal_has_enemy_spawn() const;
@@ -782,7 +803,7 @@ class ToClientMessage final : public ::google::protobuf::Message
   ::Proto::PayloadEnemySpawn* PROTOBUF_NONNULL _internal_mutable_enemy_spawn();
 
   public:
-  // .Proto.PayloadEnemyDespawn enemy_despawn = 10;
+  // .Proto.PayloadEnemyDespawn enemy_despawn = 11;
   bool has_enemy_despawn() const;
   private:
   bool _internal_has_enemy_despawn() const;
@@ -801,7 +822,7 @@ class ToClientMessage final : public ::google::protobuf::Message
   ::Proto::PayloadEnemyDespawn* PROTOBUF_NONNULL _internal_mutable_enemy_despawn();
 
   public:
-  // .Proto.PayloadZoneEnterNotification zone_enter_notification = 11;
+  // .Proto.PayloadZoneEnterNotification zone_enter_notification = 12;
   bool has_zone_enter_notification() const;
   private:
   bool _internal_has_zone_enter_notification() const;
@@ -820,7 +841,7 @@ class ToClientMessage final : public ::google::protobuf::Message
   ::Proto::PayloadZoneEnterNotification* PROTOBUF_NONNULL _internal_mutable_zone_enter_notification();
 
   public:
-  // .Proto.PayloadZoneExitNotification zone_exit_notification = 12;
+  // .Proto.PayloadZoneExitNotification zone_exit_notification = 13;
   bool has_zone_exit_notification() const;
   private:
   bool _internal_has_zone_exit_notification() const;
@@ -839,7 +860,7 @@ class ToClientMessage final : public ::google::protobuf::Message
   ::Proto::PayloadZoneExitNotification* PROTOBUF_NONNULL _internal_mutable_zone_exit_notification();
 
   public:
-  // .Proto.PayloadTextMessage text_message = 13;
+  // .Proto.PayloadTextMessage text_message = 14;
   bool has_text_message() const;
   private:
   bool _internal_has_text_message() const;
@@ -866,6 +887,7 @@ class ToClientMessage final : public ::google::protobuf::Message
   void set_has_logout_response();
   void set_has_signup_response();
   void set_has_lobby_enter_response();
+  void set_has_start_game_response();
   void set_has_end_game_response();
   void set_has_transform_sync();
   void set_has_play_action();
@@ -878,8 +900,8 @@ class ToClientMessage final : public ::google::protobuf::Message
   inline bool has_message() const;
   inline void clear_has_message();
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<0, 12,
-                                   12, 0,
+  static const ::google::protobuf::internal::TcParseTable<0, 13,
+                                   13, 0,
                                    2>
       _table_;
 
@@ -904,6 +926,7 @@ class ToClientMessage final : public ::google::protobuf::Message
       ::google::protobuf::Message* PROTOBUF_NULLABLE logout_response_;
       ::google::protobuf::Message* PROTOBUF_NULLABLE signup_response_;
       ::google::protobuf::Message* PROTOBUF_NULLABLE lobby_enter_response_;
+      ::google::protobuf::Message* PROTOBUF_NULLABLE start_game_response_;
       ::google::protobuf::Message* PROTOBUF_NULLABLE end_game_response_;
       ::google::protobuf::Message* PROTOBUF_NULLABLE transform_sync_;
       ::google::protobuf::Message* PROTOBUF_NULLABLE play_action_;
@@ -1723,7 +1746,77 @@ inline ::Proto::PayloadLobbyEnterResponse* PROTOBUF_NONNULL ToClientMessage::mut
   return _msg;
 }
 
-// .Proto.PayloadLobbyEndGameResponse end_game_response = 5;
+// .Proto.PayloadLobbyStartGameResponse start_game_response = 5;
+inline bool ToClientMessage::has_start_game_response() const {
+  return message_case() == kStartGameResponse;
+}
+inline bool ToClientMessage::_internal_has_start_game_response() const {
+  return message_case() == kStartGameResponse;
+}
+inline void ToClientMessage::set_has_start_game_response() {
+  _impl_._oneof_case_[0] = kStartGameResponse;
+}
+inline ::Proto::PayloadLobbyStartGameResponse* PROTOBUF_NULLABLE ToClientMessage::release_start_game_response() {
+  // @@protoc_insertion_point(field_release:Proto.ToClientMessage.start_game_response)
+  if (message_case() == kStartGameResponse) {
+    clear_has_message();
+    auto* temp = reinterpret_cast<::Proto::PayloadLobbyStartGameResponse*>(_impl_.message_.start_game_response_);
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.message_.start_game_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::Proto::PayloadLobbyStartGameResponse& ToClientMessage::_internal_start_game_response() const {
+  return message_case() == kStartGameResponse ? *reinterpret_cast<::Proto::PayloadLobbyStartGameResponse*>(_impl_.message_.start_game_response_) : reinterpret_cast<::Proto::PayloadLobbyStartGameResponse&>(::Proto::_PayloadLobbyStartGameResponse_default_instance_);
+}
+inline const ::Proto::PayloadLobbyStartGameResponse& ToClientMessage::start_game_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:Proto.ToClientMessage.start_game_response)
+  return _internal_start_game_response();
+}
+inline ::Proto::PayloadLobbyStartGameResponse* PROTOBUF_NULLABLE ToClientMessage::unsafe_arena_release_start_game_response() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.ToClientMessage.start_game_response)
+  if (message_case() == kStartGameResponse) {
+    clear_has_message();
+    auto* temp = reinterpret_cast<::Proto::PayloadLobbyStartGameResponse*>(_impl_.message_.start_game_response_);
+    _impl_.message_.start_game_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void ToClientMessage::unsafe_arena_set_allocated_start_game_response(
+    ::Proto::PayloadLobbyStartGameResponse* PROTOBUF_NULLABLE value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_start_game_response();
+    _impl_.message_.start_game_response_ = reinterpret_cast<::google::protobuf::Message*>(value);
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.ToClientMessage.start_game_response)
+}
+inline ::Proto::PayloadLobbyStartGameResponse* PROTOBUF_NONNULL ToClientMessage::_internal_mutable_start_game_response() {
+  if (message_case() != kStartGameResponse) {
+    clear_message();
+    set_has_start_game_response();
+    _impl_.message_.start_game_response_ = reinterpret_cast<::google::protobuf::Message*>(
+        ::google::protobuf::Message::DefaultConstruct<::Proto::PayloadLobbyStartGameResponse>(GetArena()));
+  }
+  return reinterpret_cast<::Proto::PayloadLobbyStartGameResponse*>(_impl_.message_.start_game_response_);
+}
+inline ::Proto::PayloadLobbyStartGameResponse* PROTOBUF_NONNULL ToClientMessage::mutable_start_game_response()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::Proto::PayloadLobbyStartGameResponse* _msg = _internal_mutable_start_game_response();
+  // @@protoc_insertion_point(field_mutable:Proto.ToClientMessage.start_game_response)
+  return _msg;
+}
+
+// .Proto.PayloadLobbyEndGameResponse end_game_response = 6;
 inline bool ToClientMessage::has_end_game_response() const {
   return message_case() == kEndGameResponse;
 }
@@ -1793,7 +1886,7 @@ inline ::Proto::PayloadLobbyEndGameResponse* PROTOBUF_NONNULL ToClientMessage::m
   return _msg;
 }
 
-// .Proto.PayloadTransformSync transform_sync = 6;
+// .Proto.PayloadTransformSync transform_sync = 7;
 inline bool ToClientMessage::has_transform_sync() const {
   return message_case() == kTransformSync;
 }
@@ -1863,7 +1956,7 @@ inline ::Proto::PayloadTransformSync* PROTOBUF_NONNULL ToClientMessage::mutable_
   return _msg;
 }
 
-// .Proto.PayloadPlayAction play_action = 7;
+// .Proto.PayloadPlayAction play_action = 8;
 inline bool ToClientMessage::has_play_action() const {
   return message_case() == kPlayAction;
 }
@@ -1933,7 +2026,7 @@ inline ::Proto::PayloadPlayAction* PROTOBUF_NONNULL ToClientMessage::mutable_pla
   return _msg;
 }
 
-// .Proto.PayloadEntityDamaged entity_damaged = 8;
+// .Proto.PayloadEntityDamaged entity_damaged = 9;
 inline bool ToClientMessage::has_entity_damaged() const {
   return message_case() == kEntityDamaged;
 }
@@ -2003,7 +2096,7 @@ inline ::Proto::PayloadEntityDamaged* PROTOBUF_NONNULL ToClientMessage::mutable_
   return _msg;
 }
 
-// .Proto.PayloadEnemySpawn enemy_spawn = 9;
+// .Proto.PayloadEnemySpawn enemy_spawn = 10;
 inline bool ToClientMessage::has_enemy_spawn() const {
   return message_case() == kEnemySpawn;
 }
@@ -2073,7 +2166,7 @@ inline ::Proto::PayloadEnemySpawn* PROTOBUF_NONNULL ToClientMessage::mutable_ene
   return _msg;
 }
 
-// .Proto.PayloadEnemyDespawn enemy_despawn = 10;
+// .Proto.PayloadEnemyDespawn enemy_despawn = 11;
 inline bool ToClientMessage::has_enemy_despawn() const {
   return message_case() == kEnemyDespawn;
 }
@@ -2143,7 +2236,7 @@ inline ::Proto::PayloadEnemyDespawn* PROTOBUF_NONNULL ToClientMessage::mutable_e
   return _msg;
 }
 
-// .Proto.PayloadZoneEnterNotification zone_enter_notification = 11;
+// .Proto.PayloadZoneEnterNotification zone_enter_notification = 12;
 inline bool ToClientMessage::has_zone_enter_notification() const {
   return message_case() == kZoneEnterNotification;
 }
@@ -2213,7 +2306,7 @@ inline ::Proto::PayloadZoneEnterNotification* PROTOBUF_NONNULL ToClientMessage::
   return _msg;
 }
 
-// .Proto.PayloadZoneExitNotification zone_exit_notification = 12;
+// .Proto.PayloadZoneExitNotification zone_exit_notification = 13;
 inline bool ToClientMessage::has_zone_exit_notification() const {
   return message_case() == kZoneExitNotification;
 }
@@ -2283,7 +2376,7 @@ inline ::Proto::PayloadZoneExitNotification* PROTOBUF_NONNULL ToClientMessage::m
   return _msg;
 }
 
-// .Proto.PayloadTextMessage text_message = 13;
+// .Proto.PayloadTextMessage text_message = 14;
 inline bool ToClientMessage::has_text_message() const {
   return message_case() == kTextMessage;
 }

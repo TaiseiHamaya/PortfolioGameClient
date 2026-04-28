@@ -10,6 +10,9 @@ void NetworkCluster::Initialize() {
 void NetworkCluster::Setup(const std::string& addr, u16 port) {
 	auto& instance = GetInstance();
 	instance.connectionManager.setup(addr, port);
+
+	instance.packetReceiver.setup(instance.connectionManager);
+	instance.packetSender.setup(instance.connectionManager);
 }
 
 void NetworkCluster::Connect() {

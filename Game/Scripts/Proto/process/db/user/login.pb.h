@@ -220,8 +220,8 @@ class PayloadLoginResponse final : public ::google::protobuf::Message
   // accessors -------------------------------------------------------
   enum : int {
     kSessionIdFieldNumber = 3,
-    kIsSucceededFieldNumber = 1,
     kUserIdFieldNumber = 2,
+    kIsSucceededFieldNumber = 1,
   };
   // .Proto.SessionId session_id = 3;
   bool has_session_id() const;
@@ -238,6 +238,16 @@ class PayloadLoginResponse final : public ::google::protobuf::Message
   ::Proto::SessionId* PROTOBUF_NONNULL _internal_mutable_session_id();
 
   public:
+  // uint64 user_id = 2;
+  void clear_user_id() ;
+  ::uint64_t user_id() const;
+  void set_user_id(::uint64_t value);
+
+  private:
+  ::uint64_t _internal_user_id() const;
+  void _internal_set_user_id(::uint64_t value);
+
+  public:
   // bool is_succeeded = 1;
   void clear_is_succeeded() ;
   bool is_succeeded() const;
@@ -246,16 +256,6 @@ class PayloadLoginResponse final : public ::google::protobuf::Message
   private:
   bool _internal_is_succeeded() const;
   void _internal_set_is_succeeded(bool value);
-
-  public:
-  // uint32 user_id = 2;
-  void clear_user_id() ;
-  ::uint32_t user_id() const;
-  void set_user_id(::uint32_t value);
-
-  private:
-  ::uint32_t _internal_user_id() const;
-  void _internal_set_user_id(::uint32_t value);
 
   public:
   // @@protoc_insertion_point(class_scope:Proto.PayloadLoginResponse)
@@ -285,8 +285,8 @@ class PayloadLoginResponse final : public ::google::protobuf::Message
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::Proto::SessionId* PROTOBUF_NULLABLE session_id_;
+    ::uint64_t user_id_;
     bool is_succeeded_;
-    ::uint32_t user_id_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -608,7 +608,7 @@ inline void PayloadLoginRequest::set_allocated_session_id(::Proto::SessionId* PR
 inline void PayloadLoginResponse::clear_is_succeeded() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.is_succeeded_ = false;
-  _impl_._has_bits_[0] &= ~0x00000002U;
+  _impl_._has_bits_[0] &= ~0x00000004U;
 }
 inline bool PayloadLoginResponse::is_succeeded() const {
   // @@protoc_insertion_point(field_get:Proto.PayloadLoginResponse.is_succeeded)
@@ -616,7 +616,7 @@ inline bool PayloadLoginResponse::is_succeeded() const {
 }
 inline void PayloadLoginResponse::set_is_succeeded(bool value) {
   _internal_set_is_succeeded(value);
-  _impl_._has_bits_[0] |= 0x00000002U;
+  _impl_._has_bits_[0] |= 0x00000004U;
   // @@protoc_insertion_point(field_set:Proto.PayloadLoginResponse.is_succeeded)
 }
 inline bool PayloadLoginResponse::_internal_is_succeeded() const {
@@ -628,26 +628,26 @@ inline void PayloadLoginResponse::_internal_set_is_succeeded(bool value) {
   _impl_.is_succeeded_ = value;
 }
 
-// uint32 user_id = 2;
+// uint64 user_id = 2;
 inline void PayloadLoginResponse::clear_user_id() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.user_id_ = 0u;
-  _impl_._has_bits_[0] &= ~0x00000004U;
+  _impl_.user_id_ = ::uint64_t{0u};
+  _impl_._has_bits_[0] &= ~0x00000002U;
 }
-inline ::uint32_t PayloadLoginResponse::user_id() const {
+inline ::uint64_t PayloadLoginResponse::user_id() const {
   // @@protoc_insertion_point(field_get:Proto.PayloadLoginResponse.user_id)
   return _internal_user_id();
 }
-inline void PayloadLoginResponse::set_user_id(::uint32_t value) {
+inline void PayloadLoginResponse::set_user_id(::uint64_t value) {
   _internal_set_user_id(value);
-  _impl_._has_bits_[0] |= 0x00000004U;
+  _impl_._has_bits_[0] |= 0x00000002U;
   // @@protoc_insertion_point(field_set:Proto.PayloadLoginResponse.user_id)
 }
-inline ::uint32_t PayloadLoginResponse::_internal_user_id() const {
+inline ::uint64_t PayloadLoginResponse::_internal_user_id() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.user_id_;
 }
-inline void PayloadLoginResponse::_internal_set_user_id(::uint32_t value) {
+inline void PayloadLoginResponse::_internal_set_user_id(::uint64_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.user_id_ = value;
 }

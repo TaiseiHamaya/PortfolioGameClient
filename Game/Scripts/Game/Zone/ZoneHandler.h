@@ -45,6 +45,8 @@ public:
 
 	void post_update() override;
 
+	void finalize() override;
+
 	/// <summary>
 	/// コマンドの実行
 	/// </summary>

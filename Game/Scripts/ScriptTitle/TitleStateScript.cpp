@@ -1,7 +1,6 @@
 #include "TitleStateScript.h"
 
-#include "Engine/Assets/BackgroundLoader/BackgroundLoader.h"
-#include <Engine/Application/ArgumentParser.h>
+#include <Engine/Assets/BackgroundLoader/BackgroundLoader.h>
 #include <Engine/Assets/Json/JsonAsset.h>
 #include <Engine/Module/Manager/RuntimeStorage/RuntimeStorage.h>
 #include <Engine/Module/World/Mesh/Primitive/Rect3d.h>
@@ -19,10 +18,6 @@
 #include "Scripts/Network/NetworkCluster.h"
 #include "Scripts/Scene/FactoryPortfolio.h"
 
-static constexpr string_literal LOCAL_LOOPBACK_ADDRESS = "127.0.0.1";
-static constexpr string_literal AWS_SERVER_ADDRESS = "18.180.254.93";
-static constexpr u16 SERVER_PORT = 3215;
-
 void TitleStateScript::setup() {
 	selectingRect = szg::RuntimeStorage::GetValue<Reference<szg::Rect3d>>("RuntimeInstance", "Selecting").value();
 	loginString = szg::RuntimeStorage::GetValue<Reference<szg::StringRectInstance>>("RuntimeInstance", "Login").value();
@@ -35,15 +30,6 @@ void TitleStateScript::setup() {
 	inputKey.initialize({ szg::KeyID::Space, szg::KeyID::Return, szg::KeyID::W, szg::KeyID::S, szg::KeyID::DownArrow, szg::KeyID::UpArrow });
 	inputPad.initialize({ szg::PadID::A,szg::PadID::Up,szg::PadID::Down });
 
-	std::string prefix = "-server-addr=";
-	std::optional<std::string> serverAddressOpt = szg::ArgumentParser::FindValueStartWith(prefix, 1);
-	if (serverAddressOpt.has_value()) {
-		NetworkCluster::Setup(serverAddressOpt.value().substr(prefix.size()), SERVER_PORT);
-	}
-	else {
-		NetworkCluster::Setup(AWS_SERVER_ADDRESS, SERVER_PORT);
-	}
-
 	state = State::Login;
 }
 
@@ -51,6 +37,8 @@ void TitleStateScript::finalize() {
 }
 
 void TitleStateScript::prev_update() {
+	NetworkCluster::Receive();
+
 	switch (state) {
 	case TitleStateScript::State::None:
 		update_none();
@@ -86,6 +74,7 @@ void TitleStateScript::prev_update() {
 }
 
 void TitleStateScript::post_update() {
+	NetworkCluster::Send();
 }
 
 void TitleStateScript::update_none() {
@@ -132,15 +121,16 @@ void TitleStateScript::update_signup() {
 		}
 		if (inputKey.trigger(szg::KeyID::Return) || inputPad.trigger(szg::PadID::A)) {
 			state = State::Loading;
+
+			// メッセージ送信
+			Proto::ToServerMessage packet;
+			Proto::PayloadSignupRequest* signupRequest = packet.mutable_signup_request();
+			signupRequest->set_username(inputString->string_imm());
+			NetworkCluster::SenderMut()->stack_packet(packet);
+			szgInformation("Signup request sent. Username: {}", inputString->string_imm());
+
 			waitUntil.reset([&]() -> bool {
-				// レスポンスが帰ってくるorタイムアウト
-				if (waitUntil.timer_imm() >= 10.0f) {
-					state = State::Signup;
-					errorMessageString->reset_string("Failed to connect to server. Please try again.");
-					return true;
-				}
 				// メッセージ受け取り
-				NetworkCluster::Receive();
 				auto messages = NetworkCluster::ReceiverMut()->take_packet_stack();
 
 				for (auto message : messages) {
@@ -165,6 +155,13 @@ void TitleStateScript::update_signup() {
 						}
 						return true;
 					}
+				}
+
+				// タイムアウト
+				if (waitUntil.timer_imm() >= 10.0f) {
+					state = State::Signup;
+					errorMessageString->reset_string("Failed to connect to server. Please try again.");
+					return true;
 				}
 				return false;
 			});
@@ -218,22 +215,12 @@ void TitleStateScript::update_login() {
 		Proto::ToServerMessage packet;
 		Proto::PayloadLoginRequest* loginRequest = packet.mutable_login_request();
 		Proto::SessionId* sessionId = loginRequest->mutable_session_id();
-		sessionId->set_high(sessionIdObj.value("High", 0));
-		sessionId->set_low(sessionIdObj.value("Low", 0));
+		sessionId->set_high(sessionIdObj.value("High", 0ull));
+		sessionId->set_low(sessionIdObj.value("Low", 0ull));
 		NetworkCluster::SenderMut()->stack_packet(packet);
-		NetworkCluster::Send();
 
 		waitUntil.reset([&]() -> bool {
-			// レスポンスが帰ってくるorタイムアウト
-			if (waitUntil.timer_imm() >= 10.0f) {
-				state = State::Signup;
-				loginString->reset_string("Signup");
-				errorMessageString->reset_string("Failed to login to server. Please try again.");
-				return true;
-			}
-
 			// メッセージ受け取り
-			NetworkCluster::Receive();
 			auto messages = NetworkCluster::ReceiverMut()->take_packet_stack();
 
 			for (auto message : messages) {
@@ -256,6 +243,13 @@ void TitleStateScript::update_login() {
 					}
 					return true;
 				}
+			}
+
+			// タイムアウト
+			if (waitUntil.timer_imm() >= 10.0f) {
+				state = State::Signup;
+				errorMessageString->reset_string("Failed to connect to server. Please try again.");
+				return true;
 			}
 
 			return false;
@@ -284,7 +278,7 @@ void TitleStateScript::update_lobby() {
 			// ロードが終わったら移動を開始
 			szg::SceneManager2::EndSceneChangeIntervalForce();
 		};
-		szg::RuntimeStorage::GetValueList("Temp")["PlayerName"] = inputString->string_imm();
+		szg::RuntimeStorage::GetValueList("Temp")["PlayerName"] = nameString->string_imm();
 	}
 }
 

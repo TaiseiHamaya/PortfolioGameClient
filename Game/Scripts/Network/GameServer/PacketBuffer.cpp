@@ -57,7 +57,7 @@ bool ReceiveBuffer::read_length_header(std::span<u8>& data) {
 	// 読み込み可能なバイト数
 	u64 readSize = std::min<u64>(static_cast<u64>(neededSize), data.size());
 	for (u64 i = 0; i < readSize; ++i) {
-		size |= static_cast<u32>(data[i]) << (received_header_size * 8);
+		size |= static_cast<u32>(data[i]) << ((sizeof32 - received_header_size - 1) * 8);
 		++received_header_size;
 	}
 	data = data.subspan(readSize);

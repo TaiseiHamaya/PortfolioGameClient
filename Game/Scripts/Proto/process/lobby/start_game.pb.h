@@ -20,7 +20,6 @@
 #include "google/protobuf/io/coded_stream.h"
 #include "google/protobuf/arena.h"
 #include "google/protobuf/arenastring.h"
-#include "google/protobuf/generated_message_bases.h"
 #include "google/protobuf/generated_message_tctable_decl.h"
 #include "google/protobuf/generated_message_util.h"
 #include "google/protobuf/metadata_lite.h"
@@ -76,10 +75,11 @@ namespace Proto {
 
 // -------------------------------------------------------------------
 
-class PayloadLobbyStartGameResponse final : public ::google::protobuf::internal::ZeroFieldsBase
+class PayloadLobbyStartGameResponse final : public ::google::protobuf::Message
 /* @@protoc_insertion_point(class_definition:Proto.PayloadLobbyStartGameResponse) */ {
  public:
   inline PayloadLobbyStartGameResponse() : PayloadLobbyStartGameResponse(nullptr) {}
+  ~PayloadLobbyStartGameResponse() PROTOBUF_FINAL;
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
   void operator delete(PayloadLobbyStartGameResponse* PROTOBUF_NONNULL msg, ::std::destroying_delete_t) {
@@ -149,21 +149,48 @@ class PayloadLobbyStartGameResponse final : public ::google::protobuf::internal:
   // implements Message ----------------------------------------------
 
   PayloadLobbyStartGameResponse* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
-    return ::google::protobuf::internal::ZeroFieldsBase::DefaultConstruct<PayloadLobbyStartGameResponse>(arena);
+    return ::google::protobuf::Message::DefaultConstruct<PayloadLobbyStartGameResponse>(arena);
   }
-  using ::google::protobuf::internal::ZeroFieldsBase::CopyFrom;
-  inline void CopyFrom(const PayloadLobbyStartGameResponse& from) {
-    ::google::protobuf::internal::ZeroFieldsBase::CopyImpl(*this, from);
-  }
-  using ::google::protobuf::internal::ZeroFieldsBase::MergeFrom;
-  void MergeFrom(const PayloadLobbyStartGameResponse& from) {
-    ::google::protobuf::internal::ZeroFieldsBase::MergeImpl(*this, from);
-  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const PayloadLobbyStartGameResponse& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const PayloadLobbyStartGameResponse& from) { PayloadLobbyStartGameResponse::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(::google::protobuf::MessageLite& to_msg,
+                        const ::google::protobuf::MessageLite& from_msg);
 
   public:
   bool IsInitialized() const {
     return true;
   }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      const ::google::protobuf::MessageLite& msg, ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(PayloadLobbyStartGameResponse* PROTOBUF_NONNULL other);
  private:
   template <typename T>
   friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
@@ -190,11 +217,35 @@ class PayloadLobbyStartGameResponse final : public ::google::protobuf::internal:
   // nested types ----------------------------------------------------
 
   // accessors -------------------------------------------------------
+  enum : int {
+    kZoneIdFieldNumber = 1,
+    kPlayerEntityIdFieldNumber = 2,
+  };
+  // uint64 zone_id = 1;
+  void clear_zone_id() ;
+  ::uint64_t zone_id() const;
+  void set_zone_id(::uint64_t value);
+
+  private:
+  ::uint64_t _internal_zone_id() const;
+  void _internal_set_zone_id(::uint64_t value);
+
+  public:
+  // uint64 player_entity_id = 2;
+  void clear_player_entity_id() ;
+  ::uint64_t player_entity_id() const;
+  void set_player_entity_id(::uint64_t value);
+
+  private:
+  ::uint64_t _internal_player_entity_id() const;
+  void _internal_set_player_entity_id(::uint64_t value);
+
+  public:
   // @@protoc_insertion_point(class_scope:Proto.PayloadLobbyStartGameResponse)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<0, 0,
+  static const ::google::protobuf::internal::TcParseTable<1, 2,
                                    0, 0,
                                    2>
       _table_;
@@ -205,6 +256,22 @@ class PayloadLobbyStartGameResponse final : public ::google::protobuf::internal:
   friend class ::google::protobuf::Arena::InternalHelper;
   using InternalArenaConstructable_ = void;
   using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(
+        ::google::protobuf::internal::InternalVisibility visibility,
+        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+    inline explicit Impl_(
+        ::google::protobuf::internal::InternalVisibility visibility,
+        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
+        const PayloadLobbyStartGameResponse& from_msg);
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    ::uint64_t zone_id_;
+    ::uint64_t player_entity_id_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
   friend struct ::TableStruct_process_2flobby_2fstart_5fgame_2eproto;
 };
 
@@ -444,6 +511,54 @@ inline void PayloadLobbyStartGameRequest::_internal_set_user_id(::uint64_t value
 // -------------------------------------------------------------------
 
 // PayloadLobbyStartGameResponse
+
+// uint64 zone_id = 1;
+inline void PayloadLobbyStartGameResponse::clear_zone_id() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.zone_id_ = ::uint64_t{0u};
+  _impl_._has_bits_[0] &= ~0x00000001U;
+}
+inline ::uint64_t PayloadLobbyStartGameResponse::zone_id() const {
+  // @@protoc_insertion_point(field_get:Proto.PayloadLobbyStartGameResponse.zone_id)
+  return _internal_zone_id();
+}
+inline void PayloadLobbyStartGameResponse::set_zone_id(::uint64_t value) {
+  _internal_set_zone_id(value);
+  _impl_._has_bits_[0] |= 0x00000001U;
+  // @@protoc_insertion_point(field_set:Proto.PayloadLobbyStartGameResponse.zone_id)
+}
+inline ::uint64_t PayloadLobbyStartGameResponse::_internal_zone_id() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.zone_id_;
+}
+inline void PayloadLobbyStartGameResponse::_internal_set_zone_id(::uint64_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.zone_id_ = value;
+}
+
+// uint64 player_entity_id = 2;
+inline void PayloadLobbyStartGameResponse::clear_player_entity_id() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.player_entity_id_ = ::uint64_t{0u};
+  _impl_._has_bits_[0] &= ~0x00000002U;
+}
+inline ::uint64_t PayloadLobbyStartGameResponse::player_entity_id() const {
+  // @@protoc_insertion_point(field_get:Proto.PayloadLobbyStartGameResponse.player_entity_id)
+  return _internal_player_entity_id();
+}
+inline void PayloadLobbyStartGameResponse::set_player_entity_id(::uint64_t value) {
+  _internal_set_player_entity_id(value);
+  _impl_._has_bits_[0] |= 0x00000002U;
+  // @@protoc_insertion_point(field_set:Proto.PayloadLobbyStartGameResponse.player_entity_id)
+}
+inline ::uint64_t PayloadLobbyStartGameResponse::_internal_player_entity_id() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.player_entity_id_;
+}
+inline void PayloadLobbyStartGameResponse::_internal_set_player_entity_id(::uint64_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.player_entity_id_ = value;
+}
 
 #ifdef __GNUC__
 #pragma GCC diagnostic pop

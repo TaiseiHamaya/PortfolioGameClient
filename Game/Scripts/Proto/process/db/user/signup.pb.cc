@@ -57,6 +57,7 @@ inline constexpr PayloadSignupResponse::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
         session_id_{nullptr},
+        user_id_{::uint64_t{0u}},
         is_succeeded_{false} {}
 
 template <typename>
@@ -93,9 +94,11 @@ const ::uint32_t
         0,
         0x081, // bitmap
         PROTOBUF_FIELD_OFFSET(::Proto::PayloadSignupResponse, _impl_._has_bits_),
-        5, // hasbit index offset
+        6, // hasbit index offset
         PROTOBUF_FIELD_OFFSET(::Proto::PayloadSignupResponse, _impl_.is_succeeded_),
+        PROTOBUF_FIELD_OFFSET(::Proto::PayloadSignupResponse, _impl_.user_id_),
         PROTOBUF_FIELD_OFFSET(::Proto::PayloadSignupResponse, _impl_.session_id_),
+        2,
         1,
         0,
 };
@@ -113,9 +116,10 @@ const char descriptor_table_protodef_process_2fdb_2fuser_2fsignup_2eproto[] ABSL
     protodesc_cold) = {
     "\n\034process/db/user/signup.proto\022\005Proto\032\024c"
     "ommon/session.proto\"(\n\024PayloadSignupRequ"
-    "est\022\020\n\010username\030\001 \001(\t\"S\n\025PayloadSignupRe"
-    "sponse\022\024\n\014is_succeeded\030\001 \001(\010\022$\n\nsession_"
-    "id\030\002 \001(\0132\020.Proto.SessionIdb\006proto3"
+    "est\022\020\n\010username\030\001 \001(\t\"d\n\025PayloadSignupRe"
+    "sponse\022\024\n\014is_succeeded\030\001 \001(\010\022\017\n\007user_id\030"
+    "\002 \001(\004\022$\n\nsession_id\030\003 \001(\0132\020.Proto.Sessio"
+    "nIdb\006proto3"
 };
 static const ::_pbi::DescriptorTable* PROTOBUF_NONNULL const
     descriptor_table_process_2fdb_2fuser_2fsignup_2eproto_deps[1] = {
@@ -125,7 +129,7 @@ static ::absl::once_flag descriptor_table_process_2fdb_2fuser_2fsignup_2eproto_o
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_process_2fdb_2fuser_2fsignup_2eproto = {
     false,
     false,
-    194,
+    211,
     descriptor_table_protodef_process_2fdb_2fuser_2fsignup_2eproto,
     "process/db/user/signup.proto",
     &descriptor_table_process_2fdb_2fuser_2fsignup_2eproto_once,
@@ -457,7 +461,13 @@ PayloadSignupResponse::PayloadSignupResponse(
   _impl_.session_id_ = ((cached_has_bits & 0x00000001U) != 0)
                 ? ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.session_id_)
                 : nullptr;
-  _impl_.is_succeeded_ = from._impl_.is_succeeded_;
+  ::memcpy(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, user_id_),
+           reinterpret_cast<const char *>(&from._impl_) +
+               offsetof(Impl_, user_id_),
+           offsetof(Impl_, is_succeeded_) -
+               offsetof(Impl_, user_id_) +
+               sizeof(Impl_::is_succeeded_));
 
   // @@protoc_insertion_point(copy_constructor:Proto.PayloadSignupResponse)
 }
@@ -533,16 +543,16 @@ PayloadSignupResponse::GetClassData() const {
   return PayloadSignupResponse_class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<1, 2, 1, 0, 2>
+const ::_pbi::TcParseTable<2, 3, 1, 0, 2>
 PayloadSignupResponse::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(PayloadSignupResponse, _impl_._has_bits_),
     0, // no _extensions_
-    2, 8,  // max_field_number, fast_idx_mask
+    3, 24,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967292,  // skipmap
+    4294967288,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    2,  // num_field_entries
+    3,  // num_field_entries
     1,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     PayloadSignupResponse_class_data_.base(),
@@ -552,18 +562,24 @@ PayloadSignupResponse::_table_ = {
     ::_pbi::TcParser::GetTable<::Proto::PayloadSignupResponse>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // .Proto.SessionId session_id = 2;
-    {::_pbi::TcParser::FastMtS1,
-     {18, 0, 0, PROTOBUF_FIELD_OFFSET(PayloadSignupResponse, _impl_.session_id_)}},
+    {::_pbi::TcParser::MiniParse, {}},
     // bool is_succeeded = 1;
-    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(PayloadSignupResponse, _impl_.is_succeeded_), 1>(),
-     {8, 1, 0, PROTOBUF_FIELD_OFFSET(PayloadSignupResponse, _impl_.is_succeeded_)}},
+    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(PayloadSignupResponse, _impl_.is_succeeded_), 2>(),
+     {8, 2, 0, PROTOBUF_FIELD_OFFSET(PayloadSignupResponse, _impl_.is_succeeded_)}},
+    // uint64 user_id = 2;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(PayloadSignupResponse, _impl_.user_id_), 1>(),
+     {16, 1, 0, PROTOBUF_FIELD_OFFSET(PayloadSignupResponse, _impl_.user_id_)}},
+    // .Proto.SessionId session_id = 3;
+    {::_pbi::TcParser::FastMtS1,
+     {26, 0, 0, PROTOBUF_FIELD_OFFSET(PayloadSignupResponse, _impl_.session_id_)}},
   }}, {{
     65535, 65535
   }}, {{
     // bool is_succeeded = 1;
-    {PROTOBUF_FIELD_OFFSET(PayloadSignupResponse, _impl_.is_succeeded_), _Internal::kHasBitsOffset + 1, 0, (0 | ::_fl::kFcOptional | ::_fl::kBool)},
-    // .Proto.SessionId session_id = 2;
+    {PROTOBUF_FIELD_OFFSET(PayloadSignupResponse, _impl_.is_succeeded_), _Internal::kHasBitsOffset + 2, 0, (0 | ::_fl::kFcOptional | ::_fl::kBool)},
+    // uint64 user_id = 2;
+    {PROTOBUF_FIELD_OFFSET(PayloadSignupResponse, _impl_.user_id_), _Internal::kHasBitsOffset + 1, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt64)},
+    // .Proto.SessionId session_id = 3;
     {PROTOBUF_FIELD_OFFSET(PayloadSignupResponse, _impl_.session_id_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
   }},
   {{
@@ -584,7 +600,11 @@ PROTOBUF_NOINLINE void PayloadSignupResponse::Clear() {
     ABSL_DCHECK(_impl_.session_id_ != nullptr);
     _impl_.session_id_->Clear();
   }
-  _impl_.is_succeeded_ = false;
+  if ((cached_has_bits & 0x00000006U) != 0) {
+    ::memset(&_impl_.user_id_, 0, static_cast<::size_t>(
+        reinterpret_cast<char*>(&_impl_.is_succeeded_) -
+        reinterpret_cast<char*>(&_impl_.user_id_)) + sizeof(_impl_.is_succeeded_));
+  }
   _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
@@ -608,7 +628,7 @@ PROTOBUF_NOINLINE void PayloadSignupResponse::Clear() {
   (void)cached_has_bits;
 
   // bool is_succeeded = 1;
-  if ((this_._impl_._has_bits_[0] & 0x00000002U) != 0) {
+  if ((this_._impl_._has_bits_[0] & 0x00000004U) != 0) {
     if (this_._internal_is_succeeded() != 0) {
       target = stream->EnsureSpace(target);
       target = ::_pbi::WireFormatLite::WriteBoolToArray(
@@ -616,11 +636,20 @@ PROTOBUF_NOINLINE void PayloadSignupResponse::Clear() {
     }
   }
 
+  // uint64 user_id = 2;
+  if ((this_._impl_._has_bits_[0] & 0x00000002U) != 0) {
+    if (this_._internal_user_id() != 0) {
+      target = stream->EnsureSpace(target);
+      target = ::_pbi::WireFormatLite::WriteUInt64ToArray(
+          2, this_._internal_user_id(), target);
+    }
+  }
+
   cached_has_bits = this_._impl_._has_bits_[0];
-  // .Proto.SessionId session_id = 2;
+  // .Proto.SessionId session_id = 3;
   if ((cached_has_bits & 0x00000001U) != 0) {
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-        2, *this_._impl_.session_id_, this_._impl_.session_id_->GetCachedSize(), target,
+        3, *this_._impl_.session_id_, this_._impl_.session_id_->GetCachedSize(), target,
         stream);
   }
 
@@ -649,14 +678,21 @@ PROTOBUF_NOINLINE void PayloadSignupResponse::Clear() {
 
   ::_pbi::Prefetch5LinesFrom7Lines(&this_);
   cached_has_bits = this_._impl_._has_bits_[0];
-  if ((cached_has_bits & 0x00000003U) != 0) {
-    // .Proto.SessionId session_id = 2;
+  if ((cached_has_bits & 0x00000007U) != 0) {
+    // .Proto.SessionId session_id = 3;
     if ((cached_has_bits & 0x00000001U) != 0) {
       total_size += 1 +
                     ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.session_id_);
     }
-    // bool is_succeeded = 1;
+    // uint64 user_id = 2;
     if ((cached_has_bits & 0x00000002U) != 0) {
+      if (this_._internal_user_id() != 0) {
+        total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(
+            this_._internal_user_id());
+      }
+    }
+    // bool is_succeeded = 1;
+    if ((cached_has_bits & 0x00000004U) != 0) {
       if (this_._internal_is_succeeded() != 0) {
         total_size += 2;
       }
@@ -679,7 +715,7 @@ void PayloadSignupResponse::MergeImpl(::google::protobuf::MessageLite& to_msg, c
   (void) cached_has_bits;
 
   cached_has_bits = from._impl_._has_bits_[0];
-  if ((cached_has_bits & 0x00000003U) != 0) {
+  if ((cached_has_bits & 0x00000007U) != 0) {
     if ((cached_has_bits & 0x00000001U) != 0) {
       ABSL_DCHECK(from._impl_.session_id_ != nullptr);
       if (_this->_impl_.session_id_ == nullptr) {
@@ -689,6 +725,11 @@ void PayloadSignupResponse::MergeImpl(::google::protobuf::MessageLite& to_msg, c
       }
     }
     if ((cached_has_bits & 0x00000002U) != 0) {
+      if (from._internal_user_id() != 0) {
+        _this->_impl_.user_id_ = from._impl_.user_id_;
+      }
+    }
+    if ((cached_has_bits & 0x00000004U) != 0) {
       if (from._internal_is_succeeded() != 0) {
         _this->_impl_.is_succeeded_ = from._impl_.is_succeeded_;
       }
