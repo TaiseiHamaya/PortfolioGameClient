@@ -8,8 +8,8 @@
 
 #include "Scripts/Game/Zone/Command/IZoneCommand.h"
 #include "Scripts/Game/Zone/MessageHandler/ZoneEnemyMessageHandler.h"
-#include "Scripts/Game/Zone/MessageHandler/ZoneLoginMessageHandler.h"
-#include "Scripts/Game/Zone/MessageHandler/ZoneLogoutMessageHandler.h"
+#include "Scripts/Game/Zone/MessageHandler/ZoneStartGameMessageHandler.h"
+#include "Scripts/Game/Zone/MessageHandler/ZoneNotificationMessageHandler.h"
 #include "Scripts/Game/Zone/MessageHandler/ZoneSyncMessageHandler.h"
 #include "Scripts/Game/Zone/MessageHandler/ZoneTextMessageHandler.h"
 #include "Scripts/Game/Zone/Zone.h"
@@ -91,8 +91,8 @@ private:
 	ReceivedMessageRouter router;
 
 	ZoneTextMessageHandler textMessageHandler;
-	ZoneLoginMessageHandler loginMessageHandler;
-	ZoneLogoutMessageHandler logoutMessageHandler;
+	ZoneStartGameMessageHandler startGameMessageHandler;
+	ZoneNotificationMessageHandler notificationMessageHandler;
 	ZoneSyncMessageHandler syncMessageHandler;
 	ZoneEnemyMessageHandler enemyMessageHandler;
 
@@ -107,7 +107,7 @@ public:
 
 private:
 	i32 debugCommandCount{ 0 };
-	i32 debugRecivedMessageCount{ 0 };
+	i32 debugReceivedMessageCount{ 0 };
 	i32 debugSentMessageCount{ 0 };
 
 	std::string msg;

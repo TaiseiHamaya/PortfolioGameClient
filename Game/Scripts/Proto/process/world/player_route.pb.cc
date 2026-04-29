@@ -51,31 +51,6 @@ struct PayloadPlayerZoneEnterReadyDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 PayloadPlayerZoneEnterReadyDefaultTypeInternal _PayloadPlayerZoneEnterReady_default_instance_;
 
-inline constexpr PayloadPlayerZoneEnterCompleteResponse::Impl_::Impl_(
-    ::_pbi::ConstantInitialized) noexcept
-      : _cached_size_{0},
-        player_entity_id_{::uint64_t{0u}} {}
-
-template <typename>
-PROTOBUF_CONSTEXPR PayloadPlayerZoneEnterCompleteResponse::PayloadPlayerZoneEnterCompleteResponse(::_pbi::ConstantInitialized)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(PayloadPlayerZoneEnterCompleteResponse_class_data_.base()),
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(),
-#endif  // PROTOBUF_CUSTOM_VTABLE
-      _impl_(::_pbi::ConstantInitialized()) {
-}
-struct PayloadPlayerZoneEnterCompleteResponseDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR PayloadPlayerZoneEnterCompleteResponseDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~PayloadPlayerZoneEnterCompleteResponseDefaultTypeInternal() {}
-  union {
-    PayloadPlayerZoneEnterCompleteResponse _instance;
-  };
-};
-
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 PayloadPlayerZoneEnterCompleteResponseDefaultTypeInternal _PayloadPlayerZoneEnterCompleteResponse_default_instance_;
-
 inline constexpr PayloadPlayerZoneEnterComplete::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
@@ -201,6 +176,31 @@ struct PayloadPlayerExitZoneBeginDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 PayloadPlayerExitZoneBeginDefaultTypeInternal _PayloadPlayerExitZoneBegin_default_instance_;
+
+inline constexpr PayloadPlayerZoneEnterCompleteResponse::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        player_data_{nullptr} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR PayloadPlayerZoneEnterCompleteResponse::PayloadPlayerZoneEnterCompleteResponse(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(PayloadPlayerZoneEnterCompleteResponse_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct PayloadPlayerZoneEnterCompleteResponseDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR PayloadPlayerZoneEnterCompleteResponseDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~PayloadPlayerZoneEnterCompleteResponseDefaultTypeInternal() {}
+  union {
+    PayloadPlayerZoneEnterCompleteResponse _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 PayloadPlayerZoneEnterCompleteResponseDefaultTypeInternal _PayloadPlayerZoneEnterCompleteResponse_default_instance_;
 }  // namespace Proto
 static constexpr const ::_pb::EnumDescriptor *PROTOBUF_NONNULL *PROTOBUF_NULLABLE
     file_level_enum_descriptors_process_2fworld_2fplayer_5froute_2eproto = nullptr;
@@ -229,7 +229,7 @@ const ::uint32_t
         0x081, // bitmap
         PROTOBUF_FIELD_OFFSET(::Proto::PayloadPlayerZoneEnterCompleteResponse, _impl_._has_bits_),
         4, // hasbit index offset
-        PROTOBUF_FIELD_OFFSET(::Proto::PayloadPlayerZoneEnterCompleteResponse, _impl_.player_entity_id_),
+        PROTOBUF_FIELD_OFFSET(::Proto::PayloadPlayerZoneEnterCompleteResponse, _impl_.player_data_),
         0,
         0x081, // bitmap
         PROTOBUF_FIELD_OFFSET(::Proto::PayloadPlayerExitZoneBegin, _impl_._has_bits_),
@@ -270,29 +270,30 @@ static const ::_pb::Message* PROTOBUF_NONNULL const file_default_instances[] = {
 const char descriptor_table_protodef_process_2fworld_2fplayer_5froute_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
     "\n process/world/player_route.proto\022\005Prot"
-    "o\032\021common/math.proto\032\024common/session.pro"
-    "to\"B\n\033PayloadPlayerZoneEnterBegin\022\017\n\007use"
-    "r_id\030\001 \001(\004\022\022\n\ngateway_id\030\002 \001(\004\".\n\033Payloa"
-    "dPlayerZoneEnterReady\022\017\n\007user_id\030\001 \001(\004\"1"
-    "\n\036PayloadPlayerZoneEnterComplete\022\017\n\007user"
-    "_id\030\001 \001(\004\"\\\n&PayloadPlayerZoneEnterCompl"
-    "eteResponse\022\035\n\020player_entity_id\030\001 \001(\004H\000\210"
-    "\001\001B\023\n\021_player_entity_id\"-\n\032PayloadPlayer"
-    "ExitZoneBegin\022\017\n\007user_id\030\001 \001(\004\"-\n\032Payloa"
-    "dPlayerExitZoneReady\022\017\n\007user_id\030\001 \001(\004\"0\n"
-    "\035PayloadPlayerExitZoneComplete\022\017\n\007user_i"
-    "d\030\001 \001(\004b\006proto3"
+    "o\032\024common/session.proto\032%process/world/r"
+    "oute_player_data.proto\"B\n\033PayloadPlayerZ"
+    "oneEnterBegin\022\017\n\007user_id\030\001 \001(\004\022\022\n\ngatewa"
+    "y_id\030\002 \001(\004\".\n\033PayloadPlayerZoneEnterRead"
+    "y\022\017\n\007user_id\030\001 \001(\004\"1\n\036PayloadPlayerZoneE"
+    "nterComplete\022\017\n\007user_id\030\001 \001(\004\"j\n&Payload"
+    "PlayerZoneEnterCompleteResponse\0220\n\013playe"
+    "r_data\030\001 \001(\0132\026.Proto.RoutePlayerDataH\000\210\001"
+    "\001B\016\n\014_player_data\"-\n\032PayloadPlayerExitZo"
+    "neBegin\022\017\n\007user_id\030\001 \001(\004\"-\n\032PayloadPlaye"
+    "rExitZoneReady\022\017\n\007user_id\030\001 \001(\004\"0\n\035Paylo"
+    "adPlayerExitZoneComplete\022\017\n\007user_id\030\001 \001("
+    "\004b\006proto3"
 };
 static const ::_pbi::DescriptorTable* PROTOBUF_NONNULL const
     descriptor_table_process_2fworld_2fplayer_5froute_2eproto_deps[2] = {
-        &::descriptor_table_common_2fmath_2eproto,
         &::descriptor_table_common_2fsession_2eproto,
+        &::descriptor_table_process_2fworld_2froute_5fplayer_5fdata_2eproto,
 };
 static ::absl::once_flag descriptor_table_process_2fworld_2fplayer_5froute_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_process_2fworld_2fplayer_5froute_2eproto = {
     false,
     false,
-    495,
+    529,
     descriptor_table_protodef_process_2fworld_2fplayer_5froute_2eproto,
     "process/world/player_route.proto",
     &descriptor_table_process_2fworld_2fplayer_5froute_2eproto_once,
@@ -1089,6 +1090,11 @@ class PayloadPlayerZoneEnterCompleteResponse::_Internal {
       8 * PROTOBUF_FIELD_OFFSET(PayloadPlayerZoneEnterCompleteResponse, _impl_._has_bits_);
 };
 
+void PayloadPlayerZoneEnterCompleteResponse::clear_player_data() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.player_data_ != nullptr) _impl_.player_data_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000001U;
+}
 PayloadPlayerZoneEnterCompleteResponse::PayloadPlayerZoneEnterCompleteResponse(::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, PayloadPlayerZoneEnterCompleteResponse_class_data_.base()) {
@@ -1098,16 +1104,32 @@ PayloadPlayerZoneEnterCompleteResponse::PayloadPlayerZoneEnterCompleteResponse(:
   SharedCtor(arena);
   // @@protoc_insertion_point(arena_constructor:Proto.PayloadPlayerZoneEnterCompleteResponse)
 }
+PROTOBUF_NDEBUG_INLINE PayloadPlayerZoneEnterCompleteResponse::Impl_::Impl_(
+    [[maybe_unused]] ::google::protobuf::internal::InternalVisibility visibility,
+    [[maybe_unused]] ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
+    [[maybe_unused]] const ::Proto::PayloadPlayerZoneEnterCompleteResponse& from_msg)
+      : _has_bits_{from._has_bits_},
+        _cached_size_{0} {}
+
 PayloadPlayerZoneEnterCompleteResponse::PayloadPlayerZoneEnterCompleteResponse(
-    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const PayloadPlayerZoneEnterCompleteResponse& from)
+    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena,
+    const PayloadPlayerZoneEnterCompleteResponse& from)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, PayloadPlayerZoneEnterCompleteResponse_class_data_.base()),
+    : ::google::protobuf::Message(arena, PayloadPlayerZoneEnterCompleteResponse_class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(arena),
+    : ::google::protobuf::Message(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
-      _impl_(from._impl_) {
+  PayloadPlayerZoneEnterCompleteResponse* const _this = this;
+  (void)_this;
   _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  ::uint32_t cached_has_bits = _impl_._has_bits_[0];
+  _impl_.player_data_ = ((cached_has_bits & 0x00000001U) != 0)
+                ? ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.player_data_)
+                : nullptr;
+
+  // @@protoc_insertion_point(copy_constructor:Proto.PayloadPlayerZoneEnterCompleteResponse)
 }
 PROTOBUF_NDEBUG_INLINE PayloadPlayerZoneEnterCompleteResponse::Impl_::Impl_(
     [[maybe_unused]] ::google::protobuf::internal::InternalVisibility visibility,
@@ -1116,7 +1138,7 @@ PROTOBUF_NDEBUG_INLINE PayloadPlayerZoneEnterCompleteResponse::Impl_::Impl_(
 
 inline void PayloadPlayerZoneEnterCompleteResponse::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
-  _impl_.player_entity_id_ = {};
+  _impl_.player_data_ = {};
 }
 PayloadPlayerZoneEnterCompleteResponse::~PayloadPlayerZoneEnterCompleteResponse() {
   // @@protoc_insertion_point(destructor:Proto.PayloadPlayerZoneEnterCompleteResponse)
@@ -1129,6 +1151,7 @@ inline void PayloadPlayerZoneEnterCompleteResponse::SharedDtor(MessageLite& self
   }
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
+  delete this_._impl_.player_data_;
   this_._impl_.~Impl_();
 }
 
@@ -1175,7 +1198,7 @@ PayloadPlayerZoneEnterCompleteResponse::GetClassData() const {
   return PayloadPlayerZoneEnterCompleteResponse_class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 1, 0, 0, 2>
+const ::_pbi::TcParseTable<0, 1, 1, 0, 2>
 PayloadPlayerZoneEnterCompleteResponse::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(PayloadPlayerZoneEnterCompleteResponse, _impl_._has_bits_),
@@ -1185,8 +1208,8 @@ PayloadPlayerZoneEnterCompleteResponse::_table_ = {
     4294967294,  // skipmap
     offsetof(decltype(_table_), field_entries),
     1,  // num_field_entries
-    0,  // num_aux_entries
-    offsetof(decltype(_table_), field_names),  // no aux_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
     PayloadPlayerZoneEnterCompleteResponse_class_data_.base(),
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
@@ -1194,16 +1217,18 @@ PayloadPlayerZoneEnterCompleteResponse::_table_ = {
     ::_pbi::TcParser::GetTable<::Proto::PayloadPlayerZoneEnterCompleteResponse>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // optional uint64 player_entity_id = 1;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(PayloadPlayerZoneEnterCompleteResponse, _impl_.player_entity_id_), 0>(),
-     {8, 0, 0, PROTOBUF_FIELD_OFFSET(PayloadPlayerZoneEnterCompleteResponse, _impl_.player_entity_id_)}},
+    // optional .Proto.RoutePlayerData player_data = 1;
+    {::_pbi::TcParser::FastMtS1,
+     {10, 0, 0, PROTOBUF_FIELD_OFFSET(PayloadPlayerZoneEnterCompleteResponse, _impl_.player_data_)}},
   }}, {{
     65535, 65535
   }}, {{
-    // optional uint64 player_entity_id = 1;
-    {PROTOBUF_FIELD_OFFSET(PayloadPlayerZoneEnterCompleteResponse, _impl_.player_entity_id_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt64)},
+    // optional .Proto.RoutePlayerData player_data = 1;
+    {PROTOBUF_FIELD_OFFSET(PayloadPlayerZoneEnterCompleteResponse, _impl_.player_data_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
   }},
-  // no aux_entries
+  {{
+      {::_pbi::TcParser::GetTable<::Proto::RoutePlayerData>()},
+  }},
   {{
   }},
 };
@@ -1214,7 +1239,11 @@ PROTOBUF_NOINLINE void PayloadPlayerZoneEnterCompleteResponse::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.player_entity_id_ = ::uint64_t{0u};
+  cached_has_bits = _impl_._has_bits_[0];
+  if ((cached_has_bits & 0x00000001U) != 0) {
+    ABSL_DCHECK(_impl_.player_data_ != nullptr);
+    _impl_.player_data_->Clear();
+  }
   _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
@@ -1238,11 +1267,11 @@ PROTOBUF_NOINLINE void PayloadPlayerZoneEnterCompleteResponse::Clear() {
   (void)cached_has_bits;
 
   cached_has_bits = this_._impl_._has_bits_[0];
-  // optional uint64 player_entity_id = 1;
+  // optional .Proto.RoutePlayerData player_data = 1;
   if ((cached_has_bits & 0x00000001U) != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteUInt64ToArray(
-        1, this_._internal_player_entity_id(), target);
+    target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+        1, *this_._impl_.player_data_, this_._impl_.player_data_->GetCachedSize(), target,
+        stream);
   }
 
   if (ABSL_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
@@ -1269,11 +1298,11 @@ PROTOBUF_NOINLINE void PayloadPlayerZoneEnterCompleteResponse::Clear() {
   (void)cached_has_bits;
 
    {
-    // optional uint64 player_entity_id = 1;
+    // optional .Proto.RoutePlayerData player_data = 1;
     cached_has_bits = this_._impl_._has_bits_[0];
     if ((cached_has_bits & 0x00000001U) != 0) {
-      total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(
-          this_._internal_player_entity_id());
+      total_size += 1 +
+                    ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.player_data_);
     }
   }
   return this_.MaybeComputeUnknownFieldsSize(total_size,
@@ -1286,6 +1315,7 @@ void PayloadPlayerZoneEnterCompleteResponse::MergeImpl(::google::protobuf::Messa
   if constexpr (::_pbi::DebugHardenVerifyHasBitConsistency()) {
     from.VerifyHasBitConsistency();
   }
+  ::google::protobuf::Arena* arena = _this->GetArena();
   // @@protoc_insertion_point(class_specific_merge_from_start:Proto.PayloadPlayerZoneEnterCompleteResponse)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
@@ -1293,7 +1323,12 @@ void PayloadPlayerZoneEnterCompleteResponse::MergeImpl(::google::protobuf::Messa
 
   cached_has_bits = from._impl_._has_bits_[0];
   if ((cached_has_bits & 0x00000001U) != 0) {
-    _this->_impl_.player_entity_id_ = from._impl_.player_entity_id_;
+    ABSL_DCHECK(from._impl_.player_data_ != nullptr);
+    if (_this->_impl_.player_data_ == nullptr) {
+      _this->_impl_.player_data_ = ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.player_data_);
+    } else {
+      _this->_impl_.player_data_->MergeFrom(*from._impl_.player_data_);
+    }
   }
   _this->_impl_._has_bits_[0] |= cached_has_bits;
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
@@ -1311,7 +1346,7 @@ void PayloadPlayerZoneEnterCompleteResponse::InternalSwap(PayloadPlayerZoneEnter
   using ::std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
-  swap(_impl_.player_entity_id_, other->_impl_.player_entity_id_);
+  swap(_impl_.player_data_, other->_impl_.player_data_);
 }
 
 ::google::protobuf::Metadata PayloadPlayerZoneEnterCompleteResponse::GetMetadata() const {

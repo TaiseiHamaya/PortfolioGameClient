@@ -26,32 +26,6 @@ namespace _pbi = ::google::protobuf::internal;
 namespace _fl = ::google::protobuf::internal::field_layout;
 namespace Proto {
 
-inline constexpr PayloadLobbyStartGameResponse::Impl_::Impl_(
-    ::_pbi::ConstantInitialized) noexcept
-      : _cached_size_{0},
-        zone_id_{::uint64_t{0u}},
-        player_entity_id_{::uint64_t{0u}} {}
-
-template <typename>
-PROTOBUF_CONSTEXPR PayloadLobbyStartGameResponse::PayloadLobbyStartGameResponse(::_pbi::ConstantInitialized)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(PayloadLobbyStartGameResponse_class_data_.base()),
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(),
-#endif  // PROTOBUF_CUSTOM_VTABLE
-      _impl_(::_pbi::ConstantInitialized()) {
-}
-struct PayloadLobbyStartGameResponseDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR PayloadLobbyStartGameResponseDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~PayloadLobbyStartGameResponseDefaultTypeInternal() {}
-  union {
-    PayloadLobbyStartGameResponse _instance;
-  };
-};
-
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 PayloadLobbyStartGameResponseDefaultTypeInternal _PayloadLobbyStartGameResponse_default_instance_;
-
 inline constexpr PayloadLobbyStartGameRequest::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
@@ -76,6 +50,33 @@ struct PayloadLobbyStartGameRequestDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 PayloadLobbyStartGameRequestDefaultTypeInternal _PayloadLobbyStartGameRequest_default_instance_;
+
+inline constexpr PayloadLobbyStartGameResponse::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        position_{nullptr},
+        zone_id_{::uint64_t{0u}},
+        player_entity_id_{::uint64_t{0u}} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR PayloadLobbyStartGameResponse::PayloadLobbyStartGameResponse(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(PayloadLobbyStartGameResponse_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct PayloadLobbyStartGameResponseDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR PayloadLobbyStartGameResponseDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~PayloadLobbyStartGameResponseDefaultTypeInternal() {}
+  union {
+    PayloadLobbyStartGameResponse _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 PayloadLobbyStartGameResponseDefaultTypeInternal _PayloadLobbyStartGameResponse_default_instance_;
 }  // namespace Proto
 static constexpr const ::_pb::EnumDescriptor *PROTOBUF_NONNULL *PROTOBUF_NULLABLE
     file_level_enum_descriptors_process_2flobby_2fstart_5fgame_2eproto = nullptr;
@@ -91,11 +92,13 @@ const ::uint32_t
         0,
         0x081, // bitmap
         PROTOBUF_FIELD_OFFSET(::Proto::PayloadLobbyStartGameResponse, _impl_._has_bits_),
-        5, // hasbit index offset
+        6, // hasbit index offset
         PROTOBUF_FIELD_OFFSET(::Proto::PayloadLobbyStartGameResponse, _impl_.zone_id_),
         PROTOBUF_FIELD_OFFSET(::Proto::PayloadLobbyStartGameResponse, _impl_.player_entity_id_),
-        0,
+        PROTOBUF_FIELD_OFFSET(::Proto::PayloadLobbyStartGameResponse, _impl_.position_),
         1,
+        2,
+        0,
 };
 
 static const ::_pbi::MigrationSchema
@@ -110,25 +113,28 @@ static const ::_pb::Message* PROTOBUF_NONNULL const file_default_instances[] = {
 const char descriptor_table_protodef_process_2flobby_2fstart_5fgame_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
     "\n\036process/lobby/start_game.proto\022\005Proto\032"
-    "\024common/session.proto\"/\n\034PayloadLobbySta"
-    "rtGameRequest\022\017\n\007user_id\030\001 \001(\004\"J\n\035Payloa"
-    "dLobbyStartGameResponse\022\017\n\007zone_id\030\001 \001(\004"
-    "\022\030\n\020player_entity_id\030\002 \001(\004b\006proto3"
+    "\024common/session.proto\032\021common/math.proto"
+    "\"/\n\034PayloadLobbyStartGameRequest\022\017\n\007user"
+    "_id\030\001 \001(\004\"l\n\035PayloadLobbyStartGameRespon"
+    "se\022\017\n\007zone_id\030\001 \001(\004\022\030\n\020player_entity_id\030"
+    "\002 \001(\004\022 \n\010position\030\003 \001(\0132\016.Proto.Vector3b"
+    "\006proto3"
 };
 static const ::_pbi::DescriptorTable* PROTOBUF_NONNULL const
-    descriptor_table_process_2flobby_2fstart_5fgame_2eproto_deps[1] = {
+    descriptor_table_process_2flobby_2fstart_5fgame_2eproto_deps[2] = {
+        &::descriptor_table_common_2fmath_2eproto,
         &::descriptor_table_common_2fsession_2eproto,
 };
 static ::absl::once_flag descriptor_table_process_2flobby_2fstart_5fgame_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_process_2flobby_2fstart_5fgame_2eproto = {
     false,
     false,
-    194,
+    247,
     descriptor_table_protodef_process_2flobby_2fstart_5fgame_2eproto,
     "process/lobby/start_game.proto",
     &descriptor_table_process_2flobby_2fstart_5fgame_2eproto_once,
     descriptor_table_process_2flobby_2fstart_5fgame_2eproto_deps,
-    1,
+    2,
     2,
     schemas,
     file_default_instances,
@@ -390,6 +396,11 @@ class PayloadLobbyStartGameResponse::_Internal {
       8 * PROTOBUF_FIELD_OFFSET(PayloadLobbyStartGameResponse, _impl_._has_bits_);
 };
 
+void PayloadLobbyStartGameResponse::clear_position() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.position_ != nullptr) _impl_.position_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000001U;
+}
 PayloadLobbyStartGameResponse::PayloadLobbyStartGameResponse(::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, PayloadLobbyStartGameResponse_class_data_.base()) {
@@ -399,16 +410,39 @@ PayloadLobbyStartGameResponse::PayloadLobbyStartGameResponse(::google::protobuf:
   SharedCtor(arena);
   // @@protoc_insertion_point(arena_constructor:Proto.PayloadLobbyStartGameResponse)
 }
+PROTOBUF_NDEBUG_INLINE PayloadLobbyStartGameResponse::Impl_::Impl_(
+    [[maybe_unused]] ::google::protobuf::internal::InternalVisibility visibility,
+    [[maybe_unused]] ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
+    [[maybe_unused]] const ::Proto::PayloadLobbyStartGameResponse& from_msg)
+      : _has_bits_{from._has_bits_},
+        _cached_size_{0} {}
+
 PayloadLobbyStartGameResponse::PayloadLobbyStartGameResponse(
-    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const PayloadLobbyStartGameResponse& from)
+    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena,
+    const PayloadLobbyStartGameResponse& from)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, PayloadLobbyStartGameResponse_class_data_.base()),
+    : ::google::protobuf::Message(arena, PayloadLobbyStartGameResponse_class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(arena),
+    : ::google::protobuf::Message(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
-      _impl_(from._impl_) {
+  PayloadLobbyStartGameResponse* const _this = this;
+  (void)_this;
   _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  ::uint32_t cached_has_bits = _impl_._has_bits_[0];
+  _impl_.position_ = ((cached_has_bits & 0x00000001U) != 0)
+                ? ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.position_)
+                : nullptr;
+  ::memcpy(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, zone_id_),
+           reinterpret_cast<const char *>(&from._impl_) +
+               offsetof(Impl_, zone_id_),
+           offsetof(Impl_, player_entity_id_) -
+               offsetof(Impl_, zone_id_) +
+               sizeof(Impl_::player_entity_id_));
+
+  // @@protoc_insertion_point(copy_constructor:Proto.PayloadLobbyStartGameResponse)
 }
 PROTOBUF_NDEBUG_INLINE PayloadLobbyStartGameResponse::Impl_::Impl_(
     [[maybe_unused]] ::google::protobuf::internal::InternalVisibility visibility,
@@ -418,10 +452,10 @@ PROTOBUF_NDEBUG_INLINE PayloadLobbyStartGameResponse::Impl_::Impl_(
 inline void PayloadLobbyStartGameResponse::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
   ::memset(reinterpret_cast<char *>(&_impl_) +
-               offsetof(Impl_, zone_id_),
+               offsetof(Impl_, position_),
            0,
            offsetof(Impl_, player_entity_id_) -
-               offsetof(Impl_, zone_id_) +
+               offsetof(Impl_, position_) +
                sizeof(Impl_::player_entity_id_));
 }
 PayloadLobbyStartGameResponse::~PayloadLobbyStartGameResponse() {
@@ -435,6 +469,7 @@ inline void PayloadLobbyStartGameResponse::SharedDtor(MessageLite& self) {
   }
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
+  delete this_._impl_.position_;
   this_._impl_.~Impl_();
 }
 
@@ -481,18 +516,18 @@ PayloadLobbyStartGameResponse::GetClassData() const {
   return PayloadLobbyStartGameResponse_class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<1, 2, 0, 0, 2>
+const ::_pbi::TcParseTable<2, 3, 1, 0, 2>
 PayloadLobbyStartGameResponse::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(PayloadLobbyStartGameResponse, _impl_._has_bits_),
     0, // no _extensions_
-    2, 8,  // max_field_number, fast_idx_mask
+    3, 24,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967292,  // skipmap
+    4294967288,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    2,  // num_field_entries
-    0,  // num_aux_entries
-    offsetof(decltype(_table_), field_names),  // no aux_entries
+    3,  // num_field_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
     PayloadLobbyStartGameResponse_class_data_.base(),
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
@@ -500,21 +535,29 @@ PayloadLobbyStartGameResponse::_table_ = {
     ::_pbi::TcParser::GetTable<::Proto::PayloadLobbyStartGameResponse>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // uint64 player_entity_id = 2;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(PayloadLobbyStartGameResponse, _impl_.player_entity_id_), 1>(),
-     {16, 1, 0, PROTOBUF_FIELD_OFFSET(PayloadLobbyStartGameResponse, _impl_.player_entity_id_)}},
+    {::_pbi::TcParser::MiniParse, {}},
     // uint64 zone_id = 1;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(PayloadLobbyStartGameResponse, _impl_.zone_id_), 0>(),
-     {8, 0, 0, PROTOBUF_FIELD_OFFSET(PayloadLobbyStartGameResponse, _impl_.zone_id_)}},
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(PayloadLobbyStartGameResponse, _impl_.zone_id_), 1>(),
+     {8, 1, 0, PROTOBUF_FIELD_OFFSET(PayloadLobbyStartGameResponse, _impl_.zone_id_)}},
+    // uint64 player_entity_id = 2;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(PayloadLobbyStartGameResponse, _impl_.player_entity_id_), 2>(),
+     {16, 2, 0, PROTOBUF_FIELD_OFFSET(PayloadLobbyStartGameResponse, _impl_.player_entity_id_)}},
+    // .Proto.Vector3 position = 3;
+    {::_pbi::TcParser::FastMtS1,
+     {26, 0, 0, PROTOBUF_FIELD_OFFSET(PayloadLobbyStartGameResponse, _impl_.position_)}},
   }}, {{
     65535, 65535
   }}, {{
     // uint64 zone_id = 1;
-    {PROTOBUF_FIELD_OFFSET(PayloadLobbyStartGameResponse, _impl_.zone_id_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt64)},
+    {PROTOBUF_FIELD_OFFSET(PayloadLobbyStartGameResponse, _impl_.zone_id_), _Internal::kHasBitsOffset + 1, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt64)},
     // uint64 player_entity_id = 2;
-    {PROTOBUF_FIELD_OFFSET(PayloadLobbyStartGameResponse, _impl_.player_entity_id_), _Internal::kHasBitsOffset + 1, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt64)},
+    {PROTOBUF_FIELD_OFFSET(PayloadLobbyStartGameResponse, _impl_.player_entity_id_), _Internal::kHasBitsOffset + 2, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt64)},
+    // .Proto.Vector3 position = 3;
+    {PROTOBUF_FIELD_OFFSET(PayloadLobbyStartGameResponse, _impl_.position_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
   }},
-  // no aux_entries
+  {{
+      {::_pbi::TcParser::GetTable<::Proto::Vector3>()},
+  }},
   {{
   }},
 };
@@ -526,7 +569,11 @@ PROTOBUF_NOINLINE void PayloadLobbyStartGameResponse::Clear() {
   (void) cached_has_bits;
 
   cached_has_bits = _impl_._has_bits_[0];
-  if ((cached_has_bits & 0x00000003U) != 0) {
+  if ((cached_has_bits & 0x00000001U) != 0) {
+    ABSL_DCHECK(_impl_.position_ != nullptr);
+    _impl_.position_->Clear();
+  }
+  if ((cached_has_bits & 0x00000006U) != 0) {
     ::memset(&_impl_.zone_id_, 0, static_cast<::size_t>(
         reinterpret_cast<char*>(&_impl_.player_entity_id_) -
         reinterpret_cast<char*>(&_impl_.zone_id_)) + sizeof(_impl_.player_entity_id_));
@@ -554,7 +601,7 @@ PROTOBUF_NOINLINE void PayloadLobbyStartGameResponse::Clear() {
   (void)cached_has_bits;
 
   // uint64 zone_id = 1;
-  if ((this_._impl_._has_bits_[0] & 0x00000001U) != 0) {
+  if ((this_._impl_._has_bits_[0] & 0x00000002U) != 0) {
     if (this_._internal_zone_id() != 0) {
       target = stream->EnsureSpace(target);
       target = ::_pbi::WireFormatLite::WriteUInt64ToArray(
@@ -563,12 +610,20 @@ PROTOBUF_NOINLINE void PayloadLobbyStartGameResponse::Clear() {
   }
 
   // uint64 player_entity_id = 2;
-  if ((this_._impl_._has_bits_[0] & 0x00000002U) != 0) {
+  if ((this_._impl_._has_bits_[0] & 0x00000004U) != 0) {
     if (this_._internal_player_entity_id() != 0) {
       target = stream->EnsureSpace(target);
       target = ::_pbi::WireFormatLite::WriteUInt64ToArray(
           2, this_._internal_player_entity_id(), target);
     }
+  }
+
+  cached_has_bits = this_._impl_._has_bits_[0];
+  // .Proto.Vector3 position = 3;
+  if ((cached_has_bits & 0x00000001U) != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+        3, *this_._impl_.position_, this_._impl_.position_->GetCachedSize(), target,
+        stream);
   }
 
   if (ABSL_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
@@ -596,16 +651,21 @@ PROTOBUF_NOINLINE void PayloadLobbyStartGameResponse::Clear() {
 
   ::_pbi::Prefetch5LinesFrom7Lines(&this_);
   cached_has_bits = this_._impl_._has_bits_[0];
-  if ((cached_has_bits & 0x00000003U) != 0) {
-    // uint64 zone_id = 1;
+  if ((cached_has_bits & 0x00000007U) != 0) {
+    // .Proto.Vector3 position = 3;
     if ((cached_has_bits & 0x00000001U) != 0) {
+      total_size += 1 +
+                    ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.position_);
+    }
+    // uint64 zone_id = 1;
+    if ((cached_has_bits & 0x00000002U) != 0) {
       if (this_._internal_zone_id() != 0) {
         total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(
             this_._internal_zone_id());
       }
     }
     // uint64 player_entity_id = 2;
-    if ((cached_has_bits & 0x00000002U) != 0) {
+    if ((cached_has_bits & 0x00000004U) != 0) {
       if (this_._internal_player_entity_id() != 0) {
         total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(
             this_._internal_player_entity_id());
@@ -622,19 +682,28 @@ void PayloadLobbyStartGameResponse::MergeImpl(::google::protobuf::MessageLite& t
   if constexpr (::_pbi::DebugHardenVerifyHasBitConsistency()) {
     from.VerifyHasBitConsistency();
   }
+  ::google::protobuf::Arena* arena = _this->GetArena();
   // @@protoc_insertion_point(class_specific_merge_from_start:Proto.PayloadLobbyStartGameResponse)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = from._impl_._has_bits_[0];
-  if ((cached_has_bits & 0x00000003U) != 0) {
+  if ((cached_has_bits & 0x00000007U) != 0) {
     if ((cached_has_bits & 0x00000001U) != 0) {
+      ABSL_DCHECK(from._impl_.position_ != nullptr);
+      if (_this->_impl_.position_ == nullptr) {
+        _this->_impl_.position_ = ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.position_);
+      } else {
+        _this->_impl_.position_->MergeFrom(*from._impl_.position_);
+      }
+    }
+    if ((cached_has_bits & 0x00000002U) != 0) {
       if (from._internal_zone_id() != 0) {
         _this->_impl_.zone_id_ = from._impl_.zone_id_;
       }
     }
-    if ((cached_has_bits & 0x00000002U) != 0) {
+    if ((cached_has_bits & 0x00000004U) != 0) {
       if (from._internal_player_entity_id() != 0) {
         _this->_impl_.player_entity_id_ = from._impl_.player_entity_id_;
       }
@@ -659,9 +728,9 @@ void PayloadLobbyStartGameResponse::InternalSwap(PayloadLobbyStartGameResponse* 
   ::google::protobuf::internal::memswap<
       PROTOBUF_FIELD_OFFSET(PayloadLobbyStartGameResponse, _impl_.player_entity_id_)
       + sizeof(PayloadLobbyStartGameResponse::_impl_.player_entity_id_)
-      - PROTOBUF_FIELD_OFFSET(PayloadLobbyStartGameResponse, _impl_.zone_id_)>(
-          reinterpret_cast<char*>(&_impl_.zone_id_),
-          reinterpret_cast<char*>(&other->_impl_.zone_id_));
+      - PROTOBUF_FIELD_OFFSET(PayloadLobbyStartGameResponse, _impl_.position_)>(
+          reinterpret_cast<char*>(&_impl_.position_),
+          reinterpret_cast<char*>(&other->_impl_.position_));
 }
 
 ::google::protobuf::Metadata PayloadLobbyStartGameResponse::GetMetadata() const {

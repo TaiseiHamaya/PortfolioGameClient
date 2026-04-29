@@ -26,27 +26,34 @@ void ZoneHandler::setup(Reference<EntityManager> entityManager_, Reference<Enemy
 	gameServerPacketSender = NetworkCluster::SenderMut();
 	gameLogWindowManager = gameLogWindowManager_;
 
+	// Zoneに必要なマネージャーをセット
 	zone.set_entity_manager(entityManager_);
 	zone.set_enemy_manager(enemyManager_);
 
 	auto commandStack = [this](std::unique_ptr<IZoneCommand> cmd) { stack_command(std::move(cmd)); };
+	// handerの初期化
 	textMessageHandler.setup(entityManager_, gameLogWindowManager_);
-	loginMessageHandler.setup(entityManager_, gameLogWindowManager_, commandStack);
-	logoutMessageHandler.setup(entityManager_, gameLogWindowManager_, commandStack);
+	startGameMessageHandler.setup(entityManager_, gameLogWindowManager_, gameServerConnectionManager, commandStack);
+	notificationMessageHandler.setup(entityManager_, gameLogWindowManager_, commandStack);
 	syncMessageHandler.setup(entityManager_, gameLogWindowManager_, commandStack);
 	enemyMessageHandler.setup(enemyManager_, entityManager_);
 
+	// routerにハンドラを登録
 	router.register_handler(Proto::ToClientMessage::kTextMessage, std::ref(textMessageHandler));
-	router.register_handler(Proto::ToClientMessage::kStartGameResponse, std::ref(loginMessageHandler));
-	router.register_handler(Proto::ToClientMessage::kLogoutResponse, std::ref(logoutMessageHandler));
-	router.register_handler(Proto::ToClientMessage::kZoneEnterNotification, std::ref(loginMessageHandler));
-	router.register_handler(Proto::ToClientMessage::kZoneExitNotification, std::ref(logoutMessageHandler));
+
+	router.register_handler(Proto::ToClientMessage::kStartGameResponse, std::ref(startGameMessageHandler));
+
+	router.register_handler(Proto::ToClientMessage::kZoneEnterNotification, std::ref(notificationMessageHandler));
+	router.register_handler(Proto::ToClientMessage::kZoneExitNotification, std::ref(notificationMessageHandler));
+
 	router.register_handler(Proto::ToClientMessage::kTransformSync, std::ref(syncMessageHandler));
 	router.register_handler(Proto::ToClientMessage::kPlayAction, std::ref(syncMessageHandler));
 	router.register_handler(Proto::ToClientMessage::kEntityDamaged, std::ref(syncMessageHandler));
+
 	router.register_handler(Proto::ToClientMessage::kEnemySpawn, std::ref(enemyMessageHandler));
 	router.register_handler(Proto::ToClientMessage::kEnemyDespawn, std::ref(enemyMessageHandler));
 
+	// チャットボックスの初期化
 	chatBoxManager.initialize();
 
 	Proto::ToServerMessage enter;
@@ -70,13 +77,12 @@ void ZoneHandler::prev_update() {
 			const std::optional<u64>& serverId = player->server_id();
 			if (serverId.has_value()) {
 				// パケット作成
-				Proto::ToServerMessage packet;
-				Proto::PayloadTextMessage body;
-				body.set_id(serverId.value());
-				body.set_message(ConvertString(message));
-				packet.set_allocated_text_message(&body);
+				Proto::ToServerMessage serverMessage;
+				Proto::PayloadTextMessage* payload = serverMessage.mutable_text_message();
+				payload->set_id(serverId.value());
+				payload->set_message(ConvertString(message));
 				// 送信
-				gameServerPacketSender->stack_packet(packet);
+				gameServerPacketSender->stack_packet(serverMessage);
 			}
 		}
 	}
@@ -113,7 +119,7 @@ void ZoneHandler::handle_zone() {
 	router.dispatch(packets);
 
 #ifdef DEBUG_FEATURES_ENABLE
-	debugRecivedMessageCount = static_cast<i32>(packets.size());
+	debugReceivedMessageCount = static_cast<i32>(packets.size());
 	debugCommandCount = static_cast<i32>(zoneCommands.size());
 	debugSentMessageCount = gameServerPacketSender ? static_cast<i32>(gameServerPacketSender->packet_count()) : 0;
 #endif // DEBUG_FEATURES_ENABLE
@@ -210,7 +216,7 @@ Reference<const ChatBoxManager> ZoneHandler::chat_box_imm() const noexcept {
 void ZoneHandler::set_player(Reference<Player> player_) {
 	player = player_;
 	zone.set_player(player_);
-	loginMessageHandler.set_player(player_);
+	startGameMessageHandler.set_player(player_);
 	syncMessageHandler.set_player(player_);
 	enemyMessageHandler.set_player(player_);
 }
@@ -227,7 +233,7 @@ void ZoneHandler::set_camera_instance(Reference<const szg::WorldInstance> camera
 
 void ZoneHandler::debug_gui() {
 	ImGui::Text(std::format("SentMessageCount-\'{}\'", debugSentMessageCount).c_str());
-	ImGui::Text(std::format("ReceivedMessageCount-\'{}\'", debugRecivedMessageCount).c_str());
+	ImGui::Text(std::format("ReceivedMessageCount-\'{}\'", debugReceivedMessageCount).c_str());
 	ImGui::Text(std::format("CommandCount-\'{}\'", debugCommandCount).c_str());
 
 	ImGui::Separator();

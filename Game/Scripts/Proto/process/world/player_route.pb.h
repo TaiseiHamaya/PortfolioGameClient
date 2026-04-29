@@ -29,8 +29,8 @@
 #include "google/protobuf/repeated_field.h"  // IWYU pragma: export
 #include "google/protobuf/extension_set.h"  // IWYU pragma: export
 #include "google/protobuf/unknown_field_set.h"
-#include "common/math.pb.h"
 #include "common/session.pb.h"
+#include "process/world/route_player_data.pb.h"
 // @@protoc_insertion_point(includes)
 
 // Must be included last.
@@ -285,198 +285,6 @@ class PayloadPlayerZoneEnterReady final : public ::google::protobuf::Message
 };
 
 extern const ::google::protobuf::internal::ClassDataFull PayloadPlayerZoneEnterReady_class_data_;
-// -------------------------------------------------------------------
-
-class PayloadPlayerZoneEnterCompleteResponse final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:Proto.PayloadPlayerZoneEnterCompleteResponse) */ {
- public:
-  inline PayloadPlayerZoneEnterCompleteResponse() : PayloadPlayerZoneEnterCompleteResponse(nullptr) {}
-  ~PayloadPlayerZoneEnterCompleteResponse() PROTOBUF_FINAL;
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-  void operator delete(PayloadPlayerZoneEnterCompleteResponse* PROTOBUF_NONNULL msg, ::std::destroying_delete_t) {
-    SharedDtor(*msg);
-    ::google::protobuf::internal::SizedDelete(msg, sizeof(PayloadPlayerZoneEnterCompleteResponse));
-  }
-#endif
-
-  template <typename = void>
-  explicit PROTOBUF_CONSTEXPR PayloadPlayerZoneEnterCompleteResponse(::google::protobuf::internal::ConstantInitialized);
-
-  inline PayloadPlayerZoneEnterCompleteResponse(const PayloadPlayerZoneEnterCompleteResponse& from) : PayloadPlayerZoneEnterCompleteResponse(nullptr, from) {}
-  inline PayloadPlayerZoneEnterCompleteResponse(PayloadPlayerZoneEnterCompleteResponse&& from) noexcept
-      : PayloadPlayerZoneEnterCompleteResponse(nullptr, ::std::move(from)) {}
-  inline PayloadPlayerZoneEnterCompleteResponse& operator=(const PayloadPlayerZoneEnterCompleteResponse& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline PayloadPlayerZoneEnterCompleteResponse& operator=(PayloadPlayerZoneEnterCompleteResponse&& from) noexcept {
-    if (this == &from) return *this;
-    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
-      InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
-  }
-  inline ::google::protobuf::UnknownFieldSet* PROTOBUF_NONNULL mutable_unknown_fields()
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
-  }
-
-  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL descriptor() {
-    return GetDescriptor();
-  }
-  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::google::protobuf::Reflection* PROTOBUF_NONNULL GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const PayloadPlayerZoneEnterCompleteResponse& default_instance() {
-    return *reinterpret_cast<const PayloadPlayerZoneEnterCompleteResponse*>(
-        &_PayloadPlayerZoneEnterCompleteResponse_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages = 3;
-  friend void swap(PayloadPlayerZoneEnterCompleteResponse& a, PayloadPlayerZoneEnterCompleteResponse& b) { a.Swap(&b); }
-  inline void Swap(PayloadPlayerZoneEnterCompleteResponse* PROTOBUF_NONNULL other) {
-    if (other == this) return;
-    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
-      InternalSwap(other);
-    } else {
-      ::google::protobuf::internal::GenericSwap(this, other);
-    }
-  }
-  void UnsafeArenaSwap(PayloadPlayerZoneEnterCompleteResponse* PROTOBUF_NONNULL other) {
-    if (other == this) return;
-    ABSL_DCHECK(GetArena() == other->GetArena());
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  PayloadPlayerZoneEnterCompleteResponse* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
-    return ::google::protobuf::Message::DefaultConstruct<PayloadPlayerZoneEnterCompleteResponse>(arena);
-  }
-  using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const PayloadPlayerZoneEnterCompleteResponse& from);
-  using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const PayloadPlayerZoneEnterCompleteResponse& from) { PayloadPlayerZoneEnterCompleteResponse::MergeImpl(*this, from); }
-
-  private:
-  static void MergeImpl(::google::protobuf::MessageLite& to_msg,
-                        const ::google::protobuf::MessageLite& from_msg);
-
-  public:
-  bool IsInitialized() const {
-    return true;
-  }
-  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
-  #if defined(PROTOBUF_CUSTOM_VTABLE)
-  private:
-  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
-  static ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
-      const ::google::protobuf::MessageLite& msg, ::uint8_t* PROTOBUF_NONNULL target,
-      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream);
-
-  public:
-  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
-  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
-      ::uint8_t* PROTOBUF_NONNULL target,
-      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
-    return _InternalSerialize(*this, target, stream);
-  }
-  #else   // PROTOBUF_CUSTOM_VTABLE
-  ::size_t ByteSizeLong() const final;
-  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
-      ::uint8_t* PROTOBUF_NONNULL target,
-      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const final;
-  #endif  // PROTOBUF_CUSTOM_VTABLE
-  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
-
-  private:
-  void SharedCtor(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
-  static void SharedDtor(MessageLite& self);
-  void InternalSwap(PayloadPlayerZoneEnterCompleteResponse* PROTOBUF_NONNULL other);
- private:
-  template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "Proto.PayloadPlayerZoneEnterCompleteResponse"; }
-
- protected:
-  explicit PayloadPlayerZoneEnterCompleteResponse(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
-  PayloadPlayerZoneEnterCompleteResponse(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const PayloadPlayerZoneEnterCompleteResponse& from);
-  PayloadPlayerZoneEnterCompleteResponse(
-      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, PayloadPlayerZoneEnterCompleteResponse&& from) noexcept
-      : PayloadPlayerZoneEnterCompleteResponse(arena) {
-    *this = ::std::move(from);
-  }
-  const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL GetClassData() const PROTOBUF_FINAL;
-  static void* PROTOBUF_NONNULL PlacementNew_(
-      const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
-      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
-  static constexpr auto InternalNewImpl_();
-
- public:
-  static constexpr auto InternalGenerateClassData_();
-
-  ::google::protobuf::Metadata GetMetadata() const;
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-  enum : int {
-    kPlayerEntityIdFieldNumber = 1,
-  };
-  // optional uint64 player_entity_id = 1;
-  bool has_player_entity_id() const;
-  void clear_player_entity_id() ;
-  ::uint64_t player_entity_id() const;
-  void set_player_entity_id(::uint64_t value);
-
-  private:
-  ::uint64_t _internal_player_entity_id() const;
-  void _internal_set_player_entity_id(::uint64_t value);
-
-  public:
-  // @@protoc_insertion_point(class_scope:Proto.PayloadPlayerZoneEnterCompleteResponse)
- private:
-  class _Internal;
-  friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<0, 1,
-                                   0, 0,
-                                   2>
-      _table_;
-
-  friend class ::google::protobuf::MessageLite;
-  friend class ::google::protobuf::Arena;
-  template <typename T>
-  friend class ::google::protobuf::Arena::InternalHelper;
-  using InternalArenaConstructable_ = void;
-  using DestructorSkippable_ = void;
-  struct Impl_ {
-    inline explicit constexpr Impl_(::google::protobuf::internal::ConstantInitialized) noexcept;
-    inline explicit Impl_(
-        ::google::protobuf::internal::InternalVisibility visibility,
-        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
-    inline explicit Impl_(
-        ::google::protobuf::internal::InternalVisibility visibility,
-        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
-        const PayloadPlayerZoneEnterCompleteResponse& from_msg);
-    ::google::protobuf::internal::HasBits<1> _has_bits_;
-    ::google::protobuf::internal::CachedSize _cached_size_;
-    ::uint64_t player_entity_id_;
-    PROTOBUF_TSAN_DECLARE_MEMBER
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_process_2fworld_2fplayer_5froute_2eproto;
-};
-
-extern const ::google::protobuf::internal::ClassDataFull PayloadPlayerZoneEnterCompleteResponse_class_data_;
 // -------------------------------------------------------------------
 
 class PayloadPlayerZoneEnterComplete final : public ::google::protobuf::Message
@@ -1444,6 +1252,202 @@ class PayloadPlayerExitZoneBegin final : public ::google::protobuf::Message
 };
 
 extern const ::google::protobuf::internal::ClassDataFull PayloadPlayerExitZoneBegin_class_data_;
+// -------------------------------------------------------------------
+
+class PayloadPlayerZoneEnterCompleteResponse final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:Proto.PayloadPlayerZoneEnterCompleteResponse) */ {
+ public:
+  inline PayloadPlayerZoneEnterCompleteResponse() : PayloadPlayerZoneEnterCompleteResponse(nullptr) {}
+  ~PayloadPlayerZoneEnterCompleteResponse() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(PayloadPlayerZoneEnterCompleteResponse* PROTOBUF_NONNULL msg, ::std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(PayloadPlayerZoneEnterCompleteResponse));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR PayloadPlayerZoneEnterCompleteResponse(::google::protobuf::internal::ConstantInitialized);
+
+  inline PayloadPlayerZoneEnterCompleteResponse(const PayloadPlayerZoneEnterCompleteResponse& from) : PayloadPlayerZoneEnterCompleteResponse(nullptr, from) {}
+  inline PayloadPlayerZoneEnterCompleteResponse(PayloadPlayerZoneEnterCompleteResponse&& from) noexcept
+      : PayloadPlayerZoneEnterCompleteResponse(nullptr, ::std::move(from)) {}
+  inline PayloadPlayerZoneEnterCompleteResponse& operator=(const PayloadPlayerZoneEnterCompleteResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline PayloadPlayerZoneEnterCompleteResponse& operator=(PayloadPlayerZoneEnterCompleteResponse&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* PROTOBUF_NONNULL mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* PROTOBUF_NONNULL GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const PayloadPlayerZoneEnterCompleteResponse& default_instance() {
+    return *reinterpret_cast<const PayloadPlayerZoneEnterCompleteResponse*>(
+        &_PayloadPlayerZoneEnterCompleteResponse_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 3;
+  friend void swap(PayloadPlayerZoneEnterCompleteResponse& a, PayloadPlayerZoneEnterCompleteResponse& b) { a.Swap(&b); }
+  inline void Swap(PayloadPlayerZoneEnterCompleteResponse* PROTOBUF_NONNULL other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(PayloadPlayerZoneEnterCompleteResponse* PROTOBUF_NONNULL other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  PayloadPlayerZoneEnterCompleteResponse* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<PayloadPlayerZoneEnterCompleteResponse>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const PayloadPlayerZoneEnterCompleteResponse& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const PayloadPlayerZoneEnterCompleteResponse& from) { PayloadPlayerZoneEnterCompleteResponse::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(::google::protobuf::MessageLite& to_msg,
+                        const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      const ::google::protobuf::MessageLite& msg, ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(PayloadPlayerZoneEnterCompleteResponse* PROTOBUF_NONNULL other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "Proto.PayloadPlayerZoneEnterCompleteResponse"; }
+
+ protected:
+  explicit PayloadPlayerZoneEnterCompleteResponse(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  PayloadPlayerZoneEnterCompleteResponse(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const PayloadPlayerZoneEnterCompleteResponse& from);
+  PayloadPlayerZoneEnterCompleteResponse(
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, PayloadPlayerZoneEnterCompleteResponse&& from) noexcept
+      : PayloadPlayerZoneEnterCompleteResponse(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL GetClassData() const PROTOBUF_FINAL;
+  static void* PROTOBUF_NONNULL PlacementNew_(
+      const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static constexpr auto InternalNewImpl_();
+
+ public:
+  static constexpr auto InternalGenerateClassData_();
+
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kPlayerDataFieldNumber = 1,
+  };
+  // optional .Proto.RoutePlayerData player_data = 1;
+  bool has_player_data() const;
+  void clear_player_data() ;
+  const ::Proto::RoutePlayerData& player_data() const;
+  [[nodiscard]] ::Proto::RoutePlayerData* PROTOBUF_NULLABLE release_player_data();
+  ::Proto::RoutePlayerData* PROTOBUF_NONNULL mutable_player_data();
+  void set_allocated_player_data(::Proto::RoutePlayerData* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_player_data(::Proto::RoutePlayerData* PROTOBUF_NULLABLE value);
+  ::Proto::RoutePlayerData* PROTOBUF_NULLABLE unsafe_arena_release_player_data();
+
+  private:
+  const ::Proto::RoutePlayerData& _internal_player_data() const;
+  ::Proto::RoutePlayerData* PROTOBUF_NONNULL _internal_mutable_player_data();
+
+  public:
+  // @@protoc_insertion_point(class_scope:Proto.PayloadPlayerZoneEnterCompleteResponse)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<0, 1,
+                                   1, 0,
+                                   2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(
+        ::google::protobuf::internal::InternalVisibility visibility,
+        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+    inline explicit Impl_(
+        ::google::protobuf::internal::InternalVisibility visibility,
+        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
+        const PayloadPlayerZoneEnterCompleteResponse& from_msg);
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    ::Proto::RoutePlayerData* PROTOBUF_NULLABLE player_data_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_process_2fworld_2fplayer_5froute_2eproto;
+};
+
+extern const ::google::protobuf::internal::ClassDataFull PayloadPlayerZoneEnterCompleteResponse_class_data_;
 
 // ===================================================================
 
@@ -1569,32 +1573,97 @@ inline void PayloadPlayerZoneEnterComplete::_internal_set_user_id(::uint64_t val
 
 // PayloadPlayerZoneEnterCompleteResponse
 
-// optional uint64 player_entity_id = 1;
-inline bool PayloadPlayerZoneEnterCompleteResponse::has_player_entity_id() const {
+// optional .Proto.RoutePlayerData player_data = 1;
+inline bool PayloadPlayerZoneEnterCompleteResponse::has_player_data() const {
   bool value = (_impl_._has_bits_[0] & 0x00000001U) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.player_data_ != nullptr);
   return value;
 }
-inline void PayloadPlayerZoneEnterCompleteResponse::clear_player_entity_id() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.player_entity_id_ = ::uint64_t{0u};
-  _impl_._has_bits_[0] &= ~0x00000001U;
-}
-inline ::uint64_t PayloadPlayerZoneEnterCompleteResponse::player_entity_id() const {
-  // @@protoc_insertion_point(field_get:Proto.PayloadPlayerZoneEnterCompleteResponse.player_entity_id)
-  return _internal_player_entity_id();
-}
-inline void PayloadPlayerZoneEnterCompleteResponse::set_player_entity_id(::uint64_t value) {
-  _internal_set_player_entity_id(value);
-  _impl_._has_bits_[0] |= 0x00000001U;
-  // @@protoc_insertion_point(field_set:Proto.PayloadPlayerZoneEnterCompleteResponse.player_entity_id)
-}
-inline ::uint64_t PayloadPlayerZoneEnterCompleteResponse::_internal_player_entity_id() const {
+inline const ::Proto::RoutePlayerData& PayloadPlayerZoneEnterCompleteResponse::_internal_player_data() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.player_entity_id_;
+  const ::Proto::RoutePlayerData* p = _impl_.player_data_;
+  return p != nullptr ? *p : reinterpret_cast<const ::Proto::RoutePlayerData&>(::Proto::_RoutePlayerData_default_instance_);
 }
-inline void PayloadPlayerZoneEnterCompleteResponse::_internal_set_player_entity_id(::uint64_t value) {
+inline const ::Proto::RoutePlayerData& PayloadPlayerZoneEnterCompleteResponse::player_data() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:Proto.PayloadPlayerZoneEnterCompleteResponse.player_data)
+  return _internal_player_data();
+}
+inline void PayloadPlayerZoneEnterCompleteResponse::unsafe_arena_set_allocated_player_data(
+    ::Proto::RoutePlayerData* PROTOBUF_NULLABLE value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.player_entity_id_ = value;
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.player_data_);
+  }
+  _impl_.player_data_ = reinterpret_cast<::Proto::RoutePlayerData*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000001U;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001U;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.PayloadPlayerZoneEnterCompleteResponse.player_data)
+}
+inline ::Proto::RoutePlayerData* PROTOBUF_NULLABLE PayloadPlayerZoneEnterCompleteResponse::release_player_data() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  _impl_._has_bits_[0] &= ~0x00000001U;
+  ::Proto::RoutePlayerData* released = _impl_.player_data_;
+  _impl_.player_data_ = nullptr;
+  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
+    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    if (GetArena() == nullptr) {
+      delete old;
+    }
+  } else {
+    if (GetArena() != nullptr) {
+      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    }
+  }
+  return released;
+}
+inline ::Proto::RoutePlayerData* PROTOBUF_NULLABLE PayloadPlayerZoneEnterCompleteResponse::unsafe_arena_release_player_data() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:Proto.PayloadPlayerZoneEnterCompleteResponse.player_data)
+
+  _impl_._has_bits_[0] &= ~0x00000001U;
+  ::Proto::RoutePlayerData* temp = _impl_.player_data_;
+  _impl_.player_data_ = nullptr;
+  return temp;
+}
+inline ::Proto::RoutePlayerData* PROTOBUF_NONNULL PayloadPlayerZoneEnterCompleteResponse::_internal_mutable_player_data() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.player_data_ == nullptr) {
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::Proto::RoutePlayerData>(GetArena());
+    _impl_.player_data_ = reinterpret_cast<::Proto::RoutePlayerData*>(p);
+  }
+  return _impl_.player_data_;
+}
+inline ::Proto::RoutePlayerData* PROTOBUF_NONNULL PayloadPlayerZoneEnterCompleteResponse::mutable_player_data()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  _impl_._has_bits_[0] |= 0x00000001U;
+  ::Proto::RoutePlayerData* _msg = _internal_mutable_player_data();
+  // @@protoc_insertion_point(field_mutable:Proto.PayloadPlayerZoneEnterCompleteResponse.player_data)
+  return _msg;
+}
+inline void PayloadPlayerZoneEnterCompleteResponse::set_allocated_player_data(::Proto::RoutePlayerData* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.player_data_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::Message*>(value)->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000001U;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001U;
+  }
+
+  _impl_.player_data_ = reinterpret_cast<::Proto::RoutePlayerData*>(value);
+  // @@protoc_insertion_point(field_set_allocated:Proto.PayloadPlayerZoneEnterCompleteResponse.player_data)
 }
 
 // -------------------------------------------------------------------

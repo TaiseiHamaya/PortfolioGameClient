@@ -12,16 +12,18 @@
 
 class EntityManager;
 class GameLogWindowManager;
+class GameServerConnectionManager;
+class Player;
 
 /// <summary>
-/// ログアウトメッセージのハンドラ
+/// ログインメッセージのハンドラ
 /// </summary>
-class ZoneLogoutMessageHandler {
+class ZoneStartGameMessageHandler {
 public:
-	ZoneLogoutMessageHandler() = default;
-	~ZoneLogoutMessageHandler() = default;
+	ZoneStartGameMessageHandler() = default;
+	~ZoneStartGameMessageHandler() = default;
 
-	SZG_CLASS_MOVE_ONLY(ZoneLogoutMessageHandler)
+	SZG_CLASS_MOVE_ONLY(ZoneStartGameMessageHandler)
 
 public:
 	using CommandStack = std::function<void(std::unique_ptr<IZoneCommand>)>;
@@ -29,13 +31,18 @@ public:
 	void setup(
 		Reference<EntityManager> entityManager_,
 		Reference<GameLogWindowManager> gameLogWindowManager_,
+		Reference<GameServerConnectionManager> gameServerConnectionManager_,
 		CommandStack commandStack_
 	);
+
+	void set_player(Reference<Player> player_);
 
 	void operator()(const Proto::ToClientMessage& packet);
 
 private:
 	Reference<EntityManager> entityManager;
 	Reference<GameLogWindowManager> gameLogWindowManager;
+	Reference<GameServerConnectionManager> gameServerConnectionManager;
+	Reference<Player> player;
 	CommandStack commandStack;
 };

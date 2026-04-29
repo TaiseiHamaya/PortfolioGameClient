@@ -34,6 +34,7 @@
 #include "process/db/user/logout.pb.h"
 #include "process/db/user/signup.pb.h"
 #include "process/zone/sync.pb.h"
+#include "process/zone/client_initializer.pb.h"
 #include "process/zone/enemy.pb.h"
 #include "process/world/player_route.pb.h"
 #include "process/lobby/start_game.pb.h"
@@ -146,9 +147,10 @@ class ToServerMessage final : public ::google::protobuf::Message
     kSignupRequest = 3,
     kStartGame = 4,
     kEndGame = 5,
-    kTransformSync = 6,
-    kPlayAction = 7,
-    kTextMessage = 8,
+    kClientInitializerRequest = 6,
+    kTransformSync = 8,
+    kPlayAction = 9,
+    kTextMessage = 10,
     MESSAGE_NOT_SET = 0,
   };
   static constexpr int kIndexInFileMessages = 0;
@@ -244,9 +246,10 @@ class ToServerMessage final : public ::google::protobuf::Message
     kSignupRequestFieldNumber = 3,
     kStartGameFieldNumber = 4,
     kEndGameFieldNumber = 5,
-    kTransformSyncFieldNumber = 6,
-    kPlayActionFieldNumber = 7,
-    kTextMessageFieldNumber = 8,
+    kClientInitializerRequestFieldNumber = 6,
+    kTransformSyncFieldNumber = 8,
+    kPlayActionFieldNumber = 9,
+    kTextMessageFieldNumber = 10,
   };
   // .Proto.PayloadLoginRequest login_request = 1;
   bool has_login_request() const;
@@ -343,7 +346,26 @@ class ToServerMessage final : public ::google::protobuf::Message
   ::Proto::PayloadLobbyEndGameRequest* PROTOBUF_NONNULL _internal_mutable_end_game();
 
   public:
-  // .Proto.PayloadTransformSync transform_sync = 6;
+  // .Proto.PayloadClientInitializerRequest client_initializer_request = 6;
+  bool has_client_initializer_request() const;
+  private:
+  bool _internal_has_client_initializer_request() const;
+
+  public:
+  void clear_client_initializer_request() ;
+  const ::Proto::PayloadClientInitializerRequest& client_initializer_request() const;
+  [[nodiscard]] ::Proto::PayloadClientInitializerRequest* PROTOBUF_NULLABLE release_client_initializer_request();
+  ::Proto::PayloadClientInitializerRequest* PROTOBUF_NONNULL mutable_client_initializer_request();
+  void set_allocated_client_initializer_request(::Proto::PayloadClientInitializerRequest* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_client_initializer_request(::Proto::PayloadClientInitializerRequest* PROTOBUF_NULLABLE value);
+  ::Proto::PayloadClientInitializerRequest* PROTOBUF_NULLABLE unsafe_arena_release_client_initializer_request();
+
+  private:
+  const ::Proto::PayloadClientInitializerRequest& _internal_client_initializer_request() const;
+  ::Proto::PayloadClientInitializerRequest* PROTOBUF_NONNULL _internal_mutable_client_initializer_request();
+
+  public:
+  // .Proto.PayloadTransformSync transform_sync = 8;
   bool has_transform_sync() const;
   private:
   bool _internal_has_transform_sync() const;
@@ -362,7 +384,7 @@ class ToServerMessage final : public ::google::protobuf::Message
   ::Proto::PayloadTransformSync* PROTOBUF_NONNULL _internal_mutable_transform_sync();
 
   public:
-  // .Proto.PayloadPlayAction play_action = 7;
+  // .Proto.PayloadPlayAction play_action = 9;
   bool has_play_action() const;
   private:
   bool _internal_has_play_action() const;
@@ -381,7 +403,7 @@ class ToServerMessage final : public ::google::protobuf::Message
   ::Proto::PayloadPlayAction* PROTOBUF_NONNULL _internal_mutable_play_action();
 
   public:
-  // .Proto.PayloadTextMessage text_message = 8;
+  // .Proto.PayloadTextMessage text_message = 10;
   bool has_text_message() const;
   private:
   bool _internal_has_text_message() const;
@@ -410,14 +432,15 @@ class ToServerMessage final : public ::google::protobuf::Message
   void set_has_signup_request();
   void set_has_start_game();
   void set_has_end_game();
+  void set_has_client_initializer_request();
   void set_has_transform_sync();
   void set_has_play_action();
   void set_has_text_message();
   inline bool has_message() const;
   inline void clear_has_message();
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<0, 8,
-                                   8, 0,
+  static const ::google::protobuf::internal::TcParseTable<0, 9,
+                                   9, 0,
                                    2>
       _table_;
 
@@ -444,6 +467,7 @@ class ToServerMessage final : public ::google::protobuf::Message
       ::google::protobuf::Message* PROTOBUF_NULLABLE signup_request_;
       ::google::protobuf::Message* PROTOBUF_NULLABLE start_game_;
       ::google::protobuf::Message* PROTOBUF_NULLABLE end_game_;
+      ::google::protobuf::Message* PROTOBUF_NULLABLE client_initializer_request_;
       ::google::protobuf::Message* PROTOBUF_NULLABLE transform_sync_;
       ::google::protobuf::Message* PROTOBUF_NULLABLE play_action_;
       ::google::protobuf::Message* PROTOBUF_NULLABLE text_message_;
@@ -520,14 +544,15 @@ class ToClientMessage final : public ::google::protobuf::Message
     kLobbyEnterResponse = 4,
     kStartGameResponse = 5,
     kEndGameResponse = 6,
-    kTransformSync = 7,
-    kPlayAction = 8,
-    kEntityDamaged = 9,
-    kEnemySpawn = 10,
-    kEnemyDespawn = 11,
-    kZoneEnterNotification = 12,
-    kZoneExitNotification = 13,
-    kTextMessage = 14,
+    kClientInitializerResponse = 7,
+    kTransformSync = 8,
+    kPlayAction = 9,
+    kEntityDamaged = 10,
+    kEnemySpawn = 11,
+    kEnemyDespawn = 12,
+    kZoneEnterNotification = 13,
+    kZoneExitNotification = 14,
+    kTextMessage = 15,
     MESSAGE_NOT_SET = 0,
   };
   static constexpr int kIndexInFileMessages = 1;
@@ -623,14 +648,15 @@ class ToClientMessage final : public ::google::protobuf::Message
     kLobbyEnterResponseFieldNumber = 4,
     kStartGameResponseFieldNumber = 5,
     kEndGameResponseFieldNumber = 6,
-    kTransformSyncFieldNumber = 7,
-    kPlayActionFieldNumber = 8,
-    kEntityDamagedFieldNumber = 9,
-    kEnemySpawnFieldNumber = 10,
-    kEnemyDespawnFieldNumber = 11,
-    kZoneEnterNotificationFieldNumber = 12,
-    kZoneExitNotificationFieldNumber = 13,
-    kTextMessageFieldNumber = 14,
+    kClientInitializerResponseFieldNumber = 7,
+    kTransformSyncFieldNumber = 8,
+    kPlayActionFieldNumber = 9,
+    kEntityDamagedFieldNumber = 10,
+    kEnemySpawnFieldNumber = 11,
+    kEnemyDespawnFieldNumber = 12,
+    kZoneEnterNotificationFieldNumber = 13,
+    kZoneExitNotificationFieldNumber = 14,
+    kTextMessageFieldNumber = 15,
   };
   // .Proto.PayloadLogoutResponse logout_response = 2;
   bool has_logout_response() const;
@@ -727,7 +753,26 @@ class ToClientMessage final : public ::google::protobuf::Message
   ::Proto::PayloadLobbyEndGameResponse* PROTOBUF_NONNULL _internal_mutable_end_game_response();
 
   public:
-  // .Proto.PayloadTransformSync transform_sync = 7;
+  // .Proto.PayloadClientInitializerResponse client_initializer_response = 7;
+  bool has_client_initializer_response() const;
+  private:
+  bool _internal_has_client_initializer_response() const;
+
+  public:
+  void clear_client_initializer_response() ;
+  const ::Proto::PayloadClientInitializerResponse& client_initializer_response() const;
+  [[nodiscard]] ::Proto::PayloadClientInitializerResponse* PROTOBUF_NULLABLE release_client_initializer_response();
+  ::Proto::PayloadClientInitializerResponse* PROTOBUF_NONNULL mutable_client_initializer_response();
+  void set_allocated_client_initializer_response(::Proto::PayloadClientInitializerResponse* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_client_initializer_response(::Proto::PayloadClientInitializerResponse* PROTOBUF_NULLABLE value);
+  ::Proto::PayloadClientInitializerResponse* PROTOBUF_NULLABLE unsafe_arena_release_client_initializer_response();
+
+  private:
+  const ::Proto::PayloadClientInitializerResponse& _internal_client_initializer_response() const;
+  ::Proto::PayloadClientInitializerResponse* PROTOBUF_NONNULL _internal_mutable_client_initializer_response();
+
+  public:
+  // .Proto.PayloadTransformSync transform_sync = 8;
   bool has_transform_sync() const;
   private:
   bool _internal_has_transform_sync() const;
@@ -746,7 +791,7 @@ class ToClientMessage final : public ::google::protobuf::Message
   ::Proto::PayloadTransformSync* PROTOBUF_NONNULL _internal_mutable_transform_sync();
 
   public:
-  // .Proto.PayloadPlayAction play_action = 8;
+  // .Proto.PayloadPlayAction play_action = 9;
   bool has_play_action() const;
   private:
   bool _internal_has_play_action() const;
@@ -765,7 +810,7 @@ class ToClientMessage final : public ::google::protobuf::Message
   ::Proto::PayloadPlayAction* PROTOBUF_NONNULL _internal_mutable_play_action();
 
   public:
-  // .Proto.PayloadEntityDamaged entity_damaged = 9;
+  // .Proto.PayloadEntityDamaged entity_damaged = 10;
   bool has_entity_damaged() const;
   private:
   bool _internal_has_entity_damaged() const;
@@ -784,7 +829,7 @@ class ToClientMessage final : public ::google::protobuf::Message
   ::Proto::PayloadEntityDamaged* PROTOBUF_NONNULL _internal_mutable_entity_damaged();
 
   public:
-  // .Proto.PayloadEnemySpawn enemy_spawn = 10;
+  // .Proto.PayloadEnemySpawn enemy_spawn = 11;
   bool has_enemy_spawn() const;
   private:
   bool _internal_has_enemy_spawn() const;
@@ -803,7 +848,7 @@ class ToClientMessage final : public ::google::protobuf::Message
   ::Proto::PayloadEnemySpawn* PROTOBUF_NONNULL _internal_mutable_enemy_spawn();
 
   public:
-  // .Proto.PayloadEnemyDespawn enemy_despawn = 11;
+  // .Proto.PayloadEnemyDespawn enemy_despawn = 12;
   bool has_enemy_despawn() const;
   private:
   bool _internal_has_enemy_despawn() const;
@@ -822,7 +867,7 @@ class ToClientMessage final : public ::google::protobuf::Message
   ::Proto::PayloadEnemyDespawn* PROTOBUF_NONNULL _internal_mutable_enemy_despawn();
 
   public:
-  // .Proto.PayloadZoneEnterNotification zone_enter_notification = 12;
+  // .Proto.PayloadZoneEnterNotification zone_enter_notification = 13;
   bool has_zone_enter_notification() const;
   private:
   bool _internal_has_zone_enter_notification() const;
@@ -841,7 +886,7 @@ class ToClientMessage final : public ::google::protobuf::Message
   ::Proto::PayloadZoneEnterNotification* PROTOBUF_NONNULL _internal_mutable_zone_enter_notification();
 
   public:
-  // .Proto.PayloadZoneExitNotification zone_exit_notification = 13;
+  // .Proto.PayloadZoneExitNotification zone_exit_notification = 14;
   bool has_zone_exit_notification() const;
   private:
   bool _internal_has_zone_exit_notification() const;
@@ -860,7 +905,7 @@ class ToClientMessage final : public ::google::protobuf::Message
   ::Proto::PayloadZoneExitNotification* PROTOBUF_NONNULL _internal_mutable_zone_exit_notification();
 
   public:
-  // .Proto.PayloadTextMessage text_message = 14;
+  // .Proto.PayloadTextMessage text_message = 15;
   bool has_text_message() const;
   private:
   bool _internal_has_text_message() const;
@@ -889,6 +934,7 @@ class ToClientMessage final : public ::google::protobuf::Message
   void set_has_lobby_enter_response();
   void set_has_start_game_response();
   void set_has_end_game_response();
+  void set_has_client_initializer_response();
   void set_has_transform_sync();
   void set_has_play_action();
   void set_has_entity_damaged();
@@ -900,8 +946,8 @@ class ToClientMessage final : public ::google::protobuf::Message
   inline bool has_message() const;
   inline void clear_has_message();
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<0, 13,
-                                   13, 0,
+  static const ::google::protobuf::internal::TcParseTable<0, 14,
+                                   14, 0,
                                    2>
       _table_;
 
@@ -928,6 +974,7 @@ class ToClientMessage final : public ::google::protobuf::Message
       ::google::protobuf::Message* PROTOBUF_NULLABLE lobby_enter_response_;
       ::google::protobuf::Message* PROTOBUF_NULLABLE start_game_response_;
       ::google::protobuf::Message* PROTOBUF_NULLABLE end_game_response_;
+      ::google::protobuf::Message* PROTOBUF_NULLABLE client_initializer_response_;
       ::google::protobuf::Message* PROTOBUF_NULLABLE transform_sync_;
       ::google::protobuf::Message* PROTOBUF_NULLABLE play_action_;
       ::google::protobuf::Message* PROTOBUF_NULLABLE entity_damaged_;
@@ -1313,7 +1360,77 @@ inline ::Proto::PayloadLobbyEndGameRequest* PROTOBUF_NONNULL ToServerMessage::mu
   return _msg;
 }
 
-// .Proto.PayloadTransformSync transform_sync = 6;
+// .Proto.PayloadClientInitializerRequest client_initializer_request = 6;
+inline bool ToServerMessage::has_client_initializer_request() const {
+  return message_case() == kClientInitializerRequest;
+}
+inline bool ToServerMessage::_internal_has_client_initializer_request() const {
+  return message_case() == kClientInitializerRequest;
+}
+inline void ToServerMessage::set_has_client_initializer_request() {
+  _impl_._oneof_case_[0] = kClientInitializerRequest;
+}
+inline ::Proto::PayloadClientInitializerRequest* PROTOBUF_NULLABLE ToServerMessage::release_client_initializer_request() {
+  // @@protoc_insertion_point(field_release:Proto.ToServerMessage.client_initializer_request)
+  if (message_case() == kClientInitializerRequest) {
+    clear_has_message();
+    auto* temp = reinterpret_cast<::Proto::PayloadClientInitializerRequest*>(_impl_.message_.client_initializer_request_);
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.message_.client_initializer_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::Proto::PayloadClientInitializerRequest& ToServerMessage::_internal_client_initializer_request() const {
+  return message_case() == kClientInitializerRequest ? *reinterpret_cast<::Proto::PayloadClientInitializerRequest*>(_impl_.message_.client_initializer_request_) : reinterpret_cast<::Proto::PayloadClientInitializerRequest&>(::Proto::_PayloadClientInitializerRequest_default_instance_);
+}
+inline const ::Proto::PayloadClientInitializerRequest& ToServerMessage::client_initializer_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:Proto.ToServerMessage.client_initializer_request)
+  return _internal_client_initializer_request();
+}
+inline ::Proto::PayloadClientInitializerRequest* PROTOBUF_NULLABLE ToServerMessage::unsafe_arena_release_client_initializer_request() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.ToServerMessage.client_initializer_request)
+  if (message_case() == kClientInitializerRequest) {
+    clear_has_message();
+    auto* temp = reinterpret_cast<::Proto::PayloadClientInitializerRequest*>(_impl_.message_.client_initializer_request_);
+    _impl_.message_.client_initializer_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void ToServerMessage::unsafe_arena_set_allocated_client_initializer_request(
+    ::Proto::PayloadClientInitializerRequest* PROTOBUF_NULLABLE value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_client_initializer_request();
+    _impl_.message_.client_initializer_request_ = reinterpret_cast<::google::protobuf::Message*>(value);
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.ToServerMessage.client_initializer_request)
+}
+inline ::Proto::PayloadClientInitializerRequest* PROTOBUF_NONNULL ToServerMessage::_internal_mutable_client_initializer_request() {
+  if (message_case() != kClientInitializerRequest) {
+    clear_message();
+    set_has_client_initializer_request();
+    _impl_.message_.client_initializer_request_ = reinterpret_cast<::google::protobuf::Message*>(
+        ::google::protobuf::Message::DefaultConstruct<::Proto::PayloadClientInitializerRequest>(GetArena()));
+  }
+  return reinterpret_cast<::Proto::PayloadClientInitializerRequest*>(_impl_.message_.client_initializer_request_);
+}
+inline ::Proto::PayloadClientInitializerRequest* PROTOBUF_NONNULL ToServerMessage::mutable_client_initializer_request()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::Proto::PayloadClientInitializerRequest* _msg = _internal_mutable_client_initializer_request();
+  // @@protoc_insertion_point(field_mutable:Proto.ToServerMessage.client_initializer_request)
+  return _msg;
+}
+
+// .Proto.PayloadTransformSync transform_sync = 8;
 inline bool ToServerMessage::has_transform_sync() const {
   return message_case() == kTransformSync;
 }
@@ -1383,7 +1500,7 @@ inline ::Proto::PayloadTransformSync* PROTOBUF_NONNULL ToServerMessage::mutable_
   return _msg;
 }
 
-// .Proto.PayloadPlayAction play_action = 7;
+// .Proto.PayloadPlayAction play_action = 9;
 inline bool ToServerMessage::has_play_action() const {
   return message_case() == kPlayAction;
 }
@@ -1453,7 +1570,7 @@ inline ::Proto::PayloadPlayAction* PROTOBUF_NONNULL ToServerMessage::mutable_pla
   return _msg;
 }
 
-// .Proto.PayloadTextMessage text_message = 8;
+// .Proto.PayloadTextMessage text_message = 10;
 inline bool ToServerMessage::has_text_message() const {
   return message_case() == kTextMessage;
 }
@@ -1886,7 +2003,77 @@ inline ::Proto::PayloadLobbyEndGameResponse* PROTOBUF_NONNULL ToClientMessage::m
   return _msg;
 }
 
-// .Proto.PayloadTransformSync transform_sync = 7;
+// .Proto.PayloadClientInitializerResponse client_initializer_response = 7;
+inline bool ToClientMessage::has_client_initializer_response() const {
+  return message_case() == kClientInitializerResponse;
+}
+inline bool ToClientMessage::_internal_has_client_initializer_response() const {
+  return message_case() == kClientInitializerResponse;
+}
+inline void ToClientMessage::set_has_client_initializer_response() {
+  _impl_._oneof_case_[0] = kClientInitializerResponse;
+}
+inline ::Proto::PayloadClientInitializerResponse* PROTOBUF_NULLABLE ToClientMessage::release_client_initializer_response() {
+  // @@protoc_insertion_point(field_release:Proto.ToClientMessage.client_initializer_response)
+  if (message_case() == kClientInitializerResponse) {
+    clear_has_message();
+    auto* temp = reinterpret_cast<::Proto::PayloadClientInitializerResponse*>(_impl_.message_.client_initializer_response_);
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.message_.client_initializer_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::Proto::PayloadClientInitializerResponse& ToClientMessage::_internal_client_initializer_response() const {
+  return message_case() == kClientInitializerResponse ? *reinterpret_cast<::Proto::PayloadClientInitializerResponse*>(_impl_.message_.client_initializer_response_) : reinterpret_cast<::Proto::PayloadClientInitializerResponse&>(::Proto::_PayloadClientInitializerResponse_default_instance_);
+}
+inline const ::Proto::PayloadClientInitializerResponse& ToClientMessage::client_initializer_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:Proto.ToClientMessage.client_initializer_response)
+  return _internal_client_initializer_response();
+}
+inline ::Proto::PayloadClientInitializerResponse* PROTOBUF_NULLABLE ToClientMessage::unsafe_arena_release_client_initializer_response() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.ToClientMessage.client_initializer_response)
+  if (message_case() == kClientInitializerResponse) {
+    clear_has_message();
+    auto* temp = reinterpret_cast<::Proto::PayloadClientInitializerResponse*>(_impl_.message_.client_initializer_response_);
+    _impl_.message_.client_initializer_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void ToClientMessage::unsafe_arena_set_allocated_client_initializer_response(
+    ::Proto::PayloadClientInitializerResponse* PROTOBUF_NULLABLE value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_client_initializer_response();
+    _impl_.message_.client_initializer_response_ = reinterpret_cast<::google::protobuf::Message*>(value);
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.ToClientMessage.client_initializer_response)
+}
+inline ::Proto::PayloadClientInitializerResponse* PROTOBUF_NONNULL ToClientMessage::_internal_mutable_client_initializer_response() {
+  if (message_case() != kClientInitializerResponse) {
+    clear_message();
+    set_has_client_initializer_response();
+    _impl_.message_.client_initializer_response_ = reinterpret_cast<::google::protobuf::Message*>(
+        ::google::protobuf::Message::DefaultConstruct<::Proto::PayloadClientInitializerResponse>(GetArena()));
+  }
+  return reinterpret_cast<::Proto::PayloadClientInitializerResponse*>(_impl_.message_.client_initializer_response_);
+}
+inline ::Proto::PayloadClientInitializerResponse* PROTOBUF_NONNULL ToClientMessage::mutable_client_initializer_response()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::Proto::PayloadClientInitializerResponse* _msg = _internal_mutable_client_initializer_response();
+  // @@protoc_insertion_point(field_mutable:Proto.ToClientMessage.client_initializer_response)
+  return _msg;
+}
+
+// .Proto.PayloadTransformSync transform_sync = 8;
 inline bool ToClientMessage::has_transform_sync() const {
   return message_case() == kTransformSync;
 }
@@ -1956,7 +2143,7 @@ inline ::Proto::PayloadTransformSync* PROTOBUF_NONNULL ToClientMessage::mutable_
   return _msg;
 }
 
-// .Proto.PayloadPlayAction play_action = 8;
+// .Proto.PayloadPlayAction play_action = 9;
 inline bool ToClientMessage::has_play_action() const {
   return message_case() == kPlayAction;
 }
@@ -2026,7 +2213,7 @@ inline ::Proto::PayloadPlayAction* PROTOBUF_NONNULL ToClientMessage::mutable_pla
   return _msg;
 }
 
-// .Proto.PayloadEntityDamaged entity_damaged = 9;
+// .Proto.PayloadEntityDamaged entity_damaged = 10;
 inline bool ToClientMessage::has_entity_damaged() const {
   return message_case() == kEntityDamaged;
 }
@@ -2096,7 +2283,7 @@ inline ::Proto::PayloadEntityDamaged* PROTOBUF_NONNULL ToClientMessage::mutable_
   return _msg;
 }
 
-// .Proto.PayloadEnemySpawn enemy_spawn = 10;
+// .Proto.PayloadEnemySpawn enemy_spawn = 11;
 inline bool ToClientMessage::has_enemy_spawn() const {
   return message_case() == kEnemySpawn;
 }
@@ -2166,7 +2353,7 @@ inline ::Proto::PayloadEnemySpawn* PROTOBUF_NONNULL ToClientMessage::mutable_ene
   return _msg;
 }
 
-// .Proto.PayloadEnemyDespawn enemy_despawn = 11;
+// .Proto.PayloadEnemyDespawn enemy_despawn = 12;
 inline bool ToClientMessage::has_enemy_despawn() const {
   return message_case() == kEnemyDespawn;
 }
@@ -2236,7 +2423,7 @@ inline ::Proto::PayloadEnemyDespawn* PROTOBUF_NONNULL ToClientMessage::mutable_e
   return _msg;
 }
 
-// .Proto.PayloadZoneEnterNotification zone_enter_notification = 12;
+// .Proto.PayloadZoneEnterNotification zone_enter_notification = 13;
 inline bool ToClientMessage::has_zone_enter_notification() const {
   return message_case() == kZoneEnterNotification;
 }
@@ -2306,7 +2493,7 @@ inline ::Proto::PayloadZoneEnterNotification* PROTOBUF_NONNULL ToClientMessage::
   return _msg;
 }
 
-// .Proto.PayloadZoneExitNotification zone_exit_notification = 13;
+// .Proto.PayloadZoneExitNotification zone_exit_notification = 14;
 inline bool ToClientMessage::has_zone_exit_notification() const {
   return message_case() == kZoneExitNotification;
 }
@@ -2376,7 +2563,7 @@ inline ::Proto::PayloadZoneExitNotification* PROTOBUF_NONNULL ToClientMessage::m
   return _msg;
 }
 
-// .Proto.PayloadTextMessage text_message = 14;
+// .Proto.PayloadTextMessage text_message = 15;
 inline bool ToClientMessage::has_text_message() const {
   return message_case() == kTextMessage;
 }
