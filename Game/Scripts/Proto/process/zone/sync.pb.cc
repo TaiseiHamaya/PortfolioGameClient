@@ -83,7 +83,8 @@ inline constexpr PayloadEntityDamaged::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
         entity_id_{::uint64_t{0u}},
-        damage_{0} {}
+        damage_{0},
+        current_hp_{0} {}
 
 template <typename>
 PROTOBUF_CONSTEXPR PayloadEntityDamaged::PayloadEntityDamaged(::_pbi::ConstantInitialized)
@@ -190,11 +191,13 @@ const ::uint32_t
         2,
         0x081, // bitmap
         PROTOBUF_FIELD_OFFSET(::Proto::PayloadEntityDamaged, _impl_._has_bits_),
-        5, // hasbit index offset
+        6, // hasbit index offset
         PROTOBUF_FIELD_OFFSET(::Proto::PayloadEntityDamaged, _impl_.entity_id_),
         PROTOBUF_FIELD_OFFSET(::Proto::PayloadEntityDamaged, _impl_.damage_),
+        PROTOBUF_FIELD_OFFSET(::Proto::PayloadEntityDamaged, _impl_.current_hp_),
         0,
         1,
+        2,
         0x081, // bitmap
         PROTOBUF_FIELD_OFFSET(::Proto::PayloadZoneEnterNotification, _impl_._has_bits_),
         6, // hasbit index offset
@@ -216,8 +219,8 @@ static const ::_pbi::MigrationSchema
         {0, sizeof(::Proto::PayloadTransformSync)},
         {9, sizeof(::Proto::PayloadPlayAction)},
         {20, sizeof(::Proto::PayloadEntityDamaged)},
-        {27, sizeof(::Proto::PayloadZoneEnterNotification)},
-        {36, sizeof(::Proto::PayloadZoneExitNotification)},
+        {29, sizeof(::Proto::PayloadZoneEnterNotification)},
+        {38, sizeof(::Proto::PayloadZoneExitNotification)},
 };
 static const ::_pb::Message* PROTOBUF_NONNULL const file_default_instances[] = {
     &::Proto::_PayloadTransformSync_default_instance_._instance,
@@ -233,12 +236,13 @@ const char descriptor_table_protodef_process_2fzone_2fsync_2eproto[] ABSL_ATTRIB
     "d\030\001 \001(\004\022\021\n\ttimestamp\030\002 \001(\004\022 \n\010position\030\003"
     " \001(\0132\016.Proto.Vector3\"X\n\021PayloadPlayActio"
     "n\022\n\n\002id\030\001 \001(\004\022\021\n\ttarget_id\030\002 \001(\004\022\021\n\tacti"
-    "on_id\030\003 \001(\r\022\021\n\ttimestamp\030\004 \001(\003\"9\n\024Payloa"
-    "dEntityDamaged\022\021\n\tentity_id\030\002 \001(\004\022\016\n\006dam"
-    "age\030\003 \001(\005\"^\n\034PayloadZoneEnterNotificatio"
-    "n\022\n\n\002id\030\001 \001(\004\022\020\n\010username\030\002 \001(\t\022 \n\010posit"
-    "ion\030\003 \001(\0132\016.Proto.Vector3\")\n\033PayloadZone"
-    "ExitNotification\022\n\n\002id\030\001 \001(\004b\006proto3"
+    "on_id\030\003 \001(\r\022\021\n\ttimestamp\030\004 \001(\003\"M\n\024Payloa"
+    "dEntityDamaged\022\021\n\tentity_id\030\001 \001(\004\022\016\n\006dam"
+    "age\030\002 \001(\005\022\022\n\ncurrent_hp\030\003 \001(\005\"^\n\034Payload"
+    "ZoneEnterNotification\022\n\n\002id\030\001 \001(\004\022\020\n\010use"
+    "rname\030\002 \001(\t\022 \n\010position\030\003 \001(\0132\016.Proto.Ve"
+    "ctor3\")\n\033PayloadZoneExitNotification\022\n\n\002"
+    "id\030\001 \001(\004b\006proto3"
 };
 static const ::_pbi::DescriptorTable* PROTOBUF_NONNULL const
     descriptor_table_process_2fzone_2fsync_2eproto_deps[1] = {
@@ -248,7 +252,7 @@ static ::absl::once_flag descriptor_table_process_2fzone_2fsync_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_process_2fzone_2fsync_2eproto = {
     false,
     false,
-    436,
+    456,
     descriptor_table_protodef_process_2fzone_2fsync_2eproto,
     "process/zone/sync.proto",
     &descriptor_table_process_2fzone_2fsync_2eproto_once,
@@ -991,9 +995,9 @@ inline void PayloadEntityDamaged::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE are
   ::memset(reinterpret_cast<char *>(&_impl_) +
                offsetof(Impl_, entity_id_),
            0,
-           offsetof(Impl_, damage_) -
+           offsetof(Impl_, current_hp_) -
                offsetof(Impl_, entity_id_) +
-               sizeof(Impl_::damage_));
+               sizeof(Impl_::current_hp_));
 }
 PayloadEntityDamaged::~PayloadEntityDamaged() {
   // @@protoc_insertion_point(destructor:Proto.PayloadEntityDamaged)
@@ -1052,16 +1056,16 @@ PayloadEntityDamaged::GetClassData() const {
   return PayloadEntityDamaged_class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<1, 2, 0, 0, 2>
+const ::_pbi::TcParseTable<2, 3, 0, 0, 2>
 PayloadEntityDamaged::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(PayloadEntityDamaged, _impl_._has_bits_),
     0, // no _extensions_
-    3, 8,  // max_field_number, fast_idx_mask
+    3, 24,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967289,  // skipmap
+    4294967288,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    2,  // num_field_entries
+    3,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
     PayloadEntityDamaged_class_data_.base(),
@@ -1071,19 +1075,25 @@ PayloadEntityDamaged::_table_ = {
     ::_pbi::TcParser::GetTable<::Proto::PayloadEntityDamaged>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // uint64 entity_id = 2;
+    {::_pbi::TcParser::MiniParse, {}},
+    // uint64 entity_id = 1;
     {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(PayloadEntityDamaged, _impl_.entity_id_), 0>(),
-     {16, 0, 0, PROTOBUF_FIELD_OFFSET(PayloadEntityDamaged, _impl_.entity_id_)}},
-    // int32 damage = 3;
+     {8, 0, 0, PROTOBUF_FIELD_OFFSET(PayloadEntityDamaged, _impl_.entity_id_)}},
+    // int32 damage = 2;
     {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(PayloadEntityDamaged, _impl_.damage_), 1>(),
-     {24, 1, 0, PROTOBUF_FIELD_OFFSET(PayloadEntityDamaged, _impl_.damage_)}},
+     {16, 1, 0, PROTOBUF_FIELD_OFFSET(PayloadEntityDamaged, _impl_.damage_)}},
+    // int32 current_hp = 3;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(PayloadEntityDamaged, _impl_.current_hp_), 2>(),
+     {24, 2, 0, PROTOBUF_FIELD_OFFSET(PayloadEntityDamaged, _impl_.current_hp_)}},
   }}, {{
     65535, 65535
   }}, {{
-    // uint64 entity_id = 2;
+    // uint64 entity_id = 1;
     {PROTOBUF_FIELD_OFFSET(PayloadEntityDamaged, _impl_.entity_id_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt64)},
-    // int32 damage = 3;
+    // int32 damage = 2;
     {PROTOBUF_FIELD_OFFSET(PayloadEntityDamaged, _impl_.damage_), _Internal::kHasBitsOffset + 1, 0, (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
+    // int32 current_hp = 3;
+    {PROTOBUF_FIELD_OFFSET(PayloadEntityDamaged, _impl_.current_hp_), _Internal::kHasBitsOffset + 2, 0, (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
   }},
   // no aux_entries
   {{
@@ -1097,10 +1107,10 @@ PROTOBUF_NOINLINE void PayloadEntityDamaged::Clear() {
   (void) cached_has_bits;
 
   cached_has_bits = _impl_._has_bits_[0];
-  if ((cached_has_bits & 0x00000003U) != 0) {
+  if ((cached_has_bits & 0x00000007U) != 0) {
     ::memset(&_impl_.entity_id_, 0, static_cast<::size_t>(
-        reinterpret_cast<char*>(&_impl_.damage_) -
-        reinterpret_cast<char*>(&_impl_.entity_id_)) + sizeof(_impl_.damage_));
+        reinterpret_cast<char*>(&_impl_.current_hp_) -
+        reinterpret_cast<char*>(&_impl_.entity_id_)) + sizeof(_impl_.current_hp_));
   }
   _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
@@ -1124,21 +1134,30 @@ PROTOBUF_NOINLINE void PayloadEntityDamaged::Clear() {
   ::uint32_t cached_has_bits = 0;
   (void)cached_has_bits;
 
-  // uint64 entity_id = 2;
+  // uint64 entity_id = 1;
   if ((this_._impl_._has_bits_[0] & 0x00000001U) != 0) {
     if (this_._internal_entity_id() != 0) {
       target = stream->EnsureSpace(target);
       target = ::_pbi::WireFormatLite::WriteUInt64ToArray(
-          2, this_._internal_entity_id(), target);
+          1, this_._internal_entity_id(), target);
     }
   }
 
-  // int32 damage = 3;
+  // int32 damage = 2;
   if ((this_._impl_._has_bits_[0] & 0x00000002U) != 0) {
     if (this_._internal_damage() != 0) {
       target =
-          ::google::protobuf::internal::WireFormatLite::WriteInt32ToArrayWithField<3>(
+          ::google::protobuf::internal::WireFormatLite::WriteInt32ToArrayWithField<2>(
               stream, this_._internal_damage(), target);
+    }
+  }
+
+  // int32 current_hp = 3;
+  if ((this_._impl_._has_bits_[0] & 0x00000004U) != 0) {
+    if (this_._internal_current_hp() != 0) {
+      target =
+          ::google::protobuf::internal::WireFormatLite::WriteInt32ToArrayWithField<3>(
+              stream, this_._internal_current_hp(), target);
     }
   }
 
@@ -1167,19 +1186,26 @@ PROTOBUF_NOINLINE void PayloadEntityDamaged::Clear() {
 
   ::_pbi::Prefetch5LinesFrom7Lines(&this_);
   cached_has_bits = this_._impl_._has_bits_[0];
-  if ((cached_has_bits & 0x00000003U) != 0) {
-    // uint64 entity_id = 2;
+  if ((cached_has_bits & 0x00000007U) != 0) {
+    // uint64 entity_id = 1;
     if ((cached_has_bits & 0x00000001U) != 0) {
       if (this_._internal_entity_id() != 0) {
         total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(
             this_._internal_entity_id());
       }
     }
-    // int32 damage = 3;
+    // int32 damage = 2;
     if ((cached_has_bits & 0x00000002U) != 0) {
       if (this_._internal_damage() != 0) {
         total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
             this_._internal_damage());
+      }
+    }
+    // int32 current_hp = 3;
+    if ((cached_has_bits & 0x00000004U) != 0) {
+      if (this_._internal_current_hp() != 0) {
+        total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+            this_._internal_current_hp());
       }
     }
   }
@@ -1199,7 +1225,7 @@ void PayloadEntityDamaged::MergeImpl(::google::protobuf::MessageLite& to_msg, co
   (void) cached_has_bits;
 
   cached_has_bits = from._impl_._has_bits_[0];
-  if ((cached_has_bits & 0x00000003U) != 0) {
+  if ((cached_has_bits & 0x00000007U) != 0) {
     if ((cached_has_bits & 0x00000001U) != 0) {
       if (from._internal_entity_id() != 0) {
         _this->_impl_.entity_id_ = from._impl_.entity_id_;
@@ -1208,6 +1234,11 @@ void PayloadEntityDamaged::MergeImpl(::google::protobuf::MessageLite& to_msg, co
     if ((cached_has_bits & 0x00000002U) != 0) {
       if (from._internal_damage() != 0) {
         _this->_impl_.damage_ = from._impl_.damage_;
+      }
+    }
+    if ((cached_has_bits & 0x00000004U) != 0) {
+      if (from._internal_current_hp() != 0) {
+        _this->_impl_.current_hp_ = from._impl_.current_hp_;
       }
     }
   }
@@ -1228,8 +1259,8 @@ void PayloadEntityDamaged::InternalSwap(PayloadEntityDamaged* PROTOBUF_RESTRICT 
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(PayloadEntityDamaged, _impl_.damage_)
-      + sizeof(PayloadEntityDamaged::_impl_.damage_)
+      PROTOBUF_FIELD_OFFSET(PayloadEntityDamaged, _impl_.current_hp_)
+      + sizeof(PayloadEntityDamaged::_impl_.current_hp_)
       - PROTOBUF_FIELD_OFFSET(PayloadEntityDamaged, _impl_.entity_id_)>(
           reinterpret_cast<char*>(&_impl_.entity_id_),
           reinterpret_cast<char*>(&other->_impl_.entity_id_));

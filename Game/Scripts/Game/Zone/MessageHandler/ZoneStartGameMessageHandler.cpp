@@ -6,6 +6,8 @@
 
 #include <Scripts/Proto/process/gateway/packet.pb.h>
 
+#include "Scripts/Game/Zone/Command/ZoneEnemySpawnCommand.h"
+#include "Scripts/Game/Zone/Command/ZoneLoginPlayerCommand.h"
 #include "Scripts/Instance/Player/Player.h"
 #include "Scripts/Manager/EntityManager.h"
 #include "Scripts/Manager/GameLogWindowManager.h"
@@ -42,6 +44,27 @@ void ZoneStartGameMessageHandler::operator()(const Proto::ToClientMessage& messa
 		);
 	}
 	break;
+	case Proto::ToClientMessage::kClientInitializerData:
+	{
+		const Proto::PayloadClientInitializerData& payload = message.client_initializer_data();
+		for (const auto& player : payload.players()) {
+			const auto& entity_data = player.entity_data();
+
+			commandStack(std::make_unique<ZoneLoginPlayerCommand>(
+				entity_data.entity_id(),
+				player.name(),
+				Vector3{ entity_data.position().x(), entity_data.position().y(), entity_data.position().z() }
+			));
+		}
+		for (const auto& enemy : payload.enemies()) {
+			const auto& entity_data = enemy.entity_data();
+			commandStack(std::make_unique<ZoneEnemySpawnCommand>(
+				entity_data.entity_id(),
+				enemy.enemy_type_id(),
+				Vector3{ entity_data.position().x(), entity_data.position().y(), entity_data.position().z() }
+			));
+		}
+	}
 	default:
 		break;
 	}

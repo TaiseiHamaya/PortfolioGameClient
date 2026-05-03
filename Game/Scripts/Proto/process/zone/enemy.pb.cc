@@ -29,7 +29,7 @@ namespace Proto {
 inline constexpr PayloadEnemyDespawn::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
-        id_{::uint64_t{0u}} {}
+        entity_id_{::uint64_t{0u}} {}
 
 template <typename>
 PROTOBUF_CONSTEXPR PayloadEnemyDespawn::PayloadEnemyDespawn(::_pbi::ConstantInitialized)
@@ -54,11 +54,9 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
 inline constexpr PayloadEnemySpawn::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
-        name_(
-            &::google::protobuf::internal::fixed_address_empty_string,
-            ::_pbi::ConstantInitialized()),
         position_{nullptr},
-        id_{::uint64_t{0u}} {}
+        enemy_type_id_{::uint64_t{0u}},
+        entity_id_{::uint64_t{0u}} {}
 
 template <typename>
 PROTOBUF_CONSTEXPR PayloadEnemySpawn::PayloadEnemySpawn(::_pbi::ConstantInitialized)
@@ -90,16 +88,16 @@ const ::uint32_t
         0x081, // bitmap
         PROTOBUF_FIELD_OFFSET(::Proto::PayloadEnemySpawn, _impl_._has_bits_),
         6, // hasbit index offset
-        PROTOBUF_FIELD_OFFSET(::Proto::PayloadEnemySpawn, _impl_.id_),
-        PROTOBUF_FIELD_OFFSET(::Proto::PayloadEnemySpawn, _impl_.name_),
+        PROTOBUF_FIELD_OFFSET(::Proto::PayloadEnemySpawn, _impl_.enemy_type_id_),
+        PROTOBUF_FIELD_OFFSET(::Proto::PayloadEnemySpawn, _impl_.entity_id_),
         PROTOBUF_FIELD_OFFSET(::Proto::PayloadEnemySpawn, _impl_.position_),
+        1,
         2,
         0,
-        1,
         0x081, // bitmap
         PROTOBUF_FIELD_OFFSET(::Proto::PayloadEnemyDespawn, _impl_._has_bits_),
         4, // hasbit index offset
-        PROTOBUF_FIELD_OFFSET(::Proto::PayloadEnemyDespawn, _impl_.id_),
+        PROTOBUF_FIELD_OFFSET(::Proto::PayloadEnemyDespawn, _impl_.entity_id_),
         0,
 };
 
@@ -115,10 +113,10 @@ static const ::_pb::Message* PROTOBUF_NONNULL const file_default_instances[] = {
 const char descriptor_table_protodef_process_2fzone_2fenemy_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
     "\n\030process/zone/enemy.proto\022\005Proto\032\021commo"
-    "n/math.proto\"O\n\021PayloadEnemySpawn\022\n\n\002id\030"
-    "\001 \001(\004\022\014\n\004name\030\002 \001(\t\022 \n\010position\030\003 \001(\0132\016."
-    "Proto.Vector3\"!\n\023PayloadEnemyDespawn\022\n\n\002"
-    "id\030\001 \001(\004b\006proto3"
+    "n/math.proto\"_\n\021PayloadEnemySpawn\022\025\n\rene"
+    "my_type_id\030\001 \001(\004\022\021\n\tentity_id\030\002 \001(\004\022 \n\010p"
+    "osition\030\003 \001(\0132\016.Proto.Vector3\"(\n\023Payload"
+    "EnemyDespawn\022\021\n\tentity_id\030\001 \001(\004b\006proto3"
 };
 static const ::_pbi::DescriptorTable* PROTOBUF_NONNULL const
     descriptor_table_process_2fzone_2fenemy_2eproto_deps[1] = {
@@ -128,7 +126,7 @@ static ::absl::once_flag descriptor_table_process_2fzone_2fenemy_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_process_2fzone_2fenemy_2eproto = {
     false,
     false,
-    176,
+    199,
     descriptor_table_protodef_process_2fzone_2fenemy_2eproto,
     "process/zone/enemy.proto",
     &descriptor_table_process_2fzone_2fenemy_2eproto_once,
@@ -155,7 +153,7 @@ class PayloadEnemySpawn::_Internal {
 void PayloadEnemySpawn::clear_position() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (_impl_.position_ != nullptr) _impl_.position_->Clear();
-  _impl_._has_bits_[0] &= ~0x00000002U;
+  _impl_._has_bits_[0] &= ~0x00000001U;
 }
 PayloadEnemySpawn::PayloadEnemySpawn(::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
@@ -171,8 +169,7 @@ PROTOBUF_NDEBUG_INLINE PayloadEnemySpawn::Impl_::Impl_(
     [[maybe_unused]] ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
     [[maybe_unused]] const ::Proto::PayloadEnemySpawn& from_msg)
       : _has_bits_{from._has_bits_},
-        _cached_size_{0},
-        name_(arena, from.name_) {}
+        _cached_size_{0} {}
 
 PayloadEnemySpawn::PayloadEnemySpawn(
     ::google::protobuf::Arena* PROTOBUF_NULLABLE arena,
@@ -188,27 +185,32 @@ PayloadEnemySpawn::PayloadEnemySpawn(
       from._internal_metadata_);
   new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
   ::uint32_t cached_has_bits = _impl_._has_bits_[0];
-  _impl_.position_ = ((cached_has_bits & 0x00000002U) != 0)
+  _impl_.position_ = ((cached_has_bits & 0x00000001U) != 0)
                 ? ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.position_)
                 : nullptr;
-  _impl_.id_ = from._impl_.id_;
+  ::memcpy(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, enemy_type_id_),
+           reinterpret_cast<const char *>(&from._impl_) +
+               offsetof(Impl_, enemy_type_id_),
+           offsetof(Impl_, entity_id_) -
+               offsetof(Impl_, enemy_type_id_) +
+               sizeof(Impl_::entity_id_));
 
   // @@protoc_insertion_point(copy_constructor:Proto.PayloadEnemySpawn)
 }
 PROTOBUF_NDEBUG_INLINE PayloadEnemySpawn::Impl_::Impl_(
     [[maybe_unused]] ::google::protobuf::internal::InternalVisibility visibility,
     [[maybe_unused]] ::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
-      : _cached_size_{0},
-        name_(arena) {}
+      : _cached_size_{0} {}
 
 inline void PayloadEnemySpawn::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
   ::memset(reinterpret_cast<char *>(&_impl_) +
                offsetof(Impl_, position_),
            0,
-           offsetof(Impl_, id_) -
+           offsetof(Impl_, entity_id_) -
                offsetof(Impl_, position_) +
-               sizeof(Impl_::id_));
+               sizeof(Impl_::entity_id_));
 }
 PayloadEnemySpawn::~PayloadEnemySpawn() {
   // @@protoc_insertion_point(destructor:Proto.PayloadEnemySpawn)
@@ -221,7 +223,6 @@ inline void PayloadEnemySpawn::SharedDtor(MessageLite& self) {
   }
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
-  this_._impl_.name_.Destroy();
   delete this_._impl_.position_;
   this_._impl_.~Impl_();
 }
@@ -232,7 +233,7 @@ inline void* PROTOBUF_NONNULL PayloadEnemySpawn::PlacementNew_(
   return ::new (mem) PayloadEnemySpawn(arena);
 }
 constexpr auto PayloadEnemySpawn::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(PayloadEnemySpawn),
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(PayloadEnemySpawn),
                                             alignof(PayloadEnemySpawn));
 }
 constexpr auto PayloadEnemySpawn::InternalGenerateClassData_() {
@@ -269,7 +270,7 @@ PayloadEnemySpawn::GetClassData() const {
   return PayloadEnemySpawn_class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 3, 1, 36, 2>
+const ::_pbi::TcParseTable<2, 3, 1, 0, 2>
 PayloadEnemySpawn::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(PayloadEnemySpawn, _impl_._has_bits_),
@@ -289,32 +290,29 @@ PayloadEnemySpawn::_table_ = {
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
     {::_pbi::TcParser::MiniParse, {}},
-    // uint64 id = 1;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(PayloadEnemySpawn, _impl_.id_), 2>(),
-     {8, 2, 0, PROTOBUF_FIELD_OFFSET(PayloadEnemySpawn, _impl_.id_)}},
-    // string name = 2;
-    {::_pbi::TcParser::FastUS1,
-     {18, 0, 0, PROTOBUF_FIELD_OFFSET(PayloadEnemySpawn, _impl_.name_)}},
+    // uint64 enemy_type_id = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(PayloadEnemySpawn, _impl_.enemy_type_id_), 1>(),
+     {8, 1, 0, PROTOBUF_FIELD_OFFSET(PayloadEnemySpawn, _impl_.enemy_type_id_)}},
+    // uint64 entity_id = 2;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(PayloadEnemySpawn, _impl_.entity_id_), 2>(),
+     {16, 2, 0, PROTOBUF_FIELD_OFFSET(PayloadEnemySpawn, _impl_.entity_id_)}},
     // .Proto.Vector3 position = 3;
     {::_pbi::TcParser::FastMtS1,
-     {26, 1, 0, PROTOBUF_FIELD_OFFSET(PayloadEnemySpawn, _impl_.position_)}},
+     {26, 0, 0, PROTOBUF_FIELD_OFFSET(PayloadEnemySpawn, _impl_.position_)}},
   }}, {{
     65535, 65535
   }}, {{
-    // uint64 id = 1;
-    {PROTOBUF_FIELD_OFFSET(PayloadEnemySpawn, _impl_.id_), _Internal::kHasBitsOffset + 2, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt64)},
-    // string name = 2;
-    {PROTOBUF_FIELD_OFFSET(PayloadEnemySpawn, _impl_.name_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcOptional | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // uint64 enemy_type_id = 1;
+    {PROTOBUF_FIELD_OFFSET(PayloadEnemySpawn, _impl_.enemy_type_id_), _Internal::kHasBitsOffset + 1, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt64)},
+    // uint64 entity_id = 2;
+    {PROTOBUF_FIELD_OFFSET(PayloadEnemySpawn, _impl_.entity_id_), _Internal::kHasBitsOffset + 2, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt64)},
     // .Proto.Vector3 position = 3;
-    {PROTOBUF_FIELD_OFFSET(PayloadEnemySpawn, _impl_.position_), _Internal::kHasBitsOffset + 1, 0, (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    {PROTOBUF_FIELD_OFFSET(PayloadEnemySpawn, _impl_.position_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
   }},
   {{
       {::_pbi::TcParser::GetTable<::Proto::Vector3>()},
   }},
   {{
-    "\27\0\4\0\0\0\0\0"
-    "Proto.PayloadEnemySpawn"
-    "name"
   }},
 };
 PROTOBUF_NOINLINE void PayloadEnemySpawn::Clear() {
@@ -325,16 +323,15 @@ PROTOBUF_NOINLINE void PayloadEnemySpawn::Clear() {
   (void) cached_has_bits;
 
   cached_has_bits = _impl_._has_bits_[0];
-  if ((cached_has_bits & 0x00000003U) != 0) {
-    if ((cached_has_bits & 0x00000001U) != 0) {
-      _impl_.name_.ClearNonDefaultToEmpty();
-    }
-    if ((cached_has_bits & 0x00000002U) != 0) {
-      ABSL_DCHECK(_impl_.position_ != nullptr);
-      _impl_.position_->Clear();
-    }
+  if ((cached_has_bits & 0x00000001U) != 0) {
+    ABSL_DCHECK(_impl_.position_ != nullptr);
+    _impl_.position_->Clear();
   }
-  _impl_.id_ = ::uint64_t{0u};
+  if ((cached_has_bits & 0x00000006U) != 0) {
+    ::memset(&_impl_.enemy_type_id_, 0, static_cast<::size_t>(
+        reinterpret_cast<char*>(&_impl_.entity_id_) -
+        reinterpret_cast<char*>(&_impl_.enemy_type_id_)) + sizeof(_impl_.entity_id_));
+  }
   _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
@@ -357,28 +354,27 @@ PROTOBUF_NOINLINE void PayloadEnemySpawn::Clear() {
   ::uint32_t cached_has_bits = 0;
   (void)cached_has_bits;
 
-  // uint64 id = 1;
-  if ((this_._impl_._has_bits_[0] & 0x00000004U) != 0) {
-    if (this_._internal_id() != 0) {
+  // uint64 enemy_type_id = 1;
+  if ((this_._impl_._has_bits_[0] & 0x00000002U) != 0) {
+    if (this_._internal_enemy_type_id() != 0) {
       target = stream->EnsureSpace(target);
       target = ::_pbi::WireFormatLite::WriteUInt64ToArray(
-          1, this_._internal_id(), target);
+          1, this_._internal_enemy_type_id(), target);
     }
   }
 
-  // string name = 2;
-  if ((this_._impl_._has_bits_[0] & 0x00000001U) != 0) {
-    if (!this_._internal_name().empty()) {
-      const ::std::string& _s = this_._internal_name();
-      ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-          _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "Proto.PayloadEnemySpawn.name");
-      target = stream->WriteStringMaybeAliased(2, _s, target);
+  // uint64 entity_id = 2;
+  if ((this_._impl_._has_bits_[0] & 0x00000004U) != 0) {
+    if (this_._internal_entity_id() != 0) {
+      target = stream->EnsureSpace(target);
+      target = ::_pbi::WireFormatLite::WriteUInt64ToArray(
+          2, this_._internal_entity_id(), target);
     }
   }
 
   cached_has_bits = this_._impl_._has_bits_[0];
   // .Proto.Vector3 position = 3;
-  if ((cached_has_bits & 0x00000002U) != 0) {
+  if ((cached_has_bits & 0x00000001U) != 0) {
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
         3, *this_._impl_.position_, this_._impl_.position_->GetCachedSize(), target,
         stream);
@@ -410,23 +406,23 @@ PROTOBUF_NOINLINE void PayloadEnemySpawn::Clear() {
   ::_pbi::Prefetch5LinesFrom7Lines(&this_);
   cached_has_bits = this_._impl_._has_bits_[0];
   if ((cached_has_bits & 0x00000007U) != 0) {
-    // string name = 2;
-    if ((cached_has_bits & 0x00000001U) != 0) {
-      if (!this_._internal_name().empty()) {
-        total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
-                                        this_._internal_name());
-      }
-    }
     // .Proto.Vector3 position = 3;
-    if ((cached_has_bits & 0x00000002U) != 0) {
+    if ((cached_has_bits & 0x00000001U) != 0) {
       total_size += 1 +
                     ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.position_);
     }
-    // uint64 id = 1;
-    if ((cached_has_bits & 0x00000004U) != 0) {
-      if (this_._internal_id() != 0) {
+    // uint64 enemy_type_id = 1;
+    if ((cached_has_bits & 0x00000002U) != 0) {
+      if (this_._internal_enemy_type_id() != 0) {
         total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(
-            this_._internal_id());
+            this_._internal_enemy_type_id());
+      }
+    }
+    // uint64 entity_id = 2;
+    if ((cached_has_bits & 0x00000004U) != 0) {
+      if (this_._internal_entity_id() != 0) {
+        total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(
+            this_._internal_entity_id());
       }
     }
   }
@@ -449,15 +445,6 @@ void PayloadEnemySpawn::MergeImpl(::google::protobuf::MessageLite& to_msg, const
   cached_has_bits = from._impl_._has_bits_[0];
   if ((cached_has_bits & 0x00000007U) != 0) {
     if ((cached_has_bits & 0x00000001U) != 0) {
-      if (!from._internal_name().empty()) {
-        _this->_internal_set_name(from._internal_name());
-      } else {
-        if (_this->_impl_.name_.IsDefault()) {
-          _this->_internal_set_name("");
-        }
-      }
-    }
-    if ((cached_has_bits & 0x00000002U) != 0) {
       ABSL_DCHECK(from._impl_.position_ != nullptr);
       if (_this->_impl_.position_ == nullptr) {
         _this->_impl_.position_ = ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.position_);
@@ -465,9 +452,14 @@ void PayloadEnemySpawn::MergeImpl(::google::protobuf::MessageLite& to_msg, const
         _this->_impl_.position_->MergeFrom(*from._impl_.position_);
       }
     }
+    if ((cached_has_bits & 0x00000002U) != 0) {
+      if (from._internal_enemy_type_id() != 0) {
+        _this->_impl_.enemy_type_id_ = from._impl_.enemy_type_id_;
+      }
+    }
     if ((cached_has_bits & 0x00000004U) != 0) {
-      if (from._internal_id() != 0) {
-        _this->_impl_.id_ = from._impl_.id_;
+      if (from._internal_entity_id() != 0) {
+        _this->_impl_.entity_id_ = from._impl_.entity_id_;
       }
     }
   }
@@ -485,14 +477,11 @@ void PayloadEnemySpawn::CopyFrom(const PayloadEnemySpawn& from) {
 
 void PayloadEnemySpawn::InternalSwap(PayloadEnemySpawn* PROTOBUF_RESTRICT PROTOBUF_NONNULL other) {
   using ::std::swap;
-  auto* arena = GetArena();
-  ABSL_DCHECK_EQ(arena, other->GetArena());
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
-  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.name_, &other->_impl_.name_, arena);
   ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(PayloadEnemySpawn, _impl_.id_)
-      + sizeof(PayloadEnemySpawn::_impl_.id_)
+      PROTOBUF_FIELD_OFFSET(PayloadEnemySpawn, _impl_.entity_id_)
+      + sizeof(PayloadEnemySpawn::_impl_.entity_id_)
       - PROTOBUF_FIELD_OFFSET(PayloadEnemySpawn, _impl_.position_)>(
           reinterpret_cast<char*>(&_impl_.position_),
           reinterpret_cast<char*>(&other->_impl_.position_));
@@ -538,7 +527,7 @@ PROTOBUF_NDEBUG_INLINE PayloadEnemyDespawn::Impl_::Impl_(
 
 inline void PayloadEnemyDespawn::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
-  _impl_.id_ = {};
+  _impl_.entity_id_ = {};
 }
 PayloadEnemyDespawn::~PayloadEnemyDespawn() {
   // @@protoc_insertion_point(destructor:Proto.PayloadEnemyDespawn)
@@ -616,14 +605,14 @@ PayloadEnemyDespawn::_table_ = {
     ::_pbi::TcParser::GetTable<::Proto::PayloadEnemyDespawn>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // uint64 id = 1;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(PayloadEnemyDespawn, _impl_.id_), 0>(),
-     {8, 0, 0, PROTOBUF_FIELD_OFFSET(PayloadEnemyDespawn, _impl_.id_)}},
+    // uint64 entity_id = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(PayloadEnemyDespawn, _impl_.entity_id_), 0>(),
+     {8, 0, 0, PROTOBUF_FIELD_OFFSET(PayloadEnemyDespawn, _impl_.entity_id_)}},
   }}, {{
     65535, 65535
   }}, {{
-    // uint64 id = 1;
-    {PROTOBUF_FIELD_OFFSET(PayloadEnemyDespawn, _impl_.id_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt64)},
+    // uint64 entity_id = 1;
+    {PROTOBUF_FIELD_OFFSET(PayloadEnemyDespawn, _impl_.entity_id_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt64)},
   }},
   // no aux_entries
   {{
@@ -636,7 +625,7 @@ PROTOBUF_NOINLINE void PayloadEnemyDespawn::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.id_ = ::uint64_t{0u};
+  _impl_.entity_id_ = ::uint64_t{0u};
   _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
@@ -659,12 +648,12 @@ PROTOBUF_NOINLINE void PayloadEnemyDespawn::Clear() {
   ::uint32_t cached_has_bits = 0;
   (void)cached_has_bits;
 
-  // uint64 id = 1;
+  // uint64 entity_id = 1;
   if ((this_._impl_._has_bits_[0] & 0x00000001U) != 0) {
-    if (this_._internal_id() != 0) {
+    if (this_._internal_entity_id() != 0) {
       target = stream->EnsureSpace(target);
       target = ::_pbi::WireFormatLite::WriteUInt64ToArray(
-          1, this_._internal_id(), target);
+          1, this_._internal_entity_id(), target);
     }
   }
 
@@ -692,12 +681,12 @@ PROTOBUF_NOINLINE void PayloadEnemyDespawn::Clear() {
   (void)cached_has_bits;
 
    {
-    // uint64 id = 1;
+    // uint64 entity_id = 1;
     cached_has_bits = this_._impl_._has_bits_[0];
     if ((cached_has_bits & 0x00000001U) != 0) {
-      if (this_._internal_id() != 0) {
+      if (this_._internal_entity_id() != 0) {
         total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(
-            this_._internal_id());
+            this_._internal_entity_id());
       }
     }
   }
@@ -718,8 +707,8 @@ void PayloadEnemyDespawn::MergeImpl(::google::protobuf::MessageLite& to_msg, con
 
   cached_has_bits = from._impl_._has_bits_[0];
   if ((cached_has_bits & 0x00000001U) != 0) {
-    if (from._internal_id() != 0) {
-      _this->_impl_.id_ = from._impl_.id_;
+    if (from._internal_entity_id() != 0) {
+      _this->_impl_.entity_id_ = from._impl_.entity_id_;
     }
   }
   _this->_impl_._has_bits_[0] |= cached_has_bits;
@@ -738,7 +727,7 @@ void PayloadEnemyDespawn::InternalSwap(PayloadEnemyDespawn* PROTOBUF_RESTRICT PR
   using ::std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
-  swap(_impl_.id_, other->_impl_.id_);
+  swap(_impl_.entity_id_, other->_impl_.entity_id_);
 }
 
 ::google::protobuf::Metadata PayloadEnemyDespawn::GetMetadata() const {

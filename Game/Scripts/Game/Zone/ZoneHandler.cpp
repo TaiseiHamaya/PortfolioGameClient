@@ -36,12 +36,13 @@ void ZoneHandler::setup(Reference<EntityManager> entityManager_, Reference<Enemy
 	startGameMessageHandler.setup(entityManager_, gameLogWindowManager_, gameServerConnectionManager, commandStack);
 	notificationMessageHandler.setup(entityManager_, gameLogWindowManager_, commandStack);
 	syncMessageHandler.setup(entityManager_, gameLogWindowManager_, commandStack);
-	enemyMessageHandler.setup(enemyManager_, entityManager_);
+	enemyMessageHandler.setup(commandStack);
 
 	// routerにハンドラを登録
 	router.register_handler(Proto::ToClientMessage::kTextMessage, std::ref(textMessageHandler));
 
 	router.register_handler(Proto::ToClientMessage::kStartGameResponse, std::ref(startGameMessageHandler));
+	router.register_handler(Proto::ToClientMessage::kClientInitializerData, std::ref(startGameMessageHandler));
 
 	router.register_handler(Proto::ToClientMessage::kZoneEnterNotification, std::ref(notificationMessageHandler));
 	router.register_handler(Proto::ToClientMessage::kZoneExitNotification, std::ref(notificationMessageHandler));
@@ -57,7 +58,7 @@ void ZoneHandler::setup(Reference<EntityManager> entityManager_, Reference<Enemy
 	chatBoxManager.initialize();
 
 	Proto::ToServerMessage enter;
-	Proto::PayloadLobbyStartGameRequest* payload = enter.mutable_start_game();
+	Proto::PayloadPlayerZoneEnterComplete* payload = enter.mutable_player_zone_enter_complete();
 	NetworkCluster::SenderMut()->stack_packet(enter);
 
 	NetworkCluster::Send();
@@ -218,7 +219,6 @@ void ZoneHandler::set_player(Reference<Player> player_) {
 	zone.set_player(player_);
 	startGameMessageHandler.set_player(player_);
 	syncMessageHandler.set_player(player_);
-	enemyMessageHandler.set_player(player_);
 }
 
 void ZoneHandler::set_effect_manager(Reference<EffectManager> effectManager_) {

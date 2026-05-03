@@ -268,6 +268,12 @@ void TitleStateScript::update_lobby() {
 
 	if (inputKey.trigger(szg::KeyID::Return) || inputPad.trigger(szg::PadID::A)) {
 		state = State::Loading;
+
+		Proto::ToServerMessage enter;
+		Proto::PayloadLobbyStartGameRequest* payload = enter.mutable_start_game();
+		NetworkCluster::SenderMut()->stack_packet(enter);
+
+		NetworkCluster::Send();
 		// シーン遷移の開始
 		szg::SceneManager2::SceneChange(SceneListPortfolio::SCENE_GAME, std::numeric_limits<r32>::max());
 		waitUntil.reset([&]() -> bool {

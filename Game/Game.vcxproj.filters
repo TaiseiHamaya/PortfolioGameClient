@@ -394,6 +394,8 @@
     <ClCompile Include="Scripts\Proto\process\zone\client_initializer.pb.cc" />
     <ClCompile Include="Scripts\Proto\process\zone\enemy.pb.cc" />
     <ClCompile Include="Scripts\Proto\process\zone\sync.pb.cc" />
+    <ClCompile Include="Scripts\Proto\process\zone\client_data_getter.pb.cc" />
+    <ClCompile Include="Scripts\Game\Zone\Command\ZoneEnemySpawnCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="DevTool\launch-bot.ps1" />
@@ -424,5 +426,7 @@
     <ClInclude Include="Scripts\Proto\process\zone\client_initializer.pb.h" />
     <ClInclude Include="Scripts\Proto\process\zone\enemy.pb.h" />
     <ClInclude Include="Scripts\Proto\process\zone\sync.pb.h" />
+    <ClInclude Include="Scripts\Proto\process\zone\client_data_getter.pb.h" />
+    <ClInclude Include="Scripts\Game\Zone\Command\ZoneEnemySpawnCommand.h" />
   </ItemGroup>
 </Project>

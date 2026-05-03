@@ -131,12 +131,12 @@ const char descriptor_table_protodef_process_2fgateway_2fpacket_2eproto[] ABSL_A
     "rocess/network/text.proto\032\033process/db/us"
     "er/login.proto\032\034process/db/user/logout.p"
     "roto\032\034process/db/user/signup.proto\032\027proc"
-    "ess/zone/sync.proto\032%process/zone/client"
-    "_initializer.proto\032\030process/zone/enemy.p"
+    "ess/zone/sync.proto\032\030process/zone/enemy."
+    "proto\032%process/zone/client_data_getter.p"
     "roto\032 process/world/player_route.proto\032\036"
     "process/lobby/start_game.proto\032\034process/"
     "lobby/end_game.proto\032\031process/lobby/ente"
-    "r.proto\032\030process/lobby/exit.proto\"\232\004\n\017To"
+    "r.proto\032\030process/lobby/exit.proto\"\231\004\n\017To"
     "ServerMessage\0223\n\rlogin_request\030\001 \001(\0132\032.P"
     "roto.PayloadLoginRequestH\000\0225\n\016logout_req"
     "uest\030\002 \001(\0132\033.Proto.PayloadLogoutRequestH"
@@ -144,35 +144,35 @@ const char descriptor_table_protodef_process_2fgateway_2fpacket_2eproto[] ABSL_A
     "dSignupRequestH\000\0229\n\nstart_game\030\004 \001(\0132#.P"
     "roto.PayloadLobbyStartGameRequestH\000\0225\n\010e"
     "nd_game\030\005 \001(\0132!.Proto.PayloadLobbyEndGam"
-    "eRequestH\000\022L\n\032client_initializer_request"
-    "\030\006 \001(\0132&.Proto.PayloadClientInitializerR"
-    "equestH\000\0225\n\016transform_sync\030\010 \001(\0132\033.Proto"
-    ".PayloadTransformSyncH\000\022/\n\013play_action\030\t"
-    " \001(\0132\030.Proto.PayloadPlayActionH\000\0221\n\014text"
-    "_message\030\n \001(\0132\031.Proto.PayloadTextMessag"
-    "eH\000B\t\n\007message\"\354\006\n\017ToClientMessage\0227\n\017lo"
-    "gout_response\030\002 \001(\0132\034.Proto.PayloadLogou"
-    "tResponseH\000\0227\n\017signup_response\030\003 \001(\0132\034.P"
-    "roto.PayloadSignupResponseH\000\022@\n\024lobby_en"
-    "ter_response\030\004 \001(\0132 .Proto.PayloadLobbyE"
-    "nterResponseH\000\022C\n\023start_game_response\030\005 "
-    "\001(\0132$.Proto.PayloadLobbyStartGameRespons"
-    "eH\000\022\?\n\021end_game_response\030\006 \001(\0132\".Proto.P"
-    "ayloadLobbyEndGameResponseH\000\022N\n\033client_i"
-    "nitializer_response\030\007 \001(\0132\'.Proto.Payloa"
-    "dClientInitializerResponseH\000\0225\n\016transfor"
-    "m_sync\030\010 \001(\0132\033.Proto.PayloadTransformSyn"
-    "cH\000\022/\n\013play_action\030\t \001(\0132\030.Proto.Payload"
-    "PlayActionH\000\0225\n\016entity_damaged\030\n \001(\0132\033.P"
-    "roto.PayloadEntityDamagedH\000\022/\n\013enemy_spa"
-    "wn\030\013 \001(\0132\030.Proto.PayloadEnemySpawnH\000\0223\n\r"
-    "enemy_despawn\030\014 \001(\0132\032.Proto.PayloadEnemy"
-    "DespawnH\000\022F\n\027zone_enter_notification\030\r \001"
-    "(\0132#.Proto.PayloadZoneEnterNotificationH"
-    "\000\022D\n\026zone_exit_notification\030\016 \001(\0132\".Prot"
-    "o.PayloadZoneExitNotificationH\000\0221\n\014text_"
-    "message\030\017 \001(\0132\031.Proto.PayloadTextMessage"
-    "H\000B\t\n\007messageb\006proto3"
+    "eRequestH\000\022K\n\032player_zone_enter_complete"
+    "\030\006 \001(\0132%.Proto.PayloadPlayerZoneEnterCom"
+    "pleteH\000\0225\n\016transform_sync\030\007 \001(\0132\033.Proto."
+    "PayloadTransformSyncH\000\022/\n\013play_action\030\010 "
+    "\001(\0132\030.Proto.PayloadPlayActionH\000\0221\n\014text_"
+    "message\030\t \001(\0132\031.Proto.PayloadTextMessage"
+    "H\000B\t\n\007message\"\344\006\n\017ToClientMessage\0227\n\017log"
+    "out_response\030\002 \001(\0132\034.Proto.PayloadLogout"
+    "ResponseH\000\0227\n\017signup_response\030\003 \001(\0132\034.Pr"
+    "oto.PayloadSignupResponseH\000\022@\n\024lobby_ent"
+    "er_response\030\004 \001(\0132 .Proto.PayloadLobbyEn"
+    "terResponseH\000\022C\n\023start_game_response\030\005 \001"
+    "(\0132$.Proto.PayloadLobbyStartGameResponse"
+    "H\000\022\?\n\021end_game_response\030\006 \001(\0132\".Proto.Pa"
+    "yloadLobbyEndGameResponseH\000\022F\n\027client_in"
+    "itializer_data\030\007 \001(\0132#.Proto.PayloadClie"
+    "ntInitializerDataH\000\0225\n\016transform_sync\030\010 "
+    "\001(\0132\033.Proto.PayloadTransformSyncH\000\022/\n\013pl"
+    "ay_action\030\t \001(\0132\030.Proto.PayloadPlayActio"
+    "nH\000\0225\n\016entity_damaged\030\n \001(\0132\033.Proto.Payl"
+    "oadEntityDamagedH\000\022/\n\013enemy_spawn\030\013 \001(\0132"
+    "\030.Proto.PayloadEnemySpawnH\000\0223\n\renemy_des"
+    "pawn\030\014 \001(\0132\032.Proto.PayloadEnemyDespawnH\000"
+    "\022F\n\027zone_enter_notification\030\r \001(\0132#.Prot"
+    "o.PayloadZoneEnterNotificationH\000\022D\n\026zone"
+    "_exit_notification\030\016 \001(\0132\".Proto.Payload"
+    "ZoneExitNotificationH\000\0221\n\014text_message\030\017"
+    " \001(\0132\031.Proto.PayloadTextMessageH\000B\t\n\007mes"
+    "sageb\006proto3"
 };
 static const ::_pbi::DescriptorTable* PROTOBUF_NONNULL const
     descriptor_table_process_2fgateway_2fpacket_2eproto_deps[12] = {
@@ -185,7 +185,7 @@ static const ::_pbi::DescriptorTable* PROTOBUF_NONNULL const
         &::descriptor_table_process_2flobby_2fstart_5fgame_2eproto,
         &::descriptor_table_process_2fnetwork_2ftext_2eproto,
         &::descriptor_table_process_2fworld_2fplayer_5froute_2eproto,
-        &::descriptor_table_process_2fzone_2fclient_5finitializer_2eproto,
+        &::descriptor_table_process_2fzone_2fclient_5fdata_5fgetter_2eproto,
         &::descriptor_table_process_2fzone_2fenemy_2eproto,
         &::descriptor_table_process_2fzone_2fsync_2eproto,
 };
@@ -193,7 +193,7 @@ static ::absl::once_flag descriptor_table_process_2fgateway_2fpacket_2eproto_onc
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_process_2fgateway_2fpacket_2eproto = {
     false,
     false,
-    1821,
+    1812,
     descriptor_table_protodef_process_2fgateway_2fpacket_2eproto,
     "process/gateway/packet.proto",
     &descriptor_table_process_2fgateway_2fpacket_2eproto_once,
@@ -335,26 +335,26 @@ void ToServerMessage::clear_end_game() {
     clear_has_message();
   }
 }
-void ToServerMessage::set_allocated_client_initializer_request(::Proto::PayloadClientInitializerRequest* PROTOBUF_NULLABLE client_initializer_request) {
+void ToServerMessage::set_allocated_player_zone_enter_complete(::Proto::PayloadPlayerZoneEnterComplete* PROTOBUF_NULLABLE player_zone_enter_complete) {
   ::google::protobuf::Arena* message_arena = GetArena();
   clear_message();
-  if (client_initializer_request) {
-    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::Message*>(client_initializer_request)->GetArena();
+  if (player_zone_enter_complete) {
+    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::Message*>(player_zone_enter_complete)->GetArena();
     if (message_arena != submessage_arena) {
-      client_initializer_request = ::google::protobuf::internal::GetOwnedMessage(message_arena, client_initializer_request, submessage_arena);
+      player_zone_enter_complete = ::google::protobuf::internal::GetOwnedMessage(message_arena, player_zone_enter_complete, submessage_arena);
     }
-    set_has_client_initializer_request();
-    _impl_.message_.client_initializer_request_ = client_initializer_request;
+    set_has_player_zone_enter_complete();
+    _impl_.message_.player_zone_enter_complete_ = player_zone_enter_complete;
   }
-  // @@protoc_insertion_point(field_set_allocated:Proto.ToServerMessage.client_initializer_request)
+  // @@protoc_insertion_point(field_set_allocated:Proto.ToServerMessage.player_zone_enter_complete)
 }
-void ToServerMessage::clear_client_initializer_request() {
+void ToServerMessage::clear_player_zone_enter_complete() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (message_case() == kClientInitializerRequest) {
+  if (message_case() == kPlayerZoneEnterComplete) {
     if (GetArena() == nullptr) {
-      delete _impl_.message_.client_initializer_request_;
+      delete _impl_.message_.player_zone_enter_complete_;
     } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
-      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.message_.client_initializer_request_);
+      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.message_.player_zone_enter_complete_);
     }
     clear_has_message();
   }
@@ -479,8 +479,8 @@ ToServerMessage::ToServerMessage(
       case kEndGame:
         _impl_.message_.end_game_ = ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.message_.end_game_);
         break;
-      case kClientInitializerRequest:
-        _impl_.message_.client_initializer_request_ = ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.message_.client_initializer_request_);
+      case kPlayerZoneEnterComplete:
+        _impl_.message_.player_zone_enter_complete_ = ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.message_.player_zone_enter_complete_);
         break;
       case kTransformSync:
         _impl_.message_.transform_sync_ = ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.message_.transform_sync_);
@@ -566,11 +566,11 @@ void ToServerMessage::clear_message() {
       }
       break;
     }
-    case kClientInitializerRequest: {
+    case kPlayerZoneEnterComplete: {
       if (GetArena() == nullptr) {
-        delete _impl_.message_.client_initializer_request_;
+        delete _impl_.message_.player_zone_enter_complete_;
       } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
-        ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.message_.client_initializer_request_);
+        ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.message_.player_zone_enter_complete_);
       }
       break;
     }
@@ -654,9 +654,9 @@ ToServerMessage::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
-    10, 0,  // max_field_number, fast_idx_mask
+    9, 0,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294966336,  // skipmap
+    4294966784,  // skipmap
     offsetof(decltype(_table_), field_entries),
     9,  // num_field_entries
     9,  // num_aux_entries
@@ -682,13 +682,13 @@ ToServerMessage::_table_ = {
     {PROTOBUF_FIELD_OFFSET(ToServerMessage, _impl_.message_.start_game_), _Internal::kOneofCaseOffset + 0, 3, (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
     // .Proto.PayloadLobbyEndGameRequest end_game = 5;
     {PROTOBUF_FIELD_OFFSET(ToServerMessage, _impl_.message_.end_game_), _Internal::kOneofCaseOffset + 0, 4, (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
-    // .Proto.PayloadClientInitializerRequest client_initializer_request = 6;
-    {PROTOBUF_FIELD_OFFSET(ToServerMessage, _impl_.message_.client_initializer_request_), _Internal::kOneofCaseOffset + 0, 5, (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
-    // .Proto.PayloadTransformSync transform_sync = 8;
+    // .Proto.PayloadPlayerZoneEnterComplete player_zone_enter_complete = 6;
+    {PROTOBUF_FIELD_OFFSET(ToServerMessage, _impl_.message_.player_zone_enter_complete_), _Internal::kOneofCaseOffset + 0, 5, (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
+    // .Proto.PayloadTransformSync transform_sync = 7;
     {PROTOBUF_FIELD_OFFSET(ToServerMessage, _impl_.message_.transform_sync_), _Internal::kOneofCaseOffset + 0, 6, (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
-    // .Proto.PayloadPlayAction play_action = 9;
+    // .Proto.PayloadPlayAction play_action = 8;
     {PROTOBUF_FIELD_OFFSET(ToServerMessage, _impl_.message_.play_action_), _Internal::kOneofCaseOffset + 0, 7, (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
-    // .Proto.PayloadTextMessage text_message = 10;
+    // .Proto.PayloadTextMessage text_message = 9;
     {PROTOBUF_FIELD_OFFSET(ToServerMessage, _impl_.message_.text_message_), _Internal::kOneofCaseOffset + 0, 8, (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
   }},
   {{
@@ -697,7 +697,7 @@ ToServerMessage::_table_ = {
       {::_pbi::TcParser::GetTable<::Proto::PayloadSignupRequest>()},
       {::_pbi::TcParser::GetTable<::Proto::PayloadLobbyStartGameRequest>()},
       {::_pbi::TcParser::GetTable<::Proto::PayloadLobbyEndGameRequest>()},
-      {::_pbi::TcParser::GetTable<::Proto::PayloadClientInitializerRequest>()},
+      {::_pbi::TcParser::GetTable<::Proto::PayloadPlayerZoneEnterComplete>()},
       {::_pbi::TcParser::GetTable<::Proto::PayloadTransformSync>()},
       {::_pbi::TcParser::GetTable<::Proto::PayloadPlayAction>()},
       {::_pbi::TcParser::GetTable<::Proto::PayloadTextMessage>()},
@@ -765,27 +765,27 @@ PROTOBUF_NOINLINE void ToServerMessage::Clear() {
           stream);
       break;
     }
-    case kClientInitializerRequest: {
+    case kPlayerZoneEnterComplete: {
       target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-          6, *this_._impl_.message_.client_initializer_request_, this_._impl_.message_.client_initializer_request_->GetCachedSize(), target,
+          6, *this_._impl_.message_.player_zone_enter_complete_, this_._impl_.message_.player_zone_enter_complete_->GetCachedSize(), target,
           stream);
       break;
     }
     case kTransformSync: {
       target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-          8, *this_._impl_.message_.transform_sync_, this_._impl_.message_.transform_sync_->GetCachedSize(), target,
+          7, *this_._impl_.message_.transform_sync_, this_._impl_.message_.transform_sync_->GetCachedSize(), target,
           stream);
       break;
     }
     case kPlayAction: {
       target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-          9, *this_._impl_.message_.play_action_, this_._impl_.message_.play_action_->GetCachedSize(), target,
+          8, *this_._impl_.message_.play_action_, this_._impl_.message_.play_action_->GetCachedSize(), target,
           stream);
       break;
     }
     case kTextMessage: {
       target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-          10, *this_._impl_.message_.text_message_, this_._impl_.message_.text_message_->GetCachedSize(), target,
+          9, *this_._impl_.message_.text_message_, this_._impl_.message_.text_message_->GetCachedSize(), target,
           stream);
       break;
     }
@@ -846,25 +846,25 @@ PROTOBUF_NOINLINE void ToServerMessage::Clear() {
                     ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.message_.end_game_);
       break;
     }
-    // .Proto.PayloadClientInitializerRequest client_initializer_request = 6;
-    case kClientInitializerRequest: {
+    // .Proto.PayloadPlayerZoneEnterComplete player_zone_enter_complete = 6;
+    case kPlayerZoneEnterComplete: {
       total_size += 1 +
-                    ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.message_.client_initializer_request_);
+                    ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.message_.player_zone_enter_complete_);
       break;
     }
-    // .Proto.PayloadTransformSync transform_sync = 8;
+    // .Proto.PayloadTransformSync transform_sync = 7;
     case kTransformSync: {
       total_size += 1 +
                     ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.message_.transform_sync_);
       break;
     }
-    // .Proto.PayloadPlayAction play_action = 9;
+    // .Proto.PayloadPlayAction play_action = 8;
     case kPlayAction: {
       total_size += 1 +
                     ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.message_.play_action_);
       break;
     }
-    // .Proto.PayloadTextMessage text_message = 10;
+    // .Proto.PayloadTextMessage text_message = 9;
     case kTextMessage: {
       total_size += 1 +
                     ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.message_.text_message_);
@@ -941,11 +941,11 @@ void ToServerMessage::MergeImpl(::google::protobuf::MessageLite& to_msg, const :
         }
         break;
       }
-      case kClientInitializerRequest: {
+      case kPlayerZoneEnterComplete: {
         if (oneof_needs_init) {
-          _this->_impl_.message_.client_initializer_request_ = ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.message_.client_initializer_request_);
+          _this->_impl_.message_.player_zone_enter_complete_ = ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.message_.player_zone_enter_complete_);
         } else {
-          _this->_impl_.message_.client_initializer_request_->MergeFrom(*from._impl_.message_.client_initializer_request_);
+          _this->_impl_.message_.player_zone_enter_complete_->MergeFrom(*from._impl_.message_.player_zone_enter_complete_);
         }
         break;
       }
@@ -1126,26 +1126,26 @@ void ToClientMessage::clear_end_game_response() {
     clear_has_message();
   }
 }
-void ToClientMessage::set_allocated_client_initializer_response(::Proto::PayloadClientInitializerResponse* PROTOBUF_NULLABLE client_initializer_response) {
+void ToClientMessage::set_allocated_client_initializer_data(::Proto::PayloadClientInitializerData* PROTOBUF_NULLABLE client_initializer_data) {
   ::google::protobuf::Arena* message_arena = GetArena();
   clear_message();
-  if (client_initializer_response) {
-    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::Message*>(client_initializer_response)->GetArena();
+  if (client_initializer_data) {
+    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::Message*>(client_initializer_data)->GetArena();
     if (message_arena != submessage_arena) {
-      client_initializer_response = ::google::protobuf::internal::GetOwnedMessage(message_arena, client_initializer_response, submessage_arena);
+      client_initializer_data = ::google::protobuf::internal::GetOwnedMessage(message_arena, client_initializer_data, submessage_arena);
     }
-    set_has_client_initializer_response();
-    _impl_.message_.client_initializer_response_ = client_initializer_response;
+    set_has_client_initializer_data();
+    _impl_.message_.client_initializer_data_ = client_initializer_data;
   }
-  // @@protoc_insertion_point(field_set_allocated:Proto.ToClientMessage.client_initializer_response)
+  // @@protoc_insertion_point(field_set_allocated:Proto.ToClientMessage.client_initializer_data)
 }
-void ToClientMessage::clear_client_initializer_response() {
+void ToClientMessage::clear_client_initializer_data() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (message_case() == kClientInitializerResponse) {
+  if (message_case() == kClientInitializerData) {
     if (GetArena() == nullptr) {
-      delete _impl_.message_.client_initializer_response_;
+      delete _impl_.message_.client_initializer_data_;
     } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
-      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.message_.client_initializer_response_);
+      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.message_.client_initializer_data_);
     }
     clear_has_message();
   }
@@ -1390,8 +1390,8 @@ ToClientMessage::ToClientMessage(
       case kEndGameResponse:
         _impl_.message_.end_game_response_ = ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.message_.end_game_response_);
         break;
-      case kClientInitializerResponse:
-        _impl_.message_.client_initializer_response_ = ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.message_.client_initializer_response_);
+      case kClientInitializerData:
+        _impl_.message_.client_initializer_data_ = ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.message_.client_initializer_data_);
         break;
       case kTransformSync:
         _impl_.message_.transform_sync_ = ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.message_.transform_sync_);
@@ -1492,11 +1492,11 @@ void ToClientMessage::clear_message() {
       }
       break;
     }
-    case kClientInitializerResponse: {
+    case kClientInitializerData: {
       if (GetArena() == nullptr) {
-        delete _impl_.message_.client_initializer_response_;
+        delete _impl_.message_.client_initializer_data_;
       } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
-        ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.message_.client_initializer_response_);
+        ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.message_.client_initializer_data_);
       }
       break;
     }
@@ -1648,8 +1648,8 @@ ToClientMessage::_table_ = {
     {PROTOBUF_FIELD_OFFSET(ToClientMessage, _impl_.message_.start_game_response_), _Internal::kOneofCaseOffset + 0, 3, (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
     // .Proto.PayloadLobbyEndGameResponse end_game_response = 6;
     {PROTOBUF_FIELD_OFFSET(ToClientMessage, _impl_.message_.end_game_response_), _Internal::kOneofCaseOffset + 0, 4, (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
-    // .Proto.PayloadClientInitializerResponse client_initializer_response = 7;
-    {PROTOBUF_FIELD_OFFSET(ToClientMessage, _impl_.message_.client_initializer_response_), _Internal::kOneofCaseOffset + 0, 5, (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
+    // .Proto.PayloadClientInitializerData client_initializer_data = 7;
+    {PROTOBUF_FIELD_OFFSET(ToClientMessage, _impl_.message_.client_initializer_data_), _Internal::kOneofCaseOffset + 0, 5, (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
     // .Proto.PayloadTransformSync transform_sync = 8;
     {PROTOBUF_FIELD_OFFSET(ToClientMessage, _impl_.message_.transform_sync_), _Internal::kOneofCaseOffset + 0, 6, (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
     // .Proto.PayloadPlayAction play_action = 9;
@@ -1673,7 +1673,7 @@ ToClientMessage::_table_ = {
       {::_pbi::TcParser::GetTable<::Proto::PayloadLobbyEnterResponse>()},
       {::_pbi::TcParser::GetTable<::Proto::PayloadLobbyStartGameResponse>()},
       {::_pbi::TcParser::GetTable<::Proto::PayloadLobbyEndGameResponse>()},
-      {::_pbi::TcParser::GetTable<::Proto::PayloadClientInitializerResponse>()},
+      {::_pbi::TcParser::GetTable<::Proto::PayloadClientInitializerData>()},
       {::_pbi::TcParser::GetTable<::Proto::PayloadTransformSync>()},
       {::_pbi::TcParser::GetTable<::Proto::PayloadPlayAction>()},
       {::_pbi::TcParser::GetTable<::Proto::PayloadEntityDamaged>()},
@@ -1746,9 +1746,9 @@ PROTOBUF_NOINLINE void ToClientMessage::Clear() {
           stream);
       break;
     }
-    case kClientInitializerResponse: {
+    case kClientInitializerData: {
       target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-          7, *this_._impl_.message_.client_initializer_response_, this_._impl_.message_.client_initializer_response_->GetCachedSize(), target,
+          7, *this_._impl_.message_.client_initializer_data_, this_._impl_.message_.client_initializer_data_->GetCachedSize(), target,
           stream);
       break;
     }
@@ -1857,10 +1857,10 @@ PROTOBUF_NOINLINE void ToClientMessage::Clear() {
                     ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.message_.end_game_response_);
       break;
     }
-    // .Proto.PayloadClientInitializerResponse client_initializer_response = 7;
-    case kClientInitializerResponse: {
+    // .Proto.PayloadClientInitializerData client_initializer_data = 7;
+    case kClientInitializerData: {
       total_size += 1 +
-                    ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.message_.client_initializer_response_);
+                    ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.message_.client_initializer_data_);
       break;
     }
     // .Proto.PayloadTransformSync transform_sync = 8;
@@ -1982,11 +1982,11 @@ void ToClientMessage::MergeImpl(::google::protobuf::MessageLite& to_msg, const :
         }
         break;
       }
-      case kClientInitializerResponse: {
+      case kClientInitializerData: {
         if (oneof_needs_init) {
-          _this->_impl_.message_.client_initializer_response_ = ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.message_.client_initializer_response_);
+          _this->_impl_.message_.client_initializer_data_ = ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.message_.client_initializer_data_);
         } else {
-          _this->_impl_.message_.client_initializer_response_->MergeFrom(*from._impl_.message_.client_initializer_response_);
+          _this->_impl_.message_.client_initializer_data_->MergeFrom(*from._impl_.message_.client_initializer_data_);
         }
         break;
       }

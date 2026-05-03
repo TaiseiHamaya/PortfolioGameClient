@@ -2,12 +2,9 @@
 
 #include <Scripts/Proto/process/gateway/packet.pb.h>
 
-#include <Library/Utility/Template/Reference.h>
 #include <Library/Utility/Tools/ConstructorMacro.h>
 
-class EntityManager;
-class EnemyManager;
-class Player;
+#include "Scripts/Game/Zone/Command/IZoneCommand.h"
 
 /// <summary>
 /// 敵メッセージのハンドラ
@@ -21,16 +18,11 @@ public:
 
 public:
 	void setup(
-		Reference<EnemyManager> enemyManager_,
-		Reference<EntityManager> entityManager_
+		std::function<void(std::unique_ptr<IZoneCommand>)> commandStack_
 	);
-
-	void set_player(Reference<Player> player_);
 
 	void operator()(const Proto::ToClientMessage& packet);
 
 private:
-	Reference<EnemyManager> enemyManager;
-	Reference<EntityManager> entityManager;
-	Reference<Player> player;
+	std::function<void(std::unique_ptr<IZoneCommand>)> commandStack;
 };

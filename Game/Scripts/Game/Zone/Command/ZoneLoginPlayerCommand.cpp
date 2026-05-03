@@ -11,6 +11,11 @@ ZoneLoginPlayerCommand::ZoneLoginPlayerCommand(u64 serverId_, const std::string&
 }
 
 void ZoneLoginPlayerCommand::execute(Zone& zone) {
+	if (zone.entity_manager_imm()->inquire_server_id(serverId)) {
+		szgWarning("Entity with ServerId {} already exists. Skipping login process.", serverId);
+		return;
+	}
+
 	Reference<RemotePlayer> temp = zone.entity_manager_mut()->generate<RemotePlayer>("Player.json");
 	temp->set_name(name);
 	temp->set_server_id(serverId);

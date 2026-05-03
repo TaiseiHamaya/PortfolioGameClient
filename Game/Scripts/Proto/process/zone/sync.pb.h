@@ -648,10 +648,11 @@ class PayloadEntityDamaged final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
-    kEntityIdFieldNumber = 2,
-    kDamageFieldNumber = 3,
+    kEntityIdFieldNumber = 1,
+    kDamageFieldNumber = 2,
+    kCurrentHpFieldNumber = 3,
   };
-  // uint64 entity_id = 2;
+  // uint64 entity_id = 1;
   void clear_entity_id() ;
   ::uint64_t entity_id() const;
   void set_entity_id(::uint64_t value);
@@ -661,7 +662,7 @@ class PayloadEntityDamaged final : public ::google::protobuf::Message
   void _internal_set_entity_id(::uint64_t value);
 
   public:
-  // int32 damage = 3;
+  // int32 damage = 2;
   void clear_damage() ;
   ::int32_t damage() const;
   void set_damage(::int32_t value);
@@ -671,11 +672,21 @@ class PayloadEntityDamaged final : public ::google::protobuf::Message
   void _internal_set_damage(::int32_t value);
 
   public:
+  // int32 current_hp = 3;
+  void clear_current_hp() ;
+  ::int32_t current_hp() const;
+  void set_current_hp(::int32_t value);
+
+  private:
+  ::int32_t _internal_current_hp() const;
+  void _internal_set_current_hp(::int32_t value);
+
+  public:
   // @@protoc_insertion_point(class_scope:Proto.PayloadEntityDamaged)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<1, 2,
+  static const ::google::protobuf::internal::TcParseTable<2, 3,
                                    0, 0,
                                    2>
       _table_;
@@ -699,6 +710,7 @@ class PayloadEntityDamaged final : public ::google::protobuf::Message
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::uint64_t entity_id_;
     ::int32_t damage_;
+    ::int32_t current_hp_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -1413,7 +1425,7 @@ inline void PayloadPlayAction::_internal_set_timestamp(::int64_t value) {
 
 // PayloadEntityDamaged
 
-// uint64 entity_id = 2;
+// uint64 entity_id = 1;
 inline void PayloadEntityDamaged::clear_entity_id() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.entity_id_ = ::uint64_t{0u};
@@ -1437,7 +1449,7 @@ inline void PayloadEntityDamaged::_internal_set_entity_id(::uint64_t value) {
   _impl_.entity_id_ = value;
 }
 
-// int32 damage = 3;
+// int32 damage = 2;
 inline void PayloadEntityDamaged::clear_damage() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.damage_ = 0;
@@ -1459,6 +1471,30 @@ inline ::int32_t PayloadEntityDamaged::_internal_damage() const {
 inline void PayloadEntityDamaged::_internal_set_damage(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.damage_ = value;
+}
+
+// int32 current_hp = 3;
+inline void PayloadEntityDamaged::clear_current_hp() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.current_hp_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000004U;
+}
+inline ::int32_t PayloadEntityDamaged::current_hp() const {
+  // @@protoc_insertion_point(field_get:Proto.PayloadEntityDamaged.current_hp)
+  return _internal_current_hp();
+}
+inline void PayloadEntityDamaged::set_current_hp(::int32_t value) {
+  _internal_set_current_hp(value);
+  _impl_._has_bits_[0] |= 0x00000004U;
+  // @@protoc_insertion_point(field_set:Proto.PayloadEntityDamaged.current_hp)
+}
+inline ::int32_t PayloadEntityDamaged::_internal_current_hp() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.current_hp_;
+}
+inline void PayloadEntityDamaged::_internal_set_current_hp(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.current_hp_ = value;
 }
 
 // -------------------------------------------------------------------
