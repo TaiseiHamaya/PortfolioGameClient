@@ -47,6 +47,7 @@ void ZoneStartGameMessageHandler::operator()(const Proto::ToClientMessage& messa
 	case Proto::ToClientMessage::kClientInitializerData:
 	{
 		const Proto::PayloadClientInitializerData& payload = message.client_initializer_data();
+		szgInformation("Received initializer data. PlayerCount-\'{}\' EnemyCount-\'{}\'", payload.players_size(), payload.enemies_size());
 		for (const auto& player : payload.players()) {
 			const auto& entity_data = player.entity_data();
 

@@ -24,12 +24,11 @@ void ZoneNotificationMessageHandler::operator()(const Proto::ToClientMessage& me
 	case Proto::ToClientMessage::kZoneEnterNotification: // 他プレイヤーのログイン通知
 	{
 		const Proto::PayloadZoneEnterNotification& body = message.zone_enter_notification();
-		szgInformation("Player added. Id-\'{}\' Name-\'{}\'", body.id(), body.username());
+		Vector3 position(body.position().x(), body.position().y(), body.position().z());
 		gameLogWindowManager->add_log(
 			GameLogWindowManager::Type::SystemMessage,
 			ConvertString(std::format("Player {} has joined the game.", body.username()))
 		);
-		Vector3 position(body.position().x(), body.position().y(), body.position().z());
 		commandStack(std::make_unique<ZoneLoginPlayerCommand>(body.id(), body.username(), position));
 	}
 	break;

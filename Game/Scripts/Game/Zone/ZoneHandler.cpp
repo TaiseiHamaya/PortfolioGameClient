@@ -200,14 +200,13 @@ void ZoneHandler::request_play_action(u32 actionId) {
 	}
 	// パケット作成
 	// アクション実行
-	Proto::ToServerMessage packet;
-	Proto::PayloadPlayAction body;
-	body.set_id(serverId.value());
-	body.set_timestamp(std::chrono::duration_cast<std::chrono::microseconds>(now.time_since_epoch()).count());
-	body.set_action_id(actionId);
-	body.set_target_id(target->server_id().value());
-	packet.set_allocated_play_action(&body);
-	gameServerPacketSender->stack_packet(packet);
+	Proto::ToServerMessage message;
+	Proto::PayloadPlayAction* body = message.mutable_play_action();
+	body->set_id(serverId.value());
+	body->set_timestamp(std::chrono::duration_cast<std::chrono::microseconds>(now.time_since_epoch()).count());
+	body->set_action_id(actionId);
+	body->set_target_id(target->server_id().value());
+	gameServerPacketSender->stack_packet(message);
 }
 
 Reference<const ChatBoxManager> ZoneHandler::chat_box_imm() const noexcept {

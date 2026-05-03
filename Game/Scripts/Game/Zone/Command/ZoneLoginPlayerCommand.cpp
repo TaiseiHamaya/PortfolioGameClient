@@ -21,4 +21,5 @@ void ZoneLoginPlayerCommand::execute(Zone& zone) {
 	temp->set_server_id(serverId);
 	temp->transform_mut().set_translate(position);
 	zone.entity_manager_mut()->register_server_id(serverId, temp);
+	szgInformation("Player logged in. ServerId-\'{}\' Name-\'{}\' Position-\'{} {} {}\'", serverId, name, position.x, position.y, position.z);
 }
