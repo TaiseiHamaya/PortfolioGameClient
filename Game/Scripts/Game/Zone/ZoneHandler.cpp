@@ -56,12 +56,6 @@ void ZoneHandler::setup(Reference<EntityManager> entityManager_, Reference<Enemy
 
 	// チャットボックスの初期化
 	chatBoxManager.initialize();
-
-	Proto::ToServerMessage enter;
-	Proto::PayloadPlayerZoneEnterComplete* payload = enter.mutable_player_zone_enter_complete();
-	NetworkCluster::SenderMut()->stack_packet(enter);
-
-	NetworkCluster::Send();
 }
 
 void ZoneHandler::prev_update() {

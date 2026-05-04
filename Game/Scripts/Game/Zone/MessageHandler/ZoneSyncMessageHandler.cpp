@@ -34,6 +34,10 @@ void ZoneSyncMessageHandler::operator()(const Proto::ToClientMessage& packet) {
 	case Proto::ToClientMessage::kTransformSync: // 位置同期
 	{
 		const Proto::PayloadTransformSync& body = packet.transform_sync();
+		if (player->server_id().has_value() && player->server_id().value() == body.id()) {
+			// 自分自身の位置同期は処理しない
+			break;
+		}
 		Vector3 position(body.position().x(), body.position().y(), body.position().z());
 		using time_point = std::chrono::system_clock::time_point;
 		time_point time{ std::chrono::duration_cast<time_point::duration>(std::chrono::microseconds(body.timestamp())) };

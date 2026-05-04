@@ -12,6 +12,7 @@
 #include "Scripts/Manager/EntityManager.h"
 #include "Scripts/Manager/GameLogWindowManager.h"
 #include "Scripts/Network/GameServer/GameServerConnectionManager.h"
+#include "Scripts/Network/NetworkCluster.h"
 
 void ZoneStartGameMessageHandler::setup(
 	Reference<EntityManager> entityManager_,
@@ -42,6 +43,10 @@ void ZoneStartGameMessageHandler::operator()(const Proto::ToClientMessage& messa
 			GameLogWindowManager::Type::SystemMessage,
 			L"Welcome to game!"
 		);
+
+		Proto::ToServerMessage enter;
+		Proto::PayloadPlayerZoneEnterComplete* payload = enter.mutable_player_zone_enter_complete();
+		NetworkCluster::SenderMut()->stack_packet(enter);
 	}
 	break;
 	case Proto::ToClientMessage::kClientInitializerData:
