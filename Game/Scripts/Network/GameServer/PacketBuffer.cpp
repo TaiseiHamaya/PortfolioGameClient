@@ -2,8 +2,8 @@
 
 #include <Engine/Application/Logger.h>
 
-std::vector<Proto::Packet> ReceiveBuffer::resolve_packets(std::span<u8> data) {
-	std::vector<Proto::Packet> result;
+std::vector<Proto::ToClientMessage> ReceiveBuffer::resolve_packets(std::span<u8> data) {
+	std::vector<Proto::ToClientMessage> result;
 
 	while (!data.empty()) {
 		// ヘッダー読み込み
@@ -26,7 +26,7 @@ std::vector<Proto::Packet> ReceiveBuffer::resolve_packets(std::span<u8> data) {
 
 		if (size == 0) {
 			// パケットが完成した場合、デシリアライズして結果に追加
-			Proto::Packet packet;
+			Proto::ToClientMessage packet;
 			if (packet.ParseFromArray(buffer.data(), static_cast<int>(buffer.size()))) {
 				result.emplace_back(std::move(packet));
 			}
@@ -57,7 +57,7 @@ bool ReceiveBuffer::read_length_header(std::span<u8>& data) {
 	// 読み込み可能なバイト数
 	u64 readSize = std::min<u64>(static_cast<u64>(neededSize), data.size());
 	for (u64 i = 0; i < readSize; ++i) {
-		size |= static_cast<u32>(data[i]) << (received_header_size * 8);
+		size |= static_cast<u32>(data[i]) << ((sizeof32 - received_header_size - 1) * 8);
 		++received_header_size;
 	}
 	data = data.subspan(readSize);

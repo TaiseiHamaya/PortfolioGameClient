@@ -421,12 +421,18 @@ ABSL_LOG_INTERNAL_DEFINE_MAKE_CHECK_OP_STRING_EXTERN(const void* absl_nonnull);
     return name##Impl<int, int>(v1, v2, exprtext);                         \
   }
 
+// Modification
+#pragma warning(disable:4018)
+
 ABSL_LOG_INTERNAL_CHECK_OP_IMPL(Check_EQ, ==)
 ABSL_LOG_INTERNAL_CHECK_OP_IMPL(Check_NE, !=)
 ABSL_LOG_INTERNAL_CHECK_OP_IMPL(Check_LE, <=)
 ABSL_LOG_INTERNAL_CHECK_OP_IMPL(Check_LT, <)
 ABSL_LOG_INTERNAL_CHECK_OP_IMPL(Check_GE, >=)
 ABSL_LOG_INTERNAL_CHECK_OP_IMPL(Check_GT, >)
+
+#pragma warning(default:4018)
+
 #undef ABSL_LOG_INTERNAL_CHECK_OP_IMPL_RESULT
 #undef ABSL_LOG_INTERNAL_CHECK_OP_IMPL
 

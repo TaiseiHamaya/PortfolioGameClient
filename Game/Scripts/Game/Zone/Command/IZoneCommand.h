@@ -2,6 +2,8 @@
 
 #include <Library/Utility/Tools/ConstructorMacro.h>
 
+class Zone;
+
 /// <summary>
 /// ZoneCommandのインターフェース
 /// </summary>
@@ -16,5 +18,5 @@ public:
 	/// <summary>
 	/// 実行
 	/// </summary>
-	virtual void execute() = 0;
+	virtual void execute(Zone& zone) = 0;
 };

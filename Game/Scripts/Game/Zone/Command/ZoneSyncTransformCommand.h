@@ -17,7 +17,7 @@ public:
 	ZoneSyncTransformCommand(Reference<IEntity> entity, const std::chrono::system_clock::time_point& time, const Vector3& position_);
 
 public:
-	void execute() override;
+	void execute(Zone& zone) override;
 
 private:
 	Reference<IEntity> entity;

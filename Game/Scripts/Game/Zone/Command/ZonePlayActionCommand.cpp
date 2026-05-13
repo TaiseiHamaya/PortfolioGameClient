@@ -8,7 +8,7 @@ ZonePlayActionCommand::ZonePlayActionCommand(Reference<IEntity> entity_, const u
 	targetEntity = targetEntity_;
 }
 
-void ZonePlayActionCommand::execute() {
+void ZonePlayActionCommand::execute(Zone&) {
 	if(!entity || !targetEntity) {
 		return;
 	}

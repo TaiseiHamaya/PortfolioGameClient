@@ -16,16 +16,16 @@ CometEffect::CometEffect() = default;
 CometEffect::~CometEffect() = default;
 
 void CometEffect::initialize(const Vector3& position) {
-	Reference<szg::WorldRoot> worldRoot = world_root_mut();
+	Reference<szg::WorldRoot> worldRootMut = world_root_mut();
 	transform.set_translate(position);
 	transform.set_translate_y(0.02f);
 
 	// 煙のパーティクル1
-	dustCloudParticle0 = worldRoot->instantiate<szg::ParticleEmitterInstance>(this, "DustCloud0.json", 100);
+	dustCloudParticle0 = worldRootMut->instantiate<szg::ParticleEmitterInstance>(this, "DustCloud0.json", 100);
 	dustCloudParticle0->set_active(false);
 
 	// 煙のパーティクル1
-	dustCloudParticle1 = worldRoot->instantiate<szg::ParticleEmitterInstance>(this, "DustCloud1.json", 100);
+	dustCloudParticle1 = worldRootMut->instantiate<szg::ParticleEmitterInstance>(this, "DustCloud1.json", 100);
 	dustCloudParticle1->set_active(false);
 
 	json.load("Action/RedComet/CometEffect.json");
@@ -43,20 +43,20 @@ void CometEffect::initialize(const Vector3& position) {
 	json.register_value(SZG_JSON_ASSET_REGISTER(BlurWeight));
 
 	// コメットの隕石部分
-	cometBody = worldRoot->instantiate<szg::StaticMeshInstance>(this);
+	cometBody = worldRootMut->instantiate<szg::StaticMeshInstance>(this);
 	cometBody->reset_mesh("Comet.obj");
 	cometBody->set_active(false);
 	cometBody->get_materials()[0].color = CometBodyColor;
 	cometBody->get_materials()[0].lightingType = LighingType::None;
 	// コメットの炎エフェクト
-	cometFire = worldRoot->instantiate<szg::Rect3d>(this);
+	cometFire = worldRootMut->instantiate<szg::Rect3d>(this);
 	cometFire->set_active(false);
 	cometFire->initialize(CometFireSize, CometFirePivot);
 	cometFire->get_material().color = CometFireColor;
 	cometFire->get_material().lightingType = LighingType::None;
 	cometFire->get_material().texture = szg::TextureLibrary::GetTexture("Fire.png");
 	// 隕石と地面が衝突した時に出すエフェクト
-	groundEffect = worldRoot->instantiate<szg::Rect3d>(this);
+	groundEffect = worldRootMut->instantiate<szg::Rect3d>(this);
 	groundEffect->set_active(false);
 	groundEffect->initialize(GroundEffectSize, GroundEffectPivot);
 	groundEffect->get_material().color = GroundEffectColor;
@@ -67,7 +67,7 @@ void CometEffect::initialize(const Vector3& position) {
 		* Quaternion::LookForward(CVector3::UP, CVector3::FORWARD)
 	);
 
-	blurData = std::any_cast<Reference<szg::RadialBlurPipeline::Data>>(szg::RuntimeStorage::GetValueMut("PostEffect", "Blur"));
+	blurData = szg::RuntimeStorage::GetValue<Reference<szg::RadialBlurPipeline::Data>>("PostEffect", "Blur").value();
 }
 
 void CometEffect::update() {

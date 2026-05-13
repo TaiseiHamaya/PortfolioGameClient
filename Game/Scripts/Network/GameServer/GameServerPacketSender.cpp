@@ -15,7 +15,7 @@ void GameServerPacketSender::finalize() {
 	packetStack.clear();
 }
 
-void GameServerPacketSender::stack_packet(const Proto::Packet& packet) {
+void GameServerPacketSender::stack_packet(const Proto::ToServerMessage& packet) {
 	std::vector<u8> serialized;
 	u32 size = static_cast<u32>(packet.ByteSizeLong());
 	serialized.resize(size); // メモリ確保
@@ -31,7 +31,7 @@ void GameServerPacketSender::stack_packet(const Proto::Packet& packet) {
 }
 
 void GameServerPacketSender::send_all_packets() {
-	if (!connectionManager || !connectionManager->is_connected()) {
+	if (!connectionManager || !connectionManager->is_established()) {
 		return;
 	}
 	asio::ip::tcp::socket& socket = connectionManager->get_socket();

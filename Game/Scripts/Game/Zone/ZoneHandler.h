@@ -6,10 +6,15 @@
 #include <Library/Utility/Template/Reference.h>
 #include <Library/Utility/Tools/ConstructorMacro.h>
 
-#include <Scripts/Proto/types.pb.h>
-
 #include "Scripts/Game/Zone/Command/IZoneCommand.h"
+#include "Scripts/Game/Zone/MessageHandler/ZoneEnemyMessageHandler.h"
+#include "Scripts/Game/Zone/MessageHandler/ZoneStartGameMessageHandler.h"
+#include "Scripts/Game/Zone/MessageHandler/ZoneNotificationMessageHandler.h"
+#include "Scripts/Game/Zone/MessageHandler/ZoneSyncMessageHandler.h"
+#include "Scripts/Game/Zone/MessageHandler/ZoneTextMessageHandler.h"
+#include "Scripts/Game/Zone/Zone.h"
 #include "Scripts/Manager/ChatBoxManager.h"
+#include "Scripts/Network/GameServer/ReceivedMessageRouter.h"
 
 class Player;
 class EntityManager;
@@ -33,15 +38,14 @@ public:
 	void setup(
 		Reference<EntityManager> entityManager_,
 		Reference<EnemyManager> enemyManager_,
-		Reference<GameServerConnectionManager> gameServerConnectionManager_,
-		Reference<GameServerPacketReceiver> gameServerPacketReceiver_,
-		Reference<GameServerPacketSender> gameServerPacketSender_,
 		Reference<GameLogWindowManager> gameLogWindowManager_
 	);
 
 	void prev_update() override;
 
 	void post_update() override;
+
+	void finalize() override;
 
 	/// <summary>
 	/// コマンドの実行
@@ -71,13 +75,6 @@ public:
 	Reference<const ChatBoxManager> chat_box_imm() const noexcept;
 
 private:
-	void process_text_message(Proto::CategoryTextMessage type, const std::string& payload);
-	void process_login_message(Proto::CategoryLoginMessage type, const std::string& payload);
-	void process_logout_message(Proto::CategoryLogoutMessage type, const std::string& payload);
-	void process_sync_message(Proto::CategorySyncMessage type, const std::string& payload);
-	void process_entity_message(Proto::CategoryEnemyMessage category, const std::string& payload);
-
-private:
 	std::vector<std::unique_ptr<IZoneCommand>> zoneCommands;
 
 	Reference<Player> player;
@@ -90,8 +87,19 @@ private:
 
 	ChatBoxManager chatBoxManager;
 
+	Zone zone;
+	ReceivedMessageRouter router;
+
+	ZoneTextMessageHandler textMessageHandler;
+	ZoneStartGameMessageHandler startGameMessageHandler;
+	ZoneNotificationMessageHandler notificationMessageHandler;
+	ZoneSyncMessageHandler syncMessageHandler;
+	ZoneEnemyMessageHandler enemyMessageHandler;
+
 public:
 	void set_player(Reference<Player> player_);
+	void set_effect_manager(Reference<EffectManager> effectManager_);
+	void set_camera_instance(Reference<const szg::WorldInstance> cameraInstance_);
 
 #ifdef DEBUG_FEATURES_ENABLE
 public:
@@ -99,7 +107,9 @@ public:
 
 private:
 	i32 debugCommandCount{ 0 };
-	i32 debugRecivedMessageCount{ 0 };
+	i32 debugReceivedMessageCount{ 0 };
 	i32 debugSentMessageCount{ 0 };
+
+	std::string msg;
 #endif // DEBUG_FEATURES_ENABLE
 };

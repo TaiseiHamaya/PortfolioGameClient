@@ -1,12 +1,11 @@
 #pragma once
 
-#include <string>
 #include <vector>
 
 #include <Library/Utility/Template/Reference.h>
 #include <Library/Utility/Tools/ConstructorMacro.h>
 
-#include <Scripts/Proto/types.pb.h>
+#include <Scripts/Proto/process/gateway/packet.pb.h>
 
 #include <asio/error_code.hpp>
 
@@ -43,7 +42,7 @@ public:
 	/// スタック
 	/// </summary>
 	/// <param name="packet"></param>
-	void stack_packet(const Proto::Packet& packet);
+	void stack_packet(const Proto::ToServerMessage& packet);
 	
 	/// <summary>
 	/// 送信

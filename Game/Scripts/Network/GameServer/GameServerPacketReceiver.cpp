@@ -1,5 +1,7 @@
 #include "GameServerPacketReceiver.h"
 
+#include <Engine/Application/Logger.h>
+
 #include "GameServerConnectionManager.h"
 
 void GameServerPacketReceiver::initialize() {
@@ -13,7 +15,7 @@ void GameServerPacketReceiver::finalize() {
 	packetStack.clear();
 }
 
-std::vector<Proto::Packet> GameServerPacketReceiver::take_packet_stack() {
+std::vector<Proto::ToClientMessage> GameServerPacketReceiver::take_packet_stack() {
 	return std::move(packetStack);
 }
 
@@ -33,4 +35,5 @@ void GameServerPacketReceiver::read_packets() {
 	std::span<u8> dataSpan{ buffer.data(), bytesRead };
 	auto packets = receiveBuffer.resolve_packets(dataSpan);
 	packetStack.insert(packetStack.end(), packets.begin(), packets.end());
+	szgInformation("Received {} packets, {} bytes", packets.size(), bytesRead);
 }

@@ -9,6 +9,7 @@
 	"Shader": [],
 	"Skeleton": [],
 	"Texture": [
-		".\\Game\\Assets\\Login\\Texture\\keyboard_arrow_right_24dp_EFEFEF_FILL0_wght400_GRAD0_opsz24.dds"
+		".\\Game\\Assets\\Login\\Texture\\keyboard_arrow_right_24dp_EFEFEF_FILL0_wght400_GRAD0_opsz24.dds",
+		".\\Game\\Assets\\Login\\Texture\\loading-icon.png"
 	]
 }

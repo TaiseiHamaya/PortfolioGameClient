@@ -5,11 +5,7 @@
 #include <Engine/Runtime/Input/Input.h>
 
 void GameLogWindowManager::initialize() {
-	auto logTextRoot = szg::RuntimeStorage::GetValueMut("RuntimeInstance", "LogTextRoot");
-	Reference<szg::WorldInstance> chatTextRoot =
-		std::any_cast<Reference<szg::WorldInstance>>(
-			*logTextRoot
-		);
+	Reference<szg::WorldInstance> chatTextRoot = szg::RuntimeStorage::GetValue<Reference<szg::WorldInstance>>("RuntimeInstance", "LogTextRoot").value();
 	if (chatTextRoot) {
 		// ログ表示用のStringRectInstanceを作成
 		Reference<szg::WorldRoot> world = chatTextRoot->world_root_mut();

@@ -1,10 +1,11 @@
 #include "Portfolio.h"
 
-#include "Scripts/Proto/types.pb.h"
+#include "google/protobuf/message_lite.h"
 
 #include <Engine/Runtime/Scene/SceneManager2.h>
 
 #include "./Scene/FactoryPortfolio.h"
+#include "Network/NetworkCluster.h"
 
 #ifdef DEBUG_FEATURES_ENABLE
 #include <Engine/Application/ArgumentParser.h>
@@ -27,5 +28,6 @@ void Portfolio::initialize() {
 }
 
 Portfolio::ProtoBufManager::OnDestroy::~OnDestroy() {
+	NetworkCluster::Finalize();
 	google::protobuf::ShutdownProtobufLibrary();
 }

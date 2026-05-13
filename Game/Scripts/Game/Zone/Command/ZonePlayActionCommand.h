@@ -14,7 +14,7 @@ public:
 	ZonePlayActionCommand(Reference<IEntity> entity_, const u32 actionId_, Reference<IEntity> targetEntity_);
 
 public:
-	void execute() override;
+	void execute(Zone& zone) override;
 
 private:
 	Reference<IEntity> entity;

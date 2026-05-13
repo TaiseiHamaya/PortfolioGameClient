@@ -2,21 +2,16 @@
 
 #include "./IZoneCommand.h"
 
-#include <Library/Utility/Template/Reference.h>
-
-class EntityManager;
-
 /// <summary>
 /// ログアウト処理
 /// </summary>
 class ZoneLogoutPlayerCommand final : public IZoneCommand {
 public:
-	ZoneLogoutPlayerCommand(Reference<EntityManager> entityManager_, u64 serverId_);
+	ZoneLogoutPlayerCommand(u64 serverId_);
 
 public:
-	void execute() override;
+	void execute(Zone& zone) override;
 
 private:
-	Reference<EntityManager> entityManager;
 	u64 serverId;
 };

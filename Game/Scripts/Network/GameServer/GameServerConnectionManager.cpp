@@ -2,9 +2,6 @@
 
 #include <Engine/Application/Logger.h>
 
-static constexpr string_literal LOCAL_LOOPBACK_ADDRESS = "127.0.0.1";
-static constexpr string_literal AWS_SERVER_ADDRESS = "18.180.254.93";
-
 void GameServerConnectionManager::initialize() {
 	contextThread = std::thread{ [&]() {
 		while (true) {
@@ -23,11 +20,14 @@ void GameServerConnectionManager::initialize() {
 	SetThreadDescription(contextThread.native_handle(), L"Asio Context Thread");
 }
 
-void GameServerConnectionManager::connect() {
+void GameServerConnectionManager::setup(const std::string& address, u16 port) {
 	endpoint = {
-		asio::ip::make_address(AWS_SERVER_ADDRESS),
-		3215
+		asio::ip::make_address(address),
+		port
 	};
+}
+
+void GameServerConnectionManager::connect() {
 	// 非同期接続要求
 	// タイムアウト処理
 	timer.expires_after(std::chrono::seconds{ 5 });
@@ -136,7 +136,7 @@ void GameServerConnectionManager::on_connect_handler(const asio::error_code& err
 #include <imgui.h>
 #include <imgui_stdlib.h>
 void GameServerConnectionManager::debug_gui() {
-	ImGui::Text("Connected: %s", is_connected() ? "Yes" : "No");
+	ImGui::Text("Connected: %s", is_established() ? "Yes" : "No");
 	ImGui::Text("Connection State: %d", static_cast<i32>(connectionState));
 	if (ImGui::Button("Connect")) {
 		connect();

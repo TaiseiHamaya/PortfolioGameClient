@@ -18,7 +18,6 @@
 #include "Scripts/Extension/RenderNode/EnvironmentMeshNode/EnvironmentMeshNode.h"
 #include "Scripts/Extension/Util/LookAtRect.h"
 #include "Scripts/Game/GameInputHandler.h"
-#include "Scripts/Game/Zone/Command/ZoneEntityDamagedCommand.h"
 #include "Scripts/Game/Zone/ZoneHandler.h"
 #include "Scripts/Instance/IEntity/ISkillAction/ISkillAction.h"
 #include "Scripts/Instance/MiscInstance/Effects/DamageNumberEffect.h"
@@ -67,7 +66,6 @@ void SceneGame::custom_setup() {
 	std::unique_ptr<EnemyManager> enemyManager; // 敵管理
 
 	std::unique_ptr<GameInputHandler> gameInputHandler; // プレイヤー入力
-	std::unique_ptr<NetworkCluster> networkCluster; // ネットワーク
 	std::unique_ptr<ZoneHandler> zoneHandler; // ゾーン処理
 
 	std::unique_ptr<GameLogWindowManager> gameLogWindowManager;
@@ -77,11 +75,7 @@ void SceneGame::custom_setup() {
 	enemyManager = eps::CreateUnique<EnemyManager>();
 	effectManager = eps::CreateUnique<EffectManager>();
 
-	networkCluster = eps::CreateUnique<NetworkCluster>();
 	zoneHandler = eps::CreateUnique<ZoneHandler>();
-
-	// Network
-	networkCluster->initialize();
 
 	gameInputHandler = eps::CreateUnique<GameInputHandler>();
 	gameInputHandler->initialize();
@@ -92,14 +86,12 @@ void SceneGame::custom_setup() {
 	Reference<EntityManager> entityManagerRef = entityManager;
 	Reference<EnemyManager> enemyManagerRef = enemyManager;
 	Reference<EffectManager> effectManagerRef = effectManager;
-	Reference<NetworkCluster> networkClusterRef = networkCluster;
 	Reference<GameInputHandler> gameInputHandlerRef = gameInputHandler;
 	Reference<ZoneHandler> zoneHandlerRef = zoneHandler;
 	Reference<GameLogWindowManager> gameLogWindowManagerRef = gameLogWindowManager;
 
 	sceneScriptManager.register_script(std::move(gameInputHandler));
 	sceneScriptManager.register_script(std::move(zoneHandler));
-	sceneScriptManager.register_script(std::move(networkCluster));
 	sceneScriptManager.register_script(std::move(enemyManager));
 	sceneScriptManager.register_script(std::move(entityManager));
 	sceneScriptManager.register_script(std::move(effectManager));
@@ -110,16 +102,15 @@ void SceneGame::custom_setup() {
 	gameLogWindowManagerRef->initialize();
 	// Setup
 	enemyManagerRef->setup(entityManagerRef);
-	zoneHandlerRef->setup(entityManagerRef, enemyManagerRef, networkClusterRef->connection_manager(), networkClusterRef->get_receiver(), networkClusterRef->get_sender(), gameLogWindowManagerRef);
+	zoneHandlerRef->setup(entityManagerRef, enemyManagerRef, gameLogWindowManagerRef);
 	std::string userName;
-	auto temp = szg::RuntimeStorage::GetValueImm("Temp", "PlayerName");
-	if (temp.is_null()) {
-		userName = "Unknown";
+	auto temp = szg::RuntimeStorage::GetValue<std::string>("Temp", "PlayerName");
+	if (temp.has_value()) {
+		userName = temp.value();
 	}
 	else {
-		userName = std::any_cast<std::string>(*temp);
+		userName = "Unknown";
 	}
-	networkClusterRef->setup(userName);
 	gameInputHandlerRef->setup(zoneHandlerRef, zoneHandlerRef->chat_box_imm());
 
 	if (!get_world(0)) {
@@ -138,12 +129,11 @@ void SceneGame::custom_setup() {
 	szg::Particle::lookAtDefault = cameraInstance.ptr();
 	CometEffect::camera = cameraInstance;
 	DamageNumberEffect::cameraInstance = cameraInstance;
-	ZoneEntityDamagedCommand::cameraInstance = cameraInstance;
-	ZoneEntityDamagedCommand::effectManager = effectManagerRef;
+	zoneHandlerRef->set_effect_manager(effectManagerRef);
+	zoneHandlerRef->set_camera_instance(cameraInstance);
 	ISkillAction::SetEffectManager(effectManagerRef);
 	zoneHandlerRef->set_player(player);
 	gameInputHandlerRef->set_instances(player, cameraInstance);
-	networkClusterRef->set_player(player);
 	//environmentMeshExecutor->setup(directionalLightingExecutor, camera3D);
 
 	skydome->transform_mut().set_scale(CVector3::BASIS * 100);

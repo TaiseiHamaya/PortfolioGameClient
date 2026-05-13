@@ -8,7 +8,7 @@ ZoneSyncTransformCommand::ZoneSyncTransformCommand(Reference<IEntity> entity_, c
 	position(position_) {
 }
 
-void ZoneSyncTransformCommand::execute() {
+void ZoneSyncTransformCommand::execute(Zone&) {
 	if (entity) {
 		entity->move_to(time, position);
 	}
