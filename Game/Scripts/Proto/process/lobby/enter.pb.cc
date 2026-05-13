@@ -111,26 +111,22 @@ static const ::_pb::Message* PROTOBUF_NONNULL const file_default_instances[] = {
 };
 const char descriptor_table_protodef_process_2flobby_2fenter_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
-    "\n\031process/lobby/enter.proto\022\005Proto\032\024comm"
-    "on/session.proto\"+\n\030PayloadLobbyEnterReq"
-    "uest\022\017\n\007user_id\030\001 \001(\004\"I\n\031PayloadLobbyEnt"
-    "erResponse\022\024\n\014is_succeeded\030\001 \001(\010\022\026\n\016char"
-    "acter_name\030\002 \001(\tb\006proto3"
-};
-static const ::_pbi::DescriptorTable* PROTOBUF_NONNULL const
-    descriptor_table_process_2flobby_2fenter_2eproto_deps[1] = {
-        &::descriptor_table_common_2fsession_2eproto,
+    "\n\031process/lobby/enter.proto\022\005Proto\"+\n\030Pa"
+    "yloadLobbyEnterRequest\022\017\n\007user_id\030\001 \001(\004\""
+    "I\n\031PayloadLobbyEnterResponse\022\024\n\014is_succe"
+    "eded\030\001 \001(\010\022\026\n\016character_name\030\002 \001(\tb\006prot"
+    "o3"
 };
 static ::absl::once_flag descriptor_table_process_2flobby_2fenter_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_process_2flobby_2fenter_2eproto = {
     false,
     false,
-    184,
+    162,
     descriptor_table_protodef_process_2flobby_2fenter_2eproto,
     "process/lobby/enter.proto",
     &descriptor_table_process_2flobby_2fenter_2eproto_once,
-    descriptor_table_process_2flobby_2fenter_2eproto_deps,
-    1,
+    nullptr,
+    0,
     2,
     schemas,
     file_default_instances,

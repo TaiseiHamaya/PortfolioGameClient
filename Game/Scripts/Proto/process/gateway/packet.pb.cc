@@ -136,52 +136,50 @@ const char descriptor_table_protodef_process_2fgateway_2fpacket_2eproto[] ABSL_A
     "roto\032 process/world/player_route.proto\032\036"
     "process/lobby/start_game.proto\032\034process/"
     "lobby/end_game.proto\032\031process/lobby/ente"
-    "r.proto\032\030process/lobby/exit.proto\"\231\004\n\017To"
-    "ServerMessage\0223\n\rlogin_request\030\001 \001(\0132\032.P"
-    "roto.PayloadLoginRequestH\000\0225\n\016logout_req"
-    "uest\030\002 \001(\0132\033.Proto.PayloadLogoutRequestH"
-    "\000\0225\n\016signup_request\030\003 \001(\0132\033.Proto.Payloa"
-    "dSignupRequestH\000\0229\n\nstart_game\030\004 \001(\0132#.P"
-    "roto.PayloadLobbyStartGameRequestH\000\0225\n\010e"
-    "nd_game\030\005 \001(\0132!.Proto.PayloadLobbyEndGam"
-    "eRequestH\000\022K\n\032player_zone_enter_complete"
-    "\030\006 \001(\0132%.Proto.PayloadPlayerZoneEnterCom"
-    "pleteH\000\0225\n\016transform_sync\030\007 \001(\0132\033.Proto."
-    "PayloadTransformSyncH\000\022/\n\013play_action\030\010 "
-    "\001(\0132\030.Proto.PayloadPlayActionH\000\0221\n\014text_"
-    "message\030\t \001(\0132\031.Proto.PayloadTextMessage"
-    "H\000B\t\n\007message\"\344\006\n\017ToClientMessage\0227\n\017log"
-    "out_response\030\002 \001(\0132\034.Proto.PayloadLogout"
-    "ResponseH\000\0227\n\017signup_response\030\003 \001(\0132\034.Pr"
-    "oto.PayloadSignupResponseH\000\022@\n\024lobby_ent"
-    "er_response\030\004 \001(\0132 .Proto.PayloadLobbyEn"
-    "terResponseH\000\022C\n\023start_game_response\030\005 \001"
-    "(\0132$.Proto.PayloadLobbyStartGameResponse"
-    "H\000\022\?\n\021end_game_response\030\006 \001(\0132\".Proto.Pa"
-    "yloadLobbyEndGameResponseH\000\022F\n\027client_in"
-    "itializer_data\030\007 \001(\0132#.Proto.PayloadClie"
-    "ntInitializerDataH\000\0225\n\016transform_sync\030\010 "
-    "\001(\0132\033.Proto.PayloadTransformSyncH\000\022/\n\013pl"
-    "ay_action\030\t \001(\0132\030.Proto.PayloadPlayActio"
-    "nH\000\0225\n\016entity_damaged\030\n \001(\0132\033.Proto.Payl"
-    "oadEntityDamagedH\000\022/\n\013enemy_spawn\030\013 \001(\0132"
-    "\030.Proto.PayloadEnemySpawnH\000\0223\n\renemy_des"
-    "pawn\030\014 \001(\0132\032.Proto.PayloadEnemyDespawnH\000"
-    "\022F\n\027zone_enter_notification\030\r \001(\0132#.Prot"
-    "o.PayloadZoneEnterNotificationH\000\022D\n\026zone"
-    "_exit_notification\030\016 \001(\0132\".Proto.Payload"
-    "ZoneExitNotificationH\000\0221\n\014text_message\030\017"
-    " \001(\0132\031.Proto.PayloadTextMessageH\000B\t\n\007mes"
-    "sageb\006proto3"
+    "r.proto\"\231\004\n\017ToServerMessage\0223\n\rlogin_req"
+    "uest\030\001 \001(\0132\032.Proto.PayloadLoginRequestH\000"
+    "\0225\n\016logout_request\030\002 \001(\0132\033.Proto.Payload"
+    "LogoutRequestH\000\0225\n\016signup_request\030\003 \001(\0132"
+    "\033.Proto.PayloadSignupRequestH\000\0229\n\nstart_"
+    "game\030\004 \001(\0132#.Proto.PayloadLobbyStartGame"
+    "RequestH\000\0225\n\010end_game\030\005 \001(\0132!.Proto.Payl"
+    "oadLobbyEndGameRequestH\000\022K\n\032player_zone_"
+    "enter_complete\030\006 \001(\0132%.Proto.PayloadPlay"
+    "erZoneEnterCompleteH\000\0225\n\016transform_sync\030"
+    "\007 \001(\0132\033.Proto.PayloadTransformSyncH\000\022/\n\013"
+    "play_action\030\010 \001(\0132\030.Proto.PayloadPlayAct"
+    "ionH\000\0221\n\014text_message\030\t \001(\0132\031.Proto.Payl"
+    "oadTextMessageH\000B\t\n\007message\"\344\006\n\017ToClient"
+    "Message\0227\n\017logout_response\030\002 \001(\0132\034.Proto"
+    ".PayloadLogoutResponseH\000\0227\n\017signup_respo"
+    "nse\030\003 \001(\0132\034.Proto.PayloadSignupResponseH"
+    "\000\022@\n\024lobby_enter_response\030\004 \001(\0132 .Proto."
+    "PayloadLobbyEnterResponseH\000\022C\n\023start_gam"
+    "e_response\030\005 \001(\0132$.Proto.PayloadLobbySta"
+    "rtGameResponseH\000\022\?\n\021end_game_response\030\006 "
+    "\001(\0132\".Proto.PayloadLobbyEndGameResponseH"
+    "\000\022F\n\027client_initializer_data\030\007 \001(\0132#.Pro"
+    "to.PayloadClientInitializerDataH\000\0225\n\016tra"
+    "nsform_sync\030\010 \001(\0132\033.Proto.PayloadTransfo"
+    "rmSyncH\000\022/\n\013play_action\030\t \001(\0132\030.Proto.Pa"
+    "yloadPlayActionH\000\0225\n\016entity_damaged\030\n \001("
+    "\0132\033.Proto.PayloadEntityDamagedH\000\022/\n\013enem"
+    "y_spawn\030\013 \001(\0132\030.Proto.PayloadEnemySpawnH"
+    "\000\0223\n\renemy_despawn\030\014 \001(\0132\032.Proto.Payload"
+    "EnemyDespawnH\000\022F\n\027zone_enter_notificatio"
+    "n\030\r \001(\0132#.Proto.PayloadZoneEnterNotifica"
+    "tionH\000\022D\n\026zone_exit_notification\030\016 \001(\0132\""
+    ".Proto.PayloadZoneExitNotificationH\000\0221\n\014"
+    "text_message\030\017 \001(\0132\031.Proto.PayloadTextMe"
+    "ssageH\000B\t\n\007messageb\006proto3"
 };
 static const ::_pbi::DescriptorTable* PROTOBUF_NONNULL const
-    descriptor_table_process_2fgateway_2fpacket_2eproto_deps[12] = {
+    descriptor_table_process_2fgateway_2fpacket_2eproto_deps[11] = {
         &::descriptor_table_process_2fdb_2fuser_2flogin_2eproto,
         &::descriptor_table_process_2fdb_2fuser_2flogout_2eproto,
         &::descriptor_table_process_2fdb_2fuser_2fsignup_2eproto,
         &::descriptor_table_process_2flobby_2fend_5fgame_2eproto,
         &::descriptor_table_process_2flobby_2fenter_2eproto,
-        &::descriptor_table_process_2flobby_2fexit_2eproto,
         &::descriptor_table_process_2flobby_2fstart_5fgame_2eproto,
         &::descriptor_table_process_2fnetwork_2ftext_2eproto,
         &::descriptor_table_process_2fworld_2fplayer_5froute_2eproto,
@@ -193,12 +191,12 @@ static ::absl::once_flag descriptor_table_process_2fgateway_2fpacket_2eproto_onc
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_process_2fgateway_2fpacket_2eproto = {
     false,
     false,
-    1812,
+    1786,
     descriptor_table_protodef_process_2fgateway_2fpacket_2eproto,
     "process/gateway/packet.proto",
     &descriptor_table_process_2fgateway_2fpacket_2eproto_once,
     descriptor_table_process_2fgateway_2fpacket_2eproto_deps,
-    12,
+    11,
     2,
     schemas,
     file_default_instances,

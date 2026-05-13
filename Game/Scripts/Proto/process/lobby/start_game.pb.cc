@@ -113,28 +113,26 @@ static const ::_pb::Message* PROTOBUF_NONNULL const file_default_instances[] = {
 const char descriptor_table_protodef_process_2flobby_2fstart_5fgame_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
     "\n\036process/lobby/start_game.proto\022\005Proto\032"
-    "\024common/session.proto\032\021common/math.proto"
-    "\"/\n\034PayloadLobbyStartGameRequest\022\017\n\007user"
-    "_id\030\001 \001(\004\"l\n\035PayloadLobbyStartGameRespon"
-    "se\022\017\n\007zone_id\030\001 \001(\004\022\030\n\020player_entity_id\030"
-    "\002 \001(\004\022 \n\010position\030\003 \001(\0132\016.Proto.Vector3b"
-    "\006proto3"
+    "\021common/math.proto\"/\n\034PayloadLobbyStartG"
+    "ameRequest\022\017\n\007user_id\030\001 \001(\004\"l\n\035PayloadLo"
+    "bbyStartGameResponse\022\017\n\007zone_id\030\001 \001(\004\022\030\n"
+    "\020player_entity_id\030\002 \001(\004\022 \n\010position\030\003 \001("
+    "\0132\016.Proto.Vector3b\006proto3"
 };
 static const ::_pbi::DescriptorTable* PROTOBUF_NONNULL const
-    descriptor_table_process_2flobby_2fstart_5fgame_2eproto_deps[2] = {
+    descriptor_table_process_2flobby_2fstart_5fgame_2eproto_deps[1] = {
         &::descriptor_table_common_2fmath_2eproto,
-        &::descriptor_table_common_2fsession_2eproto,
 };
 static ::absl::once_flag descriptor_table_process_2flobby_2fstart_5fgame_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_process_2flobby_2fstart_5fgame_2eproto = {
     false,
     false,
-    247,
+    225,
     descriptor_table_protodef_process_2flobby_2fstart_5fgame_2eproto,
     "process/lobby/start_game.proto",
     &descriptor_table_process_2flobby_2fstart_5fgame_2eproto_once,
     descriptor_table_process_2flobby_2fstart_5fgame_2eproto_deps,
-    2,
+    1,
     2,
     schemas,
     file_default_instances,

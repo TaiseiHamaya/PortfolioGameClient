@@ -106,25 +106,21 @@ static const ::_pb::Message* PROTOBUF_NONNULL const file_default_instances[] = {
 };
 const char descriptor_table_protodef_process_2fdb_2fuser_2flogout_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
-    "\n\034process/db/user/logout.proto\022\005Proto\032\024c"
-    "ommon/session.proto\"\'\n\024PayloadLogoutRequ"
-    "est\022\017\n\007user_id\030\001 \001(\004\"-\n\025PayloadLogoutRes"
-    "ponse\022\024\n\014is_succeeded\030\001 \001(\010b\006proto3"
-};
-static const ::_pbi::DescriptorTable* PROTOBUF_NONNULL const
-    descriptor_table_process_2fdb_2fuser_2flogout_2eproto_deps[1] = {
-        &::descriptor_table_common_2fsession_2eproto,
+    "\n\034process/db/user/logout.proto\022\005Proto\"\'\n"
+    "\024PayloadLogoutRequest\022\017\n\007user_id\030\001 \001(\004\"-"
+    "\n\025PayloadLogoutResponse\022\024\n\014is_succeeded\030"
+    "\001 \001(\010b\006proto3"
 };
 static ::absl::once_flag descriptor_table_process_2fdb_2fuser_2flogout_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_process_2fdb_2fuser_2flogout_2eproto = {
     false,
     false,
-    155,
+    133,
     descriptor_table_protodef_process_2fdb_2fuser_2flogout_2eproto,
     "process/db/user/logout.proto",
     &descriptor_table_process_2fdb_2fuser_2flogout_2eproto_once,
-    descriptor_table_process_2fdb_2fuser_2flogout_2eproto_deps,
-    1,
+    nullptr,
+    0,
     2,
     schemas,
     file_default_instances,

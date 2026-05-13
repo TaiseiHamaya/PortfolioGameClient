@@ -112,29 +112,27 @@ static const ::_pb::Message* PROTOBUF_NONNULL const file_default_instances[] = {
 };
 const char descriptor_table_protodef_process_2fdb_2fuser_2flogin_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
-    "\n\033process/db/user/login.proto\022\005Proto\032\021co"
-    "mmon/math.proto\032\024common/session.proto\";\n"
-    "\023PayloadLoginRequest\022$\n\nsession_id\030\001 \001(\013"
-    "2\020.Proto.SessionId\"c\n\024PayloadLoginRespon"
-    "se\022\024\n\014is_succeeded\030\001 \001(\010\022\017\n\007user_id\030\002 \001("
-    "\004\022$\n\nsession_id\030\003 \001(\0132\020.Proto.SessionIdb"
-    "\006proto3"
+    "\n\033process/db/user/login.proto\022\005Proto\032\024co"
+    "mmon/session.proto\";\n\023PayloadLoginReques"
+    "t\022$\n\nsession_id\030\001 \001(\0132\020.Proto.SessionId\""
+    "c\n\024PayloadLoginResponse\022\024\n\014is_succeeded\030"
+    "\001 \001(\010\022\017\n\007user_id\030\002 \001(\004\022$\n\nsession_id\030\003 \001"
+    "(\0132\020.Proto.SessionIdb\006proto3"
 };
 static const ::_pbi::DescriptorTable* PROTOBUF_NONNULL const
-    descriptor_table_process_2fdb_2fuser_2flogin_2eproto_deps[2] = {
-        &::descriptor_table_common_2fmath_2eproto,
+    descriptor_table_process_2fdb_2fuser_2flogin_2eproto_deps[1] = {
         &::descriptor_table_common_2fsession_2eproto,
 };
 static ::absl::once_flag descriptor_table_process_2fdb_2fuser_2flogin_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_process_2fdb_2fuser_2flogin_2eproto = {
     false,
     false,
-    247,
+    228,
     descriptor_table_protodef_process_2fdb_2fuser_2flogin_2eproto,
     "process/db/user/login.proto",
     &descriptor_table_process_2fdb_2fuser_2flogin_2eproto_once,
     descriptor_table_process_2fdb_2fuser_2flogin_2eproto_deps,
-    2,
+    1,
     2,
     schemas,
     file_default_instances,

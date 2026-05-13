@@ -378,6 +378,7 @@
     <ClCompile Include="Scripts\Game\Zone\MessageHandler\ZoneSyncMessageHandler.cpp" />
     <ClCompile Include="Scripts\Game\Zone\MessageHandler\ZoneEnemyMessageHandler.cpp" />
     <ClCompile Include="Scripts\Utility\WaitUntil.cpp" />
+    <ClCompile Include="Scripts\Game\Zone\Command\ZoneEnemySpawnCommand.cpp" />
     <ClCompile Include="Scripts\Proto\common\math.pb.cc" />
     <ClCompile Include="Scripts\Proto\common\session.pb.cc" />
     <ClCompile Include="Scripts\Proto\process\db\user\login.pb.cc" />
@@ -391,11 +392,9 @@
     <ClCompile Include="Scripts\Proto\process\network\text.pb.cc" />
     <ClCompile Include="Scripts\Proto\process\world\player_route.pb.cc" />
     <ClCompile Include="Scripts\Proto\process\world\route_player_data.pb.cc" />
-    <ClCompile Include="Scripts\Proto\process\zone\client_initializer.pb.cc" />
+    <ClCompile Include="Scripts\Proto\process\zone\client_data_getter.pb.cc" />
     <ClCompile Include="Scripts\Proto\process\zone\enemy.pb.cc" />
     <ClCompile Include="Scripts\Proto\process\zone\sync.pb.cc" />
-    <ClCompile Include="Scripts\Proto\process\zone\client_data_getter.pb.cc" />
-    <ClCompile Include="Scripts\Game\Zone\Command\ZoneEnemySpawnCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="DevTool\launch-bot.ps1" />
@@ -410,6 +409,7 @@
     <ClInclude Include="Scripts\Game\Zone\MessageHandler\ZoneSyncMessageHandler.h" />
     <ClInclude Include="Scripts\Game\Zone\MessageHandler\ZoneEnemyMessageHandler.h" />
     <ClInclude Include="Scripts\Utility\WaitUntil.h" />
+    <ClInclude Include="Scripts\Game\Zone\Command\ZoneEnemySpawnCommand.h" />
     <ClInclude Include="Scripts\Proto\common\math.pb.h" />
     <ClInclude Include="Scripts\Proto\common\session.pb.h" />
     <ClInclude Include="Scripts\Proto\process\db\user\login.pb.h" />
@@ -423,10 +423,8 @@
     <ClInclude Include="Scripts\Proto\process\network\text.pb.h" />
     <ClInclude Include="Scripts\Proto\process\world\player_route.pb.h" />
     <ClInclude Include="Scripts\Proto\process\world\route_player_data.pb.h" />
-    <ClInclude Include="Scripts\Proto\process\zone\client_initializer.pb.h" />
+    <ClInclude Include="Scripts\Proto\process\zone\client_data_getter.pb.h" />
     <ClInclude Include="Scripts\Proto\process\zone\enemy.pb.h" />
     <ClInclude Include="Scripts\Proto\process\zone\sync.pb.h" />
-    <ClInclude Include="Scripts\Proto\process\zone\client_data_getter.pb.h" />
-    <ClInclude Include="Scripts\Game\Zone\Command\ZoneEnemySpawnCommand.h" />
   </ItemGroup>
 </Project>

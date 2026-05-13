@@ -40,7 +40,6 @@
 #include "process/lobby/start_game.pb.h"
 #include "process/lobby/end_game.pb.h"
 #include "process/lobby/enter.pb.h"
-#include "process/lobby/exit.pb.h"
 // @@protoc_insertion_point(includes)
 
 // Must be included last.

@@ -270,35 +270,33 @@ static const ::_pb::Message* PROTOBUF_NONNULL const file_default_instances[] = {
 const char descriptor_table_protodef_process_2fworld_2fplayer_5froute_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
     "\n process/world/player_route.proto\022\005Prot"
-    "o\032\024common/session.proto\032%process/world/r"
-    "oute_player_data.proto\"B\n\033PayloadPlayerZ"
-    "oneEnterBegin\022\017\n\007user_id\030\001 \001(\004\022\022\n\ngatewa"
-    "y_id\030\002 \001(\004\".\n\033PayloadPlayerZoneEnterRead"
-    "y\022\017\n\007user_id\030\001 \001(\004\"1\n\036PayloadPlayerZoneE"
-    "nterComplete\022\017\n\007user_id\030\001 \001(\004\"g\n#Payload"
-    "PlayerZoneEnterReadyResponse\0220\n\013player_d"
-    "ata\030\001 \001(\0132\026.Proto.RoutePlayerDataH\000\210\001\001B\016"
-    "\n\014_player_data\"-\n\032PayloadPlayerExitZoneB"
-    "egin\022\017\n\007user_id\030\001 \001(\004\"-\n\032PayloadPlayerEx"
-    "itZoneReady\022\017\n\007user_id\030\001 \001(\004\"0\n\035PayloadP"
-    "layerExitZoneComplete\022\017\n\007user_id\030\001 \001(\004b\006"
-    "proto3"
+    "o\032%process/world/route_player_data.proto"
+    "\"B\n\033PayloadPlayerZoneEnterBegin\022\017\n\007user_"
+    "id\030\001 \001(\004\022\022\n\ngateway_id\030\002 \001(\004\".\n\033PayloadP"
+    "layerZoneEnterReady\022\017\n\007user_id\030\001 \001(\004\"1\n\036"
+    "PayloadPlayerZoneEnterComplete\022\017\n\007user_i"
+    "d\030\001 \001(\004\"g\n#PayloadPlayerZoneEnterReadyRe"
+    "sponse\0220\n\013player_data\030\001 \001(\0132\026.Proto.Rout"
+    "ePlayerDataH\000\210\001\001B\016\n\014_player_data\"-\n\032Payl"
+    "oadPlayerExitZoneBegin\022\017\n\007user_id\030\001 \001(\004\""
+    "-\n\032PayloadPlayerExitZoneReady\022\017\n\007user_id"
+    "\030\001 \001(\004\"0\n\035PayloadPlayerExitZoneComplete\022"
+    "\017\n\007user_id\030\001 \001(\004b\006proto3"
 };
 static const ::_pbi::DescriptorTable* PROTOBUF_NONNULL const
-    descriptor_table_process_2fworld_2fplayer_5froute_2eproto_deps[2] = {
-        &::descriptor_table_common_2fsession_2eproto,
+    descriptor_table_process_2fworld_2fplayer_5froute_2eproto_deps[1] = {
         &::descriptor_table_process_2fworld_2froute_5fplayer_5fdata_2eproto,
 };
 static ::absl::once_flag descriptor_table_process_2fworld_2fplayer_5froute_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_process_2fworld_2fplayer_5froute_2eproto = {
     false,
     false,
-    526,
+    504,
     descriptor_table_protodef_process_2fworld_2fplayer_5froute_2eproto,
     "process/world/player_route.proto",
     &descriptor_table_process_2fworld_2fplayer_5froute_2eproto_once,
     descriptor_table_process_2fworld_2fplayer_5froute_2eproto_deps,
-    2,
+    1,
     7,
     schemas,
     file_default_instances,

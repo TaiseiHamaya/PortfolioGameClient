@@ -106,26 +106,21 @@ static const ::_pb::Message* PROTOBUF_NONNULL const file_default_instances[] = {
 };
 const char descriptor_table_protodef_process_2flobby_2fend_5fgame_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
-    "\n\034process/lobby/end_game.proto\022\005Proto\032\024c"
-    "ommon/session.proto\"-\n\032PayloadLobbyEndGa"
-    "meRequest\022\017\n\007user_id\030\001 \001(\004\".\n\033PayloadLob"
-    "byEndGameResponse\022\017\n\007success\030\001 \001(\010b\006prot"
-    "o3"
-};
-static const ::_pbi::DescriptorTable* PROTOBUF_NONNULL const
-    descriptor_table_process_2flobby_2fend_5fgame_2eproto_deps[1] = {
-        &::descriptor_table_common_2fsession_2eproto,
+    "\n\034process/lobby/end_game.proto\022\005Proto\"-\n"
+    "\032PayloadLobbyEndGameRequest\022\017\n\007user_id\030\001"
+    " \001(\004\".\n\033PayloadLobbyEndGameResponse\022\017\n\007s"
+    "uccess\030\001 \001(\010b\006proto3"
 };
 static ::absl::once_flag descriptor_table_process_2flobby_2fend_5fgame_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_process_2flobby_2fend_5fgame_2eproto = {
     false,
     false,
-    162,
+    140,
     descriptor_table_protodef_process_2flobby_2fend_5fgame_2eproto,
     "process/lobby/end_game.proto",
     &descriptor_table_process_2flobby_2fend_5fgame_2eproto_once,
-    descriptor_table_process_2flobby_2fend_5fgame_2eproto_deps,
-    1,
+    nullptr,
+    0,
     2,
     schemas,
     file_default_instances,
