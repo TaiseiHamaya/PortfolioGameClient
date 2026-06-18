@@ -1,10 +1,10 @@
 #pragma once
 
-#include <Engine/Module/Manager/SceneScript/ISceneScript.h>
+#include <Engine/Runtime/SceneScript/ISceneScript.h>
 
 #include <unordered_map>
 
-#include <Engine/Module/Manager/World/WorldRoot.h>
+#include <Engine/Runtime/Scene/World/WorldRoot.h>
 
 #include <Library/Utility/Template/Reference.h>
 #include <Library/Utility/Tools/ConstructorMacro.h>

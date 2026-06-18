@@ -1,7 +1,7 @@
 #include "HitAnimation.h"
 
 #include <Engine/GraphicsAPI/DirectX/DxResource/BufferObjects.h>
-#include <Engine/Module/Manager/World/WorldRoot.h>
+#include <Engine/Runtime/Scene/World/WorldRoot.h>
 
 HitAnimation::HitAnimation(Vector3&& position) {
 	emitter = worldRoot->instantiate<szg::ParticleEmitterInstance>(nullptr, "./Assets/Game/Json/Particles.json", 128);

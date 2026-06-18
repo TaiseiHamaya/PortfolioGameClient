@@ -3,7 +3,7 @@
 #include <algorithm>
 
 #include <Engine/Application/ProjectSettings/ProjectSettings.h>
-#include <Engine/Module/Manager/World/WorldRoot.h>
+#include <Engine/Runtime/Scene/World/WorldRoot.h>
 #include <Engine/Module/World/Camera/ProjectionAdapter/CameraPerspectiveProjection.h>
 #include <Engine/Runtime/Clock/WorldClock.h>
 #include <Engine/Runtime/Input/Input.h>

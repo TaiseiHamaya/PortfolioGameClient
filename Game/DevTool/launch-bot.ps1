@@ -126,20 +126,20 @@ Copy-Item -Path "$exeDir\*" -Destination $tempDir -Recurse -Force
 
 # SyzygyEngine のリソースフォルダをコピー
 $SyzygyEngineDir = Join-Path $solutionDir "SyzygyEngine"
-$engineResourcesSource = Join-Path $SyzygyEngineDir "EngineResources"
-$editorResourcesSource = Join-Path $SyzygyEngineDir "EditorResources"
+$AssetsSource = Join-Path $SyzygyEngineDir "Assets"
+$EditorAssetsSource = Join-Path $SyzygyEngineDir "EditorAssets"
 
 $SyzygyEngineTempDir = Join-Path $tempDir "SyzygyEngine"
 New-Item -ItemType Directory -Path $SyzygyEngineTempDir -Force | Out-Null
 
-if (Test-Path $engineResourcesSource) {
-	Write-Host "EngineResourcesをコピーしています..." -ForegroundColor Cyan
-	Copy-Item -Path $engineResourcesSource -Destination $SyzygyEngineTempDir -Recurse -Force
+if (Test-Path $AssetsSource) {
+	Write-Host "Assetsをコピーしています..." -ForegroundColor Cyan
+	Copy-Item -Path $AssetsSource -Destination $SyzygyEngineTempDir -Recurse -Force
 }
 
-if (Test-Path $editorResourcesSource) {
-	Write-Host "EditorResourcesをコピーしています..." -ForegroundColor Cyan
-	Copy-Item -Path $editorResourcesSource -Destination $SyzygyEngineTempDir -Recurse -Force
+if (Test-Path $EditorAssetsSource) {
+	Write-Host "EditorAssetsをコピーしています..." -ForegroundColor Cyan
+	Copy-Item -Path $EditorAssetsSource -Destination $SyzygyEngineTempDir -Recurse -Force
 }
 
 # Game のリソースフォルダをコピー
@@ -185,7 +185,7 @@ for ($i = 0; $i -lt $Count; $i++) {
 	Write-Host "[$($i+1)/$Count] 起動中... (座標: $($pos.X), $($pos.Y))" -ForegroundColor Yellow
 	$process = Start-Process -FilePath $tempExePath -ArgumentList $runtimeArgs -WorkingDirectory $tempDir -PassThru
 	$processes += $process
-	Start-Sleep -Milliseconds 50  # 起動間隔を設定
+	Start-Sleep -Milliseconds 2000  # 起動間隔を設定
 }
 
 Write-Host "`nすべてのプログラムを起動しました。" -ForegroundColor Green

@@ -1,7 +1,7 @@
 #include "GameLogWindowManager.h"
 
-#include <Engine/Module/Manager/RuntimeStorage/RuntimeStorage.h>
-#include <Engine/Module/Manager/World/WorldRoot.h>
+#include <Engine/Runtime/RuntimeStorage/RuntimeStorage.h>
+#include <Engine/Runtime/Scene/World/WorldRoot.h>
 #include <Engine/Runtime/Input/Input.h>
 
 void GameLogWindowManager::initialize() {

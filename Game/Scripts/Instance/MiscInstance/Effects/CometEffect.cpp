@@ -1,8 +1,8 @@
 #include "CometEffect.h"
 
-#include <Engine/Module/Manager/World/WorldRoot.h>
+#include <Engine/Runtime/Scene/World/WorldRoot.h>
 #include <Engine/Module/Render/RenderPipeline/Posteffect/RadialBlur/RadialBlurPipeline.h>
-#include <Engine/Module/Manager/RuntimeStorage/RuntimeStorage.h>
+#include <Engine/Runtime/RuntimeStorage/RuntimeStorage.h>
 
 #include <Library/Math/VectorConverter.h>
 #include <Library/Utility/Tools/MathEPS.h>

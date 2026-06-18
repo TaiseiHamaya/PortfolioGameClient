@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Engine/Module/Manager/SceneScript/ISceneScript.h>
+#include <Engine/Runtime/SceneScript/ISceneScript.h>
 #include <Engine/Runtime/Clock/WorldTimer.h>
 #include <Engine/Runtime/Input/InputHandler.h>
 

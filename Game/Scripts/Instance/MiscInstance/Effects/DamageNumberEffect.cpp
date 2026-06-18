@@ -2,7 +2,7 @@
 
 #include <Library/Utility/Tools/MathEPS.h>
 
-#include <Engine/Module/Manager/World/WorldRoot.h>
+#include <Engine/Runtime/Scene/World/WorldRoot.h>
 #include <Engine/Module/World/Mesh/Primitive/StringRectInstance.h>
 #include <Engine/Runtime/Clock/WorldClock.h>
 

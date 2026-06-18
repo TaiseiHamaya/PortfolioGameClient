@@ -1,7 +1,7 @@
 #include "IEntity.h"
 
 #include <Engine/Assets/Json/JsonAsset.h>
-#include <Engine/Module/Manager/World/WorldRoot.h>
+#include <Engine/Runtime/Scene/World/WorldRoot.h>
 #include <Engine/Runtime/Clock/WorldClock.h>
 
 #define COLOR_RGBA_SERIALIZER

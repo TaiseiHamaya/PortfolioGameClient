@@ -1,6 +1,6 @@
 #include "PaladinHolySpiritEffectTarget.h"
 
-#include <Engine/Module/Manager/World/WorldRoot.h>
+#include <Engine/Runtime/Scene/World/WorldRoot.h>
 
 #include <Library/Math/Definition.h>
 #include <Library/Utility/Tools/Easing.h>

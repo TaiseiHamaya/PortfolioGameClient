@@ -1,6 +1,6 @@
 #include "PaladinHolySpirit.h"
 
-#include <Engine/Module/Manager/World/WorldRoot.h>
+#include <Engine/Runtime/Scene/World/WorldRoot.h>
 
 #include "PaladinHolySpiritEffectSelf.h"
 #include "PaladinHolySpiritEffectTarget.h"

@@ -1,8 +1,8 @@
 #include "TitleStateScript.h"
 
-#include <Engine/Assets/BackgroundLoader/BackgroundLoader.h>
+#include <Engine/Runtime/BackgroundLoader/BackgroundLoader.h>
 #include <Engine/Assets/Json/JsonAsset.h>
-#include <Engine/Module/Manager/RuntimeStorage/RuntimeStorage.h>
+#include <Engine/Runtime/RuntimeStorage/RuntimeStorage.h>
 #include <Engine/Module/World/Mesh/Primitive/Rect3d.h>
 #include <Engine/Module/World/Mesh/Primitive/StringRectInstance.h>
 #include <Engine/Runtime/Input/Input.h>

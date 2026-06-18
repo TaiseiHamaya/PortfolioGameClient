@@ -1,6 +1,6 @@
 #include "EntityUi.h"
 
-#include <Engine/Module/Manager/World/WorldRoot.h>
+#include <Engine/Runtime/Scene/World/WorldRoot.h>
 
 #include "Scripts/Extension/Util/LookAtRect.h"
 
