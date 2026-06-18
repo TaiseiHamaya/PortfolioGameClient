@@ -87,6 +87,11 @@ bool GameServerConnectionManager::is_connected() const {
 	return connectionState == ConnectionState::ConnectionComplete;
 }
 
+bool GameServerConnectionManager::is_disconnected() const {
+	std::lock_guard lock{ mutex };
+	return connectionState == ConnectionState::Disconnected;
+}
+
 asio::ip::tcp::socket& GameServerConnectionManager::get_socket() {
 	return socket;
 }

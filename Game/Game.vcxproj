@@ -15,6 +15,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Scripts\ScriptDisconnected\DisconnectedScript.cpp" />
+    <ClCompile Include="Scripts\Scene\DisconnectedScene.cpp" />
+    <ClCompile Include="Scripts\Network\Heartbeat.cpp" />
     <ClCompile Include="Scripts\Game\Zone\MessageHandler\ZoneEnemyMessageHandler.cpp" />
     <ClCompile Include="Scripts\Game\Zone\MessageHandler\ZoneStartGameMessageHandler.cpp" />
     <ClCompile Include="Scripts\Game\Zone\MessageHandler\ZoneNotificationMessageHandler.cpp" />
@@ -30,6 +33,7 @@
     <ClCompile Include="Scripts\Proto\process\db\user\login.pb.cc" />
     <ClCompile Include="Scripts\Proto\process\db\user\logout.pb.cc" />
     <ClCompile Include="Scripts\Proto\process\db\user\signup.pb.cc" />
+    <ClCompile Include="Scripts\Proto\process\gateway\heartbeat.pb.cc" />
     <ClCompile Include="Scripts\Proto\process\gateway\packet.pb.cc" />
     <ClCompile Include="Scripts\Proto\process\lobby\end_game.pb.cc" />
     <ClCompile Include="Scripts\Proto\process\lobby\enter.pb.cc" />
@@ -90,6 +94,9 @@
     <ClCompile Include="Scripts\Game\Zone\Command\ZoneEnemySpawnCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Scripts\ScriptDisconnected\DisconnectedScript.h" />
+    <ClInclude Include="Scripts\Scene\DisconnectedScene.h" />
+    <ClInclude Include="Scripts\Network\Heartbeat.h" />
     <ClInclude Include="Scripts\Game\Zone\MessageHandler\ZoneEnemyMessageHandler.h" />
     <ClInclude Include="Scripts\Game\Zone\MessageHandler\ZoneStartGameMessageHandler.h" />
     <ClInclude Include="Scripts\Game\Zone\MessageHandler\ZoneNotificationMessageHandler.h" />
@@ -105,6 +112,7 @@
     <ClInclude Include="Scripts\Proto\process\db\user\login.pb.h" />
     <ClInclude Include="Scripts\Proto\process\db\user\logout.pb.h" />
     <ClInclude Include="Scripts\Proto\process\db\user\signup.pb.h" />
+    <ClInclude Include="Scripts\Proto\process\gateway\heartbeat.pb.h" />
     <ClInclude Include="Scripts\Proto\process\gateway\packet.pb.h" />
     <ClInclude Include="Scripts\Proto\process\lobby\end_game.pb.h" />
     <ClInclude Include="Scripts\Proto\process\lobby\enter.pb.h" />

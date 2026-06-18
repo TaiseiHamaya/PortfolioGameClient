@@ -364,6 +364,47 @@
 			},
 			"Type": 2002,
 			"Use runtime": true
+		},
+		{
+			"Children": [],
+			"Color": {
+				"A": 1.0,
+				"B": 1.0,
+				"G": 1.0,
+				"R": 1.0
+			},
+			"Font": "UDEVGothic35HS-Regular.mtsdf",
+			"IsDraw": true,
+			"Layer": 0,
+			"Local transform": {
+				"Rotation": {
+					"W": -0.00017243540787603706,
+					"XYZ": {
+						"X": 0.0,
+						"Y": 1.0,
+						"Z": 0.0
+					}
+				},
+				"Scale": {
+					"X": 1.000004768371582,
+					"Y": 1.0000078678131104,
+					"Z": 1.000004768371582
+				},
+				"Translate": {
+					"X": 0.0,
+					"Y": -0.9521834850311279,
+					"Z": 0.0
+				}
+			},
+			"Name": "Message",
+			"Pivot": {
+				"X": 0.5170000195503235,
+				"Y": 0.0
+			},
+			"Size": 8.699999809265137,
+			"Text": "Connecting...",
+			"Type": 2003,
+			"Use runtime": true
 		}
 	],
 	"Name": "MainWorld",

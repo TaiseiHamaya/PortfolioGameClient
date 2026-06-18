@@ -71,6 +71,12 @@ public:
 	/// <returns></returns>
 	bool is_connected() const;
 
+	/// <summary>
+	/// 切断済みかどうか
+	/// </summary>
+	/// <returns></returns>
+	bool is_disconnected() const;
+
 	asio::ip::tcp::socket& get_socket();
 	const asio::ip::tcp::socket& get_socket() const;
 

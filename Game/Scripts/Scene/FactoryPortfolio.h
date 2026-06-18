@@ -5,6 +5,7 @@
 enum SceneListPortfolio {
 	SCENE_LOGIN,
 	SCENE_GAME,
+	SCENE_DISCONNECTED,
 };
 
 class FactoryPortfolio final : public szg::BaseSceneFactory {

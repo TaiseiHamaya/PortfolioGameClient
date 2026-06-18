@@ -1,7 +1,8 @@
 #include "FactoryPortfolio.h"
 
-#include "Scripts/Scene/SceneGame.h"
+#include "Scripts/Scene/DisconnectedScene.h"
 #include "Scripts/Scene/LoginScene.h"
+#include "Scripts/Scene/SceneGame.h"
 
 #include <Engine/Application/ArgumentParser.h>
 
@@ -18,6 +19,8 @@ std::unique_ptr<szg::Scene> FactoryPortfolio::create_scene2(i32 next) {
 		return std::make_unique<LoginScene>();
 	case SCENE_GAME:
 		return std::make_unique<SceneGame>();
+	case SCENE_DISCONNECTED:
+		return std::make_unique<DisconnectedScene>();
 	default:
 		return nullptr;
 	}

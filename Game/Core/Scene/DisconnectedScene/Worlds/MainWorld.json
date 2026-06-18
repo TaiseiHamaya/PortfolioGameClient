@@ -1,0 +1,123 @@
+{
+	"Instances": [
+		{
+			"Children": [],
+			"Local transform": {
+				"Rotation": {
+					"W": 1.0,
+					"XYZ": {
+						"X": 0.0,
+						"Y": 0.0,
+						"Z": 0.0
+					}
+				},
+				"Scale": {
+					"X": 1.0,
+					"Y": 1.0,
+					"Z": 1.0
+				},
+				"Translate": {
+					"X": 0.0,
+					"Y": 0.0,
+					"Z": -10.0
+				}
+			},
+			"Name": "Camera",
+			"Projection": {
+				"Bottom": -2.2850000858306885,
+				"FarClip": 20.0,
+				"Left": -4.064000129699707,
+				"NearClip": 0.0,
+				"Right": 4.064000129699707,
+				"Top": 2.2850000858306885,
+				"Type": 1
+			},
+			"Type": 3000,
+			"Use runtime": false
+		},
+		{
+			"Children": [],
+			"Color": {
+				"A": 1.0,
+				"B": 1.0,
+				"G": 1.0,
+				"R": 1.0
+			},
+			"Font": "UDEVGothic35HS-Regular.mtsdf",
+			"IsDraw": true,
+			"Layer": 0,
+			"Local transform": {
+				"Rotation": {
+					"W": -0.00024415471125394106,
+					"XYZ": {
+						"X": 0.0,
+						"Y": 1.0,
+						"Z": 0.0
+					}
+				},
+				"Scale": {
+					"X": 1.000013828277588,
+					"Y": 1.0000306367874146,
+					"Z": 1.000013828277588
+				},
+				"Translate": {
+					"X": 0.0,
+					"Y": 0.0,
+					"Z": 0.0
+				}
+			},
+			"Name": "Disconnected",
+			"Pivot": {
+				"X": 0.5619999766349792,
+				"Y": 0.0
+			},
+			"Size": 21.0,
+			"Text": "Disconnected",
+			"Type": 2003,
+			"Use runtime": false
+		},
+		{
+			"Children": [],
+			"Color": {
+				"A": 1.0,
+				"B": 1.0,
+				"G": 1.0,
+				"R": 1.0
+			},
+			"Font": "UDEVGothic35HS-Regular.mtsdf",
+			"IsDraw": true,
+			"Layer": 0,
+			"Local transform": {
+				"Rotation": {
+					"W": -0.0001731448865029961,
+					"XYZ": {
+						"X": 0.0,
+						"Y": 1.0,
+						"Z": 0.0
+					}
+				},
+				"Scale": {
+					"X": 0.9999932050704956,
+					"Y": 1.0000067949295044,
+					"Z": 0.9999932050704956
+				},
+				"Translate": {
+					"X": 0.0,
+					"Y": -1.184000015258789,
+					"Z": 0.0
+				}
+			},
+			"Name": "message",
+			"Pivot": {
+				"X": 0.5,
+				"Y": 0.0
+			},
+			"Size": 7.0,
+			"Text": "Connection with the server was lost.",
+			"Type": 2003,
+			"Use runtime": false
+		}
+	],
+	"Name": "MainWorld",
+	"NumLayer": 2
+}

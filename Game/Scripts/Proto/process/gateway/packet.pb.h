@@ -40,6 +40,7 @@
 #include "process/lobby/start_game.pb.h"
 #include "process/lobby/end_game.pb.h"
 #include "process/lobby/enter.pb.h"
+#include "process/gateway/heartbeat.pb.h"
 // @@protoc_insertion_point(includes)
 
 // Must be included last.
@@ -150,6 +151,7 @@ class ToServerMessage final : public ::google::protobuf::Message
     kTransformSync = 7,
     kPlayAction = 8,
     kTextMessage = 9,
+    kHeartbeatRequest = 10,
     MESSAGE_NOT_SET = 0,
   };
   static constexpr int kIndexInFileMessages = 0;
@@ -249,6 +251,7 @@ class ToServerMessage final : public ::google::protobuf::Message
     kTransformSyncFieldNumber = 7,
     kPlayActionFieldNumber = 8,
     kTextMessageFieldNumber = 9,
+    kHeartbeatRequestFieldNumber = 10,
   };
   // .Proto.PayloadLoginRequest login_request = 1;
   bool has_login_request() const;
@@ -421,6 +424,25 @@ class ToServerMessage final : public ::google::protobuf::Message
   ::Proto::PayloadTextMessage* PROTOBUF_NONNULL _internal_mutable_text_message();
 
   public:
+  // .Proto.PayloadHeartbeatRequest heartbeat_request = 10;
+  bool has_heartbeat_request() const;
+  private:
+  bool _internal_has_heartbeat_request() const;
+
+  public:
+  void clear_heartbeat_request() ;
+  const ::Proto::PayloadHeartbeatRequest& heartbeat_request() const;
+  [[nodiscard]] ::Proto::PayloadHeartbeatRequest* PROTOBUF_NULLABLE release_heartbeat_request();
+  ::Proto::PayloadHeartbeatRequest* PROTOBUF_NONNULL mutable_heartbeat_request();
+  void set_allocated_heartbeat_request(::Proto::PayloadHeartbeatRequest* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_heartbeat_request(::Proto::PayloadHeartbeatRequest* PROTOBUF_NULLABLE value);
+  ::Proto::PayloadHeartbeatRequest* PROTOBUF_NULLABLE unsafe_arena_release_heartbeat_request();
+
+  private:
+  const ::Proto::PayloadHeartbeatRequest& _internal_heartbeat_request() const;
+  ::Proto::PayloadHeartbeatRequest* PROTOBUF_NONNULL _internal_mutable_heartbeat_request();
+
+  public:
   void clear_message();
   MessageCase message_case() const;
   // @@protoc_insertion_point(class_scope:Proto.ToServerMessage)
@@ -435,11 +457,12 @@ class ToServerMessage final : public ::google::protobuf::Message
   void set_has_transform_sync();
   void set_has_play_action();
   void set_has_text_message();
+  void set_has_heartbeat_request();
   inline bool has_message() const;
   inline void clear_has_message();
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<0, 9,
-                                   9, 0,
+  static const ::google::protobuf::internal::TcParseTable<0, 10,
+                                   10, 0,
                                    2>
       _table_;
 
@@ -470,6 +493,7 @@ class ToServerMessage final : public ::google::protobuf::Message
       ::google::protobuf::Message* PROTOBUF_NULLABLE transform_sync_;
       ::google::protobuf::Message* PROTOBUF_NULLABLE play_action_;
       ::google::protobuf::Message* PROTOBUF_NULLABLE text_message_;
+      ::google::protobuf::Message* PROTOBUF_NULLABLE heartbeat_request_;
     } message_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::uint32_t _oneof_case_[1];
@@ -552,6 +576,7 @@ class ToClientMessage final : public ::google::protobuf::Message
     kZoneEnterNotification = 13,
     kZoneExitNotification = 14,
     kTextMessage = 15,
+    kHeartbeatResponse = 16,
     MESSAGE_NOT_SET = 0,
   };
   static constexpr int kIndexInFileMessages = 1;
@@ -656,6 +681,7 @@ class ToClientMessage final : public ::google::protobuf::Message
     kZoneEnterNotificationFieldNumber = 13,
     kZoneExitNotificationFieldNumber = 14,
     kTextMessageFieldNumber = 15,
+    kHeartbeatResponseFieldNumber = 16,
   };
   // .Proto.PayloadLogoutResponse logout_response = 2;
   bool has_logout_response() const;
@@ -923,6 +949,25 @@ class ToClientMessage final : public ::google::protobuf::Message
   ::Proto::PayloadTextMessage* PROTOBUF_NONNULL _internal_mutable_text_message();
 
   public:
+  // .Proto.PayloadHeartbeatResponse heartbeat_response = 16;
+  bool has_heartbeat_response() const;
+  private:
+  bool _internal_has_heartbeat_response() const;
+
+  public:
+  void clear_heartbeat_response() ;
+  const ::Proto::PayloadHeartbeatResponse& heartbeat_response() const;
+  [[nodiscard]] ::Proto::PayloadHeartbeatResponse* PROTOBUF_NULLABLE release_heartbeat_response();
+  ::Proto::PayloadHeartbeatResponse* PROTOBUF_NONNULL mutable_heartbeat_response();
+  void set_allocated_heartbeat_response(::Proto::PayloadHeartbeatResponse* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_heartbeat_response(::Proto::PayloadHeartbeatResponse* PROTOBUF_NULLABLE value);
+  ::Proto::PayloadHeartbeatResponse* PROTOBUF_NULLABLE unsafe_arena_release_heartbeat_response();
+
+  private:
+  const ::Proto::PayloadHeartbeatResponse& _internal_heartbeat_response() const;
+  ::Proto::PayloadHeartbeatResponse* PROTOBUF_NONNULL _internal_mutable_heartbeat_response();
+
+  public:
   void clear_message();
   MessageCase message_case() const;
   // @@protoc_insertion_point(class_scope:Proto.ToClientMessage)
@@ -942,11 +987,12 @@ class ToClientMessage final : public ::google::protobuf::Message
   void set_has_zone_enter_notification();
   void set_has_zone_exit_notification();
   void set_has_text_message();
+  void set_has_heartbeat_response();
   inline bool has_message() const;
   inline void clear_has_message();
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<0, 14,
-                                   14, 0,
+  static const ::google::protobuf::internal::TcParseTable<0, 15,
+                                   15, 0,
                                    2>
       _table_;
 
@@ -982,6 +1028,7 @@ class ToClientMessage final : public ::google::protobuf::Message
       ::google::protobuf::Message* PROTOBUF_NULLABLE zone_enter_notification_;
       ::google::protobuf::Message* PROTOBUF_NULLABLE zone_exit_notification_;
       ::google::protobuf::Message* PROTOBUF_NULLABLE text_message_;
+      ::google::protobuf::Message* PROTOBUF_NULLABLE heartbeat_response_;
     } message_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::uint32_t _oneof_case_[1];
@@ -1636,6 +1683,76 @@ inline ::Proto::PayloadTextMessage* PROTOBUF_NONNULL ToServerMessage::mutable_te
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
   ::Proto::PayloadTextMessage* _msg = _internal_mutable_text_message();
   // @@protoc_insertion_point(field_mutable:Proto.ToServerMessage.text_message)
+  return _msg;
+}
+
+// .Proto.PayloadHeartbeatRequest heartbeat_request = 10;
+inline bool ToServerMessage::has_heartbeat_request() const {
+  return message_case() == kHeartbeatRequest;
+}
+inline bool ToServerMessage::_internal_has_heartbeat_request() const {
+  return message_case() == kHeartbeatRequest;
+}
+inline void ToServerMessage::set_has_heartbeat_request() {
+  _impl_._oneof_case_[0] = kHeartbeatRequest;
+}
+inline ::Proto::PayloadHeartbeatRequest* PROTOBUF_NULLABLE ToServerMessage::release_heartbeat_request() {
+  // @@protoc_insertion_point(field_release:Proto.ToServerMessage.heartbeat_request)
+  if (message_case() == kHeartbeatRequest) {
+    clear_has_message();
+    auto* temp = reinterpret_cast<::Proto::PayloadHeartbeatRequest*>(_impl_.message_.heartbeat_request_);
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.message_.heartbeat_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::Proto::PayloadHeartbeatRequest& ToServerMessage::_internal_heartbeat_request() const {
+  return message_case() == kHeartbeatRequest ? *reinterpret_cast<::Proto::PayloadHeartbeatRequest*>(_impl_.message_.heartbeat_request_) : reinterpret_cast<::Proto::PayloadHeartbeatRequest&>(::Proto::_PayloadHeartbeatRequest_default_instance_);
+}
+inline const ::Proto::PayloadHeartbeatRequest& ToServerMessage::heartbeat_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:Proto.ToServerMessage.heartbeat_request)
+  return _internal_heartbeat_request();
+}
+inline ::Proto::PayloadHeartbeatRequest* PROTOBUF_NULLABLE ToServerMessage::unsafe_arena_release_heartbeat_request() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.ToServerMessage.heartbeat_request)
+  if (message_case() == kHeartbeatRequest) {
+    clear_has_message();
+    auto* temp = reinterpret_cast<::Proto::PayloadHeartbeatRequest*>(_impl_.message_.heartbeat_request_);
+    _impl_.message_.heartbeat_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void ToServerMessage::unsafe_arena_set_allocated_heartbeat_request(
+    ::Proto::PayloadHeartbeatRequest* PROTOBUF_NULLABLE value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_heartbeat_request();
+    _impl_.message_.heartbeat_request_ = reinterpret_cast<::google::protobuf::Message*>(value);
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.ToServerMessage.heartbeat_request)
+}
+inline ::Proto::PayloadHeartbeatRequest* PROTOBUF_NONNULL ToServerMessage::_internal_mutable_heartbeat_request() {
+  if (message_case() != kHeartbeatRequest) {
+    clear_message();
+    set_has_heartbeat_request();
+    _impl_.message_.heartbeat_request_ = reinterpret_cast<::google::protobuf::Message*>(
+        ::google::protobuf::Message::DefaultConstruct<::Proto::PayloadHeartbeatRequest>(GetArena()));
+  }
+  return reinterpret_cast<::Proto::PayloadHeartbeatRequest*>(_impl_.message_.heartbeat_request_);
+}
+inline ::Proto::PayloadHeartbeatRequest* PROTOBUF_NONNULL ToServerMessage::mutable_heartbeat_request()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::Proto::PayloadHeartbeatRequest* _msg = _internal_mutable_heartbeat_request();
+  // @@protoc_insertion_point(field_mutable:Proto.ToServerMessage.heartbeat_request)
   return _msg;
 }
 
@@ -2629,6 +2746,76 @@ inline ::Proto::PayloadTextMessage* PROTOBUF_NONNULL ToClientMessage::mutable_te
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
   ::Proto::PayloadTextMessage* _msg = _internal_mutable_text_message();
   // @@protoc_insertion_point(field_mutable:Proto.ToClientMessage.text_message)
+  return _msg;
+}
+
+// .Proto.PayloadHeartbeatResponse heartbeat_response = 16;
+inline bool ToClientMessage::has_heartbeat_response() const {
+  return message_case() == kHeartbeatResponse;
+}
+inline bool ToClientMessage::_internal_has_heartbeat_response() const {
+  return message_case() == kHeartbeatResponse;
+}
+inline void ToClientMessage::set_has_heartbeat_response() {
+  _impl_._oneof_case_[0] = kHeartbeatResponse;
+}
+inline ::Proto::PayloadHeartbeatResponse* PROTOBUF_NULLABLE ToClientMessage::release_heartbeat_response() {
+  // @@protoc_insertion_point(field_release:Proto.ToClientMessage.heartbeat_response)
+  if (message_case() == kHeartbeatResponse) {
+    clear_has_message();
+    auto* temp = reinterpret_cast<::Proto::PayloadHeartbeatResponse*>(_impl_.message_.heartbeat_response_);
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.message_.heartbeat_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::Proto::PayloadHeartbeatResponse& ToClientMessage::_internal_heartbeat_response() const {
+  return message_case() == kHeartbeatResponse ? *reinterpret_cast<::Proto::PayloadHeartbeatResponse*>(_impl_.message_.heartbeat_response_) : reinterpret_cast<::Proto::PayloadHeartbeatResponse&>(::Proto::_PayloadHeartbeatResponse_default_instance_);
+}
+inline const ::Proto::PayloadHeartbeatResponse& ToClientMessage::heartbeat_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:Proto.ToClientMessage.heartbeat_response)
+  return _internal_heartbeat_response();
+}
+inline ::Proto::PayloadHeartbeatResponse* PROTOBUF_NULLABLE ToClientMessage::unsafe_arena_release_heartbeat_response() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:Proto.ToClientMessage.heartbeat_response)
+  if (message_case() == kHeartbeatResponse) {
+    clear_has_message();
+    auto* temp = reinterpret_cast<::Proto::PayloadHeartbeatResponse*>(_impl_.message_.heartbeat_response_);
+    _impl_.message_.heartbeat_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void ToClientMessage::unsafe_arena_set_allocated_heartbeat_response(
+    ::Proto::PayloadHeartbeatResponse* PROTOBUF_NULLABLE value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_heartbeat_response();
+    _impl_.message_.heartbeat_response_ = reinterpret_cast<::google::protobuf::Message*>(value);
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Proto.ToClientMessage.heartbeat_response)
+}
+inline ::Proto::PayloadHeartbeatResponse* PROTOBUF_NONNULL ToClientMessage::_internal_mutable_heartbeat_response() {
+  if (message_case() != kHeartbeatResponse) {
+    clear_message();
+    set_has_heartbeat_response();
+    _impl_.message_.heartbeat_response_ = reinterpret_cast<::google::protobuf::Message*>(
+        ::google::protobuf::Message::DefaultConstruct<::Proto::PayloadHeartbeatResponse>(GetArena()));
+  }
+  return reinterpret_cast<::Proto::PayloadHeartbeatResponse*>(_impl_.message_.heartbeat_response_);
+}
+inline ::Proto::PayloadHeartbeatResponse* PROTOBUF_NONNULL ToClientMessage::mutable_heartbeat_response()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::Proto::PayloadHeartbeatResponse* _msg = _internal_mutable_heartbeat_response();
+  // @@protoc_insertion_point(field_mutable:Proto.ToClientMessage.heartbeat_response)
   return _msg;
 }
 

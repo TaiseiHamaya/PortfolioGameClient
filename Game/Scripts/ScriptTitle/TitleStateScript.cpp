@@ -26,11 +26,15 @@ void TitleStateScript::setup() {
 	errorMessageString = szg::RuntimeStorage::GetValue<Reference<szg::StringRectInstance>>("RuntimeInstance", "ErrorMessage").value();
 	Reference<szg::Rect3d> rect = szg::RuntimeStorage::GetValue<Reference<szg::Rect3d>>("RuntimeInstance", "LoadingIcon").value();
 	waitUntil.initialize(rect);
+	waitUntil.reset([]() { return false; });
+	loginString->set_active(false);
+	nameString->set_active(false);
+	inputString->set_active(false);
 
 	inputKey.initialize({ szg::KeyID::Space, szg::KeyID::Return, szg::KeyID::W, szg::KeyID::S, szg::KeyID::DownArrow, szg::KeyID::UpArrow });
 	inputPad.initialize({ szg::PadID::A,szg::PadID::Up,szg::PadID::Down });
 
-	state = State::Login;
+	state = State::Connecting;
 }
 
 void TitleStateScript::finalize() {
@@ -43,6 +47,9 @@ void TitleStateScript::prev_update() {
 	case TitleStateScript::State::None:
 		update_none();
 		break;
+	case TitleStateScript::State::Connecting:
+		update_connecting();
+		break;
 	case TitleStateScript::State::Signup:
 		update_signup();
 		break;
@@ -54,6 +61,8 @@ void TitleStateScript::prev_update() {
 		break;
 	case TitleStateScript::State::Loading:
 		update_loading();
+		break;
+	case TitleStateScript::State::Disconnected:
 		break;
 	default:
 		break;
@@ -81,6 +90,27 @@ void TitleStateScript::update_none() {
 	// なにかおかしいのでゲームを強制終了
 	szg::SceneManager2::PopScene(1.0f);
 	errorMessageString->reset_string("An unexpected error has occurred. Please restart the game.");
+}
+
+void TitleStateScript::update_connecting() {
+	waitUntil.update();
+	auto connectionManager = NetworkCluster::ConnectionManagerMut();
+	if (connectionManager->is_established()) {
+		state = State::Login;
+		loginString->set_active(true);
+		nameString->set_active(true);
+		inputString->set_active(true);
+		waitUntil.end_force();
+		Reference<szg::StringRectInstance> messageString = szg::RuntimeStorage::GetValue<Reference<szg::StringRectInstance>>("RuntimeInstance", "Message").value_or(nullptr);
+		if (messageString) {
+			messageString->set_active(false);
+		}
+	}
+	else if (connectionManager->is_disconnected()) {
+		// 切断用のシーンに遷移
+		state = State::Disconnected;
+		szg::SceneManager2::SceneChange(SceneListPortfolio::SCENE_DISCONNECTED, 0.0f);
+	}
 }
 
 void TitleStateScript::update_signup() {

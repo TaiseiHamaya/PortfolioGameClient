@@ -10,6 +10,8 @@ public:
 	void initialize(Reference<szg::Rect3d> rect_);
 	void reset(std::function<bool()> condition_);
 
+	void end_force();
+
 	bool update();
 
 	const szg::WorldTimer& timer_imm() const { return timer; }

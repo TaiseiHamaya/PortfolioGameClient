@@ -17,10 +17,12 @@ class TitleStateScript final : public szg::ISceneScript {
 public:
 	enum class State {
 		None,
+		Connecting,
 		Signup,
 		Login,
 		Lobby,
 		Loading,
+		Disconnected,
 	};
 
 	enum class SelectIndex {
@@ -44,6 +46,7 @@ public:
 
 private:
 	void update_none();
+	void update_connecting();
 	void update_signup();
 	void update_login();
 	void update_lobby();

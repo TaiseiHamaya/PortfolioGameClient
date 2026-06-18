@@ -97,8 +97,10 @@ const ::uint32_t
         PROTOBUF_FIELD_OFFSET(::Proto::ToServerMessage, _impl_.message_),
         PROTOBUF_FIELD_OFFSET(::Proto::ToServerMessage, _impl_.message_),
         PROTOBUF_FIELD_OFFSET(::Proto::ToServerMessage, _impl_.message_),
+        PROTOBUF_FIELD_OFFSET(::Proto::ToServerMessage, _impl_.message_),
         0x004, // bitmap
         PROTOBUF_FIELD_OFFSET(::Proto::ToClientMessage, _impl_._oneof_case_[0]),
+        PROTOBUF_FIELD_OFFSET(::Proto::ToClientMessage, _impl_.message_),
         PROTOBUF_FIELD_OFFSET(::Proto::ToClientMessage, _impl_.message_),
         PROTOBUF_FIELD_OFFSET(::Proto::ToClientMessage, _impl_.message_),
         PROTOBUF_FIELD_OFFSET(::Proto::ToClientMessage, _impl_.message_),
@@ -119,7 +121,7 @@ const ::uint32_t
 static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
         {0, sizeof(::Proto::ToServerMessage)},
-        {12, sizeof(::Proto::ToClientMessage)},
+        {13, sizeof(::Proto::ToClientMessage)},
 };
 static const ::_pb::Message* PROTOBUF_NONNULL const file_default_instances[] = {
     &::Proto::_ToServerMessage_default_instance_._instance,
@@ -136,48 +138,53 @@ const char descriptor_table_protodef_process_2fgateway_2fpacket_2eproto[] ABSL_A
     "roto\032 process/world/player_route.proto\032\036"
     "process/lobby/start_game.proto\032\034process/"
     "lobby/end_game.proto\032\031process/lobby/ente"
-    "r.proto\"\231\004\n\017ToServerMessage\0223\n\rlogin_req"
-    "uest\030\001 \001(\0132\032.Proto.PayloadLoginRequestH\000"
-    "\0225\n\016logout_request\030\002 \001(\0132\033.Proto.Payload"
-    "LogoutRequestH\000\0225\n\016signup_request\030\003 \001(\0132"
-    "\033.Proto.PayloadSignupRequestH\000\0229\n\nstart_"
-    "game\030\004 \001(\0132#.Proto.PayloadLobbyStartGame"
-    "RequestH\000\0225\n\010end_game\030\005 \001(\0132!.Proto.Payl"
-    "oadLobbyEndGameRequestH\000\022K\n\032player_zone_"
-    "enter_complete\030\006 \001(\0132%.Proto.PayloadPlay"
-    "erZoneEnterCompleteH\000\0225\n\016transform_sync\030"
-    "\007 \001(\0132\033.Proto.PayloadTransformSyncH\000\022/\n\013"
-    "play_action\030\010 \001(\0132\030.Proto.PayloadPlayAct"
-    "ionH\000\0221\n\014text_message\030\t \001(\0132\031.Proto.Payl"
-    "oadTextMessageH\000B\t\n\007message\"\344\006\n\017ToClient"
-    "Message\0227\n\017logout_response\030\002 \001(\0132\034.Proto"
-    ".PayloadLogoutResponseH\000\0227\n\017signup_respo"
-    "nse\030\003 \001(\0132\034.Proto.PayloadSignupResponseH"
-    "\000\022@\n\024lobby_enter_response\030\004 \001(\0132 .Proto."
-    "PayloadLobbyEnterResponseH\000\022C\n\023start_gam"
-    "e_response\030\005 \001(\0132$.Proto.PayloadLobbySta"
-    "rtGameResponseH\000\022\?\n\021end_game_response\030\006 "
-    "\001(\0132\".Proto.PayloadLobbyEndGameResponseH"
-    "\000\022F\n\027client_initializer_data\030\007 \001(\0132#.Pro"
-    "to.PayloadClientInitializerDataH\000\0225\n\016tra"
-    "nsform_sync\030\010 \001(\0132\033.Proto.PayloadTransfo"
-    "rmSyncH\000\022/\n\013play_action\030\t \001(\0132\030.Proto.Pa"
-    "yloadPlayActionH\000\0225\n\016entity_damaged\030\n \001("
-    "\0132\033.Proto.PayloadEntityDamagedH\000\022/\n\013enem"
-    "y_spawn\030\013 \001(\0132\030.Proto.PayloadEnemySpawnH"
-    "\000\0223\n\renemy_despawn\030\014 \001(\0132\032.Proto.Payload"
-    "EnemyDespawnH\000\022F\n\027zone_enter_notificatio"
-    "n\030\r \001(\0132#.Proto.PayloadZoneEnterNotifica"
-    "tionH\000\022D\n\026zone_exit_notification\030\016 \001(\0132\""
-    ".Proto.PayloadZoneExitNotificationH\000\0221\n\014"
-    "text_message\030\017 \001(\0132\031.Proto.PayloadTextMe"
-    "ssageH\000B\t\n\007messageb\006proto3"
+    "r.proto\032\037process/gateway/heartbeat.proto"
+    "\"\326\004\n\017ToServerMessage\0223\n\rlogin_request\030\001 "
+    "\001(\0132\032.Proto.PayloadLoginRequestH\000\0225\n\016log"
+    "out_request\030\002 \001(\0132\033.Proto.PayloadLogoutR"
+    "equestH\000\0225\n\016signup_request\030\003 \001(\0132\033.Proto"
+    ".PayloadSignupRequestH\000\0229\n\nstart_game\030\004 "
+    "\001(\0132#.Proto.PayloadLobbyStartGameRequest"
+    "H\000\0225\n\010end_game\030\005 \001(\0132!.Proto.PayloadLobb"
+    "yEndGameRequestH\000\022K\n\032player_zone_enter_c"
+    "omplete\030\006 \001(\0132%.Proto.PayloadPlayerZoneE"
+    "nterCompleteH\000\0225\n\016transform_sync\030\007 \001(\0132\033"
+    ".Proto.PayloadTransformSyncH\000\022/\n\013play_ac"
+    "tion\030\010 \001(\0132\030.Proto.PayloadPlayActionH\000\0221"
+    "\n\014text_message\030\t \001(\0132\031.Proto.PayloadText"
+    "MessageH\000\022;\n\021heartbeat_request\030\n \001(\0132\036.P"
+    "roto.PayloadHeartbeatRequestH\000B\t\n\007messag"
+    "e\"\243\007\n\017ToClientMessage\0227\n\017logout_response"
+    "\030\002 \001(\0132\034.Proto.PayloadLogoutResponseH\000\0227"
+    "\n\017signup_response\030\003 \001(\0132\034.Proto.PayloadS"
+    "ignupResponseH\000\022@\n\024lobby_enter_response\030"
+    "\004 \001(\0132 .Proto.PayloadLobbyEnterResponseH"
+    "\000\022C\n\023start_game_response\030\005 \001(\0132$.Proto.P"
+    "ayloadLobbyStartGameResponseH\000\022\?\n\021end_ga"
+    "me_response\030\006 \001(\0132\".Proto.PayloadLobbyEn"
+    "dGameResponseH\000\022F\n\027client_initializer_da"
+    "ta\030\007 \001(\0132#.Proto.PayloadClientInitialize"
+    "rDataH\000\0225\n\016transform_sync\030\010 \001(\0132\033.Proto."
+    "PayloadTransformSyncH\000\022/\n\013play_action\030\t "
+    "\001(\0132\030.Proto.PayloadPlayActionH\000\0225\n\016entit"
+    "y_damaged\030\n \001(\0132\033.Proto.PayloadEntityDam"
+    "agedH\000\022/\n\013enemy_spawn\030\013 \001(\0132\030.Proto.Payl"
+    "oadEnemySpawnH\000\0223\n\renemy_despawn\030\014 \001(\0132\032"
+    ".Proto.PayloadEnemyDespawnH\000\022F\n\027zone_ent"
+    "er_notification\030\r \001(\0132#.Proto.PayloadZon"
+    "eEnterNotificationH\000\022D\n\026zone_exit_notifi"
+    "cation\030\016 \001(\0132\".Proto.PayloadZoneExitNoti"
+    "ficationH\000\0221\n\014text_message\030\017 \001(\0132\031.Proto"
+    ".PayloadTextMessageH\000\022=\n\022heartbeat_respo"
+    "nse\030\020 \001(\0132\037.Proto.PayloadHeartbeatRespon"
+    "seH\000B\t\n\007messageb\006proto3"
 };
 static const ::_pbi::DescriptorTable* PROTOBUF_NONNULL const
-    descriptor_table_process_2fgateway_2fpacket_2eproto_deps[11] = {
+    descriptor_table_process_2fgateway_2fpacket_2eproto_deps[12] = {
         &::descriptor_table_process_2fdb_2fuser_2flogin_2eproto,
         &::descriptor_table_process_2fdb_2fuser_2flogout_2eproto,
         &::descriptor_table_process_2fdb_2fuser_2fsignup_2eproto,
+        &::descriptor_table_process_2fgateway_2fheartbeat_2eproto,
         &::descriptor_table_process_2flobby_2fend_5fgame_2eproto,
         &::descriptor_table_process_2flobby_2fenter_2eproto,
         &::descriptor_table_process_2flobby_2fstart_5fgame_2eproto,
@@ -191,12 +198,12 @@ static ::absl::once_flag descriptor_table_process_2fgateway_2fpacket_2eproto_onc
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_process_2fgateway_2fpacket_2eproto = {
     false,
     false,
-    1786,
+    1943,
     descriptor_table_protodef_process_2fgateway_2fpacket_2eproto,
     "process/gateway/packet.proto",
     &descriptor_table_process_2fgateway_2fpacket_2eproto_once,
     descriptor_table_process_2fgateway_2fpacket_2eproto_deps,
-    11,
+    12,
     2,
     schemas,
     file_default_instances,
@@ -429,6 +436,30 @@ void ToServerMessage::clear_text_message() {
     clear_has_message();
   }
 }
+void ToServerMessage::set_allocated_heartbeat_request(::Proto::PayloadHeartbeatRequest* PROTOBUF_NULLABLE heartbeat_request) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  clear_message();
+  if (heartbeat_request) {
+    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::Message*>(heartbeat_request)->GetArena();
+    if (message_arena != submessage_arena) {
+      heartbeat_request = ::google::protobuf::internal::GetOwnedMessage(message_arena, heartbeat_request, submessage_arena);
+    }
+    set_has_heartbeat_request();
+    _impl_.message_.heartbeat_request_ = heartbeat_request;
+  }
+  // @@protoc_insertion_point(field_set_allocated:Proto.ToServerMessage.heartbeat_request)
+}
+void ToServerMessage::clear_heartbeat_request() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_case() == kHeartbeatRequest) {
+    if (GetArena() == nullptr) {
+      delete _impl_.message_.heartbeat_request_;
+    } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
+      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.message_.heartbeat_request_);
+    }
+    clear_has_message();
+  }
+}
 ToServerMessage::ToServerMessage(::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, ToServerMessage_class_data_.base()) {
@@ -488,6 +519,9 @@ ToServerMessage::ToServerMessage(
         break;
       case kTextMessage:
         _impl_.message_.text_message_ = ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.message_.text_message_);
+        break;
+      case kHeartbeatRequest:
+        _impl_.message_.heartbeat_request_ = ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.message_.heartbeat_request_);
         break;
   }
 
@@ -596,6 +630,14 @@ void ToServerMessage::clear_message() {
       }
       break;
     }
+    case kHeartbeatRequest: {
+      if (GetArena() == nullptr) {
+        delete _impl_.message_.heartbeat_request_;
+      } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
+        ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.message_.heartbeat_request_);
+      }
+      break;
+    }
     case MESSAGE_NOT_SET: {
       break;
     }
@@ -647,17 +689,17 @@ ToServerMessage::GetClassData() const {
   return ToServerMessage_class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 9, 9, 0, 2>
+const ::_pbi::TcParseTable<0, 10, 10, 0, 2>
 ToServerMessage::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
-    9, 0,  // max_field_number, fast_idx_mask
+    10, 0,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294966784,  // skipmap
+    4294966272,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    9,  // num_field_entries
-    9,  // num_aux_entries
+    10,  // num_field_entries
+    10,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     ToServerMessage_class_data_.base(),
     nullptr,  // post_loop_handler
@@ -688,6 +730,8 @@ ToServerMessage::_table_ = {
     {PROTOBUF_FIELD_OFFSET(ToServerMessage, _impl_.message_.play_action_), _Internal::kOneofCaseOffset + 0, 7, (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
     // .Proto.PayloadTextMessage text_message = 9;
     {PROTOBUF_FIELD_OFFSET(ToServerMessage, _impl_.message_.text_message_), _Internal::kOneofCaseOffset + 0, 8, (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
+    // .Proto.PayloadHeartbeatRequest heartbeat_request = 10;
+    {PROTOBUF_FIELD_OFFSET(ToServerMessage, _impl_.message_.heartbeat_request_), _Internal::kOneofCaseOffset + 0, 9, (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
   }},
   {{
       {::_pbi::TcParser::GetTable<::Proto::PayloadLoginRequest>()},
@@ -699,6 +743,7 @@ ToServerMessage::_table_ = {
       {::_pbi::TcParser::GetTable<::Proto::PayloadTransformSync>()},
       {::_pbi::TcParser::GetTable<::Proto::PayloadPlayAction>()},
       {::_pbi::TcParser::GetTable<::Proto::PayloadTextMessage>()},
+      {::_pbi::TcParser::GetTable<::Proto::PayloadHeartbeatRequest>()},
   }},
   {{
   }},
@@ -787,6 +832,12 @@ PROTOBUF_NOINLINE void ToServerMessage::Clear() {
           stream);
       break;
     }
+    case kHeartbeatRequest: {
+      target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+          10, *this_._impl_.message_.heartbeat_request_, this_._impl_.message_.heartbeat_request_->GetCachedSize(), target,
+          stream);
+      break;
+    }
     default:
       break;
   }
@@ -866,6 +917,12 @@ PROTOBUF_NOINLINE void ToServerMessage::Clear() {
     case kTextMessage: {
       total_size += 1 +
                     ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.message_.text_message_);
+      break;
+    }
+    // .Proto.PayloadHeartbeatRequest heartbeat_request = 10;
+    case kHeartbeatRequest: {
+      total_size += 1 +
+                    ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.message_.heartbeat_request_);
       break;
     }
     case MESSAGE_NOT_SET: {
@@ -968,6 +1025,14 @@ void ToServerMessage::MergeImpl(::google::protobuf::MessageLite& to_msg, const :
           _this->_impl_.message_.text_message_ = ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.message_.text_message_);
         } else {
           _this->_impl_.message_.text_message_->MergeFrom(*from._impl_.message_.text_message_);
+        }
+        break;
+      }
+      case kHeartbeatRequest: {
+        if (oneof_needs_init) {
+          _this->_impl_.message_.heartbeat_request_ = ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.message_.heartbeat_request_);
+        } else {
+          _this->_impl_.message_.heartbeat_request_->MergeFrom(*from._impl_.message_.heartbeat_request_);
         }
         break;
       }
@@ -1340,6 +1405,30 @@ void ToClientMessage::clear_text_message() {
     clear_has_message();
   }
 }
+void ToClientMessage::set_allocated_heartbeat_response(::Proto::PayloadHeartbeatResponse* PROTOBUF_NULLABLE heartbeat_response) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  clear_message();
+  if (heartbeat_response) {
+    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::Message*>(heartbeat_response)->GetArena();
+    if (message_arena != submessage_arena) {
+      heartbeat_response = ::google::protobuf::internal::GetOwnedMessage(message_arena, heartbeat_response, submessage_arena);
+    }
+    set_has_heartbeat_response();
+    _impl_.message_.heartbeat_response_ = heartbeat_response;
+  }
+  // @@protoc_insertion_point(field_set_allocated:Proto.ToClientMessage.heartbeat_response)
+}
+void ToClientMessage::clear_heartbeat_response() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_case() == kHeartbeatResponse) {
+    if (GetArena() == nullptr) {
+      delete _impl_.message_.heartbeat_response_;
+    } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
+      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.message_.heartbeat_response_);
+    }
+    clear_has_message();
+  }
+}
 ToClientMessage::ToClientMessage(::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, ToClientMessage_class_data_.base()) {
@@ -1414,6 +1503,9 @@ ToClientMessage::ToClientMessage(
         break;
       case kTextMessage:
         _impl_.message_.text_message_ = ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.message_.text_message_);
+        break;
+      case kHeartbeatResponse:
+        _impl_.message_.heartbeat_response_ = ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.message_.heartbeat_response_);
         break;
   }
 
@@ -1562,6 +1654,14 @@ void ToClientMessage::clear_message() {
       }
       break;
     }
+    case kHeartbeatResponse: {
+      if (GetArena() == nullptr) {
+        delete _impl_.message_.heartbeat_response_;
+      } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
+        ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.message_.heartbeat_response_);
+      }
+      break;
+    }
     case MESSAGE_NOT_SET: {
       break;
     }
@@ -1613,17 +1713,17 @@ ToClientMessage::GetClassData() const {
   return ToClientMessage_class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 14, 14, 0, 2>
+const ::_pbi::TcParseTable<0, 15, 15, 0, 2>
 ToClientMessage::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
-    15, 0,  // max_field_number, fast_idx_mask
+    16, 0,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294934529,  // skipmap
+    4294901761,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    14,  // num_field_entries
-    14,  // num_aux_entries
+    15,  // num_field_entries
+    15,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     ToClientMessage_class_data_.base(),
     nullptr,  // post_loop_handler
@@ -1664,6 +1764,8 @@ ToClientMessage::_table_ = {
     {PROTOBUF_FIELD_OFFSET(ToClientMessage, _impl_.message_.zone_exit_notification_), _Internal::kOneofCaseOffset + 0, 12, (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
     // .Proto.PayloadTextMessage text_message = 15;
     {PROTOBUF_FIELD_OFFSET(ToClientMessage, _impl_.message_.text_message_), _Internal::kOneofCaseOffset + 0, 13, (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
+    // .Proto.PayloadHeartbeatResponse heartbeat_response = 16;
+    {PROTOBUF_FIELD_OFFSET(ToClientMessage, _impl_.message_.heartbeat_response_), _Internal::kOneofCaseOffset + 0, 14, (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
   }},
   {{
       {::_pbi::TcParser::GetTable<::Proto::PayloadLogoutResponse>()},
@@ -1680,6 +1782,7 @@ ToClientMessage::_table_ = {
       {::_pbi::TcParser::GetTable<::Proto::PayloadZoneEnterNotification>()},
       {::_pbi::TcParser::GetTable<::Proto::PayloadZoneExitNotification>()},
       {::_pbi::TcParser::GetTable<::Proto::PayloadTextMessage>()},
+      {::_pbi::TcParser::GetTable<::Proto::PayloadHeartbeatResponse>()},
   }},
   {{
   }},
@@ -1798,6 +1901,12 @@ PROTOBUF_NOINLINE void ToClientMessage::Clear() {
           stream);
       break;
     }
+    case kHeartbeatResponse: {
+      target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+          16, *this_._impl_.message_.heartbeat_response_, this_._impl_.message_.heartbeat_response_->GetCachedSize(), target,
+          stream);
+      break;
+    }
     default:
       break;
   }
@@ -1907,6 +2016,12 @@ PROTOBUF_NOINLINE void ToClientMessage::Clear() {
     case kTextMessage: {
       total_size += 1 +
                     ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.message_.text_message_);
+      break;
+    }
+    // .Proto.PayloadHeartbeatResponse heartbeat_response = 16;
+    case kHeartbeatResponse: {
+      total_size += 2 +
+                    ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.message_.heartbeat_response_);
       break;
     }
     case MESSAGE_NOT_SET: {
@@ -2049,6 +2164,14 @@ void ToClientMessage::MergeImpl(::google::protobuf::MessageLite& to_msg, const :
           _this->_impl_.message_.text_message_ = ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.message_.text_message_);
         } else {
           _this->_impl_.message_.text_message_->MergeFrom(*from._impl_.message_.text_message_);
+        }
+        break;
+      }
+      case kHeartbeatResponse: {
+        if (oneof_needs_init) {
+          _this->_impl_.message_.heartbeat_response_ = ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.message_.heartbeat_response_);
+        } else {
+          _this->_impl_.message_.heartbeat_response_->MergeFrom(*from._impl_.message_.heartbeat_response_);
         }
         break;
       }

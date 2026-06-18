@@ -13,6 +13,11 @@ void WaitUntil::reset(std::function<bool()> condition_) {
 	timer.set(0);
 }
 
+void WaitUntil::end_force() {
+	condition = nullptr;
+	rect->set_active(false);
+}
+
 bool WaitUntil::update() {
 	if (!condition) {
 		return true;
