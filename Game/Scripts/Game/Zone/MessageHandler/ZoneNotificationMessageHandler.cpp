@@ -4,6 +4,7 @@
 
 #include <Scripts/Proto/process/gateway/packet.pb.h>
 
+#include "Scripts/Game/Zone/Command/HeartbeatCommand.h"
 #include "Scripts/Game/Zone/Command/ZoneLoginPlayerCommand.h"
 #include "Scripts/Game/Zone/Command/ZoneLogoutPlayerCommand.h"
 #include "Scripts/Instance/IEntity/IEntity.h"
@@ -44,6 +45,16 @@ void ZoneNotificationMessageHandler::operator()(const Proto::ToClientMessage& me
 			);
 		}
 		commandStack(std::make_unique<ZoneLogoutPlayerCommand>(body.id()));
+	}
+	case Proto::ToClientMessage::kHeartbeatResponse: // ハートビート応答
+	{
+		const Proto::PayloadHeartbeatResponse& body = message.heartbeat_response();
+		i64 timestamp = body.timestamp();
+		szgInformation("Heartbeat response received. Timestamp: {}", timestamp);
+
+		commandStack(
+			std::make_unique<HeartbeatCommand>(timestamp)
+		);
 	}
 	break;
 	default:

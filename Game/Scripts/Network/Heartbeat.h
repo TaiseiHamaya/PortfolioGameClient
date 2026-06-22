@@ -1,5 +1,6 @@
 #pragma once
 
+#include <chrono>
 #include <mutex>
 #include <optional>
 
@@ -26,5 +27,6 @@ private:
 	szg::WorldTimer timer;
 
 	std::mutex mutex;
-	std::optional<i64> latestHeartbeatTimestamp;
+	std::optional<std::chrono::system_clock::time_point> latestReceivedHeartbeatTimestamp;
+	std::optional<std::chrono::system_clock::time_point> latestSendHeartbeatTimestamp;
 };

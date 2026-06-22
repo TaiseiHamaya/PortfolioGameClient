@@ -2,20 +2,15 @@
 
 #include <Library/Utility/Tools/SmartPointer.h>
 
-#include <Engine/Assets/Shader/ShaderLibrary.h>
-
 #include <Engine/Module/World/Mesh/SkinningMeshInstance.h>
 #include <Engine/Module/World/Mesh/StaticMeshInstance.h>
 
 #include <Engine/Assets/Animation/NodeAnimation/NodeAnimationLibrary.h>
 #include <Engine/Assets/Animation/Skeleton/SkeletonLibrary.h>
-#include <Engine/Assets/Audio/AudioLibrary.h>
 #include <Engine/Assets/PolygonMesh/PolygonMeshLibrary.h>
-#include <Engine/Assets/PrimitiveGeometry/PrimitiveGeometryLibrary.h>
 #include <Engine/Assets/Texture/TextureLibrary.h>
 #include <Engine/Runtime/RuntimeStorage/RuntimeStorage.h>
 
-#include "Scripts/Extension/RenderNode/EnvironmentMeshNode/EnvironmentMeshNode.h"
 #include "Scripts/Extension/Util/LookAtRect.h"
 #include "Scripts/Game/GameInputHandler.h"
 #include "Scripts/Game/Zone/ZoneHandler.h"
@@ -26,9 +21,8 @@
 #include "Scripts/Manager/EffectManager.h"
 #include "Scripts/Manager/EntityManager.h"
 #include "Scripts/Manager/GameLogWindowManager.h"
-#include "Scripts/Network/NetworkCluster.h"
-
-#include <Engine/Assets/FontAtlasMSDF/FontAtlasMSDFLibrary.h>
+#include "Scripts/Manager/HeartbeatManager.h"
+#include "Scripts/Game/Zone/Command/HeartbeatCommand.h"
 
 SceneGame::SceneGame() noexcept {
 	sceneName = "MainGame";
@@ -69,6 +63,8 @@ void SceneGame::custom_setup() {
 	std::unique_ptr<ZoneHandler> zoneHandler; // ゾーン処理
 
 	std::unique_ptr<GameLogWindowManager> gameLogWindowManager;
+
+	std::unique_ptr<HeartbeatManager> heartbeatManager;
 	// ---------- Initialize ----------
 	// WorldManager
 	entityManager = eps::CreateUnique<EntityManager>();
@@ -82,6 +78,8 @@ void SceneGame::custom_setup() {
 
 	gameLogWindowManager = eps::CreateUnique<GameLogWindowManager>();
 
+	heartbeatManager = eps::CreateUnique<HeartbeatManager>();
+
 	// Reference
 	Reference<EntityManager> entityManagerRef = entityManager;
 	Reference<EnemyManager> enemyManagerRef = enemyManager;
@@ -89,9 +87,11 @@ void SceneGame::custom_setup() {
 	Reference<GameInputHandler> gameInputHandlerRef = gameInputHandler;
 	Reference<ZoneHandler> zoneHandlerRef = zoneHandler;
 	Reference<GameLogWindowManager> gameLogWindowManagerRef = gameLogWindowManager;
+	Reference<HeartbeatManager> heartbeatManagerRef = heartbeatManager;
 
 	sceneScriptManager.register_script(std::move(gameInputHandler));
 	sceneScriptManager.register_script(std::move(zoneHandler));
+	sceneScriptManager.register_script(std::move(heartbeatManager));
 	sceneScriptManager.register_script(std::move(enemyManager));
 	sceneScriptManager.register_script(std::move(entityManager));
 	sceneScriptManager.register_script(std::move(effectManager));
@@ -134,6 +134,7 @@ void SceneGame::custom_setup() {
 	ISkillAction::SetEffectManager(effectManagerRef);
 	zoneHandlerRef->set_player(player);
 	gameInputHandlerRef->set_instances(player, cameraInstance);
+	HeartbeatCommand::InitializeHeartbeat(heartbeatManagerRef->heartbeat_mut());
 	//environmentMeshExecutor->setup(directionalLightingExecutor, camera3D);
 
 	skydome->transform_mut().set_scale(CVector3::BASIS * 100);

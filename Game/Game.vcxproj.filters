@@ -399,6 +399,8 @@
     <ClCompile Include="Scripts\Proto\process\zone\sync.pb.cc" />
     <ClCompile Include="Scripts\Scene\DisconnectedScene.cpp" />
     <ClCompile Include="Scripts\ScriptDisconnected\DisconnectedScript.cpp" />
+    <ClCompile Include="Scripts\Manager\HeartbeatManager.cpp" />
+    <ClCompile Include="Scripts\Game\Zone\Command\HeartbeatCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="DevTool\launch-bot.ps1" />
@@ -434,5 +436,7 @@
     <ClInclude Include="Scripts\Proto\process\zone\sync.pb.h" />
     <ClInclude Include="Scripts\Scene\DisconnectedScene.h" />
     <ClInclude Include="Scripts\ScriptDisconnected\DisconnectedScript.h" />
+    <ClInclude Include="Scripts\Manager\HeartbeatManager.h" />
+    <ClInclude Include="Scripts\Game\Zone\Command\HeartbeatCommand.h" />
   </ItemGroup>
 </Project>

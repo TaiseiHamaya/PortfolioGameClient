@@ -2,6 +2,7 @@
 
 #include <Engine/Application/Logger.h>
 #include <Engine/Module/World/WorldInstance/WorldInstance.h>
+#include <Engine/Runtime/Scene/SceneManager2.h>
 
 #include "./Command/ZonePlayActionCommand.h"
 #include "./Command/ZoneSyncTransformCommand.h"
@@ -11,10 +12,11 @@
 #include "Scripts/Manager/EffectManager.h"
 #include "Scripts/Manager/EntityManager.h"
 #include "Scripts/Manager/GameLogWindowManager.h"
-#include "Scripts/Network/NetworkCluster.h"
 #include "Scripts/Network/GameServer/GameServerConnectionManager.h"
 #include "Scripts/Network/GameServer/GameServerPacketReceiver.h"
 #include "Scripts/Network/GameServer/GameServerPacketSender.h"
+#include "Scripts/Network/NetworkCluster.h"
+#include "Scripts/Scene/FactoryPortfolio.h"
 
 #include "process/gateway/packet.pb.h"
 
@@ -46,6 +48,7 @@ void ZoneHandler::setup(Reference<EntityManager> entityManager_, Reference<Enemy
 
 	router.register_handler(Proto::ToClientMessage::kZoneEnterNotification, std::ref(notificationMessageHandler));
 	router.register_handler(Proto::ToClientMessage::kZoneExitNotification, std::ref(notificationMessageHandler));
+	router.register_handler(Proto::ToClientMessage::kHeartbeatResponse, std::ref(notificationMessageHandler));
 
 	router.register_handler(Proto::ToClientMessage::kTransformSync, std::ref(syncMessageHandler));
 	router.register_handler(Proto::ToClientMessage::kPlayAction, std::ref(syncMessageHandler));
@@ -83,6 +86,11 @@ void ZoneHandler::prev_update() {
 	}
 
 	execute_commands();
+
+	// 切断した場合
+	if (gameServerConnectionManager && gameServerConnectionManager->is_disconnected()) {
+		szg::SceneManager2::SceneChange(SceneListPortfolio::SCENE_DISCONNECTED, 0.0f);
+	}
 }
 
 void ZoneHandler::post_update() {
@@ -102,7 +110,7 @@ void ZoneHandler::execute_commands() {
 		command->execute(zone);
 	}
 	zoneCommands.clear();
-}	
+}
 
 void ZoneHandler::handle_zone() {
 	if (!gameServerPacketReceiver || !player) {
