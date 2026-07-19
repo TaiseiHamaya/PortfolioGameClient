@@ -401,6 +401,7 @@
     <ClCompile Include="Scripts\ScriptDisconnected\DisconnectedScript.cpp" />
     <ClCompile Include="Scripts\Manager\HeartbeatManager.cpp" />
     <ClCompile Include="Scripts\Game\Zone\Command\HeartbeatCommand.cpp" />
+    <ClCompile Include="Scripts\Network\ProtoBufManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="DevTool\launch-bot.ps1" />
@@ -438,5 +439,6 @@
     <ClInclude Include="Scripts\ScriptDisconnected\DisconnectedScript.h" />
     <ClInclude Include="Scripts\Manager\HeartbeatManager.h" />
     <ClInclude Include="Scripts\Game\Zone\Command\HeartbeatCommand.h" />
+    <ClInclude Include="Scripts\Network\ProtoBufManager.h" />
   </ItemGroup>
 </Project>

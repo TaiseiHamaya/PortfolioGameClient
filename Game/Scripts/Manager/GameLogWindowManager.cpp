@@ -12,8 +12,8 @@ void GameLogWindowManager::initialize() {
 		r32 lineHeight = 34;
 		for (i32 i = 0; i < MaxLogCount; ++i) {
 			Reference<szg::StringRectInstance> instance = world->instantiate<szg::StringRectInstance>(chatTextRoot);
-			instance->initialize("UDEVGothic35HS-Regular.mtsdf", 550, CVector2::ZERO);
-			instance->transform_mut().set_translate_y(lineHeight * (MaxLogCount - i - 1) + 60);
+			instance->initialize("UDEVGothic35HS-Regular.mtsdf", 25, CVector2::ZERO);
+			instance->transform_mut().set_translate_y(lineHeight * (MaxLogCount - i) + 50);
 			instance->set_draw(false);
 			logInstances[i] = instance;
 		}

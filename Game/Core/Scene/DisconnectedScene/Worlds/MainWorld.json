@@ -68,10 +68,10 @@
 			},
 			"Name": "Disconnected",
 			"Pivot": {
-				"X": 0.5619999766349792,
-				"Y": 0.0
+				"X": 0.5,
+				"Y": 1.0
 			},
-			"Size": 21.0,
+			"Size": 1.0,
 			"Text": "Disconnected",
 			"Type": 2003,
 			"Use runtime": false
@@ -112,7 +112,7 @@
 				"X": 0.5,
 				"Y": 0.0
 			},
-			"Size": 7.0,
+			"Size": 0.25,
 			"Text": "Connection with the server was lost.",
 			"Type": 2003,
 			"Use runtime": false

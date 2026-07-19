@@ -5,6 +5,7 @@
 
 #include <Library/Math/Definition.h>
 #include <Library/Utility/Template/Reference.h>
+#include <Library/Math/VectorConverter.h>
 
 void ChatBoxManager::initialize() {
 	chatBoxString = szg::RuntimeStorage::GetValue<Reference<szg::StringRectInstance>>("RuntimeInstance", "InputtingText").value();
@@ -68,9 +69,9 @@ void ChatBoxManager::update() {
 
 	// カーソル位置の更新
 	if (chatBoxCursor && chatBoxString) {
-		r32 offset =
+		Vector2 offset =
 			textBox.calculate_cursor_offset(chatBoxString);
-		chatBoxCursor->transform_mut().set_translate_x(-offset - 12);
+		chatBoxCursor->transform_mut().set_translate(Converter::ToVector3(offset, 0.0f));
 	}
 }
 

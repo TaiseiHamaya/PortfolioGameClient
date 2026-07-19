@@ -15,6 +15,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Scripts\Network\ProtoBufManager.cpp" />
     <ClCompile Include="Scripts\Game\Zone\Command\HeartbeatCommand.cpp" />
     <ClCompile Include="Scripts\Manager\HeartbeatManager.cpp" />
     <ClCompile Include="Scripts\ScriptDisconnected\DisconnectedScript.cpp" />
@@ -96,6 +97,7 @@
     <ClCompile Include="Scripts\Game\Zone\Command\ZoneEnemySpawnCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Scripts\Network\ProtoBufManager.h" />
     <ClInclude Include="Scripts\Game\Zone\Command\HeartbeatCommand.h" />
     <ClInclude Include="Scripts\Manager\HeartbeatManager.h" />
     <ClInclude Include="Scripts\ScriptDisconnected\DisconnectedScript.h" />

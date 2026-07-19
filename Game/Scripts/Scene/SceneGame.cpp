@@ -113,17 +113,17 @@ void SceneGame::custom_setup() {
 	}
 	gameInputHandlerRef->setup(zoneHandlerRef, zoneHandlerRef->chat_box_imm());
 
-	if (!get_world(0)) {
+	if (!world_mut(0)) {
 		return;
 	}
 
-	entityManagerRef->setup(get_world(0)->world_root_mut());
+	entityManagerRef->setup(world_mut(0)->world_root_mut());
 	// WorldInstances
 	// Allocation
 	Reference<Player> player = entityManagerRef->generate<Player>("Player.json");
 	player->set_name(userName);
-	skydome = get_world(0)->world_root_mut().instantiate<szg::StaticMeshInstance>(nullptr, "skydome.gltf");
-	cameraInstance = get_world(0)->world_root_mut().instantiate<FollowCamera>();
+	skydome = world_mut(0)->world_root_mut().instantiate<szg::StaticMeshInstance>(nullptr, "skydome.gltf");
+	cameraInstance = world_mut(0)->world_root_mut().instantiate<FollowCamera>();
 
 	LookAtRect::camera = cameraInstance;
 	szg::Particle::lookAtDefault = cameraInstance.ptr();

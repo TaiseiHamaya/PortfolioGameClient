@@ -4,6 +4,7 @@
 
 #include "Scripts/Network/NetworkCluster.h"
 #include "Scripts/ScriptTitle/TitleStateScript.h"
+#include "Scripts/Network/ProtoBufManager.h"
 
 static constexpr string_literal LOCAL_LOOPBACK_ADDRESS = "127.0.0.1";
 static constexpr string_literal AWS_SERVER_ADDRESS = "18.180.254.93";
@@ -14,7 +15,15 @@ LoginScene::LoginScene() noexcept {
 }
 
 void LoginScene::custom_setup() {
-	NetworkCluster::Initialize();
+	static bool isNetworkClusterInitialized = false;
+	if (!isNetworkClusterInitialized) {
+		isNetworkClusterInitialized = true;
+		NetworkCluster::Initialize();
+	}
+	else {
+		NetworkCluster::Finalize();
+		NetworkCluster::Initialize();
+	}
 
 	std::string prefix = "-server-addr=";
 	std::optional<std::string> serverAddressOpt = szg::ArgumentParser::FindValueStartWith(prefix, 1);
@@ -32,4 +41,6 @@ void LoginScene::custom_setup() {
 	titleStateScript->setup();
 
 	sceneScriptManager.register_script(std::move(titleStateScript));
+
+	ProtoBufManager::Allocate();
 }

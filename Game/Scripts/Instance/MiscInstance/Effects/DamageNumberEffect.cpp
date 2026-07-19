@@ -9,7 +9,7 @@
 void DamageNumberEffect::initialize(i32 damage, ColorRGBA color) {
 	damageNumber = world_root_mut()->instantiate<szg::StringRectInstance>(this);
 
-	damageNumber->initialize("UDEVGothic35HS-Regular.mtsdf", 12.0f, CVector2::ONE / 2);
+	damageNumber->initialize("UDEVGothic35HS-Regular.mtsdf", 0.6f, CVector2::ONE / 2);
 	damageNumber->reset_string(std::to_string(damage));
 	damageNumber->get_material().color = color;
 	damageNumber->get_material().color.alpha = 1.0f;
