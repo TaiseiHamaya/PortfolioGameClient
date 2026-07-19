@@ -68,10 +68,10 @@
 			},
 			"Name": "Title",
 			"Pivot": {
-				"X": 0.6700000166893005,
-				"Y": 0.0
+				"X": 0.5,
+				"Y": 1.0
 			},
-			"Size": 21.0,
+			"Size": 0.7329999804496765,
 			"Text": "Title",
 			"Type": 2003,
 			"Use runtime": false
@@ -113,10 +113,10 @@
 							},
 							"Name": "InputtingString",
 							"Pivot": {
-								"X": 0.6700000166893005,
-								"Y": 0.0
+								"X": 0.5,
+								"Y": 1.0
 							},
-							"Size": 10.0,
+							"Size": 0.44999998807907104,
 							"Text": "",
 							"Type": 2003,
 							"Use runtime": true
@@ -153,10 +153,10 @@
 					},
 					"Name": "Name",
 					"Pivot": {
-						"X": 0.6000000238418579,
-						"Y": 0.0
+						"X": 0.5,
+						"Y": 1.0
 					},
-					"Size": 10.0,
+					"Size": 0.44999998807907104,
 					"Text": "InputName",
 					"Type": 2003,
 					"Use runtime": true
@@ -194,10 +194,10 @@
 					},
 					"Name": "Login",
 					"Pivot": {
-						"X": 0.6700000166893005,
-						"Y": 0.0
+						"X": 0.5,
+						"Y": 1.0
 					},
-					"Size": 10.0,
+					"Size": 0.44999998807907104,
 					"Text": "Login",
 					"Type": 2003,
 					"Use runtime": true
@@ -295,9 +295,9 @@
 					"Name": "ErrorMessage",
 					"Pivot": {
 						"X": 0.5,
-						"Y": 0.0
+						"Y": 1.0
 					},
-					"Size": 4.599999904632568,
+					"Size": 0.30000001192092896,
 					"Text": "",
 					"Type": 2003,
 					"Use runtime": true
@@ -398,10 +398,10 @@
 			},
 			"Name": "Message",
 			"Pivot": {
-				"X": 0.5170000195503235,
+				"X": 0.5,
 				"Y": 0.0
 			},
-			"Size": 8.699999809265137,
+			"Size": 0.44999998807907104,
 			"Text": "Connecting...",
 			"Type": 2003,
 			"Use runtime": true

@@ -6,7 +6,7 @@
 	],
 	"Json": [],
 	"Mesh": [
-		".\\SyzygyEngine\\EngineResources\\Models\\Grid\\Grid.gltf"
+		".\\SyzygyEngine\\Assets\\Models\\Grid\\Grid.gltf"
 	],
 	"Shader": [
 		"[[szg]]/PostEffect/RadialBlur.PS.hlsl",
@@ -17,6 +17,6 @@
 	],
 	"Skeleton": [],
 	"Texture": [
-		".\\SyzygyEngine\\EngineResources\\Texture\\White.png"
+		".\\SyzygyEngine\\Assets\\Texture\\White.png"
 	]
 }

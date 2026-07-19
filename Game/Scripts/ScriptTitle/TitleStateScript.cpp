@@ -314,7 +314,7 @@ void TitleStateScript::update_lobby() {
 			// ロードが終わったら移動を開始
 			szg::SceneManager2::EndSceneChangeIntervalForce();
 		};
-		szg::RuntimeStorage::GetValueList("Temp")["PlayerName"] = nameString->string_imm();
+		szg::RuntimeStorage::OverwirteValue("Temp", "PlayerName", nameString->string_imm());
 	}
 }
 

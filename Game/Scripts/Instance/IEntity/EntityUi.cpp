@@ -6,7 +6,7 @@
 
 void EntityUi::initialize(float offsetY, ColorRGBA color) {
 	nametag = world_root_mut()->instantiate<szg::StringRectInstance>(this);
-	nametag->initialize("UDEVGothic35HS-Regular.mtsdf", 8.0f, CVector2::HALF);
+	nametag->initialize("UDEVGothic35HS-Regular.mtsdf", 0.6f, Vector2{0.5f, 1.0f});
 	nametag->transform_mut().set_translate_y(offsetY);
 	nametag->set_layer(1);
 
@@ -21,7 +21,7 @@ void EntityUi::initialize(float offsetY, ColorRGBA color) {
 }
 
 void EntityUi::set_name(const std::string& name) {
-	nametag->reset_string(name + ' ');
+	nametag->reset_string(name);
 }
 
 void EntityUi::update_affine() {

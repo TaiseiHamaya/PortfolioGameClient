@@ -3,6 +3,7 @@
 #include <Engine/Application/Logger.h>
 
 void GameServerConnectionManager::initialize() {
+	isThreadEnded = false;
 	contextThread = std::thread{ [&]() {
 		while (true) {
 			{
@@ -52,14 +53,17 @@ void GameServerConnectionManager::connect() {
 
 void GameServerConnectionManager::disconnect() {
 	if (is_established()) {
+		std::lock_guard lock{ mutex };
 		socket.shutdown(asio::socket_base::shutdown_type::shutdown_both);
+		connectionState = ConnectionState::DisconnectRequest;
+		socket.close();
 	}
-	socket.close();
 	std::lock_guard lock{ mutex };
-	connectionState = ConnectionState::DisconnectRequest;
+	connectionState = ConnectionState::Disconnected;
 }
 
 void GameServerConnectionManager::finalize() {
+	timer.cancel();
 	context.stop();
 	{
 		std::lock_guard<std::mutex> lock{ mutex };
