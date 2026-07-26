@@ -6,6 +6,9 @@
 
 #include "Scripts/Network/Heartbeat.h"
 
+/// <summary>
+/// ハートビート受け取り時に発行されるコマンド
+/// </summary>
 class HeartbeatCommand final : public IZoneCommand {
 public:
 	HeartbeatCommand(i64 timestamp);

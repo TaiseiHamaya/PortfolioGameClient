@@ -3,6 +3,10 @@
 #include <functional>
 #include <mutex>
 
+/// <summary>
+/// 一度限りのトリガー実行
+/// 条件が満たされた時に一度だけ関数を呼び出す機構を提供
+/// </summary>
 class TriggerOnce {
 public:
 	TriggerOnce() = default;

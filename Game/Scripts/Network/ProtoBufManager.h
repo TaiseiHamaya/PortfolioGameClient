@@ -2,6 +2,10 @@
 
 #include <Library/Utility/Template/SingletonInterface.h>
 
+/// <summary>
+/// ProtoBufマネージャ
+/// プロトコルバッファのシングルトン管理とメモリ確保を行う
+/// </summary>
 class ProtoBufManager final : SingletonInterface<ProtoBufManager> {
 	friend class Portfolio;
 

@@ -8,6 +8,9 @@
 
 #include "Scripts/Manager/EffectManager.h"
 
+/// <summary>
+/// スキルアクション
+/// </summary>
 class ISkillAction : public IActionBasic {
 public:
 	enum class TargetType : i8 {

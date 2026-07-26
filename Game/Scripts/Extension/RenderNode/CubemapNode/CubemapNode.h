@@ -34,6 +34,10 @@ private:
 	void create_pipeline_state();
 
 private:
+	/// <summary>
+	/// キューブマップマテリアル
+	/// キューブマップテクスチャの色情報を保持
+	/// </summary>
 	struct Material {
 		ColorRGB color{ CColorRGB::WHITE };
 		u32 texture;

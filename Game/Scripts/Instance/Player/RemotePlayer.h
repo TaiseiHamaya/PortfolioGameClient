@@ -37,6 +37,10 @@ public:
 	void set_target(Reference<IEntity> entity);
 
 private:
+	/// <summary>
+	/// ウェイポイント
+	/// リモートプレイヤーの移動経路を表すタイムスタンプと位置情報の組
+	/// </summary>
 	struct Waypoint {
 		std::chrono::system_clock::duration timestamp;
 		Vector3 position;

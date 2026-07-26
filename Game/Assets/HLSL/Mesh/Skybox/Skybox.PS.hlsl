@@ -1,10 +1,18 @@
 #include "Skybox.hlsli"
 
+/// <summary>
+/// スカイボックス用マテリアル
+/// 色とテクスチャインデックスを保持
+/// </summary>
 struct Material {
 	float3 color;
 	uint textureIndex;
 };
 
+/// <summary>
+/// Skyboxピクセルシェーダー出力
+/// 最終的な色を出力
+/// </summary>
 struct PixelShaderOutput {
 	float4 color : SV_Target0;
 };

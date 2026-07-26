@@ -13,6 +13,10 @@ class StringRectInstance;
 class Rect3d;
 };
 
+/// <summary>
+/// タイトルシーンスクリプト
+/// ゲーム起動時のタイトル画面とログイン/サインアップ処理を管理
+/// </summary>
 class TitleStateScript final : public szg::ISceneScript {
 public:
 	enum class State {

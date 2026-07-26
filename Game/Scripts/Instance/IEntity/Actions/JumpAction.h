@@ -2,6 +2,9 @@
 
 #include "../IActionBasic.h"
 
+/// <summary>
+/// ジャンプ
+/// </summary>
 class JumpAction final : public IActionBasic {
 public:
 	void start() override;

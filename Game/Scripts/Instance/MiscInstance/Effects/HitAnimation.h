@@ -6,6 +6,10 @@
 
 #include "Scripts/Extension/Util/LookAtRect.h"
 
+/// <summary>
+/// ヒットアニメーション
+/// ヒット時の視覚的フィードバック（ビルボード表示とパーティクル発生）をプレイ
+/// </summary>
 class HitAnimation final {
 public:
 	HitAnimation(Vector3&& position);

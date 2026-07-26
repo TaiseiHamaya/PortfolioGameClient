@@ -12,6 +12,10 @@
 
 class PaladinHolySpiritEffectTarget final : public IEffectInstance {
 public:
+	/// <summary>
+	/// 矩形エフェクト値
+	/// ビルボード表示される矩形エフェクトの描画パラメータを定義
+	/// </summary>
 	struct RectEffectValues {
 		Vector2 size;
 		Vector2 pivot;

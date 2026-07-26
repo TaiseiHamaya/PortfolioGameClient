@@ -7,6 +7,10 @@
 #include <Engine/Runtime/Input/InputHandler.h>
 #include <Engine/Runtime/Input/InputTextController.h>
 
+/// <summary>
+/// チャットボックスマネージャ
+/// プレイヤーのチャットメッセージ入力と表示を管理
+/// </summary>
 class ChatBoxManager final {
 public:
 	ChatBoxManager() = default;

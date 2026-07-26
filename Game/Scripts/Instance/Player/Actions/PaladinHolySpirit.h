@@ -6,6 +6,10 @@
 
 class PaladinHolySpiritEffectTarget;
 
+/// <summary>
+/// パラディン聖光スキル
+/// パラディンが放つ光属性スキル「聖光」の実装
+/// </summary>
 class PaladinHolySpirit final : public ISkillAction {
 public:
 	PaladinHolySpirit() noexcept;

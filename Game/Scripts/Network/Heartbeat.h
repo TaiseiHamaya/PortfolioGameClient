@@ -8,6 +8,10 @@
 
 #include <Engine/Runtime/Clock/WorldTimer.h>
 
+/// <summary>
+/// ハートビート通信管理
+/// サーバーとのハートビート送受信をで接続状態を監視
+/// </summary>
 class Heartbeat {
 public:
 	Heartbeat() = default;

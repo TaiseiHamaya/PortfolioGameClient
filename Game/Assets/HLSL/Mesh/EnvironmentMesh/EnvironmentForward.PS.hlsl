@@ -2,6 +2,10 @@
 
 #include "Tools/Lighing/DirectionalLighting.hlsli"
 
+/// <summary>
+/// 環境メッシュ用マテリアル
+/// 色、ライティングタイプ、シャイニネス、テクスチャ、UV変換を保持
+/// </summary>
 struct Material {
 	float3 color;
 	uint lightingType;
@@ -10,6 +14,10 @@ struct Material {
 	float3x3 uvTransform;
 };
 
+/// <summary>
+/// 環境メッシュ用カメラ情報
+/// カメラの位置座標を保持
+/// </summary>
 struct Camera {
 	float3 position;
 };

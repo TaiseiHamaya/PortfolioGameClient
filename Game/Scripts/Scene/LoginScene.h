@@ -2,6 +2,10 @@
 
 #include <Engine/Runtime/Scene/Scene.h>
 
+/// <summary>
+/// ログインシーン
+/// ユーザー認証とゲームへのエントリーポイントを提供
+/// </summary>
 class LoginScene final : public szg::Scene {
 public:
 	LoginScene() noexcept;

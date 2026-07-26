@@ -7,6 +7,10 @@
 
 #include <Engine/Module/World/Mesh/Primitive/StringRectInstance.h>
 
+/// <summary>
+/// ゲームログウィンドウマネージャ
+/// チャット、システムメッセージ、アクションログなどのログを一元管理し画面上に表示
+/// </summary>
 class GameLogWindowManager final : public szg::ISceneScript {
 public:
 	enum class Type {
@@ -20,6 +24,10 @@ public:
 		Count,
 	};
 
+	/// <summary>
+	/// ログエントリ
+	/// ログのタイプとメッセージテキストを保持
+	/// </summary>
 	struct LogBody {
 		Type type;
 		std::wstring message;

@@ -17,6 +17,10 @@
 
 #include <Engine/Module/World/Mesh/Primitive/StringRectInstance.h>
 
+/// <summary>
+/// コメットスキル用アクション構造体
+/// 彗星エフェクトと範囲効果のペアを管理
+/// </summary>
 struct CometAction {
 	std::unique_ptr<CircleAoe> circleAoE;
 	std::unique_ptr<CometEffect> cometEffect;

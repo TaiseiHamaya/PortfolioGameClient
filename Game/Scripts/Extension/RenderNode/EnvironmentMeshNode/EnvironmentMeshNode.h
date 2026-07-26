@@ -4,6 +4,10 @@
 
 #include <Engine/Module/Render/RenderPipeline/BaseRenderPipeline.h>
 
+/// <summary>
+/// 環境メッシュレンダリングノード
+/// 環境マップ用のメッシュ描画パイプラインを実装
+/// </summary>
 class EnvironmentMeshNode final : public szg::BaseRenderPipeline {
 public:
 	EnvironmentMeshNode();

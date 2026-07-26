@@ -2,6 +2,9 @@
 
 #include "../IActionBasic.h"
 
+/// <summary>
+/// 立っているときの状態
+/// </summary>
 class IdleAction final : public IActionBasic {
 public:
 	IdleAction();

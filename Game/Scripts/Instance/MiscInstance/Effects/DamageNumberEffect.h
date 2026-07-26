@@ -10,6 +10,10 @@ class StringRectInstance;
 
 }
 
+/// <summary>
+/// ダメージ数値エフェクト
+/// キャラクターが受けたダメージの数値を画面上に表示するエフェクトを管理
+/// </summary>
 class DamageNumberEffect final : public IEffectInstance {
 public:
 	DamageNumberEffect() noexcept = default;
